@@ -6,3 +6,6 @@
 .idea/workspace.xml
 *.class
 TP2-Java-AlGoOh.iml
+/bin/
+.project
+.classpath

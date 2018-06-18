@@ -23,8 +23,8 @@ public class Tablero
 
     private void definirRegiones()
     {
-        this.areaDeCartasJugador = this.jugador.regionDeCartas();
-        this.areaDeCartasOponente = this.oponente.regionDeCartas();
+        this.areaDeCartasJugador = this.jugador.getAreaDeCartas();
+        this.areaDeCartasOponente = this.oponente.getAreaDeCartas();
     }
 
     // TODO: Esto cambia el estado del tablero. Podríamos abastaernos?

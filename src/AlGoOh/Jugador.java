@@ -58,7 +58,7 @@ public class Jugador
             throw new JugadorSinVida();
     }
 
-    public AreaDeCartas regionDeCartas()
+    public AreaDeCartas getAreaDeCartas()
     {
         return this.areaDeCartas;
     }

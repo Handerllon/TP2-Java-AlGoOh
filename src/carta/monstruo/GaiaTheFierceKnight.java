@@ -8,7 +8,7 @@ public class GaiaTheFierceKnight extends CartaMonstruo
     {
         this.puntosAtaque = 2300;
         this.puntosDefensa = 2100;
-        this.nivel = 7;
+        this.estrellas = 7;
         this.nombre = "Gaia The Fierce Knight";
 
         this.modo = new ModoDefensa(this.puntosDefensa);

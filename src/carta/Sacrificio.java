@@ -14,12 +14,12 @@ public class Sacrificio
         this.cartasASacrificar = new Stack<CartaMonstruo>();
     }
 
-    public void agregar(CartaMonstruo carta)
+    public void agregarCarta(CartaMonstruo carta)
     {
         this.cartasASacrificar.push(carta);
     }
 
-    public CartaMonstruo obtenerMonstruo()
+    public CartaMonstruo getMonstruo()
     {
         return cartasASacrificar.pop();
     }

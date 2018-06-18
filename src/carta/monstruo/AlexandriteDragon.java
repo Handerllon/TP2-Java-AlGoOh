@@ -8,7 +8,7 @@ public class AlexandriteDragon extends CartaMonstruo
 
         this.puntosAtaque = 2000;
         this.puntosDefensa = 100;
-        this.nivel = 4;
+        this.estrellas = 4;
         this.nombre = "Alexandrite Dragon";
 
         this.modo = new ModoDefensa(this.puntosDefensa);

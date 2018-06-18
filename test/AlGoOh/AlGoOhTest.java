@@ -1,6 +1,6 @@
 package AlGoOh;
 
-import areaDeJuego.Cementerio;
+import areaDeJuego.RegionCementerio;
 import areaDeJuego.RegionCampo;
 import areaDeJuego.RegionMonstruos;
 import areaDeJuego.Tablero;
@@ -63,7 +63,7 @@ public class AlGoOhTest
     {
         CartaMonstruo carta = new AlexandriteDragon();
 
-        Cementerio cementerio = new Cementerio();
+        RegionCementerio cementerio = new RegionCementerio();
 
         cementerio.colocarCarta(carta);
 
@@ -235,7 +235,7 @@ public class AlGoOhTest
     ambos lados del campo, y que nadie recibió daño alguno.*/
 
     @Test
-    public void test12SeColocaMonstruoEnCampoYSeColocaMonstroDe6EstrellasSacrificandoCorrectamenteAlPrimero()
+    public void test12SeColocaMonstruoEnCampoYSeColocaMonstruoDe6EstrellasSacrificandoCorrectamenteAlPrimero()
     {
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
@@ -249,7 +249,7 @@ public class AlGoOhTest
 
         CartaMonstruo carta2Jugador1 = new AmphibianBeast();
         Sacrificio sacrificios = new Sacrificio();
-        sacrificios.agregar(carta1Jugador1);
+        sacrificios.agregarCarta(carta1Jugador1);
         jugador1.agregarCarta(carta2Jugador1,sacrificios);
 
         assertTrue(jugador1.cartaEstaEnCementerio(carta1Jugador1));
@@ -260,7 +260,7 @@ public class AlGoOhTest
     destruyó el primero.*/
 
     @Test
-    public void test13()
+    public void test13SeColocan2MonstruosEnCampoYSeColocaMonstruoDe8EstrellasSacrificandoCorrectamenteAlLos2Primeros()
     {
     	Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
@@ -276,8 +276,8 @@ public class AlGoOhTest
 
         CartaMonstruo carta3Jugador1 = new BlueEyesWhiteDragon();
         Sacrificio sacrificios = new Sacrificio();
-        sacrificios.agregar(carta1Jugador1);
-        sacrificios.agregar(carta2Jugador1);
+        sacrificios.agregarCarta(carta1Jugador1);
+        sacrificios.agregarCarta(carta2Jugador1);
         jugador1.agregarCarta(carta3Jugador1,sacrificios);
 
         assertTrue(jugador1.cartaEstaEnCementerio(carta1Jugador1));

@@ -8,7 +8,7 @@ public class AmphibianBeast extends CartaMonstruo
     {
         this.puntosAtaque = 2400;
         this.puntosDefensa = 2000;
-        this.nivel = 6;
+        this.estrellas = 6;
         this.nombre = "Amphibian Beast";
 
         this.modo = new ModoDefensa(this.puntosDefensa);

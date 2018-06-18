@@ -5,11 +5,11 @@ import carta.Modo;
 import carta.ModoAtaque;
 import carta.ModoDefensa;
 
-public class CartaMonstruo extends Carta
+public abstract class CartaMonstruo extends Carta
 {
     protected int puntosAtaque;
     protected int puntosDefensa;
-    protected int nivel;
+    protected int estrellas;
     protected Modo modo;
 
     public CartaMonstruo()
@@ -51,8 +51,8 @@ public class CartaMonstruo extends Carta
         return modo instanceof ModoDefensa;
     }
 
-    public int getNivel()
+    public int getEstrellas()
     {
-        return this.nivel;
+        return this.estrellas;
     }
 }

@@ -1,8 +1,7 @@
 package areaDeJuego;
 
 import AlGoOh.Jugador;
-import areaDeJuego.excepciones.RegionMagicasYTrampasSinEspacioLibre;
-import areaDeJuego.excepciones.RegionMonstruoSinEspacioLibre;
+import areaDeJuego.excepciones.RegionSinEspacioLibre;
 import carta.Carta;
 import carta.magica.CartaMagica;
 import carta.monstruo.CartaMonstruo;
@@ -15,7 +14,8 @@ public class AreaDeCartas
     private RegionMonstruos regionMonstruos;
     private RegionMagicasYTrampas regionMagicasYTrampas;
     private RegionCampo regionCampo;
-    private Cementerio cementerio;
+    private RegionCementerio cementerio;
+
     private Jugador jugadorAsociado;
 
 
@@ -23,22 +23,49 @@ public class AreaDeCartas
     {
 
         this.regionMonstruos = new RegionMonstruos();
-
         this.regionMagicasYTrampas = new RegionMagicasYTrampas();
-
         this.regionCampo = new RegionCampo();
-
-        this.cementerio = new Cementerio();
+        this.cementerio = new RegionCementerio();
 
         this.jugadorAsociado = jugador;
     }
+
+    // --------------------------------------------------------------------
+    // Métodos de agregación de cartas.
+    // --------------------------------------------------------------------
+
+    // TODO: Se podrá evitar la sobrecarga?
+    public void agregarCarta(CartaMonstruo carta)
+    {
+        if (this.regionMonstruos.hayEspacioLibre())
+            this.regionMonstruos.colocarCarta(carta);
+        else
+            throw new RegionSinEspacioLibre(this.regionMonstruos);
+    }
+
+    public void agregarCarta(CartaMagica carta)
+    {
+        if (this.regionMagicasYTrampas.hayEspacioLibre())
+            this.regionMagicasYTrampas.colocarCarta(carta);
+        else
+            throw new RegionSinEspacioLibre(this.regionMagicasYTrampas);
+    }
+
+    public void removerCarta(CartaMonstruo carta)
+    {
+        this.regionMonstruos.removerCarta(carta);
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de movimiento de cartas.
+    // --------------------------------------------------------------------
 
     public void enviarAlCementerio(Carta carta)
     {
         this.cementerio.colocarCarta(carta);
     }
 
-    public void enviarTodosMonstruosAlCementerio()
+    public void enviarMonstruosAlCementerio()
     {
         ArrayList<Carta> cartas = this.regionMonstruos.obtenerCartas();
 
@@ -46,6 +73,10 @@ public class AreaDeCartas
 
         this.regionMonstruos.removerTodasLasCartas();
     }
+
+    // --------------------------------------------------------------------
+    // Métodos de consulta.
+    // --------------------------------------------------------------------
 
     public boolean cartaEstaEnCementerio(Carta carta)
     {
@@ -57,35 +88,13 @@ public class AreaDeCartas
         return this.regionMonstruos.contieneCarta(carta);
     }
 
-    public void agregarCarta(CartaMonstruo carta)
+    public boolean regionMonstruosVacia()
     {
-        if(regionMonstruos.hayEspacioLibre())
-            regionMonstruos.colocarCarta(carta);
-        else
-            throw new RegionMonstruoSinEspacioLibre();
+        return this.regionMonstruos.estaVacia();
     }
 
-    public void agregarCarta(CartaMagica cartaJugador)
+    public boolean regionMonstruosNoVacia()
     {
-        if(regionMagicasYTrampas.hayEspacioLibre())
-            regionMagicasYTrampas.colocarCarta(cartaJugador);
-        else
-            throw new RegionMagicasYTrampasSinEspacioLibre();
-    }
-
-
-    public boolean noTieneMonstruos()
-    {
-        return regionMonstruos.estaVacia();
-    }
-
-    public boolean tieneMonstruos()
-    {
-        return !this.noTieneMonstruos();
-    }
-
-    public void removerCarta(CartaMonstruo carta)
-    {
-        regionMonstruos.removerCarta(carta);
+        return !this.regionMonstruosVacia();
     }
 }

@@ -1,9 +1,8 @@
 package carta.magica;
 
 import areaDeJuego.Tablero;
-import carta.Efecto;
 
-public class DarkHole extends CartaMagica implements Efecto
+public class DarkHole extends CartaMagica
 {
     public void efecto(Tablero tablero)
     {

@@ -10,7 +10,7 @@ public class Jinzo7 extends CartaMonstruo implements Efecto
     {
         this.puntosAtaque = 500;
         this.puntosDefensa = 400;
-        this.nivel = 2;
+        this.estrellas = 2;
         this.nombre = "Jinzo7";
 
         this.modo = new ModoDefensa(this.puntosDefensa);

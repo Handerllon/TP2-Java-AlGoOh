@@ -52,43 +52,44 @@ public class Jugador
         return this.puntosDeVida;
     }
 
-    public void restarVida(int puntosARestar)
+    public void disminuirPuntosVida(int puntosARestar)
     {
         this.puntosDeVida -= puntosARestar;
         if (this.puntosDeVida <= 0)
+            // TODO: Esto puede ser un trigger para terminar el juego.
             throw new JugadorSinVida();
     }
 
-    public AreaDeCartas areaDeCartas()
+    public AreaDeCartas regionDeCartas()
     {
         return this.areaDeCartas;
     }
 
 
-    public void agregarCarta(CartaMonstruo cartaJugador, Sacrificio sacrificios)
+    public void agregarCarta(CartaMonstruo carta, Sacrificio sacrificios)
     {
-        tablero.agregarCarta(cartaJugador, sacrificios);
+        tablero.agregarCarta(carta, sacrificios);
     }
 
-    public void agregarCarta(CartaMagica cartaJugador)
+    public void agregarCarta(CartaMagica carta)
     {
-        tablero.agregarCarta(cartaJugador);
+        tablero.agregarCarta(carta);
 
     }
 
-    public boolean cartaEstaEnCementerio(CartaMonstruo cartaJugador)
+    public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
     {
-        return areaDeCartas.cartaEstaEnCementerio(cartaJugador);
+        tablero.atacarOponente(cartaAtacante, cartaOponente);
+    }
+
+    public boolean cartaEstaEnCementerio(CartaMonstruo carta)
+    {
+        return areaDeCartas.cartaEstaEnCementerio(carta);
     }
 
     public boolean cartaEstaEnRegionMonstruos(CartaMonstruo carta)
     {
         return areaDeCartas.cartaEstaEnRegionMonstruos(carta);
-    }
-
-    public void atacar(CartaMonstruo cartaJugador, CartaMonstruo cartaOponente)
-    {
-        tablero.atacarOponente(cartaJugador, cartaOponente);
     }
 }
 

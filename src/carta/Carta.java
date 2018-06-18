@@ -1,6 +1,6 @@
 package carta;
 
-public class Carta
+public abstract class Carta
 {
 
     protected String nombre;

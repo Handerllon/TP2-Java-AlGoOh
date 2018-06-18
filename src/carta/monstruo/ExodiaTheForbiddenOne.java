@@ -11,7 +11,7 @@ public class ExodiaTheForbiddenOne extends CartaMonstruo implements Efecto
     {
         this.puntosAtaque = 1000;
         this.puntosDefensa = 1000;
-        this.nivel = 3;
+        this.estrellas = 3;
         this.nombre = "Exodia The Forbidden One";
 
         this.modo = new ModoDefensa(this.puntosDefensa);

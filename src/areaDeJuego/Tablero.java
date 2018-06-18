@@ -1,7 +1,6 @@
 package areaDeJuego;
 
 import AlGoOh.Jugador;
-import carta.Carta;
 import carta.Sacrificio;
 import carta.magica.CartaMagica;
 import carta.monstruo.CartaMonstruo;
@@ -62,10 +61,7 @@ public class Tablero
     public void agregarCarta(CartaMagica carta)
     {
         this.areaDeCartasJugador.agregarCarta(carta);
-        if (carta.orientacionArriba())
-        {
-            this.activarEfectoCartaMagica(carta);
-        }
+        carta.efecto(this);
     }
 
     // --------------------------------------------------------------------
@@ -109,37 +105,27 @@ public class Tablero
             {
                 this.destruirMonstruoOponente(cartaOponente);
                 this.oponente.disminuirPuntosVida(Math.abs(diferenciaPuntos));
-            }
-            else if (diferenciaPuntos < 0)
+            } else if (diferenciaPuntos < 0)
             {
                 this.destruirMonstruoJugador(cartaJugador);
                 this.jugador.disminuirPuntosVida(Math.abs(diferenciaPuntos));
-            }
-            else if (diferenciaPuntos == 0)
+            } else if (diferenciaPuntos == 0)
             {
                 this.destruirMonstruoOponente(cartaOponente);
                 this.destruirMonstruoJugador(cartaJugador);
             }
-        }
-        else if (cartaJugador.enAtaque() && cartaOponente.enDefensa())
+        } else if (cartaJugador.enAtaque() && cartaOponente.enDefensa())
         {
             if (diferenciaPuntos > 0)
             {
                 this.destruirMonstruoOponente(cartaOponente);
-            }
-            else if (diferenciaPuntos < 0)
+            } else if (diferenciaPuntos < 0)
             {
                 this.jugador.disminuirPuntosVida(Math.abs(diferenciaPuntos));
-            }
-            else if (diferenciaPuntos == 0)
+            } else if (diferenciaPuntos == 0)
             {
                 // No pasa nada.
             }
         }
-    }
-
-    public void activarEfectoCartaMagica(CartaMagica carta)
-    {
-        carta.efecto(this);
     }
 }

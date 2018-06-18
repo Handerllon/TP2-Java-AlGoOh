@@ -6,7 +6,11 @@ public class DarkHole extends CartaMagica
 {
     public void efecto(Tablero tablero)
     {
-        tablero.destruirMonstruosJugador();
-        tablero.destruirMonstruosOponente();
+        // TODO: Depende del estado en el que está la carta. Podemos hacerlo más prolijo?
+        if(this.orientacionArriba())
+        {
+            tablero.destruirMonstruosJugador();
+            tablero.destruirMonstruosOponente();
+        }
     }
 }

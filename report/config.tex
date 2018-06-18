@@ -1,0 +1,644 @@
+% ***************************************************
+% FORMATO.
+% ***************************************************
+\documentclass[a4paper,12pt]{article}
+% Input encoding.
+% Idioma.
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+% Ver pagina 92 de "The not so short introduction to Latex" por Tobias Oetiker
+% para entender que hacen estos paquetes.
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+% Paquete para utilizar el font Times Roman de Adobe por defecto.
+\usepackage{mathptmx}
+ 
+%Manejo de márgenes
+%Agrega 2cm al ancho por defecto (usado junto con hoffset, no se pierde el centrado)
+\addtolength{\textwidth}{2cm}
+%Quita 1cm al margen, pero mantiene la relación repecto de cada margen
+\addtolength{\hoffset}{-1cm}
+\addtolength{\textheight}{2cm}
+\addtolength{\voffset}{-1cm}
+\setlength{\headheight}{14pt}
+
+% Paquete para manejo de headers y footers.
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+% Determinación del estilo de página (encabezado y pie). Debe ir luego del bloque de manejo de margenes para que
+% no haya problemas de dimensiones. Por ejemplo, que el texto quede mas ancho que el encabezado o pie.
+\pagestyle{fancy}
+% Se borra el header y footer por defecto.
+\fancyhf{}
+\lhead{\small TP2 - Java}
+\chead{}
+\rhead{\small [75.07] Algoritmos y Programación III}
+\rfoot{}
+\cfoot{Página {\thepage} de \pageref{LastPage}}
+\lfoot{}
+
+% Paquete para manejo de textos en varbatim en varios lugares del documento, por ejemplo en los headers.
+\usepackage{fancyvrb}
+% Paquete para manejo de boxes de manera mas flexible.
+\usepackage{fancybox}
+
+% Para no mostrar el numero de pagina, usar las siguientes dos lineas:
+%\thispagestyle{empty}
+%\setcounter{savepage}{\thepage}
+
+% Paquete para hacer subrayados, poner textos en color y resaltar texto en color.
+% Lo bueno de este paquete es que no tira errores de fullbox como cuando se usa \colorbox{declared-color}{text}.
+% El unico problema es que no soporta acentos desde el teclado (tira un error de UTF8). Hay que incluirlos usando \'.
+\usepackage{soul}
+% Configura el paquete @SOUL para que el resaltado de texto sea rojo. La sintaxis es \hl{text}.
+\sethlcolor{red}
+
+% Paquete que deja sangria luego de comenzada una seccion nueva.
+%\usepackage{indentfirst}
+
+% Se define una macro para poner double quotes de manera simple. El uso es \quotes{Hello World!}.
+\newcommand{\quotes}[1]{``#1''}
+
+% ***************************************************
+% MATEMATICA.
+% ***************************************************
+\usepackage{amsmath}
+	% Formato de numeracion de ecuaciones por seccion. Ej. seccion x, ecuacion y: (x.y)
+	\numberwithin{equation}{section}
+	\numberwithin{figure}{section}
+	
+% Simbolos matematicos. Por ej. la 'R' de reales, etc...
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+\usepackage{mathtools}
+
+% Paquete para arrays de ecuaciones.
+\usepackage[retainorgcmds]{IEEEtrantools}
+% Unidad imaginaria.
+\newcommand{\iu}{{j\mkern1mu}}
+% Contador de uso generico.
+\newcounter{hipotesis_ct}
+\setcounter{hipotesis_ct}{1}
+
+% Operador 'derivada'.
+\makeatletter
+\providecommand*{\diff}%
+{\@ifnextchar^{\DIfF}{\DIfF^{}}}
+\def\DIfF^#1{%
+	\mathop{\mathrm{\mathstrut d}}%
+	\nolimits^{#1}\gobblespace}
+\def\gobblespace{%
+	\futurelet\diffarg\opspace}
+\def\opspace{%
+	\let\DiffSpace\!%
+	\ifx\diffarg(%
+	\let\DiffSpace\relax
+	\else
+	\ifx\diffarg[%
+	\let\DiffSpace\relax
+	\else
+	\ifx\diffarg\{%
+	\let\DiffSpace\relax
+	\fi\fi\fi\DiffSpace}
+
+% Uso:
+% \pderiv[n]{A}{B}
+\providecommand*{\deriv}[3][]{%
+	\frac{\diff^{#1}#2}{\diff #3^{#1}}}
+\providecommand*{\pderiv}[3][]{%
+	\frac{\partial^{#1}#2}%
+	{\partial #3^{#1}}}
+
+% Operadores 'valor absoluto' y 'norma'.
+% Uso: \abs{123} \norm{123} \abs*{123} \norm*{123}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+% Operadores para escribir vectores en negrita directamente.
+% Ej:  $\vecbf{v} = 5\vechat{k}$ 
+\newcommand{\vecbf}[1]{\mathbf{#1}}
+% Operador para escribir en negrita todo lo que tenga hat.
+\newcommand{\vechat}[1]{\hat{\mathbf{#1}}}
+
+% ***************************************************
+% CODIGO FUENTE.
+% ***************************************************
+% Paquetes para pseudocodigo.	
+\usepackage{lgrind}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\makeatletter
+\renewcommand{\ALG@name}{Algoritmo}
+\renewcommand{\listalgorithmname}{Lista de \ALG@name s}
+\algrenewcommand\algorithmicensure{\textbf{Salida:}}
+\algrenewcommand\algorithmicrequire{\textbf{Entrada:}}
+\algnewcommand{\LineComment}[1]{\State \(\triangleright\) #1}
+\makeatother
+
+% Paquete para incluir codigo de MatLab.
+\usepackage[numbered,framed]{matlab-prettifier}
+% Paquete para control de colores. Ya lo carga 'matlab-prettifier'.
+\PassOptionsToPackage{usenames,dvipsnames}{xcolor}
+
+% Fuente: http://en.wikibooks.org/wiki/LaTeX/Colors
+\definecolor{Apricot}{RGB}{253,199,130}
+\definecolor{Aquamarine}{RGB}{0,181,202}
+\definecolor{Bittersweet}{RGB}{192,79,23}
+\definecolor{Black}{RGB}{0,0,0}
+\definecolor{Blue}{RGB}{0,0,255}
+\definecolor{BlueGreen}{RGB}{0,179,184}
+\definecolor{BlueViolet}{RGB}{71,57,146}
+\definecolor{BrickRed}{RGB}{182,50,28}
+\definecolor{Brown}{RGB}{121,37,0}
+\definecolor{BurntOrange}{RGB}{247,146,29}
+\definecolor{CadetBlue}{RGB}{116,114,154}
+\definecolor{CarnationPink}{RGB}{242,130,180}
+\definecolor{Cerulean}{RGB}{0,162,227}
+\definecolor{CornflowerBlue}{RGB}{65,176,228}
+\definecolor{Cyan}{RGB}{0,174,239}
+\definecolor{Dandelion}{RGB}{253,188,66}
+\definecolor{DarkOrchid}{RGB}{164,83,138}
+\definecolor{Emerald}{RGB}{0,169,157}
+\definecolor{ForestGreen}{RGB}{0,155,85}
+\definecolor{Fuchsia}{RGB}{140,54,140}
+\definecolor{Goldenrod}{RGB}{255,223,66}
+\definecolor{Gray}{RGB}{148,150,152}
+\definecolor{Green}{RGB}{0,166,79}
+\definecolor{GreenYellow}{RGB}{223,230,116}
+\definecolor{JungleGreen}{RGB}{0,169,154}
+\definecolor{Lavender}{RGB}{244,158,196}
+\definecolor{LimeGreen}{RGB}{141,199,62}
+\definecolor{Magenta}{RGB}{236,0,140}
+\definecolor{Mahogany}{RGB}{169,52,31}
+\definecolor{Maroon}{RGB}{175,50,53}
+\definecolor{Melon}{RGB}{248,158,123}
+\definecolor{MidnightBlue}{RGB}{0,103,149}
+\definecolor{Mulberry}{RGB}{169,60,147}
+\definecolor{NavyBlue}{RGB}{0,103,149}
+\definecolor{OliveGreen}{RGB}{60,128,49}
+\definecolor{Orange}{RGB}{245,129,55}
+\definecolor{OrangeRed}{RGB}{237,19,90}
+\definecolor{Orchid}{RGB}{175,114,176}
+\definecolor{Peach}{RGB}{247,150,90}
+\definecolor{Periwinkle}{RGB}{121,119,184}
+\definecolor{PineGreen}{RGB}{0,139,114}
+\definecolor{Plum}{RGB}{146,38,143}
+\definecolor{ProcessBlue}{RGB}{0,176,240}
+\definecolor{Purple}{RGB}{153,71,155}
+\definecolor{RawSienna}{RGB}{151,64,6}
+\definecolor{Red}{RGB}{237,27,35}
+\definecolor{RedOrange}{RGB}{242,96,70}
+\definecolor{RedViolet}{RGB}{161,36,107}
+\definecolor{Rhodamine}{RGB}{239,85,159}
+\definecolor{RoyalBlue}{RGB}{0,113,188}
+\definecolor{RoyalPurple}{RGB}{97,63,153}
+\definecolor{RubineRed}{RGB}{237,1,125}
+\definecolor{Salmon}{RGB}{246,146,137}
+\definecolor{SeaGreen}{RGB}{63,188,157}
+\definecolor{Sepia}{RGB}{103,24,0}
+\definecolor{SkyBlue}{RGB}{70,197,221}
+\definecolor{SpringGreen}{RGB}{198,220,103}
+\definecolor{Tan}{RGB}{218,157,118}
+\definecolor{TealBlue}{RGB}{0,174,179}
+\definecolor{Thistle}{RGB}{216,131,183}
+\definecolor{Turquoise}{RGB}{0,180,206}
+\definecolor{Violet}{RGB}{88,66,155}
+\definecolor{VioletRed}{RGB}{239,88,160}
+\definecolor{White}{RGB}{255,255,255}
+\definecolor{WildStrawberry}{RGB}{238,41,103}
+\definecolor{Yellow}{RGB}{255,242,0}
+\definecolor{YellowGreen}{RGB}{152,204,112}
+\definecolor{YellowOrange}{RGB}{250,162,26}
+
+
+\lstdefinestyle{StyleMake}{%
+	linewidth=\textwidth,%		Define el ancho máximo de una linea de código
+	xleftmargin=2.5pt,%				Margen izquierdo
+	xrightmargin=2.5pt,%				Margen derecho
+	breaklines=true,%				Que corte lineas largas
+	numbers=left,%			Que haya números a la izquierda (número de linea)
+	numberstyle=\scriptsize,%		Formato de los números de linea
+	stepnumber=1,%					Que avancen de a 1 (ver todos los números)
+	numbersep=10pt,%					La separación de los números del código
+	tabsize=4,showtabs=false,%		Los TABS son 4 espacios, y no se ven
+	extendedchars=true,%			Se permiten caracteres extendidos
+	basicstyle=\ttfamily\small,%	Estilo básico de la tipografía del código
+	commentstyle=\color{Blue},%		Color de los comentarios
+	showstringspaces=false,%		Los espacios no se ven de forma especial
+	stringstyle=\color{BrickRed},%	Estilo de las cadenas
+	keywordstyle=\color{ForestGreen},%	Estilo de las palabras reservadas
+	morekeywords=[1]{g++,-Wall,-pedantic},%	Definición de más palabras reservadas
+	deletekeywords={rm,-rf,*.o},%
+	keywords=[2]{rm,-rf,*.o},%
+	keywordstyle=[2]{\color{BurntOrange}},%	2do grupo de palabras reservadas
+	directives={CC,CFLAGS,OUTPUT},%
+	directivestyle=\color{NavyBlue},%	Estilo de directivas
+	keywords=[3]{CC,CFLAGS,OUTPUT},%
+	keywordstyle=[3]{\color{MidnightBlue}},%3er grupo de palabras reservadas
+	morecomment=[s][\color{Blue}]{/*}{*/}%	Definición de estilo de comentario
+}
+
+\lstdefinestyle{StyleC}{%
+	linewidth=\textwidth,%		Define el ancho máximo de una linea de código
+	xleftmargin=2.5pt,%				Margen izquierdo
+	xrightmargin=2.5pt,%				Margen derecho
+	breaklines=true,%				Que corte lineas largas
+	numbers=left,%			Que haya números a la izquierda (número de linea)
+	numberstyle=\scriptsize,%		Formato de los números de linea
+	stepnumber=1,%					Que avancen de a 1 (ver todos los números)
+	numbersep=10pt,%					La separación de los números del código
+	tabsize=4,showtabs=false,%		Los TABS son 4 espacios, y no se ven
+	extendedchars=true,%			Se permiten caracteres extendidos
+	basicstyle=\ttfamily\small,%	Estilo básico de la tipografía del código
+	commentstyle=\color{Blue},%		Color de los comentarios
+	showstringspaces=false,%		Los espacios no se ven de forma especial
+	stringstyle=\color{BrickRed},%	Estilo de las cadenas
+	keywordstyle=\color{ForestGreen},%	Estilo de las palabras reservadas
+	morekeywords=[1]{size_t,ssize_t},%	Definición de más palabras reservadas
+	deletekeywords={typedef,enum,do,while,if,else,for,case,default,switch,break,continue},%
+	keywords=[2]{typedef,enum,do,while,if,else,for,case,default,switch,break,continue,EXIT_SUCCESS,EXIT_FAILURE},%
+	keywordstyle=[2]{\color{BurntOrange}},%	2do grupo de palabras reservadas
+	directives={define,undef,include,if,else,ifndef,ifdef,elif,endif},%
+	directivestyle=\color{NavyBlue},%		Estilo de directivas
+	keywords=[3]{define,undef,include,if,else,ifndef,ifdef,elif,endif},%
+	keywordstyle=[3]{\color{MidnightBlue}},%3er grupo de palabras reservadas
+	morecomment=[s][\color{Blue}]{/*}{*/}%	Definición de estilo de comentario
+}
+
+\lstnewenvironment{terminalblock}{%
+	\lstset{style=StyleC}}{}
+
+\lstset{
+	literate={ö}{{\"o}}1
+	{ä}{{\"a}}1
+	{ü}{{\"u}}1
+	{á}{{\'a}}1
+	{Á}{{\'A}}1
+	{é}{{\'e}}1
+	{É}{{\'E}}1
+	{í}{{\'i}}1
+	{Í}{{\'I}}1
+	{ó}{{\'o}}1
+	{Ó}{{\'O}}1
+	{ú}{{\'u}}1
+	{Ú}{{\'U}}1
+}
+% ***************************************************
+% GRAFICOS.
+% ***************************************************
+	% Paquete para mejorar la interfaz con objetos flotantes, como los graficos.
+	\usepackage{float}
+	\usepackage{graphicx}
+	% Paquetes para tener mayor flexibilidad cuando se utilizan titulos para figuras, etc...
+	\usepackage{caption}
+	\usepackage{subcaption}
+	\usepackage{epstopdf}
+
+% ***************************************************
+% TABLAS.
+% ***************************************************
+% Paquetes para manejo de tablas.
+\usepackage{booktabs}
+\usepackage{multirow}
+
+% ***************************************************
+% MISC.
+% ***************************************************
+%\usepackage{draftwatermark}
+%\SetWatermarkLightness{0.9}
+%\SetWatermarkScale{0.8}
+%\SetWatermarkText{BORRADOR}
+
+% This pack­age sim­pli­fies the in­clu­sion of ex­ter­nal multi-page PDF doc­u­ments in LaTeX doc­u­ments. 
+\usepackage{pdfpages}
+\setboolean{@twoside}{false}
+
+% Unidades del SI
+\usepackage{siunitx}
+
+% ***************************************************
+% TIKZ.
+% ***************************************************
+%\usepackage{tikz}
+%\usetikzlibrary{calc,fadings,decorations.pathreplacing}
+%%% helper macros
+%\newcommand\pgfmathsinandcos[3]{%
+%	\pgfmathsetmacro#1{sin(#3)}%
+%	\pgfmathsetmacro#2{cos(#3)}%
+%}
+%\newcommand\LongitudePlane[3][current plane]{%
+%	\pgfmathsinandcos\sinEl\cosEl{#2} % elevation
+%	\pgfmathsinandcos\sint\cost{#3} % azimuth
+%	\tikzset{#1/.estyle={cm={\cost,\sint*\sinEl,0,\cosEl,(0,0)}}}
+%}
+%\newcommand\LatitudePlane[3][current plane]{%
+%	\pgfmathsinandcos\sinEl\cosEl{#2} % elevation
+%	\pgfmathsinandcos\sint\cost{#3} % latitude
+%	\pgfmathsetmacro\yshift{\cosEl*\sint}
+%	\tikzset{#1/.estyle={cm={\cost,0,0,\cost*\sinEl,(0,\yshift)}}} %
+%}
+%\newcommand\DrawLongitudeCircle[2][1]{
+%	\LongitudePlane{\angEl}{#2}
+%	\tikzset{current plane/.prefix style={scale=#1}}
+%	% angle of "visibility"
+%	\pgfmathsetmacro\angVis{atan(sin(#2)*cos(\angEl)/sin(\angEl))} %
+%	\draw[current plane] (\angVis:1) arc (\angVis:\angVis+180:1);
+%	\draw[current plane,dashed] (\angVis-180:1) arc (\angVis-180:\angVis:1);
+%}
+%\newcommand\DrawLatitudeCircle[2][1]{
+%	\LatitudePlane{\angEl}{#2}
+%	\tikzset{current plane/.prefix style={scale=#1}}
+%	\pgfmathsetmacro\sinVis{sin(#2)/cos(#2)*sin(\angEl)/cos(\angEl)}
+%	% angle of "visibility"
+%	\pgfmathsetmacro\angVis{asin(min(1,max(\sinVis,-1)))}
+%	\draw[current plane] (\angVis:1) arc (\angVis:-\angVis-180:1);
+%	\draw[current plane,dashed] (180-\angVis:1) arc (180-\angVis:\angVis:1);
+%}
+%
+%%% document-wide tikz options and styles
+%\tikzset{%
+%	>=latex, % option for nice arrows
+%	inner sep=0pt,%
+%	outer sep=2pt,%
+%	mark coordinate/.style={inner sep=0pt,outer sep=0pt,minimum size=3pt,
+%		fill=black,circle}%
+%}
+
+% ***************************************************
+% HIPERTEXTO.
+% ***************************************************
+% Paquete para utilizar hipertexto (tiene que ser siempre el ultimo paquete que se carga).
+% Todos los links, referencias, etc...pasan a ser hipertextos.
+% Setup del paquete de hipertexto.
+\usepackage[pdftex,breaklinks]{hyperref}
+	\hypersetup{a4paper,
+				% Muestra el titulo en el maro superior de la ventana del visor de pdf
+				pdfdisplaydoctitle=true,
+				% Al encender esta funcion, ya nohay recuadros feos alrededor de los links 	
+				colorlinks=true,
+				% Color cuando se escribe una URL.   
+				urlcolor = black,
+				%Para que el link a nuevos pdf, no se abran en la misma ventana 		
+				pdfnewwindow=true,
+				% Color para links internos
+				linkcolor=black,
+				% Color para links a Bibliografia
+				citecolor=black,
+				% Color para links a archivos
+       			filecolor=black,
+				pdftitle={75.07 - TP2J - 1C2018},
+				pdfauthor={Ignacio Santiago Husain}
+			}
+
+% ***************************************************			
+% GLOSARIO.
+% ***************************************************
+% Glosario. Debe cargarse después del paquete "hyperref", como excepción.
+%\include{./misc/glossary}
+
+% ***************************************************			
+% ALGUNOS TEMPLATES DE CODIGO UTIL.
+% ***************************************************
+
+% *********************************************************************************
+% Si incluyo figuras de MatLab, no conviene que se guarden maximizadas.
+%\begin{figure}[!ht]
+%	\centering
+%	\includegraphics[scale=0.9]{includes/ex1_N5.eps}
+%	\caption{Submuestreo con $N=5$ con $M=3$ y $M=6$}
+%	\label{ex1_N5}
+%\end{figure}
+% *********************************************************************************
+%\begin{figure}[H]
+%	\centering
+%	\begin{subfigure}[c]{0.3\textwidth}
+%		\includegraphics[scale=0.06]{./includes/cover/Logo_UBA.eps}
+%	\end{subfigure}
+%	\begin{subfigure}[c]{0.3\textwidth}
+%		\includegraphics[scale=0.5]{./includes/cover/Logo_FIUBA.eps}
+%	\end{subfigure}
+%\end{figure}
+% *********************************************************************************
+%\begin{IEEEeqnarray}{rCl}
+%\IEEEyesnumber\label{ec_ex1_relaciones} \IEEEyessubnumber*
+%x\left( n \right)  \  &=& \, x\left( n + k \, N \right) \label{ec_ex1_x}\\
+%y\left( n \right)  \, &=& \, y\left( n + l \, L \right) \label{ec_ex1_y}\\
+%y\left( n \right)  \, &=& \, x\left( M \, n \right) \label{ec_ex1_downsampling}
+%\end{IEEEeqnarray}
+%\begin{IEEEeqnarray}{CC}
+%	\IEEEyesnumber\label{eq:both} \IEEEyessubnumber*
+%	bla bla & blub blub \label{eq:sub1}\\
+%	bla bla & bla bla  \label{eq:sub2}
+%\end{IEEEeqnarray}
+%where the set of equations \eqref{eq:sub1} and \eqref{eq:sub2}
+%is referred to as \eqref{eq:both}.
+%\begin{align}
+%N_{x,sk} &= k_{sk}\left(\frac{t_{sk}}{b_{sk}}\right)^{2}\bar{Et}\nonumber\\
+%N_{x,st} &= k_{st}\left(\frac{t_{st}}{b_{st}}\right)^{2}\bar{Et}
+%\end{align}
+% *********************************************************************************
+%\begin{equation}
+%\begin{cases}
+%H\left( z \right) &= \sum_{l=0}^{M-1} \, z^{-l} \, E_l\left( z^M \right) \\
+%E_l\left( z \right) &= \sum_{n=-\infty}^{+\infty} \, e_l \left( n \right) \, z^{-n} \\
+%e_l\left( n \right) &= h\left(n\,M + l\right) \quad 0 \leq l \leq M-1
+%\end{cases}
+%\end{equation}
+% *********************************************************************************
+%\begin{equation}
+%\mathbf{R}_x\left(\phi\right) = 
+%\begin{bmatrix}
+%1 & 0 & 0 \\
+%0 & \cos \left(\phi\right) & \sin \left(\phi\right) \\
+%0 & -\sin \left(\phi\right) & \cos \left(\phi\right) \\
+%\end{bmatrix}
+%\end{equation}
+% *********************************************************************************
+%\begin{algorithm}[!ht]
+%\caption{Pseudocódigo del algoritmo euclídeo extendido}\label{alg_euc_ex}
+%\begin{algorithmic}[1]
+%\Require $H_0\left(z\right)$ y $H_1\left(z\right)$ coprimos
+%\Ensure  $F_0\left(z\right)$ y $F_1\left(z\right)$ tales que $H_0\left(z\right)\cdot F_0\left(z\right)+H_1\left(z\right)\cdot F_1\left(z\right) = c$, con $c\neq0$. Además, $gr\left(F_0\right) < gr\left(H_1\right) - gr\left(g\right)$ y $gr\left(F_1\right) < gr\left(H_0\right) - gr\left(g\right)$.
+%\Statex
+%\Procedure{extEuclidean}{}
+%\Statex
+%\State Inicialización.
+%\Statex
+%\State $r_0=H_0 \quad r_1=H_1 \quad s_0=1 \quad s_1=0 \quad t_0=0 \quad t_1=1 \quad i=1$
+%\Statex
+%\While {$r_i\neq0 \quad\wedge\quad gr\left(r_{i+1}\right)\geqslant gr\left(r_i\right)$:}
+%\Statex
+%\State $q \leftarrow$ Cociente de $r_{i-1}/r_i$
+%\Statex
+%\State $r_{i+1} = r_{i-1} - q\,r_i$
+%\Statex
+%\State $s_{i+1} = s_{i-1} - q\,s_i$
+%\Statex
+%\State $t_{i+1} = t_{i-1} - q\,t_i$
+%\Statex
+%\State $i = i+1$
+%\EndWhile
+%\Statex
+%\State $F_0\left(z\right) = s_{i-1} \quad F_1\left(z\right)=t_{i-1} \quad g=r_{i-1}$
+%\EndProcedure
+%\end{algorithmic}
+%\end{algorithm}
+% *********************************************************************************
+%\begin{table}
+%	\caption{A badly formatted table}
+%	\centering
+%	\label{table:bad_table}
+%	\begin{tabular}{|l|c|c|c|c|}
+%		\hline 
+%		& \multicolumn{2}{c}{Species I} & \multicolumn{2}{c|}{Species II} \\ 
+%		\hline
+%		Dental measurement  & mean & SD  & mean & SD  \\ \hline 
+%		\hline
+%		I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
+%		\hline 
+%		I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
+%		\hline 
+%		I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
+%		\hline 
+%		I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
+%		\hline 
+%		CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
+%		\hline 
+%		CBL & 11.88 & 0.05 & 13.11 & 0.04\\ 
+%		\hline 
+%	\end{tabular}
+%\end{table}
+% *********************************************************************************
+%\begin{table}
+%	\caption{A nice looking table}
+%	\centering
+%	\label{table:nice_table}
+%	\begin{tabular}{l c c c c}
+%		\hline 
+%		\multirow{2}{*}{Dental measurement} & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c}{Species II} \\ 
+%		\cline{2-5}
+%		& mean & SD  & mean & SD  \\ 
+%		\hline
+%		I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
+%		
+%		I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
+%		
+%		I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
+%		
+%		I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
+%		
+%		CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
+%		
+%		CBL & 11.88 & 0.05 & 13.11 & 0.04\\ 
+%		\hline 
+%	\end{tabular}
+%\end{table}
+% *********************************************************************************
+%\begin{table}
+%	\caption{Even better looking table using booktabs}
+%	\centering
+%	\label{table:good_table}
+%	\begin{tabular}{l c c c c}
+%		\toprule
+%		\multirow{2}{*}{Dental measurement} & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c}{Species II} \\ 
+%		\cmidrule{2-5}
+%		& mean & SD  & mean & SD  \\ 
+%		\midrule
+%		I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
+%		
+%		I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
+%		
+%		I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
+%		
+%		I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
+%		
+%		CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
+%		
+%		CBL & 11.88 & 0.05 & 13.11 & 0.04\\ 
+%		\bottomrule
+%	\end{tabular}
+%\end{table}
+% *********************************************************************************
+%\begin{table}[htbp]
+%	\centering
+%	\caption{Primeros 40 coeficientes correspondientes a la Teoría de Nutación IAU-1980.}
+%	\begin{tabular}{cccccccccc}
+%		\toprule
+%		\multicolumn{1}{c}{Coeficiente} & \multicolumn{1}{c}{$p_l$} & \multicolumn{1}{c}{$p_l'$} & \multicolumn{1}{c}{$p_F$} & \multicolumn{1}{c}{$p_D$} & \multicolumn{1}{c}{$p_\Omega$} & \multicolumn{1}{c}{$\Delta \hat{\psi} \left[0.001''\right]$} & \multicolumn{1}{c}{$\Delta \hat{\psi}_T\left[0.001''\right]$} & \multicolumn{1}{c}{$\Delta \hat{\varepsilon}\left[0.001''\right]$} & \multicolumn{1}{c}{$\Delta \hat{\varepsilon}_T\left[0.001''\right]$} \\
+%		\midrule
+%		1     & 0     & 0     & 0     & 0     & 1     & -1719960 & -1742 & 920250 & 89 \\
+%		2     & 0     & 0     & 0     & 0     & 2     & 20620 & 2     & -8950 & 5 \\
+%		3     & -2    & 0     & 2     & 0     & 1     & 460   & 0     & -240  & 0 \\
+%		4     & 2     & 0     & -2    & 0     & 0     & 110   & 0     & 0     & 0 \\
+%		5     & -2    & 0     & 2     & 0     & 2     & -30   & 0     & 10    & 0 \\
+%		6     & 1     & -1    & 0     & -1    & 0     & -30   & 0     & 0     & 0 \\
+%		7     & 0     & -2    & 2     & -2    & 1     & -20   & 0     & 10    & 0 \\
+%		8     & 2     & 0     & -2    & 0     & 1     & 10    & 0     & 0     & 0 \\
+%		9     & 0     & 0     & 2     & -2    & 2     & -131870 & -16   & 57360 & -31 \\
+%		10    & 0     & 1     & 0     & 0     & 0     & 14260 & -34   & 540   & -1 \\
+%		11    & 0     & 1     & 2     & -2    & 2     & -5170 & 12    & 2240  & -6 \\
+%		12    & 0     & -1    & 2     & -2    & 2     & 2170  & -5    & -950  & 3 \\
+%		13    & 0     & 0     & 2     & -2    & 1     & 1290  & 1     & -700  & 0 \\
+%		14    & 2     & 0     & 0     & -2    & 0     & 480   & 0     & 10    & 0 \\
+%		15    & 0     & 0     & 2     & -2    & 0     & -220  & 0     & 0     & 0 \\
+%		16    & 0     & 2     & 0     & 0     & 0     & 170   & -1    & 0     & 0 \\
+%		17    & 0     & 1     & 0     & 0     & 1     & -150  & 0     & 90    & 0 \\
+%		18    & 0     & 2     & 2     & -2    & 2     & -160  & 1     & 70    & 0 \\
+%		19    & 0     & -1    & 0     & 0     & 1     & -120  & 0     & 60    & 0 \\
+%		20    & -2    & 0     & 0     & 2     & 1     & -60   & 0     & 30    & 0 \\
+%		21    & 0     & -1    & 2     & -2    & 1     & -50   & 0     & 30    & 0 \\
+%		22    & 2     & 0     & 0     & -2    & 1     & 40    & 0     & -20   & 0 \\
+%		23    & 0     & 1     & 2     & -2    & 1     & 40    & 0     & -20   & 0 \\
+%		24    & 1     & 0     & 0     & -1    & 0     & -40   & 0     & 0     & 0 \\
+%		25    & 2     & 1     & 0     & -2    & 0     & 10    & 0     & 0     & 0 \\
+%		26    & 0     & 0     & -2    & 2     & 1     & 10    & 0     & 0     & 0 \\
+%		27    & 0     & 1     & -2    & 2     & 0     & -10   & 0     & 0     & 0 \\
+%		28    & 0     & 1     & 0     & 0     & 2     & 10    & 0     & 0     & 0 \\
+%		29    & -1    & 0     & 0     & 1     & 1     & 10    & 0     & 0     & 0 \\
+%		30    & 0     & 1     & 2     & -2    & 0     & -10   & 0     & 0     & 0 \\
+%		31    & 0     & 0     & 2     & 0     & 2     & -22740 & -2    & 9770  & -5 \\
+%		32    & 1     & 0     & 0     & 0     & 0     & 7120  & 1     & -70   & 0 \\
+%		33    & 0     & 0     & 2     & 0     & 1     & -3860 & -4    & 2000  & 0 \\
+%		34    & 1     & 0     & 2     & 0     & 2     & -3010 & 0     & 1290  & -1 \\
+%		35    & 1     & 0     & 0     & -2    & 0     & -1580 & 0     & -10   & 0 \\
+%		36    & -1    & 0     & 2     & 0     & 2     & 1230  & 0     & -530  & 0 \\
+%		37    & 0     & 0     & 0     & 2     & 0     & 630   & 0     & -20   & 0 \\
+%		38    & 1     & 0     & 0     & 0     & 1     & 630   & 1     & -330  & 0 \\
+%		39    & -1    & 0     & 0     & 0     & 1     & -580  & -1    & 320   & 0 \\
+%		40    & -1    & 0     & 2     & 2     & 2     & -590  & 0     & 260   & 0 \\
+%		\bottomrule
+%	\end{tabular}%
+%	\label{table:coefs_nut}
+%\end{table}%
+% *********************************************************************************
+% \ang{23.43929111}
+% \ang{;;46.8150}
+% $\pm \SI{0.9}{\second}$
+% \SI{1e-22}{}
+% ...utilizando mediciones en tierra de $F_{\SI{10.7}{}}$: Al dejar vacío el segundo 
+% argumento, lo que hace es usar el formato numérico SI, y no el local. O sea, aparece 
+% "10.7" en vez de "10,7".
+%
+% *********************************************************************************
+%% This bit allows you to either specify only the files which you wish to
+%% process, or `all' to process all files which you \include.
+%% Krishna Sethuraman (1990).
+%
+%\typein [\files]{Enter file names to process, (chap1,chap2 ...), or `all' to process all files:}
+%\def\all{all}
+%\ifx\files\all \typeout{Including all files.} \else \typeout{Including only \files.} \includeonly{\files} \fi
+% *********************************************************************************
+% Ignacio Santiago Husain - 2017.
+% *********************************************************************************

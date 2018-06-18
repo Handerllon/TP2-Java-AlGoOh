@@ -1,0 +1,130 @@
+\input{config.tex}
+%-----------------------------------%
+%									%
+%		Comienzo del documento		%
+%									%
+%-----------------------------------%
+\begin{document}
+%-----------------------------------%
+%									%
+%			Caratula				%
+%									%
+%-----------------------------------%
+\pagestyle{fancy}
+\begin{titlepage}
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for horizontal lines, change thickness here
+	\center % Centre everything on the page
+	
+	\thispagestyle{empty}
+	\begin{center}
+		\includegraphics[scale=1]{includes/banner_fiuba.pdf}\\
+	\end{center}
+
+	\vspace*{\stretch{1}}
+	
+	\textsc{\LARGE \textsc{[75.07] Algoritmos y Programación III}}\\[1.5cm]
+	\textsc{\large 1\textsuperscript{o} Cuatrimestre 2018}\\[0.5cm]
+	\textsc{\large Turno noche}\\[0.5cm]
+	
+	\HRule\\[0.5cm]
+	{\huge\bfseries TP2: Java}\\[0.2cm]
+	\HRule\\[1.5cm]
+	
+	\begin{tabbing}
+		\hspace{2cm}\=\+
+		\underline{AUTORES}\hspace{-1cm}\=\+\hspace{1cm}\=\hspace{6cm}\=\\
+		\\
+		Husain, Ignacio Santiago	\>\>- \#90.117\\
+		\>\footnotesize{$<$santiago.husain@gmail.com$>$}\\
+		\\
+		\<\underline{DOCENTES}\\
+		\\
+		Lic. Suarez, Pablo \\
+		\\
+		Ing. Diego, Sánchez \\
+		\\
+		Srta. Marijuán, Magalí\\
+		\\
+		Sr. Leal Bazterrica, Matías
+	\end{tabbing}
+
+	\vspace*{\stretch{1}}
+
+	\today
+
+\end{titlepage}
+
+\clearpage
+\tableofcontents
+%-------------------------------%
+%								%
+%			Seccion				%
+%								%
+%-------------------------------%
+\clearpage
+\section{Objetivo del trabajo}
+
+\section{Supuestos}
+
+[Documentar todos los supuestos hechos sobre el enunciado. Asegurarse
+de validar con los docentes]
+
+\section{Modelo de dominio}
+
+[Explicar los elementos más relevantes del diseño. Es decir: qué
+entidades se han creado, qué responsabilidades tienen asignadas, cómo
+se relacionan, etc]
+
+\section{Diagramas de clases}
+
+[ Varios diagramas de clases, mostrando la relación estática entre las
+clases, pueden agregar todo el texto necesario para aclarar y explicar su
+diseño, recuerden que la idea de todo el documento es que quede
+documentado y entendible como está hecho el TP]
+
+\section{Diagramas de secuencia}
+
+[ Varios diagramas de secuencia, mostrando la relación dinámica entre las
+clases planteando una gran cantidad de escenarios que contemplen las
+situaciones del trabajo práctico]
+
+\section{Diagramas de paquetes}
+
+[incluir un diagrama de paquetes para mostrar el acoplamiento de su
+trabajo ]
+
+\section{Diagramas de estado}
+
+[Incluir diagramas de estados, mostrando tanto los estados como las
+distintas transiciones de los mismos para varias entidades del trabajo
+práctico ]
+
+\section{Detalles de implementación}
+
+[Deben detallar/explicar qué estrategias utilizaron para resolver todos
+los puntos más conflictivos del trabajo práctico. ]
+
+\section{Excepciones}
+
+[Explicar las excepciones creadas, con qué fin fueron creadas y cómo y
+dónde se las atrapa explicando qué acciones se toman al respecto una vez
+capturadas.]
+
+%-------------------------------%
+%								%
+%			Seccion				%
+%								%
+%-------------------------------%
+\appendix
+\section{Referencias}
+% Removes 'Referencias' title from 'thebibliography'.
+\begingroup
+\renewcommand{\section}[2]{}
+\begin{thebibliography}{10}
+	\bibitem{libro_fontela1} Fontela, Carlos - \emph{Programación Orientada a Objetos con Smalltalk, Java y UML.} - 3\textsuperscript{ra} edición - Versión Beta 0.6.
+	
+	\bibitem{fowler_model} Fowler, M. - \hyperref{https://martinfowler.com/distributedComputing/purpose.pdf}{}{}{What's a model for?}
+\end{thebibliography}
+\endgroup
+
+\end{document}

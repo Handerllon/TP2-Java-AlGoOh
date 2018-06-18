@@ -1,20 +1,16 @@
 package carta.monstruo;
 
 import carta.CartaMonstruo;
-import carta.ModoDefensa;
-import carta.OrientacionAbajo;
 
 public class AlexandriteDragon extends CartaMonstruo
 {
-    public AlexandriteDragon(){
+    private static int PUNTOS_DEFENSA = 100;
+    private static int PUNTOS_ATAQUE = 2000;
 
-        this.puntosAtaque = 2000;
-        this.puntosDefensa = 100;
+    public AlexandriteDragon()
+    {
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE);
         this.estrellas = 4;
         this.nombre = "Alexandrite Dragon";
-
-        this.modo = new ModoDefensa();
-        this.puntos = this.puntosDefensa;
-        this.orientacion = new OrientacionAbajo();
     }
 }

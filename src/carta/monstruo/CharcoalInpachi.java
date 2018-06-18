@@ -1,20 +1,16 @@
 package carta.monstruo;
 
 import carta.CartaMonstruo;
-import carta.ModoDefensa;
-import carta.OrientacionAbajo;
 
 public class CharcoalInpachi extends CartaMonstruo
 {
+    private static int PUNTOS_DEFENSA = 2100;
+    private static int PUNTOS_ATAQUE = 100;
+
     public CharcoalInpachi()
     {
-        this.puntosAtaque = 100;
-        this.puntosDefensa = 2100;
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE);
         this.estrellas = 1;
         this.nombre = "Charcoal Inpachi";
-
-        this.modo = new ModoDefensa();
-        this.puntos = this.puntosDefensa;
-        this.orientacion = new OrientacionAbajo();
     }
 }

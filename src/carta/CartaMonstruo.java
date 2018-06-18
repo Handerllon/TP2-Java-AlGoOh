@@ -9,9 +9,12 @@ public abstract class CartaMonstruo extends Carta
 
     protected Modo modo;
 
-    public CartaMonstruo()
-    {
-        this.orientacion = new OrientacionAbajo();
+    public CartaMonstruo(int puntosDefensa, int puntosAtaque){
+        super();
+
+        this.puntosDefensa = puntosDefensa;
+        this.puntosAtaque = puntosAtaque;
+
         this.modo = new ModoDefensa();
         this.puntos = this.puntosDefensa;
     }

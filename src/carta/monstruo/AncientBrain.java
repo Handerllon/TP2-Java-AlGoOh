@@ -1,20 +1,16 @@
 package carta.monstruo;
 
 import carta.CartaMonstruo;
-import carta.ModoDefensa;
-import carta.OrientacionAbajo;
 
 public class AncientBrain extends CartaMonstruo
 {
+    private static int PUNTOS_DEFENSA = 700;
+    private static int PUNTOS_ATAQUE = 1000;
+
     public AncientBrain()
     {
-        this.puntosAtaque = 1000;
-        this.puntosDefensa = 700;
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE);
         this.estrellas = 3;
         this.nombre = "Ancient Brain";
-
-        this.modo = new ModoDefensa();
-        this.puntos = this.puntosDefensa;
-        this.orientacion = new OrientacionAbajo();
     }
 }

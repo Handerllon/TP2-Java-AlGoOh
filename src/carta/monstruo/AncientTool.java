@@ -1,20 +1,16 @@
 package carta.monstruo;
 
 import carta.CartaMonstruo;
-import carta.ModoDefensa;
-import carta.OrientacionAbajo;
 
 public class AncientTool extends CartaMonstruo
 {
+    private static int PUNTOS_DEFENSA = 1400;
+    private static int PUNTOS_ATAQUE = 1700;
+
     public AncientTool()
     {
-        this.puntosAtaque = 1700;
-        this.puntosDefensa = 1400;
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE);
         this.estrellas = 5;
         this.nombre = "AncientTool";
-
-        this.modo = new ModoDefensa();
-        this.puntos = this.puntosDefensa;
-        this.orientacion = new OrientacionAbajo();
     }
 }

@@ -1,20 +1,17 @@
 package carta.monstruo;
 
 import carta.CartaMonstruo;
-import carta.ModoDefensa;
-import carta.OrientacionAbajo;
 
 public class BlueEyesUltimateDragon extends CartaMonstruo
 {
-	public BlueEyesUltimateDragon(){
+    private static int PUNTOS_DEFENSA = 3800;
+    private static int PUNTOS_ATAQUE = 4500;
 
-        this.puntosAtaque = 4500;
-        this.puntosDefensa = 3800;
+    public BlueEyesUltimateDragon()
+    {
+
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE);
         this.estrellas = 12;
         this.nombre = "Blue Eyes Ultimate Dragon";
-
-        this.modo = new ModoDefensa();
-        this.puntos = this.puntosDefensa;
-        this.orientacion = new OrientacionAbajo();
-	}
+    }
 }

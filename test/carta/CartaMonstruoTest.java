@@ -1,7 +1,7 @@
-package carta.monstruo;
+package carta;
 
 
-import carta.CartaMonstruo;
+import carta.monstruo.GaiaTheFierceKnight;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;

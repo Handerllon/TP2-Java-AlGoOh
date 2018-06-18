@@ -6,7 +6,7 @@ import carta.excepciones.CartaNoExisteEnRegion;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Region
+public abstract class Region
 {
     protected HashMap<String, Carta> cartas;
     protected int capacidad, cantidadCartas;

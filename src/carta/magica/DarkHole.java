@@ -3,16 +3,14 @@ package carta.magica;
 import areaDeJuego.Tablero;
 import carta.CartaMagica;
 import carta.EfectoNulo;
-import carta.OrientacionAbajo;
 
 public class DarkHole extends CartaMagica
 {
 
     public DarkHole()
     {
+        super();
         this.nombre = "Dark Hole";
-        this.orientacion = new OrientacionAbajo();
-        this.efecto = new EfectoNulo();
     }
 
     public void efecto(Tablero tablero)

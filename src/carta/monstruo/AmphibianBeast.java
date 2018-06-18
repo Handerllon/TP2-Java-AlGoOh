@@ -1,20 +1,16 @@
 package carta.monstruo;
 
 import carta.CartaMonstruo;
-import carta.ModoDefensa;
-import carta.OrientacionAbajo;
 
 public class AmphibianBeast extends CartaMonstruo
 {
+    private static int PUNTOS_DEFENSA = 2000;
+    private static int PUNTOS_ATAQUE = 2400;
+
     public AmphibianBeast()
     {
-        this.puntosAtaque = 2400;
-        this.puntosDefensa = 2000;
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE);
         this.estrellas = 6;
         this.nombre = "Amphibian Beast";
-
-        this.modo = new ModoDefensa();
-        this.puntos = this.puntosDefensa;
-        this.orientacion = new OrientacionAbajo();
     }
 }

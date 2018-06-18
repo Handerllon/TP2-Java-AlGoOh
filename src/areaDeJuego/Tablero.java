@@ -1,9 +1,9 @@
 package areaDeJuego;
 
 import AlGoOh.Jugador;
-import carta.Sacrificio;
 import carta.CartaMagica;
 import carta.CartaMonstruo;
+import carta.Sacrificio;
 
 public class Tablero
 {

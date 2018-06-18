@@ -3,11 +3,7 @@ package AlGoOh;
 import AlGoOh.excepciones.JugadorSinVida;
 import areaDeJuego.AreaDeCartas;
 import areaDeJuego.Tablero;
-import carta.Mano;
-import carta.Mazo;
-import carta.Sacrificio;
-import carta.CartaMagica;
-import carta.CartaMonstruo;
+import carta.*;
 
 public class Jugador
 {
@@ -35,6 +31,8 @@ public class Jugador
 
         this.areaDeCartas = new AreaDeCartas(this);
 
+
+        // TODO: Terminar de implementar bien la generación del mazo.
 //        for (int i = 0; i < cartasATomarInicialmente; i++)
 //        {
 //            this.cartasEnMano.agregarCarta(mazo.agarrarCarta());

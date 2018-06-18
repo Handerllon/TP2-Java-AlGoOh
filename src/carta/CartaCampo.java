@@ -1,4 +1,4 @@
-package carta.campo;
+package carta;
 
 import carta.Carta;
 import carta.Efecto;

@@ -1,6 +1,7 @@
 package carta.monstruo;
 
 
+import carta.CartaMonstruo;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -22,20 +23,5 @@ public class CartaMonstruoTest
         carta.cambiarModo();
 
         assertTrue(carta.getPuntos() == 2300);
-    }
-
-    @Test
-    public void test03CartaMonstruoTieneOrientacionInicialHaciaAbajo()
-    {
-        CartaMonstruo carta = new GaiaTheFierceKnight();
-        assertTrue(carta.orientacionAbajo());
-    }
-
-    @Test
-    public void test04CartaMonstruoCambiaHorientacionHaciaArribaYQuedaHaciaArriba()
-    {
-        CartaMonstruo carta = new GaiaTheFierceKnight();
-        carta.cambiarOrientacion();
-        assertTrue(carta.orientacionArriba());
     }
 }

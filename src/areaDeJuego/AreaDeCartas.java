@@ -3,8 +3,8 @@ package areaDeJuego;
 import AlGoOh.Jugador;
 import areaDeJuego.excepciones.RegionSinEspacioLibre;
 import carta.Carta;
-import carta.magica.CartaMagica;
-import carta.monstruo.CartaMonstruo;
+import carta.CartaMagica;
+import carta.CartaMonstruo;
 
 import java.util.ArrayList;
 

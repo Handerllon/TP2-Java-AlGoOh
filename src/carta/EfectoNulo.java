@@ -1,11 +1,11 @@
-package carta.campo;
+package carta;
 
 import areaDeJuego.Tablero;
-import carta.CartaCampo;
 
-public class Sogen extends CartaCampo
+public class EfectoNulo implements Efecto
 {
     public void efecto(Tablero tablero)
     {
+
     }
 }

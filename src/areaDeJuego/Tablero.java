@@ -2,8 +2,8 @@ package areaDeJuego;
 
 import AlGoOh.Jugador;
 import carta.Sacrificio;
-import carta.magica.CartaMagica;
-import carta.monstruo.CartaMonstruo;
+import carta.CartaMagica;
+import carta.CartaMonstruo;
 
 public class Tablero
 {
@@ -44,6 +44,7 @@ public class Tablero
 
     public void agregarCarta(CartaMonstruo carta, Sacrificio sacrificios)
     {
+        // TODO: Esto capaz se puede hacer de una forma más elegante y prolija.
         if (this.areaDeCartasJugador.regionMonstruosNoVacia())
         {
             if (carta.getEstrellas() >= 5 && carta.getEstrellas() <= 6)
@@ -98,7 +99,7 @@ public class Tablero
     {
         int diferenciaPuntos = cartaJugador.getPuntos() - cartaOponente.getPuntos();
 
-        // Esto capaz se puede hacer de una forma más elegante y prolija.
+        // TODO: Esto capaz se puede hacer de una forma más elegante y prolija.
         if (cartaJugador.enAtaque() && cartaOponente.enAtaque())
         {
             if (diferenciaPuntos > 0)

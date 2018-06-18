@@ -1,6 +1,7 @@
 package carta.trampa;
 
 import areaDeJuego.Tablero;
+import carta.CartaTrampa;
 
 public class MagicCylinder extends CartaTrampa
 {

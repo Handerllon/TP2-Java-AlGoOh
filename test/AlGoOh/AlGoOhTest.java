@@ -4,12 +4,13 @@ import areaDeJuego.RegionCementerio;
 import areaDeJuego.RegionCampo;
 import areaDeJuego.RegionMonstruos;
 import areaDeJuego.Tablero;
+import carta.CartaMonstruo;
 import carta.Sacrificio;
 import carta.SacrificioNulo;
-import carta.magica.CartaMagica;
+import carta.CartaMagica;
 import carta.magica.DarkHole;
 import carta.monstruo.*;
-import carta.trampa.CartaTrampa;
+import carta.CartaTrampa;
 import carta.trampa.MagicCylinder;
 import org.junit.Test;
 

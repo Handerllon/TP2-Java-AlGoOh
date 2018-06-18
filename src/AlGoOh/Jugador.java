@@ -6,8 +6,8 @@ import areaDeJuego.Tablero;
 import carta.Mano;
 import carta.Mazo;
 import carta.Sacrificio;
-import carta.magica.CartaMagica;
-import carta.monstruo.CartaMonstruo;
+import carta.CartaMagica;
+import carta.CartaMonstruo;
 
 public class Jugador
 {

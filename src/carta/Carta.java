@@ -13,13 +13,7 @@ public abstract class Carta
 
     public String obtenerNombre()
     {
-
         return nombre;
-    }
-
-    public void establecerOrientacion(Orientacion orientacionNueva)
-    {
-        this.orientacion = orientacionNueva;
     }
 
     public void cambiarOrientacion()
@@ -27,11 +21,13 @@ public abstract class Carta
         this.orientacion.cambiarOrientacion(this);
     }
 
-    public boolean orientacionArriba(){
-        return this.orientacion instanceof OrientacionArriba;
+    protected void establecerOrientacion(Orientacion orientacionNueva)
+    {
+        this.orientacion = orientacionNueva;
     }
 
-    public boolean orientacionAbajo(){
-        return this.orientacion instanceof OrientacionAbajo;
+    protected boolean orientacionArriba()
+    {
+        return this.orientacion instanceof OrientacionArriba;
     }
 }

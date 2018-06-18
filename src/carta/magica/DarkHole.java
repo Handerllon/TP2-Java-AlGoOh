@@ -1,16 +1,35 @@
 package carta.magica;
 
 import areaDeJuego.Tablero;
+import carta.CartaMagica;
+import carta.EfectoNulo;
+import carta.OrientacionAbajo;
 
 public class DarkHole extends CartaMagica
 {
+
+    public DarkHole()
+    {
+        this.nombre = "Dark Hole";
+        this.orientacion = new OrientacionAbajo();
+        this.efecto = new EfectoNulo();
+    }
+
     public void efecto(Tablero tablero)
     {
-        // TODO: Depende del estado en el que está la carta. Podemos hacerlo más prolijo?
-        if(this.orientacionArriba())
+        this.efecto.efecto(tablero);
+    }
+
+    public void cambiarOrientacion()
+    {
+        this.orientacion.cambiarOrientacion(this);
+
+        if (this.orientacionArriba())
         {
-            tablero.destruirMonstruosJugador();
-            tablero.destruirMonstruosOponente();
+            this.efecto = new DarkHoleEfecto();
+        } else
+        {
+            this.efecto = new EfectoNulo();
         }
     }
 }

@@ -1,6 +1,6 @@
 package carta;
 
-public class OrientacionAbajo extends Orientacion
+public class OrientacionAbajo implements Orientacion
 {
     public void cambiarOrientacion(Carta carta)
     {

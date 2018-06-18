@@ -1,4 +1,4 @@
-package carta.trampa;
+package carta;
 
 import carta.Carta;
 import carta.Efecto;

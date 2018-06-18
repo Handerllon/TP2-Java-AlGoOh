@@ -1,6 +1,8 @@
 package carta.monstruo;
 
+import carta.CartaMonstruo;
 import carta.ModoDefensa;
+import carta.OrientacionAbajo;
 
 public class CharcoalInpachi extends CartaMonstruo
 {
@@ -11,6 +13,8 @@ public class CharcoalInpachi extends CartaMonstruo
         this.estrellas = 1;
         this.nombre = "Charcoal Inpachi";
 
-        this.modo = new ModoDefensa(this.puntosDefensa);
+        this.modo = new ModoDefensa();
+        this.puntos = this.puntosDefensa;
+        this.orientacion = new OrientacionAbajo();
     }
 }

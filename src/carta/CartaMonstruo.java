@@ -1,44 +1,41 @@
-package carta.monstruo;
-
-import carta.Carta;
-import carta.Modo;
-import carta.ModoAtaque;
-import carta.ModoDefensa;
+package carta;
 
 public abstract class CartaMonstruo extends Carta
 {
     protected int puntosAtaque;
     protected int puntosDefensa;
+    protected int puntos;
     protected int estrellas;
+
     protected Modo modo;
 
     public CartaMonstruo()
     {
-    }
-
-    public void establecerModo(Modo modoNuevo)
-    {
-        this.modo = modoNuevo;
+        this.orientacion = new OrientacionAbajo();
+        this.modo = new ModoDefensa();
+        this.puntos = this.puntosDefensa;
     }
 
     public void cambiarModo()
     {
         this.modo.cambiarModo(this);
+        if (this.enAtaque())
+        {
+            this.puntos = this.puntosAtaque;
+        } else
+        {
+            this.puntos = this.puntosDefensa;
+        }
     }
 
-    public int getPuntosDefensa()
+    protected void establecerModo(Modo modoNuevo)
     {
-        return this.puntosDefensa;
-    }
-
-    public int getPuntosAtaque()
-    {
-        return this.puntosAtaque;
+        this.modo = modoNuevo;
     }
 
     public int getPuntos()
     {
-        return this.modo.getPuntos();
+        return this.puntos;
     }
 
     public boolean enAtaque()

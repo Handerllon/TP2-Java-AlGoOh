@@ -1,8 +1,6 @@
 package carta;
 
-public abstract class Orientacion
+public interface Orientacion
 {
-    public void cambiarOrientacion(Carta carta){
-        carta.establecerOrientacion(new OrientacionArriba());
-    }
+    void cambiarOrientacion(Carta carta);
 }

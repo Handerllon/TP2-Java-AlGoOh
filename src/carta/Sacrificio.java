@@ -1,7 +1,5 @@
 package carta;
 
-import carta.monstruo.CartaMonstruo;
-
 import java.util.Stack;
 
 // TODO: validar la cantidad de cartas que voy poniendo. Puede lanzar excepciones si pido de más.

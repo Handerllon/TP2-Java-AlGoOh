@@ -1,8 +1,10 @@
 package carta.monstruo;
 
 import areaDeJuego.Tablero;
+import carta.CartaMonstruo;
 import carta.Efecto;
 import carta.ModoDefensa;
+import carta.OrientacionAbajo;
 
 public class Jinzo7 extends CartaMonstruo implements Efecto
 {
@@ -13,7 +15,9 @@ public class Jinzo7 extends CartaMonstruo implements Efecto
         this.estrellas = 2;
         this.nombre = "Jinzo7";
 
-        this.modo = new ModoDefensa(this.puntosDefensa);
+        this.modo = new ModoDefensa();
+        this.puntos = this.puntosDefensa;
+        this.orientacion = new OrientacionAbajo();
     }
 	
     public void efecto(Tablero tablero)

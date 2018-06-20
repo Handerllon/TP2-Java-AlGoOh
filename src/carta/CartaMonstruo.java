@@ -1,5 +1,7 @@
 package carta;
 
+import AlGoOh.Jugador;
+
 public abstract class CartaMonstruo extends Carta
 {
     protected int puntosAtaque;
@@ -55,4 +57,46 @@ public abstract class CartaMonstruo extends Carta
     {
         return this.estrellas;
     }
+
+	public void atacarA(Jugador jugador, Jugador oponente, CartaMonstruo cartaOponente) {
+		
+		int diferenciaDePuntos = this.calcularDiferencia(cartaOponente);
+		
+		if(cartaOponente.enAtaque()){
+			
+			if (diferenciaDePuntos > 0){
+				
+				oponente.destruirMonstruo(cartaOponente);
+				oponente.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
+			}
+			else if (diferenciaDePuntos < 0){
+				
+				jugador.destruirMonstruo(this);
+				jugador.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
+			}
+			else{
+				
+				oponente.destruirMonstruo(cartaOponente);
+				jugador.destruirMonstruo(this);
+			}
+		}
+		else{
+			if (diferenciaDePuntos > 0){
+				
+				oponente.destruirMonstruo(cartaOponente);
+			}
+			else if (diferenciaDePuntos < 0){
+				
+				jugador.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
+			}
+			else{
+				//No pasa nada
+			}
+		}
+	}
+
+	private int calcularDiferencia(CartaMonstruo cartaOponente) {
+		
+		return (this.getPuntos() - cartaOponente.getPuntos());
+	}
 }

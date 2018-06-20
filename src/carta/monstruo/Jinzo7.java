@@ -1,6 +1,6 @@
 package carta.monstruo;
 
-import areaDeJuego.Tablero;
+import AlGoOh.Jugador;
 import carta.CartaMonstruo;
 import carta.Efecto;
 
@@ -15,8 +15,10 @@ public class Jinzo7 extends CartaMonstruo implements Efecto
         this.estrellas = 2;
         this.nombre = "Jinzo7";
     }
-
-    public void efecto(Tablero tablero)
-    {
-    }
+    
+	@Override
+	public void efecto(Jugador jugador, Jugador oponente) {
+		// TODO Auto-generated method stub
+		
+	}
 }

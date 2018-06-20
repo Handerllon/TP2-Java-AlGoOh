@@ -1,6 +1,6 @@
 package carta.magica;
 
-import areaDeJuego.Tablero;
+import AlGoOh.Jugador;
 import carta.CartaMagica;
 import carta.EfectoNulo;
 
@@ -13,9 +13,9 @@ public class DarkHole extends CartaMagica
         this.nombre = "Dark Hole";
     }
 
-    public void efecto(Tablero tablero)
+    public void efecto(Jugador jugador, Jugador oponente)
     {
-        this.efecto.efecto(tablero);
+        this.efecto.efecto(jugador,oponente);
     }
 
     public void cambiarOrientacion()

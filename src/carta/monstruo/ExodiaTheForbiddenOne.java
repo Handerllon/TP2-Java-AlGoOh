@@ -1,6 +1,6 @@
 package carta.monstruo;
 
-import areaDeJuego.Tablero;
+import AlGoOh.Jugador;
 import carta.CartaMonstruo;
 import carta.Efecto;
 
@@ -16,7 +16,10 @@ public class ExodiaTheForbiddenOne extends CartaMonstruo implements Efecto
         this.nombre = "Exodia The Forbidden One";
     }
 
-    public void efecto(Tablero tablero)
-    {
-    }
+
+	@Override
+	public void efecto(Jugador jugador, Jugador oponente) {
+		// TODO Auto-generated method stub
+		
+	}
 }

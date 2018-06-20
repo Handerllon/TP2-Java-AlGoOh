@@ -62,4 +62,9 @@ public abstract class Region
     {
         return this.cantidadCartas == 0;
     }
+    
+    public void insertarCarta(Carta unaCarta){
+    	
+    	cartas.put(unaCarta.obtenerNombre(), unaCarta);
+    }
 }

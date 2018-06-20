@@ -1,8 +1,8 @@
 package carta;
 
-import areaDeJuego.Tablero;
+import AlGoOh.Jugador;
 
 public interface Efecto
 {
-    void efecto(Tablero tablero);
+    void efecto(Jugador jugador, Jugador oponente);
 }

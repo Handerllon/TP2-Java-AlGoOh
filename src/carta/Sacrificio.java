@@ -1,6 +1,10 @@
 package carta;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
+
+import carta.excepciones.NoHayCartasParaSacrificarError;
+
 
 // TODO: validar la cantidad de cartas que voy poniendo. Puede lanzar excepciones si pido de más.
 public class Sacrificio
@@ -19,6 +23,16 @@ public class Sacrificio
 
     public CartaMonstruo getMonstruo()
     {
-        return cartasASacrificar.pop();
+    	CartaMonstruo cartaMonstruo;
+    	
+    	try{
+    		cartaMonstruo = cartasASacrificar.pop();		
+    	}
+    	catch(EmptyStackException e){
+    		
+    		throw new NoHayCartasParaSacrificarError();
+    	}
+    	
+        return cartaMonstruo;
     }
 }

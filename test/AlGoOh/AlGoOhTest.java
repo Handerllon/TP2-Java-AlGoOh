@@ -3,7 +3,6 @@ package AlGoOh;
 import areaDeJuego.RegionCampo;
 import areaDeJuego.RegionCementerio;
 import areaDeJuego.RegionMonstruos;
-import areaDeJuego.Tablero;
 import carta.*;
 import carta.magica.DarkHole;
 import carta.monstruo.*;
@@ -24,6 +23,9 @@ public class AlGoOhTest
 
         RegionMonstruos regionMonstruos = new RegionMonstruos();
         regionMonstruos.colocarCarta(carta);
+        
+        assertTrue(regionMonstruos.contieneCarta(carta));
+        assertTrue(carta.enAtaque());
     }
 
     @Test
@@ -33,7 +35,9 @@ public class AlGoOhTest
 
         RegionMonstruos regionMonstruos = new RegionMonstruos();
         regionMonstruos.colocarCarta(carta);
-
+        
+        assertTrue(regionMonstruos.contieneCarta(carta));
+        assertTrue(carta.enDefensa());
     }
 
     @Test
@@ -43,7 +47,8 @@ public class AlGoOhTest
         RegionCampo regionCampo = new RegionCampo();
 
         regionCampo.colocarCarta(carta);
-
+        
+        assertTrue(regionCampo.contieneCarta(carta));
     }
 
     @Test
@@ -53,6 +58,8 @@ public class AlGoOhTest
         RegionCampo regionCampo = new RegionCampo();
 
         regionCampo.colocarCarta(carta);
+        
+        assertTrue(regionCampo.contieneCarta(carta));
     }
 
     @Test
@@ -74,71 +81,65 @@ public class AlGoOhTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        Tablero tableroJuego = new Tablero(jugador1, jugador2);
-        jugador1.definirTablero(tableroJuego);
-        jugador2.definirTablero(tableroJuego);
-
-        CartaMonstruo cartaJugador1 = new CharcoalInpachi();
+        jugador1.establecerOponente(jugador2);
+        
+        CartaMonstruo cartaJugador1 = new AncientBrain();
         cartaJugador1.cambiarModo();
         jugador1.agregarCarta(cartaJugador1, new SacrificioNulo());
-        tableroJuego.cambiarTurno();
-
-        CartaMonstruo cartaJugador2 = new GaiaTheFierceKnight();
-        cartaJugador2.cambiarModo();
-        jugador2.agregarCarta(cartaJugador2, new SacrificioNulo());
-        jugador2.atacar(cartaJugador2,cartaJugador1);
-
-        assertTrue(jugador1.getPuntosDeVida() == (8000-2200));
-
-        assertTrue(jugador1.cartaEstaEnCementerio(cartaJugador1));
-        assertFalse(jugador2.cartaEstaEnCementerio(cartaJugador2));
-    }
-
-    @Test
-    public void test07JugadorAtacaAMonstruoEnPosicionDeAtaqueConMenorAtaqueQueElDelJugador()
-    {
-        Jugador jugador1 = new Jugador("J1");
-        Jugador jugador2 = new Jugador("J2");
-
-        Tablero tableroJuego = new Tablero(jugador1, jugador2);
-        jugador1.definirTablero(tableroJuego);
-        jugador2.definirTablero(tableroJuego);
-
-        CartaMonstruo cartaJugador1 = new GaiaTheFierceKnight();
-        cartaJugador1.cambiarModo();
-        jugador1.agregarCarta(cartaJugador1, new SacrificioNulo());
-        tableroJuego.cambiarTurno();
-
+        
         CartaMonstruo cartaJugador2 = new CharcoalInpachi();
         cartaJugador2.cambiarModo();
         jugador2.agregarCarta(cartaJugador2, new SacrificioNulo());
-        jugador2.atacar(cartaJugador2,cartaJugador1);
-
-        assertTrue(jugador2.getPuntosDeVida() == (8000-2200));
+        
+        jugador1.atacar(cartaJugador1, cartaJugador2);
+        
+        assertTrue(jugador2.getPuntosDeVida() == (8000-900));
 
         assertTrue(jugador2.cartaEstaEnCementerio(cartaJugador2));
         assertFalse(jugador1.cartaEstaEnCementerio(cartaJugador1));
     }
 
     @Test
-    public void test08JugadorAtacaAMonstruoEnPosicionDeAtaqueConIgualAtaqueQueElDelJugador()
+    public void test07JugadorAtacaAMonstruoEnPosicionDeAtaqueConMenorAtaqueQueElDelJugador()
     {
-        Jugador jugador1 = new Jugador("J1");
+    	Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        Tablero tableroJuego = new Tablero(jugador1, jugador2);
-        jugador1.definirTablero(tableroJuego);
-        jugador2.definirTablero(tableroJuego);
-
-        CartaMonstruo cartaJugador1 = new GaiaTheFierceKnight();
+        jugador1.establecerOponente(jugador2);
+        
+        CartaMonstruo cartaJugador1 = new CharcoalInpachi();
         cartaJugador1.cambiarModo();
         jugador1.agregarCarta(cartaJugador1, new SacrificioNulo());
-        tableroJuego.cambiarTurno();
-
-        CartaMonstruo cartaJugador2 = new GaiaTheFierceKnight();
+        
+        CartaMonstruo cartaJugador2 = new AncientBrain();
         cartaJugador2.cambiarModo();
         jugador2.agregarCarta(cartaJugador2, new SacrificioNulo());
-        jugador2.atacar(cartaJugador2,cartaJugador1);
+        
+        jugador1.atacar(cartaJugador1, cartaJugador2);
+        
+        assertTrue(jugador1.getPuntosDeVida() == (8000-900));
+
+        assertTrue(jugador1.cartaEstaEnCementerio(cartaJugador1));
+        assertFalse(jugador2.cartaEstaEnCementerio(cartaJugador2));
+    }
+
+    @Test
+    public void test08JugadorAtacaAMonstruoEnPosicionDeAtaqueConIgualAtaqueQueElDelJugador()
+    {
+    	Jugador jugador1 = new Jugador("J1");
+        Jugador jugador2 = new Jugador("J2");
+
+        jugador1.establecerOponente(jugador2);
+        
+        CartaMonstruo cartaJugador1 = new AncientBrain();
+        cartaJugador1.cambiarModo();
+        jugador1.agregarCarta(cartaJugador1, new SacrificioNulo());
+        
+        CartaMonstruo cartaJugador2 = new AncientBrain();
+        cartaJugador2.cambiarModo();
+        jugador2.agregarCarta(cartaJugador2, new SacrificioNulo());
+        
+        jugador1.atacar(cartaJugador1, cartaJugador2);
 
         assertTrue(jugador1.getPuntosDeVida() == 8000);
         assertTrue(jugador2.getPuntosDeVida() == 8000);
@@ -151,71 +152,86 @@ public class AlGoOhTest
     @Test
     public void test09JugadorAtacaMonstruoEnPosicionDeDefensaConMenorDefensaQueElAtaqueDelMismo()
     {
-        Jugador jugador1 = new Jugador("J1");
+    	Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        Tablero tableroJuego = new Tablero(jugador1, jugador2);
-        jugador1.definirTablero(tableroJuego);
-        jugador2.definirTablero(tableroJuego);
-
-        CartaMonstruo cartaJugador1 = new CharcoalInpachi();
+        jugador1.establecerOponente(jugador2);
+        
+        CartaMonstruo cartaJugador1 = new AncientBrain();
+        cartaJugador1.cambiarModo();
         jugador1.agregarCarta(cartaJugador1, new SacrificioNulo());
-        tableroJuego.cambiarTurno();
-
-        CartaMonstruo cartaJugador2 = new GaiaTheFierceKnight();
-        cartaJugador2.cambiarModo();
+        
+        CartaMonstruo cartaJugador2 = new AlexandriteDragon();
         jugador2.agregarCarta(cartaJugador2, new SacrificioNulo());
-        jugador2.atacar(cartaJugador2,cartaJugador1);
+        
+        jugador1.atacar(cartaJugador1, cartaJugador2);
+        
+        assertTrue(jugador2.getPuntosDeVida() == (8000));
 
-        assertTrue(jugador1.getPuntosDeVida() == 8000);
-
-        assertTrue(jugador1.cartaEstaEnCementerio(cartaJugador1));
-        assertFalse(jugador2.cartaEstaEnCementerio(cartaJugador2));
+        assertTrue(jugador2.cartaEstaEnCementerio(cartaJugador2));
+        assertFalse(jugador1.cartaEstaEnCementerio(cartaJugador1));
     }
 
     @Test
     public void test10JugadorAtacaMonstruoEnPosicionDeDefensaConMayorDefensaQueElAtaqueDelMismo()
     {
-        Jugador jugador1 = new Jugador("J1");
+    	Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        Tablero tableroJuego = new Tablero(jugador1, jugador2);
-        jugador1.definirTablero(tableroJuego);
-        jugador2.definirTablero(tableroJuego);
-
-        CartaMonstruo cartaJugador1 = new GaiaTheFierceKnight();
+        jugador1.establecerOponente(jugador2);
+        
+        CartaMonstruo cartaJugador1 = new AlexandriteDragon();
+        cartaJugador1.cambiarModo();
         jugador1.agregarCarta(cartaJugador1, new SacrificioNulo());
-        tableroJuego.cambiarTurno();
-
+        
         CartaMonstruo cartaJugador2 = new CharcoalInpachi();
-        cartaJugador2.cambiarModo();
         jugador2.agregarCarta(cartaJugador2, new SacrificioNulo());
-        jugador2.atacar(cartaJugador2,cartaJugador1);
+        
+        jugador1.atacar(cartaJugador1, cartaJugador2);
+        
+        assertTrue(jugador1.getPuntosDeVida() == (8000-100));
 
-        assertTrue(jugador1.getPuntosDeVida() == 8000);
-        assertTrue(jugador2.getPuntosDeVida() == (8000-2000));
-
-        assertFalse(jugador1.cartaEstaEnCementerio(cartaJugador1));
         assertFalse(jugador2.cartaEstaEnCementerio(cartaJugador2));
+        assertFalse(jugador1.cartaEstaEnCementerio(cartaJugador1));
     }
 
     @Test
-    public void test11SeJuegaAgujeroNegroYMuerenTodosLosMonstruosDeAmbasRegionesYLosPuntosDeVidaQuedanIguales()
+    public void test11JugadorAtacaAMonstruoEnPosicionDeDefensaConIgualDefensaQueElAtaqueDelMismo(){
+    	Jugador jugador1 = new Jugador("J1");
+        Jugador jugador2 = new Jugador("J2");
+
+        jugador1.establecerOponente(jugador2);
+        
+        CartaMonstruo cartaJugador1 = new CharcoalInpachi();
+        cartaJugador1.cambiarModo();
+        jugador1.agregarCarta(cartaJugador1, new SacrificioNulo());
+        
+        CartaMonstruo cartaJugador2 = new AlexandriteDragon();
+        jugador2.agregarCarta(cartaJugador2, new SacrificioNulo());
+        
+        jugador1.atacar(cartaJugador1, cartaJugador2);
+        
+        assertTrue(jugador1.getPuntosDeVida() == (8000));
+        assertTrue(jugador2.getPuntosDeVida() == (8000));
+
+        assertFalse(jugador2.cartaEstaEnCementerio(cartaJugador2));
+        assertFalse(jugador1.cartaEstaEnCementerio(cartaJugador1));
+    }
+    
+    @Test
+    public void test12SeJuegaAgujeroNegroYMuerenTodosLosMonstruosDeAmbasRegionesYLosPuntosDeVidaQuedanIguales()
     {
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        Tablero tableroJuego = new Tablero(jugador1, jugador2);
-        jugador1.definirTablero(tableroJuego);
-        jugador2.definirTablero(tableroJuego);
-
-        CartaMonstruo cartaJugador1 = new GaiaTheFierceKnight();
+        jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
+        
+        CartaMonstruo cartaJugador1 = new AlexandriteDragon();
         jugador1.agregarCarta(cartaJugador1, new SacrificioNulo());
-        tableroJuego.cambiarTurno();
 
         CartaMonstruo cartaJugador2 = new CharcoalInpachi();
         jugador2.agregarCarta(cartaJugador2, new SacrificioNulo());
-        tableroJuego.cambiarTurno();
 
         CartaMagica cartaMagicaJugador1 = new DarkHole();
         cartaMagicaJugador1.cambiarOrientacion();
@@ -232,14 +248,13 @@ public class AlGoOhTest
     ambos lados del campo, y que nadie recibió daño alguno.*/
 
     @Test
-    public void test12SeColocaMonstruoEnCampoYSeColocaMonstruoDe6EstrellasSacrificandoCorrectamenteAlPrimero()
+    public void test13SeColocaMonstruoEnCampoYSeColocaMonstruoDe6EstrellasSacrificandoCorrectamenteAlPrimero()
     {
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
-
-        Tablero tableroJuego = new Tablero(jugador1, jugador2);
-        jugador1.definirTablero(tableroJuego);
-        jugador2.definirTablero(tableroJuego);
+        
+        jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
 
         CartaMonstruo carta1Jugador1 = new CharcoalInpachi();
         jugador1.agregarCarta(carta1Jugador1, new SacrificioNulo());
@@ -257,14 +272,13 @@ public class AlGoOhTest
     destruyó el primero.*/
 
     @Test
-    public void test13SeColocan2MonstruosEnCampoYSeColocaMonstruoDe8EstrellasSacrificandoCorrectamenteAlLos2Primeros()
+    public void test14SeColocan2MonstruosEnCampoYSeColocaMonstruoDe8EstrellasSacrificandoCorrectamenteAlLos2Primeros()
     {
     	Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        Tablero tableroJuego = new Tablero(jugador1, jugador2);
-        jugador1.definirTablero(tableroJuego);
-        jugador2.definirTablero(tableroJuego);
+        jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
 
         CartaMonstruo carta1Jugador1 = new CharcoalInpachi();
         jugador1.agregarCarta(carta1Jugador1, new SacrificioNulo());

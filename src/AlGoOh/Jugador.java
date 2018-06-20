@@ -2,7 +2,6 @@ package AlGoOh;
 
 import AlGoOh.excepciones.JugadorSinVida;
 import areaDeJuego.AreaDeCartas;
-import areaDeJuego.Tablero;
 import carta.*;
 
 public class Jugador
@@ -13,7 +12,7 @@ public class Jugador
     private Mano cartasEnMano;
     private int puntosDeVida;
     private AreaDeCartas areaDeCartas;
-    private Tablero tablero;
+	private Jugador oponente;
 
     public Jugador(String unNombre)
     {
@@ -39,12 +38,6 @@ public class Jugador
 //        }
 
     }
-
-    public void definirTablero(Tablero tablero)
-    {
-        this.tablero = tablero;
-    }
-
     public int getPuntosDeVida()
     {
         return this.puntosDeVida;
@@ -63,23 +56,30 @@ public class Jugador
         return this.areaDeCartas;
     }
 
-
-    public void agregarCarta(CartaMonstruo carta, Sacrificio sacrificios)
-    {
-        tablero.agregarCarta(carta, sacrificios);
+    // TODO: Hacer sobrecarga diferenciando cartas que requieren sacrificio y cartas que no
+    public void agregarCarta(CartaMonstruo carta, Sacrificio sacrificio) {
+    	
+    	this.areaDeCartas.agregarCarta(carta, sacrificio);
     }
-
-    public void agregarCarta(CartaMagica carta)
-    {
-        tablero.agregarCarta(carta);
-
+    
+    public void agregarCarta(CartaMagica carta) {
+    	
+    	this.areaDeCartas.agregarCarta(carta);
+    	carta.efecto( this, this.oponente);
     }
 
     public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
     {
-        tablero.atacarOponente(cartaAtacante, cartaOponente);
+        //tablero.atacarOponente(cartaAtacante, cartaOponente);
+        
+        cartaAtacante.atacarA(this, this.oponente, cartaOponente);
     }
-
+    
+    public void establecerOponente(Jugador oponente){
+    	
+    	this.oponente = oponente;
+    }
+    
     public boolean cartaEstaEnCementerio(CartaMonstruo carta)
     {
         return areaDeCartas.cartaEstaEnCementerio(carta);
@@ -89,5 +89,16 @@ public class Jugador
     {
         return areaDeCartas.cartaEstaEnRegionMonstruos(carta);
     }
+
+	public void destruirMonstruo(CartaMonstruo carta) {
+		
+		this.areaDeCartas.removerCarta(carta);
+		this.areaDeCartas.enviarAlCementerio(carta);
+	}
+	
+	public void destruirMonstruos(){
+		
+		this.areaDeCartas.enviarMonstruosAlCementerio();
+	}
 }
 

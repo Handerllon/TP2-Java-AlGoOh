@@ -1,11 +1,13 @@
 package carta.magica;
 
-import areaDeJuego.Tablero;
+import AlGoOh.Jugador;
 import carta.CartaMagica;
 
 public class PotOfGreed extends CartaMagica
 {
-    public void efecto(Tablero tablero)
-    {
-    }
+	@Override
+	public void efecto(Jugador jugador, Jugador oponente) {
+		// TODO Auto-generated method stub
+		
+	}
 }

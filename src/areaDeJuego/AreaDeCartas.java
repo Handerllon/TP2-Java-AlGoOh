@@ -5,6 +5,7 @@ import areaDeJuego.excepciones.RegionSinEspacioLibre;
 import carta.Carta;
 import carta.CartaMagica;
 import carta.CartaMonstruo;
+import carta.Sacrificio;
 
 import java.util.ArrayList;
 
@@ -35,12 +36,9 @@ public class AreaDeCartas
     // --------------------------------------------------------------------
 
     // TODO: Se podrá evitar la sobrecarga?
-    public void agregarCarta(CartaMonstruo carta)
+    public void agregarCarta(CartaMonstruo carta, Sacrificio sacrificio)
     {
-        if (this.regionMonstruos.hayEspacioLibre())
-            this.regionMonstruos.colocarCarta(carta);
-        else
-            throw new RegionSinEspacioLibre(this.regionMonstruos);
+        this.regionMonstruos.agregarCarta(carta, sacrificio, this.cementerio);
     }
 
     public void agregarCarta(CartaMagica carta)
@@ -86,15 +84,5 @@ public class AreaDeCartas
     public boolean cartaEstaEnRegionMonstruos(CartaMonstruo carta)
     {
         return this.regionMonstruos.contieneCarta(carta);
-    }
-
-    public boolean regionMonstruosVacia()
-    {
-        return this.regionMonstruos.estaVacia();
-    }
-
-    public boolean regionMonstruosNoVacia()
-    {
-        return !this.regionMonstruosVacia();
     }
 }

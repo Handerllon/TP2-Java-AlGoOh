@@ -1,11 +1,11 @@
 package carta;
 
-import areaDeJuego.Tablero;
+import AlGoOh.Jugador;
 
 public class EfectoNulo implements Efecto
 {
-    public void efecto(Tablero tablero)
-    {
-
-    }
+	@Override
+	public void efecto(Jugador jugador, Jugador oponente) {
+		
+	}
 }

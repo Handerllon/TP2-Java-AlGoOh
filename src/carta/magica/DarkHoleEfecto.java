@@ -1,13 +1,13 @@
 package carta.magica;
 
-import areaDeJuego.Tablero;
+import AlGoOh.Jugador;
 import carta.Efecto;
 
 public class DarkHoleEfecto implements Efecto
 {
-    public void efecto(Tablero tablero)
+    public void efecto(Jugador jugador, Jugador oponente)
     {
-        tablero.destruirMonstruosJugador();
-        tablero.destruirMonstruosOponente();
+        jugador.destruirMonstruos();
+        oponente.destruirMonstruos();
     }
 }

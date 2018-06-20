@@ -3,6 +3,7 @@ package areaDeJuego;
 import AlGoOh.Jugador;
 import areaDeJuego.excepciones.RegionSinEspacioLibre;
 import carta.Carta;
+import carta.CartaCampo;
 import carta.CartaMagica;
 import carta.CartaMonstruo;
 import carta.Sacrificio;
@@ -41,12 +42,18 @@ public class AreaDeCartas
         this.regionMonstruos.agregarCarta(carta, sacrificio, this.cementerio);
     }
 
+    // TODO: Cambiar implementacion para que coincida con agregar carta de monstruos, se sacaria la verificacion de aca
     public void agregarCarta(CartaMagica carta)
     {
         if (this.regionMagicasYTrampas.hayEspacioLibre())
             this.regionMagicasYTrampas.colocarCarta(carta);
         else
             throw new RegionSinEspacioLibre(this.regionMagicasYTrampas);
+    }
+    
+    public void agregarCarta(CartaCampo cartaDeCampo) {
+    	
+    	this.regionCampo.agregarCarta(cartaDeCampo);
     }
 
     public void removerCarta(CartaMonstruo carta)

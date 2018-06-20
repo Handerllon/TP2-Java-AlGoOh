@@ -67,6 +67,12 @@ public class Jugador
     	this.areaDeCartas.agregarCarta(carta);
     	carta.efecto( this, this.oponente);
     }
+    
+    public void agregarCarta(CartaCampo cartaDeCampo) {
+    	
+    	this.areaDeCartas.agregarCarta(cartaDeCampo);
+    	cartaDeCampo.efecto(this, this.oponente);
+    }
 
     public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
     {

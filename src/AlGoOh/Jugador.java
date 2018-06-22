@@ -56,7 +56,11 @@ public class Jugador
         return this.areaDeCartas;
     }
 
-    // TODO: Hacer sobrecarga diferenciando cartas que requieren sacrificio y cartas que no
+    public void agregarCarta(CartaMonstruo carta) {
+
+        this.areaDeCartas.agregarCarta(carta);
+    }
+
     public void agregarCarta(CartaMonstruo carta, Sacrificio sacrificio) {
     	
     	this.areaDeCartas.agregarCarta(carta, sacrificio);

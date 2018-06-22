@@ -36,7 +36,11 @@ public class AreaDeCartas
     // Métodos de agregación de cartas.
     // --------------------------------------------------------------------
 
-    // TODO: Se podrá evitar la sobrecarga?
+    public void agregarCarta(CartaMonstruo carta)
+    {
+        this.regionMonstruos.agregarCarta(carta, this.cementerio);
+    }
+
     public void agregarCarta(CartaMonstruo carta, Sacrificio sacrificio)
     {
         this.regionMonstruos.agregarCarta(carta, sacrificio, this.cementerio);

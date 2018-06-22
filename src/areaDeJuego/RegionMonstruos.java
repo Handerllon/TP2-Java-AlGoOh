@@ -3,6 +3,7 @@ package areaDeJuego;
 import areaDeJuego.excepciones.RegionSinEspacioLibre;
 import carta.CartaMonstruo;
 import carta.Sacrificio;
+import carta.excepciones.NoHayCartasParaSacrificarError;
 
 public class RegionMonstruos extends Region
 {
@@ -13,35 +14,62 @@ public class RegionMonstruos extends Region
         super(CAPACIDAD_REGION_MONSTRUOS);
     }
 
-	public void agregarCarta(CartaMonstruo carta, Sacrificio sacrificio, RegionCementerio cementerio) {
+    public void agregarCarta(CartaMonstruo carta, RegionCementerio cementerio)
+    {
 
-		if(hayEspacioLibre()){
-			
-			this.colocarCarta(carta, sacrificio, cementerio);
-		}
-		else 
-			throw new RegionSinEspacioLibre(this);
+        if (hayEspacioLibre())
+        {
 
-	}
+            this.colocarCarta(carta, cementerio);
+        } else
+            throw new RegionSinEspacioLibre(this);
 
-	private void colocarCarta(CartaMonstruo carta, Sacrificio sacrificios, RegionCementerio cementerio) {
-		
-		if (carta.getEstrellas() >= 5 && carta.getEstrellas() <= 6){
-			this.destruirMonstruo(sacrificios.getMonstruo() , cementerio);
-	    } 
-		else if (carta.getEstrellas() >= 7){
-	                
-			this.destruirMonstruo(sacrificios.getMonstruo() , cementerio);
-			this.destruirMonstruo(sacrificios.getMonstruo() , cementerio);
-	    }	
-	    
-		insertarCarta(carta);
-	}
+    }
 
-	private void destruirMonstruo(CartaMonstruo carta, RegionCementerio cementerio) {
-		
-		cementerio.colocarCarta(carta);
-		this.removerCarta(carta);
-	}
-    
+    public void agregarCarta(CartaMonstruo carta, Sacrificio sacrificio, RegionCementerio cementerio)
+    {
+
+        if (hayEspacioLibre())
+        {
+
+            this.colocarCarta(carta, sacrificio, cementerio);
+        } else
+            throw new RegionSinEspacioLibre(this);
+
+    }
+
+    private void colocarCarta(CartaMonstruo carta, RegionCementerio cementerio)
+    {
+
+        if (carta.getEstrellas() >= 5)
+        {
+            throw new NoHayCartasParaSacrificarError();
+        }
+
+        insertarCarta(carta);
+    }
+
+    private void colocarCarta(CartaMonstruo carta, Sacrificio sacrificios, RegionCementerio cementerio)
+    {
+
+        if (carta.getEstrellas() >= 5 && carta.getEstrellas() <= 6)
+        {
+            this.destruirMonstruo(sacrificios.getMonstruo(), cementerio);
+        } else if (carta.getEstrellas() >= 7)
+        {
+
+            this.destruirMonstruo(sacrificios.getMonstruo(), cementerio);
+            this.destruirMonstruo(sacrificios.getMonstruo(), cementerio);
+        }
+
+        insertarCarta(carta);
+    }
+
+    private void destruirMonstruo(CartaMonstruo carta, RegionCementerio cementerio)
+    {
+
+        cementerio.colocarCarta(carta);
+        this.removerCarta(carta);
+    }
+
 }

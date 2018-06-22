@@ -7,7 +7,6 @@ public class MagicCylinder extends CartaTrampa
 {
 	@Override
 	public void efecto(Jugador jugador, Jugador oponente) {
-		// TODO Auto-generated method stub
 		
 	}
 }

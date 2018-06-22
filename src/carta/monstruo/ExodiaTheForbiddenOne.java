@@ -19,7 +19,6 @@ public class ExodiaTheForbiddenOne extends CartaMonstruo implements Efecto
 
 	@Override
 	public void efecto(Jugador jugador, Jugador oponente) {
-		// TODO Auto-generated method stub
 		
 	}
 }

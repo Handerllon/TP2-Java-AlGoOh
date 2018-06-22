@@ -85,11 +85,11 @@ public class AlGoOhTest
         
         CartaMonstruo cartaJugador1 = new AncientBrain();
         cartaJugador1.cambiarModo();
-        jugador1.agregarCarta(cartaJugador1, new SacrificioNulo());
+        jugador1.agregarCarta(cartaJugador1);
         
         CartaMonstruo cartaJugador2 = new CharcoalInpachi();
         cartaJugador2.cambiarModo();
-        jugador2.agregarCarta(cartaJugador2, new SacrificioNulo());
+        jugador2.agregarCarta(cartaJugador2);
         
         jugador1.atacar(cartaJugador1, cartaJugador2);
         
@@ -109,11 +109,11 @@ public class AlGoOhTest
         
         CartaMonstruo cartaJugador1 = new CharcoalInpachi();
         cartaJugador1.cambiarModo();
-        jugador1.agregarCarta(cartaJugador1, new SacrificioNulo());
+        jugador1.agregarCarta(cartaJugador1);
         
         CartaMonstruo cartaJugador2 = new AncientBrain();
         cartaJugador2.cambiarModo();
-        jugador2.agregarCarta(cartaJugador2, new SacrificioNulo());
+        jugador2.agregarCarta(cartaJugador2);
         
         jugador1.atacar(cartaJugador1, cartaJugador2);
         
@@ -133,11 +133,11 @@ public class AlGoOhTest
         
         CartaMonstruo cartaJugador1 = new AncientBrain();
         cartaJugador1.cambiarModo();
-        jugador1.agregarCarta(cartaJugador1, new SacrificioNulo());
+        jugador1.agregarCarta(cartaJugador1);
         
         CartaMonstruo cartaJugador2 = new AncientBrain();
         cartaJugador2.cambiarModo();
-        jugador2.agregarCarta(cartaJugador2, new SacrificioNulo());
+        jugador2.agregarCarta(cartaJugador2);
         
         jugador1.atacar(cartaJugador1, cartaJugador2);
 
@@ -159,10 +159,10 @@ public class AlGoOhTest
         
         CartaMonstruo cartaJugador1 = new AncientBrain();
         cartaJugador1.cambiarModo();
-        jugador1.agregarCarta(cartaJugador1, new SacrificioNulo());
+        jugador1.agregarCarta(cartaJugador1);
         
         CartaMonstruo cartaJugador2 = new AlexandriteDragon();
-        jugador2.agregarCarta(cartaJugador2, new SacrificioNulo());
+        jugador2.agregarCarta(cartaJugador2);
         
         jugador1.atacar(cartaJugador1, cartaJugador2);
         
@@ -182,10 +182,10 @@ public class AlGoOhTest
         
         CartaMonstruo cartaJugador1 = new AlexandriteDragon();
         cartaJugador1.cambiarModo();
-        jugador1.agregarCarta(cartaJugador1, new SacrificioNulo());
+        jugador1.agregarCarta(cartaJugador1);
         
         CartaMonstruo cartaJugador2 = new CharcoalInpachi();
-        jugador2.agregarCarta(cartaJugador2, new SacrificioNulo());
+        jugador2.agregarCarta(cartaJugador2);
         
         jugador1.atacar(cartaJugador1, cartaJugador2);
         
@@ -204,10 +204,10 @@ public class AlGoOhTest
         
         CartaMonstruo cartaJugador1 = new CharcoalInpachi();
         cartaJugador1.cambiarModo();
-        jugador1.agregarCarta(cartaJugador1, new SacrificioNulo());
+        jugador1.agregarCarta(cartaJugador1);
         
         CartaMonstruo cartaJugador2 = new AlexandriteDragon();
-        jugador2.agregarCarta(cartaJugador2, new SacrificioNulo());
+        jugador2.agregarCarta(cartaJugador2);
         
         jugador1.atacar(cartaJugador1, cartaJugador2);
         
@@ -228,10 +228,10 @@ public class AlGoOhTest
         jugador2.establecerOponente(jugador1);
         
         CartaMonstruo cartaJugador1 = new AlexandriteDragon();
-        jugador1.agregarCarta(cartaJugador1, new SacrificioNulo());
+        jugador1.agregarCarta(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = new CharcoalInpachi();
-        jugador2.agregarCarta(cartaJugador2, new SacrificioNulo());
+        jugador2.agregarCarta(cartaJugador2);
 
         CartaMagica cartaMagicaJugador1 = new DarkHole();
         cartaMagicaJugador1.cambiarOrientacion();
@@ -257,7 +257,7 @@ public class AlGoOhTest
         jugador2.establecerOponente(jugador1);
 
         CartaMonstruo carta1Jugador1 = new CharcoalInpachi();
-        jugador1.agregarCarta(carta1Jugador1, new SacrificioNulo());
+        jugador1.agregarCarta(carta1Jugador1);
 
         CartaMonstruo carta2Jugador1 = new AmphibianBeast();
         Sacrificio sacrificios = new Sacrificio();
@@ -281,9 +281,9 @@ public class AlGoOhTest
         jugador2.establecerOponente(jugador1);
 
         CartaMonstruo carta1Jugador1 = new CharcoalInpachi();
-        jugador1.agregarCarta(carta1Jugador1, new SacrificioNulo());
+        jugador1.agregarCarta(carta1Jugador1);
         CartaMonstruo carta2Jugador1 = new Bitron();
-        jugador1.agregarCarta(carta2Jugador1, new SacrificioNulo());
+        jugador1.agregarCarta(carta2Jugador1);
 
         CartaMonstruo carta3Jugador1 = new BlueEyesWhiteDragon();
         Sacrificio sacrificios = new Sacrificio();

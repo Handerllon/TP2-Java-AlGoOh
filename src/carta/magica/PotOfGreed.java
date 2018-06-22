@@ -7,7 +7,7 @@ public class PotOfGreed extends CartaMagica
 {
 	@Override
 	public void efecto(Jugador jugador, Jugador oponente) {
-		// TODO Auto-generated method stub
+
 		
 	}
 }

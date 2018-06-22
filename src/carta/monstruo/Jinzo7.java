@@ -9,15 +9,14 @@ public class Jinzo7 extends CartaMonstruo implements Efecto
     private static int PUNTOS_DEFENSA = 400;
     private static int PUNTOS_ATAQUE = 500;
 
-    public Jinzo7()
+    public Jinzo7(Jugador jugador, Jugador oponente)
     {
-        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE);
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE,jugador,oponente);
         this.estrellas = 2;
-        this.nombre = "Jinzo7";
+        this.nombre = "Jinzo #7";
     }
-    
-	@Override
-	public void efecto(Jugador jugador, Jugador oponente) {
+
+	public void efecto() {
 
 		
 	}

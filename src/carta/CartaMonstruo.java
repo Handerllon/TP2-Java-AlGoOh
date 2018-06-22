@@ -2,7 +2,7 @@ package carta;
 
 import AlGoOh.Jugador;
 
-public abstract class CartaMonstruo extends Carta
+public abstract class CartaMonstruo extends Carta implements Efecto
 {
     protected int puntosAtaque;
     protected int puntosDefensa;
@@ -11,8 +11,8 @@ public abstract class CartaMonstruo extends Carta
 
     protected Modo modo;
 
-    public CartaMonstruo(int puntosDefensa, int puntosAtaque){
-        super();
+    public CartaMonstruo(int puntosDefensa, int puntosAtaque,Jugador jugador, Jugador oponente){
+        super(jugador, oponente);
 
         this.puntosDefensa = puntosDefensa;
         this.puntosAtaque = puntosAtaque;
@@ -56,6 +56,10 @@ public abstract class CartaMonstruo extends Carta
     public int getEstrellas()
     {
         return this.estrellas;
+    }
+
+    public void efecto(){
+
     }
 
 	public void atacarA(Jugador jugador, Jugador oponente, CartaMonstruo cartaOponente) {

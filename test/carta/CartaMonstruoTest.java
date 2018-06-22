@@ -1,6 +1,7 @@
 package carta;
 
 
+import AlGoOh.Jugador;
 import carta.monstruo.GaiaTheFierceKnight;
 import org.junit.Test;
 
@@ -11,7 +12,13 @@ public class CartaMonstruoTest
     @Test
     public void test01CartaMonstruoTienePuntosDeAtaqueCorrectos()
     {
-        CartaMonstruo carta = new GaiaTheFierceKnight();
+        Jugador jugador1 = new Jugador("J1");
+        Jugador jugador2 = new Jugador("J2");
+
+        jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
+
+        CartaMonstruo carta = new GaiaTheFierceKnight(jugador1, jugador2);
 
         assertTrue(carta.getPuntos() == 2100);
     }
@@ -19,7 +26,13 @@ public class CartaMonstruoTest
     @Test
     public void test02CartaMonstruoTienePuntosDeDefensaCorrectos()
     {
-        CartaMonstruo carta = new GaiaTheFierceKnight();
+        Jugador jugador1 = new Jugador("J1");
+        Jugador jugador2 = new Jugador("J2");
+
+        jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
+
+        CartaMonstruo carta = new GaiaTheFierceKnight(jugador1, jugador2);
         carta.cambiarModo();
 
         assertTrue(carta.getPuntos() == 2300);

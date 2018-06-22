@@ -1,14 +1,19 @@
 package carta;
 
+import AlGoOh.Jugador;
+
 public abstract class Carta
 {
 
     protected String nombre;
     protected Orientacion orientacion;
+    protected Jugador jugador, oponente;
 
-    public Carta()
+    public Carta(Jugador jugador, Jugador oponente)
     {
         this.orientacion = new OrientacionAbajo();
+        this.jugador = jugador;
+        this.oponente = oponente;
     }
 
     public String obtenerNombre()

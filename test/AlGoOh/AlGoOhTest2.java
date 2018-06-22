@@ -2,10 +2,7 @@ package AlGoOh;
 
 import carta.CartaCampo;
 import carta.CartaMonstruo;
-import carta.SacrificioNulo;
-import carta.campo.Wasteland;
-import carta.monstruo.AncientBrain;
-import carta.monstruo.CharcoalInpachi;
+import carta.FabricaCartas;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -13,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 public class AlGoOhTest2
 {
 
-//Colocar un monstruo de cada lado del campo. Activo la carta mágica Wasteland y
+    //Colocar un monstruo de cada lado del campo. Activo la carta mágica Wasteland y
 //verificar que de un lado del campo, el ataque del monstruo aumenta en 200 puntos y
 //del otro lado del campo, se aumenta la defensa del monstruo en 300 puntos.
     @Test
@@ -23,16 +20,20 @@ public class AlGoOhTest2
         Jugador jugador2 = new Jugador("J2");
 
         jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
 
-        CartaMonstruo cartaJugador1 = new AncientBrain();
+        FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
+        FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
+
+        CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Ancient Brain");
         cartaJugador1.cambiarModo();
         jugador1.agregarCarta(cartaJugador1);
 
-        CartaMonstruo cartaJugador2 = new CharcoalInpachi();
+        CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         cartaJugador2.cambiarModo();
         jugador2.agregarCarta(cartaJugador2);
 
-        CartaCampo cartaWasteland = new Wasteland();
+        CartaCampo cartaWasteland = fabricaCartasJugador1.crearCartaCampo("Wasteland");
         cartaWasteland.cambiarOrientacion();
         jugador1.agregarCarta(cartaWasteland);
 

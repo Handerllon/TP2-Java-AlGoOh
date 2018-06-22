@@ -9,15 +9,14 @@ public class ManEaterBug extends CartaMonstruo implements Efecto
     private static int PUNTOS_DEFENSA = 600;
     private static int PUNTOS_ATAQUE = 450;
 
-    public ManEaterBug()
+    public ManEaterBug(Jugador jugador, Jugador oponente)
     {
-        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE);
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE,jugador,oponente);
         this.estrellas = 2;
         this.nombre = "Man Eater Bug";
     }
 
-	@Override
-	public void efecto(Jugador jugador, Jugador oponente) {
+	public void efecto() {
 
 		
 	}

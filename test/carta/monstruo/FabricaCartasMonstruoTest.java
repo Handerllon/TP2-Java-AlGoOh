@@ -1,10 +1,10 @@
-package carta;
+package carta.monstruo;
 
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class FabricaCartasTest
+public class FabricaCartasMonstruoTest
 {
     @Test
     public void test01()

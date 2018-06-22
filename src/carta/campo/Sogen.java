@@ -5,9 +5,13 @@ import carta.CartaCampo;
 
 public class Sogen extends CartaCampo
 {
-	@Override
-	public void efecto(Jugador jugador, Jugador oponente) {
+    public Sogen(Jugador jugador, Jugador oponente)
+    {
+        super(jugador, oponente);
+        this.nombre = "Sogen";
+    }
 
-		
-	}
+    public void efecto()
+    {
+    }
 }

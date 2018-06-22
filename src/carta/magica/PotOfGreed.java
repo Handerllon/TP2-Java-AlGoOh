@@ -5,9 +5,13 @@ import carta.CartaMagica;
 
 public class PotOfGreed extends CartaMagica
 {
-	@Override
-	public void efecto(Jugador jugador, Jugador oponente) {
+    public PotOfGreed(Jugador jugador, Jugador oponente)
+    {
+        super(jugador, oponente);
+        this.nombre = "Pot of Greed";
+    }
 
-		
-	}
+    public void efecto()
+    {
+    }
 }

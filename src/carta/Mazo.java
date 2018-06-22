@@ -1,5 +1,11 @@
 package carta;
 
+import AlGoOh.Jugador;
+import carta.campo.FabricaCartasCampo;
+import carta.magica.FabricaCartasMagicas;
+import carta.monstruo.FabricaCartasMonstruo;
+import carta.trampa.FabricaCartasTrampa;
+
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -7,35 +13,41 @@ public class Mazo
 {
     private Stack<Carta> cartas;
 
-    public Mazo(int cantidadCartas)
+    public Mazo(int cantidadCartas, Jugador jugador, Jugador oponente)
     {
         this.cartas = new Stack<Carta>();
 
-        FabricaCartas fabricaCartas = new FabricaCartas();
-        ArrayList<String> nombresMonstruosNormales = fabricaCartas.obtenerNombresMonstruosNormales();
-        ArrayList<String> nombresMonstruosNoNormales = fabricaCartas.obtenerNombresMonstruosNoNormales();
-        ArrayList<String> nombresMagicas = fabricaCartas.obtenerNombresMagicas();
-        ArrayList<String> nombresCampo = fabricaCartas.obtenerNombresCampo();
-        ArrayList<String> nombresTrampas = fabricaCartas.obtenerNombresTrampas();
+        FabricaCartasMonstruo fabricaCartasMonstruo = new FabricaCartasMonstruo(jugador,oponente);
+        ArrayList<String> nombresMonstruosNormales = fabricaCartasMonstruo.obtenerNombresMonstruosNormales();
+        ArrayList<String> nombresMonstruosNoNormales = fabricaCartasMonstruo.obtenerNombresMonstruosNoNormales();
+
+        FabricaCartasMagicas fabricaCartasMagicas = new FabricaCartasMagicas(jugador,oponente);
+        ArrayList<String> nombresMagicas = fabricaCartasMagicas.obtenerNombres();
+
+        FabricaCartasCampo fabricaCartasCampo = new FabricaCartasCampo(jugador,oponente);
+        ArrayList<String> nombresCampo = fabricaCartasCampo.obtenerNombres();
+
+        FabricaCartasTrampa fabricaCartasTrampa = new FabricaCartasTrampa(jugador,oponente);
+        ArrayList<String> nombresTrampas = fabricaCartasTrampa.obtenerNombres();
 
         for (int i = 0; i < nombresMonstruosNoNormales.size() && cantidadCartas > 0; i++)
         {
-            cartas.push(fabricaCartas.obtenerCarta(nombresMonstruosNoNormales.get(i)));
+            cartas.push(fabricaCartasMonstruo.obtenerCarta(nombresMonstruosNoNormales.get(i)));
             cantidadCartas--;
         }
         for (int i = 0; i < nombresMagicas.size() && cantidadCartas > 0; i++)
         {
-            cartas.push(fabricaCartas.obtenerCarta(nombresMagicas.get(i)));
+            cartas.push(fabricaCartasMagicas.obtenerCarta(nombresMagicas.get(i)));
             cantidadCartas--;
         }
         for (int i = 0; i < nombresCampo.size() && cantidadCartas > 0; i++)
         {
-            cartas.push(fabricaCartas.obtenerCarta(nombresCampo.get(i)));
+            cartas.push(fabricaCartasCampo.obtenerCarta(nombresCampo.get(i)));
             cantidadCartas--;
         }
         for (int i = 0; i < nombresTrampas.size() && cantidadCartas > 0; i++)
         {
-            cartas.push(fabricaCartas.obtenerCarta(nombresTrampas.get(i)));
+            cartas.push(fabricaCartasTrampa.obtenerCarta(nombresTrampas.get(i)));
             cantidadCartas--;
         }
 
@@ -44,7 +56,7 @@ public class Mazo
         {
             if (i == nombresMonstruosNormales.size())
                 i = 0;
-            cartas.push(fabricaCartas.obtenerCarta(nombresMonstruosNormales.get(i)));
+            cartas.push(fabricaCartasMonstruo.obtenerCarta(nombresMonstruosNormales.get(i)));
             cantidadCartas--;
         }
 
@@ -63,7 +75,7 @@ public class Mazo
         this.cartas = mazoTemporal;
     }
 
-    public Carta agarrarCarta()
+    public Carta tomarCarta()
     {
         if (cartas.size() > 0)
         {

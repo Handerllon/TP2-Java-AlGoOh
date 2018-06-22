@@ -5,8 +5,15 @@ import carta.CartaTrampa;
 
 public class MagicCylinder extends CartaTrampa
 {
-	@Override
-	public void efecto(Jugador jugador, Jugador oponente) {
-		
-	}
+
+    public MagicCylinder(Jugador jugador, Jugador oponente)
+    {
+        super(jugador, oponente);
+        this.nombre = "Magic Cylinder";
+    }
+
+    public void efecto()
+    {
+
+    }
 }

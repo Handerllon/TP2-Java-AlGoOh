@@ -5,10 +5,14 @@ import carta.CartaMagica;
 
 public class Fissure extends CartaMagica
 {
- 
-	@Override
-	public void efecto(Jugador jugador, Jugador oponente) {
 
-		
-	}
+    public Fissure(Jugador jugador, Jugador oponente)
+    {
+        super(jugador, oponente);
+        this.nombre = "Fissure";
+    }
+
+    public void efecto()
+    {
+    }
 }

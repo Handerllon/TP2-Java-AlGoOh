@@ -5,8 +5,15 @@ import carta.CartaTrampa;
 
 public class Reinforcements extends CartaTrampa
 {
-	@Override
-	public void efecto(Jugador jugador, Jugador oponente) {
-		
-	}
+
+    public Reinforcements(Jugador jugador, Jugador oponente)
+    {
+        super(jugador, oponente);
+        this.nombre = "Reinforcements";
+    }
+
+    public void efecto()
+    {
+
+    }
 }

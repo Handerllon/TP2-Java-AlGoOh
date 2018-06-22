@@ -12,15 +12,14 @@ public class Jugador
     private Mano cartasEnMano;
     private int puntosDeVida;
     private AreaDeCartas areaDeCartas;
-	private Jugador oponente;
+    private Jugador oponente;
 
     public Jugador(String unNombre)
     {
-
         this.nombre = unNombre;
 
         int cantidadCartasInicialesMazo = 40;
-        this.mazo = new Mazo(cantidadCartasInicialesMazo);
+        this.mazo = new Mazo(cantidadCartasInicialesMazo, this, this.oponente);
 
         int cartasATomarInicialmente = 5;
         this.cartasEnMano = new Mano(cartasATomarInicialmente);
@@ -29,15 +28,80 @@ public class Jugador
         this.puntosDeVida = puntosDeVidaIniciales;
 
         this.areaDeCartas = new AreaDeCartas(this);
+    }
 
+    // --------------------------------------------------------------------
+    // Métodos de inicialización.
+    // --------------------------------------------------------------------
 
-        // TODO: Terminar de implementar bien la generación del mazo.
+    public void establecerOponente(Jugador oponente)
+    {
+
+        this.oponente = oponente;
+    }
+
+    // TODO: Terminar de implementar bien la generación del mazo.
 //        for (int i = 0; i < cartasATomarInicialmente; i++)
 //        {
 //            this.cartasEnMano.agregarCarta(mazo.agarrarCarta());
 //        }
 
+    // --------------------------------------------------------------------
+    // Métodos de agregado de cartas.
+    // --------------------------------------------------------------------
+
+    public void agregarCarta(CartaMonstruo carta)
+    {
+
+        this.areaDeCartas.agregarCarta(carta);
     }
+
+    public void agregarCarta(CartaMonstruo carta, Sacrificio sacrificio)
+    {
+
+        this.areaDeCartas.agregarCarta(carta, sacrificio);
+    }
+
+    public void agregarCarta(CartaMagica carta)
+    {
+
+        this.areaDeCartas.agregarCarta(carta);
+        carta.efecto();
+    }
+
+    public void agregarCarta(CartaCampo cartaDeCampo)
+    {
+
+        this.areaDeCartas.agregarCarta(cartaDeCampo);
+        cartaDeCampo.efecto();
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de acciones.
+    // --------------------------------------------------------------------
+
+    public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
+    {
+        //tablero.atacarOponente(cartaAtacante, cartaOponente);
+
+        cartaAtacante.atacarA(this, this.oponente, cartaOponente);
+    }
+
+    public void destruirMonstruo(CartaMonstruo carta)
+    {
+
+
+        this.areaDeCartas.removerCarta(carta);
+        this.areaDeCartas.enviarAlCementerio(carta);
+
+    }
+
+    public void destruirMonstruos()
+    {
+
+        this.areaDeCartas.enviarMonstruosAlCementerio();
+    }
+
     public int getPuntosDeVida()
     {
         return this.puntosDeVida;
@@ -51,45 +115,10 @@ public class Jugador
             throw new JugadorSinVida();
     }
 
-    public AreaDeCartas getAreaDeCartas()
-    {
-        return this.areaDeCartas;
-    }
+    // --------------------------------------------------------------------
+    // Métodos de consultas.
+    // --------------------------------------------------------------------
 
-    public void agregarCarta(CartaMonstruo carta) {
-
-        this.areaDeCartas.agregarCarta(carta);
-    }
-
-    public void agregarCarta(CartaMonstruo carta, Sacrificio sacrificio) {
-    	
-    	this.areaDeCartas.agregarCarta(carta, sacrificio);
-    }
-    
-    public void agregarCarta(CartaMagica carta) {
-    	
-    	this.areaDeCartas.agregarCarta(carta);
-    	carta.efecto( this, this.oponente);
-    }
-    
-    public void agregarCarta(CartaCampo cartaDeCampo) {
-    	
-    	this.areaDeCartas.agregarCarta(cartaDeCampo);
-    	cartaDeCampo.efecto(this, this.oponente);
-    }
-
-    public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
-    {
-        //tablero.atacarOponente(cartaAtacante, cartaOponente);
-        
-        cartaAtacante.atacarA(this, this.oponente, cartaOponente);
-    }
-    
-    public void establecerOponente(Jugador oponente){
-    	
-    	this.oponente = oponente;
-    }
-    
     public boolean cartaEstaEnCementerio(CartaMonstruo carta)
     {
         return areaDeCartas.cartaEstaEnCementerio(carta);
@@ -99,16 +128,5 @@ public class Jugador
     {
         return areaDeCartas.cartaEstaEnRegionMonstruos(carta);
     }
-
-	public void destruirMonstruo(CartaMonstruo carta) {
-		
-		this.areaDeCartas.removerCarta(carta);
-		this.areaDeCartas.enviarAlCementerio(carta);
-	}
-	
-	public void destruirMonstruos(){
-		
-		this.areaDeCartas.enviarMonstruosAlCementerio();
-	}
 }
 

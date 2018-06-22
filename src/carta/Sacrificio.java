@@ -1,9 +1,9 @@
 package carta;
 
+import carta.excepciones.NoHayCartasParaSacrificarError;
+
 import java.util.EmptyStackException;
 import java.util.Stack;
-
-import carta.excepciones.NoHayCartasParaSacrificarError;
 
 
 // TODO: validar la cantidad de cartas que voy poniendo. Puede lanzar excepciones si pido de más.

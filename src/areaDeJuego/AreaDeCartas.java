@@ -2,11 +2,7 @@ package areaDeJuego;
 
 import AlGoOh.Jugador;
 import areaDeJuego.excepciones.RegionSinEspacioLibre;
-import carta.Carta;
-import carta.CartaCampo;
-import carta.CartaMagica;
-import carta.CartaMonstruo;
-import carta.Sacrificio;
+import carta.*;
 
 import java.util.ArrayList;
 

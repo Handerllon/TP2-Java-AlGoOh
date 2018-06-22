@@ -4,9 +4,7 @@ import areaDeJuego.RegionCampo;
 import areaDeJuego.RegionCementerio;
 import areaDeJuego.RegionMonstruos;
 import carta.*;
-import carta.magica.DarkHole;
 import carta.monstruo.AlexandriteDragon;
-import carta.trampa.MagicCylinder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -311,9 +309,7 @@ public class AlGoOhTest
         assertTrue(jugador1.getPuntosDeVida() == 8000);
         assertTrue(jugador2.getPuntosDeVida() == 8000);
 
-    }/*Colocar monstruos en ambos lados del campo. Colocar Agujero negro boca arriba
-            (es decir, se activa el efecto). Verificar que se destruyeron todos los monstruo de
-    ambos lados del campo, y que nadie recibió daño alguno.*/
+    }
 
     @Test
     public void test13SeColocaMonstruoEnCampoYSeColocaMonstruoDe6EstrellasSacrificandoCorrectamenteAlPrimero()
@@ -337,9 +333,7 @@ public class AlGoOhTest
         assertTrue(jugador1.cartaEstaEnCementerio(carta1Jugador1));
         assertTrue(jugador1.cartaEstaEnRegionMonstruos(carta2Jugador1));
 
-    }/*Se coloca un monstruo en el campo, se quiere colocar un monstruo de 5 o 6
-    estrellas que requiere sacrificio. se verifica que se convocó al monstruo y se
-    destruyó el primero.*/
+    }
 
     @Test
     public void test14SeColocan2MonstruosEnCampoYSeColocaMonstruoDe8EstrellasSacrificandoCorrectamenteAlLos2Primeros()
@@ -351,7 +345,6 @@ public class AlGoOhTest
         jugador2.establecerOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
-        FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
         CartaMonstruo carta1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
         jugador1.agregarCarta(carta1Jugador1);
@@ -367,7 +360,5 @@ public class AlGoOhTest
         assertTrue(jugador1.cartaEstaEnCementerio(carta1Jugador1));
         assertTrue(jugador1.cartaEstaEnCementerio(carta2Jugador1));
         assertTrue(jugador1.cartaEstaEnRegionMonstruos(carta3Jugador1));
-    }/*Se colocan 2 monstruo en el campo, se quiere colocar un monstruo de 7 o más
-    estrellas que requiere 2 sacrificios. se verifica que se convocó al monstruo y se
-    destruyeron los demás.*/
+    }
 }

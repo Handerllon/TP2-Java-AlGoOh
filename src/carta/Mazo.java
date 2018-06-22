@@ -1,6 +1,7 @@
 package carta;
 
 import AlGoOh.Jugador;
+import carta.excepciones.MazoVacio;
 
 import java.util.ArrayList;
 import java.util.Stack;

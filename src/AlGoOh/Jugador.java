@@ -82,9 +82,7 @@ public class Jugador
 
     public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
     {
-        //tablero.atacarOponente(cartaAtacante, cartaOponente);
-
-        cartaAtacante.atacarA(this, this.oponente, cartaOponente);
+        cartaAtacante.atacarA(cartaOponente);
     }
 
     public void destruirMonstruo(CartaMonstruo carta)

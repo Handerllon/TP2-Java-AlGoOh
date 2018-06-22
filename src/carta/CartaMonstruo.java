@@ -62,36 +62,36 @@ public abstract class CartaMonstruo extends Carta implements Efecto
 
     }
 
-	public void atacarA(Jugador jugador, Jugador oponente, CartaMonstruo cartaOponente) {
+	public void atacarA(CartaMonstruo cartaOponente) {
 		
 		int diferenciaDePuntos = this.calcularDiferencia(cartaOponente);
 		
 		if(cartaOponente.enAtaque()){
 			
 			if (diferenciaDePuntos > 0){
-				
-				oponente.destruirMonstruo(cartaOponente);
-				oponente.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
+
+                this.oponente.destruirMonstruo(cartaOponente);
+                this.oponente.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
 			}
 			else if (diferenciaDePuntos < 0){
 				
-				jugador.destruirMonstruo(this);
-				jugador.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
+				this.jugador.destruirMonstruo(this);
+                this.jugador.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
 			}
 			else{
-				
-				oponente.destruirMonstruo(cartaOponente);
-				jugador.destruirMonstruo(this);
+
+                this.oponente.destruirMonstruo(cartaOponente);
+                this.jugador.destruirMonstruo(this);
 			}
 		}
 		else{
 			if (diferenciaDePuntos > 0){
-				
-				oponente.destruirMonstruo(cartaOponente);
+
+                this.oponente.destruirMonstruo(cartaOponente);
 			}
 			else if (diferenciaDePuntos < 0){
-				
-				jugador.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
+
+                this.jugador.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
 			}
 			else{
 				//No pasa nada

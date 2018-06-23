@@ -1,6 +1,7 @@
 package AlGoOh;
 
 import carta.CartaCampo;
+import carta.CartaMagica;
 import carta.CartaMonstruo;
 import carta.FabricaCartas;
 
@@ -51,7 +52,7 @@ public class AlGoOhTest2
 //    verificar que de un lado del campo, la defensa del monstruo aumenta en 500 puntos
 //    y del otro lado del campo, se aumenta el ataque del monstruo en 200 puntos.
     @Test
-    public void test03()
+    public void test02()
     {
     	Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
@@ -86,16 +87,32 @@ public class AlGoOhTest2
 
     //    Activar la carta mágica Olla de la codicia, y verificar que tomo 2 cartas del mazo.
     @Test
-    public void test04()
+    public void test03()
     {
-
-        assertTrue(0 == 0);
+    	Jugador jugador1 = new Jugador("Juan Pablo");
+    	Jugador jugador2 = new Jugador("Juan Carlos");
+    	
+    	FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
+    	FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
+    	
+    	CartaMagica cartaOllaDeLaCodicia = fabricaCartasJugador1.crearCartaMagica("Pot of Greed");
+    	
+    	int cartasAntesDeJugar = jugador1.cantidadDeCartasEnMano();
+    	
+    	//TODO : Modificar el nombre de agregarCarta para que sea jugarCarta
+    	jugador1.agregarCarta(cartaOllaDeLaCodicia);
+    	
+    	int cartasDespuesDeJugar = jugador1.cantidadDeCartasEnMano();
+    	
+    	int diferencia = cartasDespuesDeJugar - cartasAntesDeJugar;
+    	
+        assertEquals(diferencia,(2-1));
     }
 
     //    Colocar 2 monstruos en el campo enemigo, con diferente ataque. Activo la carta
 //    mágica Fisura, y verificar que el de menor ataque es destruido.
     @Test
-    public void test05()
+    public void test04()
     {
 
         assertTrue(0 == 0);
@@ -104,7 +121,7 @@ public class AlGoOhTest2
     //    Colocar un monstruo en el campo enemigo. invoco a Jinzo #7 en mi lado del campo.
 //    Verificar que puedo atacar a los puntos de vida directamente.
     @Test
-    public void test06()
+    public void test05()
     {
 
         assertTrue(0 == 0);
@@ -113,7 +130,7 @@ public class AlGoOhTest2
     //    Invocar 3 dragones blancos de ojos azules, al Dragón definitivo de ojos azules
 //    sacrificando los 3 dragones el lado del campo del jugador que los invocó.
     @Test
-    public void test07()
+    public void test06()
     {
 
         assertTrue(0 == 0);
@@ -124,7 +141,7 @@ public class AlGoOhTest2
 //    atacante como objetivo, verificar que este se destruye, y que mi monstruo sigue en el
 //    campo. Verificar que nadie sufre daño a los puntos de vida.
     @Test
-    public void test08()
+    public void test07()
     {
 
         assertTrue(0 == 0);
@@ -135,7 +152,7 @@ public class AlGoOhTest2
 //    trampa, se niega el ataque y el oponente recibe el daño directamente en sus puntos
 //    de vida.
     @Test
-    public void test09()
+    public void test08()
     {
 
         assertTrue(0 == 0);
@@ -147,7 +164,7 @@ public class AlGoOhTest2
 //    trampa, y el monstruo enemigo es destruido y se infligió 100 puntos de daño a la
 //    vida del otro jugador.
     @Test
-    public void test10()
+    public void test09()
     {
 
         assertTrue(0 == 0);
@@ -156,7 +173,7 @@ public class AlGoOhTest2
     //    Extraer todas las cartas del mazo, y verificar que la partida terminó y el jugador
 //    perdió.
     @Test
-    public void test11()
+    public void test10()
     {
 
         assertTrue(0 == 0);

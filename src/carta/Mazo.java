@@ -10,9 +10,11 @@ public class Mazo
 {
     private Stack<Carta> cartas;
 
-    public Mazo(int cantidadCartas, Jugador jugador, Jugador oponente)
+    public Mazo(Jugador jugador, Jugador oponente)
     {
         this.cartas = new Stack<Carta>();
+         //En el mazo hay un maximo de 40 cartas, con las cuales se comienza el juego
+        int cantidadCartas = 40;
 
         FabricaCartas fabricaCartas = new FabricaCartas(jugador, oponente);
 

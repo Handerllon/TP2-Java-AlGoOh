@@ -13,5 +13,6 @@ public class PotOfGreed extends CartaMagica
 
     public void efecto()
     {
+    	this.jugador.ollaDeLaCodicia();
     }
 }

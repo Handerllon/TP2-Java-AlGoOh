@@ -4,25 +4,38 @@ import carta.excepciones.NoSePuedenAgregarMasCartasALaMano;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 public class Mano
 {
     private static int CANTIDAD_MAXIMA = 6;
-    private Collection<Carta> cartas;
+    private HashMap<String,Carta> cartas;
     private int cantidadEnMano = 0;
 
-    public Mano(int cantidadInicial)
+    public Mano()
     {
-        this.cantidadEnMano = cantidadInicial;
-        this.cartas = new ArrayList<Carta>();
+        this.cantidadEnMano = 0;
+        this.cartas = new HashMap<String,Carta>();
     }
 
     public void agregarCarta(Carta carta)
     {
         if (cantidadEnMano <= CANTIDAD_MAXIMA)
         {
-            cartas.add(carta);
+            cartas.put(carta.obtenerNombre(),carta);
+            this.cantidadEnMano++;
         }
         else throw new NoSePuedenAgregarMasCartasALaMano();
     }
+
+	public int cantidadDeCartas() {
+		
+		return cantidadEnMano;
+	}
+	
+	public void jugarCarta(String unNombreDeCarta){
+		
+		this.cartas.remove(unNombreDeCarta);
+		this.cantidadEnMano--;
+	}
 }

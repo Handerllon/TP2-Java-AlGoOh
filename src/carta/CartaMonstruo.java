@@ -38,6 +38,8 @@ public abstract class CartaMonstruo extends Carta implements Efecto
         this.modo = modoNuevo;
     }
 
+    
+    //TODO : Cambiar la forma que se obtienen los modificadores
     public int getPuntos()
     {
     	int modificador = 0;

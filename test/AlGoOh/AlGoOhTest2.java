@@ -3,9 +3,10 @@ package AlGoOh;
 import carta.CartaCampo;
 import carta.CartaMonstruo;
 import carta.FabricaCartas;
-import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
+import org.junit.Test;
 
 public class AlGoOhTest2
 {
@@ -30,15 +31,20 @@ public class AlGoOhTest2
         jugador1.agregarCarta(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
-        cartaJugador2.cambiarModo();
         jugador2.agregarCarta(cartaJugador2);
 
         CartaCampo cartaWasteland = fabricaCartasJugador1.crearCartaCampo("Wasteland");
         cartaWasteland.cambiarOrientacion();
         jugador1.agregarCarta(cartaWasteland);
 
+        int puntosDeAtaqueEsperadosCartaJugador = 1000+200;
+        
+        int puntosDeDefensaEsperadosCartaOponente = 2100+300;
+        
+        
+        assertEquals(puntosDeAtaqueEsperadosCartaJugador, cartaJugador1.getPuntos());
 
-        assertTrue(0 == 0);
+        assertEquals(puntosDeDefensaEsperadosCartaOponente, cartaJugador2.getPuntos());
     }
 
     //    Colocar un monstruo de cada lado del campo. activo la carta mágica Sogen y
@@ -47,8 +53,35 @@ public class AlGoOhTest2
     @Test
     public void test03()
     {
+    	Jugador jugador1 = new Jugador("J1");
+        Jugador jugador2 = new Jugador("J2");
 
-        assertTrue(0 == 0);
+        jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
+
+        FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
+        FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
+
+        CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Ancient Brain");
+        jugador1.agregarCarta(cartaJugador1);
+
+        CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
+        cartaJugador2.cambiarModo();
+        jugador2.agregarCarta(cartaJugador2);
+
+        CartaCampo cartaSogen = fabricaCartasJugador1.crearCartaCampo("Sogen");
+        cartaSogen.cambiarOrientacion();
+        jugador1.agregarCarta(cartaSogen);
+
+        int puntosDeDefensaEsperadosCartaJugador = 700+500;
+        
+        int puntosDeAtaqueEsperadosCartaOponente = 100+200;
+        
+        
+        assertEquals(puntosDeDefensaEsperadosCartaJugador, cartaJugador1.getPuntos());
+
+        assertEquals(puntosDeAtaqueEsperadosCartaOponente, cartaJugador2.getPuntos());
+
     }
 
     //    Activar la carta mágica Olla de la codicia, y verificar que tomo 2 cartas del mazo.

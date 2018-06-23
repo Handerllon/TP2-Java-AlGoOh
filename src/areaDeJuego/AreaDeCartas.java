@@ -92,4 +92,27 @@ public class AreaDeCartas
     {
         return this.regionMonstruos.contieneCarta(carta);
     }
+    
+	public void modificarAtaqueMonstruosCon(int modificadorAtaque) {
+		
+		this.regionMonstruos.modificarAtaqueMonstruosCon(modificadorAtaque);
+		
+	}
+	
+	public void modificarDefensaMonstruosCon(int modificadorDefensa) {
+		
+		this.regionMonstruos.modificarDefensaMonstruosCon(modificadorDefensa);
+		
+	}
+
+	public int obtenerModificadorDePuntosDeAtaque() {
+		
+		return this.regionMonstruos.obtenerModificadorDePuntosDeAtaque();
+	}
+	
+	public int obtenerModificadorDePuntosDeDefensa() {
+		
+		return this.regionMonstruos.obtenerModificadorDePuntosDeDefensa();
+	}
+
 }

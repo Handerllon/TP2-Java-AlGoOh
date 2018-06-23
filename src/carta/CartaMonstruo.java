@@ -40,7 +40,15 @@ public abstract class CartaMonstruo extends Carta implements Efecto
 
     public int getPuntos()
     {
-        return this.puntos;
+    	int modificador = 0;
+    	if (this.enAtaque()){
+    		modificador = this.jugador.obtenerModificadorDePuntosDeAtaque();
+    		return (this.puntos + modificador);
+    	}
+    	else{
+    		modificador = this.jugador.obtenerModificadorDePuntosDeDefensa();
+    		return (this.puntos + modificador);
+    	}
     }
 
     public boolean enAtaque()

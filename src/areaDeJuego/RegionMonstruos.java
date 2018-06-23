@@ -8,10 +8,15 @@ import carta.excepciones.NoHayCartasParaSacrificarError;
 public class RegionMonstruos extends Region
 {
     private static int CAPACIDAD_REGION_MONSTRUOS = 5;
+	private int modificadorAtaque;
+	private int modificadorDefensa;
 
     public RegionMonstruos()
     {
         super(CAPACIDAD_REGION_MONSTRUOS);
+        
+        this.modificadorAtaque = 0;
+        this.modificadorDefensa = 0;
     }
 
     public void agregarCarta(CartaMonstruo carta, RegionCementerio cementerio)
@@ -71,5 +76,28 @@ public class RegionMonstruos extends Region
         cementerio.colocarCarta(carta);
         this.removerCarta(carta);
     }
+
+	public void modificarAtaqueMonstruosCon(int modificadorAtaque) {
+		
+		this.modificadorAtaque = this.modificadorAtaque + modificadorAtaque;
+		
+	}
+	
+	public void modificarDefensaMonstruosCon(int modificadorDefensa) {
+		
+		this.modificadorDefensa = this.modificadorDefensa + modificadorDefensa;
+		
+	}
+
+	public int obtenerModificadorDePuntosDeAtaque() {
+		
+		return this.modificadorAtaque;
+	}
+	
+	public int obtenerModificadorDePuntosDeDefensa() {
+		
+		return this.modificadorDefensa;
+	}
+
 
 }

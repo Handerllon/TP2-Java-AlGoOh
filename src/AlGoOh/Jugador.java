@@ -126,5 +126,37 @@ public class Jugador
     {
         return areaDeCartas.cartaEstaEnRegionMonstruos(carta);
     }
+
+	public void wasteland(Jugador jugador, int modificadorAtaque, int modificadorDefensa) {
+		
+		if (this == jugador){
+			this.areaDeCartas.modificarAtaqueMonstruosCon(modificadorAtaque);
+		}
+		else{
+			this.areaDeCartas.modificarDefensaMonstruosCon(modificadorDefensa);
+		}
+		
+	}
+	
+	public void sogen(Jugador jugador, int modificadorAtaque, int modificadorDefensa) {
+		
+		if (this == jugador){
+			this.areaDeCartas.modificarDefensaMonstruosCon(modificadorDefensa);
+		}
+		else{
+			this.areaDeCartas.modificarAtaqueMonstruosCon(modificadorAtaque);
+		}
+	}
+
+	public int obtenerModificadorDePuntosDeAtaque() {
+		
+		return this.areaDeCartas.obtenerModificadorDePuntosDeAtaque();
+	}
+	
+	public int obtenerModificadorDePuntosDeDefensa() {
+		
+		return this.areaDeCartas.obtenerModificadorDePuntosDeDefensa();
+	}
+
 }
 

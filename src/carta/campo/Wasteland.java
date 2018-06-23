@@ -7,6 +7,8 @@ public class Wasteland extends CartaCampo
 {
     private static int modificadorAtaque;
     private static int modificadorDefensa;
+    private static Jugador jugador;
+    private static Jugador oponente;
 
     public Wasteland(Jugador jugador, Jugador oponente)
     {
@@ -17,10 +19,15 @@ public class Wasteland extends CartaCampo
         this.modificadorAtaque = 200;
         //En region de oponente
         this.modificadorDefensa = 300;
+        
+        this.jugador = jugador;
+        this.oponente = oponente;
+        
     }
 
     public void efecto()
     {
-        //TODO: Aqui se debe modificar la region de monstruos de cada uno de los jugadores
+        this.jugador.wasteland(this.jugador, this.modificadorAtaque, this.modificadorDefensa);
+        this.oponente.wasteland(this.jugador, this.modificadorAtaque, this.modificadorDefensa);
     }
 }

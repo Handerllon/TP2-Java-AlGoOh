@@ -25,30 +25,18 @@ public class RegionMonstruos extends Region
         this.cartas = new HashMap<String,CartaMonstruo>();
     }
 
-    public void agregarCarta(CartaMonstruo carta, RegionCementerio cementerio)
+    public void jugarCarta(CartaMonstruo carta)
     {
 
         if (hayEspacioLibre())
         {
 
-            this.colocarCarta(carta, cementerio);
+        	insertarCarta(carta);
         } else
             throw new RegionSinEspacioLibre(this);
 
     }
-
-    public void agregarCarta(CartaMonstruo carta, Sacrificio sacrificio, RegionCementerio cementerio)
-    {
-
-        if (hayEspacioLibre())
-        {
-
-            this.colocarCarta(carta, sacrificio, cementerio);
-        } else
-            throw new RegionSinEspacioLibre(this);
-
-    }
-
+/*
     private void colocarCarta(CartaMonstruo carta, RegionCementerio cementerio)
     {
 
@@ -75,7 +63,7 @@ public class RegionMonstruos extends Region
 
         insertarCarta(carta);
     }
-
+*/
     private void destruirMonstruo(CartaMonstruo carta, RegionCementerio cementerio)
     {
 

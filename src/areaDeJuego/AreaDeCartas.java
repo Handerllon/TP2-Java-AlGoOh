@@ -32,14 +32,10 @@ public class AreaDeCartas
     // Métodos de agregación de cartas.
     // --------------------------------------------------------------------
 
-    public void agregarCarta(CartaMonstruo carta)
-    {
-        this.regionMonstruos.agregarCarta(carta, this.cementerio);
-    }
 
-    public void agregarCarta(CartaMonstruo carta, Sacrificio sacrificio)
-    {
-        this.regionMonstruos.agregarCarta(carta, sacrificio, this.cementerio);
+    public void jugarCarta(CartaMonstruo carta){
+    	
+    	this.regionMonstruos.jugarCarta(carta);
     }
 
     // TODO: Cambiar implementacion para que coincida con agregar carta de monstruos, se sacaria la verificacion de aca

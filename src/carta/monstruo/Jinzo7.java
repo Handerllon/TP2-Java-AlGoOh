@@ -3,6 +3,7 @@ package carta.monstruo;
 import AlGoOh.Jugador;
 import carta.CartaMonstruo;
 import carta.Efecto;
+import carta.Sacrificio;
 
 public class Jinzo7 extends CartaMonstruo implements Efecto
 {

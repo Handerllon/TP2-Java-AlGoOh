@@ -57,17 +57,21 @@ public class Jugador
     // Métodos de agregado de cartas.
     // --------------------------------------------------------------------
 
-    public void agregarCarta(CartaMonstruo cartaMonstruo)
-    {
-
-        this.areaDeCartas.agregarCarta(cartaMonstruo);
-        this.cartasEnMano.jugarCarta(cartaMonstruo.obtenerNombre());
-    }
-
     public void agregarCarta(CartaMonstruo cartaMonstruo, Sacrificio sacrificio)
     {
-
-        this.areaDeCartas.agregarCarta(cartaMonstruo, sacrificio);
+    	
+    	cartaMonstruo.invocar(sacrificio);
+    }
+    
+    public void agregarCarta(CartaMonstruo cartaMonstruo)
+    {
+    	
+    	cartaMonstruo.invocar();
+    }
+    
+    public void jugarCarta(CartaMonstruo cartaMonstruo){
+    	
+    	this.areaDeCartas.jugarCarta(cartaMonstruo);
         this.cartasEnMano.jugarCarta(cartaMonstruo.obtenerNombre());
     }
 

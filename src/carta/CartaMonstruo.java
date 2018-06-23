@@ -118,4 +118,13 @@ public abstract class CartaMonstruo extends Carta implements Efecto
 		
 		return this.puntosAtaque;
 	}
+
+	public void invocar(Sacrificio sacrificio) {
+		
+	}
+	
+	public void invocar(){
+    	
+    	this.jugador.jugarCarta(this);
+    }
 }

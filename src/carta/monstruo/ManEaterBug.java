@@ -3,6 +3,7 @@ package carta.monstruo;
 import AlGoOh.Jugador;
 import carta.CartaMonstruo;
 import carta.Efecto;
+import carta.Sacrificio;
 
 public class ManEaterBug extends CartaMonstruo implements Efecto
 {
@@ -20,4 +21,5 @@ public class ManEaterBug extends CartaMonstruo implements Efecto
 
 		
 	}
+
 }

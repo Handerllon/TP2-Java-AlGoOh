@@ -2,6 +2,8 @@ package carta.monstruo;
 
 import AlGoOh.Jugador;
 import carta.CartaMonstruo;
+import carta.Sacrificio;
+import carta.excepciones.NoHayCartasParaSacrificarError;
 
 public class GaiaTheFierceKnight extends CartaMonstruo
 {
@@ -13,5 +15,19 @@ public class GaiaTheFierceKnight extends CartaMonstruo
         super(PUNTOS_DEFENSA, PUNTOS_ATAQUE,jugador,oponente);
         this.estrellas = 7;
         this.nombre = "Gaia The Fierce Knight";
+    }
+    
+    public void invocar(Sacrificio sacrificio){
+    	
+    	this.jugador.destruirMonstruo(sacrificio.getMonstruo());
+    	this.jugador.destruirMonstruo(sacrificio.getMonstruo());
+    	
+    	this.jugador.jugarCarta(this);
+    	
+    }
+    
+    public void invocar(){
+    	
+    	throw new NoHayCartasParaSacrificarError();
     }
 }

@@ -2,6 +2,8 @@ package carta.monstruo;
 
 import AlGoOh.Jugador;
 import carta.CartaMonstruo;
+import carta.Sacrificio;
+import carta.excepciones.NoHayCartasParaSacrificarError;
 
 public class AmphibianBeast extends CartaMonstruo
 {
@@ -13,5 +15,18 @@ public class AmphibianBeast extends CartaMonstruo
         super(PUNTOS_DEFENSA, PUNTOS_ATAQUE,jugador,oponente);
         this.estrellas = 6;
         this.nombre = "Amphibian Beast";
+    }
+    
+    public void invocar(Sacrificio sacrificio){
+    	
+    	this.jugador.destruirMonstruo(sacrificio.getMonstruo());
+    	
+    	this.jugador.jugarCarta(this);
+    	
+    }
+    
+    public void invocar(){
+    	
+    	throw new NoHayCartasParaSacrificarError();
     }
 }

@@ -2,6 +2,7 @@ package carta.monstruo;
 
 import AlGoOh.Jugador;
 import carta.CartaMonstruo;
+import carta.Sacrificio;
 
 public class LeftLegOfTheForbiddenOne extends CartaMonstruo
 {
@@ -14,4 +15,5 @@ public class LeftLegOfTheForbiddenOne extends CartaMonstruo
         this.estrellas = 1;
         this.nombre = "Left Leg Of The Forbidden One";
     }
+
 }

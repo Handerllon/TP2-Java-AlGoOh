@@ -2,6 +2,7 @@ package carta.monstruo;
 
 import AlGoOh.Jugador;
 import carta.CartaMonstruo;
+import carta.Sacrificio;
 
 public class Bitron extends CartaMonstruo
 {
@@ -15,4 +16,5 @@ public class Bitron extends CartaMonstruo
         this.estrellas = 2;
         this.nombre = "Bitron";
     }
+
 }

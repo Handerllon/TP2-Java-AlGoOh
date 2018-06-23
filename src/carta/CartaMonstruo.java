@@ -113,4 +113,9 @@ public abstract class CartaMonstruo extends Carta implements Efecto
 		
 		return (this.getPuntos() - cartaOponente.getPuntos());
 	}
+
+	public int obtenerPuntosDeAtaque() {
+		
+		return this.puntosAtaque;
+	}
 }

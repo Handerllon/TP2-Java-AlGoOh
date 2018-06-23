@@ -9,4 +9,6 @@ public class RegionCementerio extends Region
     {
         super(CAPACIDAD_REGION_CEMENTERIO);
     }
+    
+    
 }

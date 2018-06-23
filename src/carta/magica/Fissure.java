@@ -2,6 +2,7 @@ package carta.magica;
 
 import AlGoOh.Jugador;
 import carta.CartaMagica;
+import carta.CartaMonstruo;
 
 public class Fissure extends CartaMagica
 {
@@ -14,5 +15,8 @@ public class Fissure extends CartaMagica
 
     public void efecto()
     {
+    	CartaMonstruo cartaADestruir = this.oponente.obtenerMonstruoConMenorAtaque();
+    	
+    	this.oponente.destruirMonstruo(cartaADestruir);
     }
 }

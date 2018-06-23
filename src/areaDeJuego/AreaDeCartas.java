@@ -115,4 +115,9 @@ public class AreaDeCartas
 		return this.regionMonstruos.obtenerModificadorDePuntosDeDefensa();
 	}
 
+	public CartaMonstruo obtenerMonstruoConMenorAtaque() {
+		
+		return this.regionMonstruos.obtenerMonstruoConMenorAtaque();
+	}
+
 }

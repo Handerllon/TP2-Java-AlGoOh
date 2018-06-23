@@ -4,6 +4,7 @@ import carta.CartaCampo;
 import carta.CartaMagica;
 import carta.CartaMonstruo;
 import carta.FabricaCartas;
+import carta.Sacrificio;
 
 import static org.junit.Assert.*;
 
@@ -52,7 +53,7 @@ public class AlGoOhTest2
 //    verificar que de un lado del campo, la defensa del monstruo aumenta en 500 puntos
 //    y del otro lado del campo, se aumenta el ataque del monstruo en 200 puntos.
     @Test
-    public void test02()
+    public void test02SeColocanMonstruosYSeUsaCartaSogen()
     {
     	Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
@@ -87,7 +88,7 @@ public class AlGoOhTest2
 
     //    Activar la carta mágica Olla de la codicia, y verificar que tomo 2 cartas del mazo.
     @Test
-    public void test03()
+    public void test03SeUsaCartaOllaDeLaCodiciaYSeVerificaQueLaCantidadDeCartasEnLaManoSeanCorrectas()
     {
     	Jugador jugador1 = new Jugador("Juan Pablo");
     	Jugador jugador2 = new Jugador("Juan Carlos");
@@ -114,25 +115,114 @@ public class AlGoOhTest2
     @Test
     public void test04()
     {
+    	Jugador jugador1 = new Jugador("J1");
+        Jugador jugador2 = new Jugador("J2");
 
-        assertTrue(0 == 0);
+        jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
+
+        FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
+        FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
+
+        CartaMonstruo unaCartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Ancient Brain");
+        unaCartaJugador2.cambiarModo();
+        jugador2.agregarCarta(unaCartaJugador2);
+
+        CartaMonstruo otraCartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
+        otraCartaJugador2.cambiarModo();
+        jugador2.agregarCarta(otraCartaJugador2);
+        
+        CartaMagica cartaFisura = fabricaCartasJugador1.crearCartaMagica("Fissure");
+        cartaFisura.cambiarOrientacion();
+        jugador1.agregarCarta(cartaFisura);
+        
+        assertTrue(jugador2.cartaEstaEnCementerio(otraCartaJugador2));
+
+        assertFalse(jugador2.cartaEstaEnCementerio(unaCartaJugador2));
     }
 
     //    Colocar un monstruo en el campo enemigo. invoco a Jinzo #7 en mi lado del campo.
 //    Verificar que puedo atacar a los puntos de vida directamente.
     @Test
-    public void test05()
+    public void test05SeColocaJinzoYSeAtacanLosPuntosDeVidaDirectamente()
     {
+    	Jugador jugador1 = new Jugador("J1");
+        Jugador jugador2 = new Jugador("J2");
 
-        assertTrue(0 == 0);
+        jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
+
+        FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
+        FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
+        
+        CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Jinzo #7");
+        cartaJugador1.cambiarModo();
+        jugador1.agregarCarta(cartaJugador1);
+
+        CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
+        cartaJugador2.cambiarModo();
+        jugador2.agregarCarta(cartaJugador2);
+        
+        jugador1.atacar(cartaJugador1, jugador2);
+        
+        int puntosDeVidaEsperados = 8000-500;
+        
+        assertTrue(puntosDeVidaEsperados == jugador2.getPuntosDeVida());
     }
 
     //    Invocar 3 dragones blancos de ojos azules, al Dragón definitivo de ojos azules
 //    sacrificando los 3 dragones el lado del campo del jugador que los invocó.
     @Test
-    public void test06()
+    public void test06SeJuegan3DragonesBlancosDeOjosAzulesYLuegoElDragonDefinitivoDeOjosAzules()
     {
+    	Jugador jugador1 = new Jugador("J1");
+        Jugador jugador2 = new Jugador("J2");
 
+        jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
+
+        FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
+        FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
+        
+        //Necesitamos sacrificios para invocar a todos los dragones
+        CartaMonstruo primerSacrificio1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
+        jugador1.agregarCarta(primerSacrificio1Jugador1);
+        CartaMonstruo primerSacrificio2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
+        jugador1.agregarCarta(primerSacrificio2Jugador1);
+        Sacrificio sacrificios1 = new Sacrificio();
+        sacrificios1.agregarCarta(primerSacrificio1Jugador1);
+        sacrificios1.agregarCarta(primerSacrificio2Jugador1);
+        CartaMonstruo primerDragonBlancoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
+        jugador1.agregarCarta(primerDragonBlancoJugador1,sacrificios1);
+        
+        CartaMonstruo segundoSacrificio1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
+        jugador1.agregarCarta(segundoSacrificio1Jugador1);
+        CartaMonstruo segundoSacrificio2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
+        jugador1.agregarCarta(segundoSacrificio2Jugador1);
+        Sacrificio sacrificios2 = new Sacrificio();
+        sacrificios2.agregarCarta(segundoSacrificio1Jugador1);
+        sacrificios2.agregarCarta(segundoSacrificio2Jugador1);
+        CartaMonstruo segundoDragonBlancoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
+        jugador1.agregarCarta(segundoDragonBlancoJugador1,sacrificios2);
+        
+        CartaMonstruo tercerSacrificio1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
+        jugador1.agregarCarta(tercerSacrificio1Jugador1);
+        CartaMonstruo tercerSacrificio2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
+        jugador1.agregarCarta(tercerSacrificio2Jugador1);
+        Sacrificio sacrificios3 = new Sacrificio();
+        sacrificios3.agregarCarta(tercerSacrificio1Jugador1);
+        sacrificios3.agregarCarta(tercerSacrificio2Jugador1);
+        CartaMonstruo tercerDragonBlancoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
+        jugador1.agregarCarta(tercerDragonBlancoJugador1,sacrificios3);
+        
+        Sacrificio sacrificioFinal = new Sacrificio();
+        sacrificioFinal.agregarCarta(primerDragonBlancoJugador1);
+        sacrificioFinal.agregarCarta(segundoDragonBlancoJugador1);
+        sacrificioFinal.agregarCarta(tercerDragonBlancoJugador1);
+        
+        CartaMonstruo dragonDefinitivoDeOjosAzulesJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes Ultimate Dragon");
+        jugador1.agregarCarta(dragonDefinitivoDeOjosAzulesJugador1,sacrificioFinal);
+        
         assertTrue(0 == 0);
     }
 

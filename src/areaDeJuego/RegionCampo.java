@@ -22,5 +22,5 @@ public class RegionCampo extends Region
 		else 
 			throw new RegionSinEspacioLibre(this);
 	}
-
+	
 }

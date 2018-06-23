@@ -62,7 +62,6 @@ public class Jugador
 
         this.areaDeCartas.agregarCarta(cartaMonstruo);
         this.cartasEnMano.jugarCarta(cartaMonstruo.obtenerNombre());
-        cartaMonstruo.efecto();
     }
 
     public void agregarCarta(CartaMonstruo cartaMonstruo, Sacrificio sacrificio)
@@ -70,7 +69,6 @@ public class Jugador
 
         this.areaDeCartas.agregarCarta(cartaMonstruo, sacrificio);
         this.cartasEnMano.jugarCarta(cartaMonstruo.obtenerNombre());
-        cartaMonstruo.efecto();
     }
 
     public void agregarCarta(CartaMagica cartaMagica)
@@ -98,6 +96,11 @@ public class Jugador
         cartaAtacante.atacarA(cartaOponente);
     }
 
+    public void atacar(CartaMonstruo cartaAtacante, Jugador jugadorAtacado) {
+    	
+    	cartaAtacante.efecto();
+    }
+    
     public void destruirMonstruo(CartaMonstruo carta)
     {
 
@@ -182,6 +185,12 @@ public class Jugador
 		
 		return this.areaDeCartas.obtenerModificadorDePuntosDeDefensa();
 	}
+
+	public CartaMonstruo obtenerMonstruoConMenorAtaque() {
+		
+		return this.areaDeCartas.obtenerMonstruoConMenorAtaque();
+	}
+
 
 }
 

@@ -1,6 +1,10 @@
 package areaDeJuego;
 
+import java.util.HashMap;
+import java.util.Iterator;
+
 import areaDeJuego.excepciones.RegionSinEspacioLibre;
+import carta.Carta;
 import carta.CartaMonstruo;
 import carta.Sacrificio;
 import carta.excepciones.NoHayCartasParaSacrificarError;
@@ -10,6 +14,7 @@ public class RegionMonstruos extends Region
     private static int CAPACIDAD_REGION_MONSTRUOS = 5;
 	private int modificadorAtaque;
 	private int modificadorDefensa;
+	private HashMap<String,CartaMonstruo> cartas;
 
     public RegionMonstruos()
     {
@@ -17,6 +22,7 @@ public class RegionMonstruos extends Region
         
         this.modificadorAtaque = 0;
         this.modificadorDefensa = 0;
+        this.cartas = new HashMap<String,CartaMonstruo>();
     }
 
     public void agregarCarta(CartaMonstruo carta, RegionCementerio cementerio)
@@ -97,6 +103,22 @@ public class RegionMonstruos extends Region
 	public int obtenerModificadorDePuntosDeDefensa() {
 		
 		return this.modificadorDefensa;
+	}
+
+	public CartaMonstruo obtenerMonstruoConMenorAtaque() {
+		
+		CartaMonstruo cartaConAtaqueMinimo = null;
+		int ataqueTope = 100000;
+		Iterator<HashMap.Entry<String, CartaMonstruo>> iterator = cartas.entrySet().iterator();
+	    while (iterator.hasNext()) {
+	        HashMap.Entry<String, CartaMonstruo> entry = iterator.next();
+	        if (entry.getValue().obtenerPuntosDeAtaque() < ataqueTope){
+	        	ataqueTope = entry.getValue().obtenerPuntosDeAtaque();
+	        	cartaConAtaqueMinimo = entry.getValue();
+	        }
+	    }
+	    
+	    return cartaConAtaqueMinimo;
 	}
 
 

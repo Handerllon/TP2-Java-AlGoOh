@@ -190,6 +190,11 @@ public class Jugador
         return this.areaDeCartas.obtenerMonstruoConMenorAtaque();
     }
 
+	public CartaTrampa obtenerCartaTrampaAActivar() {
+		
+		return this.areaDeCartas.obtenerCartaTrampaAActivar();
+	}
+
 
 
 

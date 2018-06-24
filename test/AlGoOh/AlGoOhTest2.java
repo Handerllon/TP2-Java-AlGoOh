@@ -261,7 +261,7 @@ public class AlGoOhTest2
 //    trampa, se niega el ataque y el oponente recibe el daño directamente en sus puntos
 //    de vida.
     @Test
-    public void test08()
+    public void test08SeColocaMonstruoDelLadoEnemigoEsteAtacaYSeActivaCorrectamenteLaCartaTrampaMagicCylinder()
     {
     	Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
@@ -283,24 +283,54 @@ public class AlGoOhTest2
         
         int puntosDeVidaEsperadosJugador2 = 8000 - 100;
         
-        assertTrue(jugador2.getPuntosDeVida() == puntosDeVidaEsperadosJugador2);
+        assertEquals(puntosDeVidaEsperadosJugador2,  jugador2.getPuntosDeVida());
         assertTrue(jugador1.getPuntosDeVida() == 8000);
     }
 
-    //    Coloco un monstruo en posición de ataque y la carta trampa Reinforcements de mi
-//    lado del campo, coloco un monstruo en el campo enemigo (con 400 puntos mas de
-//        ataque que el primero) y atacarCartaOponente al primer monstruo. Verificar que se activa la carta
-//    trampa, y el monstruo enemigo es destruido y se infligió 100 puntos de daño a la
-//    vida del otro jugador.
+    //Coloco un monstruo en posición de ataque (CharcoalInpachi) y la carta trampa Reinforcements de mi
+    //lado del campo, coloco un monstruo en el campo enemigo (Bitron) (con 100 puntos mas de
+    //ataque que el primero) y atacarCartaOponente al primer monstruo. Verificar que se activa la carta
+    //trampa, y el monstruo enemigo es destruido y se infligió 400 puntos de daño a la
+    //vida del otro jugador.
+    //
+    //TODO : Los puntos de ataque del monstruo afectado por la carta trampa deben volver a la normalidad una vez que termina el turno, ver como implementar
     @Test
-    public void test09()
+    public void test09SeColocanDosMonstruosConLaTrampaReinforcementsEnJuegoSeAtacaYSeVerificaQueSeActiveLaTrampa()
     {
+    	Jugador jugador1 = new Jugador("J1");
+        Jugador jugador2 = new Jugador("J2");
 
-        assertTrue(0 != 0);
+        jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
+
+        FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
+        FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
+        
+        CartaMonstruo monstruoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
+        monstruoJugador1.cambiarModo();
+        jugador1.jugarCarta(monstruoJugador1);
+        
+        CartaMonstruo monstruoJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Bitron");
+        monstruoJugador2.cambiarModo();
+        jugador2.jugarCarta(monstruoJugador2);
+        
+        CartaTrampa cartaTrampaReinforcements = fabricaCartasJugador1.crearCartaTrampa("Reinforcements");
+        jugador1.jugarCarta(cartaTrampaReinforcements);
+        
+        int puntosDeVidaEsperadosJugador2 = 8000-400;
+        
+        jugador2.atacarCartaOponente(monstruoJugador2, monstruoJugador1);
+        
+        assertTrue(jugador2.cartaEstaEnCementerio(monstruoJugador2));
+        assertFalse(jugador1.cartaEstaEnCementerio(monstruoJugador1));
+        assertTrue(jugador2.getPuntosDeVida() == puntosDeVidaEsperadosJugador2);
+        assertTrue(jugador1.getPuntosDeVida() == 8000);
+
+        
     }
 
-    //    Extraer todas las cartas del mazo, y verificar que la partida terminó y el jugador
-//    perdió.
+    //Extraer todas las cartas del mazo, y verificar que la partida terminó y el jugador
+    //perdió.
     @Test(expected = MazoVacio.class)
     public void test10SeExtraenTodasLasCartasDelMazoDelJugadorYEstePierde()
     {

@@ -64,10 +64,23 @@ public abstract class CartaMonstruo extends Carta implements Efecto {
     // TODO: hay alguna forma de no preguntar el estado de la carta del oponente, utilizando solamente mensajes, y
     // que ella haga lo que tenga que hacer dependiendo del estado en que se encuentra? Además, capaz cada carta
     // tenga una estrategia de ataque diferente, como la carta come hombres.
+    // TODO: Ver de nuevo funcionamiento de cartas trampa
     public void atacarCarta(CartaMonstruo cartaOponente) {
-
-        cartaOponente.recibirAtaque(this);
-
+    	
+    	CartaTrampa cartaTrampa = this.oponente.obtenerCartaTrampaAActivar();
+    	
+    	if (cartaTrampa == null){
+    		
+    		cartaOponente.recibirAtaque(this);
+    	}
+    	
+    	else if (!cartaTrampa.trampaCancelaAtaqueAMonstruo()){
+    		cartaTrampa.efecto(this, cartaOponente);
+    		cartaOponente.recibirAtaque(this);
+    	}
+    	else{
+    		cartaTrampa.efecto(this, cartaOponente);
+    	}
     }
 
     public void recibirAtaque(CartaMonstruo cartaAtacante) {
@@ -122,8 +135,25 @@ public abstract class CartaMonstruo extends Carta implements Efecto {
         throw new NoHayCartasParaSacrificarError();
     }
 
-    public void atacarOponente() {
-
-    	this.oponente.disminuirPuntosVida(this.obtenerPuntosDeAtaque());
+    public void reinforcements() {
+    	
+    	this.puntosAtaque = this.puntosAtaque + 500;
+    	if (this.enAtaque()){
+    		this.puntos = this.puntosAtaque;
+    	}
+    	
     }
+    public void atacarOponente() {
+    	
+    	CartaTrampa cartaTrampa = this.oponente.obtenerCartaTrampaAActivar();
+    	
+    	if (cartaTrampa == null){
+    		
+    		this.oponente.disminuirPuntosVida(this.obtenerPuntosDeAtaque());
+    	}
+    	else{
+    		cartaTrampa.efecto(this, null);
+    	}
+    }
+
 }

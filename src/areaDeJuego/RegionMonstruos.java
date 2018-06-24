@@ -48,39 +48,3 @@ public class RegionMonstruos extends Region<CartaMonstruo> {
     }
 }
 
-
-
-    /*
-        private void colocarCarta(CartaMonstruo carta, RegionCementerio cementerio)
-        {
-
-            if (carta.getEstrellas() >= 5)
-            {
-                throw new NoHayCartasParaSacrificarError();
-            }
-
-            insertarCarta(carta);
-        }
-
-        private void colocarCarta(CartaMonstruo carta, Sacrificio sacrificios, RegionCementerio cementerio)
-        {
-
-            if (carta.getEstrellas() >= 5 && carta.getEstrellas() <= 6)
-            {
-                this.destruirMonstruo(sacrificios.getMonstruo(), cementerio);
-            } else if (carta.getEstrellas() >= 7)
-            {
-
-                this.destruirMonstruo(sacrificios.getMonstruo(), cementerio);
-                this.destruirMonstruo(sacrificios.getMonstruo(), cementerio);
-            }
-
-            insertarCarta(carta);
-        }
-
-    private void destruirMonstruo(CartaMonstruo carta, RegionCementerio cementerio)
-    {
-        cementerio.colocarCarta(carta);
-        this.removerCarta(carta);
-    }
-*/

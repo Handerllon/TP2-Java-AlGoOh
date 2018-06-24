@@ -14,13 +14,13 @@ public class AreaDeCartas {
     private static int CAPACIDAD_REGION_CAMPO = 1;
     private static int CAPACIDAD_REGION_CEMENTERIO = 40;
     private RegionMonstruos regionMonstruos;
-    private Region regionMagicasYTrampas;
+    private RegionMagicasYTrampas regionMagicasYTrampas;
     private Region regionCampo;
     private Region cementerio;
 
     public AreaDeCartas() {
         this.regionMonstruos = new RegionMonstruos(CAPACIDAD_REGION_MONSTRUOS);
-        this.regionMagicasYTrampas = new Region<>(CAPACIDAD_REGION_MAGICAS);
+        this.regionMagicasYTrampas = new RegionMagicasYTrampas (CAPACIDAD_REGION_MAGICAS);
         this.regionCampo = new Region<CartaCampo>(CAPACIDAD_REGION_CAMPO);
         this.cementerio = new Region<>(CAPACIDAD_REGION_CEMENTERIO);
     }
@@ -102,6 +102,11 @@ public class AreaDeCartas {
 
         return this.regionMonstruos.obtenerMonstruoConMenorAtaque();
     }
+
+	public CartaTrampa obtenerCartaTrampaAActivar() {
+		
+		return this.regionMagicasYTrampas.obtenerCartaTrampaAActivar();
+	}
 
 
 

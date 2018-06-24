@@ -56,5 +56,5 @@ public class Region<T extends Carta>
     {
         return this.cartas.size() < this.capacidadMaxima;
     }
-
+    
 }

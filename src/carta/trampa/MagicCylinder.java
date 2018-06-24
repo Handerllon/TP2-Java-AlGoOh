@@ -9,9 +9,10 @@ public class MagicCylinder extends CartaTrampa {
     public MagicCylinder(Jugador jugador, Jugador oponente) {
         super(jugador, oponente);
         this.nombre = "Magic Cylinder";
+        this.trampaCancelaAtaqueAMonstruo = true;
     }
 
-    public void efecto(CartaMonstruo cartaAtacante) {
+    public void efecto(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente) {
     	
     	oponente.disminuirPuntosVida(cartaAtacante.obtenerPuntosDeAtaque());
 

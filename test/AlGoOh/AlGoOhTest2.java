@@ -1,18 +1,12 @@
 package AlGoOh;
 
-import carta.CartaCampo;
-import carta.CartaMagica;
-import carta.CartaMonstruo;
-import carta.FabricaCartas;
-import carta.Sacrificio;
+import carta.*;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 public class AlGoOhTest2
 {
-
     //Colocar un monstruo de cada lado del campo. Activo la carta mágica Wasteland y
 //verificar que de un lado del campo, el ataque del monstruo aumenta en 200 puntos y
 //del otro lado del campo, se aumenta la defensa del monstruo en 300 puntos.
@@ -39,11 +33,10 @@ public class AlGoOhTest2
         cartaWasteland.cambiarOrientacion();
         jugador1.jugarCarta(cartaWasteland);
 
-        int puntosDeAtaqueEsperadosCartaJugador = 1000+200;
-        
-        int puntosDeDefensaEsperadosCartaOponente = 2100+300;
-        
-        
+        int puntosDeAtaqueEsperadosCartaJugador = 1000 + 200;
+
+        int puntosDeDefensaEsperadosCartaOponente = 2100 + 300;
+
         assertEquals(puntosDeAtaqueEsperadosCartaJugador, cartaJugador1.getPuntos());
 
         assertEquals(puntosDeDefensaEsperadosCartaOponente, cartaJugador2.getPuntos());
@@ -55,7 +48,7 @@ public class AlGoOhTest2
     @Test
     public void test02SeColocanMonstruosYSeUsaCartaSogen()
     {
-    	Jugador jugador1 = new Jugador("J1");
+        Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
         jugador1.establecerOponente(jugador2);
@@ -75,39 +68,37 @@ public class AlGoOhTest2
         cartaSogen.cambiarOrientacion();
         jugador1.jugarCarta(cartaSogen);
 
-        int puntosDeDefensaEsperadosCartaJugador = 700+500;
-        
-        int puntosDeAtaqueEsperadosCartaOponente = 100+200;
-        
-        
+        int puntosDeDefensaEsperadosCartaJugador = 700 + 500;
+
+        int puntosDeAtaqueEsperadosCartaOponente = 100 + 200;
+
         assertEquals(puntosDeDefensaEsperadosCartaJugador, cartaJugador1.getPuntos());
 
         assertEquals(puntosDeAtaqueEsperadosCartaOponente, cartaJugador2.getPuntos());
-
     }
 
     //    Activar la carta mágica Olla de la codicia, y verificar que tomo 2 cartas del mazo.
     @Test
     public void test03SeUsaCartaOllaDeLaCodiciaYSeVerificaQueLaCantidadDeCartasEnLaManoSeanCorrectas()
     {
-    	Jugador jugador1 = new Jugador("Juan Pablo");
-    	Jugador jugador2 = new Jugador("Juan Carlos");
-    	
-    	FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
-    	FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
-    	
-    	CartaMagica cartaOllaDeLaCodicia = fabricaCartasJugador1.crearCartaMagica("Pot of Greed");
-    	
-    	int cartasAntesDeJugar = jugador1.cantidadDeCartasEnMano();
+        Jugador jugador1 = new Jugador("Juan Pablo");
+        Jugador jugador2 = new Jugador("Juan Carlos");
+
+        FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
+        FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
+
+        CartaMagica cartaOllaDeLaCodicia = fabricaCartasJugador1.crearCartaMagica("Pot of Greed");
+
+        int cartasAntesDeJugar = jugador1.cantidadDeCartasEnMano();
 
         //TODO : Modificar el nombre de jugarCarta para que sea colocarCarta
         jugador1.jugarCarta(cartaOllaDeLaCodicia);
-    	
-    	int cartasDespuesDeJugar = jugador1.cantidadDeCartasEnMano();
-    	
-    	int diferencia = cartasDespuesDeJugar - cartasAntesDeJugar;
-    	
-        assertEquals(diferencia,(2-1));
+
+        int cartasDespuesDeJugar = jugador1.cantidadDeCartasEnMano();
+
+        int diferencia = cartasDespuesDeJugar - cartasAntesDeJugar;
+
+        assertEquals(diferencia, (2 - 1));
     }
 
     //    Colocar 2 monstruos en el campo enemigo, con diferente ataque. Activo la carta
@@ -115,7 +106,7 @@ public class AlGoOhTest2
     @Test
     public void test04()
     {
-    	Jugador jugador1 = new Jugador("J1");
+        Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
         jugador1.establecerOponente(jugador2);
@@ -131,11 +122,11 @@ public class AlGoOhTest2
         CartaMonstruo otraCartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         otraCartaJugador2.cambiarModo();
         jugador2.jugarCarta(otraCartaJugador2);
-        
+
         CartaMagica cartaFisura = fabricaCartasJugador1.crearCartaMagica("Fissure");
         cartaFisura.cambiarOrientacion();
         jugador1.jugarCarta(cartaFisura);
-        
+
         assertTrue(jugador2.cartaEstaEnCementerio(otraCartaJugador2));
 
         assertFalse(jugador2.cartaEstaEnCementerio(unaCartaJugador2));
@@ -146,7 +137,7 @@ public class AlGoOhTest2
     @Test
     public void test05SeColocaJinzoYSeAtacanLosPuntosDeVidaDirectamente()
     {
-    	Jugador jugador1 = new Jugador("J1");
+        Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
         jugador1.establecerOponente(jugador2);
@@ -154,7 +145,7 @@ public class AlGoOhTest2
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
-        
+
         CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Jinzo #7");
         cartaJugador1.cambiarModo();
         jugador1.jugarCarta(cartaJugador1);
@@ -164,9 +155,9 @@ public class AlGoOhTest2
         jugador2.jugarCarta(cartaJugador2);
 
         jugador1.atacarOponente(cartaJugador1);
-        
-        int puntosDeVidaEsperados = 8000-500;
-        
+
+        int puntosDeVidaEsperados = 8000 - 500;
+
         assertTrue(puntosDeVidaEsperados == jugador2.getPuntosDeVida());
     }
 
@@ -175,7 +166,7 @@ public class AlGoOhTest2
     @Test
     public void test06SeJuegan3DragonesBlancosDeOjosAzulesYLuegoElDragonDefinitivoDeOjosAzules()
     {
-    	Jugador jugador1 = new Jugador("J1");
+        Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
         jugador1.establecerOponente(jugador2);
@@ -183,7 +174,7 @@ public class AlGoOhTest2
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
-        
+
         //Necesitamos sacrificios para invocar a todos los dragones
         CartaMonstruo primerSacrificio1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
         jugador1.jugarCarta(primerSacrificio1Jugador1);
@@ -194,7 +185,7 @@ public class AlGoOhTest2
         sacrificios1.agregarCarta(primerSacrificio2Jugador1);
         CartaMonstruo primerDragonBlancoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
         jugador1.jugarCarta(primerDragonBlancoJugador1, sacrificios1);
-        
+
         CartaMonstruo segundoSacrificio1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
         jugador1.jugarCarta(segundoSacrificio1Jugador1);
         CartaMonstruo segundoSacrificio2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
@@ -204,7 +195,7 @@ public class AlGoOhTest2
         sacrificios2.agregarCarta(segundoSacrificio2Jugador1);
         CartaMonstruo segundoDragonBlancoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
         jugador1.jugarCarta(segundoDragonBlancoJugador1, sacrificios2);
-        
+
         CartaMonstruo tercerSacrificio1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
         jugador1.jugarCarta(tercerSacrificio1Jugador1);
         CartaMonstruo tercerSacrificio2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
@@ -214,27 +205,51 @@ public class AlGoOhTest2
         sacrificios3.agregarCarta(tercerSacrificio2Jugador1);
         CartaMonstruo tercerDragonBlancoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
         jugador1.jugarCarta(tercerDragonBlancoJugador1, sacrificios3);
-        
+
         Sacrificio sacrificioFinal = new Sacrificio();
         sacrificioFinal.agregarCarta(primerDragonBlancoJugador1);
         sacrificioFinal.agregarCarta(segundoDragonBlancoJugador1);
         sacrificioFinal.agregarCarta(tercerDragonBlancoJugador1);
-        
+
         CartaMonstruo dragonDefinitivoDeOjosAzulesJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes Ultimate Dragon");
         jugador1.jugarCarta(dragonDefinitivoDeOjosAzulesJugador1, sacrificioFinal);
 
         assertTrue(0 != 0);
     }
 
-    //    Colocar al Insecto come-hombres, en posición de defensa boca abajo. Invocar un
-//    monstruo enemigo y atacarCartaOponente al insecto. activo el efecto de volteo, señalando al
+    //
+//    Colocar al Insecto come-hombres, en posición de defensa boca abajo. Invocar un
+//    monstruo enemigo y atacar al insecto. activo el efecto de volteo, señalando al
 //    atacante como objetivo, verificar que este se destruye, y que mi monstruo sigue en el
 //    campo. Verificar que nadie sufre daño a los puntos de vida.
     @Test
     public void test07()
     {
+        Jugador jugador1 = new Jugador("J1");
+        Jugador jugador2 = new Jugador("J2");
 
-        assertTrue(0 != 0);
+        jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
+
+        FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
+        FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
+
+        CartaMonstruo insectoComeHombresJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Man-Eater Bug");
+        jugador1.jugarCarta(insectoComeHombresJugador1);
+
+        CartaMonstruo monstruoJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
+        monstruoJugador2.cambiarModo();
+        jugador2.jugarCarta(monstruoJugador2);
+
+        jugador2.atacarCartaOponente(monstruoJugador2, insectoComeHombresJugador1);
+
+        insectoComeHombresJugador1.cambiarModo();
+        jugador1.atacarCartaOponente(insectoComeHombresJugador1, monstruoJugador2);
+
+        assertTrue(jugador2.cartaEstaEnCementerio(monstruoJugador2));
+
+        assertTrue(jugador1.getPuntosDeVida() == 8000);
+        assertTrue(jugador2.getPuntosDeVida() == 8000);
     }
 
     //    Colocar un monstruo del lado enemigo, luego coloco la carta trampa Cilindro mágico

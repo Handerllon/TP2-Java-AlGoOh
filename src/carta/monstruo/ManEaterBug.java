@@ -13,7 +13,12 @@ public class ManEaterBug extends CartaMonstruo implements Efecto
     {
         super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente);
         this.estrellas = 2;
-        this.nombre = "Man Eater Bug";
+        this.nombre = "Man-Eater Bug";
+    }
+
+    public void atacarCarta(CartaMonstruo cartaOponente)
+    {
+        this.oponente.destruirMonstruo(cartaOponente);
     }
 
     public void efecto()

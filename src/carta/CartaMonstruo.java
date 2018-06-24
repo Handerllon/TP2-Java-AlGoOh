@@ -75,8 +75,8 @@ public abstract class CartaMonstruo extends Carta implements Efecto
     }
 
     // TODO: hay alguna forma de no preguntar el estado de la carta del oponente, utilizando solamente mensajes, y
-    // que ella haga lo que tenga que hacer dependiendo del estado en que se encuentra? Creo que se pueden evitar los
-    // condicionales, aunque aún no se me ocurre cómo.
+    // que ella haga lo que tenga que hacer dependiendo del estado en que se encuentra? Además, capaz cada carta
+    // tenga una estrategia de ataque diferente, como la carta come hombres.
     public void atacarCarta(CartaMonstruo cartaOponente)
     {
 

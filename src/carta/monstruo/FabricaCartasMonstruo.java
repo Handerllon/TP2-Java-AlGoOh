@@ -97,7 +97,7 @@ public class FabricaCartasMonstruo
                 return new LeftArmOfTheForbiddenOne(jugador, oponente);
             case "Left Leg Of The Forbidden One":
                 return new LeftLegOfTheForbiddenOne(jugador, oponente);
-            case "Man Eater Bug":
+            case "Man-Eater Bug":
                 return new ManEaterBug(jugador, oponente);
             case "Right Arm Of The Forbidden One":
                 return new RightArmOfTheForbiddenOne(jugador, oponente);

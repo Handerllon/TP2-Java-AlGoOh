@@ -1,113 +1,95 @@
 package areaDeJuego;
 
-import java.util.HashMap;
-import java.util.Iterator;
-
-import areaDeJuego.excepciones.RegionSinEspacioLibre;
-import carta.Carta;
 import carta.CartaMonstruo;
-import carta.Sacrificio;
-import carta.excepciones.NoHayCartasParaSacrificarError;
 
-public class RegionMonstruos extends Region
+import java.util.ArrayList;
+
+public class RegionMonstruos extends Region<CartaMonstruo>
 {
-    private static int CAPACIDAD_REGION_MONSTRUOS = 5;
-	private int modificadorAtaque;
-	private int modificadorDefensa;
-	private HashMap<String,CartaMonstruo> cartas;
+    private int modificadorAtaque;
+    private int modificadorDefensa;
 
-    public RegionMonstruos()
+    public RegionMonstruos(int capacidadMaxima)
     {
-        super(CAPACIDAD_REGION_MONSTRUOS);
-        
+        super(capacidadMaxima);
         this.modificadorAtaque = 0;
         this.modificadorDefensa = 0;
-        this.cartas = new HashMap<String,CartaMonstruo>();
     }
 
-    public void jugarCarta(CartaMonstruo carta)
+    public void modificarAtaqueMonstruosCon(int modificadorAtaque)
     {
-
-        if (hayEspacioLibre())
-        {
-
-        	insertarCarta(carta);
-        } else
-            throw new RegionSinEspacioLibre(this);
-
+        this.modificadorAtaque = this.modificadorAtaque + modificadorAtaque;
     }
-/*
-    private void colocarCarta(CartaMonstruo carta, RegionCementerio cementerio)
-    {
 
-        if (carta.getEstrellas() >= 5)
+    public void modificarDefensaMonstruosCon(int modificadorDefensa)
+    {
+        this.modificadorDefensa = this.modificadorDefensa + modificadorDefensa;
+    }
+
+    public int obtenerModificadorDePuntosDeAtaque()
+    {
+        return this.modificadorAtaque;
+    }
+
+    public int obtenerModificadorDePuntosDeDefensa()
+    {
+        return this.modificadorDefensa;
+    }
+
+    public CartaMonstruo obtenerMonstruoConMenorAtaque()
+    {
+        CartaMonstruo cartaConAtaqueMinimo = null;
+
+        int ataqueTope = Integer.MAX_VALUE;
+
+        ArrayList<CartaMonstruo> cartas = this.obtenerCartas();
+
+        for (int i = 0; i < cartas.size(); i++)
         {
-            throw new NoHayCartasParaSacrificarError();
+            if (cartas.get(i).obtenerPuntosDeAtaque() < ataqueTope)
+            {
+                ataqueTope = cartas.get(i).obtenerPuntosDeAtaque();
+                cartaConAtaqueMinimo = cartas.get(i);
+            }
         }
 
-        insertarCarta(carta);
+        return cartaConAtaqueMinimo;
     }
+}
 
-    private void colocarCarta(CartaMonstruo carta, Sacrificio sacrificios, RegionCementerio cementerio)
-    {
 
-        if (carta.getEstrellas() >= 5 && carta.getEstrellas() <= 6)
-        {
-            this.destruirMonstruo(sacrificios.getMonstruo(), cementerio);
-        } else if (carta.getEstrellas() >= 7)
+
+    /*
+        private void colocarCarta(CartaMonstruo carta, RegionCementerio cementerio)
         {
 
-            this.destruirMonstruo(sacrificios.getMonstruo(), cementerio);
-            this.destruirMonstruo(sacrificios.getMonstruo(), cementerio);
+            if (carta.getEstrellas() >= 5)
+            {
+                throw new NoHayCartasParaSacrificarError();
+            }
+
+            insertarCarta(carta);
         }
 
-        insertarCarta(carta);
-    }
-*/
+        private void colocarCarta(CartaMonstruo carta, Sacrificio sacrificios, RegionCementerio cementerio)
+        {
+
+            if (carta.getEstrellas() >= 5 && carta.getEstrellas() <= 6)
+            {
+                this.destruirMonstruo(sacrificios.getMonstruo(), cementerio);
+            } else if (carta.getEstrellas() >= 7)
+            {
+
+                this.destruirMonstruo(sacrificios.getMonstruo(), cementerio);
+                this.destruirMonstruo(sacrificios.getMonstruo(), cementerio);
+            }
+
+            insertarCarta(carta);
+        }
+
     private void destruirMonstruo(CartaMonstruo carta, RegionCementerio cementerio)
     {
-
         cementerio.colocarCarta(carta);
         this.removerCarta(carta);
     }
-
-	public void modificarAtaqueMonstruosCon(int modificadorAtaque) {
-		
-		this.modificadorAtaque = this.modificadorAtaque + modificadorAtaque;
-		
-	}
-	
-	public void modificarDefensaMonstruosCon(int modificadorDefensa) {
-		
-		this.modificadorDefensa = this.modificadorDefensa + modificadorDefensa;
-		
-	}
-
-	public int obtenerModificadorDePuntosDeAtaque() {
-		
-		return this.modificadorAtaque;
-	}
-	
-	public int obtenerModificadorDePuntosDeDefensa() {
-		
-		return this.modificadorDefensa;
-	}
-
-	public CartaMonstruo obtenerMonstruoConMenorAtaque() {
-		
-		CartaMonstruo cartaConAtaqueMinimo = null;
-		int ataqueTope = 100000;
-		Iterator<HashMap.Entry<String, CartaMonstruo>> iterator = cartas.entrySet().iterator();
-	    while (iterator.hasNext()) {
-	        HashMap.Entry<String, CartaMonstruo> entry = iterator.next();
-	        if (entry.getValue().obtenerPuntosDeAtaque() < ataqueTope){
-	        	ataqueTope = entry.getValue().obtenerPuntosDeAtaque();
-	        	cartaConAtaqueMinimo = entry.getValue();
-	        }
-	    }
-	    
-	    return cartaConAtaqueMinimo;
-	}
-
-
-}
+*/

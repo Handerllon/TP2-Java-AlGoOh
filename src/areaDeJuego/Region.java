@@ -1,46 +1,52 @@
 package areaDeJuego;
 
+import areaDeJuego.excepciones.RegionSinEspacioLibre;
 import carta.Carta;
 import carta.excepciones.CartaNoExisteEnRegion;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class Region
+public class Region<T extends Carta>
 {
-    protected HashMap<String, Carta> cartas;
-    protected int capacidad, cantidadCartas;
+    protected HashMap<String, T> cartas;
+    protected int capacidadMaxima, cantidadCartasActuales;
 
-    public Region(int capacidad){
-        this.cartas = new HashMap<String, Carta>();
-        this.capacidad = capacidad;
-        this.cantidadCartas = 0;
-    }
-
-    public void colocarCarta(Carta carta)
+    public Region(int capacidadMaxima)
     {
-        cartas.put(carta.obtenerNombre(), carta);
-        this.cantidadCartas--;
+        this.cartas = new HashMap<>();
+        this.capacidadMaxima = capacidadMaxima;
+        this.cantidadCartasActuales = 0;
     }
 
-    public void removerCarta(Carta carta)
+    public void colocarCarta(T carta)
+    {
+        if (this.hayEspacioLibre())
+        {
+            cartas.put(carta.obtenerNombre(), carta);
+            this.cantidadCartasActuales++;
+        } else
+            throw new RegionSinEspacioLibre(this);
+    }
+
+    public void removerCarta(T carta)
     {
         if (this.contieneCarta(carta))
         {
             this.cartas.remove(carta.obtenerNombre());
-            this.cantidadCartas--;
+            this.cantidadCartasActuales--;
         } else
             throw new CartaNoExisteEnRegion(carta);
     }
 
-    public boolean contieneCarta(Carta carta)
+    public boolean contieneCarta(T carta)
     {
         return cartas.containsKey(carta.obtenerNombre());
     }
 
-    public ArrayList<Carta> obtenerCartas()
+    public ArrayList<T> obtenerCartas()
     {
-        ArrayList<Carta> listaDeCartas = new ArrayList<Carta>();
+        ArrayList<T> listaDeCartas = new ArrayList<T>();
 
         this.cartas.forEach((key, value) -> listaDeCartas.add(value));
 
@@ -49,22 +55,12 @@ public abstract class Region
 
     public void removerTodasLasCartas()
     {
-        this.cantidadCartas = 0;
         this.cartas.clear();
+        this.cantidadCartasActuales = 0;
     }
 
     public boolean hayEspacioLibre()
     {
-        return this.cantidadCartas < this.capacidad;
-    }
-
-    public boolean estaVacia()
-    {
-        return this.cantidadCartas == 0;
-    }
-    
-    public void insertarCarta(Carta unaCarta){
-    	
-    	cartas.put(unaCarta.obtenerNombre(), unaCarta);
+        return this.cantidadCartasActuales < this.capacidadMaxima;
     }
 }

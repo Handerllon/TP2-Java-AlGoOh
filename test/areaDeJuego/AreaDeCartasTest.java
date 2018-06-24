@@ -9,6 +9,6 @@ public class AreaDeCartasTest
     @Test
     public void test01()
     {
-        assertTrue(0 == 0);
+        assertTrue(0 != 0);
     }
 }

@@ -3,7 +3,6 @@ package carta.monstruo;
 import AlGoOh.Jugador;
 import carta.CartaMonstruo;
 import carta.Efecto;
-import carta.Sacrificio;
 
 public class Jinzo7 extends CartaMonstruo implements Efecto
 {
@@ -12,13 +11,13 @@ public class Jinzo7 extends CartaMonstruo implements Efecto
 
     public Jinzo7(Jugador jugador, Jugador oponente)
     {
-        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE,jugador,oponente);
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente);
         this.estrellas = 2;
         this.nombre = "Jinzo #7";
     }
 
-	public void efecto() {
-
-		this.oponente.disminuirPuntosVida(this.puntosAtaque);
-	}
+    public void efecto()
+    {
+        this.oponente.disminuirPuntosVida(this.puntosAtaque);
+    }
 }

@@ -3,7 +3,6 @@ package carta.monstruo;
 import AlGoOh.Jugador;
 import carta.CartaMonstruo;
 import carta.Efecto;
-import carta.Sacrificio;
 
 public class ManEaterBug extends CartaMonstruo implements Efecto
 {
@@ -12,14 +11,13 @@ public class ManEaterBug extends CartaMonstruo implements Efecto
 
     public ManEaterBug(Jugador jugador, Jugador oponente)
     {
-        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE,jugador,oponente);
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente);
         this.estrellas = 2;
         this.nombre = "Man Eater Bug";
     }
 
-	public void efecto() {
+    public void efecto()
+    {
 
-		
-	}
-
+    }
 }

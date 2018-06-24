@@ -1,60 +1,53 @@
 package areaDeJuego;
 
-import AlGoOh.Jugador;
-import areaDeJuego.excepciones.RegionSinEspacioLibre;
-import carta.*;
+import carta.Carta;
+import carta.CartaCampo;
+import carta.CartaMagica;
+import carta.CartaMonstruo;
 
 import java.util.ArrayList;
 
 public class AreaDeCartas
 {
-
+    private static int CAPACIDAD_REGION_MONSTRUOS = 5;
+    private static int CAPACIDAD_REGION_MAGICAS = 5;
+    private static int CAPACIDAD_REGION_CAMPO = 1;
+    private static int CAPACIDAD_REGION_CEMENTERIO = 40;
     private RegionMonstruos regionMonstruos;
-    private RegionMagicasYTrampas regionMagicasYTrampas;
-    private RegionCampo regionCampo;
-    private RegionCementerio cementerio;
+    private Region regionMagicasYTrampas;
+    private Region regionCampo;
+    private Region cementerio;
 
-    private Jugador jugadorAsociado;
-
-
-    public AreaDeCartas(Jugador jugador)
+    public AreaDeCartas()
     {
-
-        this.regionMonstruos = new RegionMonstruos();
-        this.regionMagicasYTrampas = new RegionMagicasYTrampas();
-        this.regionCampo = new RegionCampo();
-        this.cementerio = new RegionCementerio();
-
-        this.jugadorAsociado = jugador;
+        this.regionMonstruos = new RegionMonstruos(CAPACIDAD_REGION_MONSTRUOS);
+        this.regionMagicasYTrampas = new Region<>(CAPACIDAD_REGION_MAGICAS);
+        this.regionCampo = new Region<CartaCampo>(CAPACIDAD_REGION_CAMPO);
+        this.cementerio = new Region<>(CAPACIDAD_REGION_CEMENTERIO);
     }
 
     // --------------------------------------------------------------------
     // Métodos de agregación de cartas.
     // --------------------------------------------------------------------
 
-
-    public void jugarCarta(CartaMonstruo carta){
-    	
-    	this.regionMonstruos.jugarCarta(carta);
-    }
-
-    // TODO: Cambiar implementacion para que coincida con agregar carta de monstruos, se sacaria la verificacion de aca
-    public void agregarCarta(CartaMagica carta)
+    public void colocarCarta(CartaMonstruo cartaMonstruo)
     {
-        if (this.regionMagicasYTrampas.hayEspacioLibre())
-            this.regionMagicasYTrampas.colocarCarta(carta);
-        else
-            throw new RegionSinEspacioLibre(this.regionMagicasYTrampas);
-    }
-    
-    public void agregarCarta(CartaCampo cartaDeCampo) {
-    	
-    	this.regionCampo.agregarCarta(cartaDeCampo);
+        this.regionMonstruos.colocarCarta(cartaMonstruo);
     }
 
-    public void removerCarta(CartaMonstruo carta)
+    public void colocarCarta(CartaMagica cartaMagica)
     {
-        this.regionMonstruos.removerCarta(carta);
+        this.regionMagicasYTrampas.colocarCarta(cartaMagica);
+    }
+
+    public void colocarCarta(CartaCampo cartaCampo)
+    {
+        this.regionCampo.colocarCarta(cartaCampo);
+    }
+
+    public void removerCarta(CartaMonstruo cartaMonstruo)
+    {
+        this.regionMonstruos.removerCarta(cartaMonstruo);
     }
 
     // --------------------------------------------------------------------
@@ -68,7 +61,7 @@ public class AreaDeCartas
 
     public void enviarMonstruosAlCementerio()
     {
-        ArrayList<Carta> cartas = this.regionMonstruos.obtenerCartas();
+        ArrayList<CartaMonstruo> cartas = this.regionMonstruos.obtenerCartas();
 
         cartas.forEach(item -> this.enviarAlCementerio(item));
 
@@ -88,32 +81,34 @@ public class AreaDeCartas
     {
         return this.regionMonstruos.contieneCarta(carta);
     }
-    
-	public void modificarAtaqueMonstruosCon(int modificadorAtaque) {
-		
-		this.regionMonstruos.modificarAtaqueMonstruosCon(modificadorAtaque);
-		
-	}
-	
-	public void modificarDefensaMonstruosCon(int modificadorDefensa) {
-		
-		this.regionMonstruos.modificarDefensaMonstruosCon(modificadorDefensa);
-		
-	}
 
-	public int obtenerModificadorDePuntosDeAtaque() {
-		
-		return this.regionMonstruos.obtenerModificadorDePuntosDeAtaque();
-	}
-	
-	public int obtenerModificadorDePuntosDeDefensa() {
-		
-		return this.regionMonstruos.obtenerModificadorDePuntosDeDefensa();
-	}
+    public void modificarAtaqueMonstruosCon(int modificadorAtaque)
+    {
 
-	public CartaMonstruo obtenerMonstruoConMenorAtaque() {
-		
-		return this.regionMonstruos.obtenerMonstruoConMenorAtaque();
-	}
+        this.regionMonstruos.modificarAtaqueMonstruosCon(modificadorAtaque);
+    }
 
+    public void modificarDefensaMonstruosCon(int modificadorDefensa)
+    {
+
+        this.regionMonstruos.modificarDefensaMonstruosCon(modificadorDefensa);
+    }
+
+    public int obtenerModificadorDePuntosDeAtaque()
+    {
+
+        return this.regionMonstruos.obtenerModificadorDePuntosDeAtaque();
+    }
+
+    public int obtenerModificadorDePuntosDeDefensa()
+    {
+
+        return this.regionMonstruos.obtenerModificadorDePuntosDeDefensa();
+    }
+
+    public CartaMonstruo obtenerMonstruoConMenorAtaque()
+    {
+
+        return this.regionMonstruos.obtenerMonstruoConMenorAtaque();
+    }
 }

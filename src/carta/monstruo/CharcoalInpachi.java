@@ -2,7 +2,6 @@ package carta.monstruo;
 
 import AlGoOh.Jugador;
 import carta.CartaMonstruo;
-import carta.Sacrificio;
 
 public class CharcoalInpachi extends CartaMonstruo
 {
@@ -11,9 +10,8 @@ public class CharcoalInpachi extends CartaMonstruo
 
     public CharcoalInpachi(Jugador jugador, Jugador oponente)
     {
-        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE,jugador,oponente);
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente);
         this.estrellas = 1;
         this.nombre = "Charcoal Inpachi";
     }
-
 }

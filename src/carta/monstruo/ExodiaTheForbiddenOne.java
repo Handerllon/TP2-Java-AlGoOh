@@ -11,12 +11,13 @@ public class ExodiaTheForbiddenOne extends CartaMonstruo implements Efecto
 
     public ExodiaTheForbiddenOne(Jugador jugador, Jugador oponente)
     {
-        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE,jugador,oponente);
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente);
         this.estrellas = 3;
         this.nombre = "Exodia The Forbidden One";
     }
 
-	public void efecto() {
-		
-	}
+    public void efecto()
+    {
+
+    }
 }

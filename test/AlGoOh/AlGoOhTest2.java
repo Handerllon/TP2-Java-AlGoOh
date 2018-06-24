@@ -30,14 +30,14 @@ public class AlGoOhTest2
 
         CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Ancient Brain");
         cartaJugador1.cambiarModo();
-        jugador1.agregarCarta(cartaJugador1);
+        jugador1.jugarCarta(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
-        jugador2.agregarCarta(cartaJugador2);
+        jugador2.jugarCarta(cartaJugador2);
 
         CartaCampo cartaWasteland = fabricaCartasJugador1.crearCartaCampo("Wasteland");
         cartaWasteland.cambiarOrientacion();
-        jugador1.agregarCarta(cartaWasteland);
+        jugador1.jugarCarta(cartaWasteland);
 
         int puntosDeAtaqueEsperadosCartaJugador = 1000+200;
         
@@ -65,15 +65,15 @@ public class AlGoOhTest2
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
         CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Ancient Brain");
-        jugador1.agregarCarta(cartaJugador1);
+        jugador1.jugarCarta(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         cartaJugador2.cambiarModo();
-        jugador2.agregarCarta(cartaJugador2);
+        jugador2.jugarCarta(cartaJugador2);
 
         CartaCampo cartaSogen = fabricaCartasJugador1.crearCartaCampo("Sogen");
         cartaSogen.cambiarOrientacion();
-        jugador1.agregarCarta(cartaSogen);
+        jugador1.jugarCarta(cartaSogen);
 
         int puntosDeDefensaEsperadosCartaJugador = 700+500;
         
@@ -99,9 +99,9 @@ public class AlGoOhTest2
     	CartaMagica cartaOllaDeLaCodicia = fabricaCartasJugador1.crearCartaMagica("Pot of Greed");
     	
     	int cartasAntesDeJugar = jugador1.cantidadDeCartasEnMano();
-    	
-    	//TODO : Modificar el nombre de agregarCarta para que sea jugarCarta
-    	jugador1.agregarCarta(cartaOllaDeLaCodicia);
+
+        //TODO : Modificar el nombre de jugarCarta para que sea colocarCarta
+        jugador1.jugarCarta(cartaOllaDeLaCodicia);
     	
     	int cartasDespuesDeJugar = jugador1.cantidadDeCartasEnMano();
     	
@@ -126,15 +126,15 @@ public class AlGoOhTest2
 
         CartaMonstruo unaCartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Ancient Brain");
         unaCartaJugador2.cambiarModo();
-        jugador2.agregarCarta(unaCartaJugador2);
+        jugador2.jugarCarta(unaCartaJugador2);
 
         CartaMonstruo otraCartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         otraCartaJugador2.cambiarModo();
-        jugador2.agregarCarta(otraCartaJugador2);
+        jugador2.jugarCarta(otraCartaJugador2);
         
         CartaMagica cartaFisura = fabricaCartasJugador1.crearCartaMagica("Fissure");
         cartaFisura.cambiarOrientacion();
-        jugador1.agregarCarta(cartaFisura);
+        jugador1.jugarCarta(cartaFisura);
         
         assertTrue(jugador2.cartaEstaEnCementerio(otraCartaJugador2));
 
@@ -142,7 +142,7 @@ public class AlGoOhTest2
     }
 
     //    Colocar un monstruo en el campo enemigo. invoco a Jinzo #7 en mi lado del campo.
-//    Verificar que puedo atacar a los puntos de vida directamente.
+//    Verificar que puedo atacarCartaOponente a los puntos de vida directamente.
     @Test
     public void test05SeColocaJinzoYSeAtacanLosPuntosDeVidaDirectamente()
     {
@@ -157,13 +157,13 @@ public class AlGoOhTest2
         
         CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Jinzo #7");
         cartaJugador1.cambiarModo();
-        jugador1.agregarCarta(cartaJugador1);
+        jugador1.jugarCarta(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         cartaJugador2.cambiarModo();
-        jugador2.agregarCarta(cartaJugador2);
-        
-        jugador1.atacar(cartaJugador1, jugador2);
+        jugador2.jugarCarta(cartaJugador2);
+
+        jugador1.atacarOponente(cartaJugador1);
         
         int puntosDeVidaEsperados = 8000-500;
         
@@ -186,34 +186,34 @@ public class AlGoOhTest2
         
         //Necesitamos sacrificios para invocar a todos los dragones
         CartaMonstruo primerSacrificio1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
-        jugador1.agregarCarta(primerSacrificio1Jugador1);
+        jugador1.jugarCarta(primerSacrificio1Jugador1);
         CartaMonstruo primerSacrificio2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
-        jugador1.agregarCarta(primerSacrificio2Jugador1);
+        jugador1.jugarCarta(primerSacrificio2Jugador1);
         Sacrificio sacrificios1 = new Sacrificio();
         sacrificios1.agregarCarta(primerSacrificio1Jugador1);
         sacrificios1.agregarCarta(primerSacrificio2Jugador1);
         CartaMonstruo primerDragonBlancoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
-        jugador1.agregarCarta(primerDragonBlancoJugador1,sacrificios1);
+        jugador1.jugarCarta(primerDragonBlancoJugador1, sacrificios1);
         
         CartaMonstruo segundoSacrificio1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
-        jugador1.agregarCarta(segundoSacrificio1Jugador1);
+        jugador1.jugarCarta(segundoSacrificio1Jugador1);
         CartaMonstruo segundoSacrificio2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
-        jugador1.agregarCarta(segundoSacrificio2Jugador1);
+        jugador1.jugarCarta(segundoSacrificio2Jugador1);
         Sacrificio sacrificios2 = new Sacrificio();
         sacrificios2.agregarCarta(segundoSacrificio1Jugador1);
         sacrificios2.agregarCarta(segundoSacrificio2Jugador1);
         CartaMonstruo segundoDragonBlancoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
-        jugador1.agregarCarta(segundoDragonBlancoJugador1,sacrificios2);
+        jugador1.jugarCarta(segundoDragonBlancoJugador1, sacrificios2);
         
         CartaMonstruo tercerSacrificio1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
-        jugador1.agregarCarta(tercerSacrificio1Jugador1);
+        jugador1.jugarCarta(tercerSacrificio1Jugador1);
         CartaMonstruo tercerSacrificio2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
-        jugador1.agregarCarta(tercerSacrificio2Jugador1);
+        jugador1.jugarCarta(tercerSacrificio2Jugador1);
         Sacrificio sacrificios3 = new Sacrificio();
         sacrificios3.agregarCarta(tercerSacrificio1Jugador1);
         sacrificios3.agregarCarta(tercerSacrificio2Jugador1);
         CartaMonstruo tercerDragonBlancoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
-        jugador1.agregarCarta(tercerDragonBlancoJugador1,sacrificios3);
+        jugador1.jugarCarta(tercerDragonBlancoJugador1, sacrificios3);
         
         Sacrificio sacrificioFinal = new Sacrificio();
         sacrificioFinal.agregarCarta(primerDragonBlancoJugador1);
@@ -221,20 +221,20 @@ public class AlGoOhTest2
         sacrificioFinal.agregarCarta(tercerDragonBlancoJugador1);
         
         CartaMonstruo dragonDefinitivoDeOjosAzulesJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes Ultimate Dragon");
-        jugador1.agregarCarta(dragonDefinitivoDeOjosAzulesJugador1,sacrificioFinal);
-        
-        assertTrue(0 == 0);
+        jugador1.jugarCarta(dragonDefinitivoDeOjosAzulesJugador1, sacrificioFinal);
+
+        assertTrue(0 != 0);
     }
 
     //    Colocar al Insecto come-hombres, en posición de defensa boca abajo. Invocar un
-//    monstruo enemigo y atacar al insecto. activo el efecto de volteo, señalando al
+//    monstruo enemigo y atacarCartaOponente al insecto. activo el efecto de volteo, señalando al
 //    atacante como objetivo, verificar que este se destruye, y que mi monstruo sigue en el
 //    campo. Verificar que nadie sufre daño a los puntos de vida.
     @Test
     public void test07()
     {
 
-        assertTrue(0 == 0);
+        assertTrue(0 != 0);
     }
 
     //    Colocar un monstruo del lado enemigo, luego coloco la carta trampa Cilindro mágico
@@ -245,19 +245,19 @@ public class AlGoOhTest2
     public void test08()
     {
 
-        assertTrue(0 == 0);
+        assertTrue(0 != 0);
     }
 
     //    Coloco un monstruo en posición de ataque y la carta trampa Reinforcements de mi
 //    lado del campo, coloco un monstruo en el campo enemigo (con 400 puntos mas de
-//        ataque que el primero) y atacar al primer monstruo. Verificar que se activa la carta
+//        ataque que el primero) y atacarCartaOponente al primer monstruo. Verificar que se activa la carta
 //    trampa, y el monstruo enemigo es destruido y se infligió 100 puntos de daño a la
 //    vida del otro jugador.
     @Test
     public void test09()
     {
 
-        assertTrue(0 == 0);
+        assertTrue(0 != 0);
     }
 
     //    Extraer todas las cartas del mazo, y verificar que la partida terminó y el jugador
@@ -266,7 +266,7 @@ public class AlGoOhTest2
     public void test10()
     {
 
-        assertTrue(0 == 0);
+        assertTrue(0 != 0);
     }
 //    Colocar las 5 partes de exodia en la mano de un jugador, verificar que la partida
 //    termina y que ese jugador resultó ganador.

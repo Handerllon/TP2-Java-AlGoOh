@@ -3,7 +3,6 @@ package carta.monstruo;
 import AlGoOh.Jugador;
 import carta.CartaMonstruo;
 import carta.Sacrificio;
-import carta.excepciones.NoHayCartasParaSacrificarError;
 
 public class AncientTool extends CartaMonstruo
 {
@@ -16,17 +15,10 @@ public class AncientTool extends CartaMonstruo
         this.estrellas = 5;
         this.nombre = "Ancient Tool";
     }
-    
-    public void invocar(Sacrificio sacrificio){
-    	
-    	this.jugador.destruirMonstruo(sacrificio.getMonstruo());
-    	
-    	this.jugador.jugarCarta(this);
-    	
-    }
-    
-    public void invocar(){
-    	
-    	throw new NoHayCartasParaSacrificarError();
+
+    public void invocar(Sacrificio sacrificio)
+    {
+        this.jugador.destruirMonstruo(sacrificio.getMonstruo());
+        this.jugador.jugarCarta(this);
     }
 }

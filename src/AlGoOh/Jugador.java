@@ -6,7 +6,6 @@ import carta.*;
 
 public class Jugador
 {
-
     private String nombre;
     private Mazo mazo;
     private Mano cartasEnMano;
@@ -18,20 +17,16 @@ public class Jugador
     {
         this.nombre = unNombre;
 
-        int cantidadCartasInicialesMazo = 40;
         this.mazo = new Mazo(this, this.oponente);
 
-        int cartasATomarInicialmente = 5;
         this.cartasEnMano = new Mano();
 
-        int puntosDeVidaIniciales = 8000;
-        this.puntosDeVida = puntosDeVidaIniciales;
+        this.puntosDeVida = 8000;
 
-        this.areaDeCartas = new AreaDeCartas(this);
-        
+        this.areaDeCartas = new AreaDeCartas();
+
+        int cartasATomarInicialmente = 5;
         this.popularMano(cartasATomarInicialmente);
-        
-        
     }
 
     // --------------------------------------------------------------------
@@ -44,74 +39,59 @@ public class Jugador
         this.oponente = oponente;
     }
 
-    private void popularMano(int cartasATomarInicialmente){
-    	
-       for (int i = 0; i < cartasATomarInicialmente; i++)
-       {
-           this.cartasEnMano.agregarCarta(mazo.tomarCarta());
-       }
-       
+    private void popularMano(int cartasATomarInicialmente)
+    {
+
+        for (int i = 0; i < cartasATomarInicialmente; i++)
+        {
+            this.cartasEnMano.agregarCarta(mazo.tomarCarta());
+        }
     }
 
     // --------------------------------------------------------------------
-    // Métodos de agregado de cartas.
+    // Métodos de juego y acciones de cartas.
     // --------------------------------------------------------------------
 
-    public void agregarCarta(CartaMonstruo cartaMonstruo, Sacrificio sacrificio)
+    public void jugarCarta(CartaMonstruo cartaMonstruo, Sacrificio sacrificio)
     {
-    	
-    	cartaMonstruo.invocar(sacrificio);
-    }
-    
-    public void agregarCarta(CartaMonstruo cartaMonstruo)
-    {
-    	
-    	cartaMonstruo.invocar();
-    }
-    
-    public void jugarCarta(CartaMonstruo cartaMonstruo){
-    	
-    	this.areaDeCartas.jugarCarta(cartaMonstruo);
-        this.cartasEnMano.jugarCarta(cartaMonstruo.obtenerNombre());
+        cartaMonstruo.invocar(sacrificio);
     }
 
-    public void agregarCarta(CartaMagica cartaMagica)
+    public void jugarCarta(CartaMonstruo cartaMonstruo)
     {
+        this.areaDeCartas.colocarCarta(cartaMonstruo);
+        this.cartasEnMano.quitarCarta(cartaMonstruo.obtenerNombre());
+    }
 
-        this.areaDeCartas.agregarCarta(cartaMagica);
-        this.cartasEnMano.jugarCarta(cartaMagica.obtenerNombre());
+    public void jugarCarta(CartaMagica cartaMagica)
+    {
+        this.areaDeCartas.colocarCarta(cartaMagica);
+        this.cartasEnMano.quitarCarta(cartaMagica.obtenerNombre());
         cartaMagica.efecto();
     }
 
-    public void agregarCarta(CartaCampo cartaCampo)
+    public void jugarCarta(CartaCampo cartaCampo)
     {
-
-        this.areaDeCartas.agregarCarta(cartaCampo);
-        this.cartasEnMano.jugarCarta(cartaCampo.obtenerNombre());
+        this.areaDeCartas.colocarCarta(cartaCampo);
+        this.cartasEnMano.quitarCarta(cartaCampo.obtenerNombre());
         cartaCampo.efecto();
     }
 
-    // --------------------------------------------------------------------
-    // Métodos de acciones.
-    // --------------------------------------------------------------------
-
-    public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
+    public void atacarCartaOponente(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
     {
-        cartaAtacante.atacarA(cartaOponente);
+        cartaAtacante.atacarCarta(cartaOponente);
     }
 
-    public void atacar(CartaMonstruo cartaAtacante, Jugador jugadorAtacado) {
-    	
-    	cartaAtacante.efecto();
+    public void atacarOponente(CartaMonstruo cartaAtacante)
+    {
+
+        cartaAtacante.atacarOponente();
     }
-    
+
     public void destruirMonstruo(CartaMonstruo carta)
     {
-
-
         this.areaDeCartas.removerCarta(carta);
         this.areaDeCartas.enviarAlCementerio(carta);
-
     }
 
     public void destruirMonstruos()
@@ -132,34 +112,39 @@ public class Jugador
             // TODO: Esto puede ser un trigger para terminar el juego.
             throw new JugadorSinVida();
     }
-    
-    public void wasteland(Jugador jugador, int modificadorAtaque, int modificadorDefensa) {
-    	
-    	if (this == jugador){
-    		this.areaDeCartas.modificarAtaqueMonstruosCon(modificadorAtaque);
-    	}
-    	else{
-    		this.areaDeCartas.modificarDefensaMonstruosCon(modificadorDefensa);
-    	}
-    	
+
+    // TODO: Estos deberían ser implementados dentro de cada carta específica.
+    public void wasteland(Jugador jugador, int modificadorAtaque, int modificadorDefensa)
+    {
+
+        if (this == jugador)
+        {
+            this.areaDeCartas.modificarAtaqueMonstruosCon(modificadorAtaque);
+        } else
+        {
+            this.areaDeCartas.modificarDefensaMonstruosCon(modificadorDefensa);
+        }
     }
-    public void sogen(Jugador jugador, int modificadorAtaque, int modificadorDefensa) {
-    	
-    	if (this == jugador){
-    		this.areaDeCartas.modificarDefensaMonstruosCon(modificadorDefensa);
-    	}
-    	else{
-    		this.areaDeCartas.modificarAtaqueMonstruosCon(modificadorAtaque);
-    	}
+
+    public void sogen(Jugador jugador, int modificadorAtaque, int modificadorDefensa)
+    {
+
+        if (this == jugador)
+        {
+            this.areaDeCartas.modificarDefensaMonstruosCon(modificadorDefensa);
+        } else
+        {
+            this.areaDeCartas.modificarAtaqueMonstruosCon(modificadorAtaque);
+        }
     }
-    
-    
-    public void ollaDeLaCodicia() {
-    	
-    	this.cartasEnMano.agregarCarta(mazo.tomarCarta());
-    	this.cartasEnMano.agregarCarta(mazo.tomarCarta());
+
+    public void ollaDeLaCodicia()
+    {
+
+        this.cartasEnMano.agregarCarta(mazo.tomarCarta());
+        this.cartasEnMano.agregarCarta(mazo.tomarCarta());
     }
-    
+
     // --------------------------------------------------------------------
     // Métodos de consultas.
     // --------------------------------------------------------------------
@@ -173,28 +158,29 @@ public class Jugador
     {
         return areaDeCartas.cartaEstaEnRegionMonstruos(carta);
     }
-    
-    public int cantidadDeCartasEnMano() {
-    	
-    	return this.cartasEnMano.cantidadDeCartas();
+
+    public int cantidadDeCartasEnMano()
+    {
+
+        return this.cartasEnMano.cantidadDeCartas();
     }
-    
 
-	public int obtenerModificadorDePuntosDeAtaque() {
-		
-		return this.areaDeCartas.obtenerModificadorDePuntosDeAtaque();
-	}
-	
-	public int obtenerModificadorDePuntosDeDefensa() {
-		
-		return this.areaDeCartas.obtenerModificadorDePuntosDeDefensa();
-	}
+    public int obtenerModificadorDePuntosDeAtaque()
+    {
 
-	public CartaMonstruo obtenerMonstruoConMenorAtaque() {
-		
-		return this.areaDeCartas.obtenerMonstruoConMenorAtaque();
-	}
+        return this.areaDeCartas.obtenerModificadorDePuntosDeAtaque();
+    }
 
+    public int obtenerModificadorDePuntosDeDefensa()
+    {
 
+        return this.areaDeCartas.obtenerModificadorDePuntosDeDefensa();
+    }
+
+    public CartaMonstruo obtenerMonstruoConMenorAtaque()
+    {
+
+        return this.areaDeCartas.obtenerMonstruoConMenorAtaque();
+    }
 }
 

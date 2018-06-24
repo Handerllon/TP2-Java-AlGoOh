@@ -11,7 +11,7 @@ public class BlueEyesUltimateDragon extends CartaMonstruo
     public BlueEyesUltimateDragon(Jugador jugador, Jugador oponente)
     {
 
-        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE,jugador,oponente);
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente);
         this.estrellas = 12;
         this.nombre = "Blue-Eyes Ultimate Dragon";
     }

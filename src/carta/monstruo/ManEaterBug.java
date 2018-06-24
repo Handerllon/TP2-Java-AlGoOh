@@ -18,11 +18,25 @@ public class ManEaterBug extends CartaMonstruo implements Efecto
 
     public void atacarCarta(CartaMonstruo cartaOponente)
     {
-        this.oponente.destruirMonstruo(cartaOponente);
+    	super.atacarCarta(cartaOponente);
+    }
+    
+    public void recibirAtaque(CartaMonstruo cartaAtacante){
+    	
+    	if (!this.orientacionArriba()){
+    		this.cambiarOrientacion();
+    		this.efecto(cartaAtacante);
+    	}
+    	else{
+    		super.recibirAtaque(cartaAtacante);
+    	}
+    	
     }
 
-    public void efecto()
+    public void efecto(CartaMonstruo cartaADestruir)
     {
-
+    	this.oponente.destruirMonstruo(cartaADestruir);
     }
+    
+    public void efecto(){}
 }

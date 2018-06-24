@@ -80,45 +80,52 @@ public abstract class CartaMonstruo extends Carta implements Efecto
     public void atacarCarta(CartaMonstruo cartaOponente)
     {
 
-        int diferenciaDePuntos = this.calcularDiferencia(cartaOponente);
+    	cartaOponente.recibirAtaque(this);
 
-        if (cartaOponente.enAtaque())
+    }
+    
+    public void recibirAtaque(CartaMonstruo cartaAtacante) {
+		
+    	int diferenciaDePuntos = cartaAtacante.calcularDiferencia(this);
+        
+        
+        if (this.enAtaque())
         {
 
             if (diferenciaDePuntos > 0)
             {
 
-                this.oponente.destruirMonstruo(cartaOponente);
-                this.oponente.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
+                this.jugador.destruirMonstruo(this);
+                this.jugador.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
             } else if (diferenciaDePuntos < 0)
             {
 
-                this.jugador.destruirMonstruo(this);
-                this.jugador.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
+                this.oponente.destruirMonstruo(cartaAtacante);
+                this.oponente.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
             } else
             {
 
-                this.oponente.destruirMonstruo(cartaOponente);
-                this.jugador.destruirMonstruo(this);
+                this.jugador.destruirMonstruo(cartaAtacante);
+                this.oponente.destruirMonstruo(this);
             }
         } else
         {
             if (diferenciaDePuntos > 0)
             {
 
-                this.oponente.destruirMonstruo(cartaOponente);
+                this.jugador.destruirMonstruo(this);
             } else if (diferenciaDePuntos < 0)
             {
 
-                this.jugador.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
+                this.oponente.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
             } else
             {
                 //No pasa nada
             }
         }
-    }
+	}
 
-    private int calcularDiferencia(CartaMonstruo cartaOponente)
+	private int calcularDiferencia(CartaMonstruo cartaOponente)
     {
 
         return (this.getPuntos() - cartaOponente.getPuntos());

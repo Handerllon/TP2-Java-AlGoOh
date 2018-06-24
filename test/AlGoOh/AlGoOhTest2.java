@@ -104,7 +104,7 @@ public class AlGoOhTest2
     //    Colocar 2 monstruos en el campo enemigo, con diferente ataque. Activo la carta
 //    mágica Fisura, y verificar que el de menor ataque es destruido.
     @Test
-    public void test04()
+    public void test04SeJueganDosMonstruosEnemigosSeUsaLaCartaFisuraYElDeMenorAtaqueMuere()
     {
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
@@ -115,10 +115,12 @@ public class AlGoOhTest2
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
+        //Carta con mayor ataque
         CartaMonstruo unaCartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Ancient Brain");
         unaCartaJugador2.cambiarModo();
         jugador2.jugarCarta(unaCartaJugador2);
-
+        
+        //Carta con menor ataque
         CartaMonstruo otraCartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         otraCartaJugador2.cambiarModo();
         jugador2.jugarCarta(otraCartaJugador2);
@@ -223,7 +225,7 @@ public class AlGoOhTest2
 //    atacante como objetivo, verificar que este se destruye, y que mi monstruo sigue en el
 //    campo. Verificar que nadie sufre daño a los puntos de vida.
     @Test
-    public void test07()
+    public void test07UnMonstruoAtacaAlInsectoComeHombresQueSeEncuentraBocaAbajoYEsteEsDestruido()
     {
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
@@ -243,10 +245,8 @@ public class AlGoOhTest2
 
         jugador2.atacarCartaOponente(monstruoJugador2, insectoComeHombresJugador1);
 
-        insectoComeHombresJugador1.cambiarModo();
-        jugador1.atacarCartaOponente(insectoComeHombresJugador1, monstruoJugador2);
-
         assertTrue(jugador2.cartaEstaEnCementerio(monstruoJugador2));
+        assertFalse(jugador1.cartaEstaEnCementerio(insectoComeHombresJugador1));
 
         assertTrue(jugador1.getPuntosDeVida() == 8000);
         assertTrue(jugador2.getPuntosDeVida() == 8000);

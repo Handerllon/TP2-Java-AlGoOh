@@ -84,6 +84,13 @@ public class Jugador
         this.cartasEnMano.quitarCarta(cartaCampo);
         cartaCampo.efecto();
     }
+    
+    public void jugarCarta(CartaTrampa cartaTrampa) {
+    	
+    	this.areaDeCartas.colocarCarta(cartaTrampa);
+    	this.cartasEnMano.quitarCarta(cartaTrampa);
+    	cartaTrampa.efecto();
+    }
 
     public void atacarCartaOponente(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
     {
@@ -182,5 +189,9 @@ public class Jugador
 
         return this.areaDeCartas.obtenerMonstruoConMenorAtaque();
     }
+
+
+
+
 }
 

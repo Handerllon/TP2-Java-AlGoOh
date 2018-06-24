@@ -73,7 +73,8 @@ public abstract class CartaMonstruo extends Carta implements Efecto {
     public void recibirAtaque(CartaMonstruo cartaAtacante) {
 
         int diferenciaDePuntos = cartaAtacante.calcularDiferencia(this);
-
+        
+       
 
         if (this.enAtaque()) {
 
@@ -122,6 +123,7 @@ public abstract class CartaMonstruo extends Carta implements Efecto {
     }
 
     public void atacarOponente() {
-        this.efecto();
+
+    	this.oponente.disminuirPuntosVida(this.obtenerPuntosDeAtaque());
     }
 }

@@ -263,8 +263,28 @@ public class AlGoOhTest2
     @Test
     public void test08()
     {
+    	Jugador jugador1 = new Jugador("J1");
+        Jugador jugador2 = new Jugador("J2");
 
-        assertTrue(0 != 0);
+        jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
+
+        FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
+        FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
+
+        CartaTrampa trampaJugador1 = fabricaCartasJugador1.crearCartaTrampa("Magic Cylinder");
+        jugador1.jugarCarta(trampaJugador1);
+        
+        CartaMonstruo monstruoJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
+        monstruoJugador2.cambiarModo();
+        jugador2.jugarCarta(monstruoJugador2);
+        
+        jugador2.atacarOponente(monstruoJugador2);
+        
+        int puntosDeVidaEsperadosJugador2 = 8000 - 100;
+        
+        assertTrue(jugador2.getPuntosDeVida() == puntosDeVidaEsperadosJugador2);
+        assertTrue(jugador1.getPuntosDeVida() == 8000);
     }
 
     //    Coloco un monstruo en posición de ataque y la carta trampa Reinforcements de mi

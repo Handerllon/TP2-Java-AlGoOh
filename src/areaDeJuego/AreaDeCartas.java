@@ -4,6 +4,7 @@ import carta.Carta;
 import carta.CartaCampo;
 import carta.CartaMagica;
 import carta.CartaMonstruo;
+import carta.CartaTrampa;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,11 @@ public class AreaDeCartas {
         this.regionCampo.colocarCarta(cartaCampo);
     }
 
+    public void colocarCarta(CartaTrampa cartaTrampa) {
+    	this.regionMagicasYTrampas.colocarCarta(cartaTrampa);
+    	
+    }
+    
     public void removerCarta(CartaMonstruo cartaMonstruo) {
         this.regionMonstruos.removerCarta(cartaMonstruo);
     }
@@ -96,4 +102,7 @@ public class AreaDeCartas {
 
         return this.regionMonstruos.obtenerMonstruoConMenorAtaque();
     }
+
+
+
 }

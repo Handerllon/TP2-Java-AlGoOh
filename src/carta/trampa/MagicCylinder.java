@@ -1,6 +1,7 @@
 package carta.trampa;
 
 import AlGoOh.Jugador;
+import carta.CartaMonstruo;
 import carta.CartaTrampa;
 
 public class MagicCylinder extends CartaTrampa {
@@ -10,7 +11,13 @@ public class MagicCylinder extends CartaTrampa {
         this.nombre = "Magic Cylinder";
     }
 
-    public void efecto() {
+    public void efecto(CartaMonstruo cartaAtacante) {
+    	
+    	oponente.disminuirPuntosVida(cartaAtacante.obtenerPuntosDeAtaque());
 
+    }
+    
+    public void efecto() {
+    	
     }
 }

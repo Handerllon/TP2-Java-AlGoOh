@@ -1,6 +1,7 @@
 package AlGoOh;
 
 import carta.*;
+import carta.excepciones.MazoVacio;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -280,8 +281,8 @@ public class AlGoOhTest2
 
     //    Extraer todas las cartas del mazo, y verificar que la partida terminó y el jugador
 //    perdió.
-    @Test
-    public void test10()
+    @Test(expected = MazoVacio.class)
+    public void test10SeExtraenTodasLasCartasDelMazoDelJugadorYEstePierde()
     {
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
@@ -289,7 +290,8 @@ public class AlGoOhTest2
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        assertTrue(0 != 0);
+        for (int i = 0; i < 41; i++)
+            jugador1.tomarCarta();
     }
 
     //    Colocar las 5 partes de exodia en la mano de un jugador, verificar que la partida

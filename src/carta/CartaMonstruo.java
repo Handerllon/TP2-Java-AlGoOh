@@ -87,8 +87,8 @@ public abstract class CartaMonstruo extends Carta implements Efecto {
                 this.oponente.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
             } else {
 
-                this.jugador.destruirMonstruo(cartaAtacante);
-                this.oponente.destruirMonstruo(this);
+                this.jugador.destruirMonstruo(this);
+                this.oponente.destruirMonstruo(cartaAtacante);
             }
         } else {
             if (diferenciaDePuntos > 0) {

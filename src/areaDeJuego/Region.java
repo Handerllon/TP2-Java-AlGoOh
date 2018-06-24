@@ -2,6 +2,7 @@ package areaDeJuego;
 
 import areaDeJuego.excepciones.RegionSinEspacioLibre;
 import carta.Carta;
+import carta.CartaMonstruo;
 import carta.excepciones.CartaNoExisteEnRegion;
 
 import java.util.ArrayList;

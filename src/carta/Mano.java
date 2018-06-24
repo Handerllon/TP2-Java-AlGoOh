@@ -2,31 +2,43 @@ package carta;
 
 import carta.excepciones.NoSePuedenAgregarMasCartasALaMano;
 
-import java.util.HashMap;
+import java.util.LinkedList;
 
-public class Mano {
+public class Mano
+{
     private static int CANTIDAD_MAXIMA = 6;
-    private HashMap<String, Carta> cartas;
-    private int cantidadEnMano = 0;
+    private LinkedList<Carta> cartas;
 
-    public Mano() {
-        this.cantidadEnMano = 0;
-        this.cartas = new HashMap<String, Carta>();
+    public Mano()
+    {
+        this.cartas = new LinkedList<>();
     }
 
-    public void agregarCarta(Carta carta) {
-        if (cantidadEnMano <= CANTIDAD_MAXIMA) {
-            cartas.put(carta.obtenerNombre(), carta);
-            this.cantidadEnMano++;
+    public void agregarCarta(Carta carta)
+    {
+        if (this.cantidadDeCartas() <= CANTIDAD_MAXIMA)
+        {
+            cartas.add(carta);
         } else throw new NoSePuedenAgregarMasCartasALaMano();
     }
 
-    public void quitarCarta(String unNombreDeCarta) {
-        this.cartas.remove(unNombreDeCarta);
-        this.cantidadEnMano--;
+    public void quitarCarta(Carta carta)
+    {
+        this.cartas.remove(carta);
     }
 
-    public int cantidadDeCartas() {
-        return cantidadEnMano;
+    public Carta quitarUltimaCarta()
+    {
+        return this.cartas.removeLast();
+    }
+
+    public int cantidadDeCartas()
+    {
+        return cartas.size();
+    }
+
+    public boolean manoLlena()
+    {
+        return this.cantidadDeCartas() == this.CANTIDAD_MAXIMA;
     }
 }

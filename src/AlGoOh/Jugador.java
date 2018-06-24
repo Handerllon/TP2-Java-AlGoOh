@@ -4,7 +4,8 @@ import AlGoOh.excepciones.JugadorSinVida;
 import areaDeJuego.AreaDeCartas;
 import carta.*;
 
-public class Jugador {
+public class Jugador
+{
     private String nombre;
     private Mazo mazo;
     private Mano cartasEnMano;
@@ -12,7 +13,8 @@ public class Jugador {
     private AreaDeCartas areaDeCartas;
     private Jugador oponente;
 
-    public Jugador(String unNombre) {
+    public Jugador(String unNombre)
+    {
         this.nombre = unNombre;
 
         this.mazo = new Mazo(this, this.oponente);
@@ -27,71 +29,92 @@ public class Jugador {
         this.popularMano(cartasATomarInicialmente);
     }
 
-    // --------------------------------------------------------------------
-    // Métodos de inicialización.
-    // --------------------------------------------------------------------
-
-    public void establecerOponente(Jugador oponente) {
+    public void establecerOponente(Jugador oponente)
+    {
 
         this.oponente = oponente;
     }
 
-    private void popularMano(int cartasATomarInicialmente) {
+    private void popularMano(int cartasATomarInicialmente)
+    {
 
-        for (int i = 0; i < cartasATomarInicialmente; i++) {
+        for (int i = 0; i < cartasATomarInicialmente; i++)
+        {
             this.cartasEnMano.agregarCarta(mazo.tomarCarta());
         }
+    }
+
+    public void tomarCarta()
+    {
+        Carta cartaAQuitar;
+        while (this.cartasEnMano.manoLlena())
+        {
+            cartaAQuitar = this.cartasEnMano.quitarUltimaCarta();
+            this.areaDeCartas.enviarAlCementerio(cartaAQuitar);
+        }
+
+        this.cartasEnMano.agregarCarta(mazo.tomarCarta());
     }
 
     // --------------------------------------------------------------------
     // Métodos de juego y acciones de cartas.
     // --------------------------------------------------------------------
 
-    public void jugarCarta(CartaMonstruo cartaMonstruo, Sacrificio sacrificio) {
+    public void jugarCarta(CartaMonstruo cartaMonstruo, Sacrificio sacrificio)
+    {
         cartaMonstruo.invocar(sacrificio);
     }
 
-    public void jugarCarta(CartaMonstruo cartaMonstruo) {
+    public void jugarCarta(CartaMonstruo cartaMonstruo)
+    {
         this.areaDeCartas.colocarCarta(cartaMonstruo);
-        this.cartasEnMano.quitarCarta(cartaMonstruo.obtenerNombre());
+        this.cartasEnMano.quitarCarta(cartaMonstruo);
     }
 
-    public void jugarCarta(CartaMagica cartaMagica) {
+    public void jugarCarta(CartaMagica cartaMagica)
+    {
         this.areaDeCartas.colocarCarta(cartaMagica);
-        this.cartasEnMano.quitarCarta(cartaMagica.obtenerNombre());
+        this.cartasEnMano.quitarCarta(cartaMagica);
         cartaMagica.efecto();
     }
 
-    public void jugarCarta(CartaCampo cartaCampo) {
+    public void jugarCarta(CartaCampo cartaCampo)
+    {
         this.areaDeCartas.colocarCarta(cartaCampo);
-        this.cartasEnMano.quitarCarta(cartaCampo.obtenerNombre());
+        this.cartasEnMano.quitarCarta(cartaCampo);
         cartaCampo.efecto();
     }
 
-    public void atacarCartaOponente(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente) {
+    public void atacarCartaOponente(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
+    {
         cartaAtacante.atacarCarta(cartaOponente);
     }
 
-    public void atacarOponente(CartaMonstruo cartaAtacante) {
+    public void atacarOponente(CartaMonstruo cartaAtacante)
+    {
 
         cartaAtacante.atacarOponente();
     }
 
-    public void destruirMonstruo(CartaMonstruo carta) {
+    public void destruirMonstruo(CartaMonstruo carta)
+    {
         this.areaDeCartas.removerCarta(carta);
         this.areaDeCartas.enviarAlCementerio(carta);
     }
 
-    public void destruirMonstruos() {
+    public void destruirMonstruos()
+    {
 
         this.areaDeCartas.enviarMonstruosAlCementerio();
     }
 
-    public int getPuntosDeVida() {
+    public int getPuntosDeVida()
+    {
         return this.puntosDeVida;
     }
 
-    public void disminuirPuntosVida(int puntosARestar) {
+    public void disminuirPuntosVida(int puntosARestar)
+    {
         this.puntosDeVida -= puntosARestar;
         if (this.puntosDeVida <= 0)
             // TODO: Esto puede ser un trigger para terminar el juego.
@@ -99,58 +122,63 @@ public class Jugador {
     }
 
     // TODO: Estos deberían ser implementados dentro de cada carta específica.
-    public void wasteland(Jugador jugador, int modificadorAtaque, int modificadorDefensa) {
+    public void wasteland(Jugador jugador, int modificadorAtaque, int modificadorDefensa)
+    {
 
-        if (this == jugador) {
+        if (this == jugador)
+        {
             this.areaDeCartas.modificarAtaqueMonstruosCon(modificadorAtaque);
-        } else {
+        } else
+        {
             this.areaDeCartas.modificarDefensaMonstruosCon(modificadorDefensa);
         }
     }
 
-    public void sogen(Jugador jugador, int modificadorAtaque, int modificadorDefensa) {
+    public void sogen(Jugador jugador, int modificadorAtaque, int modificadorDefensa)
+    {
 
-        if (this == jugador) {
+        if (this == jugador)
+        {
             this.areaDeCartas.modificarDefensaMonstruosCon(modificadorDefensa);
-        } else {
+        } else
+        {
             this.areaDeCartas.modificarAtaqueMonstruosCon(modificadorAtaque);
         }
     }
-
-    public void ollaDeLaCodicia() {
-
-        this.cartasEnMano.agregarCarta(mazo.tomarCarta());
-        this.cartasEnMano.agregarCarta(mazo.tomarCarta());
-    }
-
     // --------------------------------------------------------------------
     // Métodos de consultas.
     // --------------------------------------------------------------------
 
-    public boolean cartaEstaEnCementerio(CartaMonstruo carta) {
+    public boolean cartaEstaEnCementerio(CartaMonstruo carta)
+    {
         return areaDeCartas.cartaEstaEnCementerio(carta);
     }
 
-    public boolean cartaEstaEnRegionMonstruos(CartaMonstruo carta) {
+    public boolean cartaEstaEnRegionMonstruos(CartaMonstruo carta)
+    {
         return areaDeCartas.cartaEstaEnRegionMonstruos(carta);
     }
 
-    public int cantidadDeCartasEnMano() {
+    public int cantidadDeCartasEnMano()
+    {
 
         return this.cartasEnMano.cantidadDeCartas();
     }
 
-    public int obtenerModificadorDePuntosDeAtaque() {
+    public int obtenerModificadorDePuntosDeAtaque()
+    {
 
         return this.areaDeCartas.obtenerModificadorDePuntosDeAtaque();
     }
 
-    public int obtenerModificadorDePuntosDeDefensa() {
+    public int obtenerModificadorDePuntosDeDefensa()
+    {
 
         return this.areaDeCartas.obtenerModificadorDePuntosDeDefensa();
     }
 
-    public CartaMonstruo obtenerMonstruoConMenorAtaque() {
+    public CartaMonstruo obtenerMonstruoConMenorAtaque()
+    {
 
         return this.areaDeCartas.obtenerMonstruoConMenorAtaque();
     }

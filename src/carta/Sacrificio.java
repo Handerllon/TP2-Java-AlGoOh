@@ -5,7 +5,6 @@ import carta.excepciones.NoHayCartasParaSacrificarError;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-
 // TODO: validar la cantidad de cartas que voy poniendo. Puede lanzar excepciones si pido de más.
 public class Sacrificio
 {
@@ -24,10 +23,8 @@ public class Sacrificio
     public CartaMonstruo getMonstruo()
     {
 
-    	if (cartasASacrificar.isEmpty()){
-
-    		throw new NoHayCartasParaSacrificarError();
-    	}
+        if (cartasASacrificar.isEmpty())
+            throw new NoHayCartasParaSacrificarError();
 
         CartaMonstruo cartaMonstruo;
         cartaMonstruo = cartasASacrificar.getLast();
@@ -36,25 +33,43 @@ public class Sacrificio
         return cartaMonstruo;
     }
 
-    public void removerMonstruo(String nombreCarta) {
+    public CartaMonstruo getMonstruo(String nombreCarta)
+    {
 
-        if (cartasASacrificar.isEmpty()) {
-
+        if (cartasASacrificar.isEmpty())
             throw new NoHayCartasParaSacrificarError();
+
+        Iterator<CartaMonstruo> iterador = this.getIterador();
+        while (iterador.hasNext())
+        {
+            CartaMonstruo cartaActual = iterador.next();
+            if (cartaActual.obtenerNombre() == nombreCarta)
+            {
+                return this.cartasASacrificar.remove(this.cartasASacrificar.indexOf(cartaActual));
+            }
         }
 
-        
-        int indiceCartaARemover = this.cartasASacrificar.indexOf(cartaMonstruo);
-        this.cartasASacrificar.remove(indiceCartaARemover);
+        return null;
     }
 
-	public int cantidadDeSacrificios() {
+    public int cantidadSacrificiosDe(String nombreCarta)
+    {
+        int cantidadSacrificios = 0;
+        Iterator<CartaMonstruo> iterador = this.getIterador();
 
-        return this.cartasASacrificar.size();
-	}
+        while (iterador.hasNext())
+        {
+            if (iterador.next().obtenerNombre() == nombreCarta)
+            {
+                cantidadSacrificios++;
+            }
+        }
 
-    public Iterator<CartaMonstruo> getIteratorCartasASacrificar(){
+        return cantidadSacrificios;
+    }
 
+    public Iterator<CartaMonstruo> getIterador()
+    {
         return cartasASacrificar.iterator();
-	}
+    }
 }

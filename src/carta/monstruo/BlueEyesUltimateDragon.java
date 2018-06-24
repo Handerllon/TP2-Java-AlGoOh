@@ -5,54 +5,41 @@ import carta.CartaMonstruo;
 import carta.Sacrificio;
 import carta.excepciones.NoHayTresDragonesBlancosParaSacrificioError;
 
-import java.util.Iterator;
-
-public class BlueEyesUltimateDragon extends CartaMonstruo {
+public class BlueEyesUltimateDragon extends CartaMonstruo
+{
     private static int PUNTOS_DEFENSA = 3800;
     private static int PUNTOS_ATAQUE = 4500;
 
-    public BlueEyesUltimateDragon(Jugador jugador, Jugador oponente) {
+    public BlueEyesUltimateDragon(Jugador jugador, Jugador oponente)
+    {
 
         super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente);
         this.estrellas = 12;
         this.nombre = "Blue-Eyes Ultimate Dragon";
     }
 
+    public void invocar(Sacrificio sacrificio)
+    {
+        int cantidadDragonesBlancosNecesarios = 3;
 
-    public void invocar(Sacrificio sacrificio) {
-        Iterator<CartaMonstruo> iterador = sacrificio.getIteratorCartasASacrificar();
+        // Se crea una carta Dragón Blanco de Ojos Azules para obtener su nombre, y no hardcodearlo en el código, ya
+        // que si este nombre cambia, habría que cambiar todos los lugares donde se hubiera hardcodeado.
+        CartaMonstruo cartaBlueEyesWhiteDragonMock = new BlueEyesWhiteDragon(this.jugador, this.oponente);
 
-
-        if (this.cantidadDragonesBlancosOjosAzules(sacrificio) == 3) {
-
-            CartaMonstruo cartaActual = null;
-
-            while (iterador.hasNext()) {
-                cartaActual = iterador.next();
-                // TODO: hay que crear un metodo que me devuelva la carta que yo quiero, y no la última.
-                if (cartaActual.obtenerNombre() == "Blue-Eyes White Dragon") {
-                    this.jugador.destruirMonstruo(sacrificio.getMonstruo());
-                }
-            }
-
-        } else
+        if (sacrificio.cantidadSacrificiosDe(cartaBlueEyesWhiteDragonMock.obtenerNombre()) < cantidadDragonesBlancosNecesarios)
+        {
             throw new NoHayTresDragonesBlancosParaSacrificioError();
+        } else
+        {
+            CartaMonstruo cartaASacrificar;
 
-
-        this.jugador.jugarCarta(this);
-    }
-
-    private int cantidadDragonesBlancosOjosAzules(Sacrificio sacrificio) {
-        int cantidadDragonesBlancosDeOjosAzules = 0;
-
-        Iterator<CartaMonstruo> iterador = sacrificio.getIteratorCartasASacrificar();
-
-        while (iterador.hasNext()) {
-            if (iterador.next().obtenerNombre() == "Blue-Eyes White Dragon") {
-                cantidadDragonesBlancosDeOjosAzules++;
+            for (int i = 0; i < cantidadDragonesBlancosNecesarios; i++)
+            {
+                cartaASacrificar = sacrificio.getMonstruo(cartaBlueEyesWhiteDragonMock.obtenerNombre());
+                this.jugador.destruirMonstruo(cartaASacrificar);
             }
         }
 
-        return cantidadDragonesBlancosDeOjosAzules;
+        this.jugador.jugarCarta(this);
     }
 }

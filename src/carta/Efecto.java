@@ -1,6 +1,5 @@
 package carta;
 
-public interface Efecto
-{
+public interface Efecto {
     void efecto();
 }

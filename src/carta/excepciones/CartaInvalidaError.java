@@ -1,5 +1,4 @@
 package carta.excepciones;
 
-public class CartaInvalidaError extends RuntimeException
-{
+public class CartaInvalidaError extends RuntimeException {
 }

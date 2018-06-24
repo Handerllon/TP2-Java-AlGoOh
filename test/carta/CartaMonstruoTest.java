@@ -7,11 +7,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class CartaMonstruoTest
-{
+public class CartaMonstruoTest {
     @Test
-    public void test01CartaMonstruoTienePuntosDeAtaqueCorrectos()
-    {
+    public void test01CartaMonstruoTienePuntosDeAtaqueCorrectos() {
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
@@ -24,8 +22,7 @@ public class CartaMonstruoTest
     }
 
     @Test
-    public void test02CartaMonstruoTienePuntosDeDefensaCorrectos()
-    {
+    public void test02CartaMonstruoTienePuntosDeDefensaCorrectos() {
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 

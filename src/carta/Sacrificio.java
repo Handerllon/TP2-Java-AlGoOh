@@ -2,19 +2,18 @@ package carta;
 
 import carta.excepciones.NoHayCartasParaSacrificarError;
 
-import java.util.ArrayList;
-import java.util.EmptyStackException;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 
 // TODO: validar la cantidad de cartas que voy poniendo. Puede lanzar excepciones si pido de más.
 public class Sacrificio
 {
-    private ArrayList<CartaMonstruo> cartasASacrificar;
+    private LinkedList<CartaMonstruo> cartasASacrificar;
 
     public Sacrificio()
     {
-        this.cartasASacrificar = new ArrayList<CartaMonstruo>();
+        this.cartasASacrificar = new LinkedList<>();
     }
 
     public void agregarCarta(CartaMonstruo carta)
@@ -24,27 +23,38 @@ public class Sacrificio
 
     public CartaMonstruo getMonstruo()
     {
-    	
+
     	if (cartasASacrificar.isEmpty()){
-    		
+
     		throw new NoHayCartasParaSacrificarError();
     	}
-    	
-    	CartaMonstruo cartaMonstruo;
-    	cartaMonstruo = cartasASacrificar.get(cartasASacrificar.size()-1);
-    	cartasASacrificar.remove(cartasASacrificar.size()-1);	
-    	
-    	
+
+        CartaMonstruo cartaMonstruo;
+        cartaMonstruo = cartasASacrificar.getLast();
+        cartasASacrificar.removeLast();
+
         return cartaMonstruo;
     }
 
+    public void removerMonstruo(String nombreCarta) {
+
+        if (cartasASacrificar.isEmpty()) {
+
+            throw new NoHayCartasParaSacrificarError();
+        }
+
+        
+        int indiceCartaARemover = this.cartasASacrificar.indexOf(cartaMonstruo);
+        this.cartasASacrificar.remove(indiceCartaARemover);
+    }
+
 	public int cantidadDeSacrificios() {
-		
-		return this.cartasASacrificar.size();
+
+        return this.cartasASacrificar.size();
 	}
-	
-	public Iterator<CartaMonstruo> getIteratorCartasASacrificar(){
-		
-		return cartasASacrificar.iterator();
+
+    public Iterator<CartaMonstruo> getIteratorCartasASacrificar(){
+
+        return cartasASacrificar.iterator();
 	}
 }

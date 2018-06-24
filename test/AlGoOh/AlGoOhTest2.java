@@ -5,14 +5,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class AlGoOhTest2
-{
+public class AlGoOhTest2 {
     //Colocar un monstruo de cada lado del campo. Activo la carta mágica Wasteland y
 //verificar que de un lado del campo, el ataque del monstruo aumenta en 200 puntos y
 //del otro lado del campo, se aumenta la defensa del monstruo en 300 puntos.
     @Test
-    public void test01SeColocaCartaEnRegionDeMonstruosYSeActivaCartaWasteland()
-    {
+    public void test01SeColocaCartaEnRegionDeMonstruosYSeActivaCartaWasteland() {
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
@@ -46,8 +44,7 @@ public class AlGoOhTest2
 //    verificar que de un lado del campo, la defensa del monstruo aumenta en 500 puntos
 //    y del otro lado del campo, se aumenta el ataque del monstruo en 200 puntos.
     @Test
-    public void test02SeColocanMonstruosYSeUsaCartaSogen()
-    {
+    public void test02SeColocanMonstruosYSeUsaCartaSogen() {
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
@@ -79,8 +76,7 @@ public class AlGoOhTest2
 
     //    Activar la carta mágica Olla de la codicia, y verificar que tomo 2 cartas del mazo.
     @Test
-    public void test03SeUsaCartaOllaDeLaCodiciaYSeVerificaQueLaCantidadDeCartasEnLaManoSeanCorrectas()
-    {
+    public void test03SeUsaCartaOllaDeLaCodiciaYSeVerificaQueLaCantidadDeCartasEnLaManoSeanCorrectas() {
         Jugador jugador1 = new Jugador("Juan Pablo");
         Jugador jugador2 = new Jugador("Juan Carlos");
 
@@ -104,8 +100,7 @@ public class AlGoOhTest2
     //    Colocar 2 monstruos en el campo enemigo, con diferente ataque. Activo la carta
 //    mágica Fisura, y verificar que el de menor ataque es destruido.
     @Test
-    public void test04SeJueganDosMonstruosEnemigosSeUsaLaCartaFisuraYElDeMenorAtaqueMuere()
-    {
+    public void test04SeJueganDosMonstruosEnemigosSeUsaLaCartaFisuraYElDeMenorAtaqueMuere() {
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
@@ -119,7 +114,7 @@ public class AlGoOhTest2
         CartaMonstruo unaCartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Ancient Brain");
         unaCartaJugador2.cambiarModo();
         jugador2.jugarCarta(unaCartaJugador2);
-        
+
         //Carta con menor ataque
         CartaMonstruo otraCartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         otraCartaJugador2.cambiarModo();
@@ -137,8 +132,7 @@ public class AlGoOhTest2
     //    Colocar un monstruo en el campo enemigo. invoco a Jinzo #7 en mi lado del campo.
 //    Verificar que puedo atacarCartaOponente a los puntos de vida directamente.
     @Test
-    public void test05SeColocaJinzoYSeAtacanLosPuntosDeVidaDirectamente()
-    {
+    public void test05SeColocaJinzoYSeAtacanLosPuntosDeVidaDirectamente() {
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
@@ -166,8 +160,7 @@ public class AlGoOhTest2
     //    Invocar 3 dragones blancos de ojos azules, al Dragón definitivo de ojos azules
 //    sacrificando los 3 dragones el lado del campo del jugador que los invocó.
     @Test
-    public void test06SeJuegan3DragonesBlancosDeOjosAzulesYLuegoElDragonDefinitivoDeOjosAzules()
-    {
+    public void test06SeJuegan3DragonesBlancosDeOjosAzulesYLuegoElDragonDefinitivoDeOjosAzules() {
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
@@ -216,7 +209,11 @@ public class AlGoOhTest2
         CartaMonstruo dragonDefinitivoDeOjosAzulesJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes Ultimate Dragon");
         jugador1.jugarCarta(dragonDefinitivoDeOjosAzulesJugador1, sacrificioFinal);
 
-        assertTrue(0 != 0);
+        assertTrue(jugador1.cartaEstaEnCementerio(primerDragonBlancoJugador1));
+        assertTrue(jugador1.cartaEstaEnCementerio(segundoDragonBlancoJugador1));
+        assertTrue(jugador1.cartaEstaEnCementerio(tercerDragonBlancoJugador1));
+
+        assertTrue(jugador1.cartaEstaEnRegionMonstruos(dragonDefinitivoDeOjosAzulesJugador1));
     }
 
     //
@@ -225,8 +222,7 @@ public class AlGoOhTest2
 //    atacante como objetivo, verificar que este se destruye, y que mi monstruo sigue en el
 //    campo. Verificar que nadie sufre daño a los puntos de vida.
     @Test
-    public void test07UnMonstruoAtacaAlInsectoComeHombresQueSeEncuentraBocaAbajoYEsteEsDestruido()
-    {
+    public void test07UnMonstruoAtacaAlInsectoComeHombresQueSeEncuentraBocaAbajoYEsteEsDestruido() {
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
@@ -257,8 +253,7 @@ public class AlGoOhTest2
 //    trampa, se niega el ataque y el oponente recibe el daño directamente en sus puntos
 //    de vida.
     @Test
-    public void test08()
-    {
+    public void test08() {
 
         assertTrue(0 != 0);
     }
@@ -269,8 +264,7 @@ public class AlGoOhTest2
 //    trampa, y el monstruo enemigo es destruido y se infligió 100 puntos de daño a la
 //    vida del otro jugador.
     @Test
-    public void test09()
-    {
+    public void test09() {
 
         assertTrue(0 != 0);
     }
@@ -278,8 +272,7 @@ public class AlGoOhTest2
     //    Extraer todas las cartas del mazo, y verificar que la partida terminó y el jugador
 //    perdió.
     @Test
-    public void test10()
-    {
+    public void test10() {
 
         assertTrue(0 != 0);
     }

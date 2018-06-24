@@ -1,6 +1,5 @@
 package carta;
 
-public interface Orientacion
-{
+public interface Orientacion {
     void cambiarOrientacion(Carta carta);
 }

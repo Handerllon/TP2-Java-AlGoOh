@@ -6,18 +6,15 @@ import carta.excepciones.CartaInvalidaError;
 
 import java.util.ArrayList;
 
-public class FabricaCartasCampo
-{
+public class FabricaCartasCampo {
     private Jugador jugador, oponente;
 
-    public FabricaCartasCampo(Jugador jugador, Jugador oponente)
-    {
+    public FabricaCartasCampo(Jugador jugador, Jugador oponente) {
         this.jugador = jugador;
         this.oponente = oponente;
     }
 
-    public ArrayList<String> obtenerNombres()
-    {
+    public ArrayList<String> obtenerNombres() {
         ArrayList<String> nombres = new ArrayList<String>();
 
         String nombre;
@@ -29,10 +26,8 @@ public class FabricaCartasCampo
         return nombres;
     }
 
-    public CartaCampo obtenerCarta(String nombreCarta)
-    {
-        switch (nombreCarta)
-        {
+    public CartaCampo obtenerCarta(String nombreCarta) {
+        switch (nombreCarta) {
             // Campo.
             case "Sogen":
                 return new Sogen(jugador, oponente);

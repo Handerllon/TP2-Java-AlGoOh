@@ -11,11 +11,9 @@ import java.util.ArrayList;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
-public class RegionTest
-{
+public class RegionTest {
     @Test
-    public void test01()
-    {
+    public void test01() {
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
@@ -33,8 +31,7 @@ public class RegionTest
     }
 
     @Test
-    public void test02()
-    {
+    public void test02() {
         int capacidadMaxima = 10;
         Region region = new Region(capacidadMaxima);
 
@@ -44,8 +41,7 @@ public class RegionTest
     }
 
     @Test
-    public void test03()
-    {
+    public void test03() {
         int capacidadMaxima = 10;
         Region region = new Region(capacidadMaxima);
 

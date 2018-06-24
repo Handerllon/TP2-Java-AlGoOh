@@ -6,18 +6,15 @@ import carta.excepciones.CartaInvalidaError;
 
 import java.util.ArrayList;
 
-public class FabricaCartasMonstruo
-{
+public class FabricaCartasMonstruo {
     private Jugador jugador, oponente;
 
-    public FabricaCartasMonstruo(Jugador jugador, Jugador oponente)
-    {
+    public FabricaCartasMonstruo(Jugador jugador, Jugador oponente) {
         this.jugador = jugador;
         this.oponente = oponente;
     }
 
-    public ArrayList<String> obtenerNombresMonstruosNormales()
-    {
+    public ArrayList<String> obtenerNombresMonstruosNormales() {
         ArrayList<String> nombres = new ArrayList<String>();
 
         String nombre;
@@ -41,8 +38,7 @@ public class FabricaCartasMonstruo
         return nombres;
     }
 
-    public ArrayList<String> obtenerNombresMonstruosNoNormales()
-    {
+    public ArrayList<String> obtenerNombresMonstruosNoNormales() {
         ArrayList<String> nombres = new ArrayList<String>();
 
         String nombre;
@@ -66,10 +62,8 @@ public class FabricaCartasMonstruo
         return nombres;
     }
 
-    public CartaMonstruo obtenerCarta(String nombreCarta)
-    {
-        switch (nombreCarta)
-        {
+    public CartaMonstruo obtenerCarta(String nombreCarta) {
+        switch (nombreCarta) {
             // Monstruos.
             case "Alexandrite Dragon":
                 return new AlexandriteDragon(jugador, oponente);

@@ -1,6 +1,5 @@
 package carta;
 
-public interface Modo
-{
+public interface Modo {
     void cambiarModo(CartaMonstruo carta);
 }

@@ -2,37 +2,31 @@ package carta;
 
 import AlGoOh.Jugador;
 
-public abstract class Carta
-{
+public abstract class Carta {
 
     protected String nombre;
     protected Orientacion orientacion;
     protected Jugador jugador, oponente;
 
-    public Carta(Jugador jugador, Jugador oponente)
-    {
+    public Carta(Jugador jugador, Jugador oponente) {
         this.orientacion = new OrientacionAbajo();
         this.jugador = jugador;
         this.oponente = oponente;
     }
 
-    public String obtenerNombre()
-    {
+    public String obtenerNombre() {
         return nombre;
     }
 
-    public void cambiarOrientacion()
-    {
+    public void cambiarOrientacion() {
         this.orientacion.cambiarOrientacion(this);
     }
 
-    protected void establecerOrientacion(Orientacion orientacionNueva)
-    {
+    protected void establecerOrientacion(Orientacion orientacionNueva) {
         this.orientacion = orientacionNueva;
     }
 
-    protected boolean orientacionArriba()
-    {
+    protected boolean orientacionArriba() {
         return this.orientacion instanceof OrientacionArriba;
     }
 }

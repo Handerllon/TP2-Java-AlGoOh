@@ -7,8 +7,7 @@ import carta.CartaMonstruo;
 
 import java.util.ArrayList;
 
-public class AreaDeCartas
-{
+public class AreaDeCartas {
     private static int CAPACIDAD_REGION_MONSTRUOS = 5;
     private static int CAPACIDAD_REGION_MAGICAS = 5;
     private static int CAPACIDAD_REGION_CAMPO = 1;
@@ -18,8 +17,7 @@ public class AreaDeCartas
     private Region regionCampo;
     private Region cementerio;
 
-    public AreaDeCartas()
-    {
+    public AreaDeCartas() {
         this.regionMonstruos = new RegionMonstruos(CAPACIDAD_REGION_MONSTRUOS);
         this.regionMagicasYTrampas = new Region<>(CAPACIDAD_REGION_MAGICAS);
         this.regionCampo = new Region<CartaCampo>(CAPACIDAD_REGION_CAMPO);
@@ -30,23 +28,19 @@ public class AreaDeCartas
     // Métodos de agregación de cartas.
     // --------------------------------------------------------------------
 
-    public void colocarCarta(CartaMonstruo cartaMonstruo)
-    {
+    public void colocarCarta(CartaMonstruo cartaMonstruo) {
         this.regionMonstruos.colocarCarta(cartaMonstruo);
     }
 
-    public void colocarCarta(CartaMagica cartaMagica)
-    {
+    public void colocarCarta(CartaMagica cartaMagica) {
         this.regionMagicasYTrampas.colocarCarta(cartaMagica);
     }
 
-    public void colocarCarta(CartaCampo cartaCampo)
-    {
+    public void colocarCarta(CartaCampo cartaCampo) {
         this.regionCampo.colocarCarta(cartaCampo);
     }
 
-    public void removerCarta(CartaMonstruo cartaMonstruo)
-    {
+    public void removerCarta(CartaMonstruo cartaMonstruo) {
         this.regionMonstruos.removerCarta(cartaMonstruo);
     }
 
@@ -54,13 +48,11 @@ public class AreaDeCartas
     // Métodos de movimiento de cartas.
     // --------------------------------------------------------------------
 
-    public void enviarAlCementerio(Carta carta)
-    {
+    public void enviarAlCementerio(Carta carta) {
         this.cementerio.colocarCarta(carta);
     }
 
-    public void enviarMonstruosAlCementerio()
-    {
+    public void enviarMonstruosAlCementerio() {
         ArrayList<CartaMonstruo> cartas = this.regionMonstruos.obtenerCartas();
 
         cartas.forEach(item -> this.enviarAlCementerio(item));
@@ -72,42 +64,35 @@ public class AreaDeCartas
     // Métodos de consulta.
     // --------------------------------------------------------------------
 
-    public boolean cartaEstaEnCementerio(Carta carta)
-    {
+    public boolean cartaEstaEnCementerio(Carta carta) {
         return this.cementerio.contieneCarta(carta);
     }
 
-    public boolean cartaEstaEnRegionMonstruos(CartaMonstruo carta)
-    {
+    public boolean cartaEstaEnRegionMonstruos(CartaMonstruo carta) {
         return this.regionMonstruos.contieneCarta(carta);
     }
 
-    public void modificarAtaqueMonstruosCon(int modificadorAtaque)
-    {
+    public void modificarAtaqueMonstruosCon(int modificadorAtaque) {
 
         this.regionMonstruos.modificarAtaqueMonstruosCon(modificadorAtaque);
     }
 
-    public void modificarDefensaMonstruosCon(int modificadorDefensa)
-    {
+    public void modificarDefensaMonstruosCon(int modificadorDefensa) {
 
         this.regionMonstruos.modificarDefensaMonstruosCon(modificadorDefensa);
     }
 
-    public int obtenerModificadorDePuntosDeAtaque()
-    {
+    public int obtenerModificadorDePuntosDeAtaque() {
 
         return this.regionMonstruos.obtenerModificadorDePuntosDeAtaque();
     }
 
-    public int obtenerModificadorDePuntosDeDefensa()
-    {
+    public int obtenerModificadorDePuntosDeDefensa() {
 
         return this.regionMonstruos.obtenerModificadorDePuntosDeDefensa();
     }
 
-    public CartaMonstruo obtenerMonstruoConMenorAtaque()
-    {
+    public CartaMonstruo obtenerMonstruoConMenorAtaque() {
 
         return this.regionMonstruos.obtenerMonstruoConMenorAtaque();
     }

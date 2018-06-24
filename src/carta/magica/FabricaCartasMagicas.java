@@ -6,18 +6,15 @@ import carta.excepciones.CartaInvalidaError;
 
 import java.util.ArrayList;
 
-public class FabricaCartasMagicas
-{
+public class FabricaCartasMagicas {
     private Jugador jugador, oponente;
 
-    public FabricaCartasMagicas(Jugador jugador, Jugador oponente)
-    {
+    public FabricaCartasMagicas(Jugador jugador, Jugador oponente) {
         this.jugador = jugador;
         this.oponente = oponente;
     }
 
-    public ArrayList<String> obtenerNombres()
-    {
+    public ArrayList<String> obtenerNombres() {
         ArrayList<String> nombres = new ArrayList<String>();
 
         String nombre;
@@ -31,10 +28,8 @@ public class FabricaCartasMagicas
         return nombres;
     }
 
-    public CartaMagica obtenerCarta(String nombreCarta)
-    {
-        switch (nombreCarta)
-        {
+    public CartaMagica obtenerCarta(String nombreCarta) {
+        switch (nombreCarta) {
             // Magicas.
             case "Dark Hole":
                 return new DarkHole(jugador, oponente);

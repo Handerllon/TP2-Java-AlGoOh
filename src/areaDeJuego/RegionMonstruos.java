@@ -4,32 +4,14 @@ import carta.CartaMonstruo;
 
 import java.util.ArrayList;
 
+import AlGoOh.Jugador;
+
 public class RegionMonstruos extends Region<CartaMonstruo> {
-    private int modificadorAtaque;
-    private int modificadorDefensa;
 
     public RegionMonstruos(int capacidadMaxima) {
         super(capacidadMaxima);
-        this.modificadorAtaque = 0;
-        this.modificadorDefensa = 0;
     }
-
-    public void modificarAtaqueMonstruosCon(int modificadorAtaque) {
-        this.modificadorAtaque = this.modificadorAtaque + modificadorAtaque;
-    }
-
-    public void modificarDefensaMonstruosCon(int modificadorDefensa) {
-        this.modificadorDefensa = this.modificadorDefensa + modificadorDefensa;
-    }
-
-    public int obtenerModificadorDePuntosDeAtaque() {
-        return this.modificadorAtaque;
-    }
-
-    public int obtenerModificadorDePuntosDeDefensa() {
-        return this.modificadorDefensa;
-    }
-
+    
     public CartaMonstruo obtenerMonstruoConMenorAtaque() {
         CartaMonstruo cartaConAtaqueMinimo = null;
 
@@ -45,6 +27,20 @@ public class RegionMonstruos extends Region<CartaMonstruo> {
         }
 
         return cartaConAtaqueMinimo;
+    }
+    
+    public void wasteland(int modificadorAtaque, int modificadorDefensa, Jugador jugador){
+    	
+    	for (int i=0 ; i<this.cartas.size(); i++){
+    		this.cartas.get(i).wasteland(modificadorAtaque, modificadorDefensa, jugador);
+    	}
+    }
+    
+    public void sogen(int modificadorAtaque, int modificadorDefensa, Jugador jugador){
+    	
+    	for (int i=0 ; i<this.cartas.size(); i++){
+    		this.cartas.get(i).sogen(modificadorAtaque, modificadorDefensa, jugador);
+    	}
     }
 }
 

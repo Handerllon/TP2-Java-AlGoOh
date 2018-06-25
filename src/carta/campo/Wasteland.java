@@ -2,6 +2,7 @@ package carta.campo;
 
 import AlGoOh.Jugador;
 import carta.CartaCampo;
+import carta.CartaMonstruo;
 
 public class Wasteland extends CartaCampo {
     private static int modificadorAtaque;
@@ -23,8 +24,20 @@ public class Wasteland extends CartaCampo {
 
     }
 
-    public void efecto() {
-        this.jugador.wasteland(this.jugador, this.modificadorAtaque, this.modificadorDefensa);
-        this.oponente.wasteland(this.jugador, this.modificadorAtaque, this.modificadorDefensa);
-    }
+	public void efecto(CartaMonstruo cartaMonstruo) {
+		
+		cartaMonstruo.wasteland(this.modificadorAtaque,this.modificadorDefensa,this.jugador);
+	}
+
+	public void efecto() {
+		
+		this.jugador.wasteland(this.modificadorAtaque,this.modificadorDefensa,this.jugador);
+		this.oponente.wasteland(this.modificadorAtaque,this.modificadorDefensa,this.jugador);
+	}
+
+	
+	public void quitarEfecto(CartaMonstruo cartaMonstruo) {
+		
+		cartaMonstruo.quitarWasteland(this.modificadorAtaque,this.modificadorDefensa,this.jugador);
+	}
 }

@@ -62,11 +62,15 @@ public class Jugador
 
     public void jugarCarta(CartaMonstruo cartaMonstruo, Sacrificio sacrificio)
     {
+    	cartaMonstruo.aplicarEfectosDeCampo();
+    	this.oponente.aplicarEfectosDeCampo(cartaMonstruo);
         cartaMonstruo.invocar(sacrificio);
     }
 
     public void jugarCarta(CartaMonstruo cartaMonstruo)
     {
+    	cartaMonstruo.aplicarEfectosDeCampo();
+    	this.oponente.aplicarEfectosDeCampo(cartaMonstruo);
         this.areaDeCartas.colocarCarta(cartaMonstruo);
         this.cartasEnMano.quitarCarta(cartaMonstruo);
     }
@@ -82,6 +86,8 @@ public class Jugador
     {
         this.areaDeCartas.colocarCarta(cartaCampo);
         this.cartasEnMano.quitarCarta(cartaCampo);
+        //Este efecto de la carta campo le aplica los modificadores de ataque o defensa
+        //a cada carta que ya se encuentra en la region de monstruos
         cartaCampo.efecto();
     }
     
@@ -94,6 +100,7 @@ public class Jugador
 
     public void atacarCartaOponente(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
     {
+  
         cartaAtacante.atacarCarta(cartaOponente);
     }
 
@@ -105,6 +112,7 @@ public class Jugador
 
     public void destruirMonstruo(CartaMonstruo carta)
     {
+    	carta.quitarEfectosDeCampo();
         this.areaDeCartas.removerCarta(carta);
         this.areaDeCartas.enviarAlCementerio(carta);
     }
@@ -128,29 +136,14 @@ public class Jugador
             throw new JugadorSinVida();
     }
 
-    // TODO: Estos deberían ser implementados dentro de cada carta específica.
-    public void wasteland(Jugador jugador, int modificadorAtaque, int modificadorDefensa)
+    public void wasteland(int modificadorAtaque, int modificadorDefensa, Jugador jugador)
     {
-
-        if (this == jugador)
-        {
-            this.areaDeCartas.modificarAtaqueMonstruosCon(modificadorAtaque);
-        } else
-        {
-            this.areaDeCartas.modificarDefensaMonstruosCon(modificadorDefensa);
-        }
+    	this.areaDeCartas.wasteland(modificadorAtaque, modificadorDefensa, jugador);
     }
 
-    public void sogen(Jugador jugador, int modificadorAtaque, int modificadorDefensa)
+    public void sogen(int modificadorAtaque, int modificadorDefensa, Jugador jugador)
     {
-
-        if (this == jugador)
-        {
-            this.areaDeCartas.modificarDefensaMonstruosCon(modificadorDefensa);
-        } else
-        {
-            this.areaDeCartas.modificarAtaqueMonstruosCon(modificadorAtaque);
-        }
+    	this.areaDeCartas.sogen(modificadorAtaque, modificadorDefensa, jugador);
     }
     // --------------------------------------------------------------------
     // Métodos de consultas.
@@ -172,18 +165,6 @@ public class Jugador
         return this.cartasEnMano.cantidadDeCartas();
     }
 
-    public int obtenerModificadorDePuntosDeAtaque()
-    {
-
-        return this.areaDeCartas.obtenerModificadorDePuntosDeAtaque();
-    }
-
-    public int obtenerModificadorDePuntosDeDefensa()
-    {
-
-        return this.areaDeCartas.obtenerModificadorDePuntosDeDefensa();
-    }
-
     public CartaMonstruo obtenerMonstruoConMenorAtaque()
     {
 
@@ -193,6 +174,18 @@ public class Jugador
 	public CartaTrampa obtenerCartaTrampaAActivar() {
 		
 		return this.areaDeCartas.obtenerCartaTrampaAActivar();
+	}
+
+	public void aplicarEfectosDeCampo(CartaMonstruo cartaMonstruo) {
+		
+		this.areaDeCartas.aplicarEfectosDeCampo(cartaMonstruo);
+		
+	}
+
+	public void quitarEfectosDeCampo(CartaMonstruo cartaMonstruo) {
+		
+		this.areaDeCartas.quitarEfectosDeCampo(cartaMonstruo);
+		
 	}
 
 

@@ -8,6 +8,8 @@ import carta.CartaTrampa;
 
 import java.util.ArrayList;
 
+import AlGoOh.Jugador;
+
 public class AreaDeCartas {
     private static int CAPACIDAD_REGION_MONSTRUOS = 5;
     private static int CAPACIDAD_REGION_MAGICAS = 5;
@@ -15,13 +17,13 @@ public class AreaDeCartas {
     private static int CAPACIDAD_REGION_CEMENTERIO = 40;
     private RegionMonstruos regionMonstruos;
     private RegionMagicasYTrampas regionMagicasYTrampas;
-    private Region regionCampo;
+    private RegionCampo regionCampo;
     private Region cementerio;
 
     public AreaDeCartas() {
         this.regionMonstruos = new RegionMonstruos(CAPACIDAD_REGION_MONSTRUOS);
         this.regionMagicasYTrampas = new RegionMagicasYTrampas (CAPACIDAD_REGION_MAGICAS);
-        this.regionCampo = new Region<CartaCampo>(CAPACIDAD_REGION_CAMPO);
+        this.regionCampo = new RegionCampo(CAPACIDAD_REGION_CAMPO);
         this.cementerio = new Region<>(CAPACIDAD_REGION_CEMENTERIO);
     }
 
@@ -78,26 +80,7 @@ public class AreaDeCartas {
         return this.regionMonstruos.contieneCarta(carta);
     }
 
-    public void modificarAtaqueMonstruosCon(int modificadorAtaque) {
-
-        this.regionMonstruos.modificarAtaqueMonstruosCon(modificadorAtaque);
-    }
-
-    public void modificarDefensaMonstruosCon(int modificadorDefensa) {
-
-        this.regionMonstruos.modificarDefensaMonstruosCon(modificadorDefensa);
-    }
-
-    public int obtenerModificadorDePuntosDeAtaque() {
-
-        return this.regionMonstruos.obtenerModificadorDePuntosDeAtaque();
-    }
-
-    public int obtenerModificadorDePuntosDeDefensa() {
-
-        return this.regionMonstruos.obtenerModificadorDePuntosDeDefensa();
-    }
-
+    
     public CartaMonstruo obtenerMonstruoConMenorAtaque() {
 
         return this.regionMonstruos.obtenerMonstruoConMenorAtaque();
@@ -107,6 +90,28 @@ public class AreaDeCartas {
 		
 		return this.regionMagicasYTrampas.obtenerCartaTrampaAActivar();
 	}
+
+	public void aplicarEfectosDeCampo(CartaMonstruo cartaMonstruo) {
+
+		this.regionCampo.aplicarEfecto(cartaMonstruo);
+		
+	}
+	
+	public void quitarEfectosDeCampo(CartaMonstruo cartaMonstruo) {
+		
+		this.regionCampo.quitarEfecto(cartaMonstruo);
+		
+	}
+	
+	public void wasteland(int modificadorAtaque, int modificadorDefensa, Jugador jugador){
+		this.regionMonstruos.wasteland(modificadorAtaque, modificadorDefensa, jugador);
+	}
+
+	public void sogen(int modificadorAtaque, int modificadorDefensa, Jugador jugador) {
+
+		this.regionMonstruos.sogen(modificadorAtaque, modificadorDefensa, jugador);
+	}
+
 
 
 

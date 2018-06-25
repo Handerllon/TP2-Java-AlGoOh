@@ -35,13 +35,10 @@ public abstract class CartaMonstruo extends Carta implements Efecto {
 
     //TODO : Cambiar la forma que se obtienen los modificadores
     public int getPuntos() {
-        int modificador = 0;
         if (this.enAtaque()) {
-            modificador = this.jugador.obtenerModificadorDePuntosDeAtaque();
-            return (this.puntos + modificador);
+            return (this.puntos);
         } else {
-            modificador = this.jugador.obtenerModificadorDePuntosDeDefensa();
-            return (this.puntos + modificador);
+            return (this.puntos);
         }
     }
 
@@ -59,6 +56,17 @@ public abstract class CartaMonstruo extends Carta implements Efecto {
 
     public void efecto() {
 
+    }
+    
+    public void aplicarEfectosDeCampo() {
+    	
+    	this.jugador.aplicarEfectosDeCampo(this);
+    	
+    }
+    
+    public void quitarEfectosDeCampo(){
+    	
+    	this.jugador.quitarEfectosDeCampo(this);
     }
 
     // TODO: hay alguna forma de no preguntar el estado de la carta del oponente, utilizando solamente mensajes, y
@@ -87,8 +95,6 @@ public abstract class CartaMonstruo extends Carta implements Efecto {
 
         int diferenciaDePuntos = cartaAtacante.calcularDiferencia(this);
         
-       
-
         if (this.enAtaque()) {
 
             if (diferenciaDePuntos > 0) {
@@ -143,6 +149,7 @@ public abstract class CartaMonstruo extends Carta implements Efecto {
     	}
     	
     }
+    
     public void atacarOponente() {
     	
     	CartaTrampa cartaTrampa = this.oponente.obtenerCartaTrampaAActivar();
@@ -153,6 +160,65 @@ public abstract class CartaMonstruo extends Carta implements Efecto {
     	}
     	else{
     		cartaTrampa.efecto(this, null);
+    	}
+    }
+    
+    public void wasteland(int modificadorAtaque, int modificadorDefensa, Jugador jugador) {
+    	
+    	if (this.jugador == jugador){
+    		this.puntosAtaque = this.puntosAtaque + modificadorAtaque;
+    		if(this.enAtaque())
+    			this.puntos = puntosAtaque;
+    	}
+    	else{
+    		this.puntosDefensa = this.puntosDefensa + modificadorDefensa;
+    		if(this.enDefensa())
+    			this.puntos = puntosDefensa;
+    	}
+    }
+    
+    public void quitarWasteland(int modificadorAtaque, int modificadorDefensa, Jugador jugador) {
+    	
+    	if (this.jugador == jugador){
+    		this.puntosAtaque = this.puntosAtaque - modificadorAtaque;
+    		if(this.enAtaque())
+    			this.puntos = puntosAtaque;
+    	}
+    	else{
+    		this.puntosDefensa = this.puntosDefensa - modificadorDefensa;
+    		if(this.enDefensa())
+    			this.puntos = puntosDefensa;
+    	}
+    	
+    }
+    
+    
+
+    public void sogen(int modificadorAtaque, int modificadorDefensa, Jugador jugador) {
+    	
+    	if (this.jugador == jugador){
+    		this.puntosDefensa = this.puntosDefensa + modificadorDefensa;
+    		if(this.enDefensa())
+    			this.puntos = puntosDefensa;
+    	}
+    	else{
+    		this.puntosAtaque = this.puntosAtaque + modificadorAtaque;
+    		if(this.enAtaque())
+    			this.puntos = puntosAtaque;
+    	}
+    }
+    
+    public void quitarSogen(int modificadorAtaque, int modificadorDefensa, Jugador jugador) {
+    	
+    	if (this.jugador == jugador){
+    		this.puntosDefensa = this.puntosDefensa - modificadorDefensa;
+    		if(this.enDefensa())
+    			this.puntos = puntosDefensa;
+    	}
+    	else{
+    		this.puntosAtaque = this.puntosAtaque - modificadorAtaque;
+    		if(this.enAtaque())
+    			this.puntos = puntosAtaque;
     	}
     }
 

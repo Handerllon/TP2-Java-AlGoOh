@@ -2,6 +2,7 @@ package carta.campo;
 
 import AlGoOh.Jugador;
 import carta.CartaCampo;
+import carta.CartaMonstruo;
 
 public class Sogen extends CartaCampo {
     private static int modificadorAtaque;
@@ -21,9 +22,22 @@ public class Sogen extends CartaCampo {
         this.jugador = jugador;
         this.oponente = oponente;
     }
+    
+    public void efecto(CartaMonstruo cartaMonstruo) {
+		
+		cartaMonstruo.sogen(this.modificadorAtaque,this.modificadorDefensa,this.jugador);
+	}
 
-    public void efecto() {
-        this.jugador.sogen(this.jugador, this.modificadorAtaque, this.modificadorDefensa);
-        this.oponente.sogen(this.jugador, this.modificadorAtaque, this.modificadorDefensa);
-    }
+	public void efecto() {
+		
+		this.jugador.sogen(this.modificadorAtaque,this.modificadorDefensa,this.jugador);
+		this.oponente.sogen(this.modificadorAtaque,this.modificadorDefensa,this.jugador);
+	}
+
+	
+	public void quitarEfecto(CartaMonstruo cartaMonstruo) {
+		
+		cartaMonstruo.quitarSogen(this.modificadorAtaque,this.modificadorDefensa,this.jugador);
+	}
 }
+

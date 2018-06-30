@@ -2,19 +2,23 @@ package carta;
 
 import AlGoOh.Jugador;
 
-public abstract class CartaTrampa extends Carta implements Efecto {
-	
-	protected boolean trampaCancelaAtaqueAMonstruo;
-	
-    public CartaTrampa(Jugador jugador, Jugador oponente) {
+public abstract class CartaTrampa extends Carta
+{
+    protected boolean trampaCancelaAtaqueAMonstruo;
+
+    public CartaTrampa(Jugador jugador, Jugador oponente)
+    {
         super(jugador, oponente);
         trampaCancelaAtaqueAMonstruo = false;
     }
-    
-    public boolean trampaCancelaAtaqueAMonstruo(){
-    	
-    	return trampaCancelaAtaqueAMonstruo;
+
+    public boolean trampaCancelaAtaqueAMonstruo()
+    {
+
+        return trampaCancelaAtaqueAMonstruo;
     }
-    
-    public void efecto (CartaMonstruo cartaMonstruoJugador, CartaMonstruo cartaMonstruoOponente){}
+
+    public abstract void efecto(CartaMonstruo cartaMonstruoJugador, CartaMonstruo cartaMonstruoOponente);
+
+    public abstract void efecto();
 }

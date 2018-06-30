@@ -1,22 +1,34 @@
 package areaDeJuego;
 
+import AlGoOh.Jugador;
 import areaDeJuego.excepciones.RegionSinEspacioLibre;
 import carta.Carta;
 import carta.CartaMonstruo;
 import carta.excepciones.CartaNoExisteEnRegion;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
-public class Region<T extends Carta>
+public abstract class Region<T extends Carta> implements Notificable
 {
-    protected LinkedList<T> cartas;
+    protected ArrayList<T> cartas = new ArrayList<>();
     protected int capacidadMaxima;
+    protected Jugador jugador, oponente;
+    protected ArrayList<Region> regionesANotificar = new ArrayList<>();
 
-    public Region(int capacidadMaxima)
+    public Region(int capacidadMaxima, Jugador jugador)
     {
-        this.cartas = new LinkedList<>();
         this.capacidadMaxima = capacidadMaxima;
+        this.jugador = jugador;
+    }
+
+    public void establecerOponente(Jugador oponente)
+    {
+        this.oponente = oponente;
+    }
+
+    public void suscribirRegionANotificar(Region region)
+    {
+        this.regionesANotificar.add(region);
     }
 
     public void colocarCarta(T carta)
@@ -56,5 +68,19 @@ public class Region<T extends Carta>
     {
         return this.cartas.size() < this.capacidadMaxima;
     }
-    
+
+    public ArrayList<T> obtenerCartasEnRegion()
+    {
+        return this.cartas;
+    }
+
+    public void notificarColocacionDeCarta(CartaMonstruo carta)
+    {
+
+    }
+
+    public void notificarRemocionDeCarta(CartaMonstruo carta)
+    {
+
+    }
 }

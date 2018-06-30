@@ -1,23 +1,24 @@
 package AlGoOh;
 
-public class AlGoOh {
-
+public class AlGoOh
+{
     private Jugador jugador;
     private Jugador oponente;
 
-    public AlGoOh() {
+    public AlGoOh()
+    {
 
     }
 
-    public void inicializarJuego(String nombreJugador, String nombreOponente) {
+    public void inicializarJuego(String nombreJugador, String nombreOponente)
+    {
 
         this.jugador = new Jugador(nombreJugador);
         this.oponente = new Jugador(nombreOponente);
-
     }
 
-
-    public Jugador obtenerJugador() {
+    public Jugador obtenerJugador()
+    {
         return this.jugador;
     }
 }

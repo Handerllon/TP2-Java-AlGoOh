@@ -20,6 +20,9 @@ public class AlGoOhTest2
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
+        jugador1.crearMazo();
+        jugador2.crearMazo();
+
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
@@ -35,11 +38,50 @@ public class AlGoOhTest2
         jugador1.jugarCarta(cartaWasteland);
 
         int puntosDeAtaqueEsperadosCartaJugador = 1000 + 200;
-
         int puntosDeDefensaEsperadosCartaOponente = 2100 + 300;
 
         assertEquals(puntosDeAtaqueEsperadosCartaJugador, cartaJugador1.getPuntos());
+        assertEquals(puntosDeDefensaEsperadosCartaOponente, cartaJugador2.getPuntos());
 
+        jugador1.removerCarta(cartaWasteland);
+        puntosDeAtaqueEsperadosCartaJugador = 1000 + 200 - 200;
+        puntosDeDefensaEsperadosCartaOponente = 2100 + 300 - 300;
+        assertEquals(puntosDeAtaqueEsperadosCartaJugador, cartaJugador1.getPuntos());
+        assertEquals(puntosDeDefensaEsperadosCartaOponente, cartaJugador2.getPuntos());
+    }
+
+    @Test
+    public void test01bisSeColocaCartaWastelandActivaYSeColocanCartasEnRegionDeMonstruos()
+    {
+        Jugador jugador1 = new Jugador("J1");
+        Jugador jugador2 = new Jugador("J2");
+
+        jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
+
+        jugador1.crearMazo();
+        jugador2.crearMazo();
+
+        FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
+        FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
+
+        CartaCampo cartaWasteland = fabricaCartasJugador1.crearCartaCampo("Wasteland");
+        cartaWasteland.cambiarOrientacion();
+        jugador1.jugarCarta(cartaWasteland);
+
+        CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Ancient Brain");
+        cartaJugador1.cambiarModo();
+        jugador1.jugarCarta(cartaJugador1);
+
+        CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
+        // TODO: Hay que hacer que de alguna forma la región campo del oponente (jugador1) se entere de que entró una
+        // carta monstruo, ya que es la que tiene la carta campo activa.
+        jugador2.jugarCarta(cartaJugador2);
+
+        int puntosDeAtaqueEsperadosCartaJugador = 1000 + 200;
+        int puntosDeDefensaEsperadosCartaOponente = 2100 + 300;
+
+        assertEquals(puntosDeAtaqueEsperadosCartaJugador, cartaJugador1.getPuntos());
         assertEquals(puntosDeDefensaEsperadosCartaOponente, cartaJugador2.getPuntos());
     }
 
@@ -54,6 +96,9 @@ public class AlGoOhTest2
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
+
+        jugador1.crearMazo();
+        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -70,11 +115,16 @@ public class AlGoOhTest2
         jugador1.jugarCarta(cartaSogen);
 
         int puntosDeDefensaEsperadosCartaJugador = 700 + 500;
-
         int puntosDeAtaqueEsperadosCartaOponente = 100 + 200;
 
         assertEquals(puntosDeDefensaEsperadosCartaJugador, cartaJugador1.getPuntos());
+        assertEquals(puntosDeAtaqueEsperadosCartaOponente, cartaJugador2.getPuntos());
 
+        jugador1.removerCarta(cartaSogen);
+        puntosDeDefensaEsperadosCartaJugador = 700 + 500 - 500;
+        puntosDeAtaqueEsperadosCartaOponente = 100 + 200 - 200;
+
+        assertEquals(puntosDeDefensaEsperadosCartaJugador, cartaJugador1.getPuntos());
         assertEquals(puntosDeAtaqueEsperadosCartaOponente, cartaJugador2.getPuntos());
     }
 
@@ -84,6 +134,12 @@ public class AlGoOhTest2
     {
         Jugador jugador1 = new Jugador("Juan Pablo");
         Jugador jugador2 = new Jugador("Juan Carlos");
+
+        jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
+
+        jugador1.crearMazo();
+        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -111,6 +167,9 @@ public class AlGoOhTest2
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
+
+        jugador1.crearMazo();
+        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -145,6 +204,9 @@ public class AlGoOhTest2
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
+        jugador1.crearMazo();
+        jugador2.crearMazo();
+
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
@@ -173,6 +235,9 @@ public class AlGoOhTest2
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
+
+        jugador1.crearMazo();
+        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -237,6 +302,9 @@ public class AlGoOhTest2
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
+        jugador1.crearMazo();
+        jugador2.crearMazo();
+
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
@@ -263,27 +331,30 @@ public class AlGoOhTest2
     @Test
     public void test08SeColocaMonstruoDelLadoEnemigoEsteAtacaYSeActivaCorrectamenteLaCartaTrampaMagicCylinder()
     {
-    	Jugador jugador1 = new Jugador("J1");
+        Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
+
+        jugador1.crearMazo();
+        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
         CartaTrampa trampaJugador1 = fabricaCartasJugador1.crearCartaTrampa("Magic Cylinder");
         jugador1.jugarCarta(trampaJugador1);
-        
+
         CartaMonstruo monstruoJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         monstruoJugador2.cambiarModo();
         jugador2.jugarCarta(monstruoJugador2);
-        
+
         jugador2.atacarOponente(monstruoJugador2);
-        
+
         int puntosDeVidaEsperadosJugador2 = 8000 - 100;
-        
-        assertEquals(puntosDeVidaEsperadosJugador2,  jugador2.getPuntosDeVida());
+
+        assertEquals(puntosDeVidaEsperadosJugador2, jugador2.getPuntosDeVida());
         assertTrue(jugador1.getPuntosDeVida() == 8000);
     }
 
@@ -297,36 +368,37 @@ public class AlGoOhTest2
     @Test
     public void test09SeColocanDosMonstruosConLaTrampaReinforcementsEnJuegoSeAtacaYSeVerificaQueSeActiveLaTrampa()
     {
-    	Jugador jugador1 = new Jugador("J1");
+        Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
+        jugador1.crearMazo();
+        jugador2.crearMazo();
+
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
-        
+
         CartaMonstruo monstruoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
         monstruoJugador1.cambiarModo();
         jugador1.jugarCarta(monstruoJugador1);
-        
+
         CartaMonstruo monstruoJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Bitron");
         monstruoJugador2.cambiarModo();
         jugador2.jugarCarta(monstruoJugador2);
-        
+
         CartaTrampa cartaTrampaReinforcements = fabricaCartasJugador1.crearCartaTrampa("Reinforcements");
         jugador1.jugarCarta(cartaTrampaReinforcements);
-        
-        int puntosDeVidaEsperadosJugador2 = 8000-400;
-        
+
+        int puntosDeVidaEsperadosJugador2 = 8000 - 400;
+
         jugador2.atacarCartaOponente(monstruoJugador2, monstruoJugador1);
-        
+
         assertTrue(jugador2.cartaEstaEnCementerio(monstruoJugador2));
         assertFalse(jugador1.cartaEstaEnCementerio(monstruoJugador1));
         assertTrue(jugador2.getPuntosDeVida() == puntosDeVidaEsperadosJugador2);
         assertTrue(jugador1.getPuntosDeVida() == 8000);
-
-        
     }
 
     //Extraer todas las cartas del mazo, y verificar que la partida terminó y el jugador
@@ -339,6 +411,9 @@ public class AlGoOhTest2
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
+
+        jugador1.crearMazo();
+        jugador2.crearMazo();
 
         for (int i = 0; i < 41; i++)
             jugador1.tomarCarta();

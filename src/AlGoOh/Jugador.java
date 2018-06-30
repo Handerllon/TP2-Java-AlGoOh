@@ -1,8 +1,13 @@
 package AlGoOh;
 
 import AlGoOh.excepciones.JugadorSinVida;
-import areaDeJuego.AreaDeCartas;
+import areaDeJuego.RegionCampo;
+import areaDeJuego.RegionCementerio;
+import areaDeJuego.RegionMagicasYTrampas;
+import areaDeJuego.RegionMonstruos;
 import carta.*;
+
+import java.util.ArrayList;
 
 public class Jugador
 {
@@ -10,29 +15,48 @@ public class Jugador
     private Mazo mazo;
     private Mano cartasEnMano;
     private int puntosDeVida;
-    private AreaDeCartas areaDeCartas;
+    private RegionMonstruos regionMonstruos;
+    private RegionMagicasYTrampas regionMagicasYTrampas;
+    private RegionCampo regionCampo;
+    private RegionCementerio cementerio;
     private Jugador oponente;
 
     public Jugador(String unNombre)
     {
         this.nombre = unNombre;
-
-        this.mazo = new Mazo(this, this.oponente);
+        this.puntosDeVida = 8000;
 
         this.cartasEnMano = new Mano();
 
-        this.puntosDeVida = 8000;
-
-        this.areaDeCartas = new AreaDeCartas();
-
-        int cartasATomarInicialmente = 5;
-        this.popularMano(cartasATomarInicialmente);
+        this.regionMonstruos = new RegionMonstruos(this);
+        this.regionMagicasYTrampas = new RegionMagicasYTrampas(this);
+        this.regionCampo = new RegionCampo(this);
+        this.cementerio = new RegionCementerio(this);
     }
 
     public void establecerOponente(Jugador oponente)
     {
-
         this.oponente = oponente;
+
+        this.regionMonstruos.establecerOponente(oponente);
+        this.regionMagicasYTrampas.establecerOponente(oponente);
+        this.regionCampo.establecerOponente(oponente);
+        this.cementerio.establecerOponente(oponente);
+
+        this.suscribirRegiones();
+    }
+
+    public void suscribirRegiones()
+    {
+        this.regionMonstruos.suscribirRegionANotificar(this.obtenerRegionCampo());
+        this.oponente.obtenerRegionMonstruos().suscribirRegionANotificar(this.obtenerRegionCampo());
+    }
+
+    public void crearMazo()
+    {
+        this.mazo = new Mazo(this, this.oponente);
+        int cartasATomarInicialmente = 5;
+        this.popularMano(cartasATomarInicialmente);
     }
 
     private void popularMano(int cartasATomarInicialmente)
@@ -50,82 +74,10 @@ public class Jugador
         while (this.cartasEnMano.manoLlena())
         {
             cartaAQuitar = this.cartasEnMano.quitarUltimaCarta();
-            this.areaDeCartas.enviarAlCementerio(cartaAQuitar);
+            this.cementerio.colocarCarta(cartaAQuitar);
         }
 
         this.cartasEnMano.agregarCarta(mazo.tomarCarta());
-    }
-
-    // --------------------------------------------------------------------
-    // Métodos de juego y acciones de cartas.
-    // --------------------------------------------------------------------
-
-    public void jugarCarta(CartaMonstruo cartaMonstruo, Sacrificio sacrificio)
-    {
-    	cartaMonstruo.aplicarEfectosDeCampo();
-    	this.oponente.aplicarEfectosDeCampo(cartaMonstruo);
-        cartaMonstruo.invocar(sacrificio);
-    }
-
-    public void jugarCarta(CartaMonstruo cartaMonstruo)
-    {
-    	cartaMonstruo.aplicarEfectosDeCampo();
-    	this.oponente.aplicarEfectosDeCampo(cartaMonstruo);
-        this.areaDeCartas.colocarCarta(cartaMonstruo);
-        this.cartasEnMano.quitarCarta(cartaMonstruo);
-    }
-
-    public void jugarCarta(CartaMagica cartaMagica)
-    {
-        this.areaDeCartas.colocarCarta(cartaMagica);
-        this.cartasEnMano.quitarCarta(cartaMagica);
-        cartaMagica.efecto();
-    }
-
-    public void jugarCarta(CartaCampo cartaCampo)
-    {
-        this.areaDeCartas.colocarCarta(cartaCampo);
-        this.cartasEnMano.quitarCarta(cartaCampo);
-        //Este efecto de la carta campo le aplica los modificadores de ataque o defensa
-        //a cada carta que ya se encuentra en la region de monstruos
-        cartaCampo.efecto();
-    }
-    
-    public void jugarCarta(CartaTrampa cartaTrampa) {
-    	
-    	this.areaDeCartas.colocarCarta(cartaTrampa);
-    	this.cartasEnMano.quitarCarta(cartaTrampa);
-    	cartaTrampa.efecto();
-    }
-
-    public void atacarCartaOponente(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
-    {
-  
-        cartaAtacante.atacarCarta(cartaOponente);
-    }
-
-    public void atacarOponente(CartaMonstruo cartaAtacante)
-    {
-
-        cartaAtacante.atacarOponente();
-    }
-
-    public void destruirMonstruo(CartaMonstruo carta)
-    {
-    	carta.quitarEfectosDeCampo();
-        this.areaDeCartas.removerCarta(carta);
-        this.areaDeCartas.enviarAlCementerio(carta);
-    }
-
-    public void destruirMonstruos()
-    {
-
-        this.areaDeCartas.enviarMonstruosAlCementerio();
-    }
-
-    public int getPuntosDeVida()
-    {
-        return this.puntosDeVida;
     }
 
     public void disminuirPuntosVida(int puntosARestar)
@@ -136,27 +88,100 @@ public class Jugador
             throw new JugadorSinVida();
     }
 
-    public void wasteland(int modificadorAtaque, int modificadorDefensa, Jugador jugador)
+    // --------------------------------------------------------------------
+    // Métodos de juego de cartas.
+    // --------------------------------------------------------------------
+
+    public void jugarCarta(CartaMonstruo cartaMonstruo, Sacrificio sacrificio)
     {
-    	this.areaDeCartas.wasteland(modificadorAtaque, modificadorDefensa, jugador);
+        cartaMonstruo.invocar(sacrificio);
     }
 
-    public void sogen(int modificadorAtaque, int modificadorDefensa, Jugador jugador)
+    public void jugarCarta(CartaMonstruo cartaMonstruo)
     {
-    	this.areaDeCartas.sogen(modificadorAtaque, modificadorDefensa, jugador);
+        this.regionMonstruos.colocarCarta(cartaMonstruo);
+        this.cartasEnMano.quitarCarta(cartaMonstruo);
+    }
+
+    public void jugarCarta(CartaMagica cartaMagica)
+    {
+        this.regionMagicasYTrampas.colocarCarta(cartaMagica);
+        this.cartasEnMano.quitarCarta(cartaMagica);
+    }
+
+    public void jugarCarta(CartaCampo cartaCampo)
+    {
+        this.regionCampo.colocarCarta(cartaCampo);
+        this.cartasEnMano.quitarCarta(cartaCampo);
+    }
+
+    public void jugarCarta(CartaTrampa cartaTrampa)
+    {
+        this.regionMagicasYTrampas.colocarCarta(cartaTrampa);
+        this.cartasEnMano.quitarCarta(cartaTrampa);
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de juego de destrucción de cartas.
+    // --------------------------------------------------------------------
+
+    public void destruirMonstruo(CartaMonstruo carta)
+    {
+        this.regionMonstruos.removerCarta(carta);
+        this.cementerio.colocarCarta(carta);
+    }
+
+    public void destruirMonstruos()
+    {
+        ArrayList<CartaMonstruo> cartas = this.regionMonstruos.obtenerCartas();
+
+        cartas.forEach(item -> this.cementerio.colocarCarta(item));
+
+        this.regionMonstruos.removerTodasLasCartas();
+    }
+
+    public void removerCarta(CartaCampo carta)
+    {
+        this.regionCampo.removerCarta(carta);
+        this.cementerio.colocarCarta(carta);
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de ataque.
+    // --------------------------------------------------------------------
+
+    public void atacarCartaOponente(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
+    {
+        cartaAtacante.atacarCarta(cartaOponente);
+    }
+
+    public void atacarOponente(CartaMonstruo cartaAtacante)
+    {
+
+        cartaAtacante.atacarOponente();
     }
     // --------------------------------------------------------------------
     // Métodos de consultas.
     // --------------------------------------------------------------------
 
+    public int getPuntosDeVida()
+    {
+        return this.puntosDeVida;
+    }
+
     public boolean cartaEstaEnCementerio(CartaMonstruo carta)
     {
-        return areaDeCartas.cartaEstaEnCementerio(carta);
+        return this.cementerio.contieneCarta(carta);
     }
 
     public boolean cartaEstaEnRegionMonstruos(CartaMonstruo carta)
     {
-        return areaDeCartas.cartaEstaEnRegionMonstruos(carta);
+        return this.regionMonstruos.contieneCarta(carta);
+    }
+
+    public boolean cartaEstaEnRegionMagicasYTrampa(Carta carta)
+    {
+        return this.regionMagicasYTrampas.contieneCarta(carta);
     }
 
     public int cantidadDeCartasEnMano()
@@ -168,28 +193,28 @@ public class Jugador
     public CartaMonstruo obtenerMonstruoConMenorAtaque()
     {
 
-        return this.areaDeCartas.obtenerMonstruoConMenorAtaque();
+        return this.regionMonstruos.obtenerMonstruoConMenorAtaque();
     }
 
-	public CartaTrampa obtenerCartaTrampaAActivar() {
-		
-		return this.areaDeCartas.obtenerCartaTrampaAActivar();
-	}
+    public ArrayList<CartaMonstruo> obtenerCartasEnAreaMonstruo()
+    {
+        return this.regionMonstruos.obtenerCartasEnRegion();
+    }
 
-	public void aplicarEfectosDeCampo(CartaMonstruo cartaMonstruo) {
-		
-		this.areaDeCartas.aplicarEfectosDeCampo(cartaMonstruo);
-		
-	}
+    public CartaTrampa obtenerCartaTrampaAActivar()
+    {
 
-	public void quitarEfectosDeCampo(CartaMonstruo cartaMonstruo) {
-		
-		this.areaDeCartas.quitarEfectosDeCampo(cartaMonstruo);
-		
-	}
+        return this.regionMagicasYTrampas.obtenerCartaTrampaAActivar();
+    }
 
+    public RegionMonstruos obtenerRegionMonstruos()
+    {
+        return this.regionMonstruos;
+    }
 
-
-
+    public RegionCampo obtenerRegionCampo()
+    {
+        return this.regionCampo;
+    }
 }
 

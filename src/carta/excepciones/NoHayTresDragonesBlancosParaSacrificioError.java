@@ -1,4 +1,5 @@
 package carta.excepciones;
 
-public class NoHayTresDragonesBlancosParaSacrificioError extends RuntimeException {
+public class NoHayTresDragonesBlancosParaSacrificioError extends RuntimeException
+{
 }

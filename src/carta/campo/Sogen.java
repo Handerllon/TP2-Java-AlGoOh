@@ -4,40 +4,56 @@ import AlGoOh.Jugador;
 import carta.CartaCampo;
 import carta.CartaMonstruo;
 
-public class Sogen extends CartaCampo {
-    private static int modificadorAtaque;
-    private static int modificadorDefensa;
-    private static Jugador jugador;
-    private static Jugador oponente;
+import java.util.ArrayList;
 
-    public Sogen(Jugador jugador, Jugador oponente) {
+public class Sogen extends CartaCampo
+{
+    public Sogen(Jugador jugador, Jugador oponente)
+    {
         super(jugador, oponente);
         this.nombre = "Sogen";
 
-        //En region de jugador que juega la carta
         this.modificadorDefensa = 500;
-        //En region del oponente
         this.modificadorAtaque = 200;
-
-        this.jugador = jugador;
-        this.oponente = oponente;
     }
-    
-    public void efecto(CartaMonstruo cartaMonstruo) {
-		
-		cartaMonstruo.sogen(this.modificadorAtaque,this.modificadorDefensa,this.jugador);
-	}
 
-	public void efecto() {
-		
-		this.jugador.sogen(this.modificadorAtaque,this.modificadorDefensa,this.jugador);
-		this.oponente.sogen(this.modificadorAtaque,this.modificadorDefensa,this.jugador);
-	}
+    public void efecto()
+    {
+        ArrayList<CartaMonstruo> cartasMonstruoJugador = this.jugador.obtenerCartasEnAreaMonstruo();
+        ArrayList<CartaMonstruo> cartasMonstruoOponente = this.oponente.obtenerCartasEnAreaMonstruo();
 
-	
-	public void quitarEfecto(CartaMonstruo cartaMonstruo) {
-		
-		cartaMonstruo.quitarSogen(this.modificadorAtaque,this.modificadorDefensa,this.jugador);
-	}
+        cartasMonstruoJugador.forEach(item -> this.modificarPuntosDefensa(item));
+        cartasMonstruoOponente.forEach(item -> this.modificarPuntosAtaque(item));
+    }
+
+    public void deshacerEfecto()
+    {
+        ArrayList<CartaMonstruo> cartasMonstruoJugador = this.jugador.obtenerCartasEnAreaMonstruo();
+        ArrayList<CartaMonstruo> cartasMonstruoOponente = this.oponente.obtenerCartasEnAreaMonstruo();
+
+        cartasMonstruoJugador.forEach(item -> this.restaurarPuntosDefensa(item));
+        cartasMonstruoOponente.forEach(item -> this.restaurarPuntosAtaque(item));
+    }
+
+    public void efecto(CartaMonstruo carta)
+    {
+        if (carta.obtenerPropietario() == this.jugador)
+        {
+            this.modificarPuntosDefensa(carta);
+        } else
+        {
+            this.modificarPuntosAtaque(carta);
+        }
+    }
+
+    public void deshacerEfecto(CartaMonstruo carta)
+    {
+        if (carta.obtenerPropietario() == this.jugador)
+        {
+            this.restaurarPuntosDefensa(carta);
+        } else
+        {
+            this.restaurarPuntosAtaque(carta);
+        }
+    }
 }
-

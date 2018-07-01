@@ -2,7 +2,7 @@ package AlGoOh.EstadosJuego;
 
 import AlGoOh.Jugador;
 
-import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class FasePreparacion implements Fase
 {
@@ -19,15 +19,20 @@ public class FasePreparacion implements Fase
     public void jugar(Jugador jugador)
     {
         // TODO: implementar la fase.
+        System.out.println("----------------------");
+        System.out.println(jugador.obtenerNombre() + " FasePreparacion.");
+        System.out.println("----------------------");
         this.finalizarFase();
     }
 
     public void finalizarFase()
     {
-        Scanner s = new Scanner(System.in);
-
-        System.out.println("Presionar ENTER para terminar la fase.");
-
-        s.nextLine();
+        try
+        {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

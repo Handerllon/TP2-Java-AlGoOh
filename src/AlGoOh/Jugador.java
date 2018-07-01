@@ -216,5 +216,10 @@ public class Jugador
     {
         return this.regionCampo;
     }
+
+    public String obtenerNombre()
+    {
+        return this.nombre;
+    }
 }
 

@@ -13,7 +13,7 @@ public class AlGoOh
         this.inicializarJuego("J1", "J2");
     }
 
-    public void inicializarJuego(String nombreJugador, String nombreOponente)
+    private void inicializarJuego(String nombreJugador, String nombreOponente)
     {
 
         this.jugador1 = new Jugador(nombreJugador);
@@ -29,8 +29,9 @@ public class AlGoOh
         this.comenzarJuego();
     }
 
-    public void comenzarJuego(){
-        while(true)
-            this.maquinaTurnos.jugarTurno();
+    public void comenzarJuego()
+    {
+        while (true)
+            this.maquinaTurnos.jugar();
     }
 }

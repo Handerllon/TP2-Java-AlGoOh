@@ -71,7 +71,7 @@ public class InicializadorDeGrid
 
         GridPane gridPane = new GridPane();
 
-        gridPane.setGridLinesVisible(true);
+        gridPane.setGridLinesVisible(false);
 
         ColumnConstraints columnMonstruos1 = new ColumnConstraints(262);
         ColumnConstraints columnMonstruos2 = new ColumnConstraints(262);

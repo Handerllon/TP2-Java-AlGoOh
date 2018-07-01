@@ -23,6 +23,8 @@ public class FaseInicial implements Fase
         System.out.println(jugador.obtenerNombre() + " FaseInicial.");
         System.out.println("----------------------");
         jugador.tomarCarta();
+
+
         this.finalizarFase();
     }
 

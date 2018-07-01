@@ -1,5 +1,6 @@
 package carta;
 
+import AlGoOh.EstadosJuego.ObservadorFinJuego;
 import AlGoOh.Jugador;
 import carta.excepciones.MazoVacio;
 
@@ -8,11 +9,10 @@ import java.util.Stack;
 
 public class Mazo
 {
-    private Stack<Carta> cartas;
+    private Stack<Carta> cartas = new Stack<>();
 
     public Mazo(Jugador jugador, Jugador oponente)
     {
-        this.cartas = new Stack<Carta>();
         //En el mazo hay un maximo de 40 cartas, con las cuales se comienza el juego
         int cantidadCartas = 40;
 
@@ -78,7 +78,8 @@ public class Mazo
             Carta carta = cartas.pop();
             return carta;
         } else
-            // Podría ser un evento que notifique que el jugador se quedó sin cartas en el mazo y perdió el juego.
+        {
             throw new MazoVacio();
+        }
     }
 }

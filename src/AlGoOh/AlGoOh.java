@@ -26,12 +26,15 @@ public class AlGoOh
         this.jugador2.crearMazo();
 
         this.maquinaTurnos = new MaquinaTurnos(this.jugador1, this.jugador2);
-        this.comenzarJuego();
     }
 
     public void comenzarJuego()
     {
-        while (true)
+        int i = 1;
+        while (i != 20)
+        {
             this.maquinaTurnos.jugar();
+            i++;
+        }
     }
 }

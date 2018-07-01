@@ -3,8 +3,10 @@ package interfaceJuego;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -13,8 +15,9 @@ public class InicializadorDeGrid
     public GridPane inicializarGrid(GridPane grid, Stage primaryStage)
     {
 
-        grid.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-        grid.setGridLinesVisible(true);
+        grid.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader().getResource("resources/imagenes/tablero/tablero yogioh.png").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        
+        grid.setGridLinesVisible(false);
         grid.setPadding(new Insets(5));
         ColumnConstraints column0 = new ColumnConstraints(300);
         ColumnConstraints column1 = new ColumnConstraints(1310);
@@ -68,7 +71,7 @@ public class InicializadorDeGrid
 
         GridPane gridPane = new GridPane();
 
-        gridPane.setGridLinesVisible(true);
+        gridPane.setGridLinesVisible(false);
 
         ColumnConstraints columnMonstruos1 = new ColumnConstraints(262);
         ColumnConstraints columnMonstruos2 = new ColumnConstraints(262);

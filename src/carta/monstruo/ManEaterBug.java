@@ -15,9 +15,9 @@ public class ManEaterBug extends CartaMonstruo
         this.nombre = "Man-Eater Bug";
     }
 
-    public void atacarCarta(CartaMonstruo cartaOponente)
+    public void atacarOponente(CartaMonstruo cartaOponente)
     {
-        super.atacarCarta(cartaOponente);
+        super.atacarOponente(cartaOponente);
     }
 
     public void recibirAtaque(CartaMonstruo cartaAtacante)

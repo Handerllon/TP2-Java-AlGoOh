@@ -33,11 +33,32 @@ public abstract class CartaMonstruo extends Carta
         this.modo = modoNuevo;
     }
 
+    // --------------------------------------------------------------------
+    // Métodos de consulta.
+    // --------------------------------------------------------------------
     public int getPuntos()
     {
         return this.puntos;
     }
 
+    public boolean enAtaque()
+    {
+        return modo instanceof ModoAtaque;
+    }
+
+    public boolean enDefensa()
+    {
+        return modo instanceof ModoDefensa;
+    }
+
+    public int getEstrellas()
+    {
+        return this.estrellas;
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos sobre puntos.
+    // --------------------------------------------------------------------
     public void sumarPuntosAtaque(int puntos)
     {
         this.puntosAtaque += puntos;
@@ -61,20 +82,21 @@ public abstract class CartaMonstruo extends Carta
         }
     }
 
-    public boolean enAtaque()
+    private int calcularDiferenciaPuntos(CartaMonstruo cartaOponente)
     {
-        return modo instanceof ModoAtaque;
+
+        return (this.getPuntos() - cartaOponente.getPuntos());
     }
 
-    public boolean enDefensa()
+    public int obtenerPuntosDeAtaque()
     {
-        return modo instanceof ModoDefensa;
+
+        return this.puntosAtaque;
     }
 
-    public int getEstrellas()
-    {
-        return this.estrellas;
-    }
+    // --------------------------------------------------------------------
+    // Métodos de ataque.
+    // --------------------------------------------------------------------
 
     // TODO: la carta monstruo no debería saber sobre reinforcements...
     public void reinforcements()
@@ -91,12 +113,13 @@ public abstract class CartaMonstruo extends Carta
     // que ella haga lo que tenga que hacer dependiendo del estado en que se encuentra? Además, capaz cada carta
     // tenga una estrategia de ataque diferente, como la carta come hombres.
     // TODO: Ver de nuevo funcionamiento de cartas trampa
-    public void atacarCarta(CartaMonstruo cartaOponente)
+    public void atacarOponente(CartaMonstruo cartaOponente)
     {
 
         // TODO: la carta monstruo no debería saber sobre la carta trampa...
         CartaTrampa cartaTrampa = this.oponente.obtenerCartaTrampaAActivar();
 
+        // TODO: no es bueno preguntar si algo es null.
         if (cartaTrampa == null)
         {
 
@@ -114,7 +137,7 @@ public abstract class CartaMonstruo extends Carta
     public void recibirAtaque(CartaMonstruo cartaAtacante)
     {
 
-        int diferenciaDePuntos = cartaAtacante.calcularDiferencia(this);
+        int diferenciaDePuntos = cartaAtacante.calcularDiferenciaPuntos(this);
 
         if (this.enAtaque())
         {
@@ -152,28 +175,6 @@ public abstract class CartaMonstruo extends Carta
         }
     }
 
-    private int calcularDiferencia(CartaMonstruo cartaOponente)
-    {
-
-        return (this.getPuntos() - cartaOponente.getPuntos());
-    }
-
-    public int obtenerPuntosDeAtaque()
-    {
-
-        return this.puntosAtaque;
-    }
-
-    public void invocar(Sacrificio sacrificio)
-    {
-
-    }
-
-    public void invocar()
-    {
-        throw new NoHayCartasParaSacrificarError();
-    }
-
     public void atacarOponente()
     {
 
@@ -187,5 +188,18 @@ public abstract class CartaMonstruo extends Carta
         {
             cartaTrampa.efecto(this, null);
         }
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de invocación.
+    // --------------------------------------------------------------------
+    public void invocar(Sacrificio sacrificio)
+    {
+
+    }
+
+    public void invocar()
+    {
+        throw new NoHayCartasParaSacrificarError();
     }
 }

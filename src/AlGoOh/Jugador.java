@@ -150,9 +150,9 @@ public class Jugador
     // Métodos de ataque.
     // --------------------------------------------------------------------
 
-    public void atacarCartaOponente(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
+    public void atacarOponente(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
     {
-        cartaAtacante.atacarCarta(cartaOponente);
+        cartaAtacante.atacarOponente(cartaOponente);
     }
 
     public void atacarOponente(CartaMonstruo cartaAtacante)

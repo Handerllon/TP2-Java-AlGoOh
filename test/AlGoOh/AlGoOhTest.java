@@ -136,7 +136,7 @@ public class AlGoOhTest
         cartaJugador2.cambiarModo();
         jugador2.jugarCarta(cartaJugador2);
 
-        jugador1.atacarCartaOponente(cartaJugador1, cartaJugador2);
+        jugador1.atacarOponente(cartaJugador1, cartaJugador2);
 
         assertTrue(jugador2.getPuntosDeVida() == (8000 - 900));
 
@@ -167,7 +167,7 @@ public class AlGoOhTest
         cartaJugador2.cambiarModo();
         jugador2.jugarCarta(cartaJugador2);
 
-        jugador1.atacarCartaOponente(cartaJugador1, cartaJugador2);
+        jugador1.atacarOponente(cartaJugador1, cartaJugador2);
 
         assertTrue(jugador1.getPuntosDeVida() == (8000 - 900));
 
@@ -198,7 +198,7 @@ public class AlGoOhTest
         cartaJugador2.cambiarModo();
         jugador2.jugarCarta(cartaJugador2);
 
-        jugador1.atacarCartaOponente(cartaJugador1, cartaJugador2);
+        jugador1.atacarOponente(cartaJugador1, cartaJugador2);
 
         assertTrue(jugador1.getPuntosDeVida() == 8000);
         assertTrue(jugador2.getPuntosDeVida() == 8000);
@@ -229,7 +229,7 @@ public class AlGoOhTest
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Alexandrite Dragon");
         jugador2.jugarCarta(cartaJugador2);
 
-        jugador1.atacarCartaOponente(cartaJugador1, cartaJugador2);
+        jugador1.atacarOponente(cartaJugador1, cartaJugador2);
 
         assertTrue(jugador2.getPuntosDeVida() == (8000));
 
@@ -259,7 +259,7 @@ public class AlGoOhTest
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         jugador2.jugarCarta(cartaJugador2);
 
-        jugador1.atacarCartaOponente(cartaJugador1, cartaJugador2);
+        jugador1.atacarOponente(cartaJugador1, cartaJugador2);
 
         assertTrue(jugador1.getPuntosDeVida() == (8000 - 100));
 
@@ -289,7 +289,7 @@ public class AlGoOhTest
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Alexandrite Dragon");
         jugador2.jugarCarta(cartaJugador2);
 
-        jugador1.atacarCartaOponente(cartaJugador1, cartaJugador2);
+        jugador1.atacarOponente(cartaJugador1, cartaJugador2);
 
         assertTrue(jugador1.getPuntosDeVida() == (8000));
         assertTrue(jugador2.getPuntosDeVida() == (8000));

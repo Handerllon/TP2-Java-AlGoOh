@@ -79,65 +79,145 @@
 \clearpage
 \section{Objetivo del trabajo}
 
+El objetivo de este trabajo práctico es lograr utilizar todos los conceptos sobre la teoría de programación orientada a objetos vistos en la cursada, para poder realizar y llevar a cabo un juego muy similar al Yu-Gi-Oh.
+
 \section{Supuestos}
 
-[Documentar todos los supuestos hechos sobre el enunciado. Asegurarse
-de validar con los docentes]
+A medida que fuimos desarrollando el trabajo práctico, tuvimos que adoptar ciertos supuestos que nos fueron surgiendo durante la realización del mismo pero que ninguno de ellos se contradiga con lo aclarado en la consigna del mismo.
+
+\begin{description}
+
+\item[Supuesto 1] Una carta puede pasar de boca abajo a boca arriba, pero no al revés.
+
+\item[Supuesto 2] Una carta puede pasar de boca abajo a boca arriba, pero no al revés.
+
+\item[Supuesto 3] Una carta puede pasar de boca abajo a boca arriba, pero no al revés.
+
+\item[Supuesto 4] Una carta puede pasar de boca abajo a boca arriba, pero no al revés.
+
+\item[Supuesto 5] Una carta puede pasar de boca abajo a boca arriba, pero no al revés.
+
+\end{description}
 
 \section{Modelo de dominio}
 
-[Explicar los elementos más relevantes del diseño. Es decir: qué
-entidades se han creado, qué responsabilidades tienen asignadas, cómo
-se relacionan, etc]
+	
+En esta sección, explicaremos sin demasiados detalles las clases que utilizamos y las responsabilidades de las mismas.
+
+
+\begin{description}
+
+\item[Jugador] Tiene como atributos: un nombre, puntos de vida, un oponente (que tambien es de clase jugador), una region (de clase Region), un mazo (de clase Mazo) y una mano (de clase Mano). Esta clase representa a uno de los usuarios que se van a enfrentar en el juego, y tiene la responsabilidad de iniciar los ataques o acciones relacionadas con la jugabilidad.
+
+\item[Region] Es una clase abstracta, que podrá tener como hijas 4 regiones particulares, que se detallaran a continuación. Como atributos, las clases hijas tendran: cartas (ArrayList de clase Carta), capacidad máxima, regionesANotificar(ArrayList de clase Region) y además, tendrá una referencia al jugador que tiene asociado y a su oponente. Como responsabilidad, cada una de las hijas de esta clase representará un area física del tablero de juego, donde se podrá jugar las cartas. Implementa la interfaz Notificable.
+
+\item[RegionCampo] Albergará las cartas de tipo Campo.
+
+\item[RegionMonstruos] Albergará las cartas de tipo Monstruo.
+
+\item[RegionCementerio] Albergará las cartas que hayan sido destruidas.
+
+\item[RegionMagicasYTrampas] Albergará las cartas de tipo Magicas o Trampas.
+
+\item[Notificable] El objetivo de esta interfaz es que todas las regiones puedan avisar cuando se juega o se remueve una carta en la misma.
+
+\item[Mazo] Tiene como atributo cartas, que es una lista del tipo Carta. El mazo, se encarga de otorgarle cartas al jugador y de mezclar.
+
+\item[Mano] Tiene como atributo una cantidad maxima y una lista de cartas. Son las cartas que el jugador puede utilizar para jugar.
+
+\item[Carta] Es una clase abstracta, que obligará a sus hijos a tener como atributo un nombre, un jugdor y un oponente, una orientación,  y que implementen el metodo de cambio de orientación (boca abajo o boca arriba).
+
+\item[Orientacion] Es una clase abstracta que tendrá como hijas a OrientaciónArriba o OrientaciónAbajo, y las acciones que se puedan realizar dependeran de la misma.
+
+\item[OrientacionArriba] Si la carta esta en este estado, puede realizar las acciones de ataque. 
+
+\item[OrientacionAbajo] Si la carta esta en este estado, esta boca abajo por lo que no se puede usar, solo girar.
+
+\item[CartaCampo] Es una clase abstracta que obligará a sus hijos a tener como atributos un modificador de defensa y un modificador de ataque, y además a ser capaces de activar un efecto y deshacerlo, y modificar los puntos de ataque y defensa de un monstruo.
+
+\item[CartaMonstruo] Es una clase abstracta que obligará a sus hijos a tener como atributos puntos de ataque, puntos de defensa, puntos (los cuales cambian dependiendo si es ataque o defensa), estrellas (el nivel del monstruo), modo ( de clase Modo, puede ser ataque o defensa) y además todos los monstruos serán capaces de cambiar de modo, atacar o recibir ataque, y invocarse.
+
+\item[CartaMagica] Es una clase abstracta que obligará a sus hijos a ser capaces de activar un efecto.
+
+\item[CartaTrampa] Es una clase abstracta que obligará a sus hijos a ser capaces de activar un efecto al momento de recibir un ataque.
+
+\item[Modo] Puede ser ModoAtaque o ModoDefensa, dependiendo de lo que decida el jugador y en base a eso, se podrá o no atacar, los calculos de puntos de vida a quitar seran distintos, etc.
+
+\item[ModoAtaque] Representa uno de los estados posibles de la carta.
+
+\item[ModoDefensa] Representa uno de los estados posibles de la carta.
+
+\item[FabricaCartas] Contiene 4 fabricas, detalladas a continuación. Se encarga de pedirle a cada una de estas fábricas una carta.
+
+\item[FabricaCartasMonstruo] Genera y devuelve una carta monstruo.
+
+\item[FabricaCartasMagicas] Genera y devuelve una carta mágica.
+
+\item[FabricaCartasTrampa] Genera y devuelve una carta trampa.
+
+\item[FabricaCartasCampo] Genera y devuelve una carta trampa.
+
+\item[Sacrificio] Contiene una lista de cartas a sacrificar.
+
+\end{description}
+
 
 \clearpage
 \section{Diagramas de clases}
 
-[ Varios diagramas de clases, mostrando la relación estática entre las
-clases, pueden agregar todo el texto necesario para aclarar y explicar su
-diseño, recuerden que la idea de todo el documento es que quede
-documentado y entendible como está hecho el TP]
+El diagrama de la figura 4.1, muestra como se relaciona la clase Jugador con las regiones, con el mazo y con la mano. Ademas, muestra el hecho de que las regiones, el mazo y la mano, contienen cartas. Por otro lado, un jugador, contiene una referencia de otro jugador (oponente).
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{includes/AlGoOh}
-	\caption{titulo.}
-	\label{AlGoOh}
+	\includegraphics[scale=0.3]{includes/Jugador}
+	\caption{Jugador y Carta}
+	\label{Jugador}
 \end{figure}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.9]{includes/Tablero}
-	\caption{titulo.}
-	\label{Tablero}
-\end{figure}
+El diagrama de la figura 4.2, muestra los distintos tipos de regiones posibles, y como estas implementan la interfaz Notificable. La clase Region es abstracta.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{includes/Cartas}
-	\caption{titulo.}
+	\includegraphics[scale=0.3]{includes/areaDeJuego}
+	\caption{Regiones}
+	\label{areaDeJuego}
+\end{figure}
+
+El diagrama de la figura 4.3, muestra la clase abstracta Carta.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{includes/Carta}
+	\caption{Carta}
 	\label{Cartas}
 \end{figure}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.9]{includes/Implementacion_de_efectos}
-	\caption{titulo.}
-	\label{Implementacion_de_efectos}
-\end{figure}
+El diagrama de la figura 4.4, muestra los distintos tipos de Cartas que puede existir, y tambien el hecho de que existe una fábrica contenedora de cartas.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{includes/Implementacion_cartas_magicas}
-	\caption{titulo.}
-	\label{Implementacion_cartas_magicas}
+	\includegraphics[scale=0.3]{includes/Carta2}
+	\caption{Tipos de Cartas}
+	\label{TiposCarta}
 \end{figure}
+
+El diagrama de la figura 4.5 muestra a la clase abstracta CartaMonstruo. La misma contiene un modo, y por otra parte, tendra como hijos a todos los monstruos. La clase sacrificio, conoce a las cartas monstruos gracias al jugador (que es el que decide que sacrificar) y ademas las contiene, 
+
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{includes/Implementacion_carta_monstruo}
-	\caption{titulo.}
-	\label{Implementacion_carta_monstruo}
+	\includegraphics[scale=0.3]{includes/CartaMonstruo}
+	\caption{Carta Monstruo}
+	\label{CartaMonstruo}
+\end{figure}
+
+El diagrama de la figura 4.6 muestra las fábricas de cartas.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.3]{includes/Fabricas}
+	\caption{Fabricas}
+	\label{Fabricas}
 \end{figure}
 
 \clearpage

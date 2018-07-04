@@ -8,9 +8,9 @@ public class ManEaterBug extends CartaMonstruo
     private static int PUNTOS_DEFENSA = 600;
     private static int PUNTOS_ATAQUE = 450;
 
-    public ManEaterBug(Jugador jugador, Jugador oponente)
+    public ManEaterBug(Jugador jugador, Jugador oponente,String locacionDeImagen)
     {
-        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente);
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente, locacionDeImagen);
         this.estrellas = 2;
         this.nombre = "Man-Eater Bug";
     }

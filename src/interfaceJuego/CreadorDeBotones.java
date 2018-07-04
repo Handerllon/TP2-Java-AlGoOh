@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 public class CreadorDeBotones
 {
-    public Button nuevoBoton(Button boton, Stage primaryStage)
+    public Button nuevoBotonMonstruo(Button boton, Stage primaryStage)
     {
 
         boton.setPrefSize(95.4, 139);
@@ -18,7 +18,7 @@ public class CreadorDeBotones
 
         VBox vbox = new VBox();
 
-        vbox = this.crearVBox(vbox, popup);
+        vbox = this.crearVBoxCartaMonstruo(vbox, popup);
 
         popup.getContent().addAll(vbox);
 
@@ -36,24 +36,77 @@ public class CreadorDeBotones
 
         return boton;
     }
-
-    private VBox crearVBox(VBox vbox, Popup popup)
+    public Button nuevoBotonCartaEnMano(Button boton, Stage primaryStage)
     {
 
-        Button b1 = new Button("Algo");
-        Button b2 = new Button("Cerrar");
+        boton.setPrefSize(95.4, 139);
 
-        b2.setOnAction(new EventHandler<ActionEvent>()
+        Popup popup = new Popup();
+
+        VBox vbox = new VBox();
+
+        vbox = this.crearVBoxCartaEnMano(vbox, popup);
+
+        popup.getContent().addAll(vbox);
+
+        boton.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent event)
             {
 
-                popup.hide();
+                popup.show(primaryStage);
+                javafx.geometry.Point2D point = boton.localToScene(0.0, 0.0);
+                popup.setX(primaryStage.getX() + point.getX());
+                popup.setY(primaryStage.getY() + point.getY());
             }
         });
 
-        vbox.getChildren().addAll(b1, b2);
+        return boton;
+    }
+    
+    private VBox crearVBoxCartaMonstruo(VBox vbox, Popup popup)
+    {
+    	
+    	Button b2 = new Button("Atacar");
+    	Button b3 = new Button("Cambiar Orientacion");
+    	Button b4 = new Button("Dar Vuelta");
+    	Button b5 = new Button("Cerrar");
+    	
+    	b5.setOnAction(new EventHandler<ActionEvent>()
+    	{
+    		public void handle(ActionEvent event)
+    		{
+    			
+    			popup.hide();
+    		}
+    	});
+    	
+    	vbox.getChildren().addAll(b2, b3, b4, b5);
+    	
+    	return vbox;
+    }
+    
 
-        return vbox;
+    private VBox crearVBoxCartaEnMano(VBox vbox, Popup popup)
+    {
+    	
+    	Button b2 = new Button("Jugar boca arriba");
+    	Button b3 = new Button("Jugar boca abajo");
+    	Button b4 = new Button("Dar Vuelta");
+    	Button b5 = new Button("Cerrar");
+    	
+    	b5.setOnAction(new EventHandler<ActionEvent>()
+    	{
+    		public void handle(ActionEvent event)
+    		{
+    			
+    			popup.hide();
+    		}
+    	});
+    	
+    	vbox.getChildren().addAll(b2, b3, b4, b5);
+    	
+    	return vbox;
     }
 }
+

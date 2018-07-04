@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class Wasteland extends CartaCampo
 {
-    public Wasteland(Jugador jugador, Jugador oponente)
+    public Wasteland(Jugador jugador, Jugador oponente,String locacionDeImagen)
     {
-        super(jugador, oponente);
+        super(jugador, oponente,locacionDeImagen);
         this.nombre = "Wasteland";
 
         this.modificadorAtaque = 200;

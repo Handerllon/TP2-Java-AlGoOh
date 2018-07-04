@@ -5,9 +5,9 @@ import carta.CartaMagica;
 
 public class DarkHole extends CartaMagica
 {
-    public DarkHole(Jugador jugador, Jugador oponente)
+    public DarkHole(Jugador jugador, Jugador oponente,String locacionDeImagen)
     {
-        super(jugador, oponente);
+        super(jugador, oponente,locacionDeImagen);
         this.nombre = "Dark Hole";
     }
 

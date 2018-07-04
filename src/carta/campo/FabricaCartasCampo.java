@@ -21,9 +21,9 @@ public class FabricaCartasCampo
         ArrayList<String> nombres = new ArrayList<String>();
 
         String nombre;
-        nombre = new Sogen(jugador, oponente).obtenerNombre();
+        nombre = new Sogen(jugador, oponente,"resources/imagenes/campo/Sogen.png").obtenerNombre();
         nombres.add(nombre);
-        nombre = new Wasteland(jugador, oponente).obtenerNombre();
+        nombre = new Wasteland(jugador, oponente,"resources/imagenes/campo/Wasteland.png").obtenerNombre();
         nombres.add(nombre);
 
         return nombres;
@@ -35,9 +35,9 @@ public class FabricaCartasCampo
         {
             // Campo.
             case "Sogen":
-                return new Sogen(jugador, oponente);
+                return new Sogen(jugador, oponente,"resources/imagenes/campo/Sogen.png");
             case "Wasteland":
-                return new Wasteland(jugador, oponente);
+                return new Wasteland(jugador, oponente,"resources/imagenes/campo/Wasteland.png");
             default:
                 throw new CartaInvalidaError();
         }

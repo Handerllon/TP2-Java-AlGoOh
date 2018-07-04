@@ -6,9 +6,9 @@ public abstract class CartaTrampa extends Carta
 {
     protected boolean trampaCancelaAtaqueAMonstruo;
 
-    public CartaTrampa(Jugador jugador, Jugador oponente)
+    public CartaTrampa(Jugador jugador, Jugador oponente,String locacionDeImagen)
     {
-        super(jugador, oponente);
+        super(jugador, oponente,locacionDeImagen);
         trampaCancelaAtaqueAMonstruo = false;
     }
 

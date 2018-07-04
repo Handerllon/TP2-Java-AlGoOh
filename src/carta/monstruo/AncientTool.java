@@ -9,9 +9,9 @@ public class AncientTool extends CartaMonstruo
     private static int PUNTOS_DEFENSA = 1400;
     private static int PUNTOS_ATAQUE = 1700;
 
-    public AncientTool(Jugador jugador, Jugador oponente)
+    public AncientTool(Jugador jugador, Jugador oponente,String locacionDeImagen)
     {
-        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente);
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente, locacionDeImagen);
         this.estrellas = 5;
         this.nombre = "Ancient Tool";
     }

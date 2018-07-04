@@ -17,7 +17,7 @@ public class CartaMonstruoTest
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        CartaMonstruo carta = new GaiaTheFierceKnight(jugador1, jugador2);
+        CartaMonstruo carta = new GaiaTheFierceKnight(jugador1, jugador2,"resources/imagenes/monstruo/GaiaTheFierceKnight.png");
 
         assertTrue(carta.getPuntos() == 2100);
     }
@@ -31,7 +31,7 @@ public class CartaMonstruoTest
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        CartaMonstruo carta = new GaiaTheFierceKnight(jugador1, jugador2);
+        CartaMonstruo carta = new GaiaTheFierceKnight(jugador1, jugador2,"resources/imagenes/monstruo/GaiaTheFierceKnight.png");
         carta.cambiarModo();
 
         assertTrue(carta.getPuntos() == 2300);

@@ -7,9 +7,9 @@ public abstract class CartaCampo extends Carta
     protected static int modificadorAtaque;
     protected static int modificadorDefensa;
 
-    public CartaCampo(Jugador jugador, Jugador oponente)
+    public CartaCampo(Jugador jugador, Jugador oponente, String locacionDeImagen)
     {
-        super(jugador, oponente);
+        super(jugador, oponente,locacionDeImagen);
     }
 
     public abstract void efecto();

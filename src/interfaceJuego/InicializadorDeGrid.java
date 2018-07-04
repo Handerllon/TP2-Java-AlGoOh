@@ -2,6 +2,8 @@ package interfaceJuego;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -30,6 +32,8 @@ public class InicializadorDeGrid
         RowConstraints row5 = new RowConstraints(160);
         grid.getColumnConstraints().addAll(column0, column1, column2);
         grid.getRowConstraints().addAll(row0, row1, row2, row3, row4, row5);
+        
+        
 
         Rectangle mazo1 = new Rectangle(95.4, 139);
         mazo1.setFill(Color.SADDLEBROWN);
@@ -50,7 +54,7 @@ public class InicializadorDeGrid
         grid.add(campo2, 0, 4);
         grid.add(cementerio1, 2, 2);
         grid.add(cementerio2, 0, 3);
-
+        
         grid.setHalignment(mazo1, HPos.CENTER);
         grid.setHalignment(mazo2, HPos.CENTER);
         grid.setHalignment(campo1, HPos.CENTER);
@@ -58,15 +62,43 @@ public class InicializadorDeGrid
         grid.setHalignment(cementerio1, HPos.CENTER);
         grid.setHalignment(cementerio2, HPos.CENTER);
 
-        grid.add(this.crearRegion(Color.DARKORANGE, primaryStage), 1, 3);
-        grid.add(this.crearRegion(Color.DARKORANGE, primaryStage), 1, 2);
-        grid.add(this.crearRegion(Color.DARKTURQUOISE, primaryStage), 1, 1);
-        grid.add(this.crearRegion(Color.DARKTURQUOISE, primaryStage), 1, 4);
+        grid.add(this.crearRegionMonstruos(Color.DARKORANGE, primaryStage), 1, 3);
+        grid.add(this.crearRegionMonstruos(Color.DARKORANGE, primaryStage), 1, 2);
+        grid.add(this.crearRegionMonstruos(Color.DARKTURQUOISE, primaryStage), 1, 1);
+        grid.add(this.crearRegionMonstruos(Color.DARKTURQUOISE, primaryStage), 1, 4);
+        grid.add(this.crearMano(primaryStage), 1, 0);
+        grid.add(this.crearMano(primaryStage), 1, 5);
 
         return grid;
     }
 
-    private GridPane crearRegion(Color colorBuscado, Stage primaryStage)
+    private FlowPane crearMano(Stage primaryStage) {
+		
+    	FlowPane mano = new FlowPane();
+    	
+    	mano.setHgap(15);
+    	
+    	mano.setAlignment(Pos.CENTER);
+    	
+    	CreadorDeBotones creadorDeBotones = new CreadorDeBotones();
+    	
+    	Button b1 = new Button();
+        b1 = creadorDeBotones.nuevoBotonCartaEnMano(b1, primaryStage);
+        Button b2 = new Button();
+        b2 = creadorDeBotones.nuevoBotonCartaEnMano(b2, primaryStage);
+        Button b3 = new Button();
+        b3 = creadorDeBotones.nuevoBotonCartaEnMano(b3, primaryStage);
+        Button b4 = new Button();
+        b4 = creadorDeBotones.nuevoBotonCartaEnMano(b4, primaryStage);
+        Button b5 = new Button();
+        b5 = creadorDeBotones.nuevoBotonCartaEnMano(b5, primaryStage);
+        
+        mano.getChildren().addAll(b1,b2,b3,b4,b5);
+    	
+		return mano;
+	}
+
+	private GridPane crearRegionMonstruos(Color colorBuscado, Stage primaryStage)
     {
 
         GridPane gridPane = new GridPane();
@@ -86,15 +118,15 @@ public class InicializadorDeGrid
         CreadorDeBotones creadorDeBotones = new CreadorDeBotones();
 
         Button b1 = new Button();
-        b1 = creadorDeBotones.nuevoBoton(b1, primaryStage);
+        b1 = creadorDeBotones.nuevoBotonMonstruo(b1, primaryStage);
         Button b2 = new Button();
-        b2 = creadorDeBotones.nuevoBoton(b2, primaryStage);
+        b2 = creadorDeBotones.nuevoBotonMonstruo(b2, primaryStage);
         Button b3 = new Button();
-        b3 = creadorDeBotones.nuevoBoton(b3, primaryStage);
+        b3 = creadorDeBotones.nuevoBotonMonstruo(b3, primaryStage);
         Button b4 = new Button();
-        b4 = creadorDeBotones.nuevoBoton(b4, primaryStage);
+        b4 = creadorDeBotones.nuevoBotonMonstruo(b4, primaryStage);
         Button b5 = new Button();
-        b5 = creadorDeBotones.nuevoBoton(b5, primaryStage);
+        b5 = creadorDeBotones.nuevoBotonMonstruo(b5, primaryStage);
 
         gridPane.add(b1, 0, 0);
         gridPane.add(b2, 1, 0);

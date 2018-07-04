@@ -10,10 +10,10 @@ public class BlueEyesUltimateDragon extends CartaMonstruo
     private static int PUNTOS_DEFENSA = 3800;
     private static int PUNTOS_ATAQUE = 4500;
 
-    public BlueEyesUltimateDragon(Jugador jugador, Jugador oponente)
+    public BlueEyesUltimateDragon(Jugador jugador, Jugador oponente,String locacionDeImagen)
     {
 
-        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente);
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente, locacionDeImagen);
         this.estrellas = 12;
         this.nombre = "Blue-Eyes Ultimate Dragon";
     }
@@ -24,7 +24,7 @@ public class BlueEyesUltimateDragon extends CartaMonstruo
 
         // Se crea una carta Dragón Blanco de Ojos Azules para obtener su nombre, y no hardcodearlo en el código, ya
         // que si este nombre cambia, habría que cambiar todos los lugares donde se hubiera hardcodeado.
-        CartaMonstruo cartaBlueEyesWhiteDragonMock = new BlueEyesWhiteDragon(this.jugador, this.oponente);
+        CartaMonstruo cartaBlueEyesWhiteDragonMock = new BlueEyesWhiteDragon(this.jugador, this.oponente,"resources/imagenes/monstruo/BlueEyesWhiteDragon.png");
 
         if (sacrificio.cantidadSacrificiosDe(cartaBlueEyesWhiteDragonMock.obtenerNombre()) < cantidadDragonesBlancosNecesarios)
         {

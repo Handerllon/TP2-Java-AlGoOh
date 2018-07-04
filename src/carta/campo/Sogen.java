@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class Sogen extends CartaCampo
 {
-    public Sogen(Jugador jugador, Jugador oponente)
+    public Sogen(Jugador jugador, Jugador oponente,String locacionDeImagen)
     {
-        super(jugador, oponente);
+        super(jugador, oponente,locacionDeImagen);
         this.nombre = "Sogen";
 
         this.modificadorDefensa = 500;

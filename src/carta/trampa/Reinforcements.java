@@ -6,9 +6,9 @@ import carta.CartaTrampa;
 
 public class Reinforcements extends CartaTrampa
 {
-    public Reinforcements(Jugador jugador, Jugador oponente)
+    public Reinforcements(Jugador jugador, Jugador oponente,String locacionDeImagen)
     {
-        super(jugador, oponente);
+        super(jugador, oponente, locacionDeImagen);
         this.nombre = "Reinforcements";
     }
 

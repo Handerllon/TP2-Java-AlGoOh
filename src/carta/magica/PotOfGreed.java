@@ -5,9 +5,9 @@ import carta.CartaMagica;
 
 public class PotOfGreed extends CartaMagica
 {
-    public PotOfGreed(Jugador jugador, Jugador oponente)
+    public PotOfGreed(Jugador jugador, Jugador oponente,String locacionDeImagen)
     {
-        super(jugador, oponente);
+        super(jugador, oponente,locacionDeImagen);
         this.nombre = "Pot of Greed";
     }
 

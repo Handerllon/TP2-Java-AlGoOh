@@ -8,9 +8,9 @@ public class Jinzo7 extends CartaMonstruo
     private static int PUNTOS_DEFENSA = 400;
     private static int PUNTOS_ATAQUE = 500;
 
-    public Jinzo7(Jugador jugador, Jugador oponente)
+    public Jinzo7(Jugador jugador, Jugador oponente,String locacionDeImagen)
     {
-        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente);
+        super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente, locacionDeImagen);
         this.estrellas = 2;
         this.nombre = "Jinzo #7";
     }

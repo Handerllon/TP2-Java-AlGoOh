@@ -1,23 +1,32 @@
 package controlador;
 
 import AlGoOh.Jugador;
-import interfaceJuego.InterfacePrincipal;
-import javafx.application.Application;
+import areaDeJuego.RegionMonstruos;
+import carta.CartaMonstruo;
+import carta.FabricaCartas;
 
 public class Controlador {
 	
 	private Jugador jugador;
 	private Jugador oponente;
 	
-	public Controlador(Jugador jugador, Jugador oponente) {
 	
+	public void establecerJugadores(Jugador jugador, Jugador oponente){
+		
 		this.jugador = jugador;
 		this.oponente = oponente;
-	
+		
 	}
 
-	public static void main(String[] args) throws Exception{
+
+	public RegionMonstruos obtenerRegionMonstruosJugador() {
 		
-		Application.launch(InterfacePrincipal.class, args);
+		return this.jugador.obtenerRegionMonstruos();
+	}
+
+
+	public RegionMonstruos obtenerRegionMonstruosOponente() {
+		
+		return this.oponente.obtenerRegionMonstruos();
 	}
 }

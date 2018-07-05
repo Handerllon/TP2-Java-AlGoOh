@@ -1,5 +1,11 @@
 package interfaceJuego;
 
+import java.awt.Paint;
+import java.util.ArrayList;
+
+import areaDeJuego.RegionMonstruos;
+import carta.CartaMonstruo;
+import controlador.Controlador;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,10 +19,11 @@ import javafx.stage.Stage;
 
 public class InicializadorDeGrid
 {
-    public GridPane inicializarGrid(GridPane grid, Stage primaryStage)
+    public GridPane inicializarGrid(GridPane grid, Stage primaryStage, Controlador controlador)
     {
 
-        grid.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader().getResource("resources/imagenes/tablero/tablero yogioh.png").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        grid.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+        		.getResource("resources/imagenes/tablero/tablero yogioh.png").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         
         grid.setGridLinesVisible(false);
         grid.setPadding(new Insets(5));
@@ -32,8 +39,24 @@ public class InicializadorDeGrid
         grid.getColumnConstraints().addAll(column0, column1, column2);
         grid.getRowConstraints().addAll(row0, row1, row2, row3, row4, row5);
         
-        
+        GridPane regionMonstruosJugador = this.crearRegionMonstruos(primaryStage);
 
+        GridPane regionMonstruosOponente = this.crearRegionMonstruos(primaryStage);
+        
+        GridPane regionMagicasYTrampasJugador = this.crearRegionMagicasYTrampas(primaryStage);
+        
+        GridPane regionMagicasYTrampasOponente = this.crearRegionMagicasYTrampas(primaryStage);
+        
+        grid.add(regionMonstruosJugador, 1, 3);
+
+        grid.add(regionMonstruosOponente, 1, 2);
+        
+        grid.add(regionMagicasYTrampasJugador, 1, 1);
+
+        grid.add(regionMagicasYTrampasOponente, 1, 4);
+        
+        
+/*
         Rectangle mazo1 = new Rectangle(95.4, 139);
         mazo1.setFill(Color.SADDLEBROWN);
         Rectangle mazo2 = new Rectangle(95.4, 139);
@@ -67,10 +90,10 @@ public class InicializadorDeGrid
         grid.add(this.crearRegionMonstruos(Color.DARKTURQUOISE, primaryStage), 1, 4);
         grid.add(this.crearMano(primaryStage), 1, 0);
         grid.add(this.crearMano(primaryStage), 1, 5);
-
+*/
         return grid;
     }
-
+/*
     private FlowPane crearMano(Stage primaryStage) {
 		
     	FlowPane mano = new FlowPane();
@@ -141,4 +164,68 @@ public class InicializadorDeGrid
 
         return gridPane;
     }
+*/
+
+	private GridPane crearRegionMagicasYTrampas(Stage primaryStage) {
+
+		GridPane gridJugador = new GridPane();
+		
+		
+		ColumnConstraints columnMonstruos1 = new ColumnConstraints(262);
+        ColumnConstraints columnMonstruos2 = new ColumnConstraints(262);
+        ColumnConstraints columnMonstruos3 = new ColumnConstraints(262);
+        ColumnConstraints columnMonstruos4 = new ColumnConstraints(262);
+        ColumnConstraints columnMonstruos5 = new ColumnConstraints(262);
+        RowConstraints filaMonstruos1 = new RowConstraints(160);
+
+        gridJugador.getColumnConstraints().addAll(columnMonstruos1, columnMonstruos2, columnMonstruos3, columnMonstruos4, columnMonstruos5);
+        gridJugador.getRowConstraints().addAll(filaMonstruos1);
+        
+        for(int i = 0; i<5; i++){
+        	
+        	Button boton = new Button();
+        	boton.setPrefSize(95.4, 139);
+        	boton.setStyle("-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black");
+        	
+        	gridJugador.add(boton, i, 0);
+        	
+        	GridPane.setHalignment(boton, HPos.CENTER);
+        	
+        }
+		
+		
+		return gridJugador;
+	}
+
+	private GridPane crearRegionMonstruos(Stage primaryStage) {
+		
+		GridPane gridJugador = new GridPane();
+		
+		
+		ColumnConstraints columnMonstruos1 = new ColumnConstraints(262);
+        ColumnConstraints columnMonstruos2 = new ColumnConstraints(262);
+        ColumnConstraints columnMonstruos3 = new ColumnConstraints(262);
+        ColumnConstraints columnMonstruos4 = new ColumnConstraints(262);
+        ColumnConstraints columnMonstruos5 = new ColumnConstraints(262);
+        RowConstraints filaMonstruos1 = new RowConstraints(160);
+
+        gridJugador.getColumnConstraints().addAll(columnMonstruos1, columnMonstruos2, columnMonstruos3, columnMonstruos4, columnMonstruos5);
+        gridJugador.getRowConstraints().addAll(filaMonstruos1);
+        
+        for(int i = 0; i<5; i++){
+        	
+        	Button boton = new Button();
+        	boton.setPrefSize(95.4, 139);
+        	boton.setStyle("-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black");
+        	
+        	gridJugador.add(boton, i, 0);
+        	
+        	GridPane.setHalignment(boton, HPos.CENTER);
+        	
+        }
+		
+		
+		return gridJugador;
+	}
+	
 }

@@ -222,7 +222,7 @@ public class AlGoOhTest2
 
         int puntosDeVidaEsperados = 8000 - 500;
 
-        assertTrue(puntosDeVidaEsperados == jugador2.getPuntosDeVida());
+        assertEquals(puntosDeVidaEsperados, jugador2.getPuntosDeVida(), 0);
     }
 
     //    Invocar 3 dragones blancos de ojos azules, al Dragón definitivo de ojos azules
@@ -320,8 +320,8 @@ public class AlGoOhTest2
         assertTrue(jugador2.cartaEstaEnCementerio(monstruoJugador2));
         assertFalse(jugador1.cartaEstaEnCementerio(insectoComeHombresJugador1));
 
-        assertTrue(jugador1.getPuntosDeVida() == 8000);
-        assertTrue(jugador2.getPuntosDeVida() == 8000);
+        assertEquals(8000, jugador1.getPuntosDeVida(), 0);
+        assertEquals(8000, jugador2.getPuntosDeVida(), 0);
     }
 
     //    Colocar un monstruo del lado enemigo, luego coloco la carta trampa Cilindro mágico
@@ -355,7 +355,7 @@ public class AlGoOhTest2
         int puntosDeVidaEsperadosJugador2 = 8000 - 100;
 
         assertEquals(puntosDeVidaEsperadosJugador2, jugador2.getPuntosDeVida());
-        assertTrue(jugador1.getPuntosDeVida() == 8000);
+        assertEquals(8000, jugador1.getPuntosDeVida(), 0);
     }
 
     //Coloco un monstruo en posición de ataque (CharcoalInpachi) y la carta trampa Reinforcements de mi
@@ -397,8 +397,8 @@ public class AlGoOhTest2
 
         assertTrue(jugador2.cartaEstaEnCementerio(monstruoJugador2));
         assertFalse(jugador1.cartaEstaEnCementerio(monstruoJugador1));
-        assertTrue(jugador2.getPuntosDeVida() == puntosDeVidaEsperadosJugador2);
-        assertTrue(jugador1.getPuntosDeVida() == 8000);
+        assertEquals(puntosDeVidaEsperadosJugador2 , jugador2.getPuntosDeVida(), 0);
+        assertEquals(8000, jugador1.getPuntosDeVida(), 0);
     }
 
     //Extraer todas las cartas del mazo, y verificar que la partida terminó y el jugador

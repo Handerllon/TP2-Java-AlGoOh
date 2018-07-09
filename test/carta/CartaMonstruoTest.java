@@ -4,6 +4,7 @@ import AlGoOh.Jugador;
 import carta.monstruo.GaiaTheFierceKnight;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class CartaMonstruoTest
@@ -19,7 +20,7 @@ public class CartaMonstruoTest
 
         CartaMonstruo carta = new GaiaTheFierceKnight(jugador1, jugador2,"resources/imagenes/monstruo/GaiaTheFierceKnight.png");
 
-        assertTrue(carta.getPuntos() == 2100);
+        assertEquals(2100, carta.getPuntos(), 0);
     }
 
     @Test
@@ -34,6 +35,6 @@ public class CartaMonstruoTest
         CartaMonstruo carta = new GaiaTheFierceKnight(jugador1, jugador2,"resources/imagenes/monstruo/GaiaTheFierceKnight.png");
         carta.cambiarModo();
 
-        assertTrue(carta.getPuntos() == 2300);
+        assertEquals(2300, carta.getPuntos(), 0);
     }
 }

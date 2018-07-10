@@ -2,6 +2,8 @@ package carta;
 
 import AlGoOh.Jugador;
 import carta.monstruo.GaiaTheFierceKnight;
+import carta.monstruo.ManEaterBug;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -37,4 +39,5 @@ public class CartaMonstruoTest
 
         assertEquals(2300, carta.getPuntos(), 0);
     }
+    
 }

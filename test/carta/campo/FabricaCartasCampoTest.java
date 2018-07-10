@@ -2,13 +2,22 @@ package carta.campo;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import carta.CartaCampo;
+
+import static org.junit.Assert.assertEquals;
 
 public class FabricaCartasCampoTest
 {
     @Test
-    public void test01()
+    public void test01SeCreaUnaCartaEnLaFabricaYSeVerificaQueLaClaseCreadaSeaCorrecta()
     {
-        assertTrue(0 == 0);
+       
+    	FabricaCartasCampo fabrica = new FabricaCartasCampo(null, null);
+    	
+    	CartaCampo unaCartaCampo = fabrica.obtenerCarta("Sogen");
+    	
+    	CartaCampo cartaEsperada = new Sogen(null, null , null);
+    	
+    	assertEquals(cartaEsperada.getClass(), unaCartaCampo.getClass());
     }
 }

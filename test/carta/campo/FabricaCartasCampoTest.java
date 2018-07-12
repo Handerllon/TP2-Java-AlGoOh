@@ -16,7 +16,7 @@ public class FabricaCartasCampoTest
     	
     	CartaCampo unaCartaCampo = fabrica.obtenerCarta("Sogen");
     	
-    	CartaCampo cartaEsperada = new Sogen(null, null , null);
+    	CartaCampo cartaEsperada = new Sogen(null, null , "resources/imagenes/campo/Sogen.png");
     	
     	assertEquals(cartaEsperada.getClass(), unaCartaCampo.getClass());
     }

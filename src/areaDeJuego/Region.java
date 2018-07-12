@@ -104,7 +104,7 @@ public abstract class Region<T extends Carta> implements Notificable, Observable
 		
 		for (int i = 0 ; i<this.observadores.size(); i++){
 			
-			this.observadores.get(i).notificar(this.obtenerCartasEnRegion());
+			this.observadores.get(i).update(this.obtenerCartasEnRegion());
 		}
 		
 	}

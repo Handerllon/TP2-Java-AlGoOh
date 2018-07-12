@@ -87,15 +87,15 @@ A medida que fuimos desarrollando el trabajo práctico, tuvimos que adoptar cier
 
 \begin{description}
 
-\item[Supuesto 1] Una carta puede pasar de boca abajo a boca arriba, pero no al revés.
+\item[Supuesto 1] Una Modelo.carta puede pasar de boca abajo a boca arriba, pero no al revés.
 
-\item[Supuesto 2] Una carta puede pasar de boca abajo a boca arriba, pero no al revés.
+\item[Supuesto 2] Una Modelo.carta puede pasar de boca abajo a boca arriba, pero no al revés.
 
-\item[Supuesto 3] Una carta puede pasar de boca abajo a boca arriba, pero no al revés.
+\item[Supuesto 3] Una Modelo.carta puede pasar de boca abajo a boca arriba, pero no al revés.
 
-\item[Supuesto 4] Una carta puede pasar de boca abajo a boca arriba, pero no al revés.
+\item[Supuesto 4] Una Modelo.carta puede pasar de boca abajo a boca arriba, pero no al revés.
 
-\item[Supuesto 5] Una carta puede pasar de boca abajo a boca arriba, pero no al revés.
+\item[Supuesto 5] Una Modelo.carta puede pasar de boca abajo a boca arriba, pero no al revés.
 
 \end{description}
 
@@ -119,7 +119,7 @@ En esta sección, explicaremos sin demasiados detalles las clases que utilizamos
 
 \item[RegionMagicasYTrampas] Albergará las cartas de tipo Magicas o Trampas.
 
-\item[Notificable] El objetivo de esta interfaz es que todas las regiones puedan avisar cuando se juega o se remueve una carta en la misma.
+\item[Notificable] El objetivo de esta interfaz es que todas las regiones puedan avisar cuando se juega o se remueve una Modelo.carta en la misma.
 
 \item[Mazo] Tiene como atributo cartas, que es una lista del tipo Carta. El mazo, se encarga de otorgarle cartas al jugador y de mezclar.
 
@@ -129,9 +129,9 @@ En esta sección, explicaremos sin demasiados detalles las clases que utilizamos
 
 \item[Orientacion] Es una clase abstracta que tendrá como hijas a OrientaciónArriba o OrientaciónAbajo, y las acciones que se puedan realizar dependeran de la misma.
 
-\item[OrientacionArriba] Si la carta esta en este estado, puede realizar las acciones de ataque. 
+\item[OrientacionArriba] Si la Modelo.carta esta en este estado, puede realizar las acciones de ataque.
 
-\item[OrientacionAbajo] Si la carta esta en este estado, esta boca abajo por lo que no se puede usar, solo girar.
+\item[OrientacionAbajo] Si la Modelo.carta esta en este estado, esta boca abajo por lo que no se puede usar, solo girar.
 
 \item[CartaCampo] Es una clase abstracta que obligará a sus hijos a tener como atributos un modificador de defensa y un modificador de ataque, y además a ser capaces de activar un efecto y deshacerlo, y modificar los puntos de ataque y defensa de un monstruo.
 
@@ -143,19 +143,19 @@ En esta sección, explicaremos sin demasiados detalles las clases que utilizamos
 
 \item[Modo] Puede ser ModoAtaque o ModoDefensa, dependiendo de lo que decida el jugador y en base a eso, se podrá o no atacar, los calculos de puntos de vida a quitar seran distintos, etc.
 
-\item[ModoAtaque] Representa uno de los estados posibles de la carta.
+\item[ModoAtaque] Representa uno de los estados posibles de la Modelo.carta.
 
-\item[ModoDefensa] Representa uno de los estados posibles de la carta.
+\item[ModoDefensa] Representa uno de los estados posibles de la Modelo.carta.
 
-\item[FabricaCartas] Contiene 4 fabricas, detalladas a continuación. Se encarga de pedirle a cada una de estas fábricas una carta.
+\item[FabricaCartas] Contiene 4 fabricas, detalladas a continuación. Se encarga de pedirle a cada una de estas fábricas una Modelo.carta.
 
-\item[FabricaCartasMonstruo] Genera y devuelve una carta monstruo.
+\item[FabricaCartasMonstruo] Genera y devuelve una Modelo.carta monstruo.
 
-\item[FabricaCartasMagicas] Genera y devuelve una carta mágica.
+\item[FabricaCartasMagicas] Genera y devuelve una Modelo.carta mágica.
 
-\item[FabricaCartasTrampa] Genera y devuelve una carta trampa.
+\item[FabricaCartasTrampa] Genera y devuelve una Modelo.carta trampa.
 
-\item[FabricaCartasCampo] Genera y devuelve una carta trampa.
+\item[FabricaCartasCampo] Genera y devuelve una Modelo.carta trampa.
 
 \item[Sacrificio] Contiene una lista de cartas a sacrificar.
 
@@ -178,9 +178,9 @@ El diagrama de la figura 4.2, muestra los distintos tipos de regiones posibles, 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{includes/areaDeJuego}
+	\includegraphics[scale=0.3]{includes/Modelo.carta.areaDeJuego}
 	\caption{Regiones}
-	\label{areaDeJuego}
+	\label{Modelo.carta.areaDeJuego}
 \end{figure}
 
 El diagrama de la figura 4.3, muestra la clase abstracta Carta.

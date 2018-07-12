@@ -1,29 +1,19 @@
 package exepciones;
 
+import Modelo.Jugador;
+import Modelo.areaDeJuego.RegionMonstruos;
+import Modelo.areaDeJuego.excepciones.RegionSinEspacioLibre;
+import Modelo.carta.*;
+import Modelo.carta.campo.FabricaCartasCampo;
+import Modelo.carta.excepciones.*;
+import Modelo.carta.magica.FabricaCartasMagicas;
+import Modelo.carta.monstruo.BlueEyesUltimateDragon;
+import Modelo.carta.monstruo.BlueEyesWhiteDragon;
+import Modelo.carta.monstruo.FabricaCartasMonstruo;
+import Modelo.carta.monstruo.GaiaTheFierceKnight;
+import Modelo.carta.trampa.FabricaCartasTrampa;
+import Modelo.excepciones.JugadorSinVida;
 import org.junit.Test;
-
-import AlGoOh.Jugador;
-import AlGoOh.excepciones.JugadorSinVida;
-import areaDeJuego.RegionMonstruos;
-import areaDeJuego.excepciones.RegionSinEspacioLibre;
-import carta.CartaCampo;
-import carta.CartaMagica;
-import carta.CartaMonstruo;
-import carta.CartaTrampa;
-import carta.Mano;
-import carta.Sacrificio;
-import carta.campo.FabricaCartasCampo;
-import carta.excepciones.CartaInvalidaError;
-import carta.excepciones.CartaNoExisteEnRegion;
-import carta.excepciones.NoHayCartasParaSacrificarError;
-import carta.excepciones.NoHayTresDragonesBlancosParaSacrificioError;
-import carta.excepciones.NoSePuedenAgregarMasCartasALaMano;
-import carta.magica.FabricaCartasMagicas;
-import carta.monstruo.BlueEyesUltimateDragon;
-import carta.monstruo.BlueEyesWhiteDragon;
-import carta.monstruo.FabricaCartasMonstruo;
-import carta.monstruo.GaiaTheFierceKnight;
-import carta.trampa.FabricaCartasTrampa;
 
 public class exepcionesTest {
 
@@ -78,7 +68,7 @@ public class exepcionesTest {
 		
 		CartaMonstruo carta = new BlueEyesWhiteDragon(null,null,null);
 		
-		//No hay cartas para sacrificar, y la carta requiere sacrificios para ser invocada
+		//No hay cartas para sacrificar, y la Modelo.carta requiere sacrificios para ser invocada
 		Sacrificio sacrificio = new Sacrificio();
 		
 		carta.invocar(sacrificio);
@@ -89,7 +79,7 @@ public class exepcionesTest {
 		
 		CartaMonstruo carta = new BlueEyesUltimateDragon(null,null,null);
 		
-		//No hay cartas para sacrificar, y la carta requiere sacrificios para ser invocada
+		//No hay cartas para sacrificar, y la Modelo.carta requiere sacrificios para ser invocada
 		Sacrificio sacrificio = new Sacrificio();
 		
 		carta.invocar(sacrificio);

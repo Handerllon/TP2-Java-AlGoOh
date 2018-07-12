@@ -2,7 +2,10 @@ package exepciones;
 
 import org.junit.Test;
 
+import AlGoOh.Jugador;
+import AlGoOh.excepciones.JugadorSinVida;
 import areaDeJuego.RegionMonstruos;
+import areaDeJuego.excepciones.RegionSinEspacioLibre;
 import carta.CartaCampo;
 import carta.CartaMagica;
 import carta.CartaMonstruo;
@@ -82,7 +85,7 @@ public class exepcionesTest {
 	}
 	
 	@Test(expected = NoHayTresDragonesBlancosParaSacrificioError.class)
-	public void test08NoHayCartasParaSacrificarError(){
+	public void test07NoHayCartasParaSacrificarError(){
 		
 		CartaMonstruo carta = new BlueEyesUltimateDragon(null,null,null);
 		
@@ -93,7 +96,7 @@ public class exepcionesTest {
 	}
 	
 	@Test(expected = NoSePuedenAgregarMasCartasALaMano.class)
-	public void test09NoSePuedenAgregarCartasALaMano(){
+	public void test08NoSePuedenAgregarCartasALaMano(){
 		
 		Mano mano = new Mano();
 		
@@ -105,4 +108,29 @@ public class exepcionesTest {
 			
 		}
 	}
+	
+	@Test(expected = RegionSinEspacioLibre.class)
+	public void test09RegionSinEspacioLibre(){
+		
+		RegionMonstruos region = new RegionMonstruos(null);
+		
+		CartaMonstruo carta = new GaiaTheFierceKnight(null,null,null);
+		
+		for (int i = 0; i < 6; i++) {
+		
+		region.colocarCarta(carta);
+		
+		}
+	}
+	
+	@Test(expected = JugadorSinVida.class)
+	public void test10JugadorSinVida(){
+		
+		Jugador jugador = new Jugador("AAAA");
+		
+		jugador.disminuirPuntosVida(9000);
+				
+	}
+	
 }
+	

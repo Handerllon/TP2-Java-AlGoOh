@@ -1,15 +1,18 @@
 package carta;
 
 import AlGoOh.EstadosJuego.ObservadorFinJuego;
+import areaDeJuego.Observable;
 import AlGoOh.Jugador;
 import carta.excepciones.MazoVacio;
+import vistaJuego.Observador;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Mazo
+public class Mazo implements Observable
 {
     private Stack<Carta> cartas = new Stack<>();
+    private ArrayList<Observador> observadores = new ArrayList<>();
 
     public Mazo(Jugador jugador, Jugador oponente)
     {
@@ -82,4 +85,29 @@ public class Mazo
             throw new MazoVacio();
         }
     }
+    
+    
+    @Override
+	public void subscribir(Observador observer) {
+		this.observadores.add(observer);
+		
+	}
+
+	@Override
+	public void desubscribir(Observador observer) {
+		this.observadores.remove(observer);
+		
+	}
+
+	@Override
+	public void notificar() {
+		
+		for (int i = 0 ; i<this.observadores.size(); i++){
+			
+			//this.observadores.get(i).notificar(this.obtenerCartasEnMano);
+		}
+		
+	}
+	
+	
 }

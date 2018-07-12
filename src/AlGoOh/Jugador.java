@@ -207,19 +207,40 @@ public class Jugador
         return this.regionMagicasYTrampas.obtenerCartaTrampaAActivar();
     }
 
-    public RegionMonstruos obtenerRegionMonstruos()
-    {
-        return this.regionMonstruos;
-    }
-
-    public RegionCampo obtenerRegionCampo()
-    {
-        return this.regionCampo;
-    }
-
     public String obtenerNombre()
     {
         return this.nombre;
+    }
+
+    //Obtener de regiones
+    public RegionMonstruos obtenerRegionMonstruos()
+    {
+    	return this.regionMonstruos;
+    }
+    
+    public RegionCampo obtenerRegionCampo()
+    {
+    	return this.regionCampo;
+    }
+    
+    public RegionMagicasYTrampas obtenerRegionMagicasYTrampas(){
+    	
+    	return this.regionMagicasYTrampas;
+    }
+    
+    public RegionCementerio obtenerCementerio(){
+    	
+    	return this.cementerio;
+    }
+    
+    public Mazo obtenerMazo(){
+    	
+    	return this.mazo;
+    }
+    
+    public Mano obtenerMano(){
+    	
+    	return this.cartasEnMano;
     }
 }
 

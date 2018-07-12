@@ -3,6 +3,7 @@ package areaDeJuego;
 import AlGoOh.Jugador;
 import carta.CartaCampo;
 import carta.CartaMonstruo;
+import vistaJuego.Observador;
 
 public class RegionCampo extends Region<CartaCampo>
 {
@@ -40,4 +41,5 @@ public class RegionCampo extends Region<CartaCampo>
             this.cartas.get(0).deshacerEfecto(carta);
         }
     }
+
 }

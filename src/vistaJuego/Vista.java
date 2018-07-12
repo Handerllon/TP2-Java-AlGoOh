@@ -1,4 +1,4 @@
-package interfaceJuego;
+package vistaJuego;
 
 import AlGoOh.Jugador;
 import carta.CartaMonstruo;
@@ -9,13 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class InterfacePrincipal extends Application
+public class Vista extends Application
 {
 	
 	private GridPane root;
 	private Controlador controlador;
 	
-	public InterfacePrincipal(){
+	public Vista(){
 		
 		this.root = new GridPane();
 		this.controlador = new Controlador();
@@ -34,12 +34,18 @@ public class InterfacePrincipal extends Application
         Jugador jugador = new Jugador("Manu");
         Jugador oponente = new Jugador("Nico");
         
+        jugador.establecerOponente(oponente);
+        oponente.establecerOponente(jugador);
+
+        jugador.crearMazo();
+        oponente.crearMazo();
+        
         this.controlador.establecerJugadores(jugador, oponente);
         
-        InicializadorDeGrid inicializador = new InicializadorDeGrid();
+        InicializadorDeVista inicializador = new InicializadorDeVista();
 
         
-        root = inicializador.inicializarGrid(root, primaryStage,this.controlador);
+        root = inicializador.inicializarVista(root, primaryStage,this.controlador,jugador,oponente);
         
 
         

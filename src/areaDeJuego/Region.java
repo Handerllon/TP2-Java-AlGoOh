@@ -5,12 +5,14 @@ import areaDeJuego.excepciones.RegionSinEspacioLibre;
 import carta.Carta;
 import carta.CartaMonstruo;
 import carta.excepciones.CartaNoExisteEnRegion;
+import vistaJuego.Observador;
 
 import java.util.ArrayList;
 
-public abstract class Region<T extends Carta> implements Notificable
+public abstract class Region<T extends Carta> implements Notificable, Observable
 {
     protected ArrayList<T> cartas = new ArrayList<>();
+    protected ArrayList<Observador> observadores = new ArrayList<>();
     protected int capacidadMaxima;
     protected Jugador jugador, oponente;
     protected ArrayList<Region> regionesANotificar = new ArrayList<>();
@@ -83,4 +85,27 @@ public abstract class Region<T extends Carta> implements Notificable
     {
 
     }
+    
+
+	@Override
+	public void subscribir(Observador observer) {
+		this.observadores.add(observer);
+		
+	}
+
+	@Override
+	public void desubscribir(Observador observer) {
+		this.observadores.remove(observer);
+		
+	}
+
+	@Override
+	public void notificar() {
+		
+		for (int i = 0 ; i<this.observadores.size(); i++){
+			
+			this.observadores.get(i).notificar(this.obtenerCartasEnRegion());
+		}
+		
+	}
 }

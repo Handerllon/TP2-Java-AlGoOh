@@ -1,4 +1,4 @@
-package interfaceJuego;
+package vistaJuego;
 
 import carta.Carta;
 import carta.CartaMagica;

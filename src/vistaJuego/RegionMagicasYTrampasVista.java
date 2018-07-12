@@ -1,5 +1,9 @@
-package interfaceJuego;
+package vistaJuego;
 
+import java.util.ArrayList;
+
+import AlGoOh.Jugador;
+import carta.Carta;
 import javafx.geometry.HPos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
@@ -7,15 +11,17 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
-public class RegionMagicasYTrampasInterface {
+public class RegionMagicasYTrampasVista implements Observador {
 
 	private GridPane gridJugador;
 	private Stage stage;
 
-	public RegionMagicasYTrampasInterface(Stage primaryStage){
+	public RegionMagicasYTrampasVista(Stage primaryStage, Jugador jugador){
 		
 		gridJugador = new GridPane();
 		stage = primaryStage;
+		
+		jugador.obtenerRegionMagicasYTrampas().subscribir(this);
 		
 		
 	}
@@ -50,5 +56,12 @@ public class RegionMagicasYTrampasInterface {
 		
 		return gridJugador;
 	}
+
+	@Override
+	public void update(ArrayList arrayList) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

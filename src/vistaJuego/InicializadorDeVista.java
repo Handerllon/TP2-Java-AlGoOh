@@ -1,8 +1,9 @@
-package interfaceJuego;
+package vistaJuego;
 
 import java.awt.Paint;
 import java.util.ArrayList;
 
+import AlGoOh.Jugador;
 import areaDeJuego.RegionMonstruos;
 import carta.CartaMonstruo;
 import controlador.Controlador;
@@ -17,9 +18,9 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class InicializadorDeGrid
+public class InicializadorDeVista
 {
-    public GridPane inicializarGrid(GridPane grid, Stage primaryStage, Controlador controlador)
+    public GridPane inicializarVista(GridPane grid, Stage primaryStage, Controlador controlador,Jugador jugador, Jugador oponente)
     {
 
         grid.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
@@ -39,38 +40,38 @@ public class InicializadorDeGrid
         grid.getColumnConstraints().addAll(column0, column1, column2);
         grid.getRowConstraints().addAll(row0, row1, row2, row3, row4, row5);
         
-        RegionMonstruosInterface regionMonstruosJugador = new RegionMonstruosInterface(primaryStage);
+        RegionMonstruosVista regionMonstruosJugador = new RegionMonstruosVista(primaryStage,jugador);
         regionMonstruosJugador.inicializarRegion();
 
-        RegionMonstruosInterface regionMonstruosOponente = new RegionMonstruosInterface(primaryStage);
+        RegionMonstruosVista regionMonstruosOponente = new RegionMonstruosVista(primaryStage,oponente);
         regionMonstruosOponente.inicializarRegion();
         
-        RegionMagicasYTrampasInterface regionMagicasYTrampasJugador = new RegionMagicasYTrampasInterface(primaryStage);
+        RegionMagicasYTrampasVista regionMagicasYTrampasJugador = new RegionMagicasYTrampasVista(primaryStage,jugador);
         regionMagicasYTrampasJugador.inicializarRegion();
         
-        RegionMagicasYTrampasInterface regionMagicasYTrampasOponente = new RegionMagicasYTrampasInterface(primaryStage);
+        RegionMagicasYTrampasVista regionMagicasYTrampasOponente = new RegionMagicasYTrampasVista(primaryStage,oponente);
         regionMagicasYTrampasOponente.inicializarRegion();
         
-        RegionCampoInterface regionCampoJugador = new RegionCampoInterface(primaryStage);
+        RegionCampoVista regionCampoJugador = new RegionCampoVista(primaryStage,jugador);
         regionCampoJugador.inicializarRegion();
         
-        RegionCampoInterface regionCampoOponente = new RegionCampoInterface(primaryStage);
+        RegionCampoVista regionCampoOponente = new RegionCampoVista(primaryStage,oponente);
         regionCampoOponente.inicializarRegion();
         
-        RegionCementerioInterface regionCementerioJugador = new RegionCementerioInterface(primaryStage);
+        RegionCementerioVista regionCementerioJugador = new RegionCementerioVista(primaryStage,jugador);
         regionCementerioJugador.inicializarRegion();
         
-        RegionCementerioInterface regionCementerioOponente = new RegionCementerioInterface(primaryStage);
+        RegionCementerioVista regionCementerioOponente = new RegionCementerioVista(primaryStage,oponente);
         regionCementerioOponente.inicializarRegion();
         
-        ManoInterface manoJugador = new ManoInterface(primaryStage);
+        ManoVista manoJugador = new ManoVista(primaryStage,jugador);
         
-        ManoInterface manoOponente = new ManoInterface(primaryStage);
+        ManoVista manoOponente = new ManoVista(primaryStage,oponente);
         
-        MazoInterface mazoJugador = new MazoInterface(primaryStage);
+        MazoVista mazoJugador = new MazoVista(primaryStage,jugador);
         mazoJugador.inicializar();
         
-        MazoInterface mazoOponente = new MazoInterface(primaryStage);
+        MazoVista mazoOponente = new MazoVista(primaryStage,oponente);
         mazoOponente.inicializar();
         
         grid.add(regionMonstruosJugador.getNodo(), 1, 3);

@@ -104,7 +104,7 @@ public class Mazo implements Observable
 		
 		for (int i = 0 ; i<this.observadores.size(); i++){
 			
-			//this.observadores.get(i).notificar(this.obtenerCartasEnMano);
+			//this.observadores.get(i).update(this.obtenerCartasEnMano);
 		}
 		
 	}

@@ -39,193 +39,74 @@ public class InicializadorDeGrid
         grid.getColumnConstraints().addAll(column0, column1, column2);
         grid.getRowConstraints().addAll(row0, row1, row2, row3, row4, row5);
         
-        GridPane regionMonstruosJugador = this.crearRegionMonstruos(primaryStage);
+        RegionMonstruosInterface regionMonstruosJugador = new RegionMonstruosInterface(primaryStage);
+        regionMonstruosJugador.inicializarRegion();
 
-        GridPane regionMonstruosOponente = this.crearRegionMonstruos(primaryStage);
+        RegionMonstruosInterface regionMonstruosOponente = new RegionMonstruosInterface(primaryStage);
+        regionMonstruosOponente.inicializarRegion();
         
-        GridPane regionMagicasYTrampasJugador = this.crearRegionMagicasYTrampas(primaryStage);
+        RegionMagicasYTrampasInterface regionMagicasYTrampasJugador = new RegionMagicasYTrampasInterface(primaryStage);
+        regionMagicasYTrampasJugador.inicializarRegion();
         
-        GridPane regionMagicasYTrampasOponente = this.crearRegionMagicasYTrampas(primaryStage);
+        RegionMagicasYTrampasInterface regionMagicasYTrampasOponente = new RegionMagicasYTrampasInterface(primaryStage);
+        regionMagicasYTrampasOponente.inicializarRegion();
         
-        grid.add(regionMonstruosJugador, 1, 3);
+        RegionCampoInterface regionCampoJugador = new RegionCampoInterface(primaryStage);
+        regionCampoJugador.inicializarRegion();
+        
+        RegionCampoInterface regionCampoOponente = new RegionCampoInterface(primaryStage);
+        regionCampoOponente.inicializarRegion();
+        
+        RegionCementerioInterface regionCementerioJugador = new RegionCementerioInterface(primaryStage);
+        regionCementerioJugador.inicializarRegion();
+        
+        RegionCementerioInterface regionCementerioOponente = new RegionCementerioInterface(primaryStage);
+        regionCementerioOponente.inicializarRegion();
+        
+        ManoInterface manoJugador = new ManoInterface(primaryStage);
+        
+        ManoInterface manoOponente = new ManoInterface(primaryStage);
+        
+        MazoInterface mazoJugador = new MazoInterface(primaryStage);
+        mazoJugador.inicializar();
+        
+        MazoInterface mazoOponente = new MazoInterface(primaryStage);
+        mazoOponente.inicializar();
+        
+        grid.add(regionMonstruosJugador.getNodo(), 1, 3);
 
-        grid.add(regionMonstruosOponente, 1, 2);
+        grid.add(regionMonstruosOponente.getNodo(), 1, 2);
         
-        grid.add(regionMagicasYTrampasJugador, 1, 1);
+        grid.add(regionMagicasYTrampasJugador.getNodo(), 1, 4);
 
-        grid.add(regionMagicasYTrampasOponente, 1, 4);
+        grid.add(regionMagicasYTrampasOponente.getNodo(), 1, 1);
         
+        grid.add(regionCampoJugador.getNodo(), 0, 4);
         
-/*
-        Rectangle mazo1 = new Rectangle(95.4, 139);
-        mazo1.setFill(Color.SADDLEBROWN);
-        Rectangle mazo2 = new Rectangle(95.4, 139);
-        mazo2.setFill(Color.SADDLEBROWN);
-        Rectangle campo1 = new Rectangle(95.4, 139);
-        campo1.setFill(Color.GREEN);
-        Rectangle campo2 = new Rectangle(95.4, 139);
-        campo2.setFill(Color.GREEN);
-        Rectangle cementerio1 = new Rectangle(95.4, 139);
-        cementerio1.setFill(Color.GREY);
-        Rectangle cementerio2 = new Rectangle(95.4, 139);
-        cementerio2.setFill(Color.GREY);
+        grid.add(regionCampoOponente.getNodo(), 2, 1);
+        
+        grid.add(regionCementerioJugador.getNodo(),0 , 3);
+        
+        grid.add(regionCementerioOponente.getNodo(), 2, 2);
+        
+        grid.add(manoJugador.getNodo(), 1, 5);
+        
+        grid.add(manoOponente.getNodo(), 1, 0);
+        
+        grid.add(mazoJugador.getNodo(), 2, 5);
+        
+        grid.add(mazoOponente.getNodo(), 0, 0);
+        
+        grid.setHalignment(regionCampoJugador.getNodo(), HPos.CENTER);
+        grid.setHalignment(regionCampoOponente.getNodo(), HPos.CENTER);
+        grid.setHalignment(regionCementerioJugador.getNodo(), HPos.CENTER);
+        grid.setHalignment(regionCementerioOponente.getNodo(), HPos.CENTER);
+        grid.setHalignment(manoJugador.getNodo(), HPos.CENTER);
+        grid.setHalignment(manoOponente.getNodo(), HPos.CENTER);
+        grid.setHalignment(mazoJugador.getNodo(), HPos.CENTER);
+        grid.setHalignment(mazoOponente.getNodo(), HPos.CENTER);
 
-        grid.add(mazo1, 0, 0);
-        grid.add(mazo2, 2, 5);
-        grid.add(campo1, 2, 1);
-        grid.add(campo2, 0, 4);
-        grid.add(cementerio1, 2, 2);
-        grid.add(cementerio2, 0, 3);
-        
-        grid.setHalignment(mazo1, HPos.CENTER);
-        grid.setHalignment(mazo2, HPos.CENTER);
-        grid.setHalignment(campo1, HPos.CENTER);
-        grid.setHalignment(campo2, HPos.CENTER);
-        grid.setHalignment(cementerio1, HPos.CENTER);
-        grid.setHalignment(cementerio2, HPos.CENTER);
-
-        grid.add(this.crearRegionMonstruos(Color.DARKORANGE, primaryStage), 1, 3);
-        grid.add(this.crearRegionMonstruos(Color.DARKORANGE, primaryStage), 1, 2);
-        grid.add(this.crearRegionMonstruos(Color.DARKTURQUOISE, primaryStage), 1, 1);
-        grid.add(this.crearRegionMonstruos(Color.DARKTURQUOISE, primaryStage), 1, 4);
-        grid.add(this.crearMano(primaryStage), 1, 0);
-        grid.add(this.crearMano(primaryStage), 1, 5);
-*/
         return grid;
     }
-/*
-    private FlowPane crearMano(Stage primaryStage) {
-		
-    	FlowPane mano = new FlowPane();
-    	
-    	mano.setHgap(15);
-    	
-    	mano.setAlignment(Pos.CENTER);
-    	
-    	CreadorDeBotones creadorDeBotones = new CreadorDeBotones();
-    	
-    	Button b1 = new Button();
-        b1 = creadorDeBotones.nuevoBotonCartaEnMano(b1, primaryStage);
-        Button b2 = new Button();
-        b2 = creadorDeBotones.nuevoBotonCartaEnMano(b2, primaryStage);
-        Button b3 = new Button();
-        b3 = creadorDeBotones.nuevoBotonCartaEnMano(b3, primaryStage);
-        Button b4 = new Button();
-        b4 = creadorDeBotones.nuevoBotonCartaEnMano(b4, primaryStage);
-        Button b5 = new Button();
-        b5 = creadorDeBotones.nuevoBotonCartaEnMano(b5, primaryStage);
-        
-        mano.getChildren().addAll(b1,b2,b3,b4,b5);
-    	
-		return mano;
-	}
 
-	private GridPane crearRegionMonstruos(Color colorBuscado, Stage primaryStage)
-    {
-
-        GridPane gridPane = new GridPane();
-
-        gridPane.setGridLinesVisible(false);
-
-        ColumnConstraints columnMonstruos1 = new ColumnConstraints(262);
-        ColumnConstraints columnMonstruos2 = new ColumnConstraints(262);
-        ColumnConstraints columnMonstruos3 = new ColumnConstraints(262);
-        ColumnConstraints columnMonstruos4 = new ColumnConstraints(262);
-        ColumnConstraints columnMonstruos5 = new ColumnConstraints(262);
-        RowConstraints filaMonstruos1 = new RowConstraints(160);
-
-        gridPane.getColumnConstraints().addAll(columnMonstruos1, columnMonstruos2, columnMonstruos3, columnMonstruos4, columnMonstruos5);
-        gridPane.getRowConstraints().addAll(filaMonstruos1);
-
-        CreadorDeBotones creadorDeBotones = new CreadorDeBotones();
-
-        Button b1 = new Button();
-        b1 = creadorDeBotones.nuevoBotonMonstruo(b1, primaryStage);
-        Button b2 = new Button();
-        b2 = creadorDeBotones.nuevoBotonMonstruo(b2, primaryStage);
-        Button b3 = new Button();
-        b3 = creadorDeBotones.nuevoBotonMonstruo(b3, primaryStage);
-        Button b4 = new Button();
-        b4 = creadorDeBotones.nuevoBotonMonstruo(b4, primaryStage);
-        Button b5 = new Button();
-        b5 = creadorDeBotones.nuevoBotonMonstruo(b5, primaryStage);
-
-        gridPane.add(b1, 0, 0);
-        gridPane.add(b2, 1, 0);
-        gridPane.add(b3, 2, 0);
-        gridPane.add(b4, 3, 0);
-        gridPane.add(b5, 4, 0);
-
-        gridPane.setHalignment(b1, HPos.CENTER);
-        gridPane.setHalignment(b2, HPos.CENTER);
-        gridPane.setHalignment(b3, HPos.CENTER);
-        gridPane.setHalignment(b4, HPos.CENTER);
-        gridPane.setHalignment(b5, HPos.CENTER);
-
-        return gridPane;
-    }
-*/
-
-	private GridPane crearRegionMagicasYTrampas(Stage primaryStage) {
-
-		GridPane gridJugador = new GridPane();
-		
-		
-		ColumnConstraints columnMonstruos1 = new ColumnConstraints(262);
-        ColumnConstraints columnMonstruos2 = new ColumnConstraints(262);
-        ColumnConstraints columnMonstruos3 = new ColumnConstraints(262);
-        ColumnConstraints columnMonstruos4 = new ColumnConstraints(262);
-        ColumnConstraints columnMonstruos5 = new ColumnConstraints(262);
-        RowConstraints filaMonstruos1 = new RowConstraints(160);
-
-        gridJugador.getColumnConstraints().addAll(columnMonstruos1, columnMonstruos2, columnMonstruos3, columnMonstruos4, columnMonstruos5);
-        gridJugador.getRowConstraints().addAll(filaMonstruos1);
-        
-        for(int i = 0; i<5; i++){
-        	
-        	Button boton = new Button();
-        	boton.setPrefSize(95.4, 139);
-        	boton.setStyle("-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black");
-        	
-        	gridJugador.add(boton, i, 0);
-        	
-        	GridPane.setHalignment(boton, HPos.CENTER);
-        	
-        }
-		
-		
-		return gridJugador;
-	}
-
-	private GridPane crearRegionMonstruos(Stage primaryStage) {
-		
-		GridPane gridJugador = new GridPane();
-		
-		
-		ColumnConstraints columnMonstruos1 = new ColumnConstraints(262);
-        ColumnConstraints columnMonstruos2 = new ColumnConstraints(262);
-        ColumnConstraints columnMonstruos3 = new ColumnConstraints(262);
-        ColumnConstraints columnMonstruos4 = new ColumnConstraints(262);
-        ColumnConstraints columnMonstruos5 = new ColumnConstraints(262);
-        RowConstraints filaMonstruos1 = new RowConstraints(160);
-
-        gridJugador.getColumnConstraints().addAll(columnMonstruos1, columnMonstruos2, columnMonstruos3, columnMonstruos4, columnMonstruos5);
-        gridJugador.getRowConstraints().addAll(filaMonstruos1);
-        
-        for(int i = 0; i<5; i++){
-        	
-        	Button boton = new Button();
-        	boton.setPrefSize(95.4, 139);
-        	boton.setStyle("-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black");
-        	
-        	gridJugador.add(boton, i, 0);
-        	
-        	GridPane.setHalignment(boton, HPos.CENTER);
-        	
-        }
-		
-		
-		return gridJugador;
-	}
-	
 }

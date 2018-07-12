@@ -23,7 +23,7 @@ public class FabricaCartasMonstruo
         String nombre;
         nombre = new AlexandriteDragon(jugador, oponente,"resources/imagenes/monstruo/AlexandriteDragon.png").obtenerNombre();
         nombres.add(nombre);
-        nombre = new AmphibianBeast(jugador, oponente,"resources/imagenes/monstruo/AmphibianBeast.png").obtenerNombre();
+        nombre = new AmphibianBeast(jugador, oponente,"resources/imagenes/monstruo/AmphibianBeast.jpg").obtenerNombre();
         nombres.add(nombre);
         nombre = new AncientBrain(jugador, oponente,"resources/imagenes/monstruo/AncientBrain.png").obtenerNombre();
         nombres.add(nombre);
@@ -50,13 +50,13 @@ public class FabricaCartasMonstruo
         nombres.add(nombre);
         nombre = new ExodiaTheForbiddenOne(jugador, oponente,"resources/imagenes/monstruo/ExodiaTheForbiddenOne.png").obtenerNombre();
         nombres.add(nombre);
-        nombre = new Jinzo7(jugador, oponente,"resources/imagenes/monstruo/Jinzo7.png").obtenerNombre();
+        nombre = new Jinzo7(jugador, oponente,"resources/imagenes/monstruo/Jinzo7.jpg").obtenerNombre();
         nombres.add(nombre);
         nombre = new LeftArmOfTheForbiddenOne(jugador, oponente,"resources/imagenes/monstruo/LeftArmOfTheForbiddenOne.png").obtenerNombre();
         nombres.add(nombre);
         nombre = new LeftLegOfTheForbiddenOne(jugador, oponente,"resources/imagenes/monstruo/LeftLegOfTheForbiddenOne.png").obtenerNombre();
         nombres.add(nombre);
-        nombre = new ManEaterBug(jugador, oponente,"resources/imagenes/monstruo/ManEaterBug.png").obtenerNombre();
+        nombre = new ManEaterBug(jugador, oponente,"resources/imagenes/monstruo/ManEaterBug.jpg").obtenerNombre();
         nombres.add(nombre);
         nombre = new RightArmOfTheForbiddenOne(jugador, oponente,"resources/imagenes/monstruo/RightArmOfTheForbiddenOne.png").obtenerNombre();
         nombres.add(nombre);
@@ -74,7 +74,7 @@ public class FabricaCartasMonstruo
             case "Alexandrite Dragon":
                 return new AlexandriteDragon(jugador, oponente,"resources/imagenes/monstruo/AlexandriteDragon.png");
             case "Amphibian Beast":
-                return new AmphibianBeast(jugador, oponente,"resources/imagenes/monstruo/AmphibianBeast.png");
+                return new AmphibianBeast(jugador, oponente,"resources/imagenes/monstruo/AmphibianBeast.jpg");
             case "Ancient Brain":
                 return new AncientBrain(jugador, oponente,"resources/imagenes/monstruo/AncientBrain.png");
             case "Ancient Tool":
@@ -92,13 +92,13 @@ public class FabricaCartasMonstruo
             case "Gaia The Fierce Knight":
                 return new GaiaTheFierceKnight(jugador, oponente,"resources/imagenes/monstruo/GaiaTheFierceKnight.png");
             case "Jinzo #7":
-                return new Jinzo7(jugador, oponente,"resources/imagenes/monstruo/Jinzo7.png");
+                return new Jinzo7(jugador, oponente,"resources/imagenes/monstruo/Jinzo7.jpg");
             case "Left Arm Of The Forbidden One":
                 return new LeftArmOfTheForbiddenOne(jugador, oponente,"resources/imagenes/monstruo/LeftArmOfTheForbiddenOne.png");
             case "Left Leg Of The Forbidden One":
                 return new LeftLegOfTheForbiddenOne(jugador, oponente,"resources/imagenes/monstruo/LeftLegOfTheForbiddenOne.png");
             case "Man-Eater Bug":
-                return new ManEaterBug(jugador, oponente,"resources/imagenes/monstruo/ManEaterBug.png");
+                return new ManEaterBug(jugador, oponente,"resources/imagenes/monstruo/ManEaterBug.jpg");
             case "Right Arm Of The Forbidden One":
                 return new RightArmOfTheForbiddenOne(jugador, oponente,"resources/imagenes/monstruo/RightArmOfTheForbiddenOne.png");
             case "Right Leg Of The Forbidden One":

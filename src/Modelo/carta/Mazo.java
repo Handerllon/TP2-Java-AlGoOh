@@ -2,7 +2,7 @@ package Modelo.carta;
 
 import Modelo.Jugador;
 import Modelo.carta.excepciones.MazoVacio;
-import Vista.ObjectoObservador;
+import Observador.ObjetoObservador;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -10,7 +10,7 @@ import java.util.Stack;
 public class Mazo
 {
     private Stack<Carta> cartas = new Stack<>();
-    private ArrayList<ObjectoObservador> observadores = new ArrayList<>();
+    private ArrayList<ObjetoObservador> observadores = new ArrayList<>();
 
     public Mazo(Jugador jugador, Jugador oponente)
     {

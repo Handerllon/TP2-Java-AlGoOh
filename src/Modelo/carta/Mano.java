@@ -1,7 +1,7 @@
 package Modelo.carta;
 
 import Modelo.carta.excepciones.NoSePuedenAgregarMasCartasALaMano;
-import Vista.ObjectoObservador;
+import Observador.ObjetoObservador;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -10,7 +10,7 @@ public class Mano
 {
     private static int CANTIDAD_MAXIMA = 6;
     private LinkedList<Carta> cartas;
-    private ArrayList<ObjectoObservador> observadores = new ArrayList<>();
+    private ArrayList<ObjetoObservador> observadores = new ArrayList<>();
 
     public Mano()
     {

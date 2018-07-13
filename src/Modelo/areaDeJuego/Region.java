@@ -3,20 +3,20 @@ package Modelo.areaDeJuego;
 import Modelo.Jugador;
 import Modelo.areaDeJuego.excepciones.RegionSinEspacioLibre;
 import Modelo.carta.Carta;
-import Modelo.carta.CartaMonstruo;
 import Modelo.carta.excepciones.CartaNoExisteEnRegion;
-import Vista.ObjectoObservador;
+import Observador.RegionObservable;
+import Observador.ObservadorRegion;
 
 import java.util.ArrayList;
 
-public abstract class Region<T extends Carta> implements Notificable
+public abstract class Region<T extends Carta> implements RegionObservable, ObservadorRegion
 {
     protected ArrayList<T> cartas = new ArrayList<>();
     protected int capacidadMaxima;
     protected Jugador jugador, oponente;
-    protected ArrayList<Region> regionesANotificar = new ArrayList<>();
-    // Observadores.
-    protected ArrayList<ObjectoObservador> observadores = new ArrayList<>();
+    protected T ultimaCartaEnEntrar, ultimaCartaEnSalir;
+
+    protected ArrayList<ObservadorRegion> observadoresRegion = new ArrayList<>();
 
     public Region(int capacidadMaxima, Jugador jugador)
     {
@@ -29,16 +29,13 @@ public abstract class Region<T extends Carta> implements Notificable
         this.oponente = oponente;
     }
 
-    public void suscribirRegionANotificar(Region region)
-    {
-        this.regionesANotificar.add(region);
-    }
-
     public void colocarCarta(T carta)
     {
         if (this.hayEspacioLibre())
         {
-            cartas.add(carta);
+            this.cartas.add(carta);
+            this.ultimaCartaEnEntrar = carta;
+            this.notificarObservadores();
         } else
             throw new RegionSinEspacioLibre(this);
     }
@@ -47,7 +44,9 @@ public abstract class Region<T extends Carta> implements Notificable
     {
         if (this.contieneCarta(carta))
         {
+            this.ultimaCartaEnSalir = carta;
             this.cartas.remove(carta);
+            this.notificarObservadores();
         } else
             throw new CartaNoExisteEnRegion(carta);
     }
@@ -65,6 +64,7 @@ public abstract class Region<T extends Carta> implements Notificable
     public void removerTodasLasCartas()
     {
         this.cartas.clear();
+        this.notificarObservadores();
     }
 
     public boolean hayEspacioLibre()
@@ -72,17 +72,48 @@ public abstract class Region<T extends Carta> implements Notificable
         return this.cartas.size() < this.capacidadMaxima;
     }
 
+    public boolean estaVacia()
+    {
+        return this.cartas.isEmpty();
+    }
+
     public ArrayList<T> obtenerCartasEnRegion()
     {
         return this.cartas;
     }
 
-    public void notificarColocacionDeCarta(CartaMonstruo carta)
+    public T obtenerUltimaCartaEnEntrar()
+    {
+        return this.ultimaCartaEnEntrar;
+    }
+
+    // Metodos de observadores de region.
+    @Override
+    public void agregarObsevador(ObservadorRegion observador)
+    {
+        this.observadoresRegion.add(observador);
+    }
+
+    @Override
+    public void quitarObservador(ObservadorRegion observador)
+    {
+        this.observadoresRegion.remove(observador);
+    }
+
+    @Override
+    public void notificarObservadores()
+    {
+        this.observadoresRegion.forEach(item -> item.actualizar(this));
+    }
+
+    @Override
+    public void actualizar()
     {
 
     }
 
-    public void notificarRemocionDeCarta(CartaMonstruo carta)
+    @Override
+    public <T extends Carta> void actualizar(Region<T> region)
     {
 
     }

@@ -2,7 +2,7 @@ package Modelo.carta;
 
 import Modelo.Jugador;
 
-public abstract class CartaCampo extends Carta
+public abstract class CartaCampo<T extends Carta> extends Carta
 {
     protected static int modificadorAtaque;
     protected static int modificadorDefensa;
@@ -14,11 +14,11 @@ public abstract class CartaCampo extends Carta
 
     public abstract void efecto();
 
-    public abstract void efecto(CartaMonstruo carta);
+    public abstract void efecto(Carta carta);
 
     public abstract void deshacerEfecto();
 
-    public abstract void deshacerEfecto(CartaMonstruo carta);
+    public abstract void deshacerEfecto(Carta carta);
 
     protected void modificarPuntosAtaque(CartaMonstruo cartaMonstruo)
     {
@@ -39,16 +39,4 @@ public abstract class CartaCampo extends Carta
     {
         cartaMonstruo.sumarPuntosDefensa(-this.modificadorDefensa);
     }
-
-//    public void notificarColocacionCarta(CartaMonstruo Modelo.carta)
-//    {
-//        this.efecto(Modelo.carta);
-//        this.regionCampoOponente.notificarColocacionDeCarta(Modelo.carta);
-//    }
-//
-//    public void notificarRemocionCarta(CartaMonstruo Modelo.carta)
-//    {
-//        this.deshacerEfecto(Modelo.carta);
-//        this.regionCampoOponente.notificarRemocionDeCarta(Modelo.carta);
-//    }
 }

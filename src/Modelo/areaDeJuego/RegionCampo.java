@@ -1,8 +1,8 @@
 package Modelo.areaDeJuego;
 
 import Modelo.Jugador;
+import Modelo.carta.Carta;
 import Modelo.carta.CartaCampo;
-import Modelo.carta.CartaMonstruo;
 
 public class RegionCampo extends Region<CartaCampo>
 {
@@ -25,19 +25,13 @@ public class RegionCampo extends Region<CartaCampo>
         carta.deshacerEfecto();
     }
 
-    public void notificarColocacionDeCarta(CartaMonstruo carta)
+    @Override
+    public <T extends Carta> void actualizar(Region<T> tRegion)
     {
-        if (this.obtenerCartas().size() != 0)
+        T carta = tRegion.obtenerUltimaCartaEnEntrar();
+        if (this.estaVacia() == false)
         {
             this.cartas.get(0).efecto(carta);
-        }
-    }
-
-    public void notificarRemocionDeCarta(CartaMonstruo carta)
-    {
-        if (this.obtenerCartas().size() != 0)
-        {
-            this.cartas.get(0).deshacerEfecto(carta);
         }
     }
 }

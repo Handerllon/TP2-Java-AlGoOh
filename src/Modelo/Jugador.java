@@ -48,8 +48,8 @@ public class Jugador
 
     public void suscribirRegiones()
     {
-        this.regionMonstruos.suscribirRegionANotificar(this.obtenerRegionCampo());
-        this.oponente.obtenerRegionMonstruos().suscribirRegionANotificar(this.obtenerRegionCampo());
+        this.regionMonstruos.agregarObsevador(this.obtenerRegionCampo());
+        this.oponente.obtenerRegionMonstruos().agregarObsevador(this.obtenerRegionCampo());
     }
 
     public void crearMazo()

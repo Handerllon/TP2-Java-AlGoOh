@@ -14,24 +14,6 @@ public class RegionMonstruos extends Region<CartaMonstruo>
         super(CAPACIDAD_REGION_MONSTRUOS, jugador);
     }
 
-    public void colocarCarta(CartaMonstruo carta)
-    {
-        super.colocarCarta(carta);
-        if (this.regionesANotificar.isEmpty() == false)
-        {
-            regionesANotificar.forEach(item -> item.notificarColocacionDeCarta(carta));
-        }
-    }
-
-    public void removerCarta(CartaMonstruo carta)
-    {
-        if (this.regionesANotificar.isEmpty() == false)
-        {
-            regionesANotificar.forEach(item -> item.notificarRemocionDeCarta(carta));
-        }
-        super.removerCarta(carta);
-    }
-
     public CartaMonstruo obtenerMonstruoConMenorAtaque()
     {
         CartaMonstruo cartaConAtaqueMinimo = null;

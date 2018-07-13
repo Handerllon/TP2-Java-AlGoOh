@@ -1,6 +1,7 @@
 package Modelo.carta.campo;
 
 import Modelo.Jugador;
+import Modelo.carta.Carta;
 import Modelo.carta.CartaCampo;
 import Modelo.carta.CartaMonstruo;
 
@@ -35,25 +36,25 @@ public class Sogen extends CartaCampo
         cartasMonstruoOponente.forEach(item -> this.restaurarPuntosAtaque(item));
     }
 
-    public void efecto(CartaMonstruo carta)
+    public void efecto(Carta carta)
     {
         if (carta.obtenerPropietario() == this.jugador)
         {
-            this.modificarPuntosDefensa(carta);
+            this.modificarPuntosDefensa((CartaMonstruo)carta);
         } else
         {
-            this.modificarPuntosAtaque(carta);
+            this.modificarPuntosAtaque((CartaMonstruo)carta);
         }
     }
 
-    public void deshacerEfecto(CartaMonstruo carta)
+    public void deshacerEfecto(Carta carta)
     {
         if (carta.obtenerPropietario() == this.jugador)
         {
-            this.restaurarPuntosDefensa(carta);
+            this.restaurarPuntosDefensa((CartaMonstruo)carta);
         } else
         {
-            this.restaurarPuntosAtaque(carta);
+            this.restaurarPuntosAtaque((CartaMonstruo)carta);
         }
     }
 }

@@ -1,15 +1,20 @@
 package Modelo;
 
-import Vista.ObjectoObservador;
+import Observador.ModeloObservable;
+import Observador.ObjetoObservador;
 
 import java.util.ArrayList;
 
-public class Modelo implements ObjectoObservado
+import Modelo.carta.Carta;
+import Modelo.carta.CartaCampo;
+import Modelo.carta.CartaMonstruo;
+
+public class Modelo implements ModeloObservable
 {
     private Jugador jugador1;
     private Jugador jugador2;
 
-    private ArrayList<ObjectoObservador> observadores = new ArrayList<>();
+    private ArrayList<ObjetoObservador> observadores = new ArrayList<>();
 
     public Modelo(String nombreJugador, String nombreOponente)
     {
@@ -23,26 +28,26 @@ public class Modelo implements ObjectoObservado
         this.jugador2.crearMazo();
     }
 
-    @Override
+    
     public Jugador obtenerJugador()
     {
         return this.jugador1;
     }
 
-    @Override
+    
     public Jugador obtenerOponente()
     {
         return this.jugador2;
     }
 
     @Override
-    public void agregarObsevador(ObjectoObservador observer)
+    public void agregarObsevador(ObjetoObservador observer)
     {
         this.observadores.add(observer);
     }
 
     @Override
-    public void quitarObservador(ObjectoObservador observer)
+    public void quitarObservador(ObjetoObservador observer)
     {
         this.observadores.remove(observer);
     }
@@ -54,7 +59,67 @@ public class Modelo implements ObjectoObservado
         for (int i = 0; i < this.observadores.size(); i++)
         {
 
-            this.observadores.get(i).update();
+            this.observadores.get(i).actualizar();
         }
     }
+
+	@Override
+	public ArrayList<CartaMonstruo> obtenerCartasEnRegionMonstruosJugador() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<CartaMonstruo> obtenerCartasEnRegionMonstruosOponente() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Carta> obtenerCartasEnRegionMagicasYTrampasJugador() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Carta> obtenerCartasEnRegionMagicasYTrampasOponente() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CartaCampo obtenerCartasEnRegionCampoJugador() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CartaCampo obtenerCartasEnRegionCampoOponente() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int obtenerNumeroDeCartasRestantesEnMazoJugador() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int obtenerNumeroDeCartasRestantesEnMazoOponente() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ArrayList<Carta> obtenerCartasEnLaManoDelJugador() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Carta> obtenerCartasEnLaManoDelOponente() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -29,7 +29,8 @@ public class RegionMagicasYTrampas extends Region<Carta>
     {
         super.colocarCarta(carta);
         this.cartasTrampa.add(carta);
-        // TODO: el efecto se activa en el turno del adversario.
+        // TODO: el efecto se activa en el turno del adversario. Se podría usar la máquina de turnos, y que esta
+        // llame a un metodo "ActivarEfectosTrampa" de la region correspondiente.
         carta.efecto();
     }
 

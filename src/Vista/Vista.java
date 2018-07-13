@@ -1,7 +1,7 @@
 package Vista;
 
 import Modelo.Modelo;
-import Observador.ObjetoObservador;
+import Modelo.ObservadorModelo;
 import Vista.areaDeJuego.RegionCampoVista;
 import Vista.areaDeJuego.RegionCementerioVista;
 import Vista.areaDeJuego.RegionMagicasYTrampasVista;
@@ -16,7 +16,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 
-public class Vista implements ObjetoObservador
+public class Vista implements ObservadorModelo
 {
     // TODO: levantar la resolucion automaticamente con alguna llamada al sistema.
     private static int RESOLUCION_HORIZONTAL = 1920;

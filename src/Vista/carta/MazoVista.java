@@ -1,7 +1,7 @@
 package Vista.carta;
 
 import Modelo.Modelo;
-import Observador.ObjetoObservador;
+import Modelo.ObservadorModelo;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -11,9 +11,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 
-public class MazoVista implements ObjetoObservador
+public class MazoVista implements ObservadorModelo
 {
-    
     private Stage stage;
     private Modelo modelo;
     private Button mazoJugador;
@@ -28,18 +27,17 @@ public class MazoVista implements ObjetoObservador
 
         this.mazoJugador = inicializar();
         this.mazoOponente = inicializar();
-
     }
 
     public Button inicializar()
     {
-    	
-    	Button boton = new Button();
-    	
+
+        Button boton = new Button();
+
         boton.setPrefSize(95.4, 139);
         boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource("resources/imagenes/tablero/Back.jpg").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-        
+
         return boton;
     }
 
@@ -48,7 +46,7 @@ public class MazoVista implements ObjetoObservador
 
         return mazoJugador;
     }
-    
+
     public Button getMazoOponente()
     {
 

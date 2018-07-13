@@ -4,8 +4,6 @@ import Modelo.Jugador;
 import Modelo.areaDeJuego.excepciones.RegionSinEspacioLibre;
 import Modelo.carta.Carta;
 import Modelo.carta.excepciones.CartaNoExisteEnRegion;
-import Observador.ObservadorRegion;
-import Observador.RegionObservable;
 
 import java.util.ArrayList;
 

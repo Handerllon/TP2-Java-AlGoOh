@@ -1,7 +1,7 @@
 package Vista.areaDeJuego;
 
 import Modelo.Modelo;
-import Observador.ObjetoObservador;
+import Modelo.ObservadorModelo;
 import javafx.geometry.HPos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
-public class RegionMonstruosVista implements ObjetoObservador
+public class RegionMonstruosVista implements ObservadorModelo
 {
     private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
     private Modelo modelo;

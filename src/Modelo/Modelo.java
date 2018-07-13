@@ -1,20 +1,17 @@
 package Modelo;
 
-import Observador.ModeloObservable;
-import Observador.ObjetoObservador;
-
-import java.util.ArrayList;
-
 import Modelo.carta.Carta;
 import Modelo.carta.CartaCampo;
 import Modelo.carta.CartaMonstruo;
+
+import java.util.ArrayList;
 
 public class Modelo implements ModeloObservable
 {
     private Jugador jugador1;
     private Jugador jugador2;
 
-    private ArrayList<ObjetoObservador> observadores = new ArrayList<>();
+    private ArrayList<ObservadorModelo> observadores = new ArrayList<>();
 
     public Modelo(String nombreJugador, String nombreOponente)
     {
@@ -41,13 +38,13 @@ public class Modelo implements ModeloObservable
     }
 
     @Override
-    public void agregarObsevador(ObjetoObservador observer)
+    public void agregarObsevador(ObservadorModelo observer)
     {
         this.observadores.add(observer);
     }
 
     @Override
-    public void quitarObservador(ObjetoObservador observer)
+    public void quitarObservador(ObservadorModelo observer)
     {
         this.observadores.remove(observer);
     }

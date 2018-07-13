@@ -1,16 +1,16 @@
-package Observador;
-
-import java.util.ArrayList;
+package Modelo;
 
 import Modelo.carta.Carta;
 import Modelo.carta.CartaCampo;
 import Modelo.carta.CartaMonstruo;
 
+import java.util.ArrayList;
+
 public interface ModeloObservable
 {
-    void agregarObsevador(ObjetoObservador observador);
+    void agregarObsevador(ObservadorModelo observador);
 
-    void quitarObservador(ObjetoObservador observador);
+    void quitarObservador(ObservadorModelo observador);
 
     void notificarObservadores();
     

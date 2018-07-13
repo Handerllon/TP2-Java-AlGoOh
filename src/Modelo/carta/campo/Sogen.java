@@ -1,7 +1,6 @@
 package Modelo.carta.campo;
 
 import Modelo.Jugador;
-import Modelo.carta.Carta;
 import Modelo.carta.CartaCampo;
 import Modelo.carta.CartaMonstruo;
 

@@ -6,10 +6,13 @@ import Modelo.areaDeJuego.RegionMagicasYTrampas;
 import Modelo.areaDeJuego.RegionMonstruos;
 import Modelo.carta.*;
 import Modelo.excepciones.JugadorSinVida;
+import Modelo.finDeJuego.CausaFinJuego;
+import Modelo.finDeJuego.FinJuegoObservable;
+import Modelo.finDeJuego.ObservadorFinJuego;
 
 import java.util.ArrayList;
 
-public class Jugador
+public class Jugador implements FinJuegoObservable
 {
     private String nombre;
     private Mazo mazo;
@@ -245,6 +248,24 @@ public class Jugador
     {
 
         return this.cartasEnMano;
+    }
+
+    @Override
+    public void agregarObsevador(ObservadorFinJuego observador)
+    {
+
+    }
+
+    @Override
+    public void quitarObservador(ObservadorFinJuego observador)
+    {
+
+    }
+
+    @Override
+    public void notificarFinDeJuego(CausaFinJuego causaFinJuego)
+    {
+
     }
 }
 

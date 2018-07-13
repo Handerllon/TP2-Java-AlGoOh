@@ -1,16 +1,16 @@
 package Modelo.carta;
 
-import Modelo.ObservadorModelo;
 import Modelo.carta.excepciones.NoSePuedenAgregarMasCartasALaMano;
+import Modelo.finDeJuego.CausaFinJuego;
+import Modelo.finDeJuego.FinJuegoObservable;
+import Modelo.finDeJuego.ObservadorFinJuego;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Mano
+public class Mano implements FinJuegoObservable
 {
     private static int CANTIDAD_MAXIMA = 6;
     private LinkedList<Carta> cartas;
-    private ArrayList<ObservadorModelo> observadores = new ArrayList<>();
 
     public Mano()
     {
@@ -45,10 +45,21 @@ public class Mano
         return this.cantidadDeCartas() == this.CANTIDAD_MAXIMA;
     }
 
-    /*
-    private ArrayList<Carta> obtenerCartasEnMano(){
-    	
-    	return this.cartas;
+    @Override
+    public void agregarObsevador(ObservadorFinJuego observador)
+    {
+
     }
-*/
+
+    @Override
+    public void quitarObservador(ObservadorFinJuego observador)
+    {
+
+    }
+
+    @Override
+    public void notificarFinDeJuego(CausaFinJuego causaFinJuego)
+    {
+
+    }
 }

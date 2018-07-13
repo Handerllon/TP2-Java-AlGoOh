@@ -1,16 +1,17 @@
 package Modelo.carta;
 
 import Modelo.Jugador;
-import Modelo.ObservadorModelo;
 import Modelo.carta.excepciones.MazoVacio;
+import Modelo.finDeJuego.CausaFinJuego;
+import Modelo.finDeJuego.FinJuegoObservable;
+import Modelo.finDeJuego.ObservadorFinJuego;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Mazo
+public class Mazo implements FinJuegoObservable
 {
     private Stack<Carta> cartas = new Stack<>();
-    private ArrayList<ObservadorModelo> observadores = new ArrayList<>();
 
     public Mazo(Jugador jugador, Jugador oponente)
     {
@@ -82,5 +83,23 @@ public class Mazo
         {
             throw new MazoVacio();
         }
+    }
+
+    @Override
+    public void agregarObsevador(ObservadorFinJuego observador)
+    {
+
+    }
+
+    @Override
+    public void quitarObservador(ObservadorFinJuego observador)
+    {
+
+    }
+
+    @Override
+    public void notificarFinDeJuego(CausaFinJuego causaFinJuego)
+    {
+
     }
 }

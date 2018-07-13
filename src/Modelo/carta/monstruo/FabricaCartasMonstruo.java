@@ -6,6 +6,7 @@ import Modelo.carta.excepciones.CartaInvalidaError;
 
 import java.util.ArrayList;
 
+// TODO: Parametrizar los strings con las rutas.
 public class FabricaCartasMonstruo
 {
     private Jugador jugador, oponente;

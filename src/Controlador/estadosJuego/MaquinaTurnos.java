@@ -1,4 +1,4 @@
-package Modelo.EstadosJuego;
+package Controlador.estadosJuego;
 
 import Modelo.Jugador;
 

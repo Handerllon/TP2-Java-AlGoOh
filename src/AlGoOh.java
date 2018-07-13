@@ -12,7 +12,6 @@ public class AlGoOh extends Application
 
     public static void main(String[] args)
     {
-
         launch(args);
     }
 

@@ -1,18 +1,18 @@
-package Modelo.EstadosJuego;
+package Controlador.estadosJuego;
 
 import Modelo.Jugador;
 
 import java.util.concurrent.TimeUnit;
 
-public class FasePreparacion implements Fase
+public class FaseTrampas implements Fase
 {
-    public FasePreparacion()
+    public FaseTrampas()
     {
     }
 
     public Fase cambiarFase()
     {
-        return new FaseAtaque();
+        return new FaseFinal();
     }
 
     @Override
@@ -20,7 +20,7 @@ public class FasePreparacion implements Fase
     {
         // TODO: implementar la fase.
         System.out.println("----------------------");
-        System.out.println(jugador.obtenerNombre() + " FasePreparacion.");
+        System.out.println(jugador.obtenerNombre() + " FaseTrampas.");
         System.out.println("----------------------");
         this.finalizarFase();
     }

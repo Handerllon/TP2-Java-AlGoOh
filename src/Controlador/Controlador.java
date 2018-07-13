@@ -1,6 +1,6 @@
 package Controlador;
 
-import Modelo.EstadosJuego.MaquinaTurnos;
+import Controlador.estadosJuego.MaquinaTurnos;
 import Modelo.Modelo;
 import Vista.Vista;
 
@@ -28,17 +28,4 @@ public class Controlador
             i++;
         }
     }
-
-/*
-    public RegionMonstruos obtenerRegionMonstruosJugador() {
-
-        return this.jugador1.obtenerRegionMonstruos();
-    }
-
-
-    public RegionMonstruos obtenerRegionMonstruosOponente() {
-
-        return this.jugador2.obtenerRegionMonstruos();
-    }
-    */
 }

@@ -1,24 +1,28 @@
+import Controlador.Controlador;
+import Modelo.Modelo;
+import Vista.Vista;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class AlGoOh
-{
-/*    public static void main(String[] args) {
+public class AlGoOh extends Application {
 
-        *//*
-        Primero se crea el modelo.
-        Model      model      = new Model();
-        Despues la vista, y le pasamos una referencia al modelo para que le pida lo que necesita.
-        View       view       = new View(model);
-        Por ultimo creamos el controlador y le pasamos las referencias del modelo y la vista.
-        Controller controller = new Controller(model, view);
 
-        Inicia todo.
-        view.setVisible(true);
-        *//*
+    private static Modelo modelo;
+    private static Controlador controlador;
+    private static Vista vista;
+
+    public static void main(String[] args) {
+
         launch(args);
+    }
 
-    }*/
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        // TODO: solicitar nombres usando una escena previa a la principal.
+        this.modelo = new Modelo("Manu", "Nico");
+        this.vista = new Vista(modelo, primaryStage);
+        this.controlador = new Controlador(modelo, vista);
+
+    }
 }

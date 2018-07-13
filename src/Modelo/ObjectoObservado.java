@@ -14,5 +14,4 @@ public interface ObjectoObservado {
     Jugador obtenerJugador();
 
     Jugador obtenerOponente();
-
 }

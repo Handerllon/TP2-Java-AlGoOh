@@ -6,5 +6,6 @@ public interface RegionObservable
 
     void quitarObservador(ObservadorRegion observador);
 
-    void notificarObservadores();
+    void notificarAgregacionCarta();
+    void notificarRemocionCarta();
 }

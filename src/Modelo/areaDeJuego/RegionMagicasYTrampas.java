@@ -45,6 +45,7 @@ public class RegionMagicasYTrampas extends Region<Carta>
             if (cartas.get(i) instanceof CartaTrampa)
             {
 
+                // TODO: evitar casteo porque rompe el principio de sustitución de Liskov.
                 cartaTrampaBuscada = (CartaTrampa) cartas.get(i);
                 return cartaTrampaBuscada;
             }

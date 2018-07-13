@@ -1,11 +1,11 @@
 package Modelo.areaDeJuego;
 
 import Modelo.Jugador;
-import Modelo.carta.Carta;
 import Modelo.carta.CartaCampo;
 import Modelo.carta.CartaMonstruo;
+import Observador.ObservadorRegion;
 
-public class RegionCampo extends Region<CartaCampo>
+public class RegionCampo extends Region<CartaCampo> implements ObservadorRegion<RegionMonstruos>
 {
     private static int CAPACIDAD_REGION_CAMPO = 1;
 
@@ -27,12 +27,22 @@ public class RegionCampo extends Region<CartaCampo>
     }
 
     @Override
-    public <T extends Carta> void actualizar(Region<T> tRegion)
+    public void agregacionCarta(RegionMonstruos region)
     {
-        CartaMonstruo carta = (CartaMonstruo) tRegion.obtenerUltimaCartaEnEntrar();
+        CartaMonstruo carta =  region.obtenerUltimaCartaEnEntrar();
         if (this.estaVacia() == false)
         {
             this.cartas.get(0).efecto(carta);
+        }
+    }
+
+    @Override
+    public void remocionCarta(RegionMonstruos region)
+    {
+        CartaMonstruo carta =  region.obtenerUltimaCartaEnSalir();
+        if (this.estaVacia() == false)
+        {
+            this.cartas.get(0).deshacerEfecto(carta);
         }
     }
 }

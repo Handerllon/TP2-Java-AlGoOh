@@ -4,12 +4,12 @@ import Modelo.Jugador;
 import Modelo.areaDeJuego.excepciones.RegionSinEspacioLibre;
 import Modelo.carta.Carta;
 import Modelo.carta.excepciones.CartaNoExisteEnRegion;
-import Observador.RegionObservable;
 import Observador.ObservadorRegion;
+import Observador.RegionObservable;
 
 import java.util.ArrayList;
 
-public abstract class Region<T extends Carta> implements RegionObservable, ObservadorRegion
+public abstract class Region<T extends Carta> implements RegionObservable
 {
     protected ArrayList<T> cartas = new ArrayList<>();
     protected int capacidadMaxima;
@@ -35,7 +35,7 @@ public abstract class Region<T extends Carta> implements RegionObservable, Obser
         {
             this.cartas.add(carta);
             this.ultimaCartaEnEntrar = carta;
-            this.notificarObservadores();
+            this.notificarAgregacionCarta();
         } else
             throw new RegionSinEspacioLibre(this);
     }
@@ -46,7 +46,7 @@ public abstract class Region<T extends Carta> implements RegionObservable, Obser
         {
             this.ultimaCartaEnSalir = carta;
             this.cartas.remove(carta);
-            this.notificarObservadores();
+            this.notificarRemocionCarta();
         } else
             throw new CartaNoExisteEnRegion(carta);
     }
@@ -63,8 +63,8 @@ public abstract class Region<T extends Carta> implements RegionObservable, Obser
 
     public void removerTodasLasCartas()
     {
-        this.cartas.clear();
-        this.notificarObservadores();
+        ArrayList<T> cartasARemover = this.obtenerCartas();
+        cartasARemover.forEach(item -> this.removerCarta(item));
     }
 
     public boolean hayEspacioLibre()
@@ -87,7 +87,12 @@ public abstract class Region<T extends Carta> implements RegionObservable, Obser
         return this.ultimaCartaEnEntrar;
     }
 
-    // Metodos de observadores de region.
+    public T obtenerUltimaCartaEnSalir()
+    {
+        return this.ultimaCartaEnSalir;
+    }
+
+    // Metodos de región observable.
     @Override
     public void agregarObsevador(ObservadorRegion observador)
     {
@@ -101,20 +106,14 @@ public abstract class Region<T extends Carta> implements RegionObservable, Obser
     }
 
     @Override
-    public void notificarObservadores()
+    public void notificarAgregacionCarta()
     {
-        this.observadoresRegion.forEach(item -> item.actualizar(this));
+        this.observadoresRegion.forEach(item -> item.agregacionCarta(this));
     }
 
     @Override
-    public void actualizar()
+    public void notificarRemocionCarta()
     {
-
-    }
-
-    @Override
-    public <T extends Carta> void actualizar(Region<T> region)
-    {
-
+        this.observadoresRegion.forEach(item -> item.remocionCarta(this));
     }
 }

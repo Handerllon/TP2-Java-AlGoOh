@@ -40,5 +40,4 @@ public class RegionCampo extends Region<CartaCampo>
             this.cartas.get(0).deshacerEfecto(carta);
         }
     }
-
 }

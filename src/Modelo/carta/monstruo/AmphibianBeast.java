@@ -9,7 +9,7 @@ public class AmphibianBeast extends CartaMonstruo
     private static int PUNTOS_DEFENSA = 2000;
     private static int PUNTOS_ATAQUE = 2400;
 
-    public AmphibianBeast(Jugador jugador, Jugador oponente,String locacionDeImagen)
+    public AmphibianBeast(Jugador jugador, Jugador oponente, String locacionDeImagen)
     {
         super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente, locacionDeImagen);
         this.estrellas = 6;

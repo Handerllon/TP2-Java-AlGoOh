@@ -4,14 +4,14 @@ import Modelo.EstadosJuego.MaquinaTurnos;
 import Modelo.Modelo;
 import Vista.Vista;
 
-public class Controlador {
-
+public class Controlador
+{
     private Modelo modelo;
     private Vista vista;
-
     private MaquinaTurnos maquinaTurnos;
 
-    public Controlador(Modelo modelo, Vista vista) {
+    public Controlador(Modelo modelo, Vista vista)
+    {
         this.modelo = modelo;
         this.vista = vista;
 
@@ -19,9 +19,11 @@ public class Controlador {
         //this.comenzarJuego();
     }
 
-    public void comenzarJuego() {
+    public void comenzarJuego()
+    {
         int i = 1;
-        while (i != 20) {
+        while (i != 20)
+        {
             this.maquinaTurnos.jugar();
             i++;
         }

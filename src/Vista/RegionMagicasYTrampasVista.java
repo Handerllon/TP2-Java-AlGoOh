@@ -8,18 +8,20 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
-public class RegionMagicasYTrampasVista implements ObjectoObservador {
-
+public class RegionMagicasYTrampasVista implements ObjectoObservador
+{
     private GridPane gridJugador;
     private Stage stage;
 
-    public RegionMagicasYTrampasVista(Stage primaryStage, Jugador jugador) {
+    public RegionMagicasYTrampasVista(Stage primaryStage, Jugador jugador)
+    {
 
         gridJugador = new GridPane();
         stage = primaryStage;
     }
 
-    public void inicializarRegion() {
+    public void inicializarRegion()
+    {
 
         // TODO: no hardcodear los valores. Usar un resultado en funcion de la resolucion.
         ColumnConstraints columna0 = new ColumnConstraints(262);
@@ -32,7 +34,8 @@ public class RegionMagicasYTrampasVista implements ObjectoObservador {
         gridJugador.getColumnConstraints().addAll(columna0, columna1, columna2, columna3, columna4);
         gridJugador.getRowConstraints().addAll(fila1);
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++)
+        {
 
             Button boton = new Button();
             boton.setPrefSize(95.4, 139);
@@ -41,20 +44,18 @@ public class RegionMagicasYTrampasVista implements ObjectoObservador {
             gridJugador.add(boton, i, 0);
 
             GridPane.setHalignment(boton, HPos.CENTER);
-
         }
     }
 
-    public GridPane getNodo() {
-
+    public GridPane getNodo()
+    {
 
         return gridJugador;
     }
 
     @Override
-    public void update() {
+    public void update()
+    {
         // TODO: pedir las cartas de la region, y pedirles sus imagenes para actualizar la vista de la region.
     }
-
-
 }

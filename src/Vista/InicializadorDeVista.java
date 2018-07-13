@@ -8,8 +8,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 
-public class InicializadorDeVista {
-    public GridPane inicializarVista(GridPane grid, Stage primaryStage, Jugador jugador, Jugador oponente) {
+public class InicializadorDeVista
+{
+    public GridPane inicializarVista(GridPane grid, Stage primaryStage, Jugador jugador, Jugador oponente)
+    {
 
         grid.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource("resources/imagenes/tablero/tablero yogioh.png").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
@@ -97,5 +99,4 @@ public class InicializadorDeVista {
 
         return grid;
     }
-
 }

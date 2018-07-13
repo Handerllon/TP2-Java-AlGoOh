@@ -21,11 +21,11 @@ public class FabricaCartasMagicas
         ArrayList<String> nombres = new ArrayList<String>();
 
         String nombre;
-        nombre = new DarkHole(jugador, oponente,"resources/imagenes/magica/DarkHole.png").obtenerNombre();
+        nombre = new DarkHole(jugador, oponente, "resources/imagenes/magica/DarkHole.png").obtenerNombre();
         nombres.add(nombre);
-        nombre = new Fissure(jugador, oponente,"resources/imagenes/magica/Fissure.png").obtenerNombre();
+        nombre = new Fissure(jugador, oponente, "resources/imagenes/magica/Fissure.png").obtenerNombre();
         nombres.add(nombre);
-        nombre = new PotOfGreed(jugador, oponente,"resources/imagenes/magica/PotOfGreed.png").obtenerNombre();
+        nombre = new PotOfGreed(jugador, oponente, "resources/imagenes/magica/PotOfGreed.png").obtenerNombre();
         nombres.add(nombre);
 
         return nombres;
@@ -37,11 +37,11 @@ public class FabricaCartasMagicas
         {
             // Magicas.
             case "Dark Hole":
-                return new DarkHole(jugador, oponente,"resources/imagenes/magica/DarkHole.png");
+                return new DarkHole(jugador, oponente, "resources/imagenes/magica/DarkHole.png");
             case "Fissure":
-                return new Fissure(jugador, oponente,"resources/imagenes/magica/Fissure.png");
+                return new Fissure(jugador, oponente, "resources/imagenes/magica/Fissure.png");
             case "Pot of Greed":
-                return new PotOfGreed(jugador, oponente,"resources/imagenes/magica/PotOfGreed.png");
+                return new PotOfGreed(jugador, oponente, "resources/imagenes/magica/PotOfGreed.png");
             default:
                 throw new CartaInvalidaError();
         }

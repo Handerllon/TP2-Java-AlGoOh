@@ -24,7 +24,6 @@ public class FaseInicial implements Fase
         System.out.println("----------------------");
         jugador.tomarCarta();
 
-
         this.finalizarFase();
     }
 

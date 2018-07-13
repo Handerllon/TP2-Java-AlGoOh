@@ -8,7 +8,7 @@ public class AncientBrain extends CartaMonstruo
     private static int PUNTOS_DEFENSA = 700;
     private static int PUNTOS_ATAQUE = 1000;
 
-    public AncientBrain(Jugador jugador, Jugador oponente,String locacionDeImagen)
+    public AncientBrain(Jugador jugador, Jugador oponente, String locacionDeImagen)
     {
         super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente, locacionDeImagen);
         this.estrellas = 3;

@@ -215,32 +215,36 @@ public class Jugador
     //Obtener de regiones
     public RegionMonstruos obtenerRegionMonstruos()
     {
-    	return this.regionMonstruos;
+        return this.regionMonstruos;
     }
-    
+
     public RegionCampo obtenerRegionCampo()
     {
-    	return this.regionCampo;
+        return this.regionCampo;
     }
-    
-    public RegionMagicasYTrampas obtenerRegionMagicasYTrampas(){
-    	
-    	return this.regionMagicasYTrampas;
+
+    public RegionMagicasYTrampas obtenerRegionMagicasYTrampas()
+    {
+
+        return this.regionMagicasYTrampas;
     }
-    
-    public RegionCementerio obtenerCementerio(){
-    	
-    	return this.cementerio;
+
+    public RegionCementerio obtenerCementerio()
+    {
+
+        return this.cementerio;
     }
-    
-    public Mazo obtenerMazo(){
-    	
-    	return this.mazo;
+
+    public Mazo obtenerMazo()
+    {
+
+        return this.mazo;
     }
-    
-    public Mano obtenerMano(){
-    	
-    	return this.cartasEnMano;
+
+    public Mano obtenerMano()
+    {
+
+        return this.cartasEnMano;
     }
 }
 

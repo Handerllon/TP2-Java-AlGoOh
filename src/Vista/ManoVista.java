@@ -4,12 +4,13 @@ import Modelo.Jugador;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
-public class ManoVista implements ObjectoObservador {
-
+public class ManoVista implements ObjectoObservador
+{
     private FlowPane flowPane;
     private Stage stage;
 
-    public ManoVista(Stage primaryStage, Jugador jugador) {
+    public ManoVista(Stage primaryStage, Jugador jugador)
+    {
 
         flowPane = new FlowPane();
 
@@ -19,20 +20,20 @@ public class ManoVista implements ObjectoObservador {
 
     }
 
-    public void inicializarRegion() {
-
+    public void inicializarRegion()
+    {
 
     }
 
-    public FlowPane getNodo() {
+    public FlowPane getNodo()
+    {
 
         return flowPane;
     }
 
     @Override
-    public void update() {
+    public void update()
+    {
         // TODO: pedir las cartas a la mano y actualizar las vistas.
     }
-
-
 }

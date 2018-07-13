@@ -1,14 +1,10 @@
 
-.idea/libraries/junit_4_12.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
-.idea/workspace.xml
 *.class
-TP2-Java-AlGoOh.iml
-/bin/
+*.iml
+*.jar
 .project
 .classpath
-.idea/dictionaries/Santiago.xml
-.idea/codeStyles/codeStyleConfig.xml
-*.jar
+/bin/
+/.idea/
+/out/
+/libs/

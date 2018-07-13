@@ -8,7 +8,7 @@ public class LeftLegOfTheForbiddenOne extends CartaMonstruo
     private static int PUNTOS_DEFENSA = 300;
     private static int PUNTOS_ATAQUE = 200;
 
-    public LeftLegOfTheForbiddenOne(Jugador jugador, Jugador oponente,String locacionDeImagen)
+    public LeftLegOfTheForbiddenOne(Jugador jugador, Jugador oponente, String locacionDeImagen)
     {
         super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente, locacionDeImagen);
         this.estrellas = 1;

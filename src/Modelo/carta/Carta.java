@@ -17,11 +17,12 @@ public abstract class Carta
         this.locacionDeImagen = locacionDeImagen;
     }
 
-    public String obtenerLocacionDeImagen(){
-    	
-    	return this.locacionDeImagen;
+    public String obtenerLocacionDeImagen()
+    {
+
+        return this.locacionDeImagen;
     }
-    
+
     public String obtenerNombre()
     {
         return nombre;

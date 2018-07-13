@@ -1,8 +1,8 @@
 package AlGoOh;
 
 import Modelo.Jugador;
-import Modelo.carta.excepciones.MazoVacio;
 import Modelo.carta.*;
+import Modelo.carta.excepciones.MazoVacio;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -398,7 +398,7 @@ public class AlGoOhTest2
 
         assertTrue(jugador2.cartaEstaEnCementerio(monstruoJugador2));
         assertFalse(jugador1.cartaEstaEnCementerio(monstruoJugador1));
-        assertEquals(puntosDeVidaEsperadosJugador2 , jugador2.getPuntosDeVida(), 0);
+        assertEquals(puntosDeVidaEsperadosJugador2, jugador2.getPuntosDeVida(), 0);
         assertEquals(8000, jugador1.getPuntosDeVida(), 0);
     }
 

@@ -13,7 +13,7 @@ public abstract class CartaMonstruo extends Carta
 
     public CartaMonstruo(int puntosDefensa, int puntosAtaque, Jugador jugador, Jugador oponente, String locacionDeImagen)
     {
-        super(jugador, oponente,locacionDeImagen);
+        super(jugador, oponente, locacionDeImagen);
 
         this.puntosDefensa = puntosDefensa;
         this.puntosAtaque = puntosAtaque;

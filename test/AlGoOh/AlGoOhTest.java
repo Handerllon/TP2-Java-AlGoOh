@@ -138,7 +138,7 @@ public class AlGoOhTest
 
         jugador1.atacarOponente(cartaJugador1, cartaJugador2);
 
-        assertEquals(8000-900, jugador2.getPuntosDeVida(), 0 );
+        assertEquals(8000 - 900, jugador2.getPuntosDeVida(), 0);
 
         assertTrue(jugador2.cartaEstaEnCementerio(cartaJugador2));
         assertFalse(jugador1.cartaEstaEnCementerio(cartaJugador1));
@@ -169,7 +169,7 @@ public class AlGoOhTest
 
         jugador1.atacarOponente(cartaJugador1, cartaJugador2);
 
-        assertEquals(8000-900, jugador1.getPuntosDeVida(), 0);
+        assertEquals(8000 - 900, jugador1.getPuntosDeVida(), 0);
 
         assertTrue(jugador1.cartaEstaEnCementerio(cartaJugador1));
         assertFalse(jugador2.cartaEstaEnCementerio(cartaJugador2));
@@ -261,7 +261,7 @@ public class AlGoOhTest
 
         jugador1.atacarOponente(cartaJugador1, cartaJugador2);
 
-        assertEquals(8000-100, jugador1.getPuntosDeVida(), 0);
+        assertEquals(8000 - 100, jugador1.getPuntosDeVida(), 0);
 
         assertFalse(jugador2.cartaEstaEnCementerio(cartaJugador2));
         assertFalse(jugador1.cartaEstaEnCementerio(cartaJugador1));

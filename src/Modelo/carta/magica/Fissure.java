@@ -6,9 +6,9 @@ import Modelo.carta.CartaMonstruo;
 
 public class Fissure extends CartaMagica
 {
-    public Fissure(Jugador jugador, Jugador oponente,String locacionDeImagen)
+    public Fissure(Jugador jugador, Jugador oponente, String locacionDeImagen)
     {
-        super(jugador, oponente,locacionDeImagen);
+        super(jugador, oponente, locacionDeImagen);
         this.nombre = "Fissure";
     }
 

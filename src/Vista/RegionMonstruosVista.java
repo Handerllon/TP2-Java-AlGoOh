@@ -8,12 +8,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
-public class RegionMonstruosVista implements ObjectoObservador {
-
+public class RegionMonstruosVista implements ObjectoObservador
+{
     private GridPane gridJugador;
     private Stage stage;
 
-    public RegionMonstruosVista(Stage primaryStage, Jugador jugador) {
+    public RegionMonstruosVista(Stage primaryStage, Jugador jugador)
+    {
 
         gridJugador = new GridPane();
 
@@ -23,7 +24,8 @@ public class RegionMonstruosVista implements ObjectoObservador {
 
     }
 
-    public void inicializarRegion() {
+    public void inicializarRegion()
+    {
 
         ColumnConstraints columna0 = new ColumnConstraints(262);
         ColumnConstraints columna1 = new ColumnConstraints(262);
@@ -35,7 +37,8 @@ public class RegionMonstruosVista implements ObjectoObservador {
         gridJugador.getColumnConstraints().addAll(columna0, columna1, columna2, columna3, columna4);
         gridJugador.getRowConstraints().addAll(fila1);
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++)
+        {
 
             Button boton = new Button();
             boton.setPrefSize(95.4, 139);
@@ -44,20 +47,19 @@ public class RegionMonstruosVista implements ObjectoObservador {
             gridJugador.add(boton, i, 0);
 
             GridPane.setHalignment(boton, HPos.CENTER);
-
         }
     }
 
-    public GridPane getNodo() {
-
+    public GridPane getNodo()
+    {
 
         return gridJugador;
     }
 
     @Override
-    public void update() {
+    public void update()
+    {
         // TODO: pedir las cartas de la region monstruo, y pedirles sus imagenes para actualizar la vista de la region monstruo.
 
     }
-
 }

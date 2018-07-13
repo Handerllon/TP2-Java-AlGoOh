@@ -1,8 +1,9 @@
 package Modelo;
 
+import Modelo.carta.Mano;
+import Modelo.carta.Mazo;
 import org.junit.Test;
 
-import Modelo.carta.*;
 import static org.junit.Assert.assertEquals;
 
 public class ManoTest

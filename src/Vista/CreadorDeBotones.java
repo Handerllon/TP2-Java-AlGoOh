@@ -36,6 +36,7 @@ public class CreadorDeBotones
 
         return boton;
     }
+
     public Button nuevoBotonCartaEnMano(Button boton, Stage primaryStage)
     {
 
@@ -63,50 +64,49 @@ public class CreadorDeBotones
 
         return boton;
     }
-    
+
     private VBox crearVBoxCartaMonstruo(VBox vbox, Popup popup)
     {
-    	
-    	Button b2 = new Button("Atacar");
-    	Button b3 = new Button("Cambiar Orientacion");
-    	Button b4 = new Button("Dar Vuelta");
-    	Button b5 = new Button("Cerrar");
-    	
-    	b5.setOnAction(new EventHandler<ActionEvent>()
-    	{
-    		public void handle(ActionEvent event)
-    		{
-    			
-    			popup.hide();
-    		}
-    	});
-    	
-    	vbox.getChildren().addAll(b2, b3, b4, b5);
-    	
-    	return vbox;
+
+        Button b2 = new Button("Atacar");
+        Button b3 = new Button("Cambiar Orientacion");
+        Button b4 = new Button("Dar Vuelta");
+        Button b5 = new Button("Cerrar");
+
+        b5.setOnAction(new EventHandler<ActionEvent>()
+        {
+            public void handle(ActionEvent event)
+            {
+
+                popup.hide();
+            }
+        });
+
+        vbox.getChildren().addAll(b2, b3, b4, b5);
+
+        return vbox;
     }
-    
 
     private VBox crearVBoxCartaEnMano(VBox vbox, Popup popup)
     {
-    	
-    	Button b2 = new Button("Jugar boca arriba");
-    	Button b3 = new Button("Jugar boca abajo");
-    	Button b4 = new Button("Dar Vuelta");
-    	Button b5 = new Button("Cerrar");
-    	
-    	b5.setOnAction(new EventHandler<ActionEvent>()
-    	{
-    		public void handle(ActionEvent event)
-    		{
-    			
-    			popup.hide();
-    		}
-    	});
-    	
-    	vbox.getChildren().addAll(b2, b3, b4, b5);
-    	
-    	return vbox;
+
+        Button b2 = new Button("Jugar boca arriba");
+        Button b3 = new Button("Jugar boca abajo");
+        Button b4 = new Button("Dar Vuelta");
+        Button b5 = new Button("Cerrar");
+
+        b5.setOnAction(new EventHandler<ActionEvent>()
+        {
+            public void handle(ActionEvent event)
+            {
+
+                popup.hide();
+            }
+        });
+
+        vbox.getChildren().addAll(b2, b3, b4, b5);
+
+        return vbox;
     }
 }
 

@@ -21,9 +21,9 @@ public class FabricaCartasTrampa
         ArrayList<String> nombres = new ArrayList<String>();
 
         String nombre;
-        nombre = new MagicCylinder(jugador, oponente,"resources/imagenes/trampa/MagicCylinder.png").obtenerNombre();
+        nombre = new MagicCylinder(jugador, oponente, "resources/imagenes/trampa/MagicCylinder.png").obtenerNombre();
         nombres.add(nombre);
-        nombre = new Reinforcements(jugador, oponente,"resources/imagenes/trampa/Reinforcements.jpg").obtenerNombre();
+        nombre = new Reinforcements(jugador, oponente, "resources/imagenes/trampa/Reinforcements.jpg").obtenerNombre();
         nombres.add(nombre);
 
         return nombres;
@@ -35,9 +35,9 @@ public class FabricaCartasTrampa
         {
             //Trampa.
             case "Magic Cylinder":
-                return new MagicCylinder(jugador, oponente,"resources/imagenes/trampa/MagicCylinder.png");
+                return new MagicCylinder(jugador, oponente, "resources/imagenes/trampa/MagicCylinder.png");
             case "Reinforcements":
-                return new Reinforcements(jugador, oponente,"resources/imagenes/trampa/Reinforcements.jpg");
+                return new Reinforcements(jugador, oponente, "resources/imagenes/trampa/Reinforcements.jpg");
             default:
                 throw new CartaInvalidaError();
         }

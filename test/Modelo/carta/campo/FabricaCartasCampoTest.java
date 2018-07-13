@@ -10,13 +10,13 @@ public class FabricaCartasCampoTest
     @Test
     public void test01SeCreaUnaCartaEnLaFabricaYSeVerificaQueLaClaseCreadaSeaCorrecta()
     {
-       
-    	FabricaCartasCampo fabrica = new FabricaCartasCampo(null, null);
-    	
-    	CartaCampo unaCartaCampo = fabrica.obtenerCarta("Sogen");
-    	
-    	CartaCampo cartaEsperada = new Sogen(null, null , "resources/imagenes/campo/Sogen.png");
-    	
-    	assertEquals(cartaEsperada.getClass(), unaCartaCampo.getClass());
+
+        FabricaCartasCampo fabrica = new FabricaCartasCampo(null, null);
+
+        CartaCampo unaCartaCampo = fabrica.obtenerCarta("Sogen");
+
+        CartaCampo cartaEsperada = new Sogen(null, null, "resources/imagenes/campo/Sogen.png");
+
+        assertEquals(cartaEsperada.getClass(), unaCartaCampo.getClass());
     }
 }

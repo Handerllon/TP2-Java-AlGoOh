@@ -1,7 +1,6 @@
 package Modelo.carta.campo;
 
 import Modelo.Jugador;
-import Modelo.carta.Carta;
 import Modelo.carta.CartaCampo;
 import Modelo.carta.CartaMonstruo;
 
@@ -36,25 +35,25 @@ public class Wasteland extends CartaCampo
         cartasMonstruoOponente.forEach(item -> this.restaurarPuntosDefensa(item));
     }
 
-    public void efecto(Carta carta)
+    public void efecto(CartaMonstruo carta)
     {
         if (carta.obtenerPropietario() == this.jugador)
         {
-            this.modificarPuntosAtaque((CartaMonstruo) carta);
+            this.modificarPuntosAtaque(carta);
         } else
         {
-            this.modificarPuntosDefensa((CartaMonstruo) carta);
+            this.modificarPuntosDefensa(carta);
         }
     }
 
-    public void deshacerEfecto(Carta carta)
+    public void deshacerEfecto(CartaMonstruo carta)
     {
         if (carta.obtenerPropietario() == this.jugador)
         {
-            this.restaurarPuntosAtaque((CartaMonstruo) carta);
+            this.restaurarPuntosAtaque(carta);
         } else
         {
-            this.restaurarPuntosDefensa((CartaMonstruo) carta);
+            this.restaurarPuntosDefensa(carta);
         }
     }
 }

@@ -36,25 +36,25 @@ public class Sogen extends CartaCampo
         cartasMonstruoOponente.forEach(item -> this.restaurarPuntosAtaque(item));
     }
 
-    public void efecto(Carta carta)
+    public void efecto(CartaMonstruo carta)
     {
         if (carta.obtenerPropietario() == this.jugador)
         {
-            this.modificarPuntosDefensa((CartaMonstruo)carta);
+            this.modificarPuntosDefensa(carta);
         } else
         {
-            this.modificarPuntosAtaque((CartaMonstruo)carta);
+            this.modificarPuntosAtaque(carta);
         }
     }
 
-    public void deshacerEfecto(Carta carta)
+    public void deshacerEfecto(CartaMonstruo carta)
     {
         if (carta.obtenerPropietario() == this.jugador)
         {
-            this.restaurarPuntosDefensa((CartaMonstruo)carta);
+            this.restaurarPuntosDefensa(carta);
         } else
         {
-            this.restaurarPuntosAtaque((CartaMonstruo)carta);
+            this.restaurarPuntosAtaque(carta);
         }
     }
 }

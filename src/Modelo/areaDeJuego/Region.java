@@ -4,8 +4,8 @@ import Modelo.Jugador;
 import Modelo.areaDeJuego.excepciones.RegionSinEspacioLibre;
 import Modelo.carta.Carta;
 import Modelo.carta.excepciones.CartaNoExisteEnRegion;
-import Observador.RegionObservable;
 import Observador.ObservadorRegion;
+import Observador.RegionObservable;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,6 @@ public abstract class Region<T extends Carta> implements RegionObservable, Obser
     protected int capacidadMaxima;
     protected Jugador jugador, oponente;
     protected T ultimaCartaEnEntrar, ultimaCartaEnSalir;
-
     protected ArrayList<ObservadorRegion> observadoresRegion = new ArrayList<>();
 
     public Region(int capacidadMaxima, Jugador jugador)
@@ -103,7 +102,6 @@ public abstract class Region<T extends Carta> implements RegionObservable, Obser
     @Override
     public void notificarObservadores()
     {
-        this.observadoresRegion.forEach(item -> item.actualizar(this));
     }
 
     @Override
@@ -113,7 +111,7 @@ public abstract class Region<T extends Carta> implements RegionObservable, Obser
     }
 
     @Override
-    public <T extends Carta> void actualizar(Region<T> region)
+    public void actualizar(Region tRegion)
     {
 
     }

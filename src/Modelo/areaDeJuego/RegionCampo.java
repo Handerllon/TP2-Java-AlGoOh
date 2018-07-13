@@ -1,8 +1,8 @@
 package Modelo.areaDeJuego;
 
 import Modelo.Jugador;
-import Modelo.carta.Carta;
 import Modelo.carta.CartaCampo;
+import Modelo.carta.CartaMonstruo;
 
 public class RegionCampo extends Region<CartaCampo>
 {
@@ -25,10 +25,15 @@ public class RegionCampo extends Region<CartaCampo>
         carta.deshacerEfecto();
     }
 
-    @Override
-    public <T extends Carta> void actualizar(Region<T> tRegion)
+    public void notificarObservadores()
     {
-        T carta = tRegion.obtenerUltimaCartaEnEntrar();
+        this.observadoresRegion.forEach(item -> item.actualizar(this));
+    }
+
+    @Override
+    public void actualizar(Region tRegion)
+    {
+        CartaMonstruo carta = (CartaMonstruo) tRegion.obtenerUltimaCartaEnEntrar();
         if (this.estaVacia() == false)
         {
             this.cartas.get(0).efecto(carta);

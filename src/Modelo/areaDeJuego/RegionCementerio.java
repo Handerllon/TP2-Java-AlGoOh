@@ -11,4 +11,9 @@ public class RegionCementerio extends Region<Carta>
     {
         super(CAPACIDAD_REGION_CEMENTERIO, jugador);
     }
+
+    public void notificarObservadores()
+    {
+        this.observadoresRegion.forEach(item -> item.actualizar(this));
+    }
 }

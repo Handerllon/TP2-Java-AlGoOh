@@ -33,10 +33,5 @@ public class RegionMonstruos extends Region<CartaMonstruo>
 
         return cartaConAtaqueMinimo;
     }
-
-    public void notificarObservadores()
-    {
-        this.observadoresRegion.forEach(item -> item.actualizar(this));
-    }
 }
 

@@ -1,10 +1,11 @@
 package Observador;
 
 import Modelo.areaDeJuego.Region;
+import Modelo.carta.Carta;
 
 public interface ObservadorRegion
 {
     void actualizar();
 
-    void actualizar(Region tRegion);
+    <T extends Carta> void actualizar(Region<T> region);
 }

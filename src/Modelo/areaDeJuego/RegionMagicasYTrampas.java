@@ -51,9 +51,4 @@ public class RegionMagicasYTrampas extends Region<Carta>
         }
         return cartaTrampaBuscada;
     }
-
-    public void notificarObservadores()
-    {
-        this.observadoresRegion.forEach(item -> item.actualizar(this));
-    }
 }

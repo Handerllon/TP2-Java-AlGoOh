@@ -22,7 +22,7 @@ public class Controlador implements ObservadorFinJuego
         this.maquinaTurnos = new MaquinaTurnos(this.modelo.obtenerJugador(), this.modelo.obtenerOponente());
 
 
-        this.comenzarJuego();
+        //this.comenzarJuego();
     }
 
     public void comenzarJuego()

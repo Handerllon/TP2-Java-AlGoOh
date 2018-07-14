@@ -8,9 +8,11 @@ import java.util.ArrayList;
 
 public class Sogen extends CartaCampo
 {
-    public Sogen(Jugador jugador, Jugador oponente, String locacionDeImagen)
+    private static String rutaImagen = "resources/imagenes/campo/Sogen.png";
+
+    public Sogen(Jugador jugador, Jugador oponente)
     {
-        super(jugador, oponente, locacionDeImagen);
+        super(jugador, oponente, rutaImagen);
         this.nombre = "Sogen";
 
         this.modificadorDefensa = 500;

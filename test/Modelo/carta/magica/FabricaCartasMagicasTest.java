@@ -15,7 +15,7 @@ public class FabricaCartasMagicasTest
 
         CartaMagica unaCartaMagica = fabrica.obtenerCarta("Dark Hole");
 
-        CartaMagica cartaEsperada = new DarkHole(null, null, null);
+        CartaMagica cartaEsperada = new DarkHole(null, null);
 
         assertEquals(cartaEsperada.getClass(), unaCartaMagica.getClass());
     }

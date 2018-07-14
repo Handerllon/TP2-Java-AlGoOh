@@ -7,20 +7,20 @@ public abstract class Carta
     protected String nombre;
     protected Orientacion orientacion;
     protected Jugador jugador, oponente;
-    private String locacionDeImagen;
+    private String rutaImagen;
 
-    public Carta(Jugador jugador, Jugador oponente, String locacionDeImagen)
+    public Carta(Jugador jugador, Jugador oponente, String rutaImagen)
     {
         this.orientacion = new OrientacionAbajo();
         this.jugador = jugador;
         this.oponente = oponente;
-        this.locacionDeImagen = locacionDeImagen;
+        this.rutaImagen = rutaImagen;
     }
 
     public String obtenerLocacionDeImagen()
     {
 
-        return this.locacionDeImagen;
+        return this.rutaImagen;
     }
 
     public String obtenerNombre()

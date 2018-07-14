@@ -6,7 +6,6 @@ import Modelo.carta.excepciones.CartaInvalidaError;
 
 import java.util.ArrayList;
 
-// TODO: Parametrizar los strings con las rutas.
 public class FabricaCartasCampo
 {
     private Jugador jugador, oponente;
@@ -22,9 +21,9 @@ public class FabricaCartasCampo
         ArrayList<String> nombres = new ArrayList<String>();
 
         String nombre;
-        nombre = new Sogen(jugador, oponente, "resources/imagenes/campo/Sogen.png").obtenerNombre();
+        nombre = new Sogen(jugador, oponente).obtenerNombre();
         nombres.add(nombre);
-        nombre = new Wasteland(jugador, oponente, "resources/imagenes/campo/Wasteland.png").obtenerNombre();
+        nombre = new Wasteland(jugador, oponente).obtenerNombre();
         nombres.add(nombre);
 
         return nombres;
@@ -36,9 +35,9 @@ public class FabricaCartasCampo
         {
             // Campo.
             case "Sogen":
-                return new Sogen(jugador, oponente, "resources/imagenes/campo/Sogen.png");
+                return new Sogen(jugador, oponente);
             case "Wasteland":
-                return new Wasteland(jugador, oponente, "resources/imagenes/campo/Wasteland.png");
+                return new Wasteland(jugador, oponente);
             default:
                 throw new CartaInvalidaError();
         }

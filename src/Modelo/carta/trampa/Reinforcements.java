@@ -6,9 +6,11 @@ import Modelo.carta.CartaTrampa;
 
 public class Reinforcements extends CartaTrampa
 {
-    public Reinforcements(Jugador jugador, Jugador oponente, String locacionDeImagen)
+    private static String rutaImagen = "resources/imagenes/trampa/Reinforcements.jpg";
+
+    public Reinforcements(Jugador jugador, Jugador oponente)
     {
-        super(jugador, oponente, locacionDeImagen);
+        super(jugador, oponente, rutaImagen);
         this.nombre = "Reinforcements";
     }
 

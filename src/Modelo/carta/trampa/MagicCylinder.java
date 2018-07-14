@@ -6,9 +6,11 @@ import Modelo.carta.CartaTrampa;
 
 public class MagicCylinder extends CartaTrampa
 {
-    public MagicCylinder(Jugador jugador, Jugador oponente, String locacionDeImagen)
+    private static String rutaImagen = "resources/imagenes/trampa/MagicCylinder.png";
+
+    public MagicCylinder(Jugador jugador, Jugador oponente)
     {
-        super(jugador, oponente, locacionDeImagen);
+        super(jugador, oponente, rutaImagen);
         this.nombre = "Magic Cylinder";
         this.trampaCancelaAtaqueAMonstruo = true;
     }

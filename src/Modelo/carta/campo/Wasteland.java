@@ -8,9 +8,11 @@ import java.util.ArrayList;
 
 public class Wasteland extends CartaCampo
 {
-    public Wasteland(Jugador jugador, Jugador oponente, String locacionDeImagen)
+    private static String rutaImagen = "resources/imagenes/campo/Wasteland.png";
+
+    public Wasteland(Jugador jugador, Jugador oponente)
     {
-        super(jugador, oponente, locacionDeImagen);
+        super(jugador, oponente, rutaImagen);
         this.nombre = "Wasteland";
 
         this.modificadorAtaque = 200;

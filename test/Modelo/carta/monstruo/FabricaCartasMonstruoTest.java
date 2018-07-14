@@ -15,7 +15,7 @@ public class FabricaCartasMonstruoTest
 
         CartaMonstruo unaCartaMonstruo = fabrica.obtenerCarta("Alexandrite Dragon");
 
-        CartaMonstruo cartaEsperada = new AlexandriteDragon(null, null, null);
+        CartaMonstruo cartaEsperada = new AlexandriteDragon(null, null);
 
         assertEquals(cartaEsperada.getClass(), unaCartaMonstruo.getClass());
     }

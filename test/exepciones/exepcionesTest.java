@@ -21,7 +21,7 @@ public class exepcionesTest
 
         RegionMonstruos region = new RegionMonstruos(null);
 
-        CartaMonstruo unaCartaMonstruo = new GaiaTheFierceKnight(null, null, null);
+        CartaMonstruo unaCartaMonstruo = new GaiaTheFierceKnight(null, null);
 
         region.removerCarta(unaCartaMonstruo);
     }
@@ -66,7 +66,7 @@ public class exepcionesTest
     public void test06NoHayCartasParaSacrificarError()
     {
 
-        CartaMonstruo carta = new BlueEyesWhiteDragon(null, null, null);
+        CartaMonstruo carta = new BlueEyesWhiteDragon(null, null);
 
         //No hay cartas para sacrificar, y la Modelo.carta requiere sacrificios para ser invocada
         Sacrificio sacrificio = new Sacrificio();
@@ -78,7 +78,7 @@ public class exepcionesTest
     public void test07NoHayCartasParaSacrificarError()
     {
 
-        CartaMonstruo carta = new BlueEyesUltimateDragon(null, null, null);
+        CartaMonstruo carta = new BlueEyesUltimateDragon(null, null);
 
         //No hay cartas para sacrificar, y la Modelo.carta requiere sacrificios para ser invocada
         Sacrificio sacrificio = new Sacrificio();
@@ -91,7 +91,7 @@ public class exepcionesTest
     {
         Mano mano = new Mano(null);
 
-        CartaMonstruo carta = new GaiaTheFierceKnight(null, null, null);
+        CartaMonstruo carta = new GaiaTheFierceKnight(null, null);
 
         for (int i = 0; i < 8; i++)
         {
@@ -106,7 +106,7 @@ public class exepcionesTest
 
         RegionMonstruos region = new RegionMonstruos(null);
 
-        CartaMonstruo carta = new GaiaTheFierceKnight(null, null, null);
+        CartaMonstruo carta = new GaiaTheFierceKnight(null, null);
 
         for (int i = 0; i < 6; i++)
         {

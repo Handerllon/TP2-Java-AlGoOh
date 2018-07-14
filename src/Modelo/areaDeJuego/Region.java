@@ -100,7 +100,10 @@ public abstract class Region<T extends Carta> implements RegionObservable
     @Override
     public void quitarObservador(ObservadorRegion observador)
     {
-        this.observadoresRegion.remove(observador);
+        if(this.observadoresRegion.isEmpty() == false)
+        {
+            this.observadoresRegion.remove(observador);
+        }
     }
 
     @Override

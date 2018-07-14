@@ -19,7 +19,7 @@ public class MaquinaTurnos
 
     public void establecerMaquinaFasesInicial()
     {
-        // nextInt is normally exclusive of the top value, so add 1 to make it inclusive.
+        // nextInt produce un conjunto abierto, asique se le suma 1 para incluir el límite superior.
         int randomNum = ThreadLocalRandom.current().nextInt(0, 1 + 1);
         if (randomNum == 0)
         {

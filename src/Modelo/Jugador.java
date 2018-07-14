@@ -5,8 +5,8 @@ import Modelo.areaDeJuego.RegionCementerio;
 import Modelo.areaDeJuego.RegionMagicasYTrampas;
 import Modelo.areaDeJuego.RegionMonstruos;
 import Modelo.carta.*;
-import Modelo.excepciones.JugadorSinVida;
 import Modelo.finDeJuego.CausaFinJuego;
+import Modelo.finDeJuego.CausaPuntosDeVidaNulos;
 import Modelo.finDeJuego.FinJuegoObservable;
 import Modelo.finDeJuego.ObservadorFinJuego;
 
@@ -23,13 +23,14 @@ public class Jugador implements FinJuegoObservable
     private RegionCampo regionCampo;
     private RegionCementerio cementerio;
     private Jugador oponente;
+    private ArrayList<ObservadorFinJuego> observadoresFinJuegos = new ArrayList<>();
 
     public Jugador(String unNombre)
     {
         this.nombre = unNombre;
         this.puntosDeVida = 8000;
 
-        this.cartasEnMano = new Mano();
+        this.cartasEnMano = new Mano(this);
 
         this.regionMonstruos = new RegionMonstruos(this);
         this.regionMagicasYTrampas = new RegionMagicasYTrampas(this);
@@ -87,8 +88,9 @@ public class Jugador implements FinJuegoObservable
     {
         this.puntosDeVida -= puntosARestar;
         if (this.puntosDeVida <= 0)
-            // TODO: Esto puede ser un trigger para terminar el juego.
-            throw new JugadorSinVida();
+        {
+            this.notificarFinDeJuego(new CausaPuntosDeVidaNulos(this));
+        }
     }
 
     // --------------------------------------------------------------------
@@ -250,22 +252,28 @@ public class Jugador implements FinJuegoObservable
         return this.cartasEnMano;
     }
 
+    // --------------------------------------------------------------------
+    // Metodos de observadores de fin de juego.
+    // --------------------------------------------------------------------
     @Override
-    public void agregarObsevador(ObservadorFinJuego observador)
+    public void agregarObsevadorFinDeJuego(ObservadorFinJuego observador)
     {
-
+        this.observadoresFinJuegos.add(observador);
     }
 
     @Override
-    public void quitarObservador(ObservadorFinJuego observador)
+    public void quitarObservadorFinDeJuego(ObservadorFinJuego observador)
     {
-
+        if (this.observadoresFinJuegos.isEmpty() == false)
+        {
+            this.observadoresFinJuegos.remove(observador);
+        }
     }
 
     @Override
     public void notificarFinDeJuego(CausaFinJuego causaFinJuego)
     {
-
+        this.observadoresFinJuegos.forEach(item -> item.finDeJuego(causaFinJuego));
     }
 }
 

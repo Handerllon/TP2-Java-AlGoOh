@@ -2,7 +2,6 @@ package AlGoOh;
 
 import Modelo.Jugador;
 import Modelo.carta.*;
-import Modelo.carta.excepciones.MazoVacio;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -404,7 +403,7 @@ public class AlGoOhTest2
 
     //Extraer todas las cartas del mazo, y verificar que la partida terminó y el jugador
     //perdió.
-    @Test(expected = MazoVacio.class)
+    @Test
     public void test10SeExtraenTodasLasCartasDelMazoDelJugadorYEstePierde()
     {
         Jugador jugador1 = new Jugador("J1");
@@ -416,15 +415,46 @@ public class AlGoOhTest2
         jugador1.crearMazo();
         jugador2.crearMazo();
 
-        for (int i = 0; i < 41; i++)
+        for(int k = 0; k < 40; k++)
             jugador1.tomarCarta();
+
+        // Como escribo la condicion de fin de juego? El mazo le avisa a sus observadores de fin de juego.
+        assertTrue(0 != 0);
+
     }
 
     //    Colocar las 5 partes de exodia en la mano de un jugador, verificar que la partida
-//    termina y que ese jugador resultó ganador.
+    //    termina y que ese jugador resultó ganador.
     @Test
-    public void test11()
+    public void test11SeColocanLasCincoPartesDeExodiaEnLaManoDeUnJugadorYEsteGanaLaPartida()
     {
+        Jugador jugador1 = new Jugador("J1");
+        Jugador jugador2 = new Jugador("J2");
+
+        jugador1.establecerOponente(jugador2);
+        jugador2.establecerOponente(jugador1);
+
+        jugador1.crearMazo();
+        jugador2.crearMazo();
+
+        FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
+        CartaMonstruo exodiaParte1 = fabricaCartasJugador1.crearCartaMonstruo("Exodia The Forbidden One");
+        CartaMonstruo exodiaParte2 = fabricaCartasJugador1.crearCartaMonstruo("Left Arm Of The Forbidden One");
+        CartaMonstruo exodiaParte3 = fabricaCartasJugador1.crearCartaMonstruo("Left Leg Of The Forbidden One");
+        CartaMonstruo exodiaParte4 = fabricaCartasJugador1.crearCartaMonstruo("Right Arm Of The Forbidden One");
+        CartaMonstruo exodiaParte5 = fabricaCartasJugador1.crearCartaMonstruo("Right Leg Of The Forbidden One");
+
+        Mano manoJugador1 = jugador1.obtenerMano();
+
+        //manoJugador1.agregarObsevadorFinDeJuego();
+
+        manoJugador1.agregarCarta(exodiaParte1);
+        manoJugador1.agregarCarta(exodiaParte2);
+        manoJugador1.agregarCarta(exodiaParte3);
+        manoJugador1.agregarCarta(exodiaParte4);
+        manoJugador1.agregarCarta(exodiaParte5);
+
+        // Como escribo la condicion de fin de juego? La mano le avisa a sus observadores de fin de juego.
         assertTrue(0 != 0);
     }
 }

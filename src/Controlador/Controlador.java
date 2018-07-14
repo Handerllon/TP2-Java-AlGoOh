@@ -2,9 +2,11 @@ package Controlador;
 
 import Controlador.estadosJuego.MaquinaTurnos;
 import Modelo.Modelo;
+import Modelo.finDeJuego.CausaFinJuego;
+import Modelo.finDeJuego.ObservadorFinJuego;
 import Vista.Vista;
 
-public class Controlador
+public class Controlador implements ObservadorFinJuego
 {
     private Modelo modelo;
     private Vista vista;
@@ -15,8 +17,12 @@ public class Controlador
         this.modelo = modelo;
         this.vista = vista;
 
+        this.modelo.agregarObsevadorFinDeJuego(this);
+
         this.maquinaTurnos = new MaquinaTurnos(this.modelo.obtenerJugador(), this.modelo.obtenerOponente());
-        //this.comenzarJuego();
+
+
+        this.comenzarJuego();
     }
 
     public void comenzarJuego()
@@ -27,5 +33,15 @@ public class Controlador
             this.maquinaTurnos.jugar();
             i++;
         }
+    }
+
+    @Override
+    public void finDeJuego(CausaFinJuego causaFinJuego)
+    {
+        // TODO: implementar la notificación en la Vista para que muestre un cartel al cliente. Algo como:
+        // vista.notificarFinDeJuego(causaFinJuego);
+        System.out.println("Fin de Juego debido a " + causaFinJuego.obtenerCausa() + " causado por el jugador " +
+                causaFinJuego.obtenerNombreJugador());
+        System.exit(0);
     }
 }

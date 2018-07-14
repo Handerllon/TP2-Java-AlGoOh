@@ -14,4 +14,9 @@ public class RightArmOfTheForbiddenOne extends CartaMonstruo
         this.estrellas = 1;
         this.nombre = "Right Arm Of The Forbidden One";
     }
+
+    public boolean esParteExodia()
+    {
+        return true;
+    }
 }

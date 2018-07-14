@@ -47,4 +47,9 @@ public abstract class Carta
     {
         return this.jugador;
     }
+
+    public boolean esParteExodia()
+    {
+        return false;
+    }
 }

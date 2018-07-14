@@ -1,8 +1,8 @@
 package Modelo.carta;
 
 import Modelo.Jugador;
-import Modelo.carta.excepciones.MazoVacio;
 import Modelo.finDeJuego.CausaFinJuego;
+import Modelo.finDeJuego.CausaSinCartasEnMazo;
 import Modelo.finDeJuego.FinJuegoObservable;
 import Modelo.finDeJuego.ObservadorFinJuego;
 
@@ -11,12 +11,17 @@ import java.util.Stack;
 
 public class Mazo implements FinJuegoObservable
 {
+    private static int CANTIDAD_CARTAS_INICIALES = 40;
+    private Jugador jugador, oponente;
     private Stack<Carta> cartas = new Stack<>();
+    private ArrayList<ObservadorFinJuego> observadoresFinJuegos = new ArrayList<>();
 
     public Mazo(Jugador jugador, Jugador oponente)
     {
-        //En el mazo hay un maximo de 40 cartas, con las cuales se comienza el juego
-        int cantidadCartas = 40;
+        this.jugador = jugador;
+        this.oponente = oponente;
+
+        int cantidadCartas = CANTIDAD_CARTAS_INICIALES;
 
         FabricaCartas fabricaCartas = new FabricaCartas(jugador, oponente);
 
@@ -81,25 +86,32 @@ public class Mazo implements FinJuegoObservable
             return carta;
         } else
         {
-            throw new MazoVacio();
+            this.notificarFinDeJuego(new CausaSinCartasEnMazo(this.jugador));
+            return new CartaNula();
         }
     }
 
+    // --------------------------------------------------------------------
+    // Metodos de observadores de fin de juego.
+    // --------------------------------------------------------------------
     @Override
-    public void agregarObsevador(ObservadorFinJuego observador)
+    public void agregarObsevadorFinDeJuego(ObservadorFinJuego observador)
     {
-
+        this.observadoresFinJuegos.add(observador);
     }
 
     @Override
-    public void quitarObservador(ObservadorFinJuego observador)
+    public void quitarObservadorFinDeJuego(ObservadorFinJuego observador)
     {
-
+        if (this.observadoresFinJuegos.isEmpty() == false)
+        {
+            this.observadoresFinJuegos.remove(observador);
+        }
     }
 
     @Override
     public void notificarFinDeJuego(CausaFinJuego causaFinJuego)
     {
-
+        this.observadoresFinJuegos.forEach(item -> item.finDeJuego(causaFinJuego));
     }
 }

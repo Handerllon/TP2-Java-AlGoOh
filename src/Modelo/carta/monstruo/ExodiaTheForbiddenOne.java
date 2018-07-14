@@ -14,4 +14,9 @@ public class ExodiaTheForbiddenOne extends CartaMonstruo
         this.estrellas = 3;
         this.nombre = "Exodia The Forbidden One";
     }
+
+    public boolean esParteExodia()
+    {
+        return true;
+    }
 }

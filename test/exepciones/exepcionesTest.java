@@ -1,6 +1,5 @@
 package exepciones;
 
-import Modelo.Jugador;
 import Modelo.areaDeJuego.RegionMonstruos;
 import Modelo.areaDeJuego.excepciones.RegionSinEspacioLibre;
 import Modelo.carta.*;
@@ -12,7 +11,6 @@ import Modelo.carta.monstruo.BlueEyesWhiteDragon;
 import Modelo.carta.monstruo.FabricaCartasMonstruo;
 import Modelo.carta.monstruo.GaiaTheFierceKnight;
 import Modelo.carta.trampa.FabricaCartasTrampa;
-import Modelo.excepciones.JugadorSinVida;
 import org.junit.Test;
 
 public class exepcionesTest
@@ -116,15 +114,6 @@ public class exepcionesTest
 
             region.colocarCarta(carta);
         }
-    }
-
-    @Test(expected = JugadorSinVida.class)
-    public void test10JugadorSinVida()
-    {
-
-        Jugador jugador = new Jugador("AAAA");
-
-        jugador.disminuirPuntosVida(9000);
     }
 }
 	

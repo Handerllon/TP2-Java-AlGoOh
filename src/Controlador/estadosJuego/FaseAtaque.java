@@ -1,6 +1,7 @@
 package Controlador.estadosJuego;
 
 import Modelo.Jugador;
+import Modelo.carta.monstruo.FabricaCartasMonstruo;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,6 +23,12 @@ public class FaseAtaque implements Fase
         System.out.println("----------------------");
         System.out.println(jugador.obtenerNombre() + " FaseAtaque.");
         System.out.println("----------------------");
+        // DEBUG: Pruebo los fines de juego. Seleccionar el que se quiera.
+        //
+        //jugador.disminuirPuntosVida(jugador.getPuntosDeVida());
+        //
+
+
         this.finalizarFase();
     }
 

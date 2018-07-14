@@ -2,15 +2,18 @@ package Vista.carta;
 
 import Modelo.Modelo;
 import Modelo.ObservadorModelo;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.transform.Rotate;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class MazoVista implements ObservadorModelo
@@ -19,6 +22,9 @@ public class MazoVista implements ObservadorModelo
     private Modelo modelo;
     private Button mazoJugador;
     private Button mazoOponente;
+    //TODO: Buscar las resoluciones del sistema
+    private static double anchoDeCarta = 95.4;
+    private static double altoDeCarta = 139; 
 
     public MazoVista(Stage primaryStage, Modelo modelo)
     {
@@ -36,11 +42,18 @@ public class MazoVista implements ObservadorModelo
 
         Button boton = new Button();
 
-        boton.setPrefSize(95.4, 139);
+        boton.setPrefSize(anchoDeCarta, altoDeCarta);
         boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource("resources/imagenes/tablero/Back.jpg").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         
-
+        Image image = new Image(getClass().getClassLoader()
+                .getResource("resources/imagenes/tablero/Back.jpg").toString())
+			;
+		Tooltip tp = new Tooltip();
+		tp.setGraphic(new ImageView(image));
+		
+		boton.setTooltip(tp);
+        
         return boton;
     }
 
@@ -65,17 +78,59 @@ public class MazoVista implements ObservadorModelo
 
     private void actualizarMazoJugador(int numeroDeCartas) {
     	
-    	Tooltip tp = new Tooltip();
-    	tp.setText("Cartas restantes en el mazo: \n" + Integer.valueOf(numeroDeCartas).toString());
-    	mazoJugador.setTooltip(tp);
+    	Popup popup = new Popup();
+    	Button b2 = new Button("Cartas restantes en el mazo: \n" + Integer.valueOf(numeroDeCartas).toString());
+    	popup.getContent().add(b2);
+    	
+    	this.mazoJugador.setOnAction(new EventHandler<ActionEvent>()
+        {
+            public void handle(ActionEvent event)
+            {
+
+                popup.show(stage);
+                javafx.geometry.Point2D point = mazoJugador.localToScene(0.0, 0.0);
+                popup.setX(stage.getX() + point.getX());
+                popup.setY(stage.getY() + point.getY());
+            }
+        });
+    	
+    	b2.setOnAction(new EventHandler<ActionEvent>()
+        {
+            public void handle(ActionEvent event)
+            {
+
+                popup.hide();
+            }
+        });
     	
     }
     
 	private void actualizarMazoOponente(int numeroDeCartas) {
 		
-		Tooltip tp = new Tooltip();
-    	tp.setText("Cartas restantes en el mazo: \n" + Integer.valueOf(numeroDeCartas).toString());
-    	mazoOponente.setTooltip(tp);
+		Popup popup = new Popup();
+    	Button b2 = new Button("Cartas restantes en el mazo: \n" + Integer.valueOf(numeroDeCartas).toString());
+    	popup.getContent().add(b2);
+    	
+    	this.mazoOponente.setOnAction(new EventHandler<ActionEvent>()
+        {
+            public void handle(ActionEvent event)
+            {
+
+                popup.show(stage);
+                javafx.geometry.Point2D point = mazoOponente.localToScene(0.0, 0.0);
+                popup.setX(stage.getX() + point.getX());
+                popup.setY(stage.getY() + point.getY());
+            }
+        });
+    	
+    	b2.setOnAction(new EventHandler<ActionEvent>()
+        {
+            public void handle(ActionEvent event)
+            {
+
+                popup.hide();
+            }
+        });
 	}
 
 }

@@ -6,6 +6,9 @@ import Modelo.carta.monstruo.CartaMonstruo;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -14,6 +17,9 @@ public class BotonCartaEnMano extends Button
 {
     private Carta carta;
     private Button botonDeLaCarta;
+  //TODO: Buscar las resoluciones del sistema
+    private static double anchoDeCarta = 95.4;
+    private static double altoDeCarta = 139;
 
     public BotonCartaEnMano(Stage primaryStage, Carta carta)
     {
@@ -40,8 +46,15 @@ public class BotonCartaEnMano extends Button
     {
 
         Button boton = new Button();
+        
+        Image image = new Image(getClass().getClassLoader()
+                .getResource(this.carta.obtenerLocacionDeImagen()).toString());
+		Tooltip tp = new Tooltip();
+		tp.setGraphic(new ImageView(image));
+		
+		boton.setTooltip(tp);
 
-        boton.setPrefSize(95.4, 139);
+        boton.setPrefSize(anchoDeCarta, altoDeCarta);
 
         Popup popup = new Popup();
 
@@ -88,8 +101,15 @@ public class BotonCartaEnMano extends Button
     private Button crearBotonCartaMagicaEnMano(Stage primaryStage)
     {
         Button boton = new Button();
+        
+        Image image = new Image(getClass().getClassLoader()
+                .getResource(this.carta.obtenerLocacionDeImagen()).toString());
+		Tooltip tp = new Tooltip();
+		tp.setGraphic(new ImageView(image));
+		
+		boton.setTooltip(tp);
 
-        boton.setPrefSize(95.4, 139);
+        boton.setPrefSize(anchoDeCarta, altoDeCarta);
 
         Popup popup = new Popup();
 
@@ -137,8 +157,15 @@ public class BotonCartaEnMano extends Button
     private Button crearBotonMonstruoEnMano(Stage primaryStage)
     {
         Button boton = new Button();
+        
+        Image image = new Image(getClass().getClassLoader()
+                .getResource(this.carta.obtenerLocacionDeImagen()).toString());
+		Tooltip tp = new Tooltip();
+		tp.setGraphic(new ImageView(image));
+		
+		boton.setTooltip(tp);
 
-        boton.setPrefSize(95.4, 139);
+        boton.setPrefSize(anchoDeCarta, altoDeCarta);
 
         Popup popup = new Popup();
 

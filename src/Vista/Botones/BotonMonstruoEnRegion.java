@@ -5,7 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -21,14 +23,19 @@ public class BotonMonstruoEnRegion extends Button
     private CartaMonstruo carta;
     private Stage stage;
     private Button botonDeLaCarta;
+    //TODO: Buscar las resoluciones del sistema
+    private static double anchoDeCarta = 95.4;
+    private static double altoDeCarta = 139;
 
     public BotonMonstruoEnRegion(Stage primaryStage)
     {
     	this.stage = primaryStage;
     	this.botonDeLaCarta = new Button();
+    	
+    	
 		
 		// TODO: generalizar el hardcodeo de los numeros.
-    	this.botonDeLaCarta.setPrefSize(95.4, 139);
+    	this.botonDeLaCarta.setPrefSize(anchoDeCarta, altoDeCarta);
     	this.botonDeLaCarta.setStyle(estiloRegion);
     }
 
@@ -40,8 +47,9 @@ public class BotonMonstruoEnRegion extends Button
 
     public void clear()
     {
-    	this.botonDeLaCarta.setPrefSize(95.4, 139);
-    	this.botonDeLaCarta.setStyle(estiloRegion);
+    	this.botonDeLaCarta = new Button();
+		botonDeLaCarta.setStyle(estiloRegion);
+    	this.botonDeLaCarta.setPrefSize(anchoDeCarta, altoDeCarta);
     }
     
     public void actualizar(CartaMonstruo cartaMonstruo) {
@@ -54,8 +62,17 @@ public class BotonMonstruoEnRegion extends Button
     private Button crearBotonParaCartaEnRegion() {
 		Button botonEnRegion = new Button();
 		
+		//-----Tooltip del boton------
+		Image image = new Image(getClass().getClassLoader()
+                .getResource(this.carta.obtenerLocacionDeImagen()).toString());
+		Tooltip tp = new Tooltip();
+		tp.setGraphic(new ImageView(image));
+		
+		botonEnRegion.setTooltip(tp);
+		//----------------------------
+		
 		//----- Fondo del boton--------
-		botonEnRegion.setPrefSize(95.4, 139);
+		botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
 		botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource(this.carta.obtenerLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 		//------------------------------	

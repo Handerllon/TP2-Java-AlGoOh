@@ -3,7 +3,9 @@ package Vista.Botones;
 import Modelo.carta.campo.CartaCampo;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -16,6 +18,9 @@ public class BotonCampoEnRegion extends Button {
 	private Button boton;
 	private CartaCampo carta;
 	private Stage stage;
+	//TODO: Buscar las resoluciones del sistema
+    private static double anchoDeCarta = 95.4;
+    private static double altoDeCarta = 139;
 	
 	public BotonCampoEnRegion(Stage primaryStage){
 		
@@ -24,7 +29,7 @@ public class BotonCampoEnRegion extends Button {
 		boton = new Button();
 		
 		// TODO: generalizar el hardcodeo de los numeros.
-        boton.setPrefSize(95.4, 139);
+        boton.setPrefSize(anchoDeCarta, altoDeCarta);
 		boton.setStyle(estiloRegion);
 		
 	}
@@ -36,7 +41,9 @@ public class BotonCampoEnRegion extends Button {
 	
 	public void clear(){
 		
+		this.boton = new Button();
 		boton.setStyle(estiloRegion);
+    	this.boton.setPrefSize(anchoDeCarta, altoDeCarta);
 		
 	}
 	
@@ -44,6 +51,12 @@ public class BotonCampoEnRegion extends Button {
 		
 		this.carta = unaCartaCampo;
 		this.boton = this.crearBotonParaCartaEnRegion();
+		Image image = new Image(getClass().getClassLoader()
+                .getResource(this.carta.obtenerLocacionDeImagen()).toString());
+		Tooltip tp = new Tooltip();
+		tp.setGraphic(new ImageView(image));
+		
+		this.boton.setTooltip(tp);
 		
 	}
 
@@ -51,7 +64,7 @@ public class BotonCampoEnRegion extends Button {
 		Button botonEnRegion = new Button();
 				
 		//TODO: Hacer opciones que tiene una cartaCampo una vez que fue jugada
-		botonEnRegion.setPrefSize(95.4, 139);
+		botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
 		botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource(this.carta.obtenerLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 				

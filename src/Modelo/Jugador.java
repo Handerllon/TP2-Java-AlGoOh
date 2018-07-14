@@ -58,7 +58,7 @@ public class Jugador implements FinJuegoObservable
         this.crearMazo();
     }
 
-    public void suscribirRegiones()
+    private void suscribirRegiones()
     {
         this.regionMonstruos.agregarObsevador(this.obtenerRegionCampo());
         this.oponente.obtenerRegionMonstruos().agregarObsevador(this.obtenerRegionCampo());

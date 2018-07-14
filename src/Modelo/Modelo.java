@@ -4,6 +4,7 @@ import Modelo.carta.Carta;
 import Modelo.carta.CartaCampo;
 import Modelo.carta.CartaMonstruo;
 import Modelo.finDeJuego.CausaFinJuego;
+import Modelo.finDeJuego.CausaFinJuegoNula;
 import Modelo.finDeJuego.FinJuegoObservable;
 import Modelo.finDeJuego.ObservadorFinJuego;
 
@@ -15,6 +16,7 @@ public class Modelo implements ModeloObservable, FinJuegoObservable, ObservadorF
     private Jugador jugador2;
     private ArrayList<ObservadorModelo> observadores = new ArrayList<>();
     private ArrayList<ObservadorFinJuego> observadoresFinJuegos = new ArrayList<>();
+    private CausaFinJuego causaFinJuego = new CausaFinJuegoNula();
 
     public Modelo(String nombreJugador, String nombreOponente)
     {
@@ -45,6 +47,14 @@ public class Modelo implements ModeloObservable, FinJuegoObservable, ObservadorF
         return this.jugador2;
     }
 
+    public CausaFinJuego obtenerCausaFinJuego()
+    {
+        return this.causaFinJuego;
+    }
+
+    // --------------------------------------------------------------------
+    // Metodos de observadores modelo.
+    // --------------------------------------------------------------------
     @Override
     public void agregarObsevador(ObservadorModelo observer)
     {
@@ -165,6 +175,7 @@ public class Modelo implements ModeloObservable, FinJuegoObservable, ObservadorF
     @Override
     public void finDeJuego(CausaFinJuego causaFinJuego)
     {
+        this.causaFinJuego = causaFinJuego;
         this.notificarFinDeJuego(causaFinJuego);
     }
 }

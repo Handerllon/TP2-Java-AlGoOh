@@ -80,10 +80,9 @@ public class Mazo implements FinJuegoObservable
 
     public Carta tomarCarta()
     {
-        if (cartas.size() > 0)
+        if (this.cartas.isEmpty() == false)
         {
-            Carta carta = cartas.pop();
-            return carta;
+            return this.cartas.pop();
         } else
         {
             this.notificarFinDeJuego(new CausaSinCartasEnMazo(this.jugador));

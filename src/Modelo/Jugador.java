@@ -19,7 +19,6 @@ public class Jugador implements FinJuegoObservable
     private int puntosDeVida;
     private Mazo mazo;
     private Mano mano;
-    private CausaFinJuego causaFinJuego = new CausaFinJuegoNula();
     // ----------------------------------------
     // Regiones.
     // ----------------------------------------
@@ -243,11 +242,6 @@ public class Jugador implements FinJuegoObservable
         return this.mano;
     }
 
-    public CausaFinJuego obtenerCausaFinJuego()
-    {
-        return this.causaFinJuego;
-    }
-
     // --------------------------------------------------------------------
     // Metodos de observadores de fin de juego.
     // --------------------------------------------------------------------
@@ -269,7 +263,6 @@ public class Jugador implements FinJuegoObservable
     @Override
     public void notificarFinDeJuego(CausaFinJuego causaFinJuego)
     {
-        this.causaFinJuego = causaFinJuego;
         this.observadoresFinJuegos.forEach(item -> item.finDeJuego(causaFinJuego));
     }
 }

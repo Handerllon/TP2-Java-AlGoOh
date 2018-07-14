@@ -47,19 +47,6 @@ public class Mano implements FinJuegoObservable
         }
     }
 
-    public Carta quitarUltimaCarta()
-    {
-        Carta ultimaCarta;
-        if (this.cartas.isEmpty() == false)
-        {
-            ultimaCarta = this.cartas.removeLast();
-            this.verificarRemocionParteExodia(ultimaCarta);
-            return ultimaCarta;
-        }
-
-        return new CartaNula();
-    }
-
     public int cantidadDeCartas()
     {
         return cartas.size();

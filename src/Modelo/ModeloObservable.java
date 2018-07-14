@@ -15,22 +15,17 @@ public interface ModeloObservable
     void notificarObservadores();
 
     ArrayList<CartaMonstruo> obtenerCartasEnRegionMonstruosJugador();
-
     ArrayList<CartaMonstruo> obtenerCartasEnRegionMonstruosOponente();
 
     ArrayList<Carta> obtenerCartasEnRegionMagicasYTrampasJugador();
-
     ArrayList<Carta> obtenerCartasEnRegionMagicasYTrampasOponente();
 
     CartaCampo obtenerCartasEnRegionCampoJugador();
-
     CartaCampo obtenerCartasEnRegionCampoOponente();
 
     int obtenerNumeroDeCartasRestantesEnMazoJugador();
-
     int obtenerNumeroDeCartasRestantesEnMazoOponente();
 
     ArrayList<Carta> obtenerCartasEnLaManoDelJugador();
-
     ArrayList<Carta> obtenerCartasEnLaManoDelOponente();
 }

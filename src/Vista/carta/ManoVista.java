@@ -9,8 +9,8 @@ public class ManoVista implements ObservadorModelo
 {
     private Modelo modelo;
     private Stage stage;
-    private FlowPane manoJugador;
-    private FlowPane manoOponente;
+    private FlowPaneDeMano manoJugador;
+    private FlowPaneDeMano manoOponente;
 
     public ManoVista(Stage primaryStage, Modelo modelo)
     {
@@ -18,30 +18,28 @@ public class ManoVista implements ObservadorModelo
         this.stage = primaryStage;
         this.modelo = modelo;
 
-        this.manoJugador = this.inicializarRegion();
-        this.manoOponente = this.inicializarRegion();
-    }
-
-    public FlowPane inicializarRegion()
-    {
-        return new FlowPane();
+        this.manoJugador = new FlowPaneDeMano(stage);
+        this.manoOponente = new FlowPaneDeMano(stage);
     }
 
     public FlowPane getManoJugador()
     {
 
-        return manoJugador;
+        return manoJugador.getFlowPane();
     }
 
     public FlowPane getManoOponente()
     {
 
-        return manoOponente;
+        return manoOponente.getFlowPane();
     }
 
     @Override
     public void actualizar()
     {
-        // TODO: pedir las cartas a la mano y actualizar las vistas.
+        this.manoJugador.clear();
+        this.manoOponente.clear();
+        this.manoJugador.actualizarMano(this.modelo.obtenerCartasEnLaManoDelJugador());
+        this.manoOponente.actualizarMano(this.modelo.obtenerCartasEnLaManoDelOponente());
     }
 }

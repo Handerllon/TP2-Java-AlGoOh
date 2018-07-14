@@ -50,6 +50,6 @@ public class RegionCementerioVista implements ObservadorModelo
     @Override
     public void actualizar()
     {
-        // TODO: pedir las cartas de la region, y pedirles sus imagenes para actualizar la vista de la region.
+        //TODO Ver que mostrar en el cementerio
     }
 }

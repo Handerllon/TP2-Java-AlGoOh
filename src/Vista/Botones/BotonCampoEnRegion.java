@@ -8,14 +8,18 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.ImagePattern;
+import javafx.stage.Stage;
 
 public class BotonCampoEnRegion extends Button {
 	
     private static String estiloRegion = "-fx-background-color: Transparent";
 	private Button boton;
 	private CartaCampo carta;
+	private Stage stage;
 	
-	public BotonCampoEnRegion(){
+	public BotonCampoEnRegion(Stage primaryStage){
+		
+		this.stage = primaryStage;
 		
 		boton = new Button();
 		
@@ -46,10 +50,10 @@ public class BotonCampoEnRegion extends Button {
 	private Button crearBotonParaCartaEnRegion() {
 		Button botonEnRegion = new Button();
 				
-
+		//TODO: Hacer opciones que tiene una cartaCampo una vez que fue jugada
 		botonEnRegion.setPrefSize(95.4, 139);
 		botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource(carta.obtenerLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+                .getResource(this.carta.obtenerLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 				
 		return botonEnRegion;
 	}

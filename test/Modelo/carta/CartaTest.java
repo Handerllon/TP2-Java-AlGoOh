@@ -1,10 +1,11 @@
-package AlGoOh;
+package Modelo.carta;
 
+import Modelo.Modelo;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class JugadorTest
+public class CartaTest
 {
     @Test
     public void test01()

@@ -1,4 +1,6 @@
-package Modelo.carta;
+package Modelo.carta.modo;
+
+import Modelo.carta.monstruo.CartaMonstruo;
 
 public class ModoAtaque implements Modo
 {

@@ -2,8 +2,8 @@ package Modelo.areaDeJuego;
 
 import Modelo.Jugador;
 import Modelo.carta.Carta;
-import Modelo.carta.CartaMagica;
-import Modelo.carta.CartaTrampa;
+import Modelo.carta.magica.CartaMagica;
+import Modelo.carta.trampa.CartaTrampa;
 
 import java.util.ArrayList;
 

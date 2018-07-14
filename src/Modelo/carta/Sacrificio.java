@@ -1,6 +1,7 @@
 package Modelo.carta;
 
 import Modelo.carta.excepciones.NoHayCartasParaSacrificarError;
+import Modelo.carta.monstruo.CartaMonstruo;
 
 import java.util.Iterator;
 import java.util.LinkedList;

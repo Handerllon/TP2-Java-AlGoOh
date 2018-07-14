@@ -1,6 +1,9 @@
 package Modelo.carta;
 
 import Modelo.Jugador;
+import Modelo.carta.orientacion.Orientacion;
+import Modelo.carta.orientacion.OrientacionAbajo;
+import Modelo.carta.orientacion.OrientacionArriba;
 
 public abstract class Carta
 {
@@ -33,7 +36,7 @@ public abstract class Carta
         this.orientacion.cambiarOrientacion(this);
     }
 
-    protected void establecerOrientacion(Orientacion orientacionNueva)
+    public void establecerOrientacion(Orientacion orientacionNueva)
     {
         this.orientacion = orientacionNueva;
     }

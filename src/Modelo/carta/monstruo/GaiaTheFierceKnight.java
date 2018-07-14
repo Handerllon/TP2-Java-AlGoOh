@@ -1,7 +1,6 @@
 package Modelo.carta.monstruo;
 
 import Modelo.Jugador;
-import Modelo.carta.CartaMonstruo;
 import Modelo.carta.Sacrificio;
 
 public class GaiaTheFierceKnight extends CartaMonstruo

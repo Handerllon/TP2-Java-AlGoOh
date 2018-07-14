@@ -3,8 +3,11 @@ package AlGoOh;
 import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.*;
+import Modelo.carta.campo.CartaCampo;
+import Modelo.carta.magica.CartaMagica;
+import Modelo.carta.monstruo.CartaMonstruo;
+import Modelo.carta.trampa.CartaTrampa;
 import Modelo.finDeJuego.CausaFinJuego;
-import Modelo.finDeJuego.CausaSinCartasEnMazo;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

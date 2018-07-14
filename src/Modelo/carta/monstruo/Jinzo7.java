@@ -1,7 +1,6 @@
 package Modelo.carta.monstruo;
 
 import Modelo.Jugador;
-import Modelo.carta.CartaMonstruo;
 
 public class Jinzo7 extends CartaMonstruo
 {

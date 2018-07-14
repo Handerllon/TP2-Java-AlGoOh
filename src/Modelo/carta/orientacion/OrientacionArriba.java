@@ -1,4 +1,6 @@
-package Modelo.carta;
+package Modelo.carta.orientacion;
+
+import Modelo.carta.Carta;
 
 public class OrientacionArriba implements Orientacion
 {

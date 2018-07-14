@@ -5,6 +5,10 @@ import Modelo.areaDeJuego.RegionCementerio;
 import Modelo.areaDeJuego.RegionMagicasYTrampas;
 import Modelo.areaDeJuego.RegionMonstruos;
 import Modelo.carta.*;
+import Modelo.carta.campo.CartaCampo;
+import Modelo.carta.magica.CartaMagica;
+import Modelo.carta.monstruo.CartaMonstruo;
+import Modelo.carta.trampa.CartaTrampa;
 import Modelo.finDeJuego.*;
 
 import java.util.ArrayList;

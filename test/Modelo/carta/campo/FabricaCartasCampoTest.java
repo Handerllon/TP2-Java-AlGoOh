@@ -1,6 +1,5 @@
 package Modelo.carta.campo;
 
-import Modelo.carta.CartaCampo;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

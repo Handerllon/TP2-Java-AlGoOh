@@ -1,10 +1,11 @@
-package Modelo;
+package Modelo.carta;
 
+import Modelo.Modelo;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class MazoTest
+public class SacrificioTest
 {
     @Test
     public void test01()

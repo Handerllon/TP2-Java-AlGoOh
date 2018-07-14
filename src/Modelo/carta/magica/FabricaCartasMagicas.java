@@ -1,7 +1,6 @@
 package Modelo.carta.magica;
 
 import Modelo.Jugador;
-import Modelo.carta.CartaMagica;
 import Modelo.carta.excepciones.CartaInvalidaError;
 
 import java.util.ArrayList;

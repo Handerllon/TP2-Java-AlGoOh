@@ -1,8 +1,7 @@
 package Modelo.carta.magica;
 
 import Modelo.Jugador;
-import Modelo.carta.CartaMagica;
-import Modelo.carta.CartaMonstruo;
+import Modelo.carta.monstruo.CartaMonstruo;
 
 public class Fissure extends CartaMagica
 {

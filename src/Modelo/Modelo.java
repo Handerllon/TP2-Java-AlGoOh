@@ -1,8 +1,8 @@
 package Modelo;
 
 import Modelo.carta.Carta;
-import Modelo.carta.CartaCampo;
-import Modelo.carta.CartaMonstruo;
+import Modelo.carta.campo.CartaCampo;
+import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaFinJuegoNula;
 import Modelo.finDeJuego.FinJuegoObservable;

@@ -1,8 +1,8 @@
 package Modelo.areaDeJuego;
 
 import Modelo.Jugador;
-import Modelo.carta.CartaCampo;
-import Modelo.carta.CartaMonstruo;
+import Modelo.carta.campo.CartaCampo;
+import Modelo.carta.monstruo.CartaMonstruo;
 
 public class RegionCampo extends Region<CartaCampo> implements ObservadorRegion<RegionMonstruos>
 {

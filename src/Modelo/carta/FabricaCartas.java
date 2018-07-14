@@ -1,9 +1,13 @@
 package Modelo.carta;
 
 import Modelo.Jugador;
+import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.campo.FabricaCartasCampo;
+import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.magica.FabricaCartasMagicas;
+import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.monstruo.FabricaCartasMonstruo;
+import Modelo.carta.trampa.CartaTrampa;
 import Modelo.carta.trampa.FabricaCartasTrampa;
 
 import java.util.ArrayList;

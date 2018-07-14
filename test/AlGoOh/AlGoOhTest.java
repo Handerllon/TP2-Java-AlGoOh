@@ -2,6 +2,9 @@ package AlGoOh;
 
 import Modelo.Jugador;
 import Modelo.carta.*;
+import Modelo.carta.magica.CartaMagica;
+import Modelo.carta.monstruo.CartaMonstruo;
+import Modelo.carta.trampa.CartaTrampa;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -1,7 +1,7 @@
 package Modelo.areaDeJuego;
 
 import Modelo.Jugador;
-import Modelo.carta.CartaMonstruo;
+import Modelo.carta.monstruo.CartaMonstruo;
 
 import java.util.ArrayList;
 

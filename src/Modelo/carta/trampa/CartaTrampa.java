@@ -1,6 +1,8 @@
-package Modelo.carta;
+package Modelo.carta.trampa;
 
 import Modelo.Jugador;
+import Modelo.carta.Carta;
+import Modelo.carta.monstruo.CartaMonstruo;
 
 public abstract class CartaTrampa extends Carta
 {

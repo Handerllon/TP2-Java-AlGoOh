@@ -1,8 +1,7 @@
 package Modelo.carta.trampa;
 
 import Modelo.Jugador;
-import Modelo.carta.CartaMonstruo;
-import Modelo.carta.CartaTrampa;
+import Modelo.carta.monstruo.CartaMonstruo;
 
 public class MagicCylinder extends CartaTrampa
 {

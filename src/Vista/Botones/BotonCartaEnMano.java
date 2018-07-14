@@ -1,8 +1,8 @@
 package Vista.Botones;
 
 import Modelo.carta.Carta;
-import Modelo.carta.CartaMagica;
-import Modelo.carta.CartaMonstruo;
+import Modelo.carta.magica.CartaMagica;
+import Modelo.carta.monstruo.CartaMonstruo;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;

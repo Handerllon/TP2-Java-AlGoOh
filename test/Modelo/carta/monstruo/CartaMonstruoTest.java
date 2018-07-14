@@ -1,7 +1,6 @@
-package Modelo;
+package Modelo.carta.monstruo;
 
-import Modelo.carta.CartaMonstruo;
-import Modelo.carta.monstruo.GaiaTheFierceKnight;
+import Modelo.Jugador;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

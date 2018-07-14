@@ -1,7 +1,6 @@
 package Modelo.carta.campo;
 
 import Modelo.Jugador;
-import Modelo.carta.CartaCampo;
 import Modelo.carta.excepciones.CartaInvalidaError;
 
 import java.util.ArrayList;

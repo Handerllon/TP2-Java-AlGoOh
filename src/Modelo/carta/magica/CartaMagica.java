@@ -1,6 +1,7 @@
-package Modelo.carta;
+package Modelo.carta.magica;
 
 import Modelo.Jugador;
+import Modelo.carta.Carta;
 
 public abstract class CartaMagica extends Carta
 {

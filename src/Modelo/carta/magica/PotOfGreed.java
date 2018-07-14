@@ -1,7 +1,6 @@
 package Modelo.carta.magica;
 
 import Modelo.Jugador;
-import Modelo.carta.CartaMagica;
 
 public class PotOfGreed extends CartaMagica
 {

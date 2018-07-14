@@ -15,21 +15,22 @@ public class RegionCampoVista implements ObservadorModelo
 
     public RegionCampoVista(Stage primaryStage, Modelo modelo)
     {
-    	stage = primaryStage;
-    	this.modelo = modelo;
+        stage = primaryStage;
+        this.modelo = modelo;
 
         this.botonCampoJugador = this.inicializarBoton();
         this.botonCampoOponente = this.inicializarBoton();
     }
-    
-    private Button inicializarBoton(){
-    	
-    	Button boton = new Button();
-    	
-    	// TODO: generalizar el hardcodeo de los numeros.
+
+    private Button inicializarBoton()
+    {
+
+        Button boton = new Button();
+
+        // TODO: generalizar el hardcodeo de los numeros.
         boton.setPrefSize(95.4, 139);
         boton.setStyle(estiloRegion);
-        
+
         return boton;
     }
 
@@ -38,7 +39,7 @@ public class RegionCampoVista implements ObservadorModelo
 
         return botonCampoJugador;
     }
-    
+
     public Button getRegionCampoOponente()
     {
 

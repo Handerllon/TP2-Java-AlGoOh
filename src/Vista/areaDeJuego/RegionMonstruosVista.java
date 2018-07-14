@@ -21,13 +21,14 @@ public class RegionMonstruosVista implements ObservadorModelo
     {
         gridJugador = this.inicializarGrid();
         gridOponente = this.inicializarGrid();
-        stage = primaryStage; 
+        stage = primaryStage;
     }
 
-    public GridPane inicializarGrid(){
-    	
-    	GridPane grid = new GridPane();
-    	
+    public GridPane inicializarGrid()
+    {
+
+        GridPane grid = new GridPane();
+
         // TODO: generalizar el hardcodeo de los numeros.
         ColumnConstraints columna0 = new ColumnConstraints(262);
         ColumnConstraints columna1 = new ColumnConstraints(262);
@@ -50,21 +51,18 @@ public class RegionMonstruosVista implements ObservadorModelo
 
             GridPane.setHalignment(boton, HPos.CENTER);
         }
-        
+
         grid.setGridLinesVisible(true);
-        
+
         return grid;
-    	
-    	
     }
-    
-    
+
     public GridPane getGridJugador()
     {
 
         return gridJugador;
     }
-    
+
     public GridPane getGridOponente()
     {
 
@@ -74,8 +72,6 @@ public class RegionMonstruosVista implements ObservadorModelo
     @Override
     public void actualizar()
     {
-        
 
     }
-    
 }

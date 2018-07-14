@@ -1,7 +1,8 @@
 package AlGoOh;
 
 import Modelo.Jugador;
-import Modelo.carta.*;
+import Modelo.carta.FabricaCartas;
+import Modelo.carta.Sacrificio;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.trampa.CartaTrampa;

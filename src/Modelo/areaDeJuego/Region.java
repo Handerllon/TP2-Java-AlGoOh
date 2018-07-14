@@ -13,7 +13,6 @@ public abstract class Region<T extends Carta> implements RegionObservable
     protected int capacidadMaxima;
     protected Jugador jugador, oponente;
     protected T ultimaCartaEnEntrar, ultimaCartaEnSalir;
-
     protected ArrayList<ObservadorRegion> observadoresRegion = new ArrayList<>();
 
     public Region(int capacidadMaxima, Jugador jugador)
@@ -100,7 +99,7 @@ public abstract class Region<T extends Carta> implements RegionObservable
     @Override
     public void quitarObservador(ObservadorRegion observador)
     {
-        if(this.observadoresRegion.isEmpty() == false)
+        if (this.observadoresRegion.isEmpty() == false)
         {
             this.observadoresRegion.remove(observador);
         }

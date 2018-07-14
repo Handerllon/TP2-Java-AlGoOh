@@ -4,12 +4,18 @@ import Modelo.areaDeJuego.RegionCampo;
 import Modelo.areaDeJuego.RegionCementerio;
 import Modelo.areaDeJuego.RegionMagicasYTrampas;
 import Modelo.areaDeJuego.RegionMonstruos;
-import Modelo.carta.*;
+import Modelo.carta.Carta;
+import Modelo.carta.Mano;
+import Modelo.carta.Mazo;
+import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.trampa.CartaTrampa;
-import Modelo.finDeJuego.*;
+import Modelo.finDeJuego.CausaFinJuego;
+import Modelo.finDeJuego.CausaPuntosDeVidaNulos;
+import Modelo.finDeJuego.FinJuegoObservable;
+import Modelo.finDeJuego.ObservadorFinJuego;
 
 import java.util.ArrayList;
 

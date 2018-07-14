@@ -2,12 +2,12 @@ package Modelo.carta.monstruo;
 
 import Modelo.Jugador;
 import Modelo.carta.Carta;
-import Modelo.carta.trampa.CartaTrampa;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.excepciones.NoHayCartasParaSacrificarError;
 import Modelo.carta.modo.Modo;
 import Modelo.carta.modo.ModoAtaque;
 import Modelo.carta.modo.ModoDefensa;
+import Modelo.carta.trampa.CartaTrampa;
 
 public abstract class CartaMonstruo extends Carta
 {

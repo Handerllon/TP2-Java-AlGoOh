@@ -15,19 +15,16 @@ public class ManoVista implements ObservadorModelo
     public ManoVista(Stage primaryStage, Modelo modelo)
     {
 
-        
-
         this.stage = primaryStage;
         this.modelo = modelo;
-        
+
         this.manoJugador = this.inicializarRegion();
         this.manoOponente = this.inicializarRegion();
-
     }
 
     public FlowPane inicializarRegion()
     {
-    	return new FlowPane();
+        return new FlowPane();
     }
 
     public FlowPane getManoJugador()
@@ -35,7 +32,7 @@ public class ManoVista implements ObservadorModelo
 
         return manoJugador;
     }
-    
+
     public FlowPane getManoOponente()
     {
 

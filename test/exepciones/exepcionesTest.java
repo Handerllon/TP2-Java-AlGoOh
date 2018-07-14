@@ -2,7 +2,8 @@ package exepciones;
 
 import Modelo.areaDeJuego.RegionMonstruos;
 import Modelo.areaDeJuego.excepciones.RegionSinEspacioLibre;
-import Modelo.carta.*;
+import Modelo.carta.Mano;
+import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.campo.FabricaCartasCampo;
 import Modelo.carta.excepciones.*;

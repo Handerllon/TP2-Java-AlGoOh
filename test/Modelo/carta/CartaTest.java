@@ -1,6 +1,5 @@
 package Modelo.carta;
 
-import Modelo.Modelo;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;

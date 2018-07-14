@@ -24,14 +24,14 @@ public class RegionMagicasYTrampasVista implements ObservadorModelo
 
         this.gridJugador = this.inicializarGrid();
         this.gridOponente = this.inicializarGrid();
-        
     }
 
-    private GridPane inicializarGrid(){
-    	
-    	GridPane grid = new GridPane();
-    	
-    	// TODO: generalizar el hardcodeo de los numeros.
+    private GridPane inicializarGrid()
+    {
+
+        GridPane grid = new GridPane();
+
+        // TODO: generalizar el hardcodeo de los numeros.
         ColumnConstraints columna0 = new ColumnConstraints(262);
         ColumnConstraints columna1 = new ColumnConstraints(262);
         ColumnConstraints columna2 = new ColumnConstraints(262);
@@ -53,17 +53,16 @@ public class RegionMagicasYTrampasVista implements ObservadorModelo
 
             GridPane.setHalignment(boton, HPos.CENTER);
         }
-        
+
         return grid;
     }
-    
-    
+
     public GridPane getGridJugador()
     {
 
         return gridJugador;
     }
-    
+
     public GridPane getGridOponente()
     {
 

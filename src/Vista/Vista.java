@@ -18,13 +18,12 @@ import javafx.stage.Stage;
 
 public class Vista implements ObservadorModelo
 {
+    protected static Modelo modelo;
     // TODO: levantar la resolucion automaticamente con alguna llamada al sistema.
     private static int RESOLUCION_HORIZONTAL = 1920;
     private static int RESOLUCION_VERTICAL = 1000;
     private static String RUTA_TABLERO = "resources/imagenes/tablero/tablero yogioh.png";
     private GridPane root = new GridPane();
-
-    protected static Modelo modelo;
 
     public Vista(Modelo modelo, Stage primaryStage)
     {
@@ -62,28 +61,27 @@ public class Vista implements ObservadorModelo
         grid.setHalignment(regionMonstruos.getGridJugador(), HPos.CENTER);
         grid.add(regionMonstruos.getGridOponente(), 1, 2);
         grid.setHalignment(regionMonstruos.getGridOponente(), HPos.CENTER);
-        
+
         RegionMagicasYTrampasVista regionMagicasYTrampas = new RegionMagicasYTrampasVista(primaryStage, this.modelo);
         grid.add(regionMagicasYTrampas.getGridJugador(), 1, 4);
         grid.setHalignment(regionMagicasYTrampas.getGridJugador(), HPos.CENTER);
         grid.add(regionMagicasYTrampas.getGridOponente(), 1, 1);
         grid.setHalignment(regionMagicasYTrampas.getGridOponente(), HPos.CENTER);
-        
+
         RegionCampoVista regionCampo = new RegionCampoVista(primaryStage, this.modelo);
         grid.add(regionCampo.getRegionCampoJugador(), 0, 4);
         grid.setHalignment(regionCampo.getRegionCampoJugador(), HPos.CENTER);
         grid.add(regionCampo.getRegionCampoOponente(), 2, 1);
         grid.setHalignment(regionCampo.getRegionCampoOponente(), HPos.CENTER);
-        
+
         RegionCementerioVista regionCementerio = new RegionCementerioVista(primaryStage, this.modelo);
         grid.add(regionCementerio.getCementerioJugador(), 0, 3);
         grid.setHalignment(regionCementerio.getCementerioJugador(), HPos.CENTER);
         grid.add(regionCementerio.getCementerioOponente(), 2, 2);
         grid.setHalignment(regionCementerio.getCementerioOponente(), HPos.CENTER);
-      
 
         // ---------------- Manos ----------------
-        
+
         ManoVista manos = new ManoVista(primaryStage, this.modelo);
         grid.add(manos.getManoJugador(), 1, 5);
         grid.setHalignment(manos.getManoJugador(), HPos.CENTER);
@@ -91,7 +89,7 @@ public class Vista implements ObservadorModelo
         grid.setHalignment(manos.getManoOponente(), HPos.CENTER);
 
         // ---------------- Mazos ----------------
-        
+
         MazoVista mazos = new MazoVista(primaryStage, this.modelo);
         grid.add(mazos.getMazoJugador(), 2, 5);
         grid.setHalignment(mazos.getMazoJugador(), HPos.CENTER);

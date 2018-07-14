@@ -2,7 +2,9 @@ package AlGoOh;
 
 import Modelo.Jugador;
 import Modelo.Modelo;
-import Modelo.carta.*;
+import Modelo.carta.FabricaCartas;
+import Modelo.carta.Mano;
+import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;

@@ -28,7 +28,7 @@ public class RegionCampo extends Region<CartaCampo> implements ObservadorRegion<
     @Override
     public void agregacionCarta(RegionMonstruos region)
     {
-        CartaMonstruo carta =  region.obtenerUltimaCartaEnEntrar();
+        CartaMonstruo carta = region.obtenerUltimaCartaEnEntrar();
         if (this.estaVacia() == false)
         {
             this.cartas.get(0).efecto(carta);
@@ -38,7 +38,7 @@ public class RegionCampo extends Region<CartaCampo> implements ObservadorRegion<
     @Override
     public void remocionCarta(RegionMonstruos region)
     {
-        CartaMonstruo carta =  region.obtenerUltimaCartaEnSalir();
+        CartaMonstruo carta = region.obtenerUltimaCartaEnSalir();
         if (this.estaVacia() == false)
         {
             this.cartas.get(0).deshacerEfecto(carta);

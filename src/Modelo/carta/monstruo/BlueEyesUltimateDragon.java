@@ -25,7 +25,7 @@ public class BlueEyesUltimateDragon extends CartaMonstruo
         // TODO: ver esto.
         // Se crea una Modelo.carta Dragón Blanco de Ojos Azules para obtener su nombre, y no hardcodearlo en el código, ya
         // que si este nombre cambia, habría que cambiar todos los lugares donde se hubiera hardcodeado.
-        CartaMonstruo cartaBlueEyesWhiteDragonMock = new BlueEyesWhiteDragon(null,null);
+        CartaMonstruo cartaBlueEyesWhiteDragonMock = new BlueEyesWhiteDragon(null, null);
 
         if (sacrificio.cantidadSacrificiosDe(cartaBlueEyesWhiteDragonMock.obtenerNombre()) < cantidadDragonesBlancosNecesarios)
         {

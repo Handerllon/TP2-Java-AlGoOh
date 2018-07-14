@@ -2,53 +2,55 @@ package Vista.areaDeJuego;
 
 import Modelo.Modelo;
 import Modelo.ObservadorModelo;
+import Modelo.carta.campo.CartaCampo;
+import Vista.Botones.BotonCampoEnRegion;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class RegionCampoVista implements ObservadorModelo
 {
-    private static String estiloRegion = "-fx-background-color: Transparent";
     private Stage stage;
     private Modelo modelo;
-    private Button botonCampoJugador;
-    private Button botonCampoOponente;
+    private BotonCampoEnRegion botonCampoJugador;
+    private BotonCampoEnRegion botonCampoOponente;
 
     public RegionCampoVista(Stage primaryStage, Modelo modelo)
     {
         stage = primaryStage;
         this.modelo = modelo;
 
-        this.botonCampoJugador = this.inicializarBoton();
-        this.botonCampoOponente = this.inicializarBoton();
-    }
-
-    private Button inicializarBoton()
-    {
-
-        Button boton = new Button();
-
-        // TODO: generalizar el hardcodeo de los numeros.
-        boton.setPrefSize(95.4, 139);
-        boton.setStyle(estiloRegion);
-
-        return boton;
+        this.botonCampoJugador = new BotonCampoEnRegion();
+        this.botonCampoOponente = new BotonCampoEnRegion();
     }
 
     public Button getRegionCampoJugador()
     {
 
-        return botonCampoJugador;
+        return botonCampoJugador.obtenerBoton();
     }
 
     public Button getRegionCampoOponente()
     {
 
-        return botonCampoOponente;
+        return botonCampoOponente.obtenerBoton();
     }
 
     @Override
     public void actualizar()
     {
-        // TODO: pedir las cartas de la region, y pedirles sus imagenes para actualizar la vista de la region.
+    	this.botonCampoJugador.clear();
+    	this.botonCampoOponente.clear();
+        this.actualizarRegionJugador(this.modelo.obtenerCartasEnRegionCampoJugador());
+        this.actualizarRegionOponente(this.modelo.obtenerCartasEnRegionCampoOponente());
+    }
+    
+    private void actualizarRegionJugador(CartaCampo unaCartaCampo)
+    {
+    	this.botonCampoJugador.actualizarImagen(unaCartaCampo);
+    }
+    
+    private void actualizarRegionOponente(CartaCampo unaCartaCampo)
+    {
+    	this.botonCampoOponente.actualizarImagen(unaCartaCampo);
     }
 }

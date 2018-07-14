@@ -1,5 +1,6 @@
 package Vista.Botones;
 
+import Modelo.carta.monstruo.CartaMonstruo;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -11,15 +12,13 @@ import javafx.stage.Stage;
 
 public class BotonMonstruoEnRegion extends Button
 {
-    private String nombreDeCartaMonstruo;
-    private String locacionDeImagen;
+    private CartaMonstruo carta;
     private Button botonDeLaCarta;
 
-    public BotonMonstruoEnRegion(String nombreDeCarta, String locacionDeImagen, Stage primaryStage)
+    public BotonMonstruoEnRegion(CartaMonstruo carta, Stage primaryStage)
     {
 
-        this.nombreDeCartaMonstruo = nombreDeCarta;
-        this.locacionDeImagen = locacionDeImagen;
+        this.carta = carta;
         this.botonDeLaCarta = this.crearBotonMonstruo(primaryStage);
     }
 
@@ -40,13 +39,9 @@ public class BotonMonstruoEnRegion extends Button
 
         VBox vbox = new VBox();
 
-        Image image = new Image(getClass().getResourceAsStream(locacionDeImagen));
-
         vbox = this.crearVBoxCartaMonstruo(vbox, popup);
 
         popup.getContent().addAll(vbox);
-
-        boton.setGraphic(new ImageView(image));
 
         boton.setOnAction(new EventHandler<ActionEvent>()
         {

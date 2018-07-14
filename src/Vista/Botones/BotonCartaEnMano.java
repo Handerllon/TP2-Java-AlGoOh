@@ -12,15 +12,13 @@ import javafx.stage.Stage;
 
 public class BotonCartaEnMano extends Button
 {
-    private String nombreDeCarta;
-    private String locacionDeImagen;
+    private Carta carta;
     private Button botonDeLaCarta;
 
-    public BotonCartaEnMano(String nombreDeCarta, String locacionDeImagen, Stage primaryStage, Carta carta)
+    public BotonCartaEnMano(Stage primaryStage, Carta carta)
     {
 
-        this.nombreDeCarta = nombreDeCarta;
-        this.locacionDeImagen = locacionDeImagen;
+        this.carta = carta;
 
         if (carta.getClass() == CartaMonstruo.class)
         {

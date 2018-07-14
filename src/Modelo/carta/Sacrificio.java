@@ -2,11 +2,11 @@ package Modelo.carta;
 
 import Modelo.carta.excepciones.NoHayCartasParaSacrificarError;
 import Modelo.carta.monstruo.CartaMonstruo;
+import Modelo.carta.monstruo.CartaMonstruoNula;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 
-// TODO: validar la cantidad de cartas que voy poniendo. Puede lanzar excepciones si pido de más.
 public class Sacrificio
 {
     private LinkedList<CartaMonstruo> cartasASacrificar;
@@ -27,11 +27,7 @@ public class Sacrificio
         if (cartasASacrificar.isEmpty())
             throw new NoHayCartasParaSacrificarError();
 
-        CartaMonstruo cartaMonstruo;
-        cartaMonstruo = cartasASacrificar.getLast();
-        cartasASacrificar.removeLast();
-
-        return cartaMonstruo;
+        return cartasASacrificar.removeLast();
     }
 
     public CartaMonstruo getMonstruo(String nombreCarta)
@@ -50,7 +46,7 @@ public class Sacrificio
             }
         }
 
-        return null;
+        return new CartaMonstruoNula();
     }
 
     public int cantidadSacrificiosDe(String nombreCarta)

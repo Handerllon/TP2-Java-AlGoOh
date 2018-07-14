@@ -10,7 +10,7 @@ public abstract class Carta
     protected String nombre;
     protected Orientacion orientacion;
     protected Jugador jugador, oponente;
-    private String rutaImagen;
+    protected String rutaImagen;
 
     public Carta(Jugador jugador, Jugador oponente, String rutaImagen)
     {

@@ -76,8 +76,7 @@ public class AlGoOhTest2
         jugador1.jugarCarta(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
-        // TODO: Hay que hacer que de alguna forma la región campo del oponente (jugador1) se entere de que entró una
-        // Modelo.carta monstruo, ya que es la que tiene la Modelo.carta campo activa.
+
         jugador2.jugarCarta(cartaJugador2);
 
         int puntosDeAtaqueEsperadosCartaJugador = 1000 + 200;
@@ -138,7 +137,6 @@ public class AlGoOhTest2
         jugador2.establecerOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
-        FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
         CartaMagica cartaOllaDeLaCodicia = fabricaCartasJugador1.crearCartaMagica("Pot of Greed");
 
@@ -229,7 +227,6 @@ public class AlGoOhTest2
         jugador2.establecerOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
-        FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
         //Necesitamos sacrificios para invocar a todos los dragones
         CartaMonstruo primerSacrificio1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");

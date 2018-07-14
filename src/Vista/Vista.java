@@ -24,6 +24,12 @@ public class Vista implements ObservadorModelo
     private static int RESOLUCION_VERTICAL = 1000;
     private static String RUTA_TABLERO = "resources/imagenes/tablero/tablero yogioh.png";
     private GridPane root = new GridPane();
+    private RegionMonstruosVista regionMonstruos;
+    private RegionMagicasYTrampasVista regionMagicasYTrampas;
+    private RegionCampoVista regionCampo;
+    private RegionCementerioVista regionCementerio;
+    private ManoVista manos;
+    private MazoVista mazos;
 
     public Vista(Modelo modelo, Stage primaryStage)
     {
@@ -102,6 +108,11 @@ public class Vista implements ObservadorModelo
     @Override
     public void actualizar()
     {
-
+    	this.regionCampo.actualizar();
+    	this.regionMagicasYTrampas.actualizar();
+    	this.regionMonstruos.actualizar();
+    	this.regionCementerio.actualizar();
+    	this.manos.actualizar();
+    	this.mazos.actualizar();
     }
 }

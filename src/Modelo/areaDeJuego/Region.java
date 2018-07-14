@@ -3,7 +3,7 @@ package Modelo.areaDeJuego;
 import Modelo.Jugador;
 import Modelo.areaDeJuego.excepciones.RegionSinEspacioLibre;
 import Modelo.carta.Carta;
-import Modelo.carta.excepciones.CartaNoExisteEnRegion;
+import Modelo.carta.excepciones.CartaNoExisteEnRegionError;
 
 import java.util.ArrayList;
 
@@ -46,7 +46,7 @@ public abstract class Region<T extends Carta> implements RegionObservable
             this.cartas.remove(carta);
             this.notificarRemocionCarta();
         } else
-            throw new CartaNoExisteEnRegion(carta);
+            throw new CartaNoExisteEnRegionError(carta);
     }
 
     public boolean contieneCarta(T carta)

@@ -1,7 +1,7 @@
 package Modelo.carta;
 
 import Modelo.Jugador;
-import Modelo.carta.excepciones.NoSePuedenAgregarMasCartasALaMano;
+import Modelo.carta.excepciones.ManoLlenaError;
 import Modelo.finDeJuego.CausaCincoPartesExodiaReunidas;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.FinJuegoObservable;
@@ -27,12 +27,15 @@ public class Mano implements FinJuegoObservable
 
     public void agregarCarta(Carta carta)
     {
-        if (this.cantidadDeCartas() <= CANTIDAD_MAXIMA)
+        if (this.manoLlena() == false)
         {
             this.cartas.add(carta);
             this.verificarAgregacionParteExodia(carta);
             this.verificarExodiaCompleto(carta);
-        } else throw new NoSePuedenAgregarMasCartasALaMano();
+        } else
+        {
+            throw new ManoLlenaError();
+        }
     }
 
     public void quitarCarta(Carta carta)

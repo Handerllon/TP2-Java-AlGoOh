@@ -15,7 +15,7 @@ import org.junit.Test;
 
 public class exepcionesTest
 {
-    @Test(expected = CartaNoExisteEnRegion.class)
+    @Test(expected = CartaNoExisteEnRegionError.class)
     public void test01CartaNoExisteEnRegion()
     {
 
@@ -86,11 +86,10 @@ public class exepcionesTest
         carta.invocar(sacrificio);
     }
 
-    @Test(expected = NoSePuedenAgregarMasCartasALaMano.class)
+    @Test(expected = ManoLlenaError.class)
     public void test08NoSePuedenAgregarCartasALaMano()
     {
-
-        Mano mano = new Mano();
+        Mano mano = new Mano(null);
 
         CartaMonstruo carta = new GaiaTheFierceKnight(null, null, null);
 

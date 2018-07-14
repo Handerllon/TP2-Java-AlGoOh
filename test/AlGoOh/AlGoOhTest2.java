@@ -2,6 +2,9 @@ package AlGoOh;
 
 import Modelo.Jugador;
 import Modelo.carta.*;
+import Modelo.finDeJuego.CausaCincoPartesExodiaReunidas;
+import Modelo.finDeJuego.CausaFinJuego;
+import Modelo.finDeJuego.CausaSinCartasEnMazo;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -19,9 +22,6 @@ public class AlGoOhTest2
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
-
-        jugador1.crearMazo();
-        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -59,9 +59,6 @@ public class AlGoOhTest2
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        jugador1.crearMazo();
-        jugador2.crearMazo();
-
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
@@ -96,9 +93,6 @@ public class AlGoOhTest2
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
-
-        jugador1.crearMazo();
-        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -138,13 +132,12 @@ public class AlGoOhTest2
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        jugador1.crearMazo();
-        jugador2.crearMazo();
-
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
         CartaMagica cartaOllaDeLaCodicia = fabricaCartasJugador1.crearCartaMagica("Pot of Greed");
+
+        jugador1.obtenerMano().agregarCarta(cartaOllaDeLaCodicia);
 
         int cartasAntesDeJugar = jugador1.cantidadDeCartasEnMano();
 
@@ -167,9 +160,6 @@ public class AlGoOhTest2
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
-
-        jugador1.crearMazo();
-        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -204,9 +194,6 @@ public class AlGoOhTest2
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        jugador1.crearMazo();
-        jugador2.crearMazo();
-
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
@@ -235,9 +222,6 @@ public class AlGoOhTest2
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
-
-        jugador1.crearMazo();
-        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -302,9 +286,6 @@ public class AlGoOhTest2
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        jugador1.crearMazo();
-        jugador2.crearMazo();
-
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
@@ -336,9 +317,6 @@ public class AlGoOhTest2
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
-
-        jugador1.crearMazo();
-        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -373,9 +351,6 @@ public class AlGoOhTest2
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
-
-        jugador1.crearMazo();
-        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -412,15 +387,11 @@ public class AlGoOhTest2
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        jugador1.crearMazo();
-        jugador2.crearMazo();
+        for (int k = 0; k <= 40; k++)
+            jugador1.obtenerMazo().tomarCarta();
 
-        for(int k = 0; k < 40; k++)
-            jugador1.tomarCarta();
-
-        // Como escribo la condicion de fin de juego? El mazo le avisa a sus observadores de fin de juego.
-        assertTrue(0 != 0);
-
+        CausaFinJuego causaFinJuego = jugador1.obtenerCausaFinJuego();
+        assertTrue(causaFinJuego instanceof CausaSinCartasEnMazo);
     }
 
     //    Colocar las 5 partes de exodia en la mano de un jugador, verificar que la partida
@@ -434,9 +405,6 @@ public class AlGoOhTest2
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        jugador1.crearMazo();
-        jugador2.crearMazo();
-
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         CartaMonstruo exodiaParte1 = fabricaCartasJugador1.crearCartaMonstruo("Exodia The Forbidden One");
         CartaMonstruo exodiaParte2 = fabricaCartasJugador1.crearCartaMonstruo("Left Arm Of The Forbidden One");
@@ -446,15 +414,12 @@ public class AlGoOhTest2
 
         Mano manoJugador1 = jugador1.obtenerMano();
 
-        //manoJugador1.agregarObsevadorFinDeJuego();
-
         manoJugador1.agregarCarta(exodiaParte1);
         manoJugador1.agregarCarta(exodiaParte2);
         manoJugador1.agregarCarta(exodiaParte3);
         manoJugador1.agregarCarta(exodiaParte4);
         manoJugador1.agregarCarta(exodiaParte5);
 
-        // Como escribo la condicion de fin de juego? La mano le avisa a sus observadores de fin de juego.
-        assertTrue(0 != 0);
+        assertTrue(jugador1.obtenerCausaFinJuego() instanceof CausaCincoPartesExodiaReunidas);
     }
 }

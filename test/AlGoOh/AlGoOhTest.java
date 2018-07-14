@@ -17,9 +17,6 @@ public class AlGoOhTest
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        jugador1.crearMazo();
-        jugador2.crearMazo();
-
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
         CartaMonstruo carta = fabricaCartasJugador1.crearCartaMonstruo("Alexandrite Dragon");
@@ -38,9 +35,6 @@ public class AlGoOhTest
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
-
-        jugador1.crearMazo();
-        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
@@ -61,9 +55,6 @@ public class AlGoOhTest
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        jugador1.crearMazo();
-        jugador2.crearMazo();
-
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
         CartaMagica carta = fabricaCartasJugador1.crearCartaMagica("Dark Hole");
@@ -80,9 +71,6 @@ public class AlGoOhTest
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
-
-        jugador1.crearMazo();
-        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
@@ -101,9 +89,6 @@ public class AlGoOhTest
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        jugador1.crearMazo();
-        jugador2.crearMazo();
-
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
         CartaMonstruo carta = fabricaCartasJugador1.crearCartaMonstruo("Alexandrite Dragon");
@@ -121,9 +106,6 @@ public class AlGoOhTest
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
-
-        jugador1.crearMazo();
-        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -153,9 +135,6 @@ public class AlGoOhTest
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        jugador1.crearMazo();
-        jugador2.crearMazo();
-
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
@@ -183,9 +162,6 @@ public class AlGoOhTest
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
-
-        jugador1.crearMazo();
-        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -216,9 +192,6 @@ public class AlGoOhTest
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        jugador1.crearMazo();
-        jugador2.crearMazo();
-
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
@@ -245,9 +218,6 @@ public class AlGoOhTest
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
-
-        jugador1.crearMazo();
-        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -276,9 +246,6 @@ public class AlGoOhTest
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        jugador1.crearMazo();
-        jugador2.crearMazo();
-
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
@@ -306,9 +273,6 @@ public class AlGoOhTest
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
-
-        jugador1.crearMazo();
-        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -339,9 +303,6 @@ public class AlGoOhTest
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
 
-        jugador1.crearMazo();
-        jugador2.crearMazo();
-
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
         CartaMonstruo carta1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
@@ -364,9 +325,6 @@ public class AlGoOhTest
 
         jugador1.establecerOponente(jugador2);
         jugador2.establecerOponente(jugador1);
-
-        jugador1.crearMazo();
-        jugador2.crearMazo();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 

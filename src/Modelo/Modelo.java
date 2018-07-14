@@ -14,7 +14,6 @@ public class Modelo implements ModeloObservable, FinJuegoObservable, ObservadorF
     private Jugador jugador1;
     private Jugador jugador2;
     private ArrayList<ObservadorModelo> observadores = new ArrayList<>();
-
     private ArrayList<ObservadorFinJuego> observadoresFinJuegos = new ArrayList<>();
 
     public Modelo(String nombreJugador, String nombreOponente)
@@ -24,9 +23,6 @@ public class Modelo implements ModeloObservable, FinJuegoObservable, ObservadorF
 
         this.jugador1.establecerOponente(this.jugador2);
         this.jugador2.establecerOponente(this.jugador1);
-
-        this.jugador1.crearMazo();
-        this.jugador2.crearMazo();
 
         // Subscripciones a los eventos de fin de juego.
         this.jugador1.agregarObsevadorFinDeJuego(this);

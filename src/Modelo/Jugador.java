@@ -5,24 +5,31 @@ import Modelo.areaDeJuego.RegionCementerio;
 import Modelo.areaDeJuego.RegionMagicasYTrampas;
 import Modelo.areaDeJuego.RegionMonstruos;
 import Modelo.carta.*;
-import Modelo.finDeJuego.CausaFinJuego;
-import Modelo.finDeJuego.CausaPuntosDeVidaNulos;
-import Modelo.finDeJuego.FinJuegoObservable;
-import Modelo.finDeJuego.ObservadorFinJuego;
+import Modelo.finDeJuego.*;
 
 import java.util.ArrayList;
 
 public class Jugador implements FinJuegoObservable
 {
+    // ----------------------------------------
+    // Atributos varios.
+    // ----------------------------------------
     private String nombre;
-    private Mazo mazo;
-    private Mano cartasEnMano;
+    private Jugador oponente;
     private int puntosDeVida;
+    private Mazo mazo;
+    private Mano mano;
+    private CausaFinJuego causaFinJuego = new CausaFinJuegoNula();
+    // ----------------------------------------
+    // Regiones.
+    // ----------------------------------------
     private RegionMonstruos regionMonstruos;
     private RegionMagicasYTrampas regionMagicasYTrampas;
     private RegionCampo regionCampo;
     private RegionCementerio cementerio;
-    private Jugador oponente;
+    // ----------------------------------------
+    // Observadores.
+    // ----------------------------------------
     private ArrayList<ObservadorFinJuego> observadoresFinJuegos = new ArrayList<>();
 
     public Jugador(String unNombre)
@@ -30,7 +37,7 @@ public class Jugador implements FinJuegoObservable
         this.nombre = unNombre;
         this.puntosDeVida = 8000;
 
-        this.cartasEnMano = new Mano(this);
+        this.mano = new Mano(this);
 
         this.regionMonstruos = new RegionMonstruos(this);
         this.regionMagicasYTrampas = new RegionMagicasYTrampas(this);
@@ -48,6 +55,8 @@ public class Jugador implements FinJuegoObservable
         this.cementerio.establecerOponente(oponente);
 
         this.suscribirRegiones();
+
+        this.crearMazo();
     }
 
     public void suscribirRegiones()
@@ -56,32 +65,15 @@ public class Jugador implements FinJuegoObservable
         this.oponente.obtenerRegionMonstruos().agregarObsevador(this.obtenerRegionCampo());
     }
 
-    public void crearMazo()
+    private void crearMazo()
     {
         this.mazo = new Mazo(this, this.oponente);
-        int cartasATomarInicialmente = 5;
-        this.popularMano(cartasATomarInicialmente);
-    }
-
-    private void popularMano(int cartasATomarInicialmente)
-    {
-
-        for (int i = 0; i < cartasATomarInicialmente; i++)
-        {
-            this.cartasEnMano.agregarCarta(mazo.tomarCarta());
-        }
     }
 
     public void tomarCarta()
     {
-        Carta cartaAQuitar;
-        while (this.cartasEnMano.manoLlena())
-        {
-            cartaAQuitar = this.cartasEnMano.quitarUltimaCarta();
-            this.cementerio.colocarCarta(cartaAQuitar);
-        }
 
-        this.cartasEnMano.agregarCarta(mazo.tomarCarta());
+        this.mano.agregarCarta(mazo.tomarCarta());
     }
 
     public void disminuirPuntosVida(int puntosARestar)
@@ -105,25 +97,25 @@ public class Jugador implements FinJuegoObservable
     public void jugarCarta(CartaMonstruo cartaMonstruo)
     {
         this.regionMonstruos.colocarCarta(cartaMonstruo);
-        this.cartasEnMano.quitarCarta(cartaMonstruo);
+        this.mano.quitarCarta(cartaMonstruo);
     }
 
     public void jugarCarta(CartaMagica cartaMagica)
     {
         this.regionMagicasYTrampas.colocarCarta(cartaMagica);
-        this.cartasEnMano.quitarCarta(cartaMagica);
+        this.mano.quitarCarta(cartaMagica);
     }
 
     public void jugarCarta(CartaCampo cartaCampo)
     {
         this.regionCampo.colocarCarta(cartaCampo);
-        this.cartasEnMano.quitarCarta(cartaCampo);
+        this.mano.quitarCarta(cartaCampo);
     }
 
     public void jugarCarta(CartaTrampa cartaTrampa)
     {
         this.regionMagicasYTrampas.colocarCarta(cartaTrampa);
-        this.cartasEnMano.quitarCarta(cartaTrampa);
+        this.mano.quitarCarta(cartaTrampa);
     }
 
     // --------------------------------------------------------------------
@@ -192,7 +184,7 @@ public class Jugador implements FinJuegoObservable
     public int cantidadDeCartasEnMano()
     {
 
-        return this.cartasEnMano.cantidadDeCartas();
+        return this.mano.cantidadDeCartas();
     }
 
     public CartaMonstruo obtenerMonstruoConMenorAtaque()
@@ -217,7 +209,6 @@ public class Jugador implements FinJuegoObservable
         return this.nombre;
     }
 
-    //Obtener de regiones
     public RegionMonstruos obtenerRegionMonstruos()
     {
         return this.regionMonstruos;
@@ -249,7 +240,12 @@ public class Jugador implements FinJuegoObservable
     public Mano obtenerMano()
     {
 
-        return this.cartasEnMano;
+        return this.mano;
+    }
+
+    public CausaFinJuego obtenerCausaFinJuego()
+    {
+        return this.causaFinJuego;
     }
 
     // --------------------------------------------------------------------
@@ -273,6 +269,7 @@ public class Jugador implements FinJuegoObservable
     @Override
     public void notificarFinDeJuego(CausaFinJuego causaFinJuego)
     {
+        this.causaFinJuego = causaFinJuego;
         this.observadoresFinJuegos.forEach(item -> item.finDeJuego(causaFinJuego));
     }
 }

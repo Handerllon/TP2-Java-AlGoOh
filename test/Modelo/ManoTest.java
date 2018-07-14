@@ -14,7 +14,7 @@ public class ManoTest
         Jugador jugador1 = new Jugador("Pepe");
         Jugador jugador2 = new Jugador("Miauricio");
         Mazo mazo = new Mazo(jugador1, jugador2);
-        Mano mano = new Mano();
+        Mano mano = new Mano(null);
 
         for (int i = 0; i < 5; i++)
         {

@@ -1,7 +1,7 @@
 package Vista.carta;
 
 import Modelo.Modelo;
-import Modelo.ObservadorModelo;
+import Modelo.ObservadorDeModelo;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -16,15 +16,15 @@ import javafx.scene.paint.ImagePattern;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
-public class MazoVista implements ObservadorModelo
+public class MazoVista implements ObservadorDeModelo
 {
+    //TODO: Buscar las resoluciones del sistema
+    private static double anchoDeCarta = 95.4;
+    private static double altoDeCarta = 139;
     private Stage stage;
     private Modelo modelo;
     private Button mazoJugador;
     private Button mazoOponente;
-    //TODO: Buscar las resoluciones del sistema
-    private static double anchoDeCarta = 95.4;
-    private static double altoDeCarta = 139; 
 
     public MazoVista(Stage primaryStage, Modelo modelo)
     {
@@ -45,15 +45,14 @@ public class MazoVista implements ObservadorModelo
         boton.setPrefSize(anchoDeCarta, altoDeCarta);
         boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource("resources/imagenes/tablero/Back.jpg").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-        
+
         Image image = new Image(getClass().getClassLoader()
-                .getResource("resources/imagenes/tablero/Back.jpg").toString())
-			;
-		Tooltip tp = new Tooltip();
-		tp.setGraphic(new ImageView(image));
-		
-		boton.setTooltip(tp);
-        
+                .getResource("resources/imagenes/tablero/Back.jpg").toString());
+        Tooltip tp = new Tooltip();
+        tp.setGraphic(new ImageView(image));
+
+        boton.setTooltip(tp);
+
         return boton;
     }
 
@@ -76,13 +75,14 @@ public class MazoVista implements ObservadorModelo
         this.actualizarMazoOponente(this.modelo.obtenerNumeroDeCartasRestantesEnMazoOponente());
     }
 
-    private void actualizarMazoJugador(int numeroDeCartas) {
-    	
-    	Popup popup = new Popup();
-    	Button b2 = new Button("Cartas restantes en el mazo: \n" + Integer.valueOf(numeroDeCartas).toString());
-    	popup.getContent().add(b2);
-    	
-    	this.mazoJugador.setOnAction(new EventHandler<ActionEvent>()
+    private void actualizarMazoJugador(int numeroDeCartas)
+    {
+
+        Popup popup = new Popup();
+        Button b2 = new Button("Cartas restantes en el mazo: \n" + Integer.valueOf(numeroDeCartas).toString());
+        popup.getContent().add(b2);
+
+        this.mazoJugador.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent event)
             {
@@ -93,8 +93,8 @@ public class MazoVista implements ObservadorModelo
                 popup.setY(stage.getY() + point.getY());
             }
         });
-    	
-    	b2.setOnAction(new EventHandler<ActionEvent>()
+
+        b2.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent event)
             {
@@ -102,16 +102,16 @@ public class MazoVista implements ObservadorModelo
                 popup.hide();
             }
         });
-    	
     }
-    
-	private void actualizarMazoOponente(int numeroDeCartas) {
-		
-		Popup popup = new Popup();
-    	Button b2 = new Button("Cartas restantes en el mazo: \n" + Integer.valueOf(numeroDeCartas).toString());
-    	popup.getContent().add(b2);
-    	
-    	this.mazoOponente.setOnAction(new EventHandler<ActionEvent>()
+
+    private void actualizarMazoOponente(int numeroDeCartas)
+    {
+
+        Popup popup = new Popup();
+        Button b2 = new Button("Cartas restantes en el mazo: \n" + Integer.valueOf(numeroDeCartas).toString());
+        popup.getContent().add(b2);
+
+        this.mazoOponente.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent event)
             {
@@ -122,8 +122,8 @@ public class MazoVista implements ObservadorModelo
                 popup.setY(stage.getY() + point.getY());
             }
         });
-    	
-    	b2.setOnAction(new EventHandler<ActionEvent>()
+
+        b2.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent event)
             {
@@ -131,6 +131,5 @@ public class MazoVista implements ObservadorModelo
                 popup.hide();
             }
         });
-	}
-
+    }
 }

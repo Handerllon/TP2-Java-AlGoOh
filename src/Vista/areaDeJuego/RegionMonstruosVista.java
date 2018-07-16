@@ -1,16 +1,11 @@
 package Vista.areaDeJuego;
 
 import Modelo.Modelo;
-import Modelo.ObservadorModelo;
-import Vista.Botones.BotonMonstruoEnRegion;
-import javafx.geometry.HPos;
-import javafx.scene.control.Button;
-import javafx.scene.layout.ColumnConstraints;
+import Modelo.ObservadorDeModelo;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
-public class RegionMonstruosVista implements ObservadorModelo
+public class RegionMonstruosVista implements ObservadorDeModelo
 {
     private Modelo modelo;
     private Stage stage;
@@ -19,9 +14,9 @@ public class RegionMonstruosVista implements ObservadorModelo
 
     public RegionMonstruosVista(Stage primaryStage, Modelo modelo)
     {
-    	this.stage = primaryStage;
-    	this.modelo = modelo;
-    	
+        this.stage = primaryStage;
+        this.modelo = modelo;
+
         this.gridJugador = new GridDeRegionMonstruos(this.stage);
         this.gridOponente = new GridDeRegionMonstruos(this.stage);
     }
@@ -41,9 +36,9 @@ public class RegionMonstruosVista implements ObservadorModelo
     @Override
     public void actualizar()
     {
-    	this.gridJugador.clear();
-    	this.gridOponente.clear();
-    	this.gridJugador.actualizarRegion(this.modelo.obtenerCartasEnRegionMonstruosJugador());
-    	this.gridOponente.actualizarRegion(this.modelo.obtenerCartasEnRegionMonstruosOponente());
+        this.gridJugador.clear();
+        this.gridOponente.clear();
+        this.gridJugador.actualizarRegion(this.modelo.obtenerCartasEnRegionMonstruosJugador());
+        this.gridOponente.actualizarRegion(this.modelo.obtenerCartasEnRegionMonstruosOponente());
     }
 }

@@ -15,11 +15,11 @@ import javafx.stage.Stage;
 
 public class BotonCartaEnMano extends Button
 {
-    private Carta carta;
-    private Button botonDeLaCarta;
-  //TODO: Buscar las resoluciones del sistema
+    //TODO: Buscar las resoluciones del sistema
     private static double anchoDeCarta = 95.4;
     private static double altoDeCarta = 139;
+    private Carta carta;
+    private Button botonDeLaCarta;
 
     public BotonCartaEnMano(Stage primaryStage, Carta carta)
     {
@@ -46,13 +46,13 @@ public class BotonCartaEnMano extends Button
     {
 
         Button boton = new Button();
-        
+
         Image image = new Image(getClass().getClassLoader()
                 .getResource(this.carta.obtenerLocacionDeImagen()).toString());
-		Tooltip tp = new Tooltip();
-		tp.setGraphic(new ImageView(image));
-		
-		boton.setTooltip(tp);
+        Tooltip tp = new Tooltip();
+        tp.setGraphic(new ImageView(image));
+
+        boton.setTooltip(tp);
 
         boton.setPrefSize(anchoDeCarta, altoDeCarta);
 
@@ -101,13 +101,13 @@ public class BotonCartaEnMano extends Button
     private Button crearBotonCartaMagicaEnMano(Stage primaryStage)
     {
         Button boton = new Button();
-        
+
         Image image = new Image(getClass().getClassLoader()
                 .getResource(this.carta.obtenerLocacionDeImagen()).toString());
-		Tooltip tp = new Tooltip();
-		tp.setGraphic(new ImageView(image));
-		
-		boton.setTooltip(tp);
+        Tooltip tp = new Tooltip();
+        tp.setGraphic(new ImageView(image));
+
+        boton.setTooltip(tp);
 
         boton.setPrefSize(anchoDeCarta, altoDeCarta);
 
@@ -157,13 +157,13 @@ public class BotonCartaEnMano extends Button
     private Button crearBotonMonstruoEnMano(Stage primaryStage)
     {
         Button boton = new Button();
-        
+
         Image image = new Image(getClass().getClassLoader()
                 .getResource(this.carta.obtenerLocacionDeImagen()).toString());
-		Tooltip tp = new Tooltip();
-		tp.setGraphic(new ImageView(image));
-		
-		boton.setTooltip(tp);
+        Tooltip tp = new Tooltip();
+        tp.setGraphic(new ImageView(image));
+
+        boton.setTooltip(tp);
 
         boton.setPrefSize(anchoDeCarta, altoDeCarta);
 

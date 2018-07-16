@@ -1,15 +1,11 @@
 package Vista.areaDeJuego;
 
 import Modelo.Modelo;
-import Modelo.ObservadorModelo;
-import javafx.geometry.HPos;
-import javafx.scene.control.Button;
-import javafx.scene.layout.ColumnConstraints;
+import Modelo.ObservadorDeModelo;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
-public class RegionMagicasYTrampasVista implements ObservadorModelo
+public class RegionMagicasYTrampasVista implements ObservadorDeModelo
 {
     private Stage stage;
     private Modelo modelo;
@@ -40,9 +36,9 @@ public class RegionMagicasYTrampasVista implements ObservadorModelo
     @Override
     public void actualizar()
     {
-    	this.gridJugador.clear();
-    	this.gridOponente.clear();
-    	this.gridJugador.actualizarRegion(this.modelo.obtenerCartasEnRegionMagicasYTrampasJugador());
-    	this.gridOponente.actualizarRegion(this.modelo.obtenerCartasEnRegionMagicasYTrampasOponente());
+        this.gridJugador.clear();
+        this.gridOponente.clear();
+        this.gridJugador.actualizarRegion(this.modelo.obtenerCartasEnRegionMagicasYTrampasJugador());
+        this.gridOponente.actualizarRegion(this.modelo.obtenerCartasEnRegionMagicasYTrampasOponente());
     }
 }

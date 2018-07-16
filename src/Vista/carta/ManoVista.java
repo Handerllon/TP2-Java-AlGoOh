@@ -1,11 +1,11 @@
 package Vista.carta;
 
 import Modelo.Modelo;
-import Modelo.ObservadorModelo;
+import Modelo.ObservadorDeModelo;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
-public class ManoVista implements ObservadorModelo
+public class ManoVista implements ObservadorDeModelo
 {
     private Modelo modelo;
     private Stage stage;

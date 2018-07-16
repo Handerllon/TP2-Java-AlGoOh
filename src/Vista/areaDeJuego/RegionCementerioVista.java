@@ -1,11 +1,11 @@
 package Vista.areaDeJuego;
 
 import Modelo.Modelo;
-import Modelo.ObservadorModelo;
+import Modelo.ObservadorDeModelo;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class RegionCementerioVista implements ObservadorModelo
+public class RegionCementerioVista implements ObservadorDeModelo
 {
     private static String estiloRegion = "-fx-background-color: Transparent";
     private Stage stage;

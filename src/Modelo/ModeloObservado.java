@@ -6,26 +6,31 @@ import Modelo.carta.monstruo.CartaMonstruo;
 
 import java.util.ArrayList;
 
-public interface ModeloObservable
+public interface ModeloObservado
 {
-    void agregarObsevador(ObservadorModelo observador);
+    void agregarObsevador(ObservadorDeModelo observador);
 
-    void quitarObservador(ObservadorModelo observador);
+    void quitarObservador(ObservadorDeModelo observador);
 
     void notificarObservadores();
 
     ArrayList<CartaMonstruo> obtenerCartasEnRegionMonstruosJugador();
+
     ArrayList<CartaMonstruo> obtenerCartasEnRegionMonstruosOponente();
 
     ArrayList<Carta> obtenerCartasEnRegionMagicasYTrampasJugador();
+
     ArrayList<Carta> obtenerCartasEnRegionMagicasYTrampasOponente();
 
     CartaCampo obtenerCartasEnRegionCampoJugador();
+
     CartaCampo obtenerCartasEnRegionCampoOponente();
 
     int obtenerNumeroDeCartasRestantesEnMazoJugador();
+
     int obtenerNumeroDeCartasRestantesEnMazoOponente();
 
     ArrayList<Carta> obtenerCartasEnLaManoDelJugador();
+
     ArrayList<Carta> obtenerCartasEnLaManoDelOponente();
 }

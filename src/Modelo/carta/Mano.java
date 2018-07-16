@@ -4,19 +4,19 @@ import Modelo.Jugador;
 import Modelo.carta.excepciones.ManoLlenaError;
 import Modelo.finDeJuego.CausaCincoPartesExodiaReunidas;
 import Modelo.finDeJuego.CausaFinJuego;
-import Modelo.finDeJuego.FinJuegoObservable;
-import Modelo.finDeJuego.ObservadorFinJuego;
+import Modelo.finDeJuego.FinJuegoObservado;
+import Modelo.finDeJuego.ObservadorDeFinJuego;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Mano implements FinJuegoObservable
+public class Mano implements FinJuegoObservado
 {
     private static int CANTIDAD_MAXIMA = 6;
     private static int contadorPartesExodia;
     private LinkedList<Carta> cartas;
     private Jugador jugadorAsociado;
-    private ArrayList<ObservadorFinJuego> observadoresFinJuegos = new ArrayList<>();
+    private ArrayList<ObservadorDeFinJuego> observadoresFinJuegos = new ArrayList<>();
 
     public Mano(Jugador jugador)
     {
@@ -65,7 +65,7 @@ public class Mano implements FinJuegoObservable
 
         if (this.contadorPartesExodia == 5)
         {
-            this.notificarFinDeJuego(new CausaCincoPartesExodiaReunidas(this.jugadorAsociado));
+            this.notificarObservadores(new CausaCincoPartesExodiaReunidas(this.jugadorAsociado));
         }
     }
 
@@ -89,13 +89,13 @@ public class Mano implements FinJuegoObservable
     // Metodos de observadores de fin de juego.
     // --------------------------------------------------------------------
     @Override
-    public void agregarObsevadorFinDeJuego(ObservadorFinJuego observador)
+    public void agregarObsevador(ObservadorDeFinJuego observador)
     {
         this.observadoresFinJuegos.add(observador);
     }
 
     @Override
-    public void quitarObservadorFinDeJuego(ObservadorFinJuego observador)
+    public void quitarObservador(ObservadorDeFinJuego observador)
     {
         if (this.observadoresFinJuegos.isEmpty() == false)
         {
@@ -104,8 +104,8 @@ public class Mano implements FinJuegoObservable
     }
 
     @Override
-    public void notificarFinDeJuego(CausaFinJuego causaFinJuego)
+    public void notificarObservadores(CausaFinJuego causaFinJuego)
     {
-        this.observadoresFinJuegos.forEach(item -> item.finDeJuego(causaFinJuego));
+        this.observadoresFinJuegos.forEach(item -> item.actualizar(causaFinJuego));
     }
 }

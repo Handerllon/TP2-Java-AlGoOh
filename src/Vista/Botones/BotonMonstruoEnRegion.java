@@ -13,30 +13,27 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.transform.Rotate;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class BotonMonstruoEnRegion extends Button
 {
-	private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
-    private CartaMonstruo carta;
-    private Stage stage;
-    private Button botonDeLaCarta;
+    private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
     //TODO: Buscar las resoluciones del sistema
     private static double anchoDeCarta = 95.4;
     private static double altoDeCarta = 139;
+    private CartaMonstruo carta;
+    private Stage stage;
+    private Button botonDeLaCarta;
 
     public BotonMonstruoEnRegion(Stage primaryStage)
     {
-    	this.stage = primaryStage;
-    	this.botonDeLaCarta = new Button();
-    	
-    	
-		
-		// TODO: generalizar el hardcodeo de los numeros.
-    	this.botonDeLaCarta.setPrefSize(anchoDeCarta, altoDeCarta);
-    	this.botonDeLaCarta.setStyle(estiloRegion);
+        this.stage = primaryStage;
+        this.botonDeLaCarta = new Button();
+
+        // TODO: generalizar el hardcodeo de los numeros.
+        this.botonDeLaCarta.setPrefSize(anchoDeCarta, altoDeCarta);
+        this.botonDeLaCarta.setStyle(estiloRegion);
     }
 
     public Button obtenerBoton()
@@ -47,39 +44,40 @@ public class BotonMonstruoEnRegion extends Button
 
     public void clear()
     {
-    	this.botonDeLaCarta = new Button();
-		botonDeLaCarta.setStyle(estiloRegion);
-    	this.botonDeLaCarta.setPrefSize(anchoDeCarta, altoDeCarta);
+        this.botonDeLaCarta = new Button();
+        botonDeLaCarta.setStyle(estiloRegion);
+        this.botonDeLaCarta.setPrefSize(anchoDeCarta, altoDeCarta);
     }
-    
-    public void actualizar(CartaMonstruo cartaMonstruo) {
-    	
-    	this.carta = cartaMonstruo;
-    	this.botonDeLaCarta = this.crearBotonParaCartaEnRegion();
-    	
+
+    public void actualizar(CartaMonstruo cartaMonstruo)
+    {
+
+        this.carta = cartaMonstruo;
+        this.botonDeLaCarta = this.crearBotonParaCartaEnRegion();
     }
-    
-    private Button crearBotonParaCartaEnRegion() {
-		Button botonEnRegion = new Button();
-		
-		//-----Tooltip del boton------
-		Image image = new Image(getClass().getClassLoader()
+
+    private Button crearBotonParaCartaEnRegion()
+    {
+        Button botonEnRegion = new Button();
+
+        //-----Tooltip del boton------
+        Image image = new Image(getClass().getClassLoader()
                 .getResource(this.carta.obtenerLocacionDeImagen()).toString());
-		Tooltip tp = new Tooltip();
-		tp.setGraphic(new ImageView(image));
-		
-		botonEnRegion.setTooltip(tp);
-		//----------------------------
-		
-		//----- Fondo del boton--------
-		botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
-		botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+        Tooltip tp = new Tooltip();
+        tp.setGraphic(new ImageView(image));
+
+        botonEnRegion.setTooltip(tp);
+        //----------------------------
+
+        //----- Fondo del boton--------
+        botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
+        botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource(this.carta.obtenerLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-		//------------------------------	
-		
-		//----Opciones Del Boton -------
-		
-		Popup popup = new Popup();
+        //------------------------------
+
+        //----Opciones Del Boton -------
+
+        Popup popup = new Popup();
 
         VBox vbox = new VBox();
 
@@ -98,17 +96,16 @@ public class BotonMonstruoEnRegion extends Button
                 popup.setY(stage.getY() + point.getY());
             }
         });
-		
-		//------------------------------
-        
-        
-		return botonEnRegion;
-	}
+
+        //------------------------------
+
+        return botonEnRegion;
+    }
 
     private VBox crearVBoxCartaMonstruo(VBox vbox, Popup popup)
     {
 
-    	//TODO: Implementar los event handler de cada opcion
+        //TODO: Implementar los event handler de cada opcion
         Button b2 = new Button("Atacar");
         Button b3 = new Button("Cambiar Orientacion");
         Button b4 = new Button("Dar Vuelta");

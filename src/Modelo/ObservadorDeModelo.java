@@ -1,6 +1,6 @@
 package Modelo;
 
-public interface ObservadorModelo
+public interface ObservadorDeModelo
 {
     void actualizar();
 }

@@ -1,7 +1,7 @@
 package Vista;
 
 import Modelo.Modelo;
-import Modelo.ObservadorModelo;
+import Modelo.ObservadorDeModelo;
 import Vista.areaDeJuego.RegionCampoVista;
 import Vista.areaDeJuego.RegionCementerioVista;
 import Vista.areaDeJuego.RegionMagicasYTrampasVista;
@@ -16,7 +16,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 
-public class Vista implements ObservadorModelo
+public class Vista implements ObservadorDeModelo
 {
     protected static Modelo modelo;
     // TODO: levantar la resolucion automaticamente con alguna llamada al sistema.
@@ -108,11 +108,11 @@ public class Vista implements ObservadorModelo
     @Override
     public void actualizar()
     {
-    	this.regionCampo.actualizar();
-    	this.regionMagicasYTrampas.actualizar();
-    	this.regionMonstruos.actualizar();
-    	this.regionCementerio.actualizar();
-    	this.manos.actualizar();
-    	this.mazos.actualizar();
+        this.regionCampo.actualizar();
+        this.regionMagicasYTrampas.actualizar();
+        this.regionMonstruos.actualizar();
+        this.regionCementerio.actualizar();
+        this.manos.actualizar();
+        this.mazos.actualizar();
     }
 }

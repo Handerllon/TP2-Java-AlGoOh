@@ -4,13 +4,13 @@ import Modelo.Jugador;
 import Modelo.carta.excepciones.ManoLlenaError;
 import Modelo.finDeJuego.CausaCincoPartesExodiaReunidas;
 import Modelo.finDeJuego.CausaFinJuego;
-import Modelo.finDeJuego.FinJuegoObservado;
+import Modelo.finDeJuego.FinDeJuegoObservable;
 import Modelo.finDeJuego.ObservadorDeFinJuego;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Mano implements FinJuegoObservado
+public class Mano implements FinDeJuegoObservable
 {
     private static int CANTIDAD_MAXIMA = 6;
     private static int contadorPartesExodia;

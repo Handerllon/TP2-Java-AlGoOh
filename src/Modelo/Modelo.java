@@ -5,17 +5,17 @@ import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaFinJuegoNula;
-import Modelo.finDeJuego.FinJuegoObservado;
+import Modelo.finDeJuego.FinDeJuegoObservable;
 import Modelo.finDeJuego.ObservadorDeFinJuego;
 
 import java.util.ArrayList;
 
-public class Modelo implements ModeloObservado, FinJuegoObservado, ObservadorDeFinJuego
+public class Modelo implements ModeloObservable, FinDeJuegoObservable, ObservadorDeFinJuego
 {
     private Jugador jugador1;
     private Jugador jugador2;
-    private ArrayList<ObservadorDeModelo> observadores = new ArrayList<>();
-    private ArrayList<ObservadorDeFinJuego> observadoresFinJuegos = new ArrayList<>();
+    private ArrayList<ObservadorDeModelo> observadoresDeModelo = new ArrayList<>();
+    private ArrayList<ObservadorDeFinJuego> observadoresFinJuego = new ArrayList<>();
     private CausaFinJuego causaFinJuego = new CausaFinJuegoNula();
 
     public Modelo(String nombreJugador, String nombreOponente)
@@ -53,28 +53,61 @@ public class Modelo implements ModeloObservado, FinJuegoObservado, ObservadorDeF
     }
 
     // --------------------------------------------------------------------
-    // Metodos de observadores modelo.
+    // Metodos de observadores de fin de juego.
+    // --------------------------------------------------------------------
+    @Override
+    public void agregarObsevador(ObservadorDeFinJuego observador)
+    {
+        this.observadoresFinJuego.add(observador);
+    }
+
+    @Override
+    public void quitarObservador(ObservadorDeFinJuego observador)
+    {
+        if (this.observadoresFinJuego.isEmpty() == false)
+        {
+            this.observadoresFinJuego.remove(observador);
+        }
+    }
+
+    @Override
+    public void notificarObservadores(CausaFinJuego causaFinJuego)
+    {
+        this.observadoresFinJuego.forEach(item -> item.actualizar(causaFinJuego));
+    }
+
+    // El modelo es también un observador de fin de juego porque este le va a avisar al controlador cuando suceda
+    // uno de esos eventos.
+    @Override
+    public void actualizar(CausaFinJuego causaFinJuego)
+    {
+        this.causaFinJuego = causaFinJuego;
+        this.notificarObservadores(causaFinJuego);
+    }
+
+    // --------------------------------------------------------------------
+    // Metodos de observadores de modelo.
     // --------------------------------------------------------------------
     @Override
     public void agregarObsevador(ObservadorDeModelo observer)
     {
-        this.observadores.add(observer);
+        this.observadoresDeModelo.add(observer);
     }
 
     @Override
     public void quitarObservador(ObservadorDeModelo observer)
     {
-        this.observadores.remove(observer);
+        this.observadoresDeModelo.remove(observer);
     }
 
     @Override
     public void notificarObservadores()
     {
 
-        for (int i = 0; i < this.observadores.size(); i++)
+        for (int i = 0; i < this.observadoresDeModelo.size(); i++)
         {
 
-            this.observadores.get(i).actualizar();
+            this.observadoresDeModelo.get(i).actualizar();
         }
     }
 
@@ -146,38 +179,5 @@ public class Modelo implements ModeloObservado, FinJuegoObservado, ObservadorDeF
     {
         // TODO Auto-generated method stub
         return null;
-    }
-
-    // --------------------------------------------------------------------
-    // Metodos de observadores de fin de juego.
-    // --------------------------------------------------------------------
-    @Override
-    public void agregarObsevador(ObservadorDeFinJuego observador)
-    {
-        this.observadoresFinJuegos.add(observador);
-    }
-
-    @Override
-    public void quitarObservador(ObservadorDeFinJuego observador)
-    {
-        if (this.observadoresFinJuegos.isEmpty() == false)
-        {
-            this.observadoresFinJuegos.remove(observador);
-        }
-    }
-
-    @Override
-    public void notificarObservadores(CausaFinJuego causaFinJuego)
-    {
-        this.observadoresFinJuegos.forEach(item -> item.actualizar(causaFinJuego));
-    }
-
-    // El modelo es también un observador de fin de juego porque este le va a avisar al controlador cuando suceda
-    // uno de esos eventos.
-    @Override
-    public void actualizar(CausaFinJuego causaFinJuego)
-    {
-        this.causaFinJuego = causaFinJuego;
-        this.notificarObservadores(causaFinJuego);
     }
 }

@@ -1,6 +1,6 @@
 package Modelo.finDeJuego;
 
-public interface FinJuegoObservado
+public interface FinDeJuegoObservable
 {
     void agregarObsevador(ObservadorDeFinJuego observador);
 

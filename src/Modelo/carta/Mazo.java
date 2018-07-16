@@ -3,13 +3,13 @@ package Modelo.carta;
 import Modelo.Jugador;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaSinCartasEnMazo;
-import Modelo.finDeJuego.FinJuegoObservado;
+import Modelo.finDeJuego.FinDeJuegoObservable;
 import Modelo.finDeJuego.ObservadorDeFinJuego;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Mazo implements FinJuegoObservado
+public class Mazo implements FinDeJuegoObservable
 {
     private static int CANTIDAD_CARTAS_INICIALES = 40;
     private Jugador jugador, oponente;

@@ -6,7 +6,7 @@ import Modelo.carta.monstruo.CartaMonstruo;
 
 import java.util.ArrayList;
 
-public interface ModeloObservado
+public interface ModeloObservable
 {
     void agregarObsevador(ObservadorDeModelo observador);
 

@@ -14,12 +14,12 @@ import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.trampa.CartaTrampa;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaPuntosDeVidaNulos;
-import Modelo.finDeJuego.FinJuegoObservado;
+import Modelo.finDeJuego.FinDeJuegoObservable;
 import Modelo.finDeJuego.ObservadorDeFinJuego;
 
 import java.util.ArrayList;
 
-public class Jugador implements FinJuegoObservado
+public class Jugador implements FinDeJuegoObservable
 {
     // ----------------------------------------
     // Atributos varios.

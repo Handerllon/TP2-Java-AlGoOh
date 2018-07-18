@@ -106,4 +106,20 @@ public final class Controlador implements ObservadorDeFinJuego
         this.vista.cerrar();
 
     }
+
+	public void finDeTurno() {
+		
+		this.maquinaTurnos.finDeTurno();
+		
+	}
+
+	public void finDeFase() {
+
+		
+	}
+
+	public void tomarCarta() {
+		// TODO Auto-generated method stub
+		
+	}
 }

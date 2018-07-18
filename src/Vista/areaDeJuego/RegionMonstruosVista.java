@@ -2,20 +2,21 @@ package Vista.areaDeJuego;
 
 import Modelo.Modelo;
 import Modelo.ObservadorDeModelo;
+import Vista.Vista;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class RegionMonstruosVista implements ObservadorDeModelo
 {
-    private Modelo modelo;
+    private Vista vista;
     private Stage stage;
     private GridDeRegionMonstruos gridJugador;
     private GridDeRegionMonstruos gridOponente;
 
-    public RegionMonstruosVista(Stage primaryStage, Modelo modelo)
+    public RegionMonstruosVista(Stage primaryStage, Vista vista)
     {
         this.stage = primaryStage;
-        this.modelo = modelo;
+        this.vista = vista;
 
         this.gridJugador = new GridDeRegionMonstruos(this.stage);
         this.gridOponente = new GridDeRegionMonstruos(this.stage);
@@ -38,7 +39,7 @@ public class RegionMonstruosVista implements ObservadorDeModelo
     {
         this.gridJugador.clear();
         this.gridOponente.clear();
-        this.gridJugador.actualizarRegion(this.modelo.obtenerCartasEnRegionMonstruosJugador());
-        this.gridOponente.actualizarRegion(this.modelo.obtenerCartasEnRegionMonstruosOponente());
+        this.gridJugador.actualizarRegion(this.vista.obtenerModelo().obtenerCartasEnRegionMonstruosJugador());
+        this.gridOponente.actualizarRegion(this.vista.obtenerModelo().obtenerCartasEnRegionMonstruosOponente());
     }
 }

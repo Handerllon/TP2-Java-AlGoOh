@@ -3,6 +3,7 @@ package Vista.escenas;
 import Modelo.Modelo;
 import Vista.EscenaVista;
 import Vista.Vista;
+import Vista.Botones.BotonesDeControl;
 import Vista.areaDeJuego.RegionCampoVista;
 import Vista.areaDeJuego.RegionCementerioVista;
 import Vista.areaDeJuego.RegionMagicasYTrampasVista;
@@ -11,6 +12,7 @@ import Vista.carta.ManoVista;
 import Vista.carta.MazoVista;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -91,25 +93,25 @@ public final class EscenaTableroPrincipal implements EscenaVista
         grid.getRowConstraints().addAll(row0, row1, row2, row3, row4, row5);
 
         // ---------------- Regiones ----------------
-        RegionMonstruosVista regionMonstruos = new RegionMonstruosVista(this.primaryStage, this.modelo);
+        RegionMonstruosVista regionMonstruos = new RegionMonstruosVista(this.primaryStage, this.vista);
         grid.add(regionMonstruos.getGridJugador(), 1, 3);
         grid.setHalignment(regionMonstruos.getGridJugador(), HPos.CENTER);
         grid.add(regionMonstruos.getGridOponente(), 1, 2);
         grid.setHalignment(regionMonstruos.getGridOponente(), HPos.CENTER);
 
-        RegionMagicasYTrampasVista regionMagicasYTrampas = new RegionMagicasYTrampasVista(this.primaryStage, this.modelo);
+        RegionMagicasYTrampasVista regionMagicasYTrampas = new RegionMagicasYTrampasVista(this.primaryStage, this.vista);
         grid.add(regionMagicasYTrampas.getGridJugador(), 1, 4);
         grid.setHalignment(regionMagicasYTrampas.getGridJugador(), HPos.CENTER);
         grid.add(regionMagicasYTrampas.getGridOponente(), 1, 1);
         grid.setHalignment(regionMagicasYTrampas.getGridOponente(), HPos.CENTER);
 
-        RegionCampoVista regionCampo = new RegionCampoVista(this.primaryStage, this.modelo);
+        RegionCampoVista regionCampo = new RegionCampoVista(this.primaryStage, this.vista);
         grid.add(regionCampo.getRegionCampoJugador(), 0, 4);
         grid.setHalignment(regionCampo.getRegionCampoJugador(), HPos.CENTER);
         grid.add(regionCampo.getRegionCampoOponente(), 2, 1);
         grid.setHalignment(regionCampo.getRegionCampoOponente(), HPos.CENTER);
 
-        RegionCementerioVista regionCementerio = new RegionCementerioVista(this.primaryStage, this.modelo);
+        RegionCementerioVista regionCementerio = new RegionCementerioVista(this.primaryStage, this.vista);
         grid.add(regionCementerio.getCementerioJugador(), 0, 3);
         grid.setHalignment(regionCementerio.getCementerioJugador(), HPos.CENTER);
         grid.add(regionCementerio.getCementerioOponente(), 2, 2);
@@ -117,7 +119,7 @@ public final class EscenaTableroPrincipal implements EscenaVista
 
         // ---------------- Manos ----------------
 
-        ManoVista manos = new ManoVista(this.primaryStage, this.modelo);
+        ManoVista manos = new ManoVista(this.primaryStage, this.vista);
         grid.add(manos.getManoJugador(), 1, 5);
         grid.setHalignment(manos.getManoJugador(), HPos.CENTER);
         grid.add(manos.getManoOponente(), 1, 0);
@@ -125,11 +127,18 @@ public final class EscenaTableroPrincipal implements EscenaVista
 
         // ---------------- Mazos ----------------
 
-        MazoVista mazos = new MazoVista(this.primaryStage, this.modelo);
+        MazoVista mazos = new MazoVista(this.primaryStage, this.vista);
         grid.add(mazos.getMazoJugador(), 2, 5);
         grid.setHalignment(mazos.getMazoJugador(), HPos.CENTER);
         grid.add(mazos.getMazoOponente(), 0, 0);
         grid.setHalignment(mazos.getMazoOponente(), HPos.CENTER);
+        
+        //-----------------Botones----------------
+        BotonesDeControl botones = new BotonesDeControl(this.primaryStage, this.vista);
+        grid.add(botones.getBotonFinDeFase(), 2, 4);
+        grid.setHalignment(botones.getBotonFinDeFase(), HPos.CENTER);
+        grid.add(botones.getBotonFinDeTurno(), 2, 3);
+        grid.setHalignment(botones.getBotonFinDeTurno(), HPos.CENTER);
 
         // -------------------------------
         // Audio.

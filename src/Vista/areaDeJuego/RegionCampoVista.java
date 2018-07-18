@@ -3,6 +3,7 @@ package Vista.areaDeJuego;
 import Modelo.Modelo;
 import Modelo.ObservadorDeModelo;
 import Modelo.carta.campo.CartaCampo;
+import Vista.Vista;
 import Vista.Botones.BotonCampoEnRegion;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -10,14 +11,14 @@ import javafx.stage.Stage;
 public class RegionCampoVista implements ObservadorDeModelo
 {
     private Stage stage;
-    private Modelo modelo;
+    private Vista vista;
     private BotonCampoEnRegion botonCampoJugador;
     private BotonCampoEnRegion botonCampoOponente;
 
-    public RegionCampoVista(Stage primaryStage, Modelo modelo)
+    public RegionCampoVista(Stage primaryStage, Vista vista)
     {
         stage = primaryStage;
-        this.modelo = modelo;
+        this.vista = vista;
 
         this.botonCampoJugador = new BotonCampoEnRegion(primaryStage);
         this.botonCampoOponente = new BotonCampoEnRegion(primaryStage);
@@ -40,8 +41,8 @@ public class RegionCampoVista implements ObservadorDeModelo
     {
         this.botonCampoJugador.clear();
         this.botonCampoOponente.clear();
-        this.actualizarRegionJugador(this.modelo.obtenerCartasEnRegionCampoJugador());
-        this.actualizarRegionOponente(this.modelo.obtenerCartasEnRegionCampoOponente());
+        this.actualizarRegionJugador(this.vista.obtenerModelo().obtenerCartasEnRegionCampoJugador());
+        this.actualizarRegionOponente(this.vista.obtenerModelo().obtenerCartasEnRegionCampoOponente());
     }
 
     private void actualizarRegionJugador(CartaCampo unaCartaCampo)

@@ -2,6 +2,7 @@ package Vista.areaDeJuego;
 
 import Modelo.Modelo;
 import Modelo.ObservadorDeModelo;
+import Vista.Vista;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -9,15 +10,15 @@ public class RegionCementerioVista implements ObservadorDeModelo
 {
     private static String estiloRegion = "-fx-background-color: Transparent";
     private Stage stage;
-    private Modelo modelo;
+    private Vista vista;
     private Button botonCementerioJugador;
     private Button botonCementerioOponente;
 
-    public RegionCementerioVista(Stage primaryStage, Modelo modelo)
+    public RegionCementerioVista(Stage primaryStage, Vista vista)
     {
 
         this.stage = primaryStage;
-        this.modelo = modelo;
+        this.vista = vista;
 
         this.botonCementerioJugador = this.inicializarBoton();
         this.botonCementerioOponente = this.inicializarBoton();

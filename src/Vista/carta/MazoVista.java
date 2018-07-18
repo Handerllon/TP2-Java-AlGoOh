@@ -2,6 +2,7 @@ package Vista.carta;
 
 import Modelo.Modelo;
 import Modelo.ObservadorDeModelo;
+import Vista.Vista;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -22,19 +23,28 @@ public class MazoVista implements ObservadorDeModelo
     private static double anchoDeCarta = 95.4;
     private static double altoDeCarta = 139;
     private Stage stage;
-    private Modelo modelo;
+    private Vista vista;
     private Button mazoJugador;
+    private Tooltip toolTipJugador;
     private Button mazoOponente;
+    private Tooltip toolTipOponente;
 
-    public MazoVista(Stage primaryStage, Modelo modelo)
+    public MazoVista(Stage primaryStage, Vista vista)
     {
 
-        this.modelo = modelo;
+        this.vista = vista;
 
         stage = primaryStage;
 
+        this.toolTipJugador = new Tooltip();
+        this.toolTipOponente = new Tooltip();
+                
         this.mazoJugador = inicializar();
+        this.mazoJugador.setTooltip(toolTipJugador);
         this.mazoOponente = inicializar();
+        this.mazoOponente.setTooltip(toolTipOponente);
+        
+        this.actualizarEstado();
     }
 
     public Button inicializar()
@@ -45,13 +55,8 @@ public class MazoVista implements ObservadorDeModelo
         boton.setPrefSize(anchoDeCarta, altoDeCarta);
         boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource("resources/imagenes/tablero/Back.jpg").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-
-        Image image = new Image(getClass().getClassLoader()
-                .getResource("resources/imagenes/tablero/Back.jpg").toString());
-        Tooltip tp = new Tooltip();
-        tp.setGraphic(new ImageView(image));
-
-        boton.setTooltip(tp);
+       
+        boton.setOnAction(e -> tomarCartaBtn_Click());
 
         return boton;
     }
@@ -71,65 +76,24 @@ public class MazoVista implements ObservadorDeModelo
     @Override
     public void actualizarEstado()
     {
-        this.actualizarMazoJugador(this.modelo.obtenerNumeroDeCartasRestantesEnMazoJugador());
-        this.actualizarMazoOponente(this.modelo.obtenerNumeroDeCartasRestantesEnMazoOponente());
+        this.actualizarMazoJugador(this.vista.obtenerModelo().obtenerNumeroDeCartasRestantesEnMazoJugador());
+        this.actualizarMazoOponente(this.vista.obtenerModelo().obtenerNumeroDeCartasRestantesEnMazoOponente());
     }
 
     private void actualizarMazoJugador(int numeroDeCartas)
     {
-
-        Popup popup = new Popup();
-        Button b2 = new Button("Cartas restantes en el mazo: \n" + Integer.valueOf(numeroDeCartas).toString());
-        popup.getContent().add(b2);
-
-        this.mazoJugador.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-
-                popup.show(stage);
-                javafx.geometry.Point2D point = mazoJugador.localToScene(0.0, 0.0);
-                popup.setX(stage.getX() + point.getX());
-                popup.setY(stage.getY() + point.getY());
-            }
-        });
-
-        b2.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-
-                popup.hide();
-            }
-        });
+    	this.toolTipJugador.setText(Integer.toString(numeroDeCartas));
     }
 
-    private void actualizarMazoOponente(int numeroDeCartas)
+
+	private void actualizarMazoOponente(int numeroDeCartas)
     {
-
-        Popup popup = new Popup();
-        Button b2 = new Button("Cartas restantes en el mazo: \n" + Integer.valueOf(numeroDeCartas).toString());
-        popup.getContent().add(b2);
-
-        this.mazoOponente.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-
-                popup.show(stage);
-                javafx.geometry.Point2D point = mazoOponente.localToScene(0.0, 0.0);
-                popup.setX(stage.getX() + point.getX());
-                popup.setY(stage.getY() + point.getY());
-            }
-        });
-
-        b2.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-
-                popup.hide();
-            }
-        });
+		this.toolTipOponente.setText(Integer.toString(numeroDeCartas));
+        
     }
+	private void tomarCartaBtn_Click() {
+		
+		this.vista.obtenerControlador().tomarCarta();
+		
+	}
 }

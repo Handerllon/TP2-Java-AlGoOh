@@ -71,5 +71,10 @@ public final class MaquinaTurnos
     {
         this.maquinaFaseActiva = MaquinaFaseNula.obtenerInstancia();
     }
+
+	public void finDeTurno() {
+		// TODO Hacer
+		
+	}
 }
 

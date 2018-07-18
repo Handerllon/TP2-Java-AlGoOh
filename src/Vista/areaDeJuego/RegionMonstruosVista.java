@@ -18,8 +18,8 @@ public class RegionMonstruosVista implements ObservadorDeModelo
         this.stage = primaryStage;
         this.vista = vista;
 
-        this.gridJugador = new GridDeRegionMonstruos(this.stage);
-        this.gridOponente = new GridDeRegionMonstruos(this.stage);
+        this.gridJugador = new GridDeRegionMonstruos(this.vista);
+        this.gridOponente = new GridDeRegionMonstruos(this.vista);
     }
 
     public GridPane getGridJugador()

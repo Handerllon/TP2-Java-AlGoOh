@@ -1,6 +1,7 @@
 package Vista.carta;
 
 import Modelo.carta.Carta;
+import Vista.Vista;
 import Vista.Botones.BotonCartaEnMano;
 import javafx.geometry.Pos;
 import javafx.scene.layout.FlowPane;
@@ -11,13 +12,13 @@ import java.util.ArrayList;
 public class FlowPaneDeMano extends FlowPane
 {
     private FlowPane flowPane;
-    private Stage stage;
     private ArrayList<BotonCartaEnMano> botones;
+	private Vista vista;
 
-    public FlowPaneDeMano(Stage primaryStage)
+    public FlowPaneDeMano(Vista vista)
     {
 
-        this.stage = primaryStage;
+        this.vista = vista;
         this.flowPane = new FlowPane();
         this.flowPane.setAlignment(Pos.CENTER);
         this.botones = new ArrayList<BotonCartaEnMano>();
@@ -43,7 +44,7 @@ public class FlowPaneDeMano extends FlowPane
         for (int i = 0; i < cartasEnLaManoDelJugador.size(); i++)
         {
 
-            BotonCartaEnMano boton = new BotonCartaEnMano(stage, cartasEnLaManoDelJugador.get(i));
+            BotonCartaEnMano boton = new BotonCartaEnMano(this.vista, cartasEnLaManoDelJugador.get(i));
             botones.add(boton);
         }
 

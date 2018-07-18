@@ -22,7 +22,7 @@ public class BotonesDeControl extends Button{
 	}
 	
 	private Button crearBotonFinDeTurno() {
-		Button boton = new Button();
+		Button boton = new Button("FIN DE TURNO");
 		
 		
 		boton.setOnAction(e -> finDeTurnoBtn_click());
@@ -31,7 +31,7 @@ public class BotonesDeControl extends Button{
 	}
 
 	private Button crearBotonFinDeFase() {
-		Button boton = new Button();
+		Button boton = new Button("FIN DE FASE");
 		
 		boton.setOnAction(e -> finDeFaseBtn_click());
 		

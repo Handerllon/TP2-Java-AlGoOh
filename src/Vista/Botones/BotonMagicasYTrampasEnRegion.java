@@ -2,6 +2,7 @@ package Vista.Botones;
 
 import Modelo.carta.Carta;
 import Modelo.carta.magica.CartaMagica;
+import Vista.Vista;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -24,12 +25,13 @@ public class BotonMagicasYTrampasEnRegion extends Button
     private static double anchoDeCarta = 95.4;
     private static double altoDeCarta = 139;
     private Carta carta;
-    private Stage stage;
+    private Vista vista;
+    private Popup popup;
     private Button botonDeLaCarta;
 
-    public BotonMagicasYTrampasEnRegion(Stage primaryStage)
+    public BotonMagicasYTrampasEnRegion(Vista vista)
     {
-        this.stage = primaryStage;
+        this.vista = vista;
         this.botonDeLaCarta = new Button();
 
         // TODO: generalizar el hardcodeo de los numeros.
@@ -87,7 +89,7 @@ public class BotonMagicasYTrampasEnRegion extends Button
     private void crearBotonParaCartaMagicaEnRegion(Button botonEnRegion)
     {
 
-        Popup popup = new Popup();
+        this.popup = new Popup();
 
         VBox vbox = new VBox();
 
@@ -95,25 +97,21 @@ public class BotonMagicasYTrampasEnRegion extends Button
 
         popup.getContent().addAll(vbox);
 
-        botonEnRegion.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-
-                popup.show(stage);
-                javafx.geometry.Point2D point = botonEnRegion.localToScene(0.0, 0.0);
-                popup.setX(stage.getX() + point.getX());
-                popup.setY(stage.getY() + point.getY());
-            }
-        });
+        botonEnRegion.setOnAction(e -> magYTramEnRegionBtn_Click());
+        
     }
 
-    private VBox crearVBoxCartaMagica(VBox vbox, Popup popup)
+
+	private VBox crearVBoxCartaMagica(VBox vbox, Popup popup)
     {
         //TODO: Implementar los event handler de cada opcion
         Button b1 = new Button("Usar");
         Button b5 = new Button("Cerrar");
 
+        
+        b1.setOnAction(e -> magYTramEnRegionUsarBtn_Click());
+        
+        
         b5.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent event)
@@ -127,4 +125,16 @@ public class BotonMagicasYTrampasEnRegion extends Button
 
         return vbox;
     }
+	private void magYTramEnRegionUsarBtn_Click() {
+		this.vista.obtenerControlador().usarCartaMagica(this.carta);
+	}
+
+	private void magYTramEnRegionBtn_Click() {
+		
+		popup.show(vista.obtenerPrimaryStage());
+		javafx.geometry.Point2D point = this.botonDeLaCarta.localToScene(0.0, 0.0);
+		popup.setX(vista.obtenerPrimaryStage().getX() + point.getX());
+		popup.setY(vista.obtenerPrimaryStage().getY() + point.getY());
+		
+	}
 }

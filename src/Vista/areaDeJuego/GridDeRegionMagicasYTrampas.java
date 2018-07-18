@@ -1,6 +1,7 @@
 package Vista.areaDeJuego;
 
 import Modelo.carta.Carta;
+import Vista.Vista;
 import Vista.Botones.BotonMagicasYTrampasEnRegion;
 import javafx.geometry.HPos;
 import javafx.scene.layout.ColumnConstraints;
@@ -15,11 +16,12 @@ public class GridDeRegionMagicasYTrampas extends GridPane
     private GridPane grid;
     private Stage stage;
     private ArrayList<BotonMagicasYTrampasEnRegion> botones;
+	private Vista vista;
 
-    public GridDeRegionMagicasYTrampas(Stage primaryStage)
+    public GridDeRegionMagicasYTrampas(Vista vista)
     {
 
-        this.stage = primaryStage;
+        this.vista = vista;
 
         this.grid = new GridPane();
 
@@ -52,7 +54,7 @@ public class GridDeRegionMagicasYTrampas extends GridPane
         for (int i = 0; i < 5; i++)
         {
 
-            BotonMagicasYTrampasEnRegion boton = new BotonMagicasYTrampasEnRegion(stage);
+            BotonMagicasYTrampasEnRegion boton = new BotonMagicasYTrampasEnRegion(this.vista);
 
             botones.add(boton);
         }

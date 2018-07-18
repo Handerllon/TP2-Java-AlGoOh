@@ -1,6 +1,7 @@
 package Vista.Botones;
 
 import Modelo.carta.campo.CartaCampo;
+import Vista.Vista;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
@@ -21,11 +22,12 @@ public class BotonCampoEnRegion extends Button
     private Button boton;
     private CartaCampo carta;
     private Stage stage;
+	private Vista vista;
 
-    public BotonCampoEnRegion(Stage primaryStage)
+    public BotonCampoEnRegion(Vista vista)
     {
 
-        this.stage = primaryStage;
+        this.vista = vista;
 
         boton = new Button();
 

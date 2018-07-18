@@ -19,8 +19,8 @@ public class ManoVista implements ObservadorDeModelo
         this.stage = primaryStage;
         this.vista = vista;
 
-        this.manoJugador = new FlowPaneDeMano(stage);
-        this.manoOponente = new FlowPaneDeMano(stage);
+        this.manoJugador = new FlowPaneDeMano(this.vista);
+        this.manoOponente = new FlowPaneDeMano(this.vista);
     }
 
     public FlowPane getManoJugador()

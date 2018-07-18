@@ -20,8 +20,8 @@ public class RegionCampoVista implements ObservadorDeModelo
         stage = primaryStage;
         this.vista = vista;
 
-        this.botonCampoJugador = new BotonCampoEnRegion(primaryStage);
-        this.botonCampoOponente = new BotonCampoEnRegion(primaryStage);
+        this.botonCampoJugador = new BotonCampoEnRegion(this.vista);
+        this.botonCampoOponente = new BotonCampoEnRegion(this.vista);
     }
 
     public Button getRegionCampoJugador()

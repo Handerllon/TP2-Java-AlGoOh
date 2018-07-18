@@ -18,8 +18,8 @@ public class RegionMagicasYTrampasVista implements ObservadorDeModelo
         this.stage = primaryStage;
         this.vista = vista;
 
-        this.gridJugador = new GridDeRegionMagicasYTrampas(this.stage);
-        this.gridOponente = new GridDeRegionMagicasYTrampas(this.stage);
+        this.gridJugador = new GridDeRegionMagicasYTrampas(this.vista);
+        this.gridOponente = new GridDeRegionMagicasYTrampas(this.vista);
     }
 
     public GridPane getGridJugador()

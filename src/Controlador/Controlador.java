@@ -2,6 +2,9 @@ package Controlador;
 
 import Controlador.estadosJuego.MaquinaTurnos;
 import Modelo.Modelo;
+import Modelo.carta.Carta;
+import Modelo.carta.CartaNula;
+import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaFinJuegoNula;
 import Modelo.finDeJuego.ObservadorDeFinJuego;
@@ -122,4 +125,70 @@ public final class Controlador implements ObservadorDeFinJuego
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void usarCartaMagica(Carta carta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void jugarCartaTrampa(Carta carta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void jugarCartaMagicaBocaArriba(Carta carta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void jugarCartaMagicaBocaAbajo(Carta carta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void orientarCartaBocaAbajo(Carta carta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void orientarCartaBocaArriba(Carta carta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void ponerCartaEnModoAtaque(Carta carta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void ponerCartaEnModoDefensa(Carta carta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void darVueltaCartaMonstruo(CartaMonstruo carta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void cambiarOrientacionCartaMonstruo(CartaMonstruo carta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void atacar(CartaMonstruo cartaAtacante, CartaNula cartaNula) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void atacar(CartaMonstruo carta) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

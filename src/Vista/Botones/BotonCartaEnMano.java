@@ -3,6 +3,7 @@ package Vista.Botones;
 import Modelo.carta.Carta;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
+import Vista.Vista;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -20,20 +21,22 @@ public class BotonCartaEnMano extends Button
     private static double altoDeCarta = 139;
     private Carta carta;
     private Button botonDeLaCarta;
+    private Vista vista;
 
-    public BotonCartaEnMano(Stage primaryStage, Carta carta)
+    public BotonCartaEnMano(Vista vista, Carta carta)
     {
 
         this.carta = carta;
+        this.vista = vista;
 
         if (carta.getClass() == CartaMonstruo.class)
         {
-            this.botonDeLaCarta = this.crearBotonMonstruoEnMano(primaryStage);
+            this.botonDeLaCarta = this.crearBotonMonstruoEnMano(vista.obtenerPrimaryStage());
         } else if (carta.getClass() == CartaMagica.class)
         {
-            this.botonDeLaCarta = this.crearBotonCartaMagicaEnMano(primaryStage);
+            this.botonDeLaCarta = this.crearBotonCartaMagicaEnMano(vista.obtenerPrimaryStage());
         } else
-            this.botonDeLaCarta = this.crearBotonCartaTrampaEnMano(primaryStage);
+            this.botonDeLaCarta = this.crearBotonCartaTrampaEnMano(vista.obtenerPrimaryStage());
     }
 
     public Button getBoton()
@@ -84,6 +87,8 @@ public class BotonCartaEnMano extends Button
         Button b1 = new Button("Jugar");
         Button b2 = new Button("Cerrar");
 
+        b1.setOnAction(e -> jugarCartaTrampaBtn_Click());
+        
         b2.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent event)
@@ -98,7 +103,8 @@ public class BotonCartaEnMano extends Button
         return vbox;
     }
 
-    private Button crearBotonCartaMagicaEnMano(Stage primaryStage)
+
+	private Button crearBotonCartaMagicaEnMano(Stage primaryStage)
     {
         Button boton = new Button();
 
@@ -140,6 +146,10 @@ public class BotonCartaEnMano extends Button
         Button b2 = new Button("Jugar Boca Abajo");
         Button b3 = new Button("Cerrar");
 
+        b1.setOnAction(e -> cartaMagicaJugarBocaArribaBtn_Click());
+        
+        b2.setOnAction(e -> cartaMagicaJugarBocaAbajoBtn_Click());
+        
         b3.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent event)
@@ -154,7 +164,7 @@ public class BotonCartaEnMano extends Button
         return vbox;
     }
 
-    private Button crearBotonMonstruoEnMano(Stage primaryStage)
+	private Button crearBotonMonstruoEnMano(Stage primaryStage)
     {
         Button boton = new Button();
 
@@ -193,71 +203,23 @@ public class BotonCartaEnMano extends Button
     private VBox crearVBoxCartaMonstruoEnMano(VBox vbox, Popup popup, Stage primaryStage)
     {
         Button b1 = new Button("Jugar");
-        Button b2 = new Button("Cerrar");
+        Button b2 = new Button("Orientar En Defensa");
+        Button b3 = new Button("Orientar En Ataque");
+        Button b4 = new Button("Boca arriba");
+        Button b5 = new Button("Boca abajo");
+        Button b6 = new Button("Cerrar");
 
-        b1.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-                Popup popupJugar = new Popup();
-                VBox vboxJugar = new VBox();
-                Button modoAtaque = new Button("En Ataque");
-                Button modoDefensa = new Button("En Defensa");
-                Button botonCerrar = new Button("Cerrar");
+        b1.setOnAction(e -> cartaMonstruoJugarBtn_Click());
+        
+        b2.setOnAction(e -> cartaMonstruoOrientarEnDefensaBtn_Click());
+        
+        b3.setOnAction(e -> cartaMonstruoOrientarEnAtaqueBtn_Click());
+        
+        b4.setOnAction(e -> cartaMonstruoPonerBocaArribaBtn_Click());
+        
+        b5.setOnAction(e -> cartaMonstruoPonerBocaAbajoBtn_Click());
 
-                vboxJugar.getChildren().addAll(modoAtaque, modoDefensa, botonCerrar);
-
-                popupJugar.getContent().addAll(vboxJugar);
-
-                popupJugar.show(primaryStage);
-                javafx.geometry.Point2D point = b1.localToScene(0.0, 0.0);
-                popupJugar.setX(primaryStage.getX() + point.getX());
-                popupJugar.setY(primaryStage.getY() + point.getY());
-
-                modoAtaque.setOnAction(new EventHandler<ActionEvent>()
-                {
-                    public void handle(ActionEvent event)
-                    {
-                        Popup popupAtaque = new Popup();
-                        VBox vboxJugarEnAtaque = new VBox();
-                        Button bocaArriba = new Button("Boca Arriba");
-                        Button bocaAbajo = new Button("Boca Abajo");
-                        Button botonCerrar = new Button("Cerrar");
-
-                        vboxJugarEnAtaque.getChildren().addAll(bocaArriba, bocaAbajo, botonCerrar);
-
-                        popupAtaque.getContent().addAll(vboxJugar);
-
-                        popupAtaque.show(primaryStage);
-                        javafx.geometry.Point2D point = modoAtaque.localToScene(0.0, 0.0);
-                        popupAtaque.setX(primaryStage.getX() + point.getX());
-                        popupAtaque.setY(primaryStage.getY() + point.getY());
-                    }
-                });
-                modoDefensa.setOnAction(new EventHandler<ActionEvent>()
-                {
-                    public void handle(ActionEvent event)
-                    {
-                        Popup popupAtaque = new Popup();
-                        VBox vboxJugarEnAtaque = new VBox();
-                        Button bocaArriba = new Button("Boca Arriba");
-                        Button bocaAbajo = new Button("Boca Abajo");
-                        Button botonCerrar = new Button("Cerrar");
-
-                        vboxJugarEnAtaque.getChildren().addAll(bocaArriba, bocaAbajo, botonCerrar);
-
-                        popupAtaque.getContent().addAll(vboxJugar);
-
-                        popupAtaque.show(primaryStage);
-                        javafx.geometry.Point2D point = modoDefensa.localToScene(0.0, 0.0);
-                        popupAtaque.setX(primaryStage.getX() + point.getX());
-                        popupAtaque.setY(primaryStage.getY() + point.getY());
-                    }
-                });
-            }
-        });
-
-        b2.setOnAction(new EventHandler<ActionEvent>()
+        b6.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent event)
             {
@@ -270,4 +232,44 @@ public class BotonCartaEnMano extends Button
 
         return vbox;
     }
+//-------------------Event Handlers------------------ 
+    
+    private void cartaMonstruoPonerBocaAbajoBtn_Click() {
+		this.vista.obtenerControlador().orientarCartaBocaAbajo(this.carta);
+	}
+
+	private void cartaMonstruoPonerBocaArribaBtn_Click() {
+
+		this.vista.obtenerControlador().orientarCartaBocaArriba(this.carta);
+	}
+
+	private void cartaMonstruoOrientarEnAtaqueBtn_Click() {
+
+		this.vista.obtenerControlador().ponerCartaEnModoAtaque(this.carta);
+	}
+
+	private void cartaMonstruoOrientarEnDefensaBtn_Click() {
+
+		this.vista.obtenerControlador().ponerCartaEnModoDefensa(this.carta);
+	}
+
+	private Object cartaMonstruoJugarBtn_Click() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private void jugarCartaTrampaBtn_Click() {
+    	
+    	this.vista.obtenerControlador().jugarCartaTrampa(this.carta);
+    }
+    
+    private void cartaMagicaJugarBocaAbajoBtn_Click() {
+    	this.vista.obtenerControlador().jugarCartaMagicaBocaAbajo(this.carta);
+    }
+    
+    private void cartaMagicaJugarBocaArribaBtn_Click() {
+    	this.vista.obtenerControlador().jugarCartaMagicaBocaArriba(this.carta);
+    }
+    
+//----------------------------------------------------
 }

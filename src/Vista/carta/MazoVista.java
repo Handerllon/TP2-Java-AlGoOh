@@ -69,7 +69,7 @@ public class MazoVista implements ObservadorDeModelo
     }
 
     @Override
-    public void actualizar()
+    public void actualizarEstado()
     {
         this.actualizarMazoJugador(this.modelo.obtenerNumeroDeCartasRestantesEnMazoJugador());
         this.actualizarMazoOponente(this.modelo.obtenerNumeroDeCartasRestantesEnMazoOponente());

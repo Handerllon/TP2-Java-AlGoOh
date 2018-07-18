@@ -384,7 +384,10 @@ public class AlGoOhTest2
     public void test10SeExtraenTodasLasCartasDelMazoDelJugadorYEstePierde()
     {
 
-        Modelo modelo = new Modelo("J1", "J2");
+        Modelo modelo = Modelo.obtenerInstancia();
+        ;
+        modelo.establecerNombreJugador("J1");
+        modelo.establecerNombreOponente("J1");
 
         Jugador jugador = modelo.obtenerJugador();
 
@@ -400,7 +403,10 @@ public class AlGoOhTest2
     @Test
     public void test11SeColocanLasCincoPartesDeExodiaEnLaManoDeUnJugadorYEsteGanaLaPartida()
     {
-        Modelo modelo = new Modelo("J1", "J2");
+        Modelo modelo = Modelo.obtenerInstancia();
+        ;
+        modelo.establecerNombreJugador("J1");
+        modelo.establecerNombreOponente("J1");
 
         Mano manoJugador1 = modelo.obtenerJugador().obtenerMano();
 

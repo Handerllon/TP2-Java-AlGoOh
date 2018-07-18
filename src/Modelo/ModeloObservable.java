@@ -14,6 +14,8 @@ public interface ModeloObservable
 
     void notificarObservadores();
 
+    // Aquí va lo que se le quiere pedir al modelo.
+
     ArrayList<CartaMonstruo> obtenerCartasEnRegionMonstruosJugador();
 
     ArrayList<CartaMonstruo> obtenerCartasEnRegionMonstruosOponente();

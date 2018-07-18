@@ -1,18 +1,24 @@
 package Controlador.estadosJuego;
 
 import Modelo.Jugador;
-
-import java.util.concurrent.TimeUnit;
+import Modelo.carta.FabricaCartas;
+import Modelo.carta.Mano;
+import Modelo.carta.monstruo.CartaMonstruo;
+import Vista.Vista;
 
 public class FaseInicial implements Fase
 {
-    public FaseInicial()
+    private Vista vista;
+    private boolean seComandoFinDeFase = false;
+
+    public FaseInicial(Vista vista)
     {
+        this.vista = vista;
     }
 
     public Fase cambiarFase()
     {
-        return new FasePreparacion();
+        return new FasePreparacion(this.vista);
     }
 
     @Override
@@ -22,19 +28,36 @@ public class FaseInicial implements Fase
         System.out.println("----------------------");
         System.out.println(jugador.obtenerNombre() + " FaseInicial.");
         System.out.println("----------------------");
-        jugador.tomarCarta();
 
-        this.finalizarFase();
+        // TODO: simulo game over o victoria.
+        //int randomNum = ThreadLocalRandom.current().nextInt(0, 5 + 1);
+        int randomNum = 2;
+        if (randomNum == 0)
+        {
+            for (int k = 0; k <= 40; k++)
+                jugador.obtenerMazo().tomarCarta();
+        }
+        if (randomNum == 1)
+        {
+            Mano manoJugador = jugador.obtenerMano();
+
+            FabricaCartas fabricaCartasJugador1 = new FabricaCartas(null, null);
+            CartaMonstruo exodiaParte1 = fabricaCartasJugador1.crearCartaMonstruo("Exodia The Forbidden One");
+            CartaMonstruo exodiaParte2 = fabricaCartasJugador1.crearCartaMonstruo("Left Arm Of The Forbidden One");
+            CartaMonstruo exodiaParte3 = fabricaCartasJugador1.crearCartaMonstruo("Left Leg Of The Forbidden One");
+            CartaMonstruo exodiaParte4 = fabricaCartasJugador1.crearCartaMonstruo("Right Arm Of The Forbidden One");
+            CartaMonstruo exodiaParte5 = fabricaCartasJugador1.crearCartaMonstruo("Right Leg Of The Forbidden One");
+
+            manoJugador.agregarCarta(exodiaParte1);
+            manoJugador.agregarCarta(exodiaParte2);
+            manoJugador.agregarCarta(exodiaParte3);
+            manoJugador.agregarCarta(exodiaParte4);
+            manoJugador.agregarCarta(exodiaParte5);
+        }
     }
 
     public void finalizarFase()
     {
-        try
-        {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
+        this.vista.actualizarEstado();
     }
 }

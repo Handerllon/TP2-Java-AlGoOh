@@ -85,8 +85,8 @@ public class Mazo implements FinDeJuegoObservable
             return this.cartas.pop();
         } else
         {
-            this.notificarObservadores(new CausaSinCartasEnMazo(this.jugador));
-            return new CartaNula();
+            this.notificarFinDeJuego(new CausaSinCartasEnMazo(this.jugador));
+            return CartaNula.obtenerInstancia();
         }
     }
 
@@ -94,13 +94,13 @@ public class Mazo implements FinDeJuegoObservable
     // Metodos de observadores de fin de juego.
     // --------------------------------------------------------------------
     @Override
-    public void agregarObsevador(ObservadorDeFinJuego observador)
+    public void agregarObsevadorFinDeJuego(ObservadorDeFinJuego observador)
     {
         this.observadoresFinJuegos.add(observador);
     }
 
     @Override
-    public void quitarObservador(ObservadorDeFinJuego observador)
+    public void quitarObservadorFinDeJuego(ObservadorDeFinJuego observador)
     {
         if (this.observadoresFinJuegos.isEmpty() == false)
         {
@@ -109,8 +109,8 @@ public class Mazo implements FinDeJuegoObservable
     }
 
     @Override
-    public void notificarObservadores(CausaFinJuego causaFinJuego)
+    public void notificarFinDeJuego(CausaFinJuego causaFinJuego)
     {
-        this.observadoresFinJuegos.forEach(item -> item.actualizar(causaFinJuego));
+        this.observadoresFinJuegos.forEach(item -> item.seLlegoAFinDeJuego(causaFinJuego));
     }
 }

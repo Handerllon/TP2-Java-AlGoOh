@@ -1,11 +1,35 @@
 package Modelo.finDeJuego;
 
-public class CausaFinJuegoNula extends CausaFinJuego
+public final class CausaFinJuegoNula extends CausaFinJuego
 {
-    private static String CAUSA = "No hay causa de fin de juego";
+    private static CausaFinJuegoNula instancia = null;
 
-    public CausaFinJuegoNula()
+    private CausaFinJuegoNula()
     {
-        super(CAUSA, null);
+        super("", null);
+    }
+
+    public static CausaFinJuegoNula obtenerInstancia()
+    {
+        if (instancia == null)
+        {
+            instancia = new CausaFinJuegoNula();
+        }
+        return instancia;
+    }
+
+    public CausaFinJuegoNula clone() throws CloneNotSupportedException
+    {
+        throw new CloneNotSupportedException();
+    }
+
+    public String obtenerCausa()
+    {
+        return "";
+    }
+
+    public String obtenerNombreJugador()
+    {
+        return "";
     }
 }

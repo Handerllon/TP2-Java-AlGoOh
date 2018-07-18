@@ -7,6 +7,10 @@ public abstract class CausaFinJuego
     private String tipoCausa;
     private Jugador jugadorAsociadoAlFin;
 
+    private CausaFinJuego(){
+
+    }
+
     public CausaFinJuego(String causa, Jugador jugadorAsociadoAlFin)
     {
         this.tipoCausa = causa;

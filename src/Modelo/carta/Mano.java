@@ -65,7 +65,7 @@ public class Mano implements FinDeJuegoObservable
 
         if (this.contadorPartesExodia == 5)
         {
-            this.notificarObservadores(new CausaCincoPartesExodiaReunidas(this.jugadorAsociado));
+            this.notificarFinDeJuego(new CausaCincoPartesExodiaReunidas(this.jugadorAsociado));
         }
     }
 
@@ -89,13 +89,13 @@ public class Mano implements FinDeJuegoObservable
     // Metodos de observadores de fin de juego.
     // --------------------------------------------------------------------
     @Override
-    public void agregarObsevador(ObservadorDeFinJuego observador)
+    public void agregarObsevadorFinDeJuego(ObservadorDeFinJuego observador)
     {
         this.observadoresFinJuegos.add(observador);
     }
 
     @Override
-    public void quitarObservador(ObservadorDeFinJuego observador)
+    public void quitarObservadorFinDeJuego(ObservadorDeFinJuego observador)
     {
         if (this.observadoresFinJuegos.isEmpty() == false)
         {
@@ -104,8 +104,8 @@ public class Mano implements FinDeJuegoObservable
     }
 
     @Override
-    public void notificarObservadores(CausaFinJuego causaFinJuego)
+    public void notificarFinDeJuego(CausaFinJuego causaFinJuego)
     {
-        this.observadoresFinJuegos.forEach(item -> item.actualizar(causaFinJuego));
+        this.observadoresFinJuegos.forEach(item -> item.seLlegoAFinDeJuego(causaFinJuego));
     }
 }

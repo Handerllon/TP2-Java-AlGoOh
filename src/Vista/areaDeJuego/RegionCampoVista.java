@@ -36,7 +36,7 @@ public class RegionCampoVista implements ObservadorDeModelo
     }
 
     @Override
-    public void actualizar()
+    public void actualizarEstado()
     {
         this.botonCampoJugador.clear();
         this.botonCampoOponente.clear();

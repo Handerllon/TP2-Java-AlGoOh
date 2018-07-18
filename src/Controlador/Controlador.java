@@ -3,44 +3,107 @@ package Controlador;
 import Controlador.estadosJuego.MaquinaTurnos;
 import Modelo.Modelo;
 import Modelo.finDeJuego.CausaFinJuego;
+import Modelo.finDeJuego.CausaFinJuegoNula;
 import Modelo.finDeJuego.ObservadorDeFinJuego;
 import Vista.Vista;
 
-public class Controlador implements ObservadorDeFinJuego
+public final class Controlador implements ObservadorDeFinJuego
 {
-    private Modelo modelo;
-    private Vista vista;
+    private static Modelo modelo;
+    private static Vista vista;
+    private static Controlador instancia = null;
+    private static CausaFinJuego causaFinDeJuego = CausaFinJuegoNula.obtenerInstancia();
     private MaquinaTurnos maquinaTurnos;
 
-    public Controlador(Modelo modelo, Vista vista)
+    // --------------------------------------------------------------------
+    // Métodos de construcción e inicialización.
+    // --------------------------------------------------------------------
+    private Controlador(Modelo modelo)
     {
         this.modelo = modelo;
-        this.vista = vista;
-
-        this.modelo.agregarObsevador(this);
-
-        this.maquinaTurnos = new MaquinaTurnos(this.modelo.obtenerJugador(), this.modelo.obtenerOponente());
-
-        //this.comenzarJuego();
+        this.modelo.agregarObsevadorFinDeJuego(this);
     }
 
-    public void comenzarJuego()
+    public static Controlador obtenerInstancia(Modelo modelo)
     {
-        int i = 1;
-        while (i != 20)
+        if (instancia == null)
         {
-            this.maquinaTurnos.jugar();
-            i++;
+            instancia = new Controlador(modelo);
         }
+        return instancia;
     }
 
-    @Override
-    public void actualizar(CausaFinJuego causaFinJuego)
+    public Controlador clone() throws CloneNotSupportedException
     {
-        // TODO: implementar la notificación en la Vista para que muestre un cartel al cliente. Algo como:
-        // vista.notificarObservadores(causaFinJuego);
-        System.out.println("Fin de Juego debido a " + causaFinJuego.obtenerCausa() + " causado por el jugador " +
-                causaFinJuego.obtenerNombreJugador());
-        System.exit(0);
+        throw new CloneNotSupportedException();
+    }
+
+    public void establecerVista(Vista vista)
+    {
+        this.vista = vista;
+    }
+
+    // --------------------------------------------------------------------
+    // Ejecucion.
+    // --------------------------------------------------------------------
+    public void iniciar()
+    {
+        this.maquinaTurnos = MaquinaTurnos.obtenerInstancia(this.modelo.obtenerJugador(), this.modelo.obtenerOponente(), this.vista);
+        this.vista.mostrar();
+    }
+
+    public void jugar()
+    {
+        this.vista.mostrar();
+        this.maquinaTurnos.jugar();
+    }
+
+    // --------------------------------------------------------------------
+    // Interfaz con el modelo.
+    // --------------------------------------------------------------------
+    public void establecerNombreJugador(String text)
+    {
+        this.modelo.establecerNombreJugador(text);
+    }
+
+    public void establecerNombreOponente(String text)
+    {
+        this.modelo.establecerNombreOponente(text);
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de observador de modelo.
+    // --------------------------------------------------------------------
+    @Override
+    public void seLlegoAFinDeJuego(CausaFinJuego causaFinJuego)
+    {
+        this.causaFinDeJuego = causaFinJuego;
+        this.terminar();
+        this.vista.finDeJuego();
+        this.modelo.terminar();
+    }
+
+    public CausaFinJuego obtenerCausaFinDeJuego()
+    {
+        return this.causaFinDeJuego;
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de terminación.
+    // --------------------------------------------------------------------
+    private void terminar()
+    {
+        this.maquinaTurnos.parar();
+    }
+
+    public void confirmarSalirPrograma()
+    {
+        this.vista.confirmarSalirPrograma();
+    }
+
+    public void cerrarPrograma()
+    {
+        this.vista.cerrar();
+
     }
 }

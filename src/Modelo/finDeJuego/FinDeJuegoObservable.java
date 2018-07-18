@@ -2,9 +2,9 @@ package Modelo.finDeJuego;
 
 public interface FinDeJuegoObservable
 {
-    void agregarObsevador(ObservadorDeFinJuego observador);
+    void agregarObsevadorFinDeJuego(ObservadorDeFinJuego observador);
 
-    void quitarObservador(ObservadorDeFinJuego observador);
+    void quitarObservadorFinDeJuego(ObservadorDeFinJuego observador);
 
-    void notificarObservadores(CausaFinJuego causaFinJuego);
+    void notificarFinDeJuego(CausaFinJuego causaFinJuego);
 }

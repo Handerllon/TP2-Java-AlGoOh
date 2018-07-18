@@ -41,6 +41,19 @@ public class Jugador implements FinDeJuegoObservable
     // ----------------------------------------
     private ArrayList<ObservadorDeFinJuego> observadoresFinJuegos = new ArrayList<>();
 
+    public Jugador()
+    {
+        this.nombre = "";
+        this.puntosDeVida = 8000;
+
+        this.mano = new Mano(this);
+
+        this.regionMonstruos = new RegionMonstruos(this);
+        this.regionMagicasYTrampas = new RegionMagicasYTrampas(this);
+        this.regionCampo = new RegionCampo(this);
+        this.cementerio = new RegionCementerio(this);
+    }
+
     public Jugador(String unNombre)
     {
         this.nombre = unNombre;
@@ -52,6 +65,11 @@ public class Jugador implements FinDeJuegoObservable
         this.regionMagicasYTrampas = new RegionMagicasYTrampas(this);
         this.regionCampo = new RegionCampo(this);
         this.cementerio = new RegionCementerio(this);
+    }
+
+    public void establecerNombre(String nombreJugador)
+    {
+        this.nombre = nombreJugador;
     }
 
     public void establecerOponente(Jugador oponente)
@@ -90,7 +108,7 @@ public class Jugador implements FinDeJuegoObservable
         this.puntosDeVida -= puntosARestar;
         if (this.puntosDeVida <= 0)
         {
-            this.notificarObservadores(new CausaPuntosDeVidaNulos(this));
+            this.notificarFinDeJuego(new CausaPuntosDeVidaNulos(this));
         }
     }
 
@@ -256,13 +274,13 @@ public class Jugador implements FinDeJuegoObservable
     // Metodos de observadores de fin de juego.
     // --------------------------------------------------------------------
     @Override
-    public void agregarObsevador(ObservadorDeFinJuego observador)
+    public void agregarObsevadorFinDeJuego(ObservadorDeFinJuego observador)
     {
         this.observadoresFinJuegos.add(observador);
     }
 
     @Override
-    public void quitarObservador(ObservadorDeFinJuego observador)
+    public void quitarObservadorFinDeJuego(ObservadorDeFinJuego observador)
     {
         if (this.observadoresFinJuegos.isEmpty() == false)
         {
@@ -271,9 +289,9 @@ public class Jugador implements FinDeJuegoObservable
     }
 
     @Override
-    public void notificarObservadores(CausaFinJuego causaFinJuego)
+    public void notificarFinDeJuego(CausaFinJuego causaFinJuego)
     {
-        this.observadoresFinJuegos.forEach(item -> item.actualizar(causaFinJuego));
+        this.observadoresFinJuegos.forEach(item -> item.seLlegoAFinDeJuego(causaFinJuego));
     }
 }
 

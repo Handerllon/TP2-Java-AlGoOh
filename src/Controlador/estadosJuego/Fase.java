@@ -8,5 +8,6 @@ public interface Fase
 
     Fase cambiarFase();
 
+    // TODO: esto lo llama el controlador cuando en la vista se aprieta el botón de finalización de fase.
     void finalizarFase();
 }

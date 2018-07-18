@@ -1,18 +1,20 @@
 package Controlador.estadosJuego;
 
 import Modelo.Jugador;
-
-import java.util.concurrent.TimeUnit;
+import Vista.Vista;
 
 public class FaseTrampas implements Fase
 {
-    public FaseTrampas()
+    private Vista vista;
+
+    public FaseTrampas(Vista vista)
     {
+        this.vista = vista;
     }
 
     public Fase cambiarFase()
     {
-        return new FaseFinal();
+        return new FaseFinal(this.vista);
     }
 
     @Override
@@ -27,12 +29,6 @@ public class FaseTrampas implements Fase
 
     public void finalizarFase()
     {
-        try
-        {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
+        this.vista.actualizarEstado();
     }
 }

@@ -1,118 +1,123 @@
 package Vista;
 
+import Controlador.Controlador;
 import Modelo.Modelo;
 import Modelo.ObservadorDeModelo;
-import Vista.areaDeJuego.RegionCampoVista;
-import Vista.areaDeJuego.RegionCementerioVista;
-import Vista.areaDeJuego.RegionMagicasYTrampasVista;
-import Vista.areaDeJuego.RegionMonstruosVista;
-import Vista.carta.ManoVista;
-import Vista.carta.MazoVista;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.layout.*;
-import javafx.scene.paint.ImagePattern;
+import Vista.escenas.EscenaBienvenida;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 public class Vista implements ObservadorDeModelo
 {
-    protected static Modelo modelo;
-    // TODO: levantar la resolucion automaticamente con alguna llamada al sistema.
-    private static int RESOLUCION_HORIZONTAL = 1920;
-    private static int RESOLUCION_VERTICAL = 1000;
-    private static String RUTA_TABLERO = "resources/imagenes/tablero/tablero yogioh.png";
-    private GridPane root = new GridPane();
-    private RegionMonstruosVista regionMonstruos;
-    private RegionMagicasYTrampasVista regionMagicasYTrampas;
-    private RegionCampoVista regionCampo;
-    private RegionCementerioVista regionCementerio;
-    private ManoVista manos;
-    private MazoVista mazos;
+    private static Modelo modelo;
+    private static Controlador controlador;
+    private static double RESOLUCION_HORIZONTAL;
+    private static double RESOLUCION_VERTICAL;
+    private EscenaVista escenaVista;
+    private Stage primaryStage;
 
-    public Vista(Modelo modelo, Stage primaryStage)
+    // --------------------------------------------------------------------
+    // Métodos de construcción e inicialización.
+    // --------------------------------------------------------------------
+    public Vista(Modelo modelo, Controlador controlador, Stage primaryStage)
     {
+        this.primaryStage = primaryStage;
+        this.RESOLUCION_HORIZONTAL = Screen.getPrimary().getVisualBounds().getWidth();
+        this.RESOLUCION_VERTICAL = Screen.getPrimary().getVisualBounds().getHeight();
+
         this.modelo = modelo;
         this.modelo.agregarObsevador(this);
 
-        GridPane grid = root;
+        this.controlador = controlador;
 
-        primaryStage.setTitle("AlGoOh");
-        Scene scenePrincipal = new Scene(grid, RESOLUCION_HORIZONTAL, RESOLUCION_VERTICAL);
-        primaryStage.setScene(scenePrincipal);
-
-        grid.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource(RUTA_TABLERO).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-
-        // Estructura de la vista.
-        grid.setGridLinesVisible(false);
-        // TODO: generalizar el hardcodeo de los numeros.
-        grid.setPadding(new Insets(5));
-        ColumnConstraints column0 = new ColumnConstraints(300);
-        ColumnConstraints column1 = new ColumnConstraints(1310);
-        ColumnConstraints column2 = new ColumnConstraints(300);
-        RowConstraints row0 = new RowConstraints(160);
-        RowConstraints row1 = new RowConstraints(160);
-        RowConstraints row2 = new RowConstraints(160);
-        RowConstraints row3 = new RowConstraints(160);
-        RowConstraints row4 = new RowConstraints(160);
-        RowConstraints row5 = new RowConstraints(160);
-        grid.getColumnConstraints().addAll(column0, column1, column2);
-        grid.getRowConstraints().addAll(row0, row1, row2, row3, row4, row5);
-
-        // ---------------- Regiones ----------------
-        RegionMonstruosVista regionMonstruos = new RegionMonstruosVista(primaryStage, this.modelo);
-        grid.add(regionMonstruos.getGridJugador(), 1, 3);
-        grid.setHalignment(regionMonstruos.getGridJugador(), HPos.CENTER);
-        grid.add(regionMonstruos.getGridOponente(), 1, 2);
-        grid.setHalignment(regionMonstruos.getGridOponente(), HPos.CENTER);
-
-        RegionMagicasYTrampasVista regionMagicasYTrampas = new RegionMagicasYTrampasVista(primaryStage, this.modelo);
-        grid.add(regionMagicasYTrampas.getGridJugador(), 1, 4);
-        grid.setHalignment(regionMagicasYTrampas.getGridJugador(), HPos.CENTER);
-        grid.add(regionMagicasYTrampas.getGridOponente(), 1, 1);
-        grid.setHalignment(regionMagicasYTrampas.getGridOponente(), HPos.CENTER);
-
-        RegionCampoVista regionCampo = new RegionCampoVista(primaryStage, this.modelo);
-        grid.add(regionCampo.getRegionCampoJugador(), 0, 4);
-        grid.setHalignment(regionCampo.getRegionCampoJugador(), HPos.CENTER);
-        grid.add(regionCampo.getRegionCampoOponente(), 2, 1);
-        grid.setHalignment(regionCampo.getRegionCampoOponente(), HPos.CENTER);
-
-        RegionCementerioVista regionCementerio = new RegionCementerioVista(primaryStage, this.modelo);
-        grid.add(regionCementerio.getCementerioJugador(), 0, 3);
-        grid.setHalignment(regionCementerio.getCementerioJugador(), HPos.CENTER);
-        grid.add(regionCementerio.getCementerioOponente(), 2, 2);
-        grid.setHalignment(regionCementerio.getCementerioOponente(), HPos.CENTER);
-
-        // ---------------- Manos ----------------
-
-        ManoVista manos = new ManoVista(primaryStage, this.modelo);
-        grid.add(manos.getManoJugador(), 1, 5);
-        grid.setHalignment(manos.getManoJugador(), HPos.CENTER);
-        grid.add(manos.getManoOponente(), 1, 0);
-        grid.setHalignment(manos.getManoOponente(), HPos.CENTER);
-
-        // ---------------- Mazos ----------------
-
-        MazoVista mazos = new MazoVista(primaryStage, this.modelo);
-        grid.add(mazos.getMazoJugador(), 2, 5);
-        grid.setHalignment(mazos.getMazoJugador(), HPos.CENTER);
-        grid.add(mazos.getMazoOponente(), 0, 0);
-        grid.setHalignment(mazos.getMazoOponente(), HPos.CENTER);
-
-        primaryStage.show();
+        this.escenaVista = EscenaBienvenida.obtenerInstancia(this.modelo, this);
     }
 
-    @Override
-    public void actualizar()
+    // --------------------------------------------------------------------
+    // Ejecucion.
+    // --------------------------------------------------------------------
+
+    public void mostrar()
     {
-        this.regionCampo.actualizar();
-        this.regionMagicasYTrampas.actualizar();
-        this.regionMonstruos.actualizar();
-        this.regionCementerio.actualizar();
-        this.manos.actualizar();
-        this.mazos.actualizar();
+        this.escenaVista.dibujarEscena();
+    }
+
+    public void establecerProximaEscena(EscenaVista escenaVista)
+    {
+        this.escenaVista = escenaVista;
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de consulta.
+    // --------------------------------------------------------------------
+    public Stage obtenerPrimaryStage()
+    {
+        return this.primaryStage;
+    }
+
+    public Controlador obtenerControlador()
+    {
+        return this.controlador;
+    }
+
+    public double obtenerResolucionHorizontal()
+    {
+        return this.RESOLUCION_HORIZONTAL;
+    }
+
+    public double obtenerResolucionVertical()
+    {
+        return this.RESOLUCION_VERTICAL;
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de observador de modelo.
+    // --------------------------------------------------------------------
+    @Override
+    public void actualizarEstado()
+    {
+        this.escenaVista.actualizarEstado();
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de terminación.
+    // --------------------------------------------------------------------
+    public void finDeJuego()
+    {
+        this.escenaVista.finDeJuego();
+        this.escenaVista.dibujarEscena();
+    }
+
+    public void confirmarSalirPrograma()
+    {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Cerrar AlGoOh");
+        alert.setHeaderText("Está seguro que desea salir?");
+        alert.setContentText("Confirmación");
+
+        ButtonType buttonTypeOne = new ButtonType("Si");
+        ButtonType buttonTypeCancel = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeOne)
+        {
+            this.obtenerControlador().cerrarPrograma();
+        } else
+        {
+            // El usuario cerro la ventana o apretó NO.
+        }
+    }
+
+    public void cerrar()
+    {
+        this.escenaVista.cerrar();
     }
 }

@@ -1,7 +1,7 @@
 package Controlador.estadosJuego;
 
+import Controlador.Controlador;
 import Modelo.Jugador;
-import Vista.Vista;
 
 public final class MaquinaFaseNula extends MaquinaFase
 {
@@ -10,9 +10,9 @@ public final class MaquinaFaseNula extends MaquinaFase
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    private MaquinaFaseNula(Jugador jugador, Vista vista)
+    private MaquinaFaseNula(Jugador jugador, Controlador controlador)
     {
-        super(jugador, vista);
+        super(jugador, controlador);
     }
 
     public static MaquinaFaseNula obtenerInstancia()

@@ -184,15 +184,13 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     @Override
     public int obtenerNumeroDeCartasRestantesEnMazoJugador()
     {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.jugador1.obtenerMazo().cantidadCartas();
     }
 
     @Override
     public int obtenerNumeroDeCartasRestantesEnMazoOponente()
     {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.jugador2.obtenerMazo().cantidadCartas();
     }
 
     @Override

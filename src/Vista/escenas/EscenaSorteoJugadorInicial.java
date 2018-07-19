@@ -3,13 +3,11 @@ package Vista.escenas;
 import Modelo.Modelo;
 import Vista.EscenaVista;
 import Vista.Vista;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
@@ -19,23 +17,22 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public final class EscenaBienvenida implements EscenaVista
+public final class EscenaSorteoJugadorInicial implements EscenaVista
 {
-    private static String direccion_video_bienvenida = "src/resources/video/welcome_yugioh.mp4";
+    private static String direccion_video_sorteo = "src/resources/video/draw_galaxy.mp4";
     private static int ANCHO_CAMPO_NOMBRE = 15;
     private static Vista vista;
     private static EscenaVista proximaEscena = EscenaNula.obtenerInstancia();
     private static MediaPlayer mplayer;
-    private static EscenaBienvenida instancia = null;
+    private static EscenaSorteoJugadorInicial instancia = null;
     private Modelo modelo;
-    private Scene escenaBienvenida;
+    private Scene escenaSorteoJugadorInicial;
     private Stage primaryStage;
-    private TextField txtJugador1, txtJugador2;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    private EscenaBienvenida(Modelo modelo, Vista vista)
+    private EscenaSorteoJugadorInicial(Modelo modelo, Vista vista)
     {
         this.modelo = modelo;
         this.vista = vista;
@@ -43,16 +40,16 @@ public final class EscenaBienvenida implements EscenaVista
         this.inicializarEscena();
     }
 
-    public static EscenaBienvenida obtenerInstancia(Modelo modelo, Vista vista)
+    public static EscenaSorteoJugadorInicial obtenerInstancia(Modelo modelo, Vista vista)
     {
         if (instancia == null)
         {
-            instancia = new EscenaBienvenida(modelo, vista);
+            instancia = new EscenaSorteoJugadorInicial(modelo, vista);
         }
         return instancia;
     }
 
-    public EscenaBienvenida clone() throws CloneNotSupportedException
+    public EscenaSorteoJugadorInicial clone() throws CloneNotSupportedException
     {
         throw new CloneNotSupportedException();
     }
@@ -60,36 +57,25 @@ public final class EscenaBienvenida implements EscenaVista
     private void inicializarEscena()
     {
         GridPane grid = new GridPane();
-        this.escenaBienvenida = new Scene(grid);
-        this.primaryStage.setScene(this.escenaBienvenida);
+        this.escenaSorteoJugadorInicial = new Scene(grid);
+        this.primaryStage.setScene(this.escenaSorteoJugadorInicial);
 
-        Label lblTitulo = new Label("Ingresar nombres de jugadores");
+        Label lblTitulo = new Label("Sorteo de jugador inicial.");
         lblTitulo.setMinWidth(100);
         lblTitulo.setAlignment(Pos.BOTTOM_CENTER);
         lblTitulo.setStyle("-fx-font-weight: bolder; -fx-font-size: 12pt");
 
-        Label lblJugador1 = new Label("Nombre del jugador 1:");
-        lblJugador1.setMinWidth(100);
-        lblJugador1.setAlignment(Pos.BOTTOM_RIGHT);
-        lblJugador1.setStyle("-fx-font-weight: bolder; -fx-font-size: 12pt");
-        this.txtJugador1 = new TextField();
-        txtJugador1.setPrefColumnCount(ANCHO_CAMPO_NOMBRE);
-        txtJugador1.setPromptText("Escribir el nombre del jugador 1 aquí.");
-
-        Label lblJugador2 = new Label("Nombre del jugador 2:");
-        lblJugador2.setMinWidth(100);
-        lblJugador2.setAlignment(Pos.BOTTOM_RIGHT);
-        lblJugador2.setStyle("-fx-font-weight: bolder; -fx-font-size: 12pt");
-        this.txtJugador2 = new TextField();
-        txtJugador2.setPrefColumnCount(ANCHO_CAMPO_NOMBRE);
-        txtJugador2.setPromptText("Escribir el nombre del jugador 2 aquí.");
+        Label lblJugadorSorteado = new Label(this.vista.obtenerControlador().nombreJugadorInicialSorteado());
+        lblJugadorSorteado.setMinWidth(100);
+        lblJugadorSorteado.setAlignment(Pos.BOTTOM_CENTER);
+        lblJugadorSorteado.setStyle("-fx-font-weight: bolder; -fx-font-size: 12pt");
 
         // -------------------------------
         // Buttons definitions.
         // -------------------------------
-        Button btnOK = new Button("Jugar");
+        Button btnOK = new Button("Ok");
         btnOK.setMinWidth(75);
-        btnOK.setOnAction(e -> jugarBtn_click());
+        btnOK.setOnAction(e -> okBtn_click());
 
         Button btnSalir = new Button("Salir");
         btnSalir.setMinWidth(75);
@@ -100,7 +86,7 @@ public final class EscenaBienvenida implements EscenaVista
         // -------------------------------
         // Video.
         // -------------------------------
-        File f = new File(direccion_video_bienvenida);
+        File f = new File(direccion_video_sorteo);
         Media media = new Media(f.toURI().toString());
         this.mplayer = new MediaPlayer(media);
         this.mplayer.setCycleCount(MediaPlayer.INDEFINITE);
@@ -118,14 +104,9 @@ public final class EscenaBienvenida implements EscenaVista
         grid.setMinWidth(500);
 
         grid.addRow(0, lblTitulo);
-        grid.setColumnSpan(lblTitulo, 2);
-        grid.setHalignment(lblTitulo, HPos.CENTER);
-        grid.addRow(1, lblJugador1, txtJugador1);
-        grid.addRow(2, lblJugador2, txtJugador2);
-        grid.addRow(3, paneButtons);
-        grid.addRow(4, paneVideo);
-        grid.setColumnSpan(paneVideo, 2);
-        grid.setHalignment(paneVideo, HPos.CENTER);
+        grid.addRow(1, lblJugadorSorteado);
+        grid.addRow(2, paneButtons);
+        grid.addRow(3, paneVideo);
     }
 
     // --------------------------------------------------------------------
@@ -136,15 +117,13 @@ public final class EscenaBienvenida implements EscenaVista
         this.vista.obtenerControlador().confirmarSalirPrograma();
     }
 
-    private void jugarBtn_click()
+    private void okBtn_click()
     {
-        // TODO: estas líneas deberían encapsular en un Command que levante el controlador.
-        this.vista.obtenerControlador().establecerNombreJugador(this.txtJugador1.getText());
-        this.vista.obtenerControlador().establecerNombreOponente(this.txtJugador2.getText());
-
         this.vista.establecerProximaEscena(this.cambiarEscena());
         this.cerrar();
-        this.vista.mostrar();
+
+        // TODO: estas líneas deberían encapsular en un Command que levante el controlador.
+        this.vista.obtenerControlador().jugar();
     }
 
     // --------------------------------------------------------------------
@@ -153,13 +132,12 @@ public final class EscenaBienvenida implements EscenaVista
     @Override
     public EscenaVista cambiarEscena()
     {
-        return EscenaSorteoJugadorInicial.obtenerInstancia(this.modelo, this.vista);
+        return EscenaTableroPrincipal.obtenerInstancia(this.modelo, this.vista);
     }
 
     @Override
     public void dibujarEscena()
     {
-        // TODO: hacer un metodo playMedia().
         this.mplayer.play();
         this.primaryStage.show();
     }

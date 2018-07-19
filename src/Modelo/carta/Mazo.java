@@ -113,4 +113,9 @@ public class Mazo implements FinDeJuegoObservable
     {
         this.observadoresFinJuegos.forEach(item -> item.seLlegoAFinDeJuego(causaFinJuego));
     }
+
+    public int cantidadCartas()
+    {
+        return cartas.size();
+    }
 }

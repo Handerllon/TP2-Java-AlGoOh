@@ -1,23 +1,23 @@
 package Controlador.estadosJuego;
 
+import Controlador.Controlador;
 import Modelo.Jugador;
-import Vista.Vista;
 
 public class MaquinaFase
 {
     private static final int cantidadFases = 5;
-    protected Vista vista;
+    private Controlador controlador;
     private Jugador jugador;
     private Fase fase;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    public MaquinaFase(Jugador jugador, Vista vista)
+    public MaquinaFase(Jugador jugador, Controlador controlador)
     {
-        this.vista = vista;
+        this.controlador = controlador;
         this.jugador = jugador;
-        this.fase = new FaseInicial(vista);
+        this.fase = new FaseInicial(controlador);
     }
 
     public void jugar()

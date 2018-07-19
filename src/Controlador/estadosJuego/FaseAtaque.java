@@ -1,20 +1,20 @@
 package Controlador.estadosJuego;
 
+import Controlador.Controlador;
 import Modelo.Jugador;
-import Vista.Vista;
 
 public class FaseAtaque implements Fase
 {
-    private Vista vista;
+    private Controlador controlador;
 
-    public FaseAtaque(Vista vista)
+    public FaseAtaque(Controlador controlador)
     {
-        this.vista = vista;
+        this.controlador = controlador;
     }
 
     public Fase cambiarFase()
     {
-        return new FaseTrampas(this.vista);
+        return new FaseTrampas(this.controlador);
     }
 
     @Override
@@ -29,6 +29,6 @@ public class FaseAtaque implements Fase
 
     public void finalizarFase()
     {
-        this.vista.actualizarEstado();
+        //this.vista.actualizarEstado();
     }
 }

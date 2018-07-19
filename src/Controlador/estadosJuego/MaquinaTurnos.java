@@ -1,7 +1,7 @@
 package Controlador.estadosJuego;
 
+import Controlador.Controlador;
 import Modelo.Jugador;
-import Vista.Vista;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -10,25 +10,28 @@ public final class MaquinaTurnos
     private static MaquinaTurnos instancia = null;
     private MaquinaFase maquinaFaseJugador1, maquinaFaseJugador2;
     private MaquinaFase maquinaFaseActiva, maquinaFaseEnEspera;
-    private Vista vista;
+    private Controlador controlador;
+    private Jugador jugador1, jugador2, jugadorInicialSorteado;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    private MaquinaTurnos(Jugador jugador1, Jugador jugador2, Vista vista)
+    private MaquinaTurnos(Jugador jugador1, Jugador jugador2, Controlador controlador)
     {
-        this.vista = vista;
-        this.maquinaFaseJugador1 = new MaquinaFase(jugador1, vista);
-        this.maquinaFaseJugador2 = new MaquinaFase(jugador2, vista);
+        this.controlador = controlador;
+        this.jugador1 = jugador1;
+        this.jugador2 = jugador2;
+        this.maquinaFaseJugador1 = new MaquinaFase(jugador1, controlador);
+        this.maquinaFaseJugador2 = new MaquinaFase(jugador2, controlador);
 
-        this.establecerMaquinaFasesInicial();
+        this.sortearJugadorInicial();
     }
 
-    public static MaquinaTurnos obtenerInstancia(Jugador jugador1, Jugador jugador2, Vista vista)
+    public static MaquinaTurnos obtenerInstancia(Jugador jugador1, Jugador jugador2, Controlador controlador)
     {
         if (instancia == null)
         {
-            instancia = new MaquinaTurnos(jugador1, jugador2, vista);
+            instancia = new MaquinaTurnos(jugador1, jugador2, controlador);
         }
         return instancia;
     }
@@ -38,7 +41,7 @@ public final class MaquinaTurnos
         throw new CloneNotSupportedException();
     }
 
-    public void establecerMaquinaFasesInicial()
+    public void sortearJugadorInicial()
     {
         // nextInt produce un conjunto abierto, asique se le suma 1 para incluir el límite superior.
         int randomNum = ThreadLocalRandom.current().nextInt(0, 1 + 1);
@@ -46,10 +49,12 @@ public final class MaquinaTurnos
         {
             this.maquinaFaseActiva = this.maquinaFaseJugador1;
             this.maquinaFaseEnEspera = this.maquinaFaseJugador2;
+            this.jugadorInicialSorteado = this.jugador1;
         } else
         {
             this.maquinaFaseActiva = this.maquinaFaseJugador2;
             this.maquinaFaseEnEspera = this.maquinaFaseJugador1;
+            this.jugadorInicialSorteado = this.jugador2;
         }
     }
 
@@ -72,9 +77,15 @@ public final class MaquinaTurnos
         this.maquinaFaseActiva = MaquinaFaseNula.obtenerInstancia();
     }
 
-	public void finDeTurno() {
-		// TODO Hacer
-		
-	}
+    public void finDeTurno()
+    {
+        // TODO Hacer
+
+    }
+
+    public Jugador obtenerJugadorInicialSorteado()
+    {
+        return this.jugadorInicialSorteado;
+    }
 }
 

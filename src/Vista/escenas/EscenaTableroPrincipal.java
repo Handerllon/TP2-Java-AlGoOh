@@ -147,13 +147,11 @@ public final class EscenaTableroPrincipal implements EscenaVista
         Media media = new Media(f.toURI().toString());
         this.mplayer = new MediaPlayer(media);
         this.mplayer.setCycleCount(MediaPlayer.INDEFINITE);
-        this.mplayer.play();
     }
 
     @Override
     public EscenaVista cambiarEscena()
     {
-        this.stopMedia();
         return EscenaFinDeJuego.obtenerInstancia(this.modelo, this.vista);
     }
 
@@ -166,6 +164,7 @@ public final class EscenaTableroPrincipal implements EscenaVista
     @Override
     public void dibujarEscena()
     {
+        this.mplayer.play();
         this.primaryStage.show();
     }
 
@@ -196,6 +195,7 @@ public final class EscenaTableroPrincipal implements EscenaVista
     @Override
     public void cerrar()
     {
+        this.stopMedia();
         this.primaryStage.close();
     }
 }

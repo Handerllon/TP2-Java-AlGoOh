@@ -1,22 +1,22 @@
 package Controlador.estadosJuego;
 
+import Controlador.Controlador;
 import Modelo.Jugador;
-import Vista.Vista;
 
 import java.util.concurrent.TimeUnit;
 
 public class FaseFinal implements Fase
 {
-    private Vista vista;
+    private Controlador controlador;
 
-    public FaseFinal(Vista vista)
+    public FaseFinal(Controlador controlador)
     {
-        this.vista = vista;
+        this.controlador = controlador;
     }
 
     public Fase cambiarFase()
     {
-        return new FaseInicial(this.vista);
+        return new FaseInicial(this.controlador);
     }
 
     @Override

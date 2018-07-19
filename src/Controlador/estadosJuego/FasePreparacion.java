@@ -1,20 +1,20 @@
 package Controlador.estadosJuego;
 
 import Modelo.Jugador;
-import Vista.Vista;
+import Controlador.Controlador;
 
 public class FasePreparacion implements Fase
 {
-    private Vista vista;
+    private Controlador controlador;
 
-    public FasePreparacion(Vista vista)
+    public FasePreparacion(Controlador controlador)
     {
-        this.vista = vista;
+        this.controlador = controlador;
     }
 
     public Fase cambiarFase()
     {
-        return new FaseAtaque(this.vista);
+        return new FaseAtaque(this.controlador);
     }
 
     @Override
@@ -29,6 +29,6 @@ public class FasePreparacion implements Fase
 
     public void finalizarFase()
     {
-        this.vista.actualizarEstado();
+        //this.controlador.actualizarEstado();
     }
 }

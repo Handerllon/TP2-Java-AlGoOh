@@ -74,10 +74,10 @@ public class Vista implements ObservadorDeModelo
     {
         return this.RESOLUCION_VERTICAL;
     }
-    
-    public Modelo obtenerModelo() {
-    	// TODO Auto-generated method stub
-    	return null;
+
+    public Modelo obtenerModelo()
+    {
+        return this.modelo;
     }
 
     // --------------------------------------------------------------------

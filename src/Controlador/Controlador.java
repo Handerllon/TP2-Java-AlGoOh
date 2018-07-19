@@ -51,7 +51,7 @@ public final class Controlador implements ObservadorDeFinJuego
     // --------------------------------------------------------------------
     public void iniciar()
     {
-        this.maquinaTurnos = MaquinaTurnos.obtenerInstancia(this.modelo.obtenerJugador(), this.modelo.obtenerOponente(), this.vista);
+        this.maquinaTurnos = MaquinaTurnos.obtenerInstancia(this.modelo.obtenerJugador(), this.modelo.obtenerOponente(), this);
         this.vista.mostrar();
     }
 
@@ -107,88 +107,105 @@ public final class Controlador implements ObservadorDeFinJuego
     public void cerrarPrograma()
     {
         this.vista.cerrar();
+    }
+
+    public void finDeTurno()
+    {
+
+        this.maquinaTurnos.finDeTurno();
+    }
+
+    public void finDeFase()
+    {
 
     }
 
-	public void finDeTurno() {
-		
-		this.maquinaTurnos.finDeTurno();
-		
-	}
+    public void tomarCarta()
+    {
+        // TODO Auto-generated method stub
 
-	public void finDeFase() {
+    }
 
-		
-	}
+    public void usarCartaMagica(Carta carta)
+    {
+        // TODO Auto-generated method stub
 
-	public void tomarCarta() {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	public void usarCartaMagica(Carta carta) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void jugarCartaTrampa(Carta carta)
+    {
+        // TODO Auto-generated method stub
 
-	public void jugarCartaTrampa(Carta carta) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	public void jugarCartaMagicaBocaArriba(Carta carta) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void jugarCartaMagicaBocaArriba(Carta carta)
+    {
+        // TODO Auto-generated method stub
 
-	public void jugarCartaMagicaBocaAbajo(Carta carta) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	public void orientarCartaBocaAbajo(Carta carta) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void jugarCartaMagicaBocaAbajo(Carta carta)
+    {
+        // TODO Auto-generated method stub
 
-	public void orientarCartaBocaArriba(Carta carta) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	public void ponerCartaEnModoAtaque(Carta carta) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void orientarCartaBocaAbajo(Carta carta)
+    {
+        // TODO Auto-generated method stub
 
-	public void ponerCartaEnModoDefensa(Carta carta) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	public void darVueltaCartaMonstruo(CartaMonstruo carta) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void orientarCartaBocaArriba(Carta carta)
+    {
+        // TODO Auto-generated method stub
 
-	public void cambiarOrientacionCartaMonstruo(CartaMonstruo carta) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	public void atacar(CartaMonstruo cartaAtacante, CartaNula cartaNula) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void ponerCartaEnModoAtaque(Carta carta)
+    {
+        // TODO Auto-generated method stub
 
-	public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	public void atacar(CartaMonstruo carta) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void ponerCartaEnModoDefensa(Carta carta)
+    {
+        // TODO Auto-generated method stub
 
+    }
+
+    public void darVueltaCartaMonstruo(CartaMonstruo carta)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void cambiarOrientacionCartaMonstruo(CartaMonstruo carta)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void atacar(CartaMonstruo cartaAtacante, CartaNula cartaNula)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void atacar(CartaMonstruo carta)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    public String nombreJugadorInicialSorteado()
+    {
+        return this.maquinaTurnos.obtenerJugadorInicialSorteado().obtenerNombre();
+    }
 }

@@ -1,24 +1,24 @@
 package Controlador.estadosJuego;
 
+import Controlador.Controlador;
 import Modelo.Jugador;
 import Modelo.carta.FabricaCartas;
 import Modelo.carta.Mano;
 import Modelo.carta.monstruo.CartaMonstruo;
-import Vista.Vista;
 
 public class FaseInicial implements Fase
 {
-    private Vista vista;
+    private Controlador controlador;
     private boolean seComandoFinDeFase = false;
 
-    public FaseInicial(Vista vista)
+    public FaseInicial(Controlador controlador)
     {
-        this.vista = vista;
+        this.controlador = controlador;
     }
 
     public Fase cambiarFase()
     {
-        return new FasePreparacion(this.vista);
+        return new FasePreparacion(this.controlador);
     }
 
     @Override
@@ -58,6 +58,6 @@ public class FaseInicial implements Fase
 
     public void finalizarFase()
     {
-        this.vista.actualizarEstado();
+        //this.controlador.actualizarEstado();
     }
 }

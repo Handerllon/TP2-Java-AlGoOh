@@ -72,6 +72,7 @@ public final class EscenaTableroPrincipal implements EscenaVista
         GridPane grid = new GridPane();
         this.escenaTableroPrincipal = new Scene(grid, this.vista.obtenerResolucionHorizontal(), this.vista.obtenerResolucionVertical());
         this.primaryStage.setScene(this.escenaTableroPrincipal);
+        this.primaryStage.setMaximized(true);
 
         grid.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource(RUTA_TABLERO).toString())), CornerRadii.EMPTY, Insets.EMPTY)));

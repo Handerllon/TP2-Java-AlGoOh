@@ -87,9 +87,9 @@ public final class EscenaBienvenida implements EscenaVista
         // -------------------------------
         // Buttons definitions.
         // -------------------------------
-        Button btnOK = new Button("Jugar");
+        Button btnOK = new Button("Ok");
         btnOK.setMinWidth(75);
-        btnOK.setOnAction(e -> jugarBtn_click());
+        btnOK.setOnAction(e -> okBtn_click());
 
         Button btnSalir = new Button("Salir");
         btnSalir.setMinWidth(75);
@@ -136,7 +136,7 @@ public final class EscenaBienvenida implements EscenaVista
         this.vista.obtenerControlador().confirmarSalirPrograma();
     }
 
-    private void jugarBtn_click()
+    private void okBtn_click()
     {
         // TODO: estas líneas deberían encapsular en un Command que levante el controlador.
         this.vista.obtenerControlador().establecerNombreJugador(this.txtJugador1.getText());
@@ -159,8 +159,7 @@ public final class EscenaBienvenida implements EscenaVista
     @Override
     public void dibujarEscena()
     {
-        // TODO: hacer un metodo playMedia().
-        this.mplayer.play();
+        this.playMedia();
         this.primaryStage.show();
     }
 
@@ -181,6 +180,12 @@ public final class EscenaBienvenida implements EscenaVista
     {
         this.stopMedia();
         this.vista.establecerProximaEscena(EscenaFinDeJuego.obtenerInstancia(this.modelo, this.vista));
+    }
+
+    @Override
+    public void playMedia()
+    {
+        this.mplayer.play();
     }
 
     @Override

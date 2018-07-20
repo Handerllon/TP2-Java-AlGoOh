@@ -12,6 +12,8 @@ public interface EscenaVista
 
     void finDeJuego();
 
+    void playMedia();
+
     void stopMedia();
 
     void cerrar();

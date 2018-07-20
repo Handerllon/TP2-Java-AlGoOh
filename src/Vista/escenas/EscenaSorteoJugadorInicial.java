@@ -73,9 +73,9 @@ public final class EscenaSorteoJugadorInicial implements EscenaVista
         // -------------------------------
         // Buttons definitions.
         // -------------------------------
-        Button btnOK = new Button("Ok");
+        Button btnOK = new Button("Jugar");
         btnOK.setMinWidth(75);
-        btnOK.setOnAction(e -> okBtn_click());
+        btnOK.setOnAction(e -> jugarBtn_click());
 
         Button btnSalir = new Button("Salir");
         btnSalir.setMinWidth(75);
@@ -117,7 +117,7 @@ public final class EscenaSorteoJugadorInicial implements EscenaVista
         this.vista.obtenerControlador().confirmarSalirPrograma();
     }
 
-    private void okBtn_click()
+    private void jugarBtn_click()
     {
         this.vista.establecerProximaEscena(this.cambiarEscena());
         this.cerrar();
@@ -138,7 +138,7 @@ public final class EscenaSorteoJugadorInicial implements EscenaVista
     @Override
     public void dibujarEscena()
     {
-        this.mplayer.play();
+        this.playMedia();
         this.primaryStage.show();
     }
 
@@ -159,6 +159,12 @@ public final class EscenaSorteoJugadorInicial implements EscenaVista
     {
         this.stopMedia();
         this.vista.establecerProximaEscena(EscenaFinDeJuego.obtenerInstancia(this.modelo, this.vista));
+    }
+
+    @Override
+    public void playMedia()
+    {
+        this.mplayer.play();
     }
 
     @Override

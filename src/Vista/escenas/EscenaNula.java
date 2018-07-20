@@ -59,6 +59,12 @@ public final class EscenaNula implements EscenaVista
     }
 
     @Override
+    public void playMedia()
+    {
+
+    }
+
+    @Override
     public void stopMedia()
     {
 

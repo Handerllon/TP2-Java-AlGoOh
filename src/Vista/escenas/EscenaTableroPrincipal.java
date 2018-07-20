@@ -165,7 +165,7 @@ public final class EscenaTableroPrincipal implements EscenaVista
     @Override
     public void dibujarEscena()
     {
-        this.mplayer.play();
+        this.playMedia();
         this.primaryStage.show();
     }
 
@@ -185,6 +185,12 @@ public final class EscenaTableroPrincipal implements EscenaVista
     {
         this.stopMedia();
         this.vista.establecerProximaEscena(EscenaFinDeJuego.obtenerInstancia(this.modelo, this.vista));
+    }
+
+    @Override
+    public void playMedia()
+    {
+        this.mplayer.play();
     }
 
     @Override

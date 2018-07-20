@@ -94,7 +94,6 @@ public final class EscenaFinDeJuego implements EscenaVista
         Media media = new Media(f.toURI().toString());
         this.mplayer = new MediaPlayer(media);
         this.mplayer.setCycleCount(MediaPlayer.INDEFINITE);
-        this.mplayer.play();
 
         // -------------------------------
         // Buttons definitions.
@@ -137,6 +136,7 @@ public final class EscenaFinDeJuego implements EscenaVista
     @Override
     public void dibujarEscena()
     {
+        this.playMedia();
         this.primaryStage.show();
     }
 
@@ -156,6 +156,12 @@ public final class EscenaFinDeJuego implements EscenaVista
     public void finDeJuego()
     {
 
+    }
+
+    @Override
+    public void playMedia()
+    {
+        this.mplayer.play();
     }
 
     @Override

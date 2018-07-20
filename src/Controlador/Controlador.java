@@ -1,6 +1,7 @@
 package Controlador;
 
 import Controlador.estadosJuego.MaquinaTurnos;
+import Controlador.excepciones.NoEsUnaCartaParaAtacar;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
 import Modelo.carta.CartaNula;
@@ -52,13 +53,14 @@ public final class Controlador implements ObservadorDeFinJuego
     public void iniciar()
     {
         this.maquinaTurnos = MaquinaTurnos.obtenerInstancia(this.modelo.obtenerJugador(), this.modelo.obtenerOponente(), this);
+        // Vista va a mostrar la pantalla de bienvenida.
         this.vista.mostrar();
     }
 
     public void jugar()
     {
+        // La vista pasa a la escena con el tablero principal.
         this.vista.mostrar();
-        this.maquinaTurnos.jugar();
     }
 
     // --------------------------------------------------------------------
@@ -81,7 +83,6 @@ public final class Controlador implements ObservadorDeFinJuego
     public void seLlegoAFinDeJuego(CausaFinJuego causaFinJuego)
     {
         this.causaFinDeJuego = causaFinJuego;
-        this.terminar();
         this.vista.finDeJuego();
         this.modelo.terminar();
     }
@@ -94,11 +95,6 @@ public final class Controlador implements ObservadorDeFinJuego
     // --------------------------------------------------------------------
     // Métodos de terminación.
     // --------------------------------------------------------------------
-    private void terminar()
-    {
-        this.maquinaTurnos.parar();
-    }
-
     public void confirmarSalirPrograma()
     {
         this.vista.confirmarSalirPrograma();
@@ -109,103 +105,113 @@ public final class Controlador implements ObservadorDeFinJuego
         this.vista.cerrar();
     }
 
-    public void finDeTurno()
+    // --------------------------------------------------------------------
+    // Métodos de fases y turnos.
+    // --------------------------------------------------------------------
+    public void terminarTurno()
     {
 
-        this.maquinaTurnos.finDeTurno();
+        this.maquinaTurnos.terminarTurno();
     }
 
-    public void finDeFase()
+    public void avanzarProximaFase()
     {
-
+        this.maquinaTurnos.avanzarProximaFase();
     }
 
+    public String obtenerNombreJugadorActual()
+    {
+        return this.maquinaTurnos.obtenerJugadorActual().obtenerNombre();
+    }
+
+    public String nombreFaseActual()
+    {
+        return this.maquinaTurnos.nombreFaseActual();
+    }
+
+    // ------------------------------------
+    // Métodos de juego de cartas.
+    // ------------------------------------
+    // TODO: verificar la condición y fase en las cuales se pueden realizar estas operaciones.
+    // TODO: verificar que el dueño de la carta y el jugador actual coincidan.
     public void tomarCarta()
     {
-        // TODO Auto-generated method stub
-
+        this.modelo.tomarCarta(this.maquinaTurnos.obtenerJugadorActual());
     }
 
-    public void usarCartaMagica(Carta carta)
+    public void activarCartaMagica(Carta carta)
     {
-        // TODO Auto-generated method stub
-
+        this.modelo.activarCartaMagica(this.maquinaTurnos.obtenerJugadorActual(),carta);
     }
 
     public void jugarCartaTrampa(Carta carta)
     {
-        // TODO Auto-generated method stub
+        this.modelo.jugarCartaTrampa(this.maquinaTurnos.obtenerJugadorActual(),carta);
 
     }
 
     public void jugarCartaMagicaBocaArriba(Carta carta)
     {
-        // TODO Auto-generated method stub
-
+        this.modelo.jugarCartaMagicaBocaArriba(this.maquinaTurnos.obtenerJugadorActual(),carta);
     }
 
     public void jugarCartaMagicaBocaAbajo(Carta carta)
     {
-        // TODO Auto-generated method stub
-
+        this.modelo.jugarCartaMagicaBocaAbajo(this.maquinaTurnos.obtenerJugadorActual(),carta);
     }
 
-    public void orientarCartaBocaAbajo(Carta carta)
-    {
-        // TODO Auto-generated method stub
+    // ------------------------------------
+    // Métodos de orientación de cartas.
+    // ------------------------------------
 
+    // TODO: verificar la condición y fase en las cuales se pueden realizar estas operaciones. Por ejemplo,
+    // no se puede cambiar la posición del monstruo ni voltearla el mismo turno que es colocada en el campo.
+    public void voltearBocaAbajo(Carta carta)
+    {
+        this.modelo.voltearBocaAbajo(carta);
     }
 
-    public void orientarCartaBocaArriba(Carta carta)
+    public void voltearBocaArriba(Carta carta)
     {
-        // TODO Auto-generated method stub
-
+        this.modelo.voltearBocaArriba(carta);
     }
 
-    public void ponerCartaEnModoAtaque(Carta carta)
+    public void ponerEnModoAtaque(Carta carta)
     {
-        // TODO Auto-generated method stub
-
+        this.modelo.ponerEnModoAtaque(carta);
     }
 
-    public void ponerCartaEnModoDefensa(Carta carta)
+    public void ponerEnModoDefensa(Carta carta)
     {
-        // TODO Auto-generated method stub
-
+        this.modelo.ponerEnModoDefensa(carta);
     }
 
-    public void darVueltaCartaMonstruo(CartaMonstruo carta)
+    public void voltearCartaMonstruo(CartaMonstruo carta)
     {
-        // TODO Auto-generated method stub
-
+        this.modelo.voltearCartaMonstruo(carta);
     }
 
-    public void cambiarOrientacionCartaMonstruo(CartaMonstruo carta)
+    public void cambiarModoCartaMonstruo(CartaMonstruo carta)
     {
-        // TODO Auto-generated method stub
-
+        this.modelo.cambiarModoCartaMonstruo(carta);
     }
 
-    public void atacar(CartaMonstruo cartaAtacante, CartaNula cartaNula)
+    // ------------------------------------
+    // Métodos de ataques.
+    // ------------------------------------
+    // TODO: verificar la condición y fase en las cuales se pueden realizar estas operaciones.
+    public void atacar(CartaMonstruo cartaAtacante, CartaNula cartaNula) throws NoEsUnaCartaParaAtacar
     {
-        // TODO Auto-generated method stub
-
+        throw new NoEsUnaCartaParaAtacar();
     }
 
     public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada)
     {
-        // TODO Auto-generated method stub
-
+        this.modelo.atacar(cartaAtacante, cartaAtacada);
     }
 
-    public void atacar(CartaMonstruo carta)
+    public void atacar(CartaMonstruo cartaAtacante)
     {
-        // TODO Auto-generated method stub
-
-    }
-
-    public String nombreJugadorInicialSorteado()
-    {
-        return this.maquinaTurnos.obtenerJugadorInicialSorteado().obtenerNombre();
+        this.modelo.atacar(cartaAtacante);
     }
 }

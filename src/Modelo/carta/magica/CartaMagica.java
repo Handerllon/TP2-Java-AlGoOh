@@ -11,4 +11,24 @@ public abstract class CartaMagica extends Carta
     }
 
     public abstract void efecto();
+
+    public boolean esCampo()
+    {
+        return false;
+    }
+
+    public boolean esMagica()
+    {
+        return true;
+    }
+
+    public boolean esMonstruo()
+    {
+        return false;
+    }
+
+    public boolean esTrampa()
+    {
+        return false;
+    }
 }

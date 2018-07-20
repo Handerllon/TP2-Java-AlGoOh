@@ -1,12 +1,13 @@
 package Vista.areaDeJuego;
 
-import Modelo.Modelo;
 import Modelo.ObservadorDeModelo;
 import Modelo.carta.campo.CartaCampo;
-import Vista.Vista;
 import Vista.Botones.BotonCampoEnRegion;
+import Vista.Vista;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class RegionCampoVista implements ObservadorDeModelo
 {
@@ -45,13 +46,13 @@ public class RegionCampoVista implements ObservadorDeModelo
         this.actualizarRegionOponente(this.vista.obtenerModelo().obtenerCartasEnRegionCampoOponente());
     }
 
-    private void actualizarRegionJugador(CartaCampo unaCartaCampo)
+    private void actualizarRegionJugador(ArrayList<CartaCampo> cartasCampo)
     {
-        this.botonCampoJugador.actualizarImagen(unaCartaCampo);
+        this.botonCampoJugador.actualizarImagen(cartasCampo.get(0));
     }
 
-    private void actualizarRegionOponente(CartaCampo unaCartaCampo)
+    private void actualizarRegionOponente(ArrayList<CartaCampo> cartasCampo)
     {
-        this.botonCampoOponente.actualizarImagen(unaCartaCampo);
+        this.botonCampoOponente.actualizarImagen(cartasCampo.get(0));
     }
 }

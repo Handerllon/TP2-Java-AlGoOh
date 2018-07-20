@@ -22,11 +22,21 @@ public class MaquinaFase
 
     public void jugar()
     {
-        // TODO: hacer como con la vista final.
-        for (int numeroFase = 1; numeroFase <= this.cantidadFases; numeroFase++)
-        {
-            this.fase.jugar(this.jugador);
-            this.fase = this.fase.cambiarFase();
-        }
+        this.fase.jugar(this.jugador);
+    }
+
+    public void avanzarProximaFase()
+    {
+        this.fase = this.fase.cambiarFase();
+    }
+
+    public Jugador obtenerJugador()
+    {
+        return this.jugador;
+    }
+
+    public String nombreFaseActual()
+    {
+        return this.fase.nombre();
     }
 }

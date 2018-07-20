@@ -8,19 +8,18 @@ import Modelo.finDeJuego.FinDeJuegoObservable;
 import Modelo.finDeJuego.ObservadorDeFinJuego;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Mano implements FinDeJuegoObservable
 {
     private static int CANTIDAD_MAXIMA = 6;
     private static int contadorPartesExodia;
-    private LinkedList<Carta> cartas;
+    private ArrayList<Carta> cartas;
     private Jugador jugadorAsociado;
     private ArrayList<ObservadorDeFinJuego> observadoresFinJuegos = new ArrayList<>();
 
     public Mano(Jugador jugador)
     {
-        this.cartas = new LinkedList<>();
+        this.cartas = new ArrayList<>();
         this.contadorPartesExodia = 0;
         this.jugadorAsociado = jugador;
     }
@@ -55,6 +54,11 @@ public class Mano implements FinDeJuegoObservable
     public boolean manoLlena()
     {
         return this.cantidadDeCartas() == this.CANTIDAD_MAXIMA;
+    }
+
+    public ArrayList<Carta> obtenerCartas()
+    {
+        return this.cartas;
     }
 
     // --------------------------------------------------------------------

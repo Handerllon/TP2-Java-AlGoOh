@@ -23,7 +23,7 @@ public class ManEaterBug extends CartaMonstruo
     public void recibirAtaque(CartaMonstruo cartaAtacante)
     {
 
-        if (!this.orientacionArriba())
+        if (this.orientacionArriba() == false)
         {
             this.cambiarOrientacion();
             this.efecto(cartaAtacante);

@@ -5,4 +5,7 @@ import Modelo.carta.monstruo.CartaMonstruo;
 public interface Modo
 {
     void cambiarModo(CartaMonstruo carta);
+
+    boolean esAtaque();
+    boolean esDefensa();
 }

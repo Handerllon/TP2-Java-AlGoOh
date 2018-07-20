@@ -25,4 +25,24 @@ public final class CartaNula extends Carta
     {
         throw new CloneNotSupportedException();
     }
+
+    public boolean esCampo()
+    {
+        return false;
+    }
+
+    public boolean esMagica()
+    {
+        return false;
+    }
+
+    public boolean esMonstruo()
+    {
+        return false;
+    }
+
+    public boolean esTrampa()
+    {
+        return false;
+    }
 }

@@ -85,7 +85,7 @@ public final class EscenaBienvenida implements EscenaVista
         txtJugador2.setPromptText("Escribir el nombre del jugador 2 aquí.");
 
         // -------------------------------
-        // Buttons definitions.
+        // Definición de botones.
         // -------------------------------
         Button btnOK = new Button("Ok");
         btnOK.setMinWidth(75);
@@ -98,7 +98,7 @@ public final class EscenaBienvenida implements EscenaVista
         HBox paneButtons = new HBox(10, btnOK, btnSalir);
 
         // -------------------------------
-        // Video.
+        // Multimedia.
         // -------------------------------
         File f = new File(direccion_video_bienvenida);
         Media media = new Media(f.toURI().toString());
@@ -110,7 +110,7 @@ public final class EscenaBienvenida implements EscenaVista
         HBox paneVideo = new HBox(mview);
 
         // -------------------------------
-        // Setting grid.
+        // Configuración de la grilla.
         // -------------------------------
         grid.setPadding(new Insets(10));
         grid.setHgap(10);
@@ -129,7 +129,7 @@ public final class EscenaBienvenida implements EscenaVista
     }
 
     // --------------------------------------------------------------------
-    // Buttons implementations.
+    // Implementación acción botones.
     // --------------------------------------------------------------------
     private void salirBtn_click()
     {
@@ -144,6 +144,7 @@ public final class EscenaBienvenida implements EscenaVista
 
         this.vista.establecerProximaEscena(this.cambiarEscena());
         this.cerrar();
+        // Ahora pasamos a la escena donde se muestra qué jugador salió sorteado.
         this.vista.mostrar();
     }
 

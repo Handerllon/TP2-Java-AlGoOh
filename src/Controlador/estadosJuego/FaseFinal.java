@@ -3,8 +3,6 @@ package Controlador.estadosJuego;
 import Controlador.Controlador;
 import Modelo.Jugador;
 
-import java.util.concurrent.TimeUnit;
-
 public class FaseFinal implements Fase
 {
     private Controlador controlador;
@@ -20,23 +18,28 @@ public class FaseFinal implements Fase
     }
 
     @Override
+    public String nombre()
+    {
+        return "Final";
+    }
+
+    @Override
     public void jugar(Jugador jugador)
     {
         // TODO: implementar la fase.
         System.out.println("----------------------");
-        System.out.println(jugador.obtenerNombre() + " FaseFinal.");
+        System.out.println(jugador.obtenerNombre() + " Fase " + this.nombre());
         System.out.println("----------------------");
-        this.finalizarFase();
     }
 
-    public void finalizarFase()
-    {
-        try
-        {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
-    }
+//    public void finalizarFase()
+//    {
+//        try
+//        {
+//            TimeUnit.SECONDS.sleep(1);
+//        } catch (InterruptedException e)
+//        {
+//            e.printStackTrace();
+//        }
+//    }
 }

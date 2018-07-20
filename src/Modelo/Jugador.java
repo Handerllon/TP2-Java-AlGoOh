@@ -187,7 +187,6 @@ public class Jugador implements FinDeJuegoObservable
     // --------------------------------------------------------------------
     // Métodos de consultas.
     // --------------------------------------------------------------------
-
     public int getPuntosDeVida()
     {
         return this.puntosDeVida;
@@ -222,7 +221,7 @@ public class Jugador implements FinDeJuegoObservable
 
     public ArrayList<CartaMonstruo> obtenerCartasEnAreaMonstruo()
     {
-        return this.regionMonstruos.obtenerCartasEnRegion();
+        return this.regionMonstruos.obtenerCartas();
     }
 
     public CartaTrampa obtenerCartaTrampaAActivar()

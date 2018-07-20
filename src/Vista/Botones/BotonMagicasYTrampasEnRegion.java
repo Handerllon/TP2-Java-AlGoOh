@@ -16,7 +16,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Popup;
-import javafx.stage.Stage;
 
 public class BotonMagicasYTrampasEnRegion extends Button
 {
@@ -98,20 +97,16 @@ public class BotonMagicasYTrampasEnRegion extends Button
         popup.getContent().addAll(vbox);
 
         botonEnRegion.setOnAction(e -> magYTramEnRegionBtn_Click());
-        
     }
 
-
-	private VBox crearVBoxCartaMagica(VBox vbox, Popup popup)
+    private VBox crearVBoxCartaMagica(VBox vbox, Popup popup)
     {
         //TODO: Implementar los event handler de cada opcion
         Button b1 = new Button("Usar");
         Button b5 = new Button("Cerrar");
 
-        
         b1.setOnAction(e -> magYTramEnRegionUsarBtn_Click());
-        
-        
+
         b5.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent event)
@@ -125,16 +120,18 @@ public class BotonMagicasYTrampasEnRegion extends Button
 
         return vbox;
     }
-	private void magYTramEnRegionUsarBtn_Click() {
-		this.vista.obtenerControlador().usarCartaMagica(this.carta);
-	}
 
-	private void magYTramEnRegionBtn_Click() {
-		
-		popup.show(vista.obtenerPrimaryStage());
-		javafx.geometry.Point2D point = this.botonDeLaCarta.localToScene(0.0, 0.0);
-		popup.setX(vista.obtenerPrimaryStage().getX() + point.getX());
-		popup.setY(vista.obtenerPrimaryStage().getY() + point.getY());
-		
-	}
+    private void magYTramEnRegionUsarBtn_Click()
+    {
+        this.vista.obtenerControlador().activarCartaMagica(this.carta);
+    }
+
+    private void magYTramEnRegionBtn_Click()
+    {
+
+        popup.show(vista.obtenerPrimaryStage());
+        javafx.geometry.Point2D point = this.botonDeLaCarta.localToScene(0.0, 0.0);
+        popup.setX(vista.obtenerPrimaryStage().getX() + point.getX());
+        popup.setY(vista.obtenerPrimaryStage().getY() + point.getY());
+    }
 }

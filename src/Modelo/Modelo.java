@@ -2,7 +2,9 @@ package Modelo;
 
 import Modelo.carta.Carta;
 import Modelo.carta.campo.CartaCampo;
+import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
+import Modelo.carta.trampa.CartaTrampa;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaFinJuegoNula;
 import Modelo.finDeJuego.FinDeJuegoObservable;
@@ -139,46 +141,43 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         }
     }
 
+    // --------------------------------------------------------------------
+    // Métodos de consultas.
+    // --------------------------------------------------------------------
     @Override
     public ArrayList<CartaMonstruo> obtenerCartasEnRegionMonstruosJugador()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return this.jugador1.obtenerRegionMonstruos().obtenerCartas();
     }
 
     @Override
     public ArrayList<CartaMonstruo> obtenerCartasEnRegionMonstruosOponente()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return this.jugador2.obtenerRegionMonstruos().obtenerCartas();
     }
 
     @Override
     public ArrayList<Carta> obtenerCartasEnRegionMagicasYTrampasJugador()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return this.jugador1.obtenerRegionMagicasYTrampas().obtenerCartas();
     }
 
     @Override
     public ArrayList<Carta> obtenerCartasEnRegionMagicasYTrampasOponente()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return this.jugador2.obtenerRegionMagicasYTrampas().obtenerCartas();
     }
 
     @Override
-    public CartaCampo obtenerCartasEnRegionCampoJugador()
+    public ArrayList<CartaCampo> obtenerCartasEnRegionCampoJugador()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return this.jugador1.obtenerRegionCampo().obtenerCartas();
     }
 
     @Override
-    public CartaCampo obtenerCartasEnRegionCampoOponente()
+    public ArrayList<CartaCampo> obtenerCartasEnRegionCampoOponente()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return this.jugador2.obtenerRegionCampo().obtenerCartas();
     }
 
     @Override
@@ -196,17 +195,138 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     @Override
     public ArrayList<Carta> obtenerCartasEnLaManoDelJugador()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return this.jugador1.obtenerMano().obtenerCartas();
     }
 
     @Override
     public ArrayList<Carta> obtenerCartasEnLaManoDelOponente()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return this.jugador2.obtenerMano().obtenerCartas();
     }
 
+    // ------------------------------------
+    // Métodos de juego de cartas.
+    // ------------------------------------
+    @Override
+    public void tomarCarta(Jugador jugador)
+    {
+        jugador.tomarCarta();
+    }
+
+    @Override
+    public void jugarCartaMagicaBocaAbajo(Jugador jugador, Carta carta)
+    {
+        this.voltearBocaAbajo(carta);
+        if (carta.esMagica() == true)
+        {
+            jugador.jugarCarta((CartaMagica) carta);
+        }
+    }
+
+    @Override
+    public void jugarCartaMagicaBocaArriba(Jugador jugador, Carta carta)
+    {
+        this.voltearBocaArriba(carta);
+        if (carta.esMagica() == true)
+        {
+            jugador.jugarCarta((CartaMagica) carta);
+        }
+    }
+
+    @Override
+    public void jugarCartaTrampa(Jugador jugador, Carta carta)
+    {
+        if (carta.esTrampa() == true)
+        {
+            jugador.jugarCarta((CartaTrampa) carta);
+        }
+    }
+
+    @Override
+    public void activarCartaMagica(Jugador jugador, Carta carta)
+    {
+        if (carta.esMagica() == true)
+        {
+            this.voltearBocaArriba(carta);
+            jugador.jugarCarta((CartaMagica) carta);
+        }
+    }
+
+    // ------------------------------------
+    // Métodos de orientación de cartas.
+    // ------------------------------------
+    @Override
+    public void voltearBocaAbajo(Carta carta)
+    {
+        if (carta.orientacionArriba() == true)
+        {
+            carta.cambiarOrientacion();
+        }
+    }
+
+    @Override
+    public void voltearBocaArriba(Carta carta)
+    {
+        if (carta.orientacionArriba() == false)
+        {
+            carta.cambiarOrientacion();
+        }
+    }
+
+    @Override
+    public void ponerEnModoAtaque(Carta carta)
+    {
+        if (carta.esMonstruo() == true)
+        {
+            if (((CartaMonstruo) carta).estaEnAtaque() == false)
+            {
+                ((CartaMonstruo) carta).cambiarModo();
+            }
+        }
+    }
+
+    @Override
+    public void ponerEnModoDefensa(Carta carta)
+    {
+        if (carta.esMonstruo() == true)
+        {
+            if (((CartaMonstruo) carta).estaEnDefensa() == false)
+            {
+                ((CartaMonstruo) carta).cambiarModo();
+            }
+        }
+    }
+
+    @Override
+    public void voltearCartaMonstruo(CartaMonstruo carta)
+    {
+        carta.cambiarOrientacion();
+    }
+
+    @Override
+    public void cambiarModoCartaMonstruo(CartaMonstruo carta)
+    {
+        carta.cambiarModo();
+    }
+
+    // ------------------------------------
+    // Métodos de ataques.
+    // ------------------------------------
+    @Override
+    public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada)
+    {
+        cartaAtacante.obtenerPropietario().atacarOponente(cartaAtacante, cartaAtacada);
+    }
+
+    @Override
+    public void atacar(CartaMonstruo cartaAtacante)
+    {
+        cartaAtacante.obtenerPropietario().atacarOponente(cartaAtacante);
+    }
+
+    // ------------------------------------
+    // Métodos de terminación.
+    // ------------------------------------
     public void terminar()
     {
         System.out.println("Terminando Modelo.");

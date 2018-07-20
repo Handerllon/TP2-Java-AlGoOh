@@ -7,7 +7,8 @@ public abstract class CausaFinJuego
     private String tipoCausa;
     private Jugador jugadorAsociadoAlFin;
 
-    private CausaFinJuego(){
+    private CausaFinJuego()
+    {
 
     }
 

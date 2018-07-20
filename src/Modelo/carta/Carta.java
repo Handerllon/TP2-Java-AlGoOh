@@ -41,7 +41,7 @@ public abstract class Carta
         this.orientacion = orientacionNueva;
     }
 
-    protected boolean orientacionArriba()
+    public boolean orientacionArriba()
     {
         return this.orientacion instanceof OrientacionArriba;
     }
@@ -55,4 +55,9 @@ public abstract class Carta
     {
         return false;
     }
+
+    public abstract boolean esCampo();
+    public abstract boolean esMagica();
+    public abstract boolean esMonstruo();
+    public abstract boolean esTrampa();
 }

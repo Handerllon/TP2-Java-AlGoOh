@@ -88,7 +88,7 @@ public class BotonCartaEnMano extends Button
         Button b2 = new Button("Cerrar");
 
         b1.setOnAction(e -> jugarCartaTrampaBtn_Click());
-        
+
         b2.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent event)
@@ -103,8 +103,7 @@ public class BotonCartaEnMano extends Button
         return vbox;
     }
 
-
-	private Button crearBotonCartaMagicaEnMano(Stage primaryStage)
+    private Button crearBotonCartaMagicaEnMano(Stage primaryStage)
     {
         Button boton = new Button();
 
@@ -147,9 +146,9 @@ public class BotonCartaEnMano extends Button
         Button b3 = new Button("Cerrar");
 
         b1.setOnAction(e -> cartaMagicaJugarBocaArribaBtn_Click());
-        
+
         b2.setOnAction(e -> cartaMagicaJugarBocaAbajoBtn_Click());
-        
+
         b3.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent event)
@@ -164,7 +163,7 @@ public class BotonCartaEnMano extends Button
         return vbox;
     }
 
-	private Button crearBotonMonstruoEnMano(Stage primaryStage)
+    private Button crearBotonMonstruoEnMano(Stage primaryStage)
     {
         Button boton = new Button();
 
@@ -210,13 +209,13 @@ public class BotonCartaEnMano extends Button
         Button b6 = new Button("Cerrar");
 
         b1.setOnAction(e -> cartaMonstruoJugarBtn_Click());
-        
+
         b2.setOnAction(e -> cartaMonstruoOrientarEnDefensaBtn_Click());
-        
+
         b3.setOnAction(e -> cartaMonstruoOrientarEnAtaqueBtn_Click());
-        
+
         b4.setOnAction(e -> cartaMonstruoPonerBocaArribaBtn_Click());
-        
+
         b5.setOnAction(e -> cartaMonstruoPonerBocaAbajoBtn_Click());
 
         b6.setOnAction(new EventHandler<ActionEvent>()
@@ -233,43 +232,50 @@ public class BotonCartaEnMano extends Button
         return vbox;
     }
 //-------------------Event Handlers------------------ 
-    
-    private void cartaMonstruoPonerBocaAbajoBtn_Click() {
-		this.vista.obtenerControlador().orientarCartaBocaAbajo(this.carta);
-	}
 
-	private void cartaMonstruoPonerBocaArribaBtn_Click() {
-
-		this.vista.obtenerControlador().orientarCartaBocaArriba(this.carta);
-	}
-
-	private void cartaMonstruoOrientarEnAtaqueBtn_Click() {
-
-		this.vista.obtenerControlador().ponerCartaEnModoAtaque(this.carta);
-	}
-
-	private void cartaMonstruoOrientarEnDefensaBtn_Click() {
-
-		this.vista.obtenerControlador().ponerCartaEnModoDefensa(this.carta);
-	}
-
-	private Object cartaMonstruoJugarBtn_Click() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private void jugarCartaTrampaBtn_Click() {
-    	
-    	this.vista.obtenerControlador().jugarCartaTrampa(this.carta);
+    private void cartaMonstruoPonerBocaAbajoBtn_Click()
+    {
+        this.vista.obtenerControlador().voltearBocaAbajo(this.carta);
     }
-    
-    private void cartaMagicaJugarBocaAbajoBtn_Click() {
-    	this.vista.obtenerControlador().jugarCartaMagicaBocaAbajo(this.carta);
+
+    private void cartaMonstruoPonerBocaArribaBtn_Click()
+    {
+
+        this.vista.obtenerControlador().voltearBocaArriba(this.carta);
     }
-    
-    private void cartaMagicaJugarBocaArribaBtn_Click() {
-    	this.vista.obtenerControlador().jugarCartaMagicaBocaArriba(this.carta);
+
+    private void cartaMonstruoOrientarEnAtaqueBtn_Click()
+    {
+        this.vista.obtenerControlador().ponerEnModoAtaque(this.carta);
     }
-    
+
+    private void cartaMonstruoOrientarEnDefensaBtn_Click()
+    {
+
+        this.vista.obtenerControlador().ponerEnModoDefensa(this.carta);
+    }
+
+    private Object cartaMonstruoJugarBtn_Click()
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    private void jugarCartaTrampaBtn_Click()
+    {
+
+        this.vista.obtenerControlador().jugarCartaTrampa(this.carta);
+    }
+
+    private void cartaMagicaJugarBocaAbajoBtn_Click()
+    {
+        this.vista.obtenerControlador().jugarCartaMagicaBocaAbajo(this.carta);
+    }
+
+    private void cartaMagicaJugarBocaArribaBtn_Click()
+    {
+        this.vista.obtenerControlador().jugarCartaMagicaBocaArriba(this.carta);
+    }
+
 //----------------------------------------------------
 }

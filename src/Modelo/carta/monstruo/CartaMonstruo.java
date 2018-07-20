@@ -62,6 +62,26 @@ public abstract class CartaMonstruo extends Carta
         return this.estrellas;
     }
 
+    public boolean esCampo()
+    {
+        return false;
+    }
+
+    public boolean esMagica()
+    {
+        return false;
+    }
+
+    public boolean esMonstruo()
+    {
+        return true;
+    }
+
+    public boolean esTrampa()
+    {
+        return false;
+    }
+
     // --------------------------------------------------------------------
     // Métodos sobre puntos.
     // --------------------------------------------------------------------
@@ -207,5 +227,15 @@ public abstract class CartaMonstruo extends Carta
     public void invocar()
     {
         throw new NoHayCartasParaSacrificarError();
+    }
+
+    public boolean estaEnAtaque()
+    {
+        return this.modo.esAtaque();
+    }
+
+    public boolean estaEnDefensa()
+    {
+        return this.modo.esDefensa();
     }
 }

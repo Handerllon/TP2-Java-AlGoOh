@@ -1,6 +1,5 @@
 package Vista.areaDeJuego;
 
-import Modelo.Modelo;
 import Modelo.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.scene.control.Button;

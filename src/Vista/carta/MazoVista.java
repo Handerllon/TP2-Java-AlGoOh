@@ -1,20 +1,15 @@
 package Vista.carta;
 
-import Modelo.Modelo;
 import Modelo.ObservadorDeModelo;
 import Vista.Vista;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.ImagePattern;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class MazoVista implements ObservadorDeModelo
@@ -29,6 +24,9 @@ public class MazoVista implements ObservadorDeModelo
     private Button mazoOponente;
     private Tooltip toolTipOponente;
 
+    // --------------------------------------------------------------------
+    // Métodos de construcción e inicialización.
+    // --------------------------------------------------------------------
     public MazoVista(Stage primaryStage, Vista vista)
     {
 
@@ -38,12 +36,12 @@ public class MazoVista implements ObservadorDeModelo
 
         this.toolTipJugador = new Tooltip();
         this.toolTipOponente = new Tooltip();
-                
+
         this.mazoJugador = inicializar();
         this.mazoJugador.setTooltip(toolTipJugador);
         this.mazoOponente = inicializar();
         this.mazoOponente.setTooltip(toolTipOponente);
-        
+
         this.actualizarEstado();
     }
 
@@ -55,12 +53,14 @@ public class MazoVista implements ObservadorDeModelo
         boton.setPrefSize(anchoDeCarta, altoDeCarta);
         boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource("resources/imagenes/tablero/Back.jpg").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-       
         boton.setOnAction(e -> tomarCartaBtn_Click());
 
         return boton;
     }
 
+    // --------------------------------------------------------------------
+    // Métodos de escena.
+    // --------------------------------------------------------------------
     public Button getMazoJugador()
     {
 
@@ -82,18 +82,19 @@ public class MazoVista implements ObservadorDeModelo
 
     private void actualizarMazoJugador(int numeroDeCartas)
     {
-    	this.toolTipJugador.setText(Integer.toString(numeroDeCartas));
+        this.toolTipJugador.setText(Integer.toString(numeroDeCartas));
     }
 
-
-	private void actualizarMazoOponente(int numeroDeCartas)
+    private void actualizarMazoOponente(int numeroDeCartas)
     {
-		this.toolTipOponente.setText(Integer.toString(numeroDeCartas));
-        
+        this.toolTipOponente.setText(Integer.toString(numeroDeCartas));
     }
-	private void tomarCartaBtn_Click() {
-		
-		this.vista.obtenerControlador().tomarCarta();
-		
-	}
+
+    // --------------------------------------------------------------------
+    // Implementación acción botones.
+    // --------------------------------------------------------------------
+    private void tomarCartaBtn_Click()
+    {
+        this.vista.obtenerControlador().tomarCarta();
+    }
 }

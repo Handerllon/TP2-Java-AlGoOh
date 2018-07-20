@@ -24,9 +24,9 @@ public interface ModeloObservable
 
     ArrayList<Carta> obtenerCartasEnRegionMagicasYTrampasOponente();
 
-    CartaCampo obtenerCartasEnRegionCampoJugador();
+    ArrayList<CartaCampo> obtenerCartasEnRegionCampoJugador();
 
-    CartaCampo obtenerCartasEnRegionCampoOponente();
+    ArrayList<CartaCampo> obtenerCartasEnRegionCampoOponente();
 
     int obtenerNumeroDeCartasRestantesEnMazoJugador();
 
@@ -35,4 +35,39 @@ public interface ModeloObservable
     ArrayList<Carta> obtenerCartasEnLaManoDelJugador();
 
     ArrayList<Carta> obtenerCartasEnLaManoDelOponente();
+
+    // ------------------------------------
+    // Métodos de orientación de cartas.
+    // ------------------------------------
+    void voltearBocaAbajo(Carta carta);
+
+    void voltearBocaArriba(Carta carta);
+
+    void ponerEnModoAtaque(Carta carta);
+
+    void ponerEnModoDefensa(Carta carta);
+
+    void voltearCartaMonstruo(CartaMonstruo carta);
+
+    void cambiarModoCartaMonstruo(CartaMonstruo carta);
+
+    // ------------------------------------
+    // Métodos de ataques.
+    // ------------------------------------
+    void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada);
+
+    void atacar(CartaMonstruo cartaAtacante);
+
+    // ------------------------------------
+    // Métodos de juego de cartas.
+    // ------------------------------------
+    void tomarCarta(Jugador jugador);
+
+    void activarCartaMagica(Jugador jugador,Carta carta);
+
+    void jugarCartaTrampa(Jugador jugador,Carta carta);
+
+    void jugarCartaMagicaBocaArriba(Jugador jugador,Carta carta);
+
+    void jugarCartaMagicaBocaAbajo(Jugador jugador,Carta carta);
 }

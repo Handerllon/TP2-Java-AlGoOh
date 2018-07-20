@@ -8,4 +8,16 @@ public class ModoDefensa implements Modo
     {
         carta.establecerModo(new ModoAtaque());
     }
+
+    @Override
+    public boolean esAtaque()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean esDefensa()
+    {
+        return true;
+    }
 }

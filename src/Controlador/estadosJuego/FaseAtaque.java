@@ -18,17 +18,22 @@ public class FaseAtaque implements Fase
     }
 
     @Override
+    public String nombre()
+    {
+        return "Ataque";
+    }
+
+    @Override
     public void jugar(Jugador jugador)
     {
         // TODO: implementar la fase.
         System.out.println("----------------------");
-        System.out.println(jugador.obtenerNombre() + " FaseAtaque.");
+        System.out.println(jugador.obtenerNombre() + " Fase " + this.nombre());
         System.out.println("----------------------");
-        this.finalizarFase();
     }
 
-    public void finalizarFase()
-    {
-        //this.vista.actualizarEstado();
-    }
+//    public void finalizarFase()
+//    {
+//        this.vista.actualizarEstado();
+//    }
 }

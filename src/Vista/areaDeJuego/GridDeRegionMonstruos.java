@@ -1,8 +1,8 @@
 package Vista.areaDeJuego;
 
 import Modelo.carta.monstruo.CartaMonstruo;
-import Vista.Vista;
 import Vista.Botones.BotonMonstruoEnRegion;
+import Vista.Vista;
 import javafx.geometry.HPos;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -16,7 +16,7 @@ public class GridDeRegionMonstruos extends GridPane
     private GridPane grid;
     private Stage stage;
     private ArrayList<BotonMonstruoEnRegion> botones;
-	private Vista vista;
+    private Vista vista;
 
     public GridDeRegionMonstruos(Vista vista)
     {

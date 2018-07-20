@@ -1,7 +1,5 @@
 package Vista.Botones;
 
-import java.util.ArrayList;
-
 import Modelo.carta.CartaNula;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.Vista;
@@ -18,7 +16,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Popup;
-import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class BotonMonstruoEnRegion extends Button
 {
@@ -28,7 +27,7 @@ public class BotonMonstruoEnRegion extends Button
     private static double altoDeCarta = 139;
     private CartaMonstruo carta;
     private Button botonDeLaCarta;
-	private Vista vista;
+    private Vista vista;
 
     public BotonMonstruoEnRegion(Vista vista)
     {
@@ -95,14 +94,15 @@ public class BotonMonstruoEnRegion extends Button
         return botonEnRegion;
     }
 
-    private void MonstruoEnRegionBtn_Click(Popup popup, Button botonEnRegion) {
-    	popup.show(this.vista.obtenerPrimaryStage());
+    private void MonstruoEnRegionBtn_Click(Popup popup, Button botonEnRegion)
+    {
+        popup.show(this.vista.obtenerPrimaryStage());
         javafx.geometry.Point2D point = botonEnRegion.localToScene(0.0, 0.0);
         popup.setX(this.vista.obtenerPrimaryStage().getX() + point.getX());
         popup.setY(this.vista.obtenerPrimaryStage().getY() + point.getY());
-	}
+    }
 
-	private VBox crearVBoxCartaMonstruo(VBox vbox, Popup popup)
+    private VBox crearVBoxCartaMonstruo(VBox vbox, Popup popup)
     {
 
         //TODO: Implementar los event handler de cada opcion
@@ -112,11 +112,11 @@ public class BotonMonstruoEnRegion extends Button
         Button b5 = new Button("Cerrar");
 
         b2.setOnAction(e -> cartaMonstruoAtacarBtn_Click());
-        
+
         b3.setOnAction(e -> cartaMonstruoCambiarOrientacionBtn_Click());
-        
+
         b4.setOnAction(e -> cartaMonstruoDarVueltaBtn_Click());
-        
+
         b5.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent event)
@@ -131,28 +131,29 @@ public class BotonMonstruoEnRegion extends Button
         return vbox;
     }
 
-	private void cartaMonstruoAtacarBtn_Click() {
-		
-		ArrayList<CartaMonstruo> cartasOponente = this.vista.obtenerModelo().obtenerCartasEnRegionMonstruosOponente();
-		
-		Button b0 = new Button("1");
-		Button b1 = new Button("2");
-		Button b2 = new Button("3");
-		Button b3 = new Button("4");
-		Button b4 = new Button("5");
-		Button b5 = new Button("Atacar directamente al oponente");
-		Button b6 = new Button("Cerrar");
-		
-		Popup popup = new Popup();
-		popup.getContent().addAll(b0,b1,b2,b3,b4,b5,b6);
-		
-		b0.setOnAction(e -> cartaMonstruoAtacarMonstruoBtn_Click(0,cartasOponente));
-		b1.setOnAction(e -> cartaMonstruoAtacarMonstruoBtn_Click(1,cartasOponente));
-		b2.setOnAction(e -> cartaMonstruoAtacarMonstruoBtn_Click(2,cartasOponente));
-		b3.setOnAction(e -> cartaMonstruoAtacarMonstruoBtn_Click(3,cartasOponente));
-		b4.setOnAction(e -> cartaMonstruoAtacarMonstruoBtn_Click(4,cartasOponente));
-		b5.setOnAction(e -> cartaMonstruoAtacarOponenteBtn_Click());
-		b6.setOnAction(new EventHandler<ActionEvent>()
+    private void cartaMonstruoAtacarBtn_Click()
+    {
+
+        ArrayList<CartaMonstruo> cartasOponente = this.vista.obtenerModelo().obtenerCartasEnRegionMonstruosOponente();
+
+        Button b0 = new Button("1");
+        Button b1 = new Button("2");
+        Button b2 = new Button("3");
+        Button b3 = new Button("4");
+        Button b4 = new Button("5");
+        Button b5 = new Button("Atacar directamente al oponente");
+        Button b6 = new Button("Cerrar");
+
+        Popup popup = new Popup();
+        popup.getContent().addAll(b0, b1, b2, b3, b4, b5, b6);
+
+        b0.setOnAction(e -> cartaMonstruoAtacarMonstruoBtn_Click(0, cartasOponente));
+        b1.setOnAction(e -> cartaMonstruoAtacarMonstruoBtn_Click(1, cartasOponente));
+        b2.setOnAction(e -> cartaMonstruoAtacarMonstruoBtn_Click(2, cartasOponente));
+        b3.setOnAction(e -> cartaMonstruoAtacarMonstruoBtn_Click(3, cartasOponente));
+        b4.setOnAction(e -> cartaMonstruoAtacarMonstruoBtn_Click(4, cartasOponente));
+        b5.setOnAction(e -> cartaMonstruoAtacarOponenteBtn_Click());
+        b6.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent event)
             {
@@ -160,29 +161,34 @@ public class BotonMonstruoEnRegion extends Button
                 popup.hide();
             }
         });
-	}
+    }
 
-	private void cartaMonstruoAtacarOponenteBtn_Click() {
-		this.vista.obtenerControlador().atacar(this.carta);
-	}
+    private void cartaMonstruoAtacarOponenteBtn_Click()
+    {
+        this.vista.obtenerControlador().atacar(this.carta);
+    }
 
-	private void cartaMonstruoAtacarMonstruoBtn_Click(int i, ArrayList<CartaMonstruo> cartasOponente) {
-		
-		if (cartasOponente.get(i) == null){
-			this.vista.obtenerControlador().atacar(this.carta, CartaNula.obtenerInstancia());
-		}
-		else{
-			this.vista.obtenerControlador().atacar(this.carta, cartasOponente.get(i));
-		}
-		
-	}
+    private void cartaMonstruoAtacarMonstruoBtn_Click(int i, ArrayList<CartaMonstruo> cartasOponente)
+    {
 
-	private void cartaMonstruoCambiarOrientacionBtn_Click() {
+        // TODO: ojo con esta condición, no estoy seguro que un array devuelva null si no está el i-ésimo elemento.
+        if (cartasOponente.get(i) == null)
+        {
+            this.vista.obtenerControlador().atacar(this.carta, CartaNula.obtenerInstancia());
+        } else
+        {
+            this.vista.obtenerControlador().atacar(this.carta, cartasOponente.get(i));
+        }
+    }
 
-		this.vista.obtenerControlador().cambiarOrientacionCartaMonstruo(this.carta);
-	}
+    private void cartaMonstruoCambiarOrientacionBtn_Click()
+    {
 
-	private void cartaMonstruoDarVueltaBtn_Click() {
-		this.vista.obtenerControlador().darVueltaCartaMonstruo(this.carta);
-	}
+        this.vista.obtenerControlador().cambiarModoCartaMonstruo(this.carta);
+    }
+
+    private void cartaMonstruoDarVueltaBtn_Click()
+    {
+        this.vista.obtenerControlador().voltearCartaMonstruo(this.carta);
+    }
 }

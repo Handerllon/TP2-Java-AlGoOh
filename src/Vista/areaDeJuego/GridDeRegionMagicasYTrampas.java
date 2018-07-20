@@ -1,8 +1,8 @@
 package Vista.areaDeJuego;
 
 import Modelo.carta.Carta;
-import Vista.Vista;
 import Vista.Botones.BotonMagicasYTrampasEnRegion;
+import Vista.Vista;
 import javafx.geometry.HPos;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -16,7 +16,7 @@ public class GridDeRegionMagicasYTrampas extends GridPane
     private GridPane grid;
     private Stage stage;
     private ArrayList<BotonMagicasYTrampasEnRegion> botones;
-	private Vista vista;
+    private Vista vista;
 
     public GridDeRegionMagicasYTrampas(Vista vista)
     {

@@ -1,6 +1,5 @@
 package Vista.carta;
 
-import Modelo.Modelo;
 import Modelo.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.scene.layout.FlowPane;
@@ -13,6 +12,9 @@ public class ManoVista implements ObservadorDeModelo
     private FlowPaneDeMano manoJugador;
     private FlowPaneDeMano manoOponente;
 
+    // --------------------------------------------------------------------
+    // Métodos de construcción e inicialización.
+    // --------------------------------------------------------------------
     public ManoVista(Stage primaryStage, Vista vista)
     {
 
@@ -23,6 +25,9 @@ public class ManoVista implements ObservadorDeModelo
         this.manoOponente = new FlowPaneDeMano(this.vista);
     }
 
+    // --------------------------------------------------------------------
+    // Métodos de escena.
+    // --------------------------------------------------------------------
     public FlowPane getManoJugador()
     {
 

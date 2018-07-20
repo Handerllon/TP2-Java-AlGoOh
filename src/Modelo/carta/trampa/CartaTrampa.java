@@ -23,4 +23,24 @@ public abstract class CartaTrampa extends Carta
     public abstract void efecto(CartaMonstruo cartaMonstruoJugador, CartaMonstruo cartaMonstruoOponente);
 
     public abstract void efecto();
+
+    public boolean esCampo()
+    {
+        return false;
+    }
+
+    public boolean esMagica()
+    {
+        return false;
+    }
+
+    public boolean esMonstruo()
+    {
+        return false;
+    }
+
+    public boolean esTrampa()
+    {
+        return true;
+    }
 }

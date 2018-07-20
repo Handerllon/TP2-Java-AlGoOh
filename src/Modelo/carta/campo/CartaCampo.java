@@ -41,4 +41,24 @@ public abstract class CartaCampo extends Carta
     {
         cartaMonstruo.sumarPuntosDefensa(-this.modificadorDefensa);
     }
+
+    public boolean esCampo()
+    {
+        return true;
+    }
+
+    public boolean esMagica()
+    {
+        return false;
+    }
+
+    public boolean esMonstruo()
+    {
+        return false;
+    }
+
+    public boolean esTrampa()
+    {
+        return false;
+    }
 }

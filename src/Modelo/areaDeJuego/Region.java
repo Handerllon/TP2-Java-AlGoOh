@@ -74,11 +74,6 @@ public abstract class Region<T extends Carta> implements RegionObservable
         return this.cartas.isEmpty();
     }
 
-    public ArrayList<T> obtenerCartasEnRegion()
-    {
-        return this.cartas;
-    }
-
     public T obtenerUltimaCartaEnEntrar()
     {
         return this.ultimaCartaEnEntrar;

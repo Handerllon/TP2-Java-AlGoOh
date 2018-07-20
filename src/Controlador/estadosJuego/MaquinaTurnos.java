@@ -61,10 +61,17 @@ public final class MaquinaTurnos
     public void jugar()
     {
         this.maquinaFaseActiva.jugar();
-        this.cambiarTurno();
     }
 
-    private void cambiarTurno()
+    // --------------------------------------------------------------------
+    // Métodos de fases y turnos.
+    // --------------------------------------------------------------------
+    public void avanzarProximaFase()
+    {
+        this.maquinaFaseActiva.avanzarProximaFase();
+    }
+
+    public void terminarTurno()
     {
         MaquinaFase maquiniaFaseSwap = this.maquinaFaseActiva;
 
@@ -72,20 +79,17 @@ public final class MaquinaTurnos
         this.maquinaFaseEnEspera = maquiniaFaseSwap;
     }
 
-    public void parar()
+    // --------------------------------------------------------------------
+    // Métodos de consultas.
+    // --------------------------------------------------------------------
+    public Jugador obtenerJugadorActual()
     {
-        this.maquinaFaseActiva = MaquinaFaseNula.obtenerInstancia();
+        return this.maquinaFaseActiva.obtenerJugador();
     }
 
-    public void finDeTurno()
+    public String nombreFaseActual()
     {
-        // TODO Hacer
-
-    }
-
-    public Jugador obtenerJugadorInicialSorteado()
-    {
-        return this.jugadorInicialSorteado;
+        return this.maquinaFaseActiva.nombreFaseActual();
     }
 }
 

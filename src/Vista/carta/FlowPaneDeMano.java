@@ -1,11 +1,10 @@
 package Vista.carta;
 
 import Modelo.carta.Carta;
-import Vista.Vista;
 import Vista.Botones.BotonCartaEnMano;
+import Vista.Vista;
 import javafx.geometry.Pos;
 import javafx.scene.layout.FlowPane;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -13,7 +12,7 @@ public class FlowPaneDeMano extends FlowPane
 {
     private FlowPane flowPane;
     private ArrayList<BotonCartaEnMano> botones;
-	private Vista vista;
+    private Vista vista;
 
     public FlowPaneDeMano(Vista vista)
     {

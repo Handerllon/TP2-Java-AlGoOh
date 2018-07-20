@@ -22,7 +22,7 @@ public class BotonCampoEnRegion extends Button
     private Button boton;
     private CartaCampo carta;
     private Stage stage;
-	private Vista vista;
+    private Vista vista;
 
     public BotonCampoEnRegion(Vista vista)
     {

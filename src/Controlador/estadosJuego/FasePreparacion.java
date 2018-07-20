@@ -1,7 +1,7 @@
 package Controlador.estadosJuego;
 
-import Modelo.Jugador;
 import Controlador.Controlador;
+import Modelo.Jugador;
 
 public class FasePreparacion implements Fase
 {
@@ -18,17 +18,23 @@ public class FasePreparacion implements Fase
     }
 
     @Override
-    public void jugar(Jugador jugador)
+    public String nombre()
     {
-        // TODO: implementar la fase.
-        System.out.println("----------------------");
-        System.out.println(jugador.obtenerNombre() + " FasePreparacion.");
-        System.out.println("----------------------");
-        this.finalizarFase();
+        return "Preparación";
     }
 
-    public void finalizarFase()
+    @Override
+    public void jugar(Jugador jugador)
     {
-        //this.controlador.actualizarEstado();
+
+        // TODO: implementar la fase.
+        System.out.println("----------------------");
+        System.out.println(jugador.obtenerNombre() + " Fase " + this.nombre());
+        System.out.println("----------------------");
     }
+
+//    public void finalizarFase()
+//    {
+//        this.controlador.actualizarEstado();
+//    }
 }

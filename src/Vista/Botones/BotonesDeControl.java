@@ -1,63 +1,76 @@
 package Vista.Botones;
 
-import Modelo.Modelo;
 import Vista.Vista;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class BotonesDeControl extends Button{
-	
-	private Button botonFinDeTurno;
-	private Button botonFinDeFase;
-	private Stage stage;
-	private Vista vista;
-	
-	public BotonesDeControl(Stage stage, Vista vista){
-		
-		this.stage = stage;
-		this.vista = vista;
-		this.botonFinDeFase = this.crearBotonFinDeFase();
-		this.botonFinDeTurno = this.crearBotonFinDeTurno();
-		
-	}
-	
-	private Button crearBotonFinDeTurno() {
-		Button boton = new Button("FIN DE TURNO");
-		
-		
-		boton.setOnAction(e -> finDeTurnoBtn_click());
-		
-		return boton;
-	}
+public class BotonesDeControl extends Button
+{
+    private Button botonFinDeTurno;
+    private Button botonFinDeFase;
+    private Stage stage;
+    private Vista vista;
 
-	private Button crearBotonFinDeFase() {
-		Button boton = new Button("FIN DE FASE");
-		
-		boton.setOnAction(e -> finDeFaseBtn_click());
-		
-		return boton;
-	}
-	
-	private void finDeTurnoBtn_click() {
-		
-		this.vista.obtenerControlador().finDeTurno();
-		
-	}
+    // --------------------------------------------------------------------
+    // Métodos de construcción e inicialización.
+    // --------------------------------------------------------------------
+    public BotonesDeControl(Stage stage, Vista vista)
+    {
 
-	private void finDeFaseBtn_click() {
-		
-		this.vista.obtenerControlador().finDeFase();
-	}
-	
-	public Button getBotonFinDeTurno(){
-		
-		return this.botonFinDeTurno;
-	}
-	
-	public Button getBotonFinDeFase(){
-		
-		return this.botonFinDeFase;
-	}
-	
-	
+        this.stage = stage;
+        this.vista = vista;
+        this.botonFinDeFase = this.crearBotonAvanzarProximaFase();
+        this.botonFinDeTurno = this.crearBotonTerminarTurno();
+    }
+
+    private Button crearBotonTerminarTurno()
+    {
+        Button boton = new Button("TERMINAR TURNO");
+
+        boton.setOnAction(e -> terminarTurnoBtn_click());
+
+        return boton;
+    }
+
+    private Button crearBotonAvanzarProximaFase()
+    {
+        Button boton = new Button("AVANZAR A PROXIMA FASE");
+
+        boton.setOnAction(e -> avanzarProximaFaseBtn_click());
+
+        return boton;
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de escena.
+    // --------------------------------------------------------------------
+    public Button getBotonFinDeTurno()
+    {
+
+        return this.botonFinDeTurno;
+    }
+
+    public Button getBotonFinDeFase()
+    {
+
+        return this.botonFinDeFase;
+    }
+
+    // --------------------------------------------------------------------
+    // Implementación acción botones.
+    // --------------------------------------------------------------------
+    private void terminarTurnoBtn_click()
+    {
+
+        this.vista.obtenerControlador().terminarTurno();
+        this.vista.mostrarJugadorActual();
+        this.vista.mostrarFaseActual();
+    }
+
+    private void avanzarProximaFaseBtn_click()
+    {
+        this.vista.obtenerControlador().avanzarProximaFase();
+        this.vista.mostrarFaseActual();
+    }
 }

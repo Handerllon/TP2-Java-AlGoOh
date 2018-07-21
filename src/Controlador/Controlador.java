@@ -148,7 +148,7 @@ public final class Controlador implements ObservadorDeFinJuego
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
-        this.modelo.tomarCarta(solicitante);
+        this.maquinaTurnos.tomarCarta();
     }
 
     public void activarCartaMagica(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
@@ -157,7 +157,7 @@ public final class Controlador implements ObservadorDeFinJuego
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
-        this.modelo.activarCartaMagica(this.maquinaTurnos.obtenerJugadorActual(), carta);
+        this.modelo.activarCartaMagica(solicitante, carta);
     }
 
     public void jugarCartaTrampa(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
@@ -166,7 +166,7 @@ public final class Controlador implements ObservadorDeFinJuego
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
-        this.modelo.jugarCartaTrampa(this.maquinaTurnos.obtenerJugadorActual(), carta);
+        this.modelo.jugarCartaTrampa(solicitante, carta);
     }
 
     public void jugarCartaMagicaBocaArriba(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
@@ -175,7 +175,7 @@ public final class Controlador implements ObservadorDeFinJuego
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
-        this.modelo.jugarCartaMagicaBocaArriba(this.maquinaTurnos.obtenerJugadorActual(), carta);
+        this.modelo.jugarCartaMagicaBocaArriba(solicitante, carta);
     }
 
     public void jugarCartaMagicaBocaAbajo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
@@ -184,7 +184,7 @@ public final class Controlador implements ObservadorDeFinJuego
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
-        this.modelo.jugarCartaMagicaBocaAbajo(this.maquinaTurnos.obtenerJugadorActual(), carta);
+        this.modelo.jugarCartaMagicaBocaAbajo(solicitante, carta);
     }
 
     // ------------------------------------

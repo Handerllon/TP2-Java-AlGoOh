@@ -91,5 +91,10 @@ public final class MaquinaTurnos
     {
         return this.maquinaFaseActiva.nombreFaseActual();
     }
+
+    public void tomarCarta()
+    {
+        this.m
+    }
 }
 

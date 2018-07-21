@@ -8,6 +8,7 @@ import javafx.geometry.HPos;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class GridDeRegionMonstruos extends GridPane
     private ArrayList<BotonMonstruoEnRegion> botones;
     private Vista vista;
     private Jugador jugadorAsociado;
+    public static double anchoColumna;
+    public static double relacionAnchoColumnaPantalla = 7.25;
 
     public GridDeRegionMonstruos(Vista vista, Jugador jugador)
     {
@@ -30,12 +33,12 @@ public class GridDeRegionMonstruos extends GridPane
 
         this.botones = new ArrayList<BotonMonstruoEnRegion>();
 
-        // TODO: generalizar el hardcodeo de los numeros.
-        ColumnConstraints columna0 = new ColumnConstraints(262);
-        ColumnConstraints columna1 = new ColumnConstraints(262);
-        ColumnConstraints columna2 = new ColumnConstraints(262);
-        ColumnConstraints columna3 = new ColumnConstraints(262);
-        ColumnConstraints columna4 = new ColumnConstraints(262);
+        anchoColumna = Screen.getPrimary().getVisualBounds().getWidth() / relacionAnchoColumnaPantalla;
+        ColumnConstraints columna0 = new ColumnConstraints(anchoColumna);
+        ColumnConstraints columna1 = new ColumnConstraints(anchoColumna);
+        ColumnConstraints columna2 = new ColumnConstraints(anchoColumna);
+        ColumnConstraints columna3 = new ColumnConstraints(anchoColumna);
+        ColumnConstraints columna4 = new ColumnConstraints(anchoColumna);
         RowConstraints fila1 = new RowConstraints(160);
 
         this.grid.getColumnConstraints().addAll(columna0, columna1, columna2, columna3, columna4);

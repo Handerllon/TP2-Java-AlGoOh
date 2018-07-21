@@ -13,13 +13,17 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.ImagePattern;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class MazoVista implements ObservadorDeModelo
 {
-    //TODO: Buscar las resoluciones del sistema
-    private static double anchoDeCarta = 95.4;
-    private static double altoDeCarta = 139;
+
+	
+    private static double anchoDeCarta;
+    private static double altoDeCarta;
+    private static double relacionAnchoAlto = 1.457;
+    private static double relacionAnchoCartaPantalla = 19.92;
     private Vista vista;
     private Button mazoJugador;
     private Tooltip toolTipJugador;
@@ -31,7 +35,9 @@ public class MazoVista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     public MazoVista(Vista vista)
     {
-
+    	this.anchoDeCarta = Screen.getPrimary().getVisualBounds().getWidth() / relacionAnchoCartaPantalla;
+    	this.altoDeCarta = this.anchoDeCarta * relacionAnchoAlto;
+    	
         this.vista = vista;
 
         this.toolTipJugador = new Tooltip();

@@ -1,7 +1,7 @@
 package Vista.Botones;
 
+import Controlador.excepciones.SeTerminaronLasFases;
 import Vista.Vista;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -70,7 +70,14 @@ public class BotonesDeControl extends Button
 
     private void avanzarProximaFaseBtn_click()
     {
-        this.vista.obtenerControlador().avanzarProximaFase();
+        try
+        {
+            this.vista.obtenerControlador().avanzarProximaFase();
+        } catch (SeTerminaronLasFases seTerminaronLasFases)
+        {
+            this.vista.obtenerControlador().terminarTurno();
+            this.vista.mostrarJugadorActual();
+        }
         this.vista.mostrarFaseActual();
     }
 }

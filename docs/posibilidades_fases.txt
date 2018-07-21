@@ -1,0 +1,62 @@
+Fase inicial:
+	Solamente puede tomar una carta.
+	Si la mano está llena, se le pide al usuario que descarte 1 carta enviándola al cementerio.
+
+Fase preparación:
+	Mano:
+		Monstruo:
+			El usuario selecciona con click derecho si se invoca o si se posiciona en región monstruo.
+			Se verifica si requiere sacrificio, y le pregunta si quiere sacrificar. Si no 
+			hay cartas suficientes en la región monstruo, se le avisa que no puede usar el monstro. Si hay
+			cartas suficientes en la región monstruo, se le piden los sacrificios. El usuario puede 
+			cancelar la operación cerrando la ventana de sacrificios.
+			Luego, se ejecutan los sacrificios y se envia la carta a la región monstruo.
+			Si el usuario seleccionó "invocar", la carta va boca arriba en posición de ataque.
+			Si el usuario seleccionó "posicionar en región", la carta va boca abajo en posición de defensa.
+			
+		Mágicas y trampa:
+			El usuario selecciona "activar", entonces va a la región MyT boca arriba.
+			El usuario selecciona "posicionar", entonces va a la región MyT boca abajo.
+			Puede enviar todas las que quiera en el turno. Si la región se llena, le avisa con un tooltip que 
+			no pueden entrar más en la región MyT.
+			
+	Región Monstruo:
+			Si toco una carta, puedo cambiarle el modo (ataque o defensa), pero solo 1 vez por turno.
+			Si el usuario intenta cambiarle el modo más de 1 vez, le sale un tooltip que le dice que no se puede.
+			
+	Región MyT:
+			Si manda una carta trampa a la región MyT, y en la región la quiere activar, le avisa con un tooltip 
+			que no puede activarse en el turno en que ingresó a la región.
+			Si manda una carta mágica a la región MyT, y en la región la quiere activar, está todo bien.
+
+
+Fase Batalla:
+	Solamente puede entrar si hay cartas en la región monstruo boca arriba y en ataque.
+	No puede atacar si es el primer turno.
+	
+		Mano:
+			Si toca alguna carta, le avisa con un tooltip que no puede jugarlas en esta fase.
+			
+		Región Monstruo:
+			Si el usuario toca una:
+				si ya la usó para atacar, le avisa con un tooltip que no puede volver a atacar en el turno.
+				si no la usó para atacar, y no hay cartas en la región monstruo del oponente, ataca directamente 
+				al oponente.
+				si no la usó para atacar, y hay cartas en la región monstruo del oponente, le deja seleccionar 
+				la carta que quiere atacar. Si la carta oponente está boca abajo, se pone boca arriba luego del ataque.
+				
+				
+		
+	Fase interna Trampa:
+		Esta fase se activa siempre después de un ataque.
+		Si hay alguna carta trampa en la región MyT del oponente, y esta carta trampa está boca abajo, 
+		se le pregunta si la quiere activar:
+			Si dice que no, continúa el cálculo de daño.
+			Si dice que sí, se la pone boca arriba, y se usa su efecto.
+		Si había cartas trampa, y estaban activas (boca arriba), entonces se la utiliza.
+		Las cartas trampa se activan 1 vez, de izquierda a derecha, y luego de usarla, van al cementerio.
+
+Fase Final:
+	Puede seleccionar las cartas mágicas que quiera y usarlas, estén boca arriba o abajo.
+	Puede suceder que las condiciones para utilizar la carta no se den, como con Fissure y Dark Hole.
+	Si se usa Pot of Greed, la mano no puede estar llena.

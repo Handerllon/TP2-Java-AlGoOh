@@ -1,10 +1,9 @@
 package Vista.Botones;
 
+import Controlador.excepciones.JugadorNoPermitidoParaJugar;
 import Modelo.carta.Carta;
 import Modelo.carta.magica.CartaMagica;
 import Vista.Vista;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
@@ -107,14 +106,7 @@ public class BotonMagicasYTrampasEnRegion extends Button
 
         b1.setOnAction(e -> magYTramEnRegionUsarBtn_Click());
 
-        b5.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-
-                popup.hide();
-            }
-        });
+        b5.setOnAction(e -> popup.hide());
 
         vbox.getChildren().addAll(b1, b5);
 
@@ -123,7 +115,13 @@ public class BotonMagicasYTrampasEnRegion extends Button
 
     private void magYTramEnRegionUsarBtn_Click()
     {
-        this.vista.obtenerControlador().activarCartaMagica(this.carta);
+        try
+        {
+            this.vista.obtenerControlador().activarCartaMagica(this.carta, null);
+        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
+        {
+            jugadorNoPermitidoParaJugar.printStackTrace();
+        }
     }
 
     private void magYTramEnRegionBtn_Click()

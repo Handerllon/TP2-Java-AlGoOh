@@ -1,8 +1,10 @@
 package Controlador;
 
 import Controlador.estadosJuego.MaquinaTurnos;
-import Controlador.excepciones.NoEsUnaCartaParaAtacar;
 import Controlador.excepciones.JugadorNoPermitidoParaJugar;
+import Controlador.excepciones.NoEsFaseInicial;
+import Controlador.excepciones.NoEsUnaCartaParaAtacar;
+import Controlador.excepciones.SeTerminaronLasFases;
 import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
@@ -54,7 +56,7 @@ public final class Controlador implements ObservadorDeFinJuego
     // --------------------------------------------------------------------
     public void iniciar()
     {
-        this.maquinaTurnos = MaquinaTurnos.obtenerInstancia(this.modelo.obtenerJugador(), this.modelo.obtenerOponente(), this);
+        this.maquinaTurnos = MaquinaTurnos.obtenerInstancia(this.modelo.obtenerJugador(), this.modelo.obtenerOponente());
         // Vista va a mostrar la pantalla de bienvenida.
         this.vista.mostrar();
     }
@@ -112,13 +114,18 @@ public final class Controlador implements ObservadorDeFinJuego
     // --------------------------------------------------------------------
     public void terminarTurno()
     {
-
         this.maquinaTurnos.terminarTurno();
     }
 
-    public void avanzarProximaFase()
+    public void avanzarProximaFase() throws SeTerminaronLasFases
     {
-        this.maquinaTurnos.avanzarProximaFase();
+        if (this.maquinaTurnos.faseActual().esFaseFinal() == false)
+        {
+            this.maquinaTurnos.avanzarProximaFase();
+        } else
+        {
+            throw new SeTerminaronLasFases();
+        }
     }
 
     public String obtenerNombreJugadorActual()
@@ -128,7 +135,7 @@ public final class Controlador implements ObservadorDeFinJuego
 
     public String nombreFaseActual()
     {
-        return this.maquinaTurnos.nombreFaseActual();
+        return this.maquinaTurnos.faseActual().nombre();
     }
 
     // ------------------------------------
@@ -142,13 +149,19 @@ public final class Controlador implements ObservadorDeFinJuego
         return this.maquinaTurnos.obtenerJugadorActual() == jugador;
     }
 
-    public void tomarCarta(Jugador solicitante) throws JugadorNoPermitidoParaJugar
+    public void tomarCarta(Jugador solicitante) throws JugadorNoPermitidoParaJugar, NoEsFaseInicial
     {
         if (jugadorPuedeJugar(solicitante) == true)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
-        this.maquinaTurnos.tomarCarta();
+        if (this.maquinaTurnos.faseActual().esFaseFinal() == true)
+        {
+            this.maquinaTurnos.tomarCarta();
+        } else
+        {
+            throw new NoEsFaseInicial();
+        }
     }
 
     public void activarCartaMagica(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar

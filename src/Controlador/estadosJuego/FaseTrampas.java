@@ -1,37 +1,84 @@
 package Controlador.estadosJuego;
 
-import Controlador.Controlador;
-import Modelo.Jugador;
-
-public class FaseTrampas implements Fase
+public final class FaseTrampas implements Fase
 {
-    private Controlador controlador;
+    private static final String nombreFase = "Trampas";
+    private static FaseTrampas instancia = null;
+    private final MaquinaTurnos maquinaTurnos;
+    private boolean noHayMasAtaques = true;
 
-    public FaseTrampas(Controlador controlador)
+    // --------------------------------------------------------------------
+    // Métodos de construcción e inicialización.
+    // --------------------------------------------------------------------
+    private FaseTrampas(MaquinaTurnos maquinaTurnos)
     {
-        this.controlador = controlador;
+        this.maquinaTurnos = maquinaTurnos;
     }
 
-    public Fase cambiarFase()
+    public static FaseTrampas obtenerInstancia(MaquinaTurnos maquinaTurnos)
     {
-        return new FaseFinal(this.controlador);
+        if (instancia == null)
+        {
+            instancia = new FaseTrampas(maquinaTurnos);
+        }
+        return instancia;
+    }
+
+    public FaseTrampas clone() throws CloneNotSupportedException
+    {
+        throw new CloneNotSupportedException();
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de fase.
+    // --------------------------------------------------------------------
+    @Override
+    public Fase avanzar()
+    {
+        if (noHayMasAtaques == true)
+        {
+            return FaseFinal.obtenerInstancia(this.maquinaTurnos);
+        } else
+        {
+            return FaseAtaque.obtenerInstancia(this.maquinaTurnos);
+        }
     }
 
     @Override
     public String nombre()
     {
-        return "Trampas";
+        return nombreFase;
     }
 
     @Override
-    public void jugar(Jugador jugador)
+    public boolean enFaseInicial()
     {
-        // TODO: implementar la fase.
-        System.out.println("----------------------");
-        System.out.println(jugador.obtenerNombre() + " Fase " + this.nombre());
-        System.out.println("----------------------");
+        return false;
     }
 
+    @Override
+    public boolean esFasePreparacion()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean esFaseAtaque()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean esFaseTrampa()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean esFaseFinal()
+    {
+        return false;
+    }
 //    public void finalizarFase()
 //    {
 //        //this.controlador.actualizarEstado();

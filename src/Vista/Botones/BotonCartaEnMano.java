@@ -1,11 +1,10 @@
 package Vista.Botones;
 
+import Controlador.excepciones.JugadorNoPermitidoParaJugar;
 import Modelo.carta.Carta;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.Vista;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -19,6 +18,7 @@ public class BotonCartaEnMano extends Button
     //TODO: Buscar las resoluciones del sistema
     private static double anchoDeCarta = 95.4;
     private static double altoDeCarta = 139;
+    Stage primaryStage;
     private Carta carta;
     private Button botonDeLaCarta;
     private Vista vista;
@@ -28,15 +28,16 @@ public class BotonCartaEnMano extends Button
 
         this.carta = carta;
         this.vista = vista;
+        this.primaryStage = vista.obtenerPrimaryStage();
 
         if (carta.getClass() == CartaMonstruo.class)
         {
-            this.botonDeLaCarta = this.crearBotonMonstruoEnMano(vista.obtenerPrimaryStage());
+            this.botonDeLaCarta = this.crearBotonMonstruoEnMano();
         } else if (carta.getClass() == CartaMagica.class)
         {
-            this.botonDeLaCarta = this.crearBotonCartaMagicaEnMano(vista.obtenerPrimaryStage());
+            this.botonDeLaCarta = this.crearBotonCartaMagicaEnMano();
         } else
-            this.botonDeLaCarta = this.crearBotonCartaTrampaEnMano(vista.obtenerPrimaryStage());
+            this.botonDeLaCarta = this.crearBotonCartaTrampaEnMano();
     }
 
     public Button getBoton()
@@ -45,7 +46,7 @@ public class BotonCartaEnMano extends Button
         return this.botonDeLaCarta;
     }
 
-    private Button crearBotonCartaTrampaEnMano(Stage primaryStage)
+    private Button crearBotonCartaTrampaEnMano()
     {
 
         Button boton = new Button();
@@ -67,17 +68,7 @@ public class BotonCartaEnMano extends Button
 
         popup.getContent().addAll(vbox);
 
-        boton.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-
-                popup.show(primaryStage);
-                javafx.geometry.Point2D point = boton.localToScene(0.0, 0.0);
-                popup.setX(primaryStage.getX() + point.getX());
-                popup.setY(primaryStage.getY() + point.getY());
-            }
-        });
+        boton.setOnAction(e -> accionBtn_Click(popup, boton));
 
         return boton;
     }
@@ -89,21 +80,14 @@ public class BotonCartaEnMano extends Button
 
         b1.setOnAction(e -> jugarCartaTrampaBtn_Click());
 
-        b2.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-
-                popup.hide();
-            }
-        });
+        b2.setOnAction(e -> popup.hide());
 
         vbox.getChildren().addAll(b1, b2);
 
         return vbox;
     }
 
-    private Button crearBotonCartaMagicaEnMano(Stage primaryStage)
+    private Button crearBotonCartaMagicaEnMano()
     {
         Button boton = new Button();
 
@@ -124,17 +108,7 @@ public class BotonCartaEnMano extends Button
 
         popup.getContent().addAll(vbox);
 
-        boton.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-
-                popup.show(primaryStage);
-                javafx.geometry.Point2D point = boton.localToScene(0.0, 0.0);
-                popup.setX(primaryStage.getX() + point.getX());
-                popup.setY(primaryStage.getY() + point.getY());
-            }
-        });
+        boton.setOnAction(e -> accionBtn_Click(popup, boton));
 
         return boton;
     }
@@ -149,21 +123,14 @@ public class BotonCartaEnMano extends Button
 
         b2.setOnAction(e -> cartaMagicaJugarBocaAbajoBtn_Click());
 
-        b3.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-
-                popup.hide();
-            }
-        });
+        b3.setOnAction(e -> popup.hide());
 
         vbox.getChildren().addAll(b1, b2, b3);
 
         return vbox;
     }
 
-    private Button crearBotonMonstruoEnMano(Stage primaryStage)
+    private Button crearBotonMonstruoEnMano()
     {
         Button boton = new Button();
 
@@ -184,19 +151,18 @@ public class BotonCartaEnMano extends Button
 
         popup.getContent().addAll(vbox);
 
-        boton.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-
-                popup.show(primaryStage);
-                javafx.geometry.Point2D point = boton.localToScene(0.0, 0.0);
-                popup.setX(primaryStage.getX() + point.getX());
-                popup.setY(primaryStage.getY() + point.getY());
-            }
-        });
+        boton.setOnAction(e -> accionBtn_Click(popup, boton));
 
         return boton;
+    }
+
+    private void accionBtn_Click(Popup popup, Button boton)
+    {
+
+        popup.show(primaryStage);
+        javafx.geometry.Point2D point = boton.localToScene(0.0, 0.0);
+        popup.setX(primaryStage.getX() + point.getX());
+        popup.setY(primaryStage.getY() + point.getY());
     }
 
     private VBox crearVBoxCartaMonstruoEnMano(VBox vbox, Popup popup, Stage primaryStage)
@@ -218,41 +184,60 @@ public class BotonCartaEnMano extends Button
 
         b5.setOnAction(e -> cartaMonstruoPonerBocaAbajoBtn_Click());
 
-        b6.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-
-                popup.hide();
-            }
-        });
+        b6.setOnAction(e -> popup.hide());
 
         vbox.getChildren().addAll(b1, b2);
 
         return vbox;
     }
-//-------------------Event Handlers------------------ 
 
+    // --------------------------------------------------------------------
+    // Implementación de botones.
+    // --------------------------------------------------------------------
     private void cartaMonstruoPonerBocaAbajoBtn_Click()
     {
-        this.vista.obtenerControlador().voltearBocaAbajo(this.carta);
+        try
+        {
+            this.vista.obtenerControlador().voltearBocaAbajo(this.carta, null);
+        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
+        {
+            jugadorNoPermitidoParaJugar.printStackTrace();
+        }
     }
 
     private void cartaMonstruoPonerBocaArribaBtn_Click()
     {
 
-        this.vista.obtenerControlador().voltearBocaArriba(this.carta);
+        try
+        {
+            this.vista.obtenerControlador().voltearBocaArriba(this.carta, null);
+        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
+        {
+            jugadorNoPermitidoParaJugar.printStackTrace();
+        }
     }
 
     private void cartaMonstruoOrientarEnAtaqueBtn_Click()
     {
-        this.vista.obtenerControlador().ponerEnModoAtaque(this.carta);
+        try
+        {
+            this.vista.obtenerControlador().ponerEnModoAtaque(this.carta, null);
+        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
+        {
+            jugadorNoPermitidoParaJugar.printStackTrace();
+        }
     }
 
     private void cartaMonstruoOrientarEnDefensaBtn_Click()
     {
 
-        this.vista.obtenerControlador().ponerEnModoDefensa(this.carta);
+        try
+        {
+            this.vista.obtenerControlador().ponerEnModoDefensa(this.carta, null);
+        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
+        {
+            jugadorNoPermitidoParaJugar.printStackTrace();
+        }
     }
 
     private Object cartaMonstruoJugarBtn_Click()
@@ -264,18 +249,34 @@ public class BotonCartaEnMano extends Button
     private void jugarCartaTrampaBtn_Click()
     {
 
-        this.vista.obtenerControlador().jugarCartaTrampa(this.carta);
+        try
+        {
+            this.vista.obtenerControlador().jugarCartaTrampa(this.carta, null);
+        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
+        {
+            jugadorNoPermitidoParaJugar.printStackTrace();
+        }
     }
 
     private void cartaMagicaJugarBocaAbajoBtn_Click()
     {
-        this.vista.obtenerControlador().jugarCartaMagicaBocaAbajo(this.carta);
+        try
+        {
+            this.vista.obtenerControlador().jugarCartaMagicaBocaAbajo(this.carta, null);
+        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
+        {
+            jugadorNoPermitidoParaJugar.printStackTrace();
+        }
     }
 
     private void cartaMagicaJugarBocaArribaBtn_Click()
     {
-        this.vista.obtenerControlador().jugarCartaMagicaBocaArriba(this.carta);
+        try
+        {
+            this.vista.obtenerControlador().jugarCartaMagicaBocaArriba(this.carta, null);
+        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
+        {
+            jugadorNoPermitidoParaJugar.printStackTrace();
+        }
     }
-
-//----------------------------------------------------
 }

@@ -184,6 +184,7 @@ public class Jugador implements FinDeJuegoObservable
 
         cartaAtacante.atacarOponente();
     }
+
     // --------------------------------------------------------------------
     // Métodos de consultas.
     // --------------------------------------------------------------------

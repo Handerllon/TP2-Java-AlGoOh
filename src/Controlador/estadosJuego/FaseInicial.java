@@ -1,39 +1,77 @@
 package Controlador.estadosJuego;
 
-import Controlador.Controlador;
-import Modelo.Jugador;
-
-public class FaseInicial implements Fase
+public final class FaseInicial implements Fase
 {
-    private Controlador controlador;
+    private static final String nombreFase = "Inicial";
+    private static FaseInicial instancia = null;
+    private final MaquinaTurnos maquinaTurnos;
 
-    public FaseInicial(Controlador controlador)
+    // --------------------------------------------------------------------
+    // Métodos de construcción e inicialización.
+    // --------------------------------------------------------------------
+    private FaseInicial(MaquinaTurnos maquinaTurnos)
     {
-        this.controlador = controlador;
+        this.maquinaTurnos = maquinaTurnos;
     }
 
-    public Fase cambiarFase()
+    public static FaseInicial obtenerInstancia(MaquinaTurnos maquinaTurnos)
     {
-        return new FasePreparacion(this.controlador);
+        if (instancia == null)
+        {
+            instancia = new FaseInicial(maquinaTurnos);
+        }
+        return instancia;
+    }
+
+    public FaseInicial clone() throws CloneNotSupportedException
+    {
+        throw new CloneNotSupportedException();
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de fase.
+    // --------------------------------------------------------------------
+    @Override
+    public Fase avanzar()
+    {
+        return FasePreparacion.obtenerInstancia(this.maquinaTurnos);
     }
 
     @Override
     public String nombre()
     {
-        return "Inicial";
+        return nombreFase;
     }
 
     @Override
-    public void jugar(Jugador jugador)
+    public boolean enFaseInicial()
     {
-        // TODO: implementar la fase.
-        System.out.println("----------------------");
-        System.out.println(jugador.obtenerNombre() + " Fase " + this.nombre());
-        System.out.println("----------------------");
-        jugador.tomarCarta();
-        this.controlador.avanzarProximaFase();
+        return true;
     }
 
+    @Override
+    public boolean esFasePreparacion()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean esFaseAtaque()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean esFaseTrampa()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean esFaseFinal()
+    {
+        return false;
+    }
 //    public void finalizarFase()
 //    {
 //        this.controlador.actualizarEstado();

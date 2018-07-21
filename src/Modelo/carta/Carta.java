@@ -57,7 +57,10 @@ public abstract class Carta
     }
 
     public abstract boolean esCampo();
+
     public abstract boolean esMagica();
+
     public abstract boolean esMonstruo();
+
     public abstract boolean esTrampa();
 }

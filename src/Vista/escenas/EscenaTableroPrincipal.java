@@ -13,7 +13,6 @@ import Vista.carta.MazoVista;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
@@ -159,7 +158,6 @@ public final class EscenaTableroPrincipal implements EscenaVista
     // --------------------------------------------------------------------
     // Métodos de escena.
     // --------------------------------------------------------------------
-
 
     @Override
     public EscenaVista cambiarEscena()

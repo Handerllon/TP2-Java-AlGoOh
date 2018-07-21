@@ -1,10 +1,10 @@
 package Vista.Botones;
 
+import Controlador.excepciones.JugadorNoPermitidoParaJugar;
+import Controlador.excepciones.NoEsUnaCartaParaAtacar;
 import Modelo.carta.CartaNula;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.Vista;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
@@ -117,14 +117,7 @@ public class BotonMonstruoEnRegion extends Button
 
         b4.setOnAction(e -> cartaMonstruoDarVueltaBtn_Click());
 
-        b5.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-
-                popup.hide();
-            }
-        });
+        b5.setOnAction(e -> popup.hide());
 
         vbox.getChildren().addAll(b2, b3, b4, b5);
 
@@ -153,19 +146,18 @@ public class BotonMonstruoEnRegion extends Button
         b3.setOnAction(e -> cartaMonstruoAtacarMonstruoBtn_Click(3, cartasOponente));
         b4.setOnAction(e -> cartaMonstruoAtacarMonstruoBtn_Click(4, cartasOponente));
         b5.setOnAction(e -> cartaMonstruoAtacarOponenteBtn_Click());
-        b6.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent event)
-            {
-
-                popup.hide();
-            }
-        });
+        b6.setOnAction(e -> popup.hide());
     }
 
     private void cartaMonstruoAtacarOponenteBtn_Click()
     {
-        this.vista.obtenerControlador().atacar(this.carta);
+        try
+        {
+            this.vista.obtenerControlador().atacar(this.carta, null);
+        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
+        {
+            jugadorNoPermitidoParaJugar.printStackTrace();
+        }
     }
 
     private void cartaMonstruoAtacarMonstruoBtn_Click(int i, ArrayList<CartaMonstruo> cartasOponente)
@@ -174,21 +166,48 @@ public class BotonMonstruoEnRegion extends Button
         // TODO: ojo con esta condición, no estoy seguro que un array devuelva null si no está el i-ésimo elemento.
         if (cartasOponente.get(i) == null)
         {
-            this.vista.obtenerControlador().atacar(this.carta, CartaNula.obtenerInstancia());
+            try
+            {
+                this.vista.obtenerControlador().atacar(this.carta, CartaNula.obtenerInstancia(), null);
+            } catch (NoEsUnaCartaParaAtacar noEsUnaCartaParaAtacar)
+            {
+                noEsUnaCartaParaAtacar.printStackTrace();
+            } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
+            {
+                jugadorNoPermitidoParaJugar.printStackTrace();
+            }
         } else
         {
-            this.vista.obtenerControlador().atacar(this.carta, cartasOponente.get(i));
+            try
+            {
+                this.vista.obtenerControlador().atacar(this.carta, cartasOponente.get(i), null);
+            } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
+            {
+                jugadorNoPermitidoParaJugar.printStackTrace();
+            }
         }
     }
 
     private void cartaMonstruoCambiarOrientacionBtn_Click()
     {
 
-        this.vista.obtenerControlador().cambiarModoCartaMonstruo(this.carta);
+        try
+        {
+            this.vista.obtenerControlador().cambiarModoCartaMonstruo(this.carta, null);
+        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
+        {
+            jugadorNoPermitidoParaJugar.printStackTrace();
+        }
     }
 
     private void cartaMonstruoDarVueltaBtn_Click()
     {
-        this.vista.obtenerControlador().voltearCartaMonstruo(this.carta);
+        try
+        {
+            this.vista.obtenerControlador().voltearCartaMonstruo(this.carta, null);
+        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
+        {
+            jugadorNoPermitidoParaJugar.printStackTrace();
+        }
     }
 }

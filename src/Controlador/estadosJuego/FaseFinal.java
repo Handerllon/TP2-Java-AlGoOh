@@ -1,37 +1,77 @@
 package Controlador.estadosJuego;
 
-import Controlador.Controlador;
-import Modelo.Jugador;
-
-public class FaseFinal implements Fase
+public final class FaseFinal implements Fase
 {
-    private Controlador controlador;
+    private static final String nombreFase = "Final";
+    private static FaseFinal instancia = null;
+    private final MaquinaTurnos maquinaTurnos;
 
-    public FaseFinal(Controlador controlador)
+    // --------------------------------------------------------------------
+    // Métodos de construcción e inicialización.
+    // --------------------------------------------------------------------
+    private FaseFinal(MaquinaTurnos maquinaTurnos)
     {
-        this.controlador = controlador;
+        this.maquinaTurnos = maquinaTurnos;
     }
 
-    public Fase cambiarFase()
+    public static FaseFinal obtenerInstancia(MaquinaTurnos maquinaTurnos)
     {
-        return new FaseInicial(this.controlador);
+        if (instancia == null)
+        {
+            instancia = new FaseFinal(maquinaTurnos);
+        }
+        return instancia;
+    }
+
+    public FaseFinal clone() throws CloneNotSupportedException
+    {
+        throw new CloneNotSupportedException();
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de fase.
+    // --------------------------------------------------------------------
+    @Override
+    public Fase avanzar()
+    {
+        return FaseNula.obtenerInstancia(this.maquinaTurnos);
     }
 
     @Override
     public String nombre()
     {
-        return "Final";
+        return nombreFase;
     }
 
     @Override
-    public void jugar(Jugador jugador)
+    public boolean enFaseInicial()
     {
-        // TODO: implementar la fase.
-        System.out.println("----------------------");
-        System.out.println(jugador.obtenerNombre() + " Fase " + this.nombre());
-        System.out.println("----------------------");
+        return false;
     }
 
+    @Override
+    public boolean esFasePreparacion()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean esFaseAtaque()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean esFaseTrampa()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean esFaseFinal()
+    {
+        return true;
+    }
 //    public void finalizarFase()
 //    {
 //        try

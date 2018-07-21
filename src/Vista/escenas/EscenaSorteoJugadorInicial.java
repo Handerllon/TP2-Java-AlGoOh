@@ -110,7 +110,7 @@ public final class EscenaSorteoJugadorInicial implements EscenaVista
     }
 
     // --------------------------------------------------------------------
-    // Buttons implementations.
+    // Implementación de botones.
     // --------------------------------------------------------------------
     private void salirBtn_click()
     {

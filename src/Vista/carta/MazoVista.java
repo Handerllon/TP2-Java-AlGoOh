@@ -1,5 +1,7 @@
 package Vista.carta;
 
+import Controlador.excepciones.JugadorNoPermitidoParaJugar;
+import Controlador.excepciones.NoEsFaseInicial;
 import Modelo.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.geometry.Insets;
@@ -95,6 +97,15 @@ public class MazoVista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     private void tomarCartaBtn_Click()
     {
-        this.vista.obtenerControlador().tomarCarta();
+        try
+        {
+            this.vista.obtenerControlador().tomarCarta(null);
+        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
+        {
+            jugadorNoPermitidoParaJugar.printStackTrace();
+        } catch (NoEsFaseInicial noEsFaseInicial)
+        {
+            noEsFaseInicial.printStackTrace();
+        }
     }
 }

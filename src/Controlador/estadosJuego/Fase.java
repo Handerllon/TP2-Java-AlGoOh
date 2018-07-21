@@ -1,12 +1,18 @@
 package Controlador.estadosJuego;
 
-import Modelo.Jugador;
-
 public interface Fase
 {
-    void jugar(Jugador jugador);
-
-    Fase cambiarFase();
+    Fase avanzar();
 
     String nombre();
+
+    boolean enFaseInicial();
+
+    boolean esFasePreparacion();
+
+    boolean esFaseAtaque();
+
+    boolean esFaseTrampa();
+
+    boolean esFaseFinal();
 }

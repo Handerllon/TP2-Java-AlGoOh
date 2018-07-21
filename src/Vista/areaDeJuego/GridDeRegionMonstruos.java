@@ -1,5 +1,6 @@
 package Vista.areaDeJuego;
 
+import Modelo.Jugador;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.Botones.BotonMonstruoEnRegion;
 import Vista.Vista;
@@ -14,13 +15,15 @@ import java.util.ArrayList;
 public class GridDeRegionMonstruos extends GridPane
 {
     private GridPane grid;
-    private Stage stage;
     private ArrayList<BotonMonstruoEnRegion> botones;
     private Vista vista;
+    private Jugador jugadorAsociado;
 
-    public GridDeRegionMonstruos(Vista vista)
+    public GridDeRegionMonstruos(Vista vista, Jugador jugador)
     {
-
+    	
+    	this.jugadorAsociado = jugador;
+    	
         this.vista = vista;
 
         this.grid = new GridPane();
@@ -54,7 +57,7 @@ public class GridDeRegionMonstruos extends GridPane
         for (int i = 0; i < 5; i++)
         {
 
-            BotonMonstruoEnRegion boton = new BotonMonstruoEnRegion(this.vista);
+            BotonMonstruoEnRegion boton = new BotonMonstruoEnRegion(this.vista, this.jugadorAsociado);
 
             botones.add(boton);
         }

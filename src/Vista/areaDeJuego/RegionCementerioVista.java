@@ -8,15 +8,12 @@ import javafx.stage.Stage;
 public class RegionCementerioVista implements ObservadorDeModelo
 {
     private static String estiloRegion = "-fx-background-color: Transparent";
-    private Stage stage;
     private Vista vista;
     private Button botonCementerioJugador;
     private Button botonCementerioOponente;
 
-    public RegionCementerioVista(Stage primaryStage, Vista vista)
+    public RegionCementerioVista(Vista vista)
     {
-
-        this.stage = primaryStage;
         this.vista = vista;
 
         this.botonCementerioJugador = this.inicializarBoton();

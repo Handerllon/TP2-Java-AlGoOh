@@ -7,18 +7,16 @@ import javafx.stage.Stage;
 
 public class RegionMagicasYTrampasVista implements ObservadorDeModelo
 {
-    private Stage stage;
     private Vista vista;
     private GridDeRegionMagicasYTrampas gridJugador;
     private GridDeRegionMagicasYTrampas gridOponente;
 
-    public RegionMagicasYTrampasVista(Stage primaryStage, Vista vista)
+    public RegionMagicasYTrampasVista(Vista vista)
     {
-        this.stage = primaryStage;
         this.vista = vista;
 
-        this.gridJugador = new GridDeRegionMagicasYTrampas(this.vista);
-        this.gridOponente = new GridDeRegionMagicasYTrampas(this.vista);
+        this.gridJugador = new GridDeRegionMagicasYTrampas(this.vista, this.vista.obtenerModelo().obtenerJugador());
+        this.gridOponente = new GridDeRegionMagicasYTrampas(this.vista, this.vista.obtenerModelo().obtenerOponente());
     }
 
     public GridPane getGridJugador()

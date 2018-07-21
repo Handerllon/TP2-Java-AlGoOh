@@ -1,5 +1,6 @@
 package Vista.Botones;
 
+import Modelo.Jugador;
 import Modelo.carta.campo.CartaCampo;
 import Vista.Vista;
 import javafx.geometry.Insets;
@@ -21,12 +22,12 @@ public class BotonCampoEnRegion extends Button
     private static double altoDeCarta = 139;
     private Button boton;
     private CartaCampo carta;
-    private Stage stage;
     private Vista vista;
+	private Jugador jugadorAsociado;
 
-    public BotonCampoEnRegion(Vista vista)
+    public BotonCampoEnRegion(Vista vista, Jugador jugadorAsociado)
     {
-
+    	this.jugadorAsociado = jugadorAsociado;
         this.vista = vista;
 
         boton = new Button();

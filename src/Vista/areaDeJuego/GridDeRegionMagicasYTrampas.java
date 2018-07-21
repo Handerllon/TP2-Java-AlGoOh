@@ -1,5 +1,6 @@
 package Vista.areaDeJuego;
 
+import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Vista.Botones.BotonMagicasYTrampasEnRegion;
 import Vista.Vista;
@@ -14,13 +15,14 @@ import java.util.ArrayList;
 public class GridDeRegionMagicasYTrampas extends GridPane
 {
     private GridPane grid;
-    private Stage stage;
     private ArrayList<BotonMagicasYTrampasEnRegion> botones;
     private Vista vista;
+	private Jugador jugadorAsociado;
 
-    public GridDeRegionMagicasYTrampas(Vista vista)
+    public GridDeRegionMagicasYTrampas(Vista vista, Jugador jugador)
     {
-
+    	this.jugadorAsociado = jugador;
+    	
         this.vista = vista;
 
         this.grid = new GridPane();
@@ -54,7 +56,7 @@ public class GridDeRegionMagicasYTrampas extends GridPane
         for (int i = 0; i < 5; i++)
         {
 
-            BotonMagicasYTrampasEnRegion boton = new BotonMagicasYTrampasEnRegion(this.vista);
+            BotonMagicasYTrampasEnRegion boton = new BotonMagicasYTrampasEnRegion(this.vista, this.jugadorAsociado);
 
             botones.add(boton);
         }

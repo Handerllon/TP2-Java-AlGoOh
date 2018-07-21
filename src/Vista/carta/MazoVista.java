@@ -2,6 +2,7 @@ package Vista.carta;
 
 import Controlador.excepciones.JugadorNoPermitidoParaJugar;
 import Controlador.excepciones.NoEsFaseInicial;
+import Modelo.Jugador;
 import Modelo.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.geometry.Insets;
@@ -19,7 +20,6 @@ public class MazoVista implements ObservadorDeModelo
     //TODO: Buscar las resoluciones del sistema
     private static double anchoDeCarta = 95.4;
     private static double altoDeCarta = 139;
-    private Stage stage;
     private Vista vista;
     private Button mazoJugador;
     private Tooltip toolTipJugador;
@@ -29,25 +29,23 @@ public class MazoVista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    public MazoVista(Stage primaryStage, Vista vista)
+    public MazoVista(Vista vista)
     {
 
         this.vista = vista;
 
-        stage = primaryStage;
-
         this.toolTipJugador = new Tooltip();
         this.toolTipOponente = new Tooltip();
 
-        this.mazoJugador = inicializar();
+        this.mazoJugador = inicializar(this.vista.obtenerModelo().obtenerJugador());
         this.mazoJugador.setTooltip(toolTipJugador);
-        this.mazoOponente = inicializar();
+        this.mazoOponente = inicializar(this.vista.obtenerModelo().obtenerOponente());
         this.mazoOponente.setTooltip(toolTipOponente);
 
         this.actualizarEstado();
     }
 
-    public Button inicializar()
+    public Button inicializar(Jugador jugadorAsociado)
     {
 
         Button boton = new Button();
@@ -55,7 +53,7 @@ public class MazoVista implements ObservadorDeModelo
         boton.setPrefSize(anchoDeCarta, altoDeCarta);
         boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource("resources/imagenes/tablero/Back.jpg").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-        boton.setOnAction(e -> tomarCartaBtn_Click());
+        boton.setOnAction(e -> tomarCartaBtn_Click(jugadorAsociado));
 
         return boton;
     }
@@ -95,11 +93,11 @@ public class MazoVista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     // Implementación acción botones.
     // --------------------------------------------------------------------
-    private void tomarCartaBtn_Click()
+    private void tomarCartaBtn_Click(Jugador jugador)
     {
         try
         {
-            this.vista.obtenerControlador().tomarCarta(null);
+            this.vista.obtenerControlador().tomarCarta(jugador);
         } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
         {
             jugadorNoPermitidoParaJugar.printStackTrace();
@@ -108,4 +106,6 @@ public class MazoVista implements ObservadorDeModelo
             noEsFaseInicial.printStackTrace();
         }
     }
+    
+    
 }

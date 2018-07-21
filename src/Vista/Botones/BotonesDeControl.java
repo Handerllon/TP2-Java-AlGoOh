@@ -3,22 +3,18 @@ package Vista.Botones;
 import Controlador.excepciones.SeTerminaronLasFases;
 import Vista.Vista;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 public class BotonesDeControl extends Button
 {
     private Button botonFinDeTurno;
     private Button botonFinDeFase;
-    private Stage stage;
     private Vista vista;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    public BotonesDeControl(Stage stage, Vista vista)
+    public BotonesDeControl(Vista vista)
     {
-
-        this.stage = stage;
         this.vista = vista;
         this.botonFinDeFase = this.crearBotonAvanzarProximaFase();
         this.botonFinDeTurno = this.crearBotonTerminarTurno();

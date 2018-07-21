@@ -5,24 +5,21 @@ import Modelo.carta.campo.CartaCampo;
 import Vista.Botones.BotonCampoEnRegion;
 import Vista.Vista;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class RegionCampoVista implements ObservadorDeModelo
 {
-    private Stage stage;
     private Vista vista;
     private BotonCampoEnRegion botonCampoJugador;
     private BotonCampoEnRegion botonCampoOponente;
 
-    public RegionCampoVista(Stage primaryStage, Vista vista)
+    public RegionCampoVista(Vista vista)
     {
-        stage = primaryStage;
         this.vista = vista;
 
-        this.botonCampoJugador = new BotonCampoEnRegion(this.vista);
-        this.botonCampoOponente = new BotonCampoEnRegion(this.vista);
+        this.botonCampoJugador = new BotonCampoEnRegion(this.vista, this.vista.obtenerModelo().obtenerJugador());
+        this.botonCampoOponente = new BotonCampoEnRegion(this.vista, this.vista.obtenerModelo().obtenerOponente());
     }
 
     public Button getRegionCampoJugador()

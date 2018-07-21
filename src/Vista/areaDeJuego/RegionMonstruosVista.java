@@ -8,17 +8,15 @@ import javafx.stage.Stage;
 public class RegionMonstruosVista implements ObservadorDeModelo
 {
     private Vista vista;
-    private Stage stage;
     private GridDeRegionMonstruos gridJugador;
     private GridDeRegionMonstruos gridOponente;
 
-    public RegionMonstruosVista(Stage primaryStage, Vista vista)
+    public RegionMonstruosVista(Vista vista)
     {
-        this.stage = primaryStage;
         this.vista = vista;
 
-        this.gridJugador = new GridDeRegionMonstruos(this.vista);
-        this.gridOponente = new GridDeRegionMonstruos(this.vista);
+        this.gridJugador = new GridDeRegionMonstruos(this.vista, this.vista.obtenerModelo().obtenerJugador());
+        this.gridOponente = new GridDeRegionMonstruos(this.vista, this.vista.obtenerModelo().obtenerOponente());
     }
 
     public GridPane getGridJugador()

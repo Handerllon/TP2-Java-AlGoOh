@@ -95,25 +95,25 @@ public final class EscenaTableroPrincipal implements EscenaVista
         // -------------------------------
         // Regiones.
         // -------------------------------
-        RegionMonstruosVista regionMonstruos = new RegionMonstruosVista(this.primaryStage, this.vista);
+        RegionMonstruosVista regionMonstruos = new RegionMonstruosVista(this.vista);
         grid.add(regionMonstruos.getGridJugador(), 1, 3);
         grid.setHalignment(regionMonstruos.getGridJugador(), HPos.CENTER);
         grid.add(regionMonstruos.getGridOponente(), 1, 2);
         grid.setHalignment(regionMonstruos.getGridOponente(), HPos.CENTER);
 
-        RegionMagicasYTrampasVista regionMagicasYTrampas = new RegionMagicasYTrampasVista(this.primaryStage, this.vista);
+        RegionMagicasYTrampasVista regionMagicasYTrampas = new RegionMagicasYTrampasVista(this.vista);
         grid.add(regionMagicasYTrampas.getGridJugador(), 1, 4);
         grid.setHalignment(regionMagicasYTrampas.getGridJugador(), HPos.CENTER);
         grid.add(regionMagicasYTrampas.getGridOponente(), 1, 1);
         grid.setHalignment(regionMagicasYTrampas.getGridOponente(), HPos.CENTER);
 
-        RegionCampoVista regionCampo = new RegionCampoVista(this.primaryStage, this.vista);
+        RegionCampoVista regionCampo = new RegionCampoVista(this.vista);
         grid.add(regionCampo.getRegionCampoJugador(), 0, 4);
         grid.setHalignment(regionCampo.getRegionCampoJugador(), HPos.CENTER);
         grid.add(regionCampo.getRegionCampoOponente(), 2, 1);
         grid.setHalignment(regionCampo.getRegionCampoOponente(), HPos.CENTER);
 
-        RegionCementerioVista regionCementerio = new RegionCementerioVista(this.primaryStage, this.vista);
+        RegionCementerioVista regionCementerio = new RegionCementerioVista(this.vista);
         grid.add(regionCementerio.getCementerioJugador(), 0, 3);
         grid.setHalignment(regionCementerio.getCementerioJugador(), HPos.CENTER);
         grid.add(regionCementerio.getCementerioOponente(), 2, 2);
@@ -122,7 +122,7 @@ public final class EscenaTableroPrincipal implements EscenaVista
         // -------------------------------
         // Manos.
         // -------------------------------
-        ManoVista manos = new ManoVista(this.primaryStage, this.vista);
+        ManoVista manos = new ManoVista(this.vista);
         grid.add(manos.getManoJugador(), 1, 5);
         grid.setHalignment(manos.getManoJugador(), HPos.CENTER);
         grid.add(manos.getManoOponente(), 1, 0);
@@ -131,7 +131,7 @@ public final class EscenaTableroPrincipal implements EscenaVista
         // -------------------------------
         // Mazos.
         // -------------------------------
-        MazoVista mazos = new MazoVista(this.primaryStage, this.vista);
+        MazoVista mazos = new MazoVista(this.vista);
         grid.add(mazos.getMazoJugador(), 2, 5);
         grid.setHalignment(mazos.getMazoJugador(), HPos.CENTER);
         grid.add(mazos.getMazoOponente(), 0, 0);
@@ -140,7 +140,7 @@ public final class EscenaTableroPrincipal implements EscenaVista
         // -------------------------------
         // Definición de botones.
         // -------------------------------
-        BotonesDeControl botones = new BotonesDeControl(this.primaryStage, this.vista);
+        BotonesDeControl botones = new BotonesDeControl(this.vista);
         grid.add(botones.getBotonFinDeFase(), 2, 4);
         grid.setHalignment(botones.getBotonFinDeFase(), HPos.CENTER);
         grid.add(botones.getBotonFinDeTurno(), 2, 3);

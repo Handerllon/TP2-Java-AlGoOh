@@ -1,6 +1,7 @@
 package Vista.Botones;
 
 import Controlador.excepciones.JugadorNoPermitidoParaJugar;
+import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.carta.magica.CartaMagica;
 import Vista.Vista;
@@ -26,9 +27,11 @@ public class BotonMagicasYTrampasEnRegion extends Button
     private Vista vista;
     private Popup popup;
     private Button botonDeLaCarta;
+	private Jugador jugadorAsociado;
 
-    public BotonMagicasYTrampasEnRegion(Vista vista)
+    public BotonMagicasYTrampasEnRegion(Vista vista, Jugador jugador)
     {
+    	this.jugadorAsociado = jugador;
         this.vista = vista;
         this.botonDeLaCarta = new Button();
 
@@ -117,7 +120,7 @@ public class BotonMagicasYTrampasEnRegion extends Button
     {
         try
         {
-            this.vista.obtenerControlador().activarCartaMagica(this.carta, null);
+            this.vista.obtenerControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
         } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
         {
             jugadorNoPermitidoParaJugar.printStackTrace();

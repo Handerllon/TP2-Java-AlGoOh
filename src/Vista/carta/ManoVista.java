@@ -8,21 +8,18 @@ import javafx.stage.Stage;
 public class ManoVista implements ObservadorDeModelo
 {
     private Vista vista;
-    private Stage stage;
     private FlowPaneDeMano manoJugador;
     private FlowPaneDeMano manoOponente;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    public ManoVista(Stage primaryStage, Vista vista)
+    public ManoVista(Vista vista)
     {
-
-        this.stage = primaryStage;
         this.vista = vista;
 
-        this.manoJugador = new FlowPaneDeMano(this.vista);
-        this.manoOponente = new FlowPaneDeMano(this.vista);
+        this.manoJugador = new FlowPaneDeMano(this.vista, this.vista.obtenerModelo().obtenerJugador());
+        this.manoOponente = new FlowPaneDeMano(this.vista, this.vista.obtenerModelo().obtenerJugador());
     }
 
     // --------------------------------------------------------------------

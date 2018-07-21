@@ -2,6 +2,7 @@ package Vista.Botones;
 
 import Controlador.excepciones.JugadorNoPermitidoParaJugar;
 import Controlador.excepciones.NoEsUnaCartaParaAtacar;
+import Modelo.Jugador;
 import Modelo.carta.CartaNula;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.Vista;
@@ -27,10 +28,12 @@ public class BotonMonstruoEnRegion extends Button
     private static double altoDeCarta = 139;
     private CartaMonstruo carta;
     private Button botonDeLaCarta;
+    private Jugador jugadorAsociado;
     private Vista vista;
 
-    public BotonMonstruoEnRegion(Vista vista)
+    public BotonMonstruoEnRegion(Vista vista, Jugador jugador)
     {
+    	this.jugadorAsociado = jugador;
         this.vista = vista;
         this.botonDeLaCarta = new Button();
 
@@ -153,7 +156,7 @@ public class BotonMonstruoEnRegion extends Button
     {
         try
         {
-            this.vista.obtenerControlador().atacar(this.carta, null);
+            this.vista.obtenerControlador().atacar(this.carta, this.jugadorAsociado);
         } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
         {
             jugadorNoPermitidoParaJugar.printStackTrace();
@@ -168,7 +171,7 @@ public class BotonMonstruoEnRegion extends Button
         {
             try
             {
-                this.vista.obtenerControlador().atacar(this.carta, CartaNula.obtenerInstancia(), null);
+                this.vista.obtenerControlador().atacar(this.carta, CartaNula.obtenerInstancia(), this.jugadorAsociado);
             } catch (NoEsUnaCartaParaAtacar noEsUnaCartaParaAtacar)
             {
                 noEsUnaCartaParaAtacar.printStackTrace();
@@ -180,7 +183,7 @@ public class BotonMonstruoEnRegion extends Button
         {
             try
             {
-                this.vista.obtenerControlador().atacar(this.carta, cartasOponente.get(i), null);
+                this.vista.obtenerControlador().atacar(this.carta, cartasOponente.get(i), this.jugadorAsociado);
             } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
             {
                 jugadorNoPermitidoParaJugar.printStackTrace();

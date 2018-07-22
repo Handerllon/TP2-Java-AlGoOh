@@ -91,18 +91,5 @@ public final class MaquinaTurnos
     {
         return this.faseActual;
     }
-
-    // --------------------------------------------------------------------
-    // Métodos de juego.
-    // --------------------------------------------------------------------
-    public void tomarCarta()
-    {
-        if (this.faseActual.enFaseInicial() == true)
-        {
-
-        }
-    }
-
-
 }
 

@@ -99,7 +99,6 @@ public class Jugador implements FinDeJuegoObservable
 
     public void tomarCarta()
     {
-
         this.mano.agregarCarta(mazo.tomarCarta());
     }
 

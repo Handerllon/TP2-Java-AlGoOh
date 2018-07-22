@@ -6,7 +6,7 @@ public interface Fase
 
     String nombre();
 
-    boolean enFaseInicial();
+    boolean esFaseInicial();
 
     boolean esFasePreparacion();
 

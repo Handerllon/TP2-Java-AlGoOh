@@ -2,17 +2,23 @@ package Controlador.excepciones;
 
 import Modelo.Jugador;
 
-public class JugadorNoPermitidoParaJugar extends Exception
+public class JugadorNoPermitidoParaJugar extends Exception implements Razon
 {
-    Jugador jugador;
+    Jugador jugadorResponsable;
+
+    public JugadorNoPermitidoParaJugar()
+    {
+
+    }
 
     public JugadorNoPermitidoParaJugar(Jugador jugador)
     {
-        this.jugador = jugador;
+        this.jugadorResponsable = jugador;
     }
 
-    public String obtenerNombreJugador()
+    @Override
+    public String nombre()
     {
-        return this.jugador.obtenerNombre();
+        return "Jugador No Permitido Para Jugar";
     }
 }

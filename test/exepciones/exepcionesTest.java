@@ -96,7 +96,6 @@ public class exepcionesTest
 
         for (int i = 0; i < 8; i++)
         {
-
             mano.agregarCarta(carta);
         }
     }

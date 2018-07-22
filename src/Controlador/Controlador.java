@@ -1,14 +1,12 @@
 package Controlador;
 
 import Controlador.estadosJuego.MaquinaTurnos;
-import Controlador.excepciones.JugadorNoPermitidoParaJugar;
-import Controlador.excepciones.NoEsFaseInicial;
-import Controlador.excepciones.NoEsUnaCartaParaAtacar;
-import Controlador.excepciones.SeTerminaronLasFases;
+import Controlador.excepciones.*;
 import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
 import Modelo.carta.CartaNula;
+import Modelo.carta.excepciones.ManoLlenaError;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaFinJuegoNula;
@@ -149,18 +147,25 @@ public final class Controlador implements ObservadorDeFinJuego
         return this.maquinaTurnos.obtenerJugadorActual() == jugador;
     }
 
-    public void tomarCarta(Jugador solicitante) throws JugadorNoPermitidoParaJugar, NoEsFaseInicial
+    public void tomarCarta(Jugador solicitante) throws NoSePuedeTomarCartaError
+
     {
         if (jugadorPuedeJugar(solicitante) == true)
         {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
+            throw new NoSePuedeTomarCartaError(solicitante, new JugadorNoPermitidoParaJugar());
         }
-        if (this.maquinaTurnos.faseActual().esFaseFinal() == true)
+        if (this.maquinaTurnos.faseActual().esFaseInicial() == true)
         {
-            this.maquinaTurnos.tomarCarta();
+            try
+            {
+                this.maquinaTurnos.obtenerJugadorActual().tomarCarta();
+            } catch (ManoLlenaError e)
+            {
+                throw new NoSePuedeTomarCartaError(solicitante, e);
+            }
         } else
         {
-            throw new NoEsFaseInicial();
+            throw new NoSePuedeTomarCartaError(solicitante, new NoEsFaseInicial());
         }
     }
 

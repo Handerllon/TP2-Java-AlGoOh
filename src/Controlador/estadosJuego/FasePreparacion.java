@@ -44,7 +44,7 @@ public final class FasePreparacion implements Fase
     }
 
     @Override
-    public boolean enFaseInicial()
+    public boolean esFaseInicial()
     {
         return false;
     }

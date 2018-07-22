@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Mano implements FinDeJuegoObservable
 {
-    private static int CANTIDAD_MAXIMA = 6;
+    private static int CANTIDAD_MAXIMA = 7;
     private static int contadorPartesExodia;
     private ArrayList<Carta> cartas;
     private Jugador jugadorAsociado;
@@ -24,7 +24,7 @@ public class Mano implements FinDeJuegoObservable
         this.jugadorAsociado = jugador;
     }
 
-    public void agregarCarta(Carta carta)
+    public void agregarCarta(Carta carta) throws ManoLlenaError
     {
         if (this.manoLlena() == false)
         {

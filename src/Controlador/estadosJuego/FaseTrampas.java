@@ -51,7 +51,7 @@ public final class FaseTrampas implements Fase
     }
 
     @Override
-    public boolean enFaseInicial()
+    public boolean esFaseInicial()
     {
         return false;
     }

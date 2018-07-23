@@ -1,15 +1,5 @@
 package Controlador.excepciones;
 
-public class NoEsFaseInicial implements Razon
-{
-    public NoEsFaseInicial()
-    {
+public class NoEsFaseInicial extends Exception {
 
-    }
-
-    @Override
-    public String nombre()
-    {
-        return "No es fase inicial";
-    }
 }

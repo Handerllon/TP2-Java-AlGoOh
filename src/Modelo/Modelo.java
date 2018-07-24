@@ -214,31 +214,21 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     }
 
     @Override
-    public void jugarCartaMagicaBocaAbajo(Jugador jugador, Carta carta)
+    public void setCartaMagica(Jugador jugador, Carta carta)
     {
         this.flipBocaAbajo(carta);
         if (carta.esMagica() == true)
         {
-            jugador.jugarCarta((CartaMagica) carta);
+            jugador.setCarta((CartaMagica) carta);
         }
     }
 
     @Override
-    public void jugarCartaMagicaBocaArriba(Jugador jugador, Carta carta)
-    {
-        this.flipBocaArriba(carta);
-        if (carta.esMagica() == true)
-        {
-            jugador.jugarCarta((CartaMagica) carta);
-        }
-    }
-
-    @Override
-    public void jugarCartaTrampa(Jugador jugador, Carta carta)
+    public void setCartaTrampa(Jugador jugador, Carta carta)
     {
         if (carta.esTrampa() == true)
         {
-            jugador.jugarCarta((CartaTrampa) carta);
+            jugador.setCarta((CartaTrampa) carta);
         }
     }
 
@@ -248,7 +238,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         if (carta.esMagica() == true)
         {
             this.flipBocaArriba(carta);
-            jugador.jugarCarta((CartaMagica) carta);
+            jugador.setCarta((CartaMagica) carta);
         }
     }
 

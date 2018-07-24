@@ -21,6 +21,6 @@ public class BlueEyesWhiteDragon extends CartaMonstruo
         this.jugador.destruirMonstruo(sacrificio.getMonstruo());
         this.jugador.destruirMonstruo(sacrificio.getMonstruo());
 
-        this.jugador.jugarCarta(this);
+        this.jugador.setCarta(this);
     }
 }

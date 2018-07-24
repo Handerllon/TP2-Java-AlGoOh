@@ -65,9 +65,7 @@ public interface ModeloObservable
 
     void activarCartaMagica(Jugador jugador, Carta carta);
 
-    void jugarCartaTrampa(Jugador jugador, Carta carta);
+    void setCartaTrampa(Jugador jugador, Carta carta);
 
-    void jugarCartaMagicaBocaArriba(Jugador jugador, Carta carta);
-
-    void jugarCartaMagicaBocaAbajo(Jugador jugador, Carta carta);
+    void setCartaMagica(Jugador jugador, Carta carta);
 }

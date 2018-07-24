@@ -13,7 +13,7 @@ import Modelo.finDeJuego.CausaFinJuegoNula;
 import Modelo.finDeJuego.ObservadorDeFinJuego;
 import Vista.Vista;
 
-public final class Controlador implements ObservadorDeFinJuego
+public final class Controlador implements ObservadorDeFinJuego, IControlador
 {
     private static Modelo modelo;
     private static Vista vista;
@@ -39,6 +39,7 @@ public final class Controlador implements ObservadorDeFinJuego
         return instancia;
     }
 
+    @Override
     public Controlador clone() throws CloneNotSupportedException
     {
         throw new CloneNotSupportedException();
@@ -95,13 +96,28 @@ public final class Controlador implements ObservadorDeFinJuego
     }
 
     // --------------------------------------------------------------------
+    // Interfaz con el modelo.
+    // --------------------------------------------------------------------
+    public void establecerNombreJugador(String text)
+    {
+        this.modelo.establecerNombreJugador(text);
+    }
+
+    public void establecerNombreOponente(String text)
+    {
+        this.modelo.establecerNombreOponente(text);
+    }
+
+    // --------------------------------------------------------------------
     // Métodos de fases y turnos.
     // --------------------------------------------------------------------
+    @Override
     public void terminarTurno()
     {
         this.maquinaTurnos.terminarTurno();
     }
 
+    @Override
     public void avanzarProximaFase() throws SeTerminaronLasFasesError
     {
         if (this.maquinaTurnos.faseActual().esFaseFinal() == false)
@@ -118,27 +134,27 @@ public final class Controlador implements ObservadorDeFinJuego
         return this.maquinaTurnos.obtenerJugadorActual() == jugador;
     }
 
+    private boolean cartaPuedeCambiarOrientacion(Carta carta)
+    {
+        if (this.maquinaTurnos.fueColocadaEnTurnoActual(carta) == true)
+        {
+            return false;
+        } else
+        {
+            return true;
+        }
+    }
+
+    @Override
     public String nombreJugadorActual()
     {
         return this.maquinaTurnos.obtenerJugadorActual().obtenerNombre();
     }
 
+    @Override
     public String nombreFaseActual()
     {
         return this.maquinaTurnos.faseActual().nombre();
-    }
-
-    // --------------------------------------------------------------------
-    // Interfaz con el modelo.
-    // --------------------------------------------------------------------
-    public void establecerNombreJugador(String text)
-    {
-        this.modelo.establecerNombreJugador(text);
-    }
-
-    public void establecerNombreOponente(String text)
-    {
-        this.modelo.establecerNombreOponente(text);
     }
 
     // ------------------------------------
@@ -182,33 +198,21 @@ public final class Controlador implements ObservadorDeFinJuego
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
-        this.modelo.jugarCartaTrampa(solicitante, carta);
+        this.modelo.setCartaTrampa(solicitante, carta);
     }
 
-    public void jugarCartaMagicaBocaArriba(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
+    public void setCartaMagica(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
     {
         if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
-        this.modelo.jugarCartaMagicaBocaArriba(solicitante, carta);
-    }
-
-    public void jugarCartaMagicaBocaAbajo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
-    {
-        if (jugadorPuedeJugar(solicitante) == false)
-        {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        }
-        this.modelo.jugarCartaMagicaBocaAbajo(solicitante, carta);
+        this.modelo.setCartaMagica(solicitante, carta);
     }
 
     // ------------------------------------
     // Métodos de orientación de cartas.
     // ------------------------------------
-
-    // TODO: verificar la condición y fase en las cuales se pueden realizar estas operaciones. Por ejemplo,
-    // no se puede cambiar el modo del monstruo ni voltearla el mismo turno que es colocada en el campo.
     public void flipCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
             NoEsFasePreparacionError, CartaColocadaEnTurnoActualError
     {
@@ -218,58 +222,109 @@ public final class Controlador implements ObservadorDeFinJuego
         } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
         {
             throw new NoEsFasePreparacionError();
-        } else if (this.maquinaTurnos.fueColocadaEnTurnoActual(carta) == true)
+        } else if (cartaPuedeCambiarOrientacion(carta) == false)
         {
             throw new CartaColocadaEnTurnoActualError();
-        }
+        } else
         {
+            this.maquinaTurnos.seCambioOrientacionCarta(carta);
             this.modelo.flipCartaMonstruo(carta);
         }
     }
 
-    public void flipBocaAbajo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
+    public void flipBocaAbajo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
+            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError
     {
         if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
+        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
+        {
+            throw new NoEsFasePreparacionError();
+        } else if (cartaPuedeCambiarOrientacion(carta) == false)
+        {
+            throw new CartaColocadaEnTurnoActualError();
+        } else
+        {
+            this.maquinaTurnos.seCambioOrientacionCarta(carta);
+            this.modelo.flipBocaAbajo(carta);
         }
-        this.modelo.flipBocaAbajo(carta);
     }
 
-    public void flipBocaArriba(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
+    public void flipBocaArriba(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
+            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError
     {
         if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
+        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
+        {
+            throw new NoEsFasePreparacionError();
+        } else if (cartaPuedeCambiarOrientacion(carta) == false)
+        {
+            throw new CartaColocadaEnTurnoActualError();
+        } else
+        {
+            this.maquinaTurnos.seCambioOrientacionCarta(carta);
+            this.modelo.flipBocaArriba(carta);
         }
-        this.modelo.flipBocaArriba(carta);
     }
 
-    public void cambiarModoCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
+    public void cambiarModoCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
+            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError
     {
         if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
+        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
+        {
+            throw new NoEsFasePreparacionError();
+        } else if (cartaPuedeCambiarOrientacion(carta) == false)
+        {
+            throw new CartaColocadaEnTurnoActualError();
+        } else
+        {
+            this.maquinaTurnos.seCambioOrientacionCarta(carta);
+            this.modelo.cambiarModoCartaMonstruo(carta);
         }
-        this.modelo.cambiarModoCartaMonstruo(carta);
     }
 
-    public void setModoAtaque(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
+    public void setModoAtaque(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
+            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError
     {
         if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
+        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
+        {
+            throw new NoEsFasePreparacionError();
+        } else if (cartaPuedeCambiarOrientacion(carta) == false)
+        {
+            throw new CartaColocadaEnTurnoActualError();
+        } else
+        {
+            this.maquinaTurnos.seCambioOrientacionCarta(carta);
+            this.modelo.setModoAtaque(carta);
         }
-        this.modelo.setModoAtaque(carta);
     }
 
-    public void setModoDefensa(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
+    public void setModoDefensa(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
+            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError
     {
         if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
+        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
+        {
+            throw new NoEsFasePreparacionError();
+        } else if (cartaPuedeCambiarOrientacion(carta) == false)
+        {
+            throw new CartaColocadaEnTurnoActualError();
+        } else
+        {
+            this.maquinaTurnos.seCambioOrientacionCarta(carta);
+            this.modelo.setModoDefensa(carta);
         }
-        this.modelo.setModoDefensa(carta);
     }
 
     // ------------------------------------

@@ -25,9 +25,9 @@ Fase preparación:
 			Si el usuario intenta cambiarle el modo más de 1 vez, le sale un tooltip que le dice que no se puede.
 			
 	Región MyT:
-			Si manda una carta trampa a la región MyT, y en la región la quiere activar, le avisa con un tooltip 
+			Si manda (set) una carta trampa a la región MyT, y en la región la quiere activar, le avisa con un tooltip 
 			que no puede activarse en el turno en que ingresó a la región.
-			Si manda una carta mágica a la región MyT, y en la región la quiere activar, está todo bien.
+			Si manda (set) una carta mágica a la región MyT, y en la región la quiere activar, está todo bien.
 
 
 Fase Batalla:

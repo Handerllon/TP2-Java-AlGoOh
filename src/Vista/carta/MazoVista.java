@@ -17,8 +17,6 @@ import javafx.stage.Screen;
 
 public class MazoVista implements ObservadorDeModelo
 {
-
-	
     private static double anchoDeCarta;
     private static double altoDeCarta;
     private static double relacionAnchoAlto = 1.457;
@@ -34,9 +32,9 @@ public class MazoVista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     public MazoVista(Vista vista)
     {
-    	this.anchoDeCarta = Screen.getPrimary().getVisualBounds().getWidth() / relacionAnchoCartaPantalla;
-    	this.altoDeCarta = this.anchoDeCarta * relacionAnchoAlto;
-    	
+        this.anchoDeCarta = Screen.getPrimary().getVisualBounds().getWidth() / relacionAnchoCartaPantalla;
+        this.altoDeCarta = this.anchoDeCarta * relacionAnchoAlto;
+
         this.vista = vista;
 
         this.toolTipJugador = new Tooltip();
@@ -111,6 +109,4 @@ public class MazoVista implements ObservadorDeModelo
             noEsFaseInicialError.printStackTrace();
         }
     }
-    
-    
 }

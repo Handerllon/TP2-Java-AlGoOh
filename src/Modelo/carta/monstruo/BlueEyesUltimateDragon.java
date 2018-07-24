@@ -41,6 +41,6 @@ public class BlueEyesUltimateDragon extends CartaMonstruo
             }
         }
 
-        this.jugador.jugarCarta(this);
+        this.jugador.setCarta(this);
     }
 }

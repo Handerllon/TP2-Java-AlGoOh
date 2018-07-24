@@ -115,30 +115,30 @@ public class Jugador implements FinDeJuegoObservable
     // Métodos de juego de cartas.
     // --------------------------------------------------------------------
 
-    public void jugarCarta(CartaMonstruo cartaMonstruo, Sacrificio sacrificio)
+    public void setCarta(CartaMonstruo cartaMonstruo, Sacrificio sacrificio)
     {
         cartaMonstruo.invocar(sacrificio);
     }
 
-    public void jugarCarta(CartaMonstruo cartaMonstruo)
+    public void setCarta(CartaMonstruo cartaMonstruo)
     {
         this.regionMonstruos.colocarCarta(cartaMonstruo);
         this.mano.quitarCarta(cartaMonstruo);
     }
 
-    public void jugarCarta(CartaMagica cartaMagica)
+    public void setCarta(CartaMagica cartaMagica)
     {
         this.regionMagicasYTrampas.colocarCarta(cartaMagica);
         this.mano.quitarCarta(cartaMagica);
     }
 
-    public void jugarCarta(CartaCampo cartaCampo)
+    public void setCarta(CartaCampo cartaCampo)
     {
         this.regionCampo.colocarCarta(cartaCampo);
         this.mano.quitarCarta(cartaCampo);
     }
 
-    public void jugarCarta(CartaTrampa cartaTrampa)
+    public void setCarta(CartaTrampa cartaTrampa)
     {
         this.regionMagicasYTrampas.colocarCarta(cartaTrampa);
         this.mano.quitarCarta(cartaTrampa);

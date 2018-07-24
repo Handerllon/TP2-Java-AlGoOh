@@ -121,9 +121,9 @@ public class BotonCartaEnMano extends Button
         Button b2 = new Button("Jugar Boca Abajo");
         Button b3 = new Button("Cerrar");
 
-        b1.setOnAction(e -> cartaMagicaJugarBocaArribaBtn_Click());
+        b1.setOnAction(e -> activarCartaMagicaBtn_Click());
 
-        b2.setOnAction(e -> cartaMagicaJugarBocaAbajoBtn_Click());
+        b2.setOnAction(e -> setCartaMagicaBtn_Click());
 
         b3.setOnAction(e -> popup.hide());
 
@@ -260,22 +260,22 @@ public class BotonCartaEnMano extends Button
         }
     }
 
-    private void cartaMagicaJugarBocaAbajoBtn_Click()
+    private void setCartaMagicaBtn_Click()
     {
         try
         {
-            this.vista.obtenerControlador().jugarCartaMagicaBocaAbajo(this.carta, this.jugadorAsociado);
+            this.vista.obtenerControlador().setCartaMagica(this.carta, this.jugadorAsociado);
         } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
         {
             jugadorNoPermitidoParaJugar.printStackTrace();
         }
     }
 
-    private void cartaMagicaJugarBocaArribaBtn_Click()
+    private void activarCartaMagicaBtn_Click()
     {
         try
         {
-            this.vista.obtenerControlador().jugarCartaMagicaBocaArriba(this.carta, this.jugadorAsociado);
+            this.vista.obtenerControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
         } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
         {
             jugadorNoPermitidoParaJugar.printStackTrace();

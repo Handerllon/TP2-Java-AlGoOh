@@ -33,14 +33,14 @@ public class AlGoOhTest2
 
         CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Ancient Brain");
         cartaJugador1.cambiarModo();
-        jugador1.jugarCarta(cartaJugador1);
+        jugador1.setCarta(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
-        jugador2.jugarCarta(cartaJugador2);
+        jugador2.setCarta(cartaJugador2);
 
         CartaCampo cartaWasteland = fabricaCartasJugador1.crearCartaCampo("Wasteland");
         cartaWasteland.cambiarOrientacion();
-        jugador1.jugarCarta(cartaWasteland);
+        jugador1.setCarta(cartaWasteland);
 
         int puntosDeAtaqueEsperadosCartaJugador = 1000 + 200;
         int puntosDeDefensaEsperadosCartaOponente = 2100 + 300;
@@ -69,15 +69,15 @@ public class AlGoOhTest2
 
         CartaCampo cartaWasteland = fabricaCartasJugador1.crearCartaCampo("Wasteland");
         cartaWasteland.cambiarOrientacion();
-        jugador1.jugarCarta(cartaWasteland);
+        jugador1.setCarta(cartaWasteland);
 
         CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Ancient Brain");
         cartaJugador1.cambiarModo();
-        jugador1.jugarCarta(cartaJugador1);
+        jugador1.setCarta(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
 
-        jugador2.jugarCarta(cartaJugador2);
+        jugador2.setCarta(cartaJugador2);
 
         int puntosDeAtaqueEsperadosCartaJugador = 1000 + 200;
         int puntosDeDefensaEsperadosCartaOponente = 2100 + 300;
@@ -102,15 +102,15 @@ public class AlGoOhTest2
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
         CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Ancient Brain");
-        jugador1.jugarCarta(cartaJugador1);
+        jugador1.setCarta(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         cartaJugador2.cambiarModo();
-        jugador2.jugarCarta(cartaJugador2);
+        jugador2.setCarta(cartaJugador2);
 
         CartaCampo cartaSogen = fabricaCartasJugador1.crearCartaCampo("Sogen");
         cartaSogen.cambiarOrientacion();
-        jugador1.jugarCarta(cartaSogen);
+        jugador1.setCarta(cartaSogen);
 
         int puntosDeDefensaEsperadosCartaJugador = 700 + 500;
         int puntosDeAtaqueEsperadosCartaOponente = 100 + 200;
@@ -144,7 +144,7 @@ public class AlGoOhTest2
 
         int cartasAntesDeJugar = jugador1.cantidadDeCartasEnMano();
 
-        jugador1.jugarCarta(cartaOllaDeLaCodicia);
+        jugador1.setCarta(cartaOllaDeLaCodicia);
 
         int cartasDespuesDeJugar = jugador1.cantidadDeCartasEnMano();
 
@@ -170,16 +170,16 @@ public class AlGoOhTest2
         //Carta con mayor ataque
         CartaMonstruo unaCartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Ancient Brain");
         unaCartaJugador2.cambiarModo();
-        jugador2.jugarCarta(unaCartaJugador2);
+        jugador2.setCarta(unaCartaJugador2);
 
         //Carta con menor ataque
         CartaMonstruo otraCartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         otraCartaJugador2.cambiarModo();
-        jugador2.jugarCarta(otraCartaJugador2);
+        jugador2.setCarta(otraCartaJugador2);
 
         CartaMagica cartaFisura = fabricaCartasJugador1.crearCartaMagica("Fissure");
         cartaFisura.cambiarOrientacion();
-        jugador1.jugarCarta(cartaFisura);
+        jugador1.setCarta(cartaFisura);
 
         assertTrue(jugador2.cartaEstaEnCementerio(otraCartaJugador2));
 
@@ -202,11 +202,11 @@ public class AlGoOhTest2
 
         CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Jinzo #7");
         cartaJugador1.cambiarModo();
-        jugador1.jugarCarta(cartaJugador1);
+        jugador1.setCarta(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         cartaJugador2.cambiarModo();
-        jugador2.jugarCarta(cartaJugador2);
+        jugador2.setCarta(cartaJugador2);
 
         jugador1.atacarOponente(cartaJugador1);
 
@@ -230,34 +230,34 @@ public class AlGoOhTest2
 
         //Necesitamos sacrificios para invocar a todos los dragones
         CartaMonstruo primerSacrificio1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
-        jugador1.jugarCarta(primerSacrificio1Jugador1);
+        jugador1.setCarta(primerSacrificio1Jugador1);
         CartaMonstruo primerSacrificio2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
-        jugador1.jugarCarta(primerSacrificio2Jugador1);
+        jugador1.setCarta(primerSacrificio2Jugador1);
         Sacrificio sacrificios1 = new Sacrificio();
         sacrificios1.agregarCarta(primerSacrificio1Jugador1);
         sacrificios1.agregarCarta(primerSacrificio2Jugador1);
         CartaMonstruo primerDragonBlancoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
-        jugador1.jugarCarta(primerDragonBlancoJugador1, sacrificios1);
+        jugador1.setCarta(primerDragonBlancoJugador1, sacrificios1);
 
         CartaMonstruo segundoSacrificio1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
-        jugador1.jugarCarta(segundoSacrificio1Jugador1);
+        jugador1.setCarta(segundoSacrificio1Jugador1);
         CartaMonstruo segundoSacrificio2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
-        jugador1.jugarCarta(segundoSacrificio2Jugador1);
+        jugador1.setCarta(segundoSacrificio2Jugador1);
         Sacrificio sacrificios2 = new Sacrificio();
         sacrificios2.agregarCarta(segundoSacrificio1Jugador1);
         sacrificios2.agregarCarta(segundoSacrificio2Jugador1);
         CartaMonstruo segundoDragonBlancoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
-        jugador1.jugarCarta(segundoDragonBlancoJugador1, sacrificios2);
+        jugador1.setCarta(segundoDragonBlancoJugador1, sacrificios2);
 
         CartaMonstruo tercerSacrificio1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
-        jugador1.jugarCarta(tercerSacrificio1Jugador1);
+        jugador1.setCarta(tercerSacrificio1Jugador1);
         CartaMonstruo tercerSacrificio2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
-        jugador1.jugarCarta(tercerSacrificio2Jugador1);
+        jugador1.setCarta(tercerSacrificio2Jugador1);
         Sacrificio sacrificios3 = new Sacrificio();
         sacrificios3.agregarCarta(tercerSacrificio1Jugador1);
         sacrificios3.agregarCarta(tercerSacrificio2Jugador1);
         CartaMonstruo tercerDragonBlancoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
-        jugador1.jugarCarta(tercerDragonBlancoJugador1, sacrificios3);
+        jugador1.setCarta(tercerDragonBlancoJugador1, sacrificios3);
 
         Sacrificio sacrificioFinal = new Sacrificio();
         sacrificioFinal.agregarCarta(primerDragonBlancoJugador1);
@@ -265,7 +265,7 @@ public class AlGoOhTest2
         sacrificioFinal.agregarCarta(tercerDragonBlancoJugador1);
 
         CartaMonstruo dragonDefinitivoDeOjosAzulesJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes Ultimate Dragon");
-        jugador1.jugarCarta(dragonDefinitivoDeOjosAzulesJugador1, sacrificioFinal);
+        jugador1.setCarta(dragonDefinitivoDeOjosAzulesJugador1, sacrificioFinal);
 
         assertTrue(jugador1.cartaEstaEnCementerio(primerDragonBlancoJugador1));
         assertTrue(jugador1.cartaEstaEnCementerio(segundoDragonBlancoJugador1));
@@ -292,11 +292,11 @@ public class AlGoOhTest2
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
         CartaMonstruo insectoComeHombresJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Man-Eater Bug");
-        jugador1.jugarCarta(insectoComeHombresJugador1);
+        jugador1.setCarta(insectoComeHombresJugador1);
 
         CartaMonstruo monstruoJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         monstruoJugador2.cambiarModo();
-        jugador2.jugarCarta(monstruoJugador2);
+        jugador2.setCarta(monstruoJugador2);
 
         jugador2.atacarOponente(monstruoJugador2, insectoComeHombresJugador1);
 
@@ -325,10 +325,10 @@ public class AlGoOhTest2
 
         CartaMonstruo monstruoJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         monstruoJugador2.cambiarModo();
-        jugador2.jugarCarta(monstruoJugador2);
+        jugador2.setCarta(monstruoJugador2);
 
         CartaTrampa trampaJugador1 = fabricaCartasJugador1.crearCartaTrampa("Magic Cylinder");
-        jugador1.jugarCarta(trampaJugador1);
+        jugador1.setCarta(trampaJugador1);
 
         jugador2.atacarOponente(monstruoJugador2);
 
@@ -359,14 +359,14 @@ public class AlGoOhTest2
 
         CartaMonstruo monstruoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
         monstruoJugador1.cambiarModo();
-        jugador1.jugarCarta(monstruoJugador1);
+        jugador1.setCarta(monstruoJugador1);
 
         CartaMonstruo monstruoJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Bitron");
         monstruoJugador2.cambiarModo();
-        jugador2.jugarCarta(monstruoJugador2);
+        jugador2.setCarta(monstruoJugador2);
 
         CartaTrampa cartaTrampaReinforcements = fabricaCartasJugador1.crearCartaTrampa("Reinforcements");
-        jugador1.jugarCarta(cartaTrampaReinforcements);
+        jugador1.setCarta(cartaTrampaReinforcements);
 
         int puntosDeVidaEsperadosJugador2 = 8000 - 400;
 

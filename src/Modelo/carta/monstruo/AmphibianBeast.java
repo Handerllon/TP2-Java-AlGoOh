@@ -20,6 +20,6 @@ public class AmphibianBeast extends CartaMonstruo
     {
         this.jugador.destruirMonstruo(sacrificio.getMonstruo());
 
-        this.jugador.jugarCarta(this);
+        this.jugador.setCarta(this);
     }
 }

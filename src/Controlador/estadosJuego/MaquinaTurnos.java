@@ -1,7 +1,10 @@
 package Controlador.estadosJuego;
 
 import Modelo.Jugador;
+import Modelo.carta.Carta;
+import Modelo.carta.monstruo.CartaMonstruo;
 
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class MaquinaTurnos
@@ -9,6 +12,7 @@ public final class MaquinaTurnos
     private static MaquinaTurnos instancia = null;
     private Fase faseActual;
     private Jugador jugador1, jugador2, jugadorActual;
+    private ArrayList<Carta> cartasConCambioDeOrientacionEnTurno;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -18,6 +22,7 @@ public final class MaquinaTurnos
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
         this.faseActual = FaseInicial.obtenerInstancia(this);
+        this.cartasConCambioDeOrientacionEnTurno = new ArrayList<>();
 
         this.sortearJugadorInicial();
     }
@@ -59,6 +64,7 @@ public final class MaquinaTurnos
 
     public void terminarTurno()
     {
+        this.cartasConCambioDeOrientacionEnTurno.clear();
         this.swapJugadorActual();
         this.reiniciarFases();
     }
@@ -90,6 +96,16 @@ public final class MaquinaTurnos
     public Fase faseActual()
     {
         return this.faseActual;
+    }
+
+    public boolean fueColocadaEnTurnoActual(Carta carta)
+    {
+        return this.cartasConCambioDeOrientacionEnTurno.contains(carta);
+    }
+
+    public void seCambioOrientacionCarta(Carta carta)
+    {
+        this.cartasConCambioDeOrientacionEnTurno.add(carta);
     }
 }
 

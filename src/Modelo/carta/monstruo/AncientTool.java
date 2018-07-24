@@ -19,6 +19,12 @@ public class AncientTool extends CartaMonstruo
     public void invocar(Sacrificio sacrificio)
     {
         this.jugador.destruirMonstruo(sacrificio.getMonstruo());
-        this.jugador.setCarta(this);
+        this.jugador.enviarARegion(this);
+    }
+
+    @Override
+    public boolean requiereSacrificio()
+    {
+        return true;
     }
 }

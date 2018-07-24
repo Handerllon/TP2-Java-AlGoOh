@@ -1,7 +1,9 @@
 package Modelo;
 
 import Modelo.carta.Carta;
+import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
+import Modelo.carta.excepciones.NoEsUnaCartaMonstruo;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.trampa.CartaTrampa;
@@ -216,10 +218,58 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     @Override
     public void setCartaMagica(Jugador jugador, Carta carta)
     {
-        this.flipBocaAbajo(carta);
         if (carta.esMagica() == true)
         {
-            jugador.setCarta((CartaMagica) carta);
+            this.flipBocaAbajo(carta);
+            jugador.enviarARegion((CartaMagica) carta);
+        }
+    }
+
+    @Override
+    public boolean requiereSacrificios(Carta carta) throws NoEsUnaCartaMonstruo
+    {
+        if (carta.esMonstruo() == true)
+        {
+            return ((CartaMonstruo) carta).requiereSacrificio();
+        } else
+        {
+            throw new NoEsUnaCartaMonstruo();
+        }
+    }
+
+    @Override
+    public void setCartaMonstruo(Carta carta) throws NoEsUnaCartaMonstruo
+    {
+        if (carta.esMonstruo() == true)
+        {
+            carta.obtenerPropietario().enviarARegion((CartaMonstruo) carta);
+        } else
+        {
+            throw new NoEsUnaCartaMonstruo();
+        }
+    }
+
+    @Override
+    public boolean haySuficientesSacrificios(Carta carta) throws NoEsUnaCartaMonstruo
+    {
+        if (carta.esMonstruo() == false)
+        {
+            throw new NoEsUnaCartaMonstruo();
+        } else
+        {
+            return carta.obtenerPropietario().obtenerRegionMonstruos().cantidadCartas() >= ((CartaMonstruo) carta).getEstrellas();
+        }
+    }
+
+    @Override
+    public void setCartaMonstruo(Carta carta, Sacrificio sacrificios) throws NoEsUnaCartaMonstruo
+    {
+        if (carta.esMonstruo() == true)
+        {
+            carta.obtenerPropietario().enviarARegion((CartaMonstruo) carta, sacrificios);
+        } else
+        {
+            throw new NoEsUnaCartaMonstruo();
         }
     }
 
@@ -228,7 +278,8 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     {
         if (carta.esTrampa() == true)
         {
-            jugador.setCarta((CartaTrampa) carta);
+            this.flipBocaAbajo(carta);
+            jugador.enviarARegion((CartaTrampa) carta);
         }
     }
 
@@ -238,7 +289,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         if (carta.esMagica() == true)
         {
             this.flipBocaArriba(carta);
-            jugador.setCarta((CartaMagica) carta);
+            jugador.enviarARegion((CartaMagica) carta);
         }
     }
 

@@ -111,4 +111,9 @@ public abstract class Region<T extends Carta> implements RegionObservable
     {
         this.observadoresRegion.forEach(item -> item.remocionCarta(this));
     }
+
+    public int cantidadCartas()
+    {
+        return this.cartas.size();
+    }
 }

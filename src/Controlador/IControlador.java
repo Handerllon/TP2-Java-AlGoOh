@@ -5,6 +5,7 @@ import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.carta.CartaNula;
 import Modelo.carta.excepciones.ManoLlenaError;
+import Modelo.carta.excepciones.NoEsUnaCartaMonstruo;
 import Modelo.carta.monstruo.CartaMonstruo;
 
 public interface IControlador
@@ -20,11 +21,14 @@ public interface IControlador
     void tomarCarta(Jugador solicitante) throws JugadorNoPermitidoParaJugar, ManoLlenaError,
             NoEsFaseInicialError;
 
-    void activarCartaMagica(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar;
+    void activarCartaMagica(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
+            SolicitanteNoEsPropietarioDeCartaError, NoEsFaseFinalError;
 
-    void jugarCartaTrampa(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar;
+    void setCartaTrampa(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
+            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError;
 
-    void setCartaMagica(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar;
+    void setCartaMagica(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
+            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError;
 
     void flipCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
             NoEsFasePreparacionError, CartaColocadaEnTurnoActualError;
@@ -35,14 +39,17 @@ public interface IControlador
     void flipBocaArriba(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
             NoEsFasePreparacionError, CartaColocadaEnTurnoActualError;
 
-    void cambiarModoCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError;
-
     void setModoAtaque(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
             NoEsFasePreparacionError, CartaColocadaEnTurnoActualError;
 
     void setModoDefensa(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
             NoEsFasePreparacionError, CartaColocadaEnTurnoActualError;
+
+    void cambiarModoCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
+            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError;
+
+    void setCartaMonstruo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
+            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError, NoHaySuficientesSacrificiosError, NoEsUnaCartaMonstruo;
 
     void atacar(CartaMonstruo cartaAtacante, CartaNula cartaNula, Jugador solicitante) throws
             NoEsUnaCartaParaAtacar, JugadorNoPermitidoParaJugar;

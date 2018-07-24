@@ -1,7 +1,9 @@
 package Modelo;
 
 import Modelo.carta.Carta;
+import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
+import Modelo.carta.excepciones.NoEsUnaCartaMonstruo;
 import Modelo.carta.monstruo.CartaMonstruo;
 
 import java.util.ArrayList;
@@ -68,4 +70,12 @@ public interface ModeloObservable
     void setCartaTrampa(Jugador jugador, Carta carta);
 
     void setCartaMagica(Jugador jugador, Carta carta);
+
+    boolean requiereSacrificios(Carta carta) throws NoEsUnaCartaMonstruo;
+
+    void setCartaMonstruo(Carta carta) throws NoEsUnaCartaMonstruo;
+
+    boolean haySuficientesSacrificios(Carta carta) throws NoEsUnaCartaMonstruo;
+
+    void setCartaMonstruo(Carta carta, Sacrificio sacrificios) throws NoEsUnaCartaMonstruo;
 }

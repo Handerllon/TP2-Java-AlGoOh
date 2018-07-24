@@ -3,6 +3,7 @@ package Vista;
 import Controlador.Controlador;
 import Modelo.Modelo;
 import Modelo.ObservadorDeModelo;
+import Modelo.carta.Sacrificio;
 import Vista.escenas.EscenaBienvenida;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
@@ -142,5 +143,11 @@ public class Vista implements ObservadorDeModelo
     public void cerrar()
     {
         this.escenaVista.cerrar();
+    }
+
+    public Sacrificio pedirSacrificios()
+    {
+        // TODO.
+        return null;
     }
 }

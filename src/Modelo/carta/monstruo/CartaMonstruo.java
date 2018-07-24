@@ -3,7 +3,6 @@ package Modelo.carta.monstruo;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
-import Modelo.carta.excepciones.NoHayCartasParaSacrificarError;
 import Modelo.carta.modo.Modo;
 import Modelo.carta.modo.ModoAtaque;
 import Modelo.carta.modo.ModoDefensa;
@@ -224,9 +223,9 @@ public abstract class CartaMonstruo extends Carta
 
     }
 
-    public void invocar()
+    public boolean requiereSacrificio()
     {
-        throw new NoHayCartasParaSacrificarError();
+        return false;
     }
 
     public boolean estaEnAtaque()
@@ -238,4 +237,5 @@ public abstract class CartaMonstruo extends Carta
     {
         return this.modo.esDefensa();
     }
+
 }

@@ -25,7 +25,7 @@ public class AlGoOhTest
 
         CartaMonstruo carta = fabricaCartasJugador1.crearCartaMonstruo("Alexandrite Dragon");
         carta.cambiarModo();
-        jugador1.setCarta(carta);
+        jugador1.enviarARegion(carta);
 
         assertTrue(jugador1.cartaEstaEnRegionMonstruos(carta));
         assertTrue(carta.enAtaque());
@@ -44,7 +44,7 @@ public class AlGoOhTest
 
         CartaMonstruo carta = fabricaCartasJugador1.crearCartaMonstruo("Alexandrite Dragon");
 
-        jugador1.setCarta(carta);
+        jugador1.enviarARegion(carta);
 
         assertTrue(jugador1.cartaEstaEnRegionMonstruos(carta));
         assertTrue(carta.enDefensa());
@@ -62,7 +62,7 @@ public class AlGoOhTest
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
         CartaMagica carta = fabricaCartasJugador1.crearCartaMagica("Dark Hole");
-        jugador1.setCarta(carta);
+        jugador1.enviarARegion(carta);
 
         assertTrue(jugador1.cartaEstaEnRegionMagicasYTrampa(carta));
     }
@@ -79,7 +79,7 @@ public class AlGoOhTest
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
         CartaTrampa carta = fabricaCartasJugador1.crearCartaTrampa("Magic Cylinder");
-        jugador1.setCarta(carta);
+        jugador1.enviarARegion(carta);
 
         assertTrue(jugador1.cartaEstaEnRegionMagicasYTrampa(carta));
     }
@@ -96,7 +96,7 @@ public class AlGoOhTest
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
         CartaMonstruo carta = fabricaCartasJugador1.crearCartaMonstruo("Alexandrite Dragon");
-        jugador1.setCarta(carta);
+        jugador1.enviarARegion(carta);
         jugador1.destruirMonstruo(carta);
 
         assertTrue(jugador1.cartaEstaEnCementerio(carta));
@@ -116,11 +116,11 @@ public class AlGoOhTest
 
         CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Ancient Brain");
         cartaJugador1.cambiarModo();
-        jugador1.setCarta(cartaJugador1);
+        jugador1.enviarARegion(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         cartaJugador2.cambiarModo();
-        jugador2.setCarta(cartaJugador2);
+        jugador2.enviarARegion(cartaJugador2);
 
         jugador1.atacarOponente(cartaJugador1, cartaJugador2);
 
@@ -144,11 +144,11 @@ public class AlGoOhTest
 
         CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
         cartaJugador1.cambiarModo();
-        jugador1.setCarta(cartaJugador1);
+        jugador1.enviarARegion(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Ancient Brain");
         cartaJugador2.cambiarModo();
-        jugador2.setCarta(cartaJugador2);
+        jugador2.enviarARegion(cartaJugador2);
 
         jugador1.atacarOponente(cartaJugador1, cartaJugador2);
 
@@ -172,11 +172,11 @@ public class AlGoOhTest
 
         CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Ancient Brain");
         cartaJugador1.cambiarModo();
-        jugador1.setCarta(cartaJugador1);
+        jugador1.enviarARegion(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Ancient Brain");
         cartaJugador2.cambiarModo();
-        jugador2.setCarta(cartaJugador2);
+        jugador2.enviarARegion(cartaJugador2);
 
         jugador1.atacarOponente(cartaJugador1, cartaJugador2);
 
@@ -201,10 +201,10 @@ public class AlGoOhTest
 
         CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Ancient Brain");
         cartaJugador1.cambiarModo();
-        jugador1.setCarta(cartaJugador1);
+        jugador1.enviarARegion(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Alexandrite Dragon");
-        jugador2.setCarta(cartaJugador2);
+        jugador2.enviarARegion(cartaJugador2);
 
         jugador1.atacarOponente(cartaJugador1, cartaJugador2);
 
@@ -228,10 +228,10 @@ public class AlGoOhTest
 
         CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Alexandrite Dragon");
         cartaJugador1.cambiarModo();
-        jugador1.setCarta(cartaJugador1);
+        jugador1.enviarARegion(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
-        jugador2.setCarta(cartaJugador2);
+        jugador2.enviarARegion(cartaJugador2);
 
         jugador1.atacarOponente(cartaJugador1, cartaJugador2);
 
@@ -255,10 +255,10 @@ public class AlGoOhTest
 
         CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
         cartaJugador1.cambiarModo();
-        jugador1.setCarta(cartaJugador1);
+        jugador1.enviarARegion(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Alexandrite Dragon");
-        jugador2.setCarta(cartaJugador2);
+        jugador2.enviarARegion(cartaJugador2);
 
         jugador1.atacarOponente(cartaJugador1, cartaJugador2);
 
@@ -282,14 +282,14 @@ public class AlGoOhTest
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
         CartaMonstruo cartaJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Alexandrite Dragon");
-        jugador1.setCarta(cartaJugador1);
+        jugador1.enviarARegion(cartaJugador1);
 
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
-        jugador2.setCarta(cartaJugador2);
+        jugador2.enviarARegion(cartaJugador2);
 
         CartaMagica cartaMagicaJugador1 = fabricaCartasJugador1.crearCartaMagica("Dark Hole");
         cartaMagicaJugador1.cambiarOrientacion();
-        jugador1.setCarta(cartaMagicaJugador1);
+        jugador1.enviarARegion(cartaMagicaJugador1);
 
         assertTrue(jugador1.cartaEstaEnCementerio(cartaJugador1));
         assertTrue(jugador2.cartaEstaEnCementerio(cartaJugador2));
@@ -310,12 +310,12 @@ public class AlGoOhTest
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
         CartaMonstruo carta1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
-        jugador1.setCarta(carta1Jugador1);
+        jugador1.enviarARegion(carta1Jugador1);
 
         CartaMonstruo carta2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Amphibian Beast");
         Sacrificio sacrificios = new Sacrificio();
         sacrificios.agregarCarta(carta1Jugador1);
-        jugador1.setCarta(carta2Jugador1, sacrificios);
+        jugador1.enviarARegion(carta2Jugador1, sacrificios);
 
         assertTrue(jugador1.cartaEstaEnCementerio(carta1Jugador1));
         assertTrue(jugador1.cartaEstaEnRegionMonstruos(carta2Jugador1));
@@ -333,15 +333,15 @@ public class AlGoOhTest
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
         CartaMonstruo carta1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
-        jugador1.setCarta(carta1Jugador1);
+        jugador1.enviarARegion(carta1Jugador1);
         CartaMonstruo carta2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
-        jugador1.setCarta(carta2Jugador1);
+        jugador1.enviarARegion(carta2Jugador1);
 
         CartaMonstruo carta3Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
         Sacrificio sacrificios = new Sacrificio();
         sacrificios.agregarCarta(carta1Jugador1);
         sacrificios.agregarCarta(carta2Jugador1);
-        jugador1.setCarta(carta3Jugador1, sacrificios);
+        jugador1.enviarARegion(carta3Jugador1, sacrificios);
 
         assertTrue(jugador1.cartaEstaEnCementerio(carta1Jugador1));
         assertTrue(jugador1.cartaEstaEnCementerio(carta2Jugador1));

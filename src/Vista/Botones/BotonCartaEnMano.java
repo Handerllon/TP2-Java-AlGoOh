@@ -253,7 +253,7 @@ public class BotonCartaEnMano extends Button
 
         try
         {
-            this.vista.obtenerControlador().jugarCartaTrampa(this.carta, this.jugadorAsociado);
+            this.vista.obtenerControlador().setCartaTrampa(this.carta, this.jugadorAsociado);
         } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
         {
             jugadorNoPermitidoParaJugar.printStackTrace();

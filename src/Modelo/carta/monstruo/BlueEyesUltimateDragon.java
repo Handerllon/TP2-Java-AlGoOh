@@ -41,6 +41,12 @@ public class BlueEyesUltimateDragon extends CartaMonstruo
             }
         }
 
-        this.jugador.setCarta(this);
+        this.jugador.enviarARegion(this);
+    }
+
+    @Override
+    public boolean requiereSacrificio()
+    {
+        return true;
     }
 }

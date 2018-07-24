@@ -21,6 +21,12 @@ public class GaiaTheFierceKnight extends CartaMonstruo
         this.jugador.destruirMonstruo(sacrificio.getMonstruo());
         this.jugador.destruirMonstruo(sacrificio.getMonstruo());
 
-        this.jugador.setCarta(this);
+        this.jugador.enviarARegion(this);
+    }
+
+    @Override
+    public boolean requiereSacrificio()
+    {
+        return true;
     }
 }

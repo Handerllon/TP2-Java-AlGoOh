@@ -27,7 +27,8 @@ Fase preparación:
 	Región MyT:
 			Si manda (set) una carta trampa a la región MyT, y en la región la quiere activar, le avisa con un tooltip 
 			que no puede activarse en el turno en que ingresó a la región.
-			Si manda (set) una carta mágica a la región MyT, y en la región la quiere activar, está todo bien.
+			Si manda (set) una carta mágica a la región MyT, y en la región la quiere activar, le avisa que no puede 
+			hacerlo en esta fase.
 
 
 Fase Batalla:
@@ -57,6 +58,7 @@ Fase Batalla:
 		Las cartas trampa se activan 1 vez, de izquierda a derecha, y luego de usarla, van al cementerio.
 
 Fase Final:
-	Puede seleccionar las cartas mágicas que quiera y usarlas, estén boca arriba o abajo.
+	Permite activar las cartas mágicas en la región MyT:
+		si está boca abajo, se la da vuelta.
 	Puede suceder que las condiciones para utilizar la carta no se den, como con Fissure y Dark Hole.
 	Si se usa Pot of Greed, la mano no puede estar llena.

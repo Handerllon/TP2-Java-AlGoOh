@@ -178,13 +178,13 @@ public class BotonCartaEnMano extends Button
 
         b1.setOnAction(e -> cartaMonstruoJugarBtn_Click());
 
-        b2.setOnAction(e -> cartaMonstruoOrientarEnDefensaBtn_Click());
+        b2.setOnAction(e -> setModoDefensaBtn_Click());
 
-        b3.setOnAction(e -> cartaMonstruoOrientarEnAtaqueBtn_Click());
+        b3.setOnAction(e -> setModoAtaqueBtn_Click());
 
-        b4.setOnAction(e -> cartaMonstruoPonerBocaArribaBtn_Click());
+        b4.setOnAction(e -> setBocaArribaBtn_Click());
 
-        b5.setOnAction(e -> cartaMonstruoPonerBocaAbajoBtn_Click());
+        b5.setOnAction(e -> setBocaAbajoBtn_Click());
 
         b6.setOnAction(e -> popup.hide());
 
@@ -196,46 +196,46 @@ public class BotonCartaEnMano extends Button
     // --------------------------------------------------------------------
     // Implementación de botones.
     // --------------------------------------------------------------------
-    private void cartaMonstruoPonerBocaAbajoBtn_Click()
+    private void setBocaAbajoBtn_Click()
     {
         try
         {
-            this.vista.obtenerControlador().voltearBocaAbajo(this.carta, this.jugadorAsociado);
+            this.vista.obtenerControlador().flipBocaAbajo(this.carta, this.jugadorAsociado);
         } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
         {
             jugadorNoPermitidoParaJugar.printStackTrace();
         }
     }
 
-    private void cartaMonstruoPonerBocaArribaBtn_Click()
+    private void setBocaArribaBtn_Click()
     {
 
         try
         {
-            this.vista.obtenerControlador().voltearBocaArriba(this.carta, this.jugadorAsociado);
+            this.vista.obtenerControlador().flipBocaArriba(this.carta, this.jugadorAsociado);
         } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
         {
             jugadorNoPermitidoParaJugar.printStackTrace();
         }
     }
 
-    private void cartaMonstruoOrientarEnAtaqueBtn_Click()
+    private void setModoAtaqueBtn_Click()
     {
         try
         {
-            this.vista.obtenerControlador().ponerEnModoAtaque(this.carta, this.jugadorAsociado);
+            this.vista.obtenerControlador().setModoAtaque(this.carta, this.jugadorAsociado);
         } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
         {
             jugadorNoPermitidoParaJugar.printStackTrace();
         }
     }
 
-    private void cartaMonstruoOrientarEnDefensaBtn_Click()
+    private void setModoDefensaBtn_Click()
     {
 
         try
         {
-            this.vista.obtenerControlador().ponerEnModoDefensa(this.carta, this.jugadorAsociado);
+            this.vista.obtenerControlador().setModoDefensa(this.carta, this.jugadorAsociado);
         } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
         {
             jugadorNoPermitidoParaJugar.printStackTrace();

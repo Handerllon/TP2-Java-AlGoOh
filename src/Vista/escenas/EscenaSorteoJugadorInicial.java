@@ -65,7 +65,7 @@ public final class EscenaSorteoJugadorInicial implements EscenaVista
         lblTitulo.setAlignment(Pos.BOTTOM_CENTER);
         lblTitulo.setStyle("-fx-font-weight: bolder; -fx-font-size: 12pt");
 
-        Label lblJugadorSorteado = new Label(this.vista.obtenerControlador().obtenerNombreJugadorActual());
+        Label lblJugadorSorteado = new Label(this.vista.obtenerControlador().nombreJugadorActual());
         lblJugadorSorteado.setMinWidth(100);
         lblJugadorSorteado.setAlignment(Pos.BOTTOM_CENTER);
         lblJugadorSorteado.setStyle("-fx-font-weight: bolder; -fx-font-size: 12pt");

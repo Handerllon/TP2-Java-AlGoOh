@@ -85,7 +85,7 @@ public class Vista implements ObservadorDeModelo
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Turno");
         alert.setHeaderText(null);
-        alert.setContentText("Turno del jugador " + this.controlador.obtenerNombreJugadorActual());
+        alert.setContentText("Turno del jugador " + this.controlador.nombreJugadorActual());
         alert.showAndWait();
     }
 

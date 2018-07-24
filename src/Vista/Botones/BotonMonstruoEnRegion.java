@@ -116,9 +116,9 @@ public class BotonMonstruoEnRegion extends Button
 
         b2.setOnAction(e -> cartaMonstruoAtacarBtn_Click());
 
-        b3.setOnAction(e -> cartaMonstruoCambiarOrientacionBtn_Click());
+        b3.setOnAction(e -> cartaMonstruoCambiarModoBtn_Click());
 
-        b4.setOnAction(e -> cartaMonstruoDarVueltaBtn_Click());
+        b4.setOnAction(e -> flipCartaMonstruoBtn_Click());
 
         b5.setOnAction(e -> popup.hide());
 
@@ -191,7 +191,7 @@ public class BotonMonstruoEnRegion extends Button
         }
     }
 
-    private void cartaMonstruoCambiarOrientacionBtn_Click()
+    private void cartaMonstruoCambiarModoBtn_Click()
     {
 
         try
@@ -203,11 +203,11 @@ public class BotonMonstruoEnRegion extends Button
         }
     }
 
-    private void cartaMonstruoDarVueltaBtn_Click()
+    private void flipCartaMonstruoBtn_Click()
     {
         try
         {
-            this.vista.obtenerControlador().voltearCartaMonstruo(this.carta, null);
+            this.vista.obtenerControlador().flipCartaMonstruo(this.carta, null);
         } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
         {
             jugadorNoPermitidoParaJugar.printStackTrace();

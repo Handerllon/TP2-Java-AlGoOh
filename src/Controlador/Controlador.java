@@ -1,10 +1,7 @@
 package Controlador;
 
 import Controlador.estadosJuego.MaquinaTurnos;
-import Controlador.excepciones.JugadorNoPermitidoParaJugar;
-import Controlador.excepciones.NoEsFaseInicial;
-import Controlador.excepciones.NoEsUnaCartaParaAtacar;
-import Controlador.excepciones.SeTerminaronLasFasesError;
+import Controlador.excepciones.*;
 import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
@@ -69,20 +66,7 @@ public final class Controlador implements ObservadorDeFinJuego
     }
 
     // --------------------------------------------------------------------
-    // Interfaz con el modelo.
-    // --------------------------------------------------------------------
-    public void establecerNombreJugador(String text)
-    {
-        this.modelo.establecerNombreJugador(text);
-    }
-
-    public void establecerNombreOponente(String text)
-    {
-        this.modelo.establecerNombreOponente(text);
-    }
-
-    // --------------------------------------------------------------------
-    // Métodos de observador de modelo.
+    // Métodos de observador de fin de juego.
     // --------------------------------------------------------------------
     @Override
     public void seLlegoAFinDeJuego(CausaFinJuego causaFinJuego)
@@ -129,7 +113,12 @@ public final class Controlador implements ObservadorDeFinJuego
         }
     }
 
-    public String obtenerNombreJugadorActual()
+    private boolean jugadorPuedeJugar(Jugador jugador)
+    {
+        return this.maquinaTurnos.obtenerJugadorActual() == jugador;
+    }
+
+    public String nombreJugadorActual()
     {
         return this.maquinaTurnos.obtenerJugadorActual().obtenerNombre();
     }
@@ -139,26 +128,33 @@ public final class Controlador implements ObservadorDeFinJuego
         return this.maquinaTurnos.faseActual().nombre();
     }
 
+    // --------------------------------------------------------------------
+    // Interfaz con el modelo.
+    // --------------------------------------------------------------------
+    public void establecerNombreJugador(String text)
+    {
+        this.modelo.establecerNombreJugador(text);
+    }
+
+    public void establecerNombreOponente(String text)
+    {
+        this.modelo.establecerNombreOponente(text);
+    }
+
     // ------------------------------------
     // Métodos de juego de cartas.
     // ------------------------------------
     // TODO: verificar la condición y fase en las cuales se pueden realizar estas operaciones.
     // TODO: verificar que el dueño de la carta y el jugador actual coincidan.
 
-    private boolean jugadorPuedeJugar(Jugador jugador)
-    {
-        return this.maquinaTurnos.obtenerJugadorActual() == jugador;
-    }
-
-    public void tomarCarta(Jugador solicitante) throws JugadorNoPermitidoParaJugar, ManoLlenaError, NoEsFaseInicial
+    public void tomarCarta(Jugador solicitante) throws JugadorNoPermitidoParaJugar, ManoLlenaError, NoEsFaseInicialError
     {
         if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
-        }
-        if (this.maquinaTurnos.faseActual().esFaseInicial() == false)
+        } else if (this.maquinaTurnos.faseActual().esFaseInicial() == false)
         {
-            throw new NoEsFaseInicial();
+            throw new NoEsFaseInicialError();
         } else
         {
             try
@@ -173,7 +169,7 @@ public final class Controlador implements ObservadorDeFinJuego
 
     public void activarCartaMagica(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
     {
-        if (jugadorPuedeJugar(solicitante) == true)
+        if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
@@ -182,7 +178,7 @@ public final class Controlador implements ObservadorDeFinJuego
 
     public void jugarCartaTrampa(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
     {
-        if (jugadorPuedeJugar(solicitante) == true)
+        if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
@@ -191,7 +187,7 @@ public final class Controlador implements ObservadorDeFinJuego
 
     public void jugarCartaMagicaBocaArriba(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
     {
-        if (jugadorPuedeJugar(solicitante) == true)
+        if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
@@ -200,7 +196,7 @@ public final class Controlador implements ObservadorDeFinJuego
 
     public void jugarCartaMagicaBocaAbajo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
     {
-        if (jugadorPuedeJugar(solicitante) == true)
+        if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
@@ -212,59 +208,68 @@ public final class Controlador implements ObservadorDeFinJuego
     // ------------------------------------
 
     // TODO: verificar la condición y fase en las cuales se pueden realizar estas operaciones. Por ejemplo,
-    // no se puede cambiar la posición del monstruo ni voltearla el mismo turno que es colocada en el campo.
-    public void voltearBocaAbajo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
+    // no se puede cambiar el modo del monstruo ni voltearla el mismo turno que es colocada en el campo.
+    public void flipCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
+            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError
     {
-        if (jugadorPuedeJugar(solicitante) == true)
+        if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
+        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
+        {
+            throw new NoEsFasePreparacionError();
+        } else if (this.maquinaTurnos.fueColocadaEnTurnoActual(carta) == true)
+        {
+            throw new CartaColocadaEnTurnoActualError();
         }
-        this.modelo.voltearBocaAbajo(carta);
+        {
+            this.modelo.flipCartaMonstruo(carta);
+        }
     }
 
-    public void voltearBocaArriba(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
+    public void flipBocaAbajo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
     {
-        if (jugadorPuedeJugar(solicitante) == true)
+        if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
-        this.modelo.voltearBocaArriba(carta);
+        this.modelo.flipBocaAbajo(carta);
     }
 
-    public void ponerEnModoAtaque(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
+    public void flipBocaArriba(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
     {
-        if (jugadorPuedeJugar(solicitante) == true)
+        if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
-        this.modelo.ponerEnModoAtaque(carta);
-    }
-
-    public void ponerEnModoDefensa(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
-    {
-        if (jugadorPuedeJugar(solicitante) == true)
-        {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        }
-        this.modelo.ponerEnModoDefensa(carta);
-    }
-
-    public void voltearCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
-    {
-        if (jugadorPuedeJugar(solicitante) == true)
-        {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        }
-        this.modelo.voltearCartaMonstruo(carta);
+        this.modelo.flipBocaArriba(carta);
     }
 
     public void cambiarModoCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
     {
-        if (jugadorPuedeJugar(solicitante) == true)
+        if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
         this.modelo.cambiarModoCartaMonstruo(carta);
+    }
+
+    public void setModoAtaque(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
+    {
+        if (jugadorPuedeJugar(solicitante) == false)
+        {
+            throw new JugadorNoPermitidoParaJugar(solicitante);
+        }
+        this.modelo.setModoAtaque(carta);
+    }
+
+    public void setModoDefensa(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar
+    {
+        if (jugadorPuedeJugar(solicitante) == false)
+        {
+            throw new JugadorNoPermitidoParaJugar(solicitante);
+        }
+        this.modelo.setModoDefensa(carta);
     }
 
     // ------------------------------------
@@ -273,7 +278,7 @@ public final class Controlador implements ObservadorDeFinJuego
     // TODO: verificar la condición y fase en las cuales se pueden realizar estas operaciones.
     public void atacar(CartaMonstruo cartaAtacante, CartaNula cartaNula, Jugador solicitante) throws NoEsUnaCartaParaAtacar, JugadorNoPermitidoParaJugar
     {
-        if (jugadorPuedeJugar(solicitante) == true)
+        if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
@@ -282,7 +287,7 @@ public final class Controlador implements ObservadorDeFinJuego
 
     public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada, Jugador solicitante) throws JugadorNoPermitidoParaJugar
     {
-        if (jugadorPuedeJugar(solicitante) == true)
+        if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }
@@ -291,7 +296,7 @@ public final class Controlador implements ObservadorDeFinJuego
 
     public void atacar(CartaMonstruo cartaAtacante, Jugador solicitante) throws JugadorNoPermitidoParaJugar
     {
-        if (jugadorPuedeJugar(solicitante) == true)
+        if (jugadorPuedeJugar(solicitante) == false)
         {
             throw new JugadorNoPermitidoParaJugar(solicitante);
         }

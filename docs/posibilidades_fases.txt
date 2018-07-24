@@ -5,20 +5,20 @@ Fase inicial:
 Fase preparación:
 	Mano:
 		Monstruo:
-			El usuario selecciona con click derecho si se invoca o si se posiciona en región monstruo.
-			Se verifica si requiere sacrificio, y le pregunta si quiere sacrificar. Si no 
-			hay cartas suficientes en la región monstruo, se le avisa que no puede usar el monstro. Si hay
-			cartas suficientes en la región monstruo, se le piden los sacrificios. El usuario puede 
-			cancelar la operación cerrando la ventana de sacrificios.
-			Luego, se ejecutan los sacrificios y se envia la carta a la región monstruo.
-			Si el usuario seleccionó "invocar", la carta va boca arriba en posición de ataque.
-			Si el usuario seleccionó "posicionar en región", la carta va boca abajo en posición de defensa.
+			El usuario selecciona con click derecho si se invoca (summon) o si se posiciona (set) en región monstruo.
+				1ro) Se verifica si requiere sacrificio, y le pregunta si quiere sacrificar:
+						Si no hay cartas suficientes en la región monstruo, se le avisa que no puede usar el monstruo.
+						Si hay cartas suficientes en la región monstruo, se le piden los sacrificios.
+						El usuario puede cancelar la operación cerrando la ventana de sacrificios.
+				2do) Se ejecutan los sacrificios y se envia la carta a la región monstruo dependiendo si:
+						el usuario seleccionó "invocar", la carta va boca arriba en posición de ataque.
+						el usuario seleccionó "posicionar en región", la carta va boca abajo en posición de defensa.
 			
 		Mágicas y trampa:
-			El usuario selecciona "activar", entonces va a la región MyT boca arriba.
-			El usuario selecciona "posicionar", entonces va a la región MyT boca abajo.
-			Puede enviar todas las que quiera en el turno. Si la región se llena, le avisa con un tooltip que 
-			no pueden entrar más en la región MyT.
+			El usuario selecciona "activar" (activate), entonces va a la región MyT boca arriba.
+			El usuario selecciona "posicionar" (set), entonces va a la región MyT boca abajo.
+			Puede enviar todas las que quiera en el turno.
+			Si la región se llena, le avisa con un tooltip que no pueden entrar más en la región MyT.
 			
 	Región Monstruo:
 			Si toco una carta, puedo cambiarle el modo (ataque o defensa), pero solo 1 vez por turno.

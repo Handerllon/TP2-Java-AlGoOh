@@ -39,15 +39,15 @@ public interface ModeloObservable
     // ------------------------------------
     // Métodos de orientación de cartas.
     // ------------------------------------
-    void voltearBocaAbajo(Carta carta);
+    void flipBocaAbajo(Carta carta);
 
-    void voltearBocaArriba(Carta carta);
+    void flipBocaArriba(Carta carta);
 
-    void ponerEnModoAtaque(Carta carta);
+    void setModoAtaque(Carta carta);
 
-    void ponerEnModoDefensa(Carta carta);
+    void setModoDefensa(Carta carta);
 
-    void voltearCartaMonstruo(CartaMonstruo carta);
+    void flipCartaMonstruo(CartaMonstruo carta);
 
     void cambiarModoCartaMonstruo(CartaMonstruo carta);
 

@@ -1,7 +1,7 @@
 package Vista.carta;
 
 import Controlador.excepciones.JugadorNoPermitidoParaJugar;
-import Controlador.excepciones.NoEsFaseInicial;
+import Controlador.excepciones.NoEsFaseInicialError;
 import Modelo.Jugador;
 import Modelo.ObservadorDeModelo;
 import Vista.Vista;
@@ -14,7 +14,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Screen;
-import javafx.stage.Stage;
 
 public class MazoVista implements ObservadorDeModelo
 {
@@ -107,9 +106,9 @@ public class MazoVista implements ObservadorDeModelo
         } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
         {
             jugadorNoPermitidoParaJugar.printStackTrace();
-        } catch (NoEsFaseInicial noEsFaseInicial)
+        } catch (NoEsFaseInicialError noEsFaseInicialError)
         {
-            noEsFaseInicial.printStackTrace();
+            noEsFaseInicialError.printStackTrace();
         }
     }
     

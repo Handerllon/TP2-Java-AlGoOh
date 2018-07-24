@@ -216,7 +216,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     @Override
     public void jugarCartaMagicaBocaAbajo(Jugador jugador, Carta carta)
     {
-        this.voltearBocaAbajo(carta);
+        this.flipBocaAbajo(carta);
         if (carta.esMagica() == true)
         {
             jugador.jugarCarta((CartaMagica) carta);
@@ -226,7 +226,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     @Override
     public void jugarCartaMagicaBocaArriba(Jugador jugador, Carta carta)
     {
-        this.voltearBocaArriba(carta);
+        this.flipBocaArriba(carta);
         if (carta.esMagica() == true)
         {
             jugador.jugarCarta((CartaMagica) carta);
@@ -247,7 +247,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     {
         if (carta.esMagica() == true)
         {
-            this.voltearBocaArriba(carta);
+            this.flipBocaArriba(carta);
             jugador.jugarCarta((CartaMagica) carta);
         }
     }
@@ -256,7 +256,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     // Métodos de orientación de cartas.
     // ------------------------------------
     @Override
-    public void voltearBocaAbajo(Carta carta)
+    public void flipBocaAbajo(Carta carta)
     {
         if (carta.orientacionArriba() == true)
         {
@@ -265,7 +265,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     }
 
     @Override
-    public void voltearBocaArriba(Carta carta)
+    public void flipBocaArriba(Carta carta)
     {
         if (carta.orientacionArriba() == false)
         {
@@ -274,7 +274,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     }
 
     @Override
-    public void ponerEnModoAtaque(Carta carta)
+    public void setModoAtaque(Carta carta)
     {
         if (carta.esMonstruo() == true)
         {
@@ -286,7 +286,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     }
 
     @Override
-    public void ponerEnModoDefensa(Carta carta)
+    public void setModoDefensa(Carta carta)
     {
         if (carta.esMonstruo() == true)
         {
@@ -298,7 +298,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     }
 
     @Override
-    public void voltearCartaMonstruo(CartaMonstruo carta)
+    public void flipCartaMonstruo(CartaMonstruo carta)
     {
         carta.cambiarOrientacion();
     }

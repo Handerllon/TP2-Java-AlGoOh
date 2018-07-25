@@ -30,6 +30,9 @@ public interface IControlador
 
     void establecerNombreOponente(String text);
 
+    // ------------------------------------
+    // Métodos de juego de cartas.
+    // ------------------------------------
     void tomarCarta(Jugador solicitante) throws JugadorNoPermitidoParaJugar, ManoLlenaError,
             NoEsFaseInicialError;
 
@@ -42,6 +45,17 @@ public interface IControlador
     void setCartaMagica(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
             SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError;
 
+    void setCartaMonstruo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
+            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError, NoHaySuficientesSacrificiosError,
+            NoEsUnaCartaMonstruo, YaSeMandoMonstruoARegionEnTurno;
+
+    void summonCartaMonstruo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
+            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError, NoHaySuficientesSacrificiosError,
+            NoEsUnaCartaMonstruo, YaSeMandoMonstruoARegionEnTurno, CartaColocadaEnTurnoActualError;
+
+    // ------------------------------------
+    // Métodos de orientación de cartas.
+    // ------------------------------------
     void flipCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
             NoEsFasePreparacionError, CartaColocadaEnTurnoActualError;
 
@@ -60,14 +74,9 @@ public interface IControlador
     void cambiarModoCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
             NoEsFasePreparacionError, CartaColocadaEnTurnoActualError;
 
-    void setCartaMonstruo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError, NoHaySuficientesSacrificiosError,
-            NoEsUnaCartaMonstruo, YaSeMandoMonstruoARegionEnTurno;
-
-    void summonCartaMonstruo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError, NoHaySuficientesSacrificiosError,
-            NoEsUnaCartaMonstruo, YaSeMandoMonstruoARegionEnTurno, CartaColocadaEnTurnoActualError;
-
+    // ------------------------------------
+    // Métodos de ataques.
+    // ------------------------------------
     void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada, Jugador solicitante) throws
             JugadorNoPermitidoParaJugar, NoEsFaseAtaqueError, NoSeAtacaEnPrimerTurnoJuegoError, CartaYaAtacoError;
 

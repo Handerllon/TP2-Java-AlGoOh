@@ -51,9 +51,9 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         this.vista = vista;
     }
 
-    // --------------------------------------------------------------------
+    // ------------------------------------
     // Ejecucion.
-    // --------------------------------------------------------------------
+    // ------------------------------------
     public void iniciar()
     {
         this.maquinaTurnos = MaquinaTurnos.obtenerInstancia(this.modelo.obtenerJugador(), this.modelo.obtenerOponente());
@@ -67,9 +67,9 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         this.vista.mostrar();
     }
 
-    // --------------------------------------------------------------------
+    // ------------------------------------
     // Métodos de observador de fin de juego.
-    // --------------------------------------------------------------------
+    // ------------------------------------
     @Override
     public void seLlegoAFinDeJuego(CausaFinJuego causaFinJuego)
     {
@@ -83,9 +83,9 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         return this.causaFinDeJuego;
     }
 
-    // --------------------------------------------------------------------
+    // ------------------------------------
     // Métodos de terminación.
-    // --------------------------------------------------------------------
+    // ------------------------------------
     public void confirmarSalirPrograma()
     {
         this.vista.confirmarSalirPrograma();
@@ -96,9 +96,9 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         this.vista.cerrar();
     }
 
-    // --------------------------------------------------------------------
+    // ------------------------------------
     // Interfaz con el modelo.
-    // --------------------------------------------------------------------
+    // ------------------------------------
     public void establecerNombreJugador(String text)
     {
         this.modelo.establecerNombreJugador(text);
@@ -109,9 +109,9 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         this.modelo.establecerNombreOponente(text);
     }
 
-    // --------------------------------------------------------------------
+    // ------------------------------------
     // Métodos de fases y turnos.
-    // --------------------------------------------------------------------
+    // ------------------------------------
     @Override
     public void terminarTurno()
     {

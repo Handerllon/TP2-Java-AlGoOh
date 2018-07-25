@@ -3,7 +3,9 @@ package Modelo;
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
-import Modelo.carta.excepciones.NoEsUnaCartaMonstruo;
+import Modelo.carta.excepciones.NoEsCartaMagicaError;
+import Modelo.carta.excepciones.NoEsCartaMonstruo;
+import Modelo.carta.excepciones.NoEsCartaTrampa;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.trampa.CartaTrampa;
@@ -227,86 +229,82 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     }
 
     @Override
-    public void setCartaMagica(Jugador jugador, Carta carta)
+    public void setCartaMagica(Jugador jugador, Carta carta) throws NoEsCartaMagicaError
     {
-        if (carta.esMagica() == true)
+        if (!carta.esMagica())
         {
-            this.flipBocaAbajo(carta);
-            jugador.enviarARegion((CartaMagica) carta);
+            throw new NoEsCartaMagicaError();
         }
+        this.flipBocaAbajo(carta);
+        jugador.enviarARegion((CartaMagica) carta);
     }
 
     @Override
-    public boolean requiereSacrificios(Carta carta)
+    public void activarCartaMagica(Jugador jugador, Carta carta) throws NoEsCartaMagicaError
     {
-        if (carta.esMonstruo() == true)
+        if (!carta.esMagica())
         {
-            return ((CartaMonstruo) carta).requiereSacrificio();
-        } else
-        {
-            throw new NoEsUnaCartaMonstruo();
+            throw new NoEsCartaMagicaError();
         }
+        this.flipBocaArriba(carta);
+        jugador.enviarARegion((CartaMagica) carta);
     }
 
     @Override
-    public void setCartaMonstruo(Carta carta)
+    public void setCartaTrampa(Jugador jugador, Carta carta) throws NoEsCartaTrampa
     {
-        if (carta.esMonstruo() == true)
+        if (!carta.esTrampa())
         {
-            carta.getPropietario().enviarARegion((CartaMonstruo) carta);
-        } else
-        {
-            throw new NoEsUnaCartaMonstruo();
+            throw new NoEsCartaTrampa();
         }
+        this.flipBocaAbajo(carta);
+        jugador.enviarARegion((CartaTrampa) carta);
     }
 
     @Override
-    public boolean haySuficientesSacrificios(Carta carta)
+    public void setCartaMonstruo(Carta carta) throws NoEsCartaMonstruo
     {
-        if (carta.esMonstruo() == false)
+        if (!carta.esMonstruo())
         {
-            throw new NoEsUnaCartaMonstruo();
-        } else
-        {
-            if (((CartaMonstruo) carta).getEstrellas() >= 5)
-            {
-                return carta.getPropietario().obtenerRegionMonstruos().cantidadCartas() >= ((CartaMonstruo) carta)
-                        .getEstrellas();
-            }
-            return true;
+            throw new NoEsCartaMonstruo();
         }
+        carta.getPropietario().enviarARegion((CartaMonstruo) carta);
     }
 
     @Override
-    public void setCartaMonstruo(Carta carta, Sacrificio sacrificios)
+    public void setCartaMonstruo(Carta carta, Sacrificio sacrificios) throws NoEsCartaMonstruo
     {
-        if (carta.esMonstruo() == true)
+        if (!carta.esMonstruo())
         {
-            carta.getPropietario().enviarARegion((CartaMonstruo) carta, sacrificios);
-        } else
-        {
-            throw new NoEsUnaCartaMonstruo();
+            throw new NoEsCartaMonstruo();
         }
+        carta.getPropietario().enviarARegion((CartaMonstruo) carta, sacrificios);
     }
 
     @Override
-    public void setCartaTrampa(Jugador jugador, Carta carta)
+    public boolean requiereSacrificios(Carta carta) throws NoEsCartaMonstruo
     {
-        if (carta.esTrampa() == true)
+        if (!carta.esMonstruo())
         {
-            this.flipBocaAbajo(carta);
-            jugador.enviarARegion((CartaTrampa) carta);
+            throw new NoEsCartaMonstruo();
         }
+        return ((CartaMonstruo) carta).requiereSacrificio();
     }
 
     @Override
-    public void activarCartaMagica(Jugador jugador, Carta carta)
+    public boolean haySuficientesSacrificios(Carta carta) throws NoEsCartaMonstruo
     {
-        if (carta.esMagica() == true)
+        if (!carta.esMonstruo())
         {
-            this.flipBocaArriba(carta);
-            jugador.enviarARegion((CartaMagica) carta);
+            throw new NoEsCartaMonstruo();
         }
+
+        if (((CartaMonstruo) carta).getEstrellas() >= 5)
+        {
+            return carta.getPropietario().obtenerRegionMonstruos().cantidadCartas() >= ((CartaMonstruo) carta)
+                    .getEstrellas();
+        }
+        return true;
     }
 
     // ------------------------------------
@@ -315,7 +313,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     @Override
     public void flipBocaAbajo(Carta carta)
     {
-        if (carta.orientacionArriba() == true)
+        if (carta.orientacionArriba())
         {
             carta.cambiarOrientacion();
         }
@@ -324,33 +322,35 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     @Override
     public void flipBocaArriba(Carta carta)
     {
-        if (carta.orientacionArriba() == false)
+        if (!carta.orientacionArriba())
         {
             carta.cambiarOrientacion();
         }
     }
 
     @Override
-    public void setModoAtaque(Carta carta)
+    public void setModoAtaque(Carta carta) throws NoEsCartaMonstruo
     {
-        if (carta.esMonstruo() == true)
+        if (!carta.esMonstruo())
         {
-            if (((CartaMonstruo) carta).estaEnAtaque() == false)
-            {
-                ((CartaMonstruo) carta).cambiarModo();
-            }
+            throw new NoEsCartaMonstruo();
+        }
+        if (!((CartaMonstruo) carta).estaEnAtaque())
+        {
+            ((CartaMonstruo) carta).cambiarModo();
         }
     }
 
     @Override
-    public void setModoDefensa(Carta carta)
+    public void setModoDefensa(Carta carta) throws NoEsCartaMonstruo
     {
-        if (carta.esMonstruo() == true)
+        if (!carta.esMonstruo())
         {
-            if (((CartaMonstruo) carta).estaEnDefensa() == false)
-            {
-                ((CartaMonstruo) carta).cambiarModo();
-            }
+            throw new NoEsCartaMonstruo();
+        }
+        if (!((CartaMonstruo) carta).estaEnDefensa())
+        {
+            ((CartaMonstruo) carta).cambiarModo();
         }
     }
 

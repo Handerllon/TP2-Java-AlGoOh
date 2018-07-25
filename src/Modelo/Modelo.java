@@ -282,6 +282,30 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     }
 
     @Override
+    public void summonCartaMonstruo(Carta carta) throws NoEsCartaMonstruo
+    {
+        if (!carta.esMonstruo())
+        {
+            throw new NoEsCartaMonstruo();
+        }
+        this.flipBocaArriba(carta);
+        this.setModoAtaque(carta);
+        carta.getPropietario().enviarARegion((CartaMonstruo) carta);
+    }
+
+    @Override
+    public void summonCartaMonstruo(Carta carta, Sacrificio sacrificios) throws NoEsCartaMonstruo
+    {
+        if (!carta.esMonstruo())
+        {
+            throw new NoEsCartaMonstruo();
+        }
+        this.flipBocaArriba(carta);
+        this.setModoAtaque(carta);
+        carta.getPropietario().enviarARegion((CartaMonstruo) carta, sacrificios);
+    }
+
+    @Override
     public boolean requiereSacrificios(Carta carta) throws NoEsCartaMonstruo
     {
         if (!carta.esMonstruo())

@@ -24,6 +24,10 @@ public interface IModelo
 
     void setCartaMonstruo(Carta carta, Sacrificio sacrificios) throws NoEsCartaMonstruo;
 
+    void summonCartaMonstruo(Carta carta) throws NoEsCartaMonstruo;
+
+    void summonCartaMonstruo(Carta carta, Sacrificio sacrificios) throws NoEsCartaMonstruo;
+
     boolean requiereSacrificios(Carta carta) throws NoEsCartaMonstruo;
 
     boolean haySuficientesSacrificios(Carta carta) throws NoEsCartaMonstruo;
@@ -49,4 +53,6 @@ public interface IModelo
     void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada);
 
     void atacar(CartaMonstruo cartaAtacante);
+
+
 }

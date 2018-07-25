@@ -26,7 +26,7 @@ public abstract class Region<T extends Carta> implements RegionObservable
         this.oponente = oponente;
     }
 
-    public void colocarCarta(T carta)
+    public void colocarCarta(T carta) throws RegionSinEspacioLibre
     {
         if (this.hayEspacioLibre())
         {
@@ -37,7 +37,7 @@ public abstract class Region<T extends Carta> implements RegionObservable
             throw new RegionSinEspacioLibre(this);
     }
 
-    public void removerCarta(T carta)
+    public void removerCarta(T carta) throws CartaNoExisteEnRegionError
     {
         if (this.contieneCarta(carta))
         {

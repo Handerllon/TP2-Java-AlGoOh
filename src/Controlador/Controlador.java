@@ -148,7 +148,6 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     // ------------------------------------
     // Métodos de juego de cartas.
     // ------------------------------------
-    // TODO: extraer las verificaciones en métodos.
     // TODO: se puede hacer un notificador desde las cartas a la maquina de turnos cuando pasa algun evento
     // interesante (ataque, cambio de orientacion, cambio de modo...)
     @Override
@@ -211,18 +210,12 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         {
             if (!this.modelo.requiereSacrificios(carta))
             {
-                // TODO: verificar si esto funciona bien durante el juego.
-                this.flipBocaArriba(carta, solicitante);
-                this.setModoAtaque(carta, solicitante);
-                this.modelo.setCartaMonstruo(carta);
+                this.modelo.summonCartaMonstruo(carta);
                 this.maquinaTurnos.seColocoCartaEnRegion(carta);
             } else
             {
                 Sacrificio sacrificios = this.vista.pedirSacrificios();
-                // TODO: verificar si esto funciona bien durante el juego.
-                this.flipBocaArriba(carta, solicitante);
-                this.setModoAtaque(carta, solicitante);
-                this.modelo.setCartaMonstruo(carta, sacrificios);
+                this.modelo.summonCartaMonstruo(carta, sacrificios);
                 this.maquinaTurnos.seColocoCartaEnRegion(carta);
             }
         }

@@ -72,14 +72,4 @@ public final class FaseFinal implements Fase
     {
         return true;
     }
-//    public void finalizarFase()
-//    {
-//        try
-//        {
-//            TimeUnit.SECONDS.sleep(1);
-//        } catch (InterruptedException e)
-//        {
-//            e.printStackTrace();
-//        }
-//    }
 }

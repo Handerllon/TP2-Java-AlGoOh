@@ -1,6 +1,8 @@
 package Vista.Botones;
 
 import Controlador.excepciones.JugadorNoPermitidoParaJugar;
+import Controlador.excepciones.NoEsFaseFinalError;
+import Controlador.excepciones.SolicitanteNoEsPropietarioDeCartaError;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.carta.magica.CartaMagica;
@@ -118,13 +120,7 @@ public class BotonMagicasYTrampasEnRegion extends Button
 
     private void magYTramEnRegionUsarBtn_Click()
     {
-        try
-        {
-            this.vista.obtenerControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
-        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
-        {
-            jugadorNoPermitidoParaJugar.printStackTrace();
-        }
+        this.vista.obtenerControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
     }
 
     private void magYTramEnRegionBtn_Click()

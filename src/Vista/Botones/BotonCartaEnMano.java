@@ -1,6 +1,5 @@
 package Vista.Botones;
 
-import Controlador.excepciones.JugadorNoPermitidoParaJugar;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.carta.magica.CartaMagica;
@@ -23,11 +22,11 @@ public class BotonCartaEnMano extends Button
     private Carta carta;
     private Button botonDeLaCarta;
     private Vista vista;
-	private Jugador jugadorAsociado;
+    private Jugador jugadorAsociado;
 
     public BotonCartaEnMano(Vista vista, Carta carta, Jugador jugador)
     {
-    	this.jugadorAsociado = jugador;
+        this.jugadorAsociado = jugador;
         this.carta = carta;
         this.vista = vista;
         this.primaryStage = vista.obtenerPrimaryStage();
@@ -198,48 +197,24 @@ public class BotonCartaEnMano extends Button
     // --------------------------------------------------------------------
     private void setBocaAbajoBtn_Click()
     {
-        try
-        {
-            this.vista.obtenerControlador().flipBocaAbajo(this.carta, this.jugadorAsociado);
-        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
-        {
-            jugadorNoPermitidoParaJugar.printStackTrace();
-        }
+        this.vista.obtenerControlador().flipBocaAbajo(this.carta, this.jugadorAsociado);
     }
 
     private void setBocaArribaBtn_Click()
     {
 
-        try
-        {
-            this.vista.obtenerControlador().flipBocaArriba(this.carta, this.jugadorAsociado);
-        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
-        {
-            jugadorNoPermitidoParaJugar.printStackTrace();
-        }
+        this.vista.obtenerControlador().flipBocaArriba(this.carta, this.jugadorAsociado);
     }
 
     private void setModoAtaqueBtn_Click()
     {
-        try
-        {
-            this.vista.obtenerControlador().setModoAtaque(this.carta, this.jugadorAsociado);
-        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
-        {
-            jugadorNoPermitidoParaJugar.printStackTrace();
-        }
+        this.vista.obtenerControlador().setModoAtaque(this.carta, this.jugadorAsociado);
     }
 
     private void setModoDefensaBtn_Click()
     {
 
-        try
-        {
-            this.vista.obtenerControlador().setModoDefensa(this.carta, this.jugadorAsociado);
-        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
-        {
-            jugadorNoPermitidoParaJugar.printStackTrace();
-        }
+        this.vista.obtenerControlador().setModoDefensa(this.carta, this.jugadorAsociado);
     }
 
     private Object cartaMonstruoJugarBtn_Click()
@@ -251,34 +226,16 @@ public class BotonCartaEnMano extends Button
     private void jugarCartaTrampaBtn_Click()
     {
 
-        try
-        {
-            this.vista.obtenerControlador().setCartaTrampa(this.carta, this.jugadorAsociado);
-        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
-        {
-            jugadorNoPermitidoParaJugar.printStackTrace();
-        }
+        this.vista.obtenerControlador().setCartaTrampa(this.carta, this.jugadorAsociado);
     }
 
     private void setCartaMagicaBtn_Click()
     {
-        try
-        {
-            this.vista.obtenerControlador().setCartaMagica(this.carta, this.jugadorAsociado);
-        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
-        {
-            jugadorNoPermitidoParaJugar.printStackTrace();
-        }
+        this.vista.obtenerControlador().setCartaMagica(this.carta, this.jugadorAsociado);
     }
 
     private void activarCartaMagicaBtn_Click()
     {
-        try
-        {
-            this.vista.obtenerControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
-        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
-        {
-            jugadorNoPermitidoParaJugar.printStackTrace();
-        }
+        this.vista.obtenerControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
     }
 }

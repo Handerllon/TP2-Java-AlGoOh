@@ -168,24 +168,11 @@ public class BotonMonstruoEnRegion extends Button
 
     private void cartaMonstruoCambiarModoBtn_Click()
     {
-
-        try
-        {
-            this.vista.obtenerControlador().cambiarModoCartaMonstruo(this.carta, null);
-        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
-        {
-            jugadorNoPermitidoParaJugar.printStackTrace();
-        }
+        this.vista.obtenerControlador().cambiarModoCartaMonstruo(this.carta, null);
     }
 
     private void flipCartaMonstruoBtn_Click()
     {
-        try
-        {
-            this.vista.obtenerControlador().flipCartaMonstruo(this.carta, null);
-        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
-        {
-            jugadorNoPermitidoParaJugar.printStackTrace();
-        }
+        this.vista.obtenerControlador().flipCartaMonstruo(this.carta, null);
     }
 }

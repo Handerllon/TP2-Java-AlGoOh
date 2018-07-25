@@ -6,6 +6,7 @@ import Modelo.carta.Carta;
 import Modelo.carta.excepciones.ManoLlenaError;
 import Modelo.carta.excepciones.NoEsUnaCartaMonstruo;
 import Modelo.carta.monstruo.CartaMonstruo;
+import Modelo.finDeJuego.CausaFinJuego;
 
 public interface IControlador
 {
@@ -16,6 +17,18 @@ public interface IControlador
     String nombreJugadorActual();
 
     String nombreFaseActual();
+
+    void cerrarPrograma();
+
+    CausaFinJuego obtenerCausaFinDeJuego();
+
+    void confirmarSalirPrograma();
+
+    void jugar();
+
+    void establecerNombreJugador(String text);
+
+    void establecerNombreOponente(String text);
 
     void tomarCarta(Jugador solicitante) throws JugadorNoPermitidoParaJugar, ManoLlenaError,
             NoEsFaseInicialError;

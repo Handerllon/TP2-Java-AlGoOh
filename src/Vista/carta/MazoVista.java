@@ -98,15 +98,6 @@ public class MazoVista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     private void tomarCartaBtn_Click(Jugador jugador)
     {
-        try
-        {
-            this.vista.obtenerControlador().tomarCarta(jugador);
-        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
-        {
-            jugadorNoPermitidoParaJugar.printStackTrace();
-        } catch (NoEsFaseInicialError noEsFaseInicialError)
-        {
-            noEsFaseInicialError.printStackTrace();
-        }
+        this.vista.obtenerControlador().tomarCarta(jugador);
     }
 }

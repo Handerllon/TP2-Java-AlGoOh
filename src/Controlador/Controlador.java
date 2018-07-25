@@ -54,7 +54,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     // ------------------------------------
     public void iniciar()
     {
-        this.maquinaTurnos = MaquinaTurnos.obtenerInstancia(this.modelo.obtenerJugador(), this.modelo.obtenerOponente());
+        this.maquinaTurnos = MaquinaTurnos.obtenerInstancia(this.modelo.getJugador(), this.modelo.getOponente());
         // Vista va a mostrar la pantalla de bienvenida.
         this.vista.mostrar();
     }
@@ -117,42 +117,18 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     }
 
     @Override
-    public void avanzarProximaFase()
+    public void avanzarProximaFase() throws SeTerminaronLasFasesError
     {
         if (this.maquinaTurnos.faseActual().esFaseFinal() == false)
         {
             this.maquinaTurnos.avanzarProximaFase();
-        } else
-        {
-            throw new SeTerminaronLasFasesError();
         }
+        throw new SeTerminaronLasFasesError();
     }
 
     private boolean jugadorPuedeJugar(Jugador jugador)
     {
         return this.maquinaTurnos.obtenerJugadorActual() == jugador;
-    }
-
-    private boolean cartaPuedeCambiarOrientacion(Carta carta)
-    {
-        if (this.maquinaTurnos.yaColocoEnTurno(carta) == true)
-        {
-            return false;
-        } else
-        {
-            return true;
-        }
-    }
-
-    private boolean cartaPuedeAtacar(CartaMonstruo carta)
-    {
-        if (this.maquinaTurnos.yaUsoAtaqueEnTurno(carta) == true)
-        {
-            return false;
-        } else
-        {
-            return true;
-        }
     }
 
     @Override
@@ -444,7 +420,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         {
             return false;
             //throw new NoEsFasePreparacionError();
-        } else if (!cartaPuedeCambiarOrientacion(carta))
+        } else if (this.maquinaTurnos.yaColocoEnTurno(carta))
         {
             return false;
             //throw new CartaNoPuedeCambiarOrientacionEnTurnoActualError();
@@ -496,7 +472,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         {
             return false;
             //throw new NoSeAtacaEnPrimerTurnoJuegoError();
-        } else if (!this.cartaPuedeAtacar(cartaAtacante))
+        } else if (this.maquinaTurnos.yaUsoAtaqueEnTurno(cartaAtacante))
         {
             return false;
             //throw new CartaYaAtacoEnTurnoActualError();

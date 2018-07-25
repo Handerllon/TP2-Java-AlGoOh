@@ -1,6 +1,6 @@
 package Vista.escenas;
 
-import Modelo.Modelo;
+import Modelo.ModeloObservable;
 import Vista.EscenaVista;
 import Vista.Vista;
 import javafx.geometry.HPos;
@@ -27,7 +27,7 @@ public final class EscenaBienvenida implements EscenaVista
     private static EscenaVista proximaEscena = EscenaNula.obtenerInstancia();
     private static MediaPlayer mplayer;
     private static EscenaBienvenida instancia = null;
-    private Modelo modelo;
+    private ModeloObservable modelo;
     private Scene escenaBienvenida;
     private Stage primaryStage;
     private TextField txtJugador1, txtJugador2;
@@ -35,7 +35,7 @@ public final class EscenaBienvenida implements EscenaVista
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    private EscenaBienvenida(Modelo modelo, Vista vista)
+    private EscenaBienvenida(ModeloObservable modelo, Vista vista)
     {
         this.modelo = modelo;
         this.vista = vista;
@@ -43,7 +43,7 @@ public final class EscenaBienvenida implements EscenaVista
         this.inicializarEscena();
     }
 
-    public static EscenaBienvenida obtenerInstancia(Modelo modelo, Vista vista)
+    public static EscenaBienvenida obtenerInstancia(ModeloObservable modelo, Vista vista)
     {
         if (instancia == null)
         {

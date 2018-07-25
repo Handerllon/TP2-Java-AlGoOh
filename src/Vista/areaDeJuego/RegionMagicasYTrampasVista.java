@@ -14,8 +14,8 @@ public class RegionMagicasYTrampasVista implements ObservadorDeModelo
     {
         this.vista = vista;
 
-        this.gridJugador = new GridDeRegionMagicasYTrampas(this.vista, this.vista.obtenerModelo().obtenerJugador());
-        this.gridOponente = new GridDeRegionMagicasYTrampas(this.vista, this.vista.obtenerModelo().obtenerOponente());
+        this.gridJugador = new GridDeRegionMagicasYTrampas(this.vista, this.vista.getModelo().getJugador());
+        this.gridOponente = new GridDeRegionMagicasYTrampas(this.vista, this.vista.getModelo().getOponente());
     }
 
     public GridPane getGridJugador()
@@ -35,7 +35,7 @@ public class RegionMagicasYTrampasVista implements ObservadorDeModelo
     {
         this.gridJugador.clear();
         this.gridOponente.clear();
-        this.gridJugador.actualizarRegion(this.vista.obtenerModelo().obtenerCartasEnRegionMagicasYTrampasJugador());
-        this.gridOponente.actualizarRegion(this.vista.obtenerModelo().obtenerCartasEnRegionMagicasYTrampasOponente());
+        this.gridJugador.actualizarRegion(this.vista.getModelo().getCartasEnRegionMagicasYTrampasJugador());
+        this.gridOponente.actualizarRegion(this.vista.getModelo().getCartasEnRegionMagicasYTrampasOponente());
     }
 }

@@ -38,9 +38,9 @@ public class MazoVista implements ObservadorDeModelo
         this.toolTipJugador = new Tooltip();
         this.toolTipOponente = new Tooltip();
 
-        this.mazoJugador = inicializar(this.vista.obtenerModelo().obtenerJugador());
+        this.mazoJugador = inicializar(this.vista.getModelo().getJugador());
         this.mazoJugador.setTooltip(toolTipJugador);
-        this.mazoOponente = inicializar(this.vista.obtenerModelo().obtenerOponente());
+        this.mazoOponente = inicializar(this.vista.getModelo().getOponente());
         this.mazoOponente.setTooltip(toolTipOponente);
 
         this.actualizarEstado();
@@ -77,8 +77,8 @@ public class MazoVista implements ObservadorDeModelo
     @Override
     public void actualizarEstado()
     {
-        this.actualizarMazoJugador(this.vista.obtenerModelo().obtenerNumeroDeCartasRestantesEnMazoJugador());
-        this.actualizarMazoOponente(this.vista.obtenerModelo().obtenerNumeroDeCartasRestantesEnMazoOponente());
+        this.actualizarMazoJugador(this.vista.getModelo().getCantidadCartasRestantesMazoJugador());
+        this.actualizarMazoOponente(this.vista.getModelo().getCantidadCartasRestantesMazoOponente());
     }
 
     private void actualizarMazoJugador(int numeroDeCartas)

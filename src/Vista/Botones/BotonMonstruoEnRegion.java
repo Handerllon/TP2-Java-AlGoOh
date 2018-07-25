@@ -127,7 +127,7 @@ public class BotonMonstruoEnRegion extends Button
     private void cartaMonstruoAtacarBtn_Click()
     {
 
-        ArrayList<CartaMonstruo> cartasOponente = this.vista.obtenerModelo().obtenerCartasEnRegionMonstruosOponente();
+        ArrayList<CartaMonstruo> cartasOponente = this.vista.getModelo().getCartasEnRegionMonstruosOponente();
 
         Button b0 = new Button("1");
         Button b1 = new Button("2");

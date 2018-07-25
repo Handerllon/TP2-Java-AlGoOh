@@ -389,7 +389,7 @@ public class AlGoOhTest2
         modelo.establecerNombreJugador("J1");
         modelo.establecerNombreOponente("J1");
 
-        Jugador jugador = modelo.obtenerJugador();
+        Jugador jugador = modelo.getJugador();
 
         for (int k = 0; k <= 40; k++)
             jugador.obtenerMazo().tomarCarta();
@@ -408,7 +408,7 @@ public class AlGoOhTest2
         modelo.establecerNombreJugador("J1");
         modelo.establecerNombreOponente("J1");
 
-        Mano manoJugador1 = modelo.obtenerJugador().obtenerMano();
+        Mano manoJugador1 = modelo.getJugador().obtenerMano();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(null, null);
         CartaMonstruo exodiaParte1 = fabricaCartasJugador1.crearCartaMonstruo("Exodia The Forbidden One");

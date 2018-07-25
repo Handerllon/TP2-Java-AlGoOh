@@ -1,7 +1,7 @@
 package Vista;
 
 import Controlador.IControlador;
-import Modelo.Modelo;
+import Modelo.ModeloObservable;
 import Modelo.ObservadorDeModelo;
 import Modelo.carta.Sacrificio;
 import Vista.escenas.EscenaBienvenida;
@@ -13,9 +13,11 @@ import javafx.stage.Stage;
 
 import java.util.Optional;
 
+;
+
 public class Vista implements ObservadorDeModelo
 {
-    private static Modelo modelo;
+    private static ModeloObservable modelo;
     private static IControlador controlador;
     private static double RESOLUCION_HORIZONTAL;
     private static double RESOLUCION_VERTICAL;
@@ -25,7 +27,7 @@ public class Vista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    public Vista(Modelo modelo, IControlador controlador, Stage primaryStage)
+    public Vista(ModeloObservable modelo, IControlador controlador, Stage primaryStage)
     {
         this.primaryStage = primaryStage;
         this.RESOLUCION_HORIZONTAL = Screen.getPrimary().getVisualBounds().getWidth();
@@ -76,7 +78,7 @@ public class Vista implements ObservadorDeModelo
         return this.RESOLUCION_VERTICAL;
     }
 
-    public Modelo obtenerModelo()
+    public ModeloObservable getModelo()
     {
         return this.modelo;
     }

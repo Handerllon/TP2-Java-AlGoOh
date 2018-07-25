@@ -17,8 +17,8 @@ public class ManoVista implements ObservadorDeModelo
     {
         this.vista = vista;
 
-        this.manoJugador = new FlowPaneDeMano(this.vista, this.vista.obtenerModelo().obtenerJugador());
-        this.manoOponente = new FlowPaneDeMano(this.vista, this.vista.obtenerModelo().obtenerJugador());
+        this.manoJugador = new FlowPaneDeMano(this.vista, this.vista.getModelo().getJugador());
+        this.manoOponente = new FlowPaneDeMano(this.vista, this.vista.getModelo().getJugador());
     }
 
     // --------------------------------------------------------------------
@@ -41,7 +41,7 @@ public class ManoVista implements ObservadorDeModelo
     {
         this.manoJugador.clear();
         this.manoOponente.clear();
-        this.manoJugador.actualizarMano(this.vista.obtenerModelo().obtenerCartasEnLaManoDelJugador());
-        this.manoOponente.actualizarMano(this.vista.obtenerModelo().obtenerCartasEnLaManoDelOponente());
+        this.manoJugador.actualizarMano(this.vista.getModelo().getCartasManoJugador());
+        this.manoOponente.actualizarMano(this.vista.getModelo().getCartasManoOponente());
     }
 }

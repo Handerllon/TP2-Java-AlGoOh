@@ -1,6 +1,6 @@
 package Vista.escenas;
 
-import Modelo.Modelo;
+import Modelo.ModeloObservable;
 import Vista.EscenaVista;
 import Vista.Vista;
 import javafx.geometry.Insets;
@@ -25,14 +25,14 @@ public final class EscenaSorteoJugadorInicial implements EscenaVista
     private static EscenaVista proximaEscena = EscenaNula.obtenerInstancia();
     private static MediaPlayer mplayer;
     private static EscenaSorteoJugadorInicial instancia = null;
-    private Modelo modelo;
+    private ModeloObservable modelo;
     private Scene escenaSorteoJugadorInicial;
     private Stage primaryStage;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    private EscenaSorteoJugadorInicial(Modelo modelo, Vista vista)
+    private EscenaSorteoJugadorInicial(ModeloObservable modelo, Vista vista)
     {
         this.modelo = modelo;
         this.vista = vista;
@@ -40,7 +40,7 @@ public final class EscenaSorteoJugadorInicial implements EscenaVista
         this.inicializarEscena();
     }
 
-    public static EscenaSorteoJugadorInicial obtenerInstancia(Modelo modelo, Vista vista)
+    public static EscenaSorteoJugadorInicial obtenerInstancia(ModeloObservable modelo, Vista vista)
     {
         if (instancia == null)
         {

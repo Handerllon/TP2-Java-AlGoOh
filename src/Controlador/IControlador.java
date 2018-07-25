@@ -21,7 +21,7 @@ public interface IControlador
     // ------------------------------------
     void terminarTurno();
 
-    void avanzarProximaFase();
+    void avanzarProximaFase() throws SeTerminaronLasFasesError;
 
     String nombreJugadorActual();
 

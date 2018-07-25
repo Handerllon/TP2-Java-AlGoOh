@@ -14,7 +14,7 @@ import Modelo.finDeJuego.ObservadorDeFinJuego;
 
 import java.util.ArrayList;
 
-public final class Modelo implements ModeloObservable, FinDeJuegoObservable, ObservadorDeFinJuego
+public final class Modelo implements ModeloObservable, FinDeJuegoObservable, ObservadorDeFinJuego, IModelo
 {
     private static Modelo instancia = null;
     private Jugador jugador1;
@@ -69,12 +69,12 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         this.jugador2.establecerNombre(nombreJugador);
     }
 
-    public Jugador obtenerJugador()
+    public Jugador getJugador()
     {
         return this.jugador1;
     }
 
-    public Jugador obtenerOponente()
+    public Jugador getOponente()
     {
         return this.jugador2;
     }
@@ -147,61 +147,61 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     // Métodos de consultas.
     // --------------------------------------------------------------------
     @Override
-    public ArrayList<CartaMonstruo> obtenerCartasEnRegionMonstruosJugador()
+    public ArrayList<CartaMonstruo> getCartasEnRegionMonstruosJugador()
     {
         return this.jugador1.obtenerRegionMonstruos().obtenerCartas();
     }
 
     @Override
-    public ArrayList<CartaMonstruo> obtenerCartasEnRegionMonstruosOponente()
+    public ArrayList<CartaMonstruo> getCartasEnRegionMonstruosOponente()
     {
         return this.jugador2.obtenerRegionMonstruos().obtenerCartas();
     }
 
     @Override
-    public ArrayList<Carta> obtenerCartasEnRegionMagicasYTrampasJugador()
+    public ArrayList<Carta> getCartasEnRegionMagicasYTrampasJugador()
     {
         return this.jugador1.obtenerRegionMagicasYTrampas().obtenerCartas();
     }
 
     @Override
-    public ArrayList<Carta> obtenerCartasEnRegionMagicasYTrampasOponente()
+    public ArrayList<Carta> getCartasEnRegionMagicasYTrampasOponente()
     {
         return this.jugador2.obtenerRegionMagicasYTrampas().obtenerCartas();
     }
 
     @Override
-    public ArrayList<CartaCampo> obtenerCartasEnRegionCampoJugador()
+    public ArrayList<CartaCampo> getCartasEnRegionCampoJugador()
     {
         return this.jugador1.obtenerRegionCampo().obtenerCartas();
     }
 
     @Override
-    public ArrayList<CartaCampo> obtenerCartasEnRegionCampoOponente()
+    public ArrayList<CartaCampo> getCartasEnRegionCampoOponente()
     {
         return this.jugador2.obtenerRegionCampo().obtenerCartas();
     }
 
     @Override
-    public int obtenerNumeroDeCartasRestantesEnMazoJugador()
+    public int getCantidadCartasRestantesMazoJugador()
     {
         return this.jugador1.obtenerMazo().cantidadCartas();
     }
 
     @Override
-    public int obtenerNumeroDeCartasRestantesEnMazoOponente()
+    public int getCantidadCartasRestantesMazoOponente()
     {
         return this.jugador2.obtenerMazo().cantidadCartas();
     }
 
     @Override
-    public ArrayList<Carta> obtenerCartasEnLaManoDelJugador()
+    public ArrayList<Carta> getCartasManoJugador()
     {
         return this.jugador1.obtenerMano().obtenerCartas();
     }
 
     @Override
-    public ArrayList<Carta> obtenerCartasEnLaManoDelOponente()
+    public ArrayList<Carta> getCartasManoOponente()
     {
         return this.jugador2.obtenerMano().obtenerCartas();
     }

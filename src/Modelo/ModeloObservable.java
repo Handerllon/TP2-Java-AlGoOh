@@ -1,9 +1,7 @@
 package Modelo;
 
 import Modelo.carta.Carta;
-import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
-import Modelo.carta.excepciones.NoEsUnaCartaMonstruo;
 import Modelo.carta.monstruo.CartaMonstruo;
 
 import java.util.ArrayList;
@@ -16,66 +14,30 @@ public interface ModeloObservable
 
     void notificarObservadores();
 
-    // Aquí va lo que se le quiere pedir al modelo.
-
-    ArrayList<CartaMonstruo> obtenerCartasEnRegionMonstruosJugador();
-
-    ArrayList<CartaMonstruo> obtenerCartasEnRegionMonstruosOponente();
-
-    ArrayList<Carta> obtenerCartasEnRegionMagicasYTrampasJugador();
-
-    ArrayList<Carta> obtenerCartasEnRegionMagicasYTrampasOponente();
-
-    ArrayList<CartaCampo> obtenerCartasEnRegionCampoJugador();
-
-    ArrayList<CartaCampo> obtenerCartasEnRegionCampoOponente();
-
-    int obtenerNumeroDeCartasRestantesEnMazoJugador();
-
-    int obtenerNumeroDeCartasRestantesEnMazoOponente();
-
-    ArrayList<Carta> obtenerCartasEnLaManoDelJugador();
-
-    ArrayList<Carta> obtenerCartasEnLaManoDelOponente();
-
     // ------------------------------------
-    // Métodos de orientación de cartas.
+    // Aquí va lo que se le quiere pedir al modelo siendo este un observable.
     // ------------------------------------
-    void flipBocaAbajo(Carta carta);
+    ArrayList<CartaMonstruo> getCartasEnRegionMonstruosJugador();
 
-    void flipBocaArriba(Carta carta);
+    ArrayList<CartaMonstruo> getCartasEnRegionMonstruosOponente();
 
-    void setModoAtaque(Carta carta);
+    ArrayList<Carta> getCartasEnRegionMagicasYTrampasJugador();
 
-    void setModoDefensa(Carta carta);
+    ArrayList<Carta> getCartasEnRegionMagicasYTrampasOponente();
 
-    void flipCartaMonstruo(CartaMonstruo carta);
+    ArrayList<CartaCampo> getCartasEnRegionCampoJugador();
 
-    void cambiarModoCartaMonstruo(CartaMonstruo carta);
+    ArrayList<CartaCampo> getCartasEnRegionCampoOponente();
 
-    // ------------------------------------
-    // Métodos de ataques.
-    // ------------------------------------
-    void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada);
+    int getCantidadCartasRestantesMazoJugador();
 
-    void atacar(CartaMonstruo cartaAtacante);
+    int getCantidadCartasRestantesMazoOponente();
 
-    // ------------------------------------
-    // Métodos de juego de cartas.
-    // ------------------------------------
-    void tomarCarta(Jugador jugador);
+    ArrayList<Carta> getCartasManoJugador();
 
-    void activarCartaMagica(Jugador jugador, Carta carta);
+    ArrayList<Carta> getCartasManoOponente();
 
-    void setCartaTrampa(Jugador jugador, Carta carta);
+    Jugador getJugador();
 
-    void setCartaMagica(Jugador jugador, Carta carta);
-
-    boolean requiereSacrificios(Carta carta) ;
-
-    void setCartaMonstruo(Carta carta);
-
-    boolean haySuficientesSacrificios(Carta carta) ;
-
-    void setCartaMonstruo(Carta carta, Sacrificio sacrificios) ;
+    Jugador getOponente();
 }

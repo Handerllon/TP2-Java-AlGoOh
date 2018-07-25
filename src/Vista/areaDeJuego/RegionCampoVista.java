@@ -18,8 +18,8 @@ public class RegionCampoVista implements ObservadorDeModelo
     {
         this.vista = vista;
 
-        this.botonCampoJugador = new BotonCampoEnRegion(this.vista, this.vista.obtenerModelo().obtenerJugador());
-        this.botonCampoOponente = new BotonCampoEnRegion(this.vista, this.vista.obtenerModelo().obtenerOponente());
+        this.botonCampoJugador = new BotonCampoEnRegion(this.vista, this.vista.getModelo().getJugador());
+        this.botonCampoOponente = new BotonCampoEnRegion(this.vista, this.vista.getModelo().getOponente());
     }
 
     public Button getRegionCampoJugador()
@@ -39,8 +39,8 @@ public class RegionCampoVista implements ObservadorDeModelo
     {
         this.botonCampoJugador.clear();
         this.botonCampoOponente.clear();
-        this.actualizarRegionJugador(this.vista.obtenerModelo().obtenerCartasEnRegionCampoJugador());
-        this.actualizarRegionOponente(this.vista.obtenerModelo().obtenerCartasEnRegionCampoOponente());
+        this.actualizarRegionJugador(this.vista.getModelo().getCartasEnRegionCampoJugador());
+        this.actualizarRegionOponente(this.vista.getModelo().getCartasEnRegionCampoOponente());
     }
 
     private void actualizarRegionJugador(ArrayList<CartaCampo> cartasCampo)

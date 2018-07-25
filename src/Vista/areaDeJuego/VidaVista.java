@@ -58,8 +58,8 @@ public class VidaVista implements ObservadorDeModelo
     public void actualizarEstado()
     {
 
-        int nuevaVidaJugador = this.vista.obtenerModelo().obtenerJugador().getPuntosDeVida();
-        int nuevaVidaOponente = this.vista.obtenerModelo().obtenerOponente().getPuntosDeVida();
+        int nuevaVidaJugador = this.vista.getModelo().getJugador().getPuntosDeVida();
+        int nuevaVidaOponente = this.vista.getModelo().getOponente().getPuntosDeVida();
 
         this.vidaJugador.setText("    Vida: \n"
                 + "    " + Integer.toString(nuevaVidaJugador));

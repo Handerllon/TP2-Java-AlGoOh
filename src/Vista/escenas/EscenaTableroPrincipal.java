@@ -1,6 +1,6 @@
 package Vista.escenas;
 
-import Modelo.Modelo;
+import Modelo.ModeloObservable;
 import Vista.Botones.BotonesDeControl;
 import Vista.EscenaVista;
 import Vista.Vista;
@@ -33,14 +33,14 @@ public final class EscenaTableroPrincipal implements EscenaVista
     private RegionCementerioVista regionCementerio;
     private ManoVista manos;
     private MazoVista mazos;
-    private Modelo modelo;
+    private ModeloObservable modelo;
     private Stage primaryStage;
     private Scene escenaTableroPrincipal;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    private EscenaTableroPrincipal(Modelo modelo, Vista vista)
+    private EscenaTableroPrincipal(ModeloObservable modelo, Vista vista)
     {
         this.modelo = modelo;
         this.vista = vista;
@@ -49,7 +49,7 @@ public final class EscenaTableroPrincipal implements EscenaVista
         this.inicializarEscena();
     }
 
-    public static EscenaTableroPrincipal obtenerInstancia(Modelo modelo, Vista vista)
+    public static EscenaTableroPrincipal obtenerInstancia(ModeloObservable modelo, Vista vista)
     {
         if (instancia == null)
         {

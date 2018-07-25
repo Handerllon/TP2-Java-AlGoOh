@@ -1,6 +1,6 @@
 package Vista.escenas;
 
-import Modelo.Modelo;
+import Modelo.ModeloObservable;
 import Modelo.finDeJuego.CausaCincoPartesExodiaReunidas;
 import Modelo.finDeJuego.CausaFinJuego;
 import Vista.EscenaVista;
@@ -28,14 +28,14 @@ public final class EscenaFinDeJuego implements EscenaVista
     private static Vista vista;
     private static MediaPlayer mplayer;
     private static EscenaFinDeJuego instancia = null;
-    private Modelo modelo;
+    private ModeloObservable modelo;
     private Stage primaryStage;
     private Scene escenaFinDeJuego;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    private EscenaFinDeJuego(Modelo modelo, Vista vista)
+    private EscenaFinDeJuego(ModeloObservable modelo, Vista vista)
     {
         this.modelo = modelo;
         this.vista = vista;
@@ -44,7 +44,7 @@ public final class EscenaFinDeJuego implements EscenaVista
         this.inicializarEscena();
     }
 
-    public static EscenaFinDeJuego obtenerInstancia(Modelo modelo, Vista vista)
+    public static EscenaFinDeJuego obtenerInstancia(ModeloObservable modelo, Vista vista)
     {
         if (instancia == null)
         {

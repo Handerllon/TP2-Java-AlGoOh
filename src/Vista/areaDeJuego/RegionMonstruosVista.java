@@ -14,8 +14,8 @@ public class RegionMonstruosVista implements ObservadorDeModelo
     {
         this.vista = vista;
 
-        this.gridJugador = new GridDeRegionMonstruos(this.vista, this.vista.obtenerModelo().obtenerJugador());
-        this.gridOponente = new GridDeRegionMonstruos(this.vista, this.vista.obtenerModelo().obtenerOponente());
+        this.gridJugador = new GridDeRegionMonstruos(this.vista, this.vista.getModelo().getJugador());
+        this.gridOponente = new GridDeRegionMonstruos(this.vista, this.vista.getModelo().getOponente());
     }
 
     public GridPane getGridJugador()
@@ -35,7 +35,7 @@ public class RegionMonstruosVista implements ObservadorDeModelo
     {
         this.gridJugador.clear();
         this.gridOponente.clear();
-        this.gridJugador.actualizarRegion(this.vista.obtenerModelo().obtenerCartasEnRegionMonstruosJugador());
-        this.gridOponente.actualizarRegion(this.vista.obtenerModelo().obtenerCartasEnRegionMonstruosOponente());
+        this.gridJugador.actualizarRegion(this.vista.getModelo().getCartasEnRegionMonstruosJugador());
+        this.gridOponente.actualizarRegion(this.vista.getModelo().getCartasEnRegionMonstruosOponente());
     }
 }

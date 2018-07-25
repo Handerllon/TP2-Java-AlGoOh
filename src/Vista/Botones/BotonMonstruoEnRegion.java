@@ -153,6 +153,7 @@ public class BotonMonstruoEnRegion extends Button
     {
         // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
         // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
+        // Ojo con tratar de atacar varias veces en el mismo turno.
         this.vista.getControlador().atacar(this.carta, this.jugadorAsociado);
     }
 
@@ -164,6 +165,7 @@ public class BotonMonstruoEnRegion extends Button
         {
             // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
             // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
+            // Ojo con tratar de atacar varias veces en el mismo turno.
             this.vista.getControlador().atacar(this.carta, cartasOponente.get(i), this.jugadorAsociado);
         }
     }
@@ -172,6 +174,7 @@ public class BotonMonstruoEnRegion extends Button
     {
         // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
         // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
+        // Ojo con tratar de cambiar modo varias veces en el mismo turno.
         this.vista.getControlador().cambiarModoCartaMonstruo(this.carta, null);
     }
 
@@ -179,6 +182,7 @@ public class BotonMonstruoEnRegion extends Button
     {
         // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
         // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
+        // Ojo con tratar de dar vueltas varias veces en el mismo turno.
         this.vista.getControlador().flipCartaMonstruo(this.carta, null);
     }
 }

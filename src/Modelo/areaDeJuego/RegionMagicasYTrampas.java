@@ -22,7 +22,6 @@ public class RegionMagicasYTrampas extends Region<Carta>
     {
         super.colocarCarta(carta);
         this.cartasMagicas.add(carta);
-        carta.efecto();
     }
 
     public void colocarCarta(CartaTrampa carta)

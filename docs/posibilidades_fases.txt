@@ -18,11 +18,11 @@ Fase preparación:
 			El usuario selecciona "activar" (activate), entonces va a la región MyT boca arriba.
 			El usuario selecciona "posicionar" (set), entonces va a la región MyT boca abajo.
 			Puede enviar todas las que quiera en el turno.
-			Si la región se llena, le avisa con un tooltip que no pueden entrar más en la región MyT.
+			Vista -> Si la región se llena, le avisa con un tooltip que no pueden entrar más en la región MyT.
 			
 	Región Monstruo:
 			Si toco una carta, puedo cambiarle el modo (ataque o defensa), pero solo 1 vez por turno.
-			Si el usuario intenta cambiarle el modo más de 1 vez, le sale un tooltip que le dice que no se puede.
+			Vista -> Si el usuario intenta cambiarle el modo más de 1 vez, le sale un tooltip que le dice que no se puede.
 			
 	Región MyT:
 			Si manda (set) una carta trampa a la región MyT, y en la región la quiere activar, le avisa con un tooltip 

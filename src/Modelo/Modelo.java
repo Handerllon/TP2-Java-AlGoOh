@@ -240,14 +240,14 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     }
 
     @Override
-    public void activarCartaMagica(Jugador jugador, Carta carta) throws NoEsCartaMagicaError
+    public void activarCartaMagica(Carta carta) throws NoEsCartaMagicaError
     {
         if (!carta.esMagica())
         {
             throw new NoEsCartaMagicaError();
         }
         this.flipBocaArriba(carta);
-        jugador.enviarARegion((CartaMagica) carta);
+        ((CartaMagica) carta).efecto();
     }
 
     @Override
@@ -268,6 +268,8 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         {
             throw new NoEsCartaMonstruo();
         }
+        this.flipBocaAbajo(carta);
+        this.setModoDefensa(carta);
         carta.getPropietario().enviarARegion((CartaMonstruo) carta);
     }
 
@@ -278,6 +280,8 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         {
             throw new NoEsCartaMonstruo();
         }
+        this.flipBocaAbajo(carta);
+        this.setModoDefensa(carta);
         carta.getPropietario().enviarARegion((CartaMonstruo) carta, sacrificios);
     }
 

@@ -16,7 +16,7 @@ public interface IModelo
 
     void setCartaMagica(Jugador jugador, Carta carta) throws NoEsCartaMagicaError;
 
-    void activarCartaMagica(Jugador jugador, Carta carta) throws NoEsCartaMagicaError;
+    void activarCartaMagica(Carta carta) throws NoEsCartaMagicaError;
 
     void setCartaTrampa(Jugador jugador, Carta carta) throws NoEsCartaTrampa;
 

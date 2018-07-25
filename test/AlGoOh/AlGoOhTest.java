@@ -290,6 +290,7 @@ public class AlGoOhTest
         CartaMagica cartaMagicaJugador1 = fabricaCartasJugador1.crearCartaMagica("Dark Hole");
         cartaMagicaJugador1.cambiarOrientacion();
         jugador1.enviarARegion(cartaMagicaJugador1);
+        cartaMagicaJugador1.efecto();
 
         assertTrue(jugador1.cartaEstaEnCementerio(cartaJugador1));
         assertTrue(jugador2.cartaEstaEnCementerio(cartaJugador2));

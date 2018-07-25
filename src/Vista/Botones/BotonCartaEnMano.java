@@ -79,7 +79,7 @@ public class BotonCartaEnMano extends Button
         Button b1 = new Button("Jugar");
         Button b2 = new Button("Cerrar");
 
-        b1.setOnAction(e -> jugarCartaTrampaBtn_Click());
+        b1.setOnAction(e -> setCartaTrampaBtn_Click());
 
         b2.setOnAction(e -> popup.hide());
 
@@ -229,10 +229,11 @@ public class BotonCartaEnMano extends Button
         return null;
     }
 
-    private void jugarCartaTrampaBtn_Click()
+    private void setCartaTrampaBtn_Click()
     {
         // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
         // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
+        // Ojo con las excepciones de región llena.
         this.vista.getControlador().setCartaTrampa(this.carta, this.jugadorAsociado);
     }
 
@@ -240,6 +241,7 @@ public class BotonCartaEnMano extends Button
     {
         // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
         // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
+        // Ojo con las excepciones de región llena.
         this.vista.getControlador().setCartaMagica(this.carta, this.jugadorAsociado);
     }
 

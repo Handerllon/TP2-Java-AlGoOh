@@ -145,6 +145,7 @@ public class AlGoOhTest2
         int cartasAntesDeJugar = jugador1.cantidadDeCartasEnMano();
 
         jugador1.enviarARegion(cartaOllaDeLaCodicia);
+        cartaOllaDeLaCodicia.efecto();
 
         int cartasDespuesDeJugar = jugador1.cantidadDeCartasEnMano();
 
@@ -180,6 +181,7 @@ public class AlGoOhTest2
         CartaMagica cartaFisura = fabricaCartasJugador1.crearCartaMagica("Fissure");
         cartaFisura.cambiarOrientacion();
         jugador1.enviarARegion(cartaFisura);
+        cartaFisura.efecto();
 
         assertTrue(jugador2.cartaEstaEnCementerio(otraCartaJugador2));
 

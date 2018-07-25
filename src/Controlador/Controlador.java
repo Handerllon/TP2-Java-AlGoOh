@@ -148,8 +148,6 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     // ------------------------------------
     // Métodos de juego de cartas.
     // ------------------------------------
-    // TODO: se puede hacer un notificador desde las cartas a la maquina de turnos cuando pasa algun evento
-    // interesante (ataque, cambio de orientacion, cambio de modo...)
     @Override
     public void tomarCarta(Jugador solicitante) throws NoSePuedeTomarCartaError
     {
@@ -302,8 +300,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
             throw new NoSePuedeEnviarARegionMyT();
         } else
         {
-            this.modelo.activarCartaMagica(solicitante, carta);
-            this.maquinaTurnos.seCambioOrientacionCarta(carta);
+            this.modelo.activarCartaMagica(carta);
         }
     }
 

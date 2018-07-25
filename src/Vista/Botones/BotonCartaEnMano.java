@@ -197,45 +197,56 @@ public class BotonCartaEnMano extends Button
     // --------------------------------------------------------------------
     private void setBocaAbajoBtn_Click()
     {
+        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
+        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
         this.vista.getControlador().flipBocaAbajo(this.carta, this.jugadorAsociado);
     }
 
     private void setBocaArribaBtn_Click()
     {
-
+        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
+        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
         this.vista.getControlador().flipBocaArriba(this.carta, this.jugadorAsociado);
     }
 
     private void setModoAtaqueBtn_Click()
     {
+        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
+        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
         this.vista.getControlador().setModoAtaque(this.carta, this.jugadorAsociado);
     }
 
     private void setModoDefensaBtn_Click()
     {
-
+        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
+        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
         this.vista.getControlador().setModoDefensa(this.carta, this.jugadorAsociado);
     }
 
     private Object cartaMonstruoJugarBtn_Click()
     {
-        // TODO Auto-generated method stub
+        // TODO: Implementar.
         return null;
     }
 
     private void jugarCartaTrampaBtn_Click()
     {
-
+        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
+        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
         this.vista.getControlador().setCartaTrampa(this.carta, this.jugadorAsociado);
     }
 
     private void setCartaMagicaBtn_Click()
     {
+        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
+        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
         this.vista.getControlador().setCartaMagica(this.carta, this.jugadorAsociado);
     }
 
     private void activarCartaMagicaBtn_Click()
     {
+        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
+        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
         this.vista.getControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
     }
 }

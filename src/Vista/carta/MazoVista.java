@@ -97,6 +97,8 @@ public class MazoVista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     private void tomarCartaBtn_Click(Jugador jugador)
     {
+        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
+        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
         this.vista.getControlador().tomarCarta(jugador);
     }
 }

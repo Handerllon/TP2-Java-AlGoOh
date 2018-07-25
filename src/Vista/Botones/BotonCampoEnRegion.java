@@ -31,7 +31,6 @@ public class BotonCampoEnRegion extends Button
 
         boton = new Button();
 
-        // TODO: generalizar el hardcodeo de los numeros.
         boton.setPrefSize(anchoDeCarta, altoDeCarta);
         boton.setStyle(estiloRegion);
     }

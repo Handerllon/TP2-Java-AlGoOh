@@ -151,7 +151,8 @@ public class BotonMonstruoEnRegion extends Button
 
     private void cartaMonstruoAtacarOponenteBtn_Click()
     {
-
+        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
+        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
         this.vista.getControlador().atacar(this.carta, this.jugadorAsociado);
     }
 
@@ -161,17 +162,23 @@ public class BotonMonstruoEnRegion extends Button
         // TODO: ojo con esta condición, no estoy seguro que un array devuelva null si no está el i-ésimo elemento.
         if (cartasOponente.get(i) != null)
         {
+            // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
+            // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
             this.vista.getControlador().atacar(this.carta, cartasOponente.get(i), this.jugadorAsociado);
         }
     }
 
     private void cartaMonstruoCambiarModoBtn_Click()
     {
+        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
+        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
         this.vista.getControlador().cambiarModoCartaMonstruo(this.carta, null);
     }
 
     private void flipCartaMonstruoBtn_Click()
     {
+        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
+        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
         this.vista.getControlador().flipCartaMonstruo(this.carta, null);
     }
 }

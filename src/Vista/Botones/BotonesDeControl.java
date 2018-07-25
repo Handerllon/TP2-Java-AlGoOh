@@ -66,6 +66,8 @@ public class BotonesDeControl extends Button
 
     private void avanzarProximaFaseBtn_click()
     {
+        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias -> implementar
+        // múltiples catch.
         try
         {
             this.vista.getControlador().avanzarProximaFase();

@@ -1,6 +1,6 @@
 Fase inicial:
 	Solamente puede tomar una carta.
-	Vista -> Si la mano está llena, se le pide al usuario que descarte 1 carta enviándola al cementerio.
+	Vista -> si la mano está llena, la vista debe pedirle al usuario que descarte 1 de ellas. También podría hacerse que se descarte alguna al azar automáticamente.
 
 Fase preparación:
 	Mano:

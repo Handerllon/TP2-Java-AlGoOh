@@ -47,7 +47,7 @@ Fase Batalla:
 				la carta que quiere atacar. Si la carta oponente está boca abajo, se pone boca arriba luego del ataque.
 				
 				
-		
+	TODO:
 	Fase interna Trampa:
 		Esta fase se activa siempre después de un ataque.
 		Si hay alguna carta trampa en la región MyT del oponente, y esta carta trampa está boca abajo, 

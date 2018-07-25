@@ -13,6 +13,9 @@ public final class MaquinaTurnos
     private Fase faseActual;
     private Jugador jugador1, jugador2, jugadorActual;
     private ArrayList<Carta> cartasConCambioDeOrientacionEnTurno;
+    private boolean esPrimerTurno;
+    private ArrayList<CartaMonstruo> cartasAtacaronEnTurnoActual;
+    private ArrayList<Carta> cartasColocadasEnRegionEnTurnos;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -23,6 +26,9 @@ public final class MaquinaTurnos
         this.jugador2 = jugador2;
         this.faseActual = FaseInicial.obtenerInstancia(this);
         this.cartasConCambioDeOrientacionEnTurno = new ArrayList<>();
+        this.esPrimerTurno = true;
+        this.cartasAtacaronEnTurnoActual = new ArrayList<>();
+        this.cartasColocadasEnRegionEnTurnos = new ArrayList<>();
 
         this.sortearJugadorInicial();
     }
@@ -65,8 +71,11 @@ public final class MaquinaTurnos
     public void terminarTurno()
     {
         this.cartasConCambioDeOrientacionEnTurno.clear();
+        this.cartasAtacaronEnTurnoActual.clear();
+        this.cartasColocadasEnRegionEnTurnos.clear();
         this.swapJugadorActual();
         this.reiniciarFases();
+        this.esPrimerTurno = false;
     }
 
     private void swapJugadorActual()
@@ -98,14 +107,39 @@ public final class MaquinaTurnos
         return this.faseActual;
     }
 
+    public void seCambioOrientacionCarta(Carta carta)
+    {
+        this.cartasConCambioDeOrientacionEnTurno.add(carta);
+    }
+
+    public void seColocoCartaEnRegion(Carta carta)
+    {
+        this.cartasColocadasEnRegionEnTurnos.add(carta);
+    }
+
+    public void cartaAtaco(CartaMonstruo cartaMonstruo)
+    {
+        this.cartasAtacaronEnTurnoActual.add(cartaMonstruo);
+    }
+
+    public boolean esPrimerTurnoJuego()
+    {
+        return this.esPrimerTurno;
+    }
+
+    public boolean usoAtaqueEnTurnoActual(CartaMonstruo cartaMonstruo)
+    {
+        return this.cartasAtacaronEnTurnoActual.contains(cartaMonstruo);
+    }
+
     public boolean fueColocadaEnTurnoActual(Carta carta)
     {
         return this.cartasConCambioDeOrientacionEnTurno.contains(carta);
     }
 
-    public void seCambioOrientacionCarta(Carta carta)
+    public boolean yaSeMandoMonstruoARegionEnTurno()
     {
-        this.cartasConCambioDeOrientacionEnTurno.add(carta);
+        return this.cartasColocadasEnRegionEnTurnos.isEmpty();
     }
 }
 

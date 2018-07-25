@@ -3,7 +3,6 @@ package Controlador;
 import Controlador.excepciones.*;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
-import Modelo.carta.CartaNula;
 import Modelo.carta.excepciones.ManoLlenaError;
 import Modelo.carta.excepciones.NoEsUnaCartaMonstruo;
 import Modelo.carta.monstruo.CartaMonstruo;
@@ -49,13 +48,16 @@ public interface IControlador
             NoEsFasePreparacionError, CartaColocadaEnTurnoActualError;
 
     void setCartaMonstruo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError, NoHaySuficientesSacrificiosError, NoEsUnaCartaMonstruo;
+            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError, NoHaySuficientesSacrificiosError,
+            NoEsUnaCartaMonstruo, YaSeMandoMonstruoARegionEnTurno;
 
-    void atacar(CartaMonstruo cartaAtacante, CartaNula cartaNula, Jugador solicitante) throws
-            NoEsUnaCartaParaAtacar, JugadorNoPermitidoParaJugar;
+    void summonCartaMonstruo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
+            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError, NoHaySuficientesSacrificiosError,
+            NoEsUnaCartaMonstruo, YaSeMandoMonstruoARegionEnTurno, CartaColocadaEnTurnoActualError;
 
     void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada, Jugador solicitante) throws
-            JugadorNoPermitidoParaJugar;
+            JugadorNoPermitidoParaJugar, NoEsFaseAtaqueError, NoSeAtacaEnPrimerTurnoJuegoError, CartaYaAtacoError;
 
-    void atacar(CartaMonstruo cartaAtacante, Jugador solicitante) throws JugadorNoPermitidoParaJugar;
+    void atacar(CartaMonstruo cartaAtacante, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
+            NoEsFaseAtaqueError, NoSeAtacaEnPrimerTurnoJuegoError, CartaYaAtacoError;
 }

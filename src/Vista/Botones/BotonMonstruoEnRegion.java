@@ -1,9 +1,7 @@
 package Vista.Botones;
 
 import Controlador.excepciones.JugadorNoPermitidoParaJugar;
-import Controlador.excepciones.NoEsUnaCartaParaAtacar;
 import Modelo.Jugador;
-import Modelo.carta.CartaNula;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.Vista;
 import javafx.geometry.Insets;
@@ -33,7 +31,7 @@ public class BotonMonstruoEnRegion extends Button
 
     public BotonMonstruoEnRegion(Vista vista, Jugador jugador)
     {
-    	this.jugadorAsociado = jugador;
+        this.jugadorAsociado = jugador;
         this.vista = vista;
         this.botonDeLaCarta = new Button();
 
@@ -154,40 +152,17 @@ public class BotonMonstruoEnRegion extends Button
 
     private void cartaMonstruoAtacarOponenteBtn_Click()
     {
-        try
-        {
-            this.vista.obtenerControlador().atacar(this.carta, this.jugadorAsociado);
-        } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
-        {
-            jugadorNoPermitidoParaJugar.printStackTrace();
-        }
+
+        this.vista.obtenerControlador().atacar(this.carta, this.jugadorAsociado);
     }
 
     private void cartaMonstruoAtacarMonstruoBtn_Click(int i, ArrayList<CartaMonstruo> cartasOponente)
     {
 
         // TODO: ojo con esta condición, no estoy seguro que un array devuelva null si no está el i-ésimo elemento.
-        if (cartasOponente.get(i) == null)
+        if (cartasOponente.get(i) != null)
         {
-            try
-            {
-                this.vista.obtenerControlador().atacar(this.carta, CartaNula.obtenerInstancia(), this.jugadorAsociado);
-            } catch (NoEsUnaCartaParaAtacar noEsUnaCartaParaAtacar)
-            {
-                noEsUnaCartaParaAtacar.printStackTrace();
-            } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
-            {
-                jugadorNoPermitidoParaJugar.printStackTrace();
-            }
-        } else
-        {
-            try
-            {
-                this.vista.obtenerControlador().atacar(this.carta, cartasOponente.get(i), this.jugadorAsociado);
-            } catch (JugadorNoPermitidoParaJugar jugadorNoPermitidoParaJugar)
-            {
-                jugadorNoPermitidoParaJugar.printStackTrace();
-            }
+            this.vista.obtenerControlador().atacar(this.carta, cartasOponente.get(i), this.jugadorAsociado);
         }
     }
 

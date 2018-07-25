@@ -24,7 +24,7 @@ public class RegionCementerioVista implements ObservadorDeModelo
 
         Button boton = new Button();
 
-        // TODO: generalizar el hardcodeo de los numeros.
+        // TODO: número mágico.
         boton.setPrefSize(95.4, 139);
         boton.setStyle(estiloRegion);
 

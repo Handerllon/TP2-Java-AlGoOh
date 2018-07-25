@@ -75,7 +75,7 @@ public final class EscenaTableroPrincipal implements EscenaVista
 
         // Estructura de la vista.
         grid.setGridLinesVisible(false);
-        // TODO: generalizar el hardcodeo de los numeros.
+        // TODO: número mágico.
         grid.setPadding(new Insets(5));
         ColumnConstraints column0 = new ColumnConstraints(300);
         ColumnConstraints column1 = new ColumnConstraints(1310);

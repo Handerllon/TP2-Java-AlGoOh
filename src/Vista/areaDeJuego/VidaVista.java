@@ -26,15 +26,18 @@ public class VidaVista implements ObservadorDeModelo
     private void inicializar()
     {
 
+        // TODO: número mágico.
         this.vidaJugador.setPrefSize((this.vista.getResolucionHorizontal() * 200) / 1920, (this.vista.getResolucionVertical() * 200) / 1080);
         this.vidaOponente.setPrefSize((this.vista.getResolucionHorizontal() * 200) / 1920, (this.vista.getResolucionVertical() * 200) / 1080);
 
+        // TODO: número mágico.
         this.vidaJugador.setText("    Vida: \n"
                 + "    8000");
 
         this.vidaOponente.setText("    Vida: \n"
                 + "    8000");
 
+        // TODO: número mágico.
         this.vidaJugador.setFont(new Font("Times New Roman", 50));
         this.vidaOponente.setFont(new Font("Times New Roman", 50));
 

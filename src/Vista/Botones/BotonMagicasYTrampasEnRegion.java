@@ -19,7 +19,7 @@ import javafx.stage.Popup;
 public class BotonMagicasYTrampasEnRegion extends Button
 {
     private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
-    //TODO: Buscar las resoluciones del sistema
+    // TODO: número mágico.
     private static double anchoDeCarta = 95.4;
     private static double altoDeCarta = 139;
     private Carta carta;

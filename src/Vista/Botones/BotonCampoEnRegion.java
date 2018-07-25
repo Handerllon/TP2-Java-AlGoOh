@@ -16,7 +16,7 @@ import javafx.scene.paint.ImagePattern;
 public class BotonCampoEnRegion extends Button
 {
     private static String estiloRegion = "-fx-background-color: Transparent";
-    //TODO: Buscar las resoluciones del sistema
+    // TODO: número mágico.
     private static double anchoDeCarta = 95.4;
     private static double altoDeCarta = 139;
     private Button boton;

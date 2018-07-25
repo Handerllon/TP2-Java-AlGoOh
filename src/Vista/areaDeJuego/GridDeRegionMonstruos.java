@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class GridDeRegionMonstruos extends GridPane
 {
     public static double anchoColumna;
+    // TODO: número mágico.
     public static double relacionAnchoColumnaPantalla = 7.25;
     private GridPane grid;
     private ArrayList<BotonMonstruoEnRegion> botones;
@@ -38,6 +39,7 @@ public class GridDeRegionMonstruos extends GridPane
         ColumnConstraints columna2 = new ColumnConstraints(anchoColumna);
         ColumnConstraints columna3 = new ColumnConstraints(anchoColumna);
         ColumnConstraints columna4 = new ColumnConstraints(anchoColumna);
+        // TODO: número mágico.
         RowConstraints fila1 = new RowConstraints(160);
 
         this.grid.getColumnConstraints().addAll(columna0, columna1, columna2, columna3, columna4);

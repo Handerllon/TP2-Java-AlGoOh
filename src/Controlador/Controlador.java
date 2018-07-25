@@ -2,6 +2,8 @@ package Controlador;
 
 import Controlador.estadosJuego.MaquinaTurnos;
 import Controlador.excepciones.*;
+import Controlador.excepciones.especificas.SolicitanteNoEsPropietarioDeCartaError;
+import Controlador.excepciones.especificas.YaSeMandoMonstruoARegionEnTurnoActual;
 import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
@@ -209,6 +211,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         {
             if (!this.modelo.requiereSacrificios(carta))
             {
+                // TODO: verificar si esto funciona bien durante el juego.
                 this.flipBocaArriba(carta, solicitante);
                 this.setModoAtaque(carta, solicitante);
                 this.modelo.setCartaMonstruo(carta);
@@ -216,6 +219,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
             } else
             {
                 Sacrificio sacrificios = this.vista.pedirSacrificios();
+                // TODO: verificar si esto funciona bien durante el juego.
                 this.flipBocaArriba(carta, solicitante);
                 this.setModoAtaque(carta, solicitante);
                 this.modelo.setCartaMonstruo(carta, sacrificios);
@@ -242,7 +246,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         } else if (this.maquinaTurnos.yaMandoMonstruoARegionEnTurno())
         {
             return false;
-            //throw new yaMandoMonstruoARegionEnTurno();
+            //throw new YaSeMandoMonstruoARegionEnTurnoActual();
         } else
         {
             if (!this.modelo.haySuficientesSacrificios(carta))

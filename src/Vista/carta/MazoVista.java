@@ -17,6 +17,7 @@ public class MazoVista implements ObservadorDeModelo
 {
     private static double anchoDeCarta;
     private static double altoDeCarta;
+    // TODO: número mágico.
     private static double relacionAnchoAlto = 1.457;
     private static double relacionAnchoCartaPantalla = 19.92;
     private Vista vista;

@@ -1,5 +1,5 @@
 package Controlador.excepciones;
 
-public class NoEsFaseAtaqueError extends Exception
+public class NoEsFaseAtaqueError extends RuntimeException
 {
 }

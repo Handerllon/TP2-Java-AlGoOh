@@ -1,6 +1,5 @@
 package Controlador.excepciones;
 
-public class NoEsFasePreparacionError extends Exception
+public class NoEsFasePreparacionError extends RuntimeException
 {
-
 }

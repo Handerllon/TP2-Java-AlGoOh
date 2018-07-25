@@ -1,5 +1,5 @@
 package Controlador.excepciones;
 
-public class NoEsFaseInicialError extends Exception {
-
+public class NoEsFaseInicialError extends RuntimeException
+{
 }

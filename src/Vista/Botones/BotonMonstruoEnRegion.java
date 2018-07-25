@@ -1,6 +1,5 @@
 package Vista.Botones;
 
-import Controlador.excepciones.JugadorNoPermitidoParaJugar;
 import Modelo.Jugador;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.Vista;

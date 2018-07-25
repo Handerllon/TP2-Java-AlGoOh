@@ -3,7 +3,6 @@ package Vista.areaDeJuego;
 import Modelo.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 public class RegionMagicasYTrampasVista implements ObservadorDeModelo
 {

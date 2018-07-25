@@ -16,6 +16,7 @@ public final class MaquinaTurnos
     private boolean esPrimerTurno;
     private ArrayList<CartaMonstruo> cartasAtacaronEnTurnoActual;
     private ArrayList<Carta> cartasColocadasEnRegionEnTurnos;
+    private boolean seTomoCartaEnTurno;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -27,6 +28,7 @@ public final class MaquinaTurnos
         this.faseActual = FaseInicial.obtenerInstancia(this);
         this.cartasConCambioDeOrientacionEnTurno = new ArrayList<>();
         this.esPrimerTurno = true;
+        this.seTomoCartaEnTurno = false;
         this.cartasAtacaronEnTurnoActual = new ArrayList<>();
         this.cartasColocadasEnRegionEnTurnos = new ArrayList<>();
 
@@ -76,6 +78,7 @@ public final class MaquinaTurnos
         this.swapJugadorActual();
         this.reiniciarFases();
         this.esPrimerTurno = false;
+        this.seTomoCartaEnTurno = false;
     }
 
     private void swapJugadorActual()
@@ -122,24 +125,34 @@ public final class MaquinaTurnos
         this.cartasAtacaronEnTurnoActual.add(cartaMonstruo);
     }
 
+    public void seTomoCartaEnTurno()
+    {
+        this.seTomoCartaEnTurno = true;
+    }
+
     public boolean esPrimerTurnoJuego()
     {
         return this.esPrimerTurno;
     }
 
-    public boolean usoAtaqueEnTurnoActual(CartaMonstruo cartaMonstruo)
+    public boolean yaUsoAtaqueEnTurno(CartaMonstruo cartaMonstruo)
     {
         return this.cartasAtacaronEnTurnoActual.contains(cartaMonstruo);
     }
 
-    public boolean fueColocadaEnTurnoActual(Carta carta)
+    public boolean yaColocoEnTurno(Carta carta)
     {
         return this.cartasConCambioDeOrientacionEnTurno.contains(carta);
     }
 
-    public boolean yaSeMandoMonstruoARegionEnTurno()
+    public boolean yaMandoMonstruoARegionEnTurno()
     {
         return this.cartasColocadasEnRegionEnTurnos.isEmpty();
+    }
+
+    public boolean yaTomoCartaEnTurno()
+    {
+        return this.seTomoCartaEnTurno;
     }
 }
 

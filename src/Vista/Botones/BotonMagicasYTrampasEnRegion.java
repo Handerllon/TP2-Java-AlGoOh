@@ -1,8 +1,5 @@
 package Vista.Botones;
 
-import Controlador.excepciones.JugadorNoPermitidoParaJugar;
-import Controlador.excepciones.NoEsFaseFinalError;
-import Controlador.excepciones.SolicitanteNoEsPropietarioDeCartaError;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.carta.magica.CartaMagica;
@@ -29,11 +26,11 @@ public class BotonMagicasYTrampasEnRegion extends Button
     private Vista vista;
     private Popup popup;
     private Button botonDeLaCarta;
-	private Jugador jugadorAsociado;
+    private Jugador jugadorAsociado;
 
     public BotonMagicasYTrampasEnRegion(Vista vista, Jugador jugador)
     {
-    	this.jugadorAsociado = jugador;
+        this.jugadorAsociado = jugador;
         this.vista = vista;
         this.botonDeLaCarta = new Button();
 

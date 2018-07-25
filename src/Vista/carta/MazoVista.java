@@ -1,7 +1,5 @@
 package Vista.carta;
 
-import Controlador.excepciones.JugadorNoPermitidoParaJugar;
-import Controlador.excepciones.NoEsFaseInicialError;
 import Modelo.Jugador;
 import Modelo.ObservadorDeModelo;
 import Vista.Vista;

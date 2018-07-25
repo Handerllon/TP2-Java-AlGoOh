@@ -1,5 +1,5 @@
 package Controlador.excepciones;
 
-public class NoSeAtacaEnPrimerTurnoJuegoError extends Exception
+public class NoSeAtacaEnPrimerTurnoJuegoError extends RuntimeException
 {
 }

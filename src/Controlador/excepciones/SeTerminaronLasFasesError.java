@@ -1,5 +1,5 @@
 package Controlador.excepciones;
 
-public class SeTerminaronLasFasesError extends Exception
+public class SeTerminaronLasFasesError extends RuntimeException
 {
 }

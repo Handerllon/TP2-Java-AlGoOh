@@ -18,7 +18,7 @@ public class FlowPaneDeMano extends FlowPane
 
     public FlowPaneDeMano(Vista vista, Jugador jugador)
     {
-    	this.jugadorAsociado = jugador;
+        this.jugadorAsociado = jugador;
         this.vista = vista;
         this.flowPane = new FlowPane();
         this.flowPane.setAlignment(Pos.CENTER);

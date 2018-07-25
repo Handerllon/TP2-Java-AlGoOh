@@ -3,83 +3,71 @@ package Controlador;
 import Controlador.excepciones.*;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
-import Modelo.carta.excepciones.ManoLlenaError;
-import Modelo.carta.excepciones.NoEsUnaCartaMonstruo;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.finDeJuego.CausaFinJuego;
 
 public interface IControlador
 {
-    void terminarTurno();
-
-    void avanzarProximaFase() throws SeTerminaronLasFasesError;
-
-    String nombreJugadorActual();
-
-    String nombreFaseActual();
-
-    void cerrarPrograma();
-
-    CausaFinJuego obtenerCausaFinDeJuego();
-
-    void confirmarSalirPrograma();
-
     void jugar();
 
     void establecerNombreJugador(String text);
 
     void establecerNombreOponente(String text);
 
+    CausaFinJuego obtenerCausaFinDeJuego();
+
+    // ------------------------------------
+    // Métodos de fases y turnos.
+    // ------------------------------------
+    void terminarTurno();
+
+    void avanzarProximaFase();
+
+    String nombreJugadorActual();
+
+    String nombreFaseActual();
+
+    // ------------------------------------
+    // Métodos de terminación.
+    // ------------------------------------
+    void cerrarPrograma();
+
+    void confirmarSalirPrograma();
+
     // ------------------------------------
     // Métodos de juego de cartas.
     // ------------------------------------
-    void tomarCarta(Jugador solicitante) throws JugadorNoPermitidoParaJugar, ManoLlenaError,
-            NoEsFaseInicialError;
+    void tomarCarta(Jugador solicitante) throws NoSePuedeTomarCartaError;
 
-    void activarCartaMagica(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            SolicitanteNoEsPropietarioDeCartaError, NoEsFaseFinalError;
+    void setCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeMandarCartaARegionError;
 
-    void setCartaTrampa(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError;
+    void summonCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeMandarCartaARegionError;
 
-    void setCartaMagica(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError;
+    void setCartaTrampa(Carta carta, Jugador solicitante) throws NoSePuedeEnviarARegionMyT;
 
-    void setCartaMonstruo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError, NoHaySuficientesSacrificiosError,
-            NoEsUnaCartaMonstruo, YaSeMandoMonstruoARegionEnTurno;
+    void setCartaMagica(Carta carta, Jugador solicitante) throws NoSePuedeEnviarARegionMyT;
 
-    void summonCartaMonstruo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError, NoHaySuficientesSacrificiosError,
-            NoEsUnaCartaMonstruo, YaSeMandoMonstruoARegionEnTurno, CartaColocadaEnTurnoActualError;
+    void activarCartaMagica(Carta carta, Jugador solicitante) throws NoSePuedeEnviarARegionMyT;
 
     // ------------------------------------
     // Métodos de orientación de cartas.
     // ------------------------------------
-    void flipCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError;
+    void flipCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
 
-    void flipBocaAbajo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError;
+    void flipBocaAbajo(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
 
-    void flipBocaArriba(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError;
+    void flipBocaArriba(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
 
-    void setModoAtaque(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError;
+    void setModoAtaque(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
 
-    void setModoDefensa(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError;
+    void setModoDefensa(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
 
-    void cambiarModoCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError;
+    void cambiarModoCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
 
     // ------------------------------------
     // Métodos de ataques.
     // ------------------------------------
-    void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada, Jugador solicitante) throws
-            JugadorNoPermitidoParaJugar, NoEsFaseAtaqueError, NoSeAtacaEnPrimerTurnoJuegoError, CartaYaAtacoError;
+    void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada, Jugador solicitante) throws NoSePuedeAtacarError;
 
-    void atacar(CartaMonstruo cartaAtacante, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            NoEsFaseAtaqueError, NoSeAtacaEnPrimerTurnoJuegoError, CartaYaAtacoError;
+    void atacar(CartaMonstruo cartaAtacante, Jugador solicitante) throws NoSePuedeAtacarError;
 }

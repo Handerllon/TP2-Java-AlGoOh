@@ -237,5 +237,4 @@ public abstract class CartaMonstruo extends Carta
     {
         return this.modo.esDefensa();
     }
-
 }

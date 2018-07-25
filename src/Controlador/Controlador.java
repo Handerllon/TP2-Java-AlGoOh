@@ -6,8 +6,6 @@ import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
-import Modelo.carta.excepciones.ManoLlenaError;
-import Modelo.carta.excepciones.NoEsUnaCartaMonstruo;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaFinJuegoNula;
@@ -67,9 +65,22 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         this.vista.mostrar();
     }
 
-    // ------------------------------------
+    // --------------------------------------------------------------------
+    // Interfaz con el modelo.
+    // --------------------------------------------------------------------
+    public void establecerNombreJugador(String text)
+    {
+        this.modelo.establecerNombreJugador(text);
+    }
+
+    public void establecerNombreOponente(String text)
+    {
+        this.modelo.establecerNombreOponente(text);
+    }
+
+    // --------------------------------------------------------------------
     // Métodos de observador de fin de juego.
-    // ------------------------------------
+    // --------------------------------------------------------------------
     @Override
     public void seLlegoAFinDeJuego(CausaFinJuego causaFinJuego)
     {
@@ -97,19 +108,6 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     }
 
     // ------------------------------------
-    // Interfaz con el modelo.
-    // ------------------------------------
-    public void establecerNombreJugador(String text)
-    {
-        this.modelo.establecerNombreJugador(text);
-    }
-
-    public void establecerNombreOponente(String text)
-    {
-        this.modelo.establecerNombreOponente(text);
-    }
-
-    // ------------------------------------
     // Métodos de fases y turnos.
     // ------------------------------------
     @Override
@@ -119,7 +117,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     }
 
     @Override
-    public void avanzarProximaFase() throws SeTerminaronLasFasesError
+    public void avanzarProximaFase()
     {
         if (this.maquinaTurnos.faseActual().esFaseFinal() == false)
         {
@@ -137,7 +135,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
 
     private boolean cartaPuedeCambiarOrientacion(Carta carta)
     {
-        if (this.maquinaTurnos.fueColocadaEnTurnoActual(carta) == true)
+        if (this.maquinaTurnos.yaColocoEnTurno(carta) == true)
         {
             return false;
         } else
@@ -148,7 +146,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
 
     private boolean cartaPuedeAtacar(CartaMonstruo carta)
     {
-        if (this.maquinaTurnos.usoAtaqueEnTurnoActual(carta) == true)
+        if (this.maquinaTurnos.yaUsoAtaqueEnTurno(carta) == true)
         {
             return false;
         } else
@@ -172,52 +170,53 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     // ------------------------------------
     // Métodos de juego de cartas.
     // ------------------------------------
+    // TODO: extraer las verificaciones en métodos.
+    // TODO: se puede hacer un notificador desde las cartas a la maquina de turnos cuando pasa algun evento
+    // interesante (ataque, cambio de orientacion, cambio de modo...)
     @Override
-    public void tomarCarta(Jugador solicitante) throws JugadorNoPermitidoParaJugar, ManoLlenaError, NoEsFaseInicialError
+    public void tomarCarta(Jugador solicitante) throws NoSePuedeTomarCartaError
     {
-        if (jugadorPuedeJugar(solicitante) == false)
+        if (!sePuedeTomarCarta(solicitante))
         {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (this.maquinaTurnos.faseActual().esFaseInicial() == false)
-        {
-            throw new NoEsFaseInicialError();
+            throw new NoSePuedeTomarCartaError();
         } else
         {
             this.modelo.tomarCarta(this.maquinaTurnos.obtenerJugadorActual());
+            this.maquinaTurnos.seTomoCartaEnTurno();
         }
     }
 
-    @Override
-    public void setCartaMonstruo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError, NoHaySuficientesSacrificiosError,
-            NoEsUnaCartaMonstruo, YaSeMandoMonstruoARegionEnTurno
+    private boolean sePuedeTomarCarta(Jugador solicitante)
     {
-        if (carta.obtenerPropietario() != solicitante)
+        if (!jugadorPuedeJugar(solicitante))
         {
-            throw new SolicitanteNoEsPropietarioDeCartaError();
-        } else if (jugadorPuedeJugar(solicitante) == false)
+            return false;
+        } else if (!this.maquinaTurnos.faseActual().esFaseInicial())
         {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
+            return false;
+        } else if (this.maquinaTurnos.yaTomoCartaEnTurno())
         {
-            throw new NoEsFasePreparacionError();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void setCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeMandarCartaARegionError
+    {
+        if (!sePuedeMandarARegion(carta, solicitante))
+        {
+            throw new NoSePuedeMandarCartaARegionError();
         } else
         {
-            if (this.modelo.requiereSacrificios(carta) == false)
+            if (!this.modelo.requiereSacrificios(carta))
             {
-                if (this.maquinaTurnos.yaSeMandoMonstruoARegionEnTurno() == true)
-                {
-                    throw new YaSeMandoMonstruoARegionEnTurno();
-                }
+
                 this.modelo.setCartaMonstruo(carta);
                 this.maquinaTurnos.seColocoCartaEnRegion(carta);
-            } else if (this.modelo.haySuficientesSacrificios(carta) == false)
-            {
-                throw new NoHaySuficientesSacrificiosError();
             } else
             {
                 Sacrificio sacrificios = this.vista.pedirSacrificios();
-
                 this.modelo.setCartaMonstruo(carta, sacrificios);
                 this.maquinaTurnos.seColocoCartaEnRegion(carta);
             }
@@ -225,34 +224,19 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     }
 
     @Override
-    public void summonCartaMonstruo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError, NoHaySuficientesSacrificiosError,
-            NoEsUnaCartaMonstruo, YaSeMandoMonstruoARegionEnTurno, CartaColocadaEnTurnoActualError
+    public void summonCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeMandarCartaARegionError
     {
-        if (carta.obtenerPropietario() != solicitante)
+        if (!sePuedeMandarARegion(carta, solicitante))
         {
-            throw new SolicitanteNoEsPropietarioDeCartaError();
-        } else if (jugadorPuedeJugar(solicitante) == false)
-        {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
-        {
-            throw new NoEsFasePreparacionError();
+            throw new NoSePuedeMandarCartaARegionError();
         } else
         {
-            if (this.modelo.requiereSacrificios(carta) == false)
+            if (!this.modelo.requiereSacrificios(carta))
             {
-                if (this.maquinaTurnos.yaSeMandoMonstruoARegionEnTurno() == true)
-                {
-                    throw new YaSeMandoMonstruoARegionEnTurno();
-                }
                 this.flipBocaArriba(carta, solicitante);
                 this.setModoAtaque(carta, solicitante);
                 this.modelo.setCartaMonstruo(carta);
                 this.maquinaTurnos.seColocoCartaEnRegion(carta);
-            } else if (this.modelo.haySuficientesSacrificios(carta) == false)
-            {
-                throw new NoHaySuficientesSacrificiosError();
             } else
             {
                 Sacrificio sacrificios = this.vista.pedirSacrificios();
@@ -264,39 +248,43 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         }
     }
 
-    @Override
-    public void activarCartaMagica(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            SolicitanteNoEsPropietarioDeCartaError, NoEsFaseFinalError
+    private boolean sePuedeMandarARegion(Carta carta, Jugador solicitante)
     {
+
         if (carta.obtenerPropietario() != solicitante)
         {
-            throw new SolicitanteNoEsPropietarioDeCartaError();
-        } else if (jugadorPuedeJugar(solicitante) == false)
+            return false;
+            //throw new SolicitanteNoEsPropietarioDeCartaError();
+        } else if (!jugadorPuedeJugar(solicitante))
         {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (this.maquinaTurnos.faseActual().esFaseFinal() == false)
+            return false;
+            //throw new JugadorNoPermitidoParaJugar(solicitante);
+        } else if (!this.maquinaTurnos.faseActual().esFasePreparacion())
         {
-            throw new NoEsFaseFinalError();
+            return false;
+            //throw new NoEsFasePreparacionError();
+        } else if (this.maquinaTurnos.yaMandoMonstruoARegionEnTurno())
+        {
+            return false;
+            //throw new yaMandoMonstruoARegionEnTurno();
         } else
         {
-            this.modelo.activarCartaMagica(solicitante, carta);
-            this.maquinaTurnos.seCambioOrientacionCarta(carta);
+            if (!this.modelo.haySuficientesSacrificios(carta))
+            {
+                return false;
+                //throw new NoHaySuficientesSacrificiosError();
+            }
         }
+
+        return true;
     }
 
     @Override
-    public void setCartaTrampa(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError
+    public void setCartaTrampa(Carta carta, Jugador solicitante) throws NoSePuedeEnviarARegionMyT
     {
-        if (carta.obtenerPropietario() != solicitante)
+        if (!sePuedeEnviarARegionMyT(carta, solicitante))
         {
-            throw new SolicitanteNoEsPropietarioDeCartaError();
-        } else if (jugadorPuedeJugar(solicitante) == false)
-        {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
-        {
-            throw new NoEsFasePreparacionError();
+            throw new NoSePuedeEnviarARegionMyT();
         } else
         {
             this.modelo.setCartaTrampa(solicitante, carta);
@@ -304,40 +292,75 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     }
 
     @Override
-    public void setCartaMagica(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            SolicitanteNoEsPropietarioDeCartaError, NoEsFasePreparacionError
+    public void setCartaMagica(Carta carta, Jugador solicitante) throws NoSePuedeEnviarARegionMyT
     {
-        if (carta.obtenerPropietario() != solicitante)
+        if (!sePuedeEnviarARegionMyT(carta, solicitante))
         {
-            throw new SolicitanteNoEsPropietarioDeCartaError();
-        } else if (jugadorPuedeJugar(solicitante) == false)
-        {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
-        {
-            throw new NoEsFasePreparacionError();
-        }
+            throw new NoSePuedeEnviarARegionMyT();
+        } else
         {
             this.modelo.setCartaMagica(solicitante, carta);
         }
+    }
+
+    private boolean sePuedeEnviarARegionMyT(Carta carta, Jugador solicitante)
+    {
+        if (carta.obtenerPropietario() != solicitante)
+        {
+            return false;
+            //throw new SolicitanteNoEsPropietarioDeCartaError();
+        } else if (!jugadorPuedeJugar(solicitante))
+        {
+            return false;
+            //throw new JugadorNoPermitidoParaJugar(solicitante);
+        } else if (!this.maquinaTurnos.faseActual().esFasePreparacion())
+        {
+            return false;
+            //throw new NoEsFaseFinalError();
+        }
+        return true;
+    }
+
+    @Override
+    public void activarCartaMagica(Carta carta, Jugador solicitante) throws NoSePuedeEnviarARegionMyT
+    {
+        if (!sePuedeEnviarMagicaARegionMyT(carta, solicitante))
+        {
+            throw new NoSePuedeEnviarARegionMyT();
+        } else
+        {
+            this.modelo.activarCartaMagica(solicitante, carta);
+            this.maquinaTurnos.seCambioOrientacionCarta(carta);
+        }
+    }
+
+    private boolean sePuedeEnviarMagicaARegionMyT(Carta carta, Jugador solicitante)
+    {
+        if (carta.obtenerPropietario() != solicitante)
+        {
+            return false;
+            //throw new SolicitanteNoEsPropietarioDeCartaError();
+        } else if (!jugadorPuedeJugar(solicitante))
+        {
+            return false;
+            //throw new JugadorNoPermitidoParaJugar(solicitante);
+        } else if (!this.maquinaTurnos.faseActual().esFaseFinal())
+        {
+            return false;
+            //throw new NoEsFaseFinalError();
+        }
+        return true;
     }
 
     // ------------------------------------
     // Métodos de orientación de cartas.
     // ------------------------------------
     @Override
-    public void flipCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError
+    public void flipCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError
     {
-        if (jugadorPuedeJugar(solicitante) == false)
+        if (!sePuedeCambiarOrientacionCarta(carta, solicitante))
         {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
-        {
-            throw new NoEsFasePreparacionError();
-        } else if (cartaPuedeCambiarOrientacion(carta) == false)
-        {
-            throw new CartaColocadaEnTurnoActualError();
+            throw new NoSePuedeCambiarOrientacionError();
         } else
         {
             this.modelo.flipCartaMonstruo(carta);
@@ -346,39 +369,24 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     }
 
     @Override
-    public void flipBocaAbajo(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError
+    public void flipBocaAbajo(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError
     {
-        if (jugadorPuedeJugar(solicitante) == false)
+        if (!sePuedeCambiarOrientacionCarta(carta, solicitante))
         {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
-        {
-            throw new NoEsFasePreparacionError();
-        } else if (cartaPuedeCambiarOrientacion(carta) == false)
-        {
-            throw new CartaColocadaEnTurnoActualError();
+            throw new NoSePuedeCambiarOrientacionError();
         } else
         {
-
             this.modelo.flipBocaAbajo(carta);
             this.maquinaTurnos.seCambioOrientacionCarta(carta);
         }
     }
 
     @Override
-    public void flipBocaArriba(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError
+    public void flipBocaArriba(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError
     {
-        if (jugadorPuedeJugar(solicitante) == false)
+        if (!sePuedeCambiarOrientacionCarta(carta, solicitante))
         {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
-        {
-            throw new NoEsFasePreparacionError();
-        } else if (cartaPuedeCambiarOrientacion(carta) == false)
-        {
-            throw new CartaColocadaEnTurnoActualError();
+            throw new NoSePuedeCambiarOrientacionError();
         } else
         {
             this.modelo.flipBocaArriba(carta);
@@ -387,18 +395,11 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     }
 
     @Override
-    public void cambiarModoCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError
+    public void cambiarModoCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError
     {
-        if (jugadorPuedeJugar(solicitante) == false)
+        if (!sePuedeCambiarOrientacionCarta(carta, solicitante))
         {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
-        {
-            throw new NoEsFasePreparacionError();
-        } else if (cartaPuedeCambiarOrientacion(carta) == false)
-        {
-            throw new CartaColocadaEnTurnoActualError();
+            throw new NoSePuedeCambiarOrientacionError();
         } else
         {
             this.modelo.cambiarModoCartaMonstruo(carta);
@@ -407,18 +408,11 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     }
 
     @Override
-    public void setModoAtaque(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError
+    public void setModoAtaque(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError
     {
-        if (jugadorPuedeJugar(solicitante) == false)
+        if (!sePuedeCambiarOrientacionCarta(carta, solicitante))
         {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
-        {
-            throw new NoEsFasePreparacionError();
-        } else if (cartaPuedeCambiarOrientacion(carta) == false)
-        {
-            throw new CartaColocadaEnTurnoActualError();
+            throw new NoSePuedeCambiarOrientacionError();
         } else
         {
             this.modelo.setModoAtaque(carta);
@@ -427,18 +421,11 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     }
 
     @Override
-    public void setModoDefensa(Carta carta, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            NoEsFasePreparacionError, CartaColocadaEnTurnoActualError
+    public void setModoDefensa(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError
     {
-        if (jugadorPuedeJugar(solicitante) == false)
+        if (!sePuedeCambiarOrientacionCarta(carta, solicitante))
         {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (this.maquinaTurnos.faseActual().esFasePreparacion() == false)
-        {
-            throw new NoEsFasePreparacionError();
-        } else if (cartaPuedeCambiarOrientacion(carta) == false)
-        {
-            throw new CartaColocadaEnTurnoActualError();
+            throw new NoSePuedeCambiarOrientacionError();
         } else
         {
             this.modelo.setModoDefensa(carta);
@@ -446,25 +433,35 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         }
     }
 
+    private boolean sePuedeCambiarOrientacionCarta(Carta carta, Jugador solicitante)
+    {
+
+        if (!jugadorPuedeJugar(solicitante))
+        {
+            return false;
+            //throw new JugadorNoPermitidoParaJugar(solicitante);
+        } else if (!this.maquinaTurnos.faseActual().esFasePreparacion())
+        {
+            return false;
+            //throw new NoEsFasePreparacionError();
+        } else if (!cartaPuedeCambiarOrientacion(carta))
+        {
+            return false;
+            //throw new CartaNoPuedeCambiarOrientacionEnTurnoActualError();
+        }
+
+        return true;
+    }
+
     // ------------------------------------
     // Métodos de ataques.
     // ------------------------------------
     @Override
-    public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada, Jugador solicitante) throws
-            JugadorNoPermitidoParaJugar, NoEsFaseAtaqueError, NoSeAtacaEnPrimerTurnoJuegoError, CartaYaAtacoError
+    public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada, Jugador solicitante) throws NoSePuedeAtacarError
     {
-        if (jugadorPuedeJugar(solicitante) == false)
+        if (!sePuedeAtacar(cartaAtacante, solicitante))
         {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (this.maquinaTurnos.faseActual().esFaseAtaque() == false)
-        {
-            throw new NoEsFaseAtaqueError();
-        } else if (this.maquinaTurnos.esPrimerTurnoJuego() == true)
-        {
-            throw new NoSeAtacaEnPrimerTurnoJuegoError();
-        } else if (this.cartaPuedeAtacar(cartaAtacante) == false)
-        {
-            throw new CartaYaAtacoError();
+            throw new NoSePuedeAtacarError();
         } else
         {
             this.modelo.atacar(cartaAtacante, cartaAtacada);
@@ -473,25 +470,37 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     }
 
     @Override
-    public void atacar(CartaMonstruo cartaAtacante, Jugador solicitante) throws JugadorNoPermitidoParaJugar,
-            NoEsFaseAtaqueError, NoSeAtacaEnPrimerTurnoJuegoError, CartaYaAtacoError
+    public void atacar(CartaMonstruo cartaAtacante, Jugador solicitante) throws NoSePuedeAtacarError
     {
-        if (jugadorPuedeJugar(solicitante) == false)
+        if (!sePuedeAtacar(cartaAtacante, solicitante))
         {
-            throw new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (this.maquinaTurnos.faseActual().esFaseAtaque() == false)
-        {
-            throw new NoEsFaseAtaqueError();
-        } else if (this.maquinaTurnos.esPrimerTurnoJuego() == true)
-        {
-            throw new NoSeAtacaEnPrimerTurnoJuegoError();
-        } else if (this.cartaPuedeAtacar(cartaAtacante) == false)
-        {
-            throw new CartaYaAtacoError();
+            throw new NoSePuedeAtacarError();
         } else
         {
             this.modelo.atacar(cartaAtacante);
             this.maquinaTurnos.cartaAtaco(cartaAtacante);
         }
+    }
+
+    private boolean sePuedeAtacar(CartaMonstruo cartaAtacante, Jugador solicitante)
+    {
+        if (!jugadorPuedeJugar(solicitante))
+        {
+            return false;
+            //throw new JugadorNoPermitidoParaJugar(solicitante);
+        } else if (!this.maquinaTurnos.faseActual().esFaseAtaque())
+        {
+            return false;
+            //throw new NoEsFaseAtaqueError();
+        } else if (this.maquinaTurnos.esPrimerTurnoJuego())
+        {
+            return false;
+            //throw new NoSeAtacaEnPrimerTurnoJuegoError();
+        } else if (!this.cartaPuedeAtacar(cartaAtacante))
+        {
+            return false;
+            //throw new CartaYaAtacoEnTurnoActualError();
+        }
+        return true;
     }
 }

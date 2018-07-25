@@ -4,11 +4,7 @@ import Modelo.Modelo;
 import Vista.Botones.BotonesDeControl;
 import Vista.EscenaVista;
 import Vista.Vista;
-import Vista.areaDeJuego.RegionCampoVista;
-import Vista.areaDeJuego.RegionCementerioVista;
-import Vista.areaDeJuego.RegionMagicasYTrampasVista;
-import Vista.areaDeJuego.RegionMonstruosVista;
-import Vista.areaDeJuego.VidaVista;
+import Vista.areaDeJuego.*;
 import Vista.carta.ManoVista;
 import Vista.carta.MazoVista;
 import javafx.geometry.HPos;
@@ -137,11 +133,11 @@ public final class EscenaTableroPrincipal implements EscenaVista
         grid.setHalignment(mazos.getMazoJugador(), HPos.CENTER);
         grid.add(mazos.getMazoOponente(), 0, 0);
         grid.setHalignment(mazos.getMazoOponente(), HPos.CENTER);
-        
+
         // -------------------------------
         // Vida.
         // -------------------------------
-        
+
         VidaVista vidas = new VidaVista(this.vista);
         grid.add(vidas.obtenerVidaJugador(), 0, 5);
         grid.setHalignment(vidas.obtenerVidaJugador(), HPos.CENTER);

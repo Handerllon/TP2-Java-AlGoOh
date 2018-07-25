@@ -3,7 +3,6 @@ package Vista.carta;
 import Modelo.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.scene.layout.FlowPane;
-import javafx.stage.Stage;
 
 public class ManoVista implements ObservadorDeModelo
 {

@@ -9,23 +9,22 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Screen;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class GridDeRegionMagicasYTrampas extends GridPane
 {
+    public static double anchoColumna;
+    public static double relacionAnchoColumnaPantalla = 7.25;
     private GridPane grid;
     private ArrayList<BotonMagicasYTrampasEnRegion> botones;
     private Vista vista;
-	private Jugador jugadorAsociado;
-	public static double anchoColumna;
-	public static double relacionAnchoColumnaPantalla = 7.25;
+    private Jugador jugadorAsociado;
 
     public GridDeRegionMagicasYTrampas(Vista vista, Jugador jugador)
     {
-    	this.jugadorAsociado = jugador;
-    	
+        this.jugadorAsociado = jugador;
+
         this.vista = vista;
 
         this.grid = new GridPane();

@@ -71,11 +71,11 @@ public interface ModeloObservable
 
     void setCartaMagica(Jugador jugador, Carta carta);
 
-    boolean requiereSacrificios(Carta carta) throws NoEsUnaCartaMonstruo;
+    boolean requiereSacrificios(Carta carta) ;
 
-    void setCartaMonstruo(Carta carta) throws NoEsUnaCartaMonstruo;
+    void setCartaMonstruo(Carta carta);
 
-    boolean haySuficientesSacrificios(Carta carta) throws NoEsUnaCartaMonstruo;
+    boolean haySuficientesSacrificios(Carta carta) ;
 
-    void setCartaMonstruo(Carta carta, Sacrificio sacrificios) throws NoEsUnaCartaMonstruo;
+    void setCartaMonstruo(Carta carta, Sacrificio sacrificios) ;
 }

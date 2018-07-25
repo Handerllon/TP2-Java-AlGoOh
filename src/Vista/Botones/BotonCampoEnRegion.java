@@ -12,7 +12,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.ImagePattern;
-import javafx.stage.Stage;
 
 public class BotonCampoEnRegion extends Button
 {
@@ -23,11 +22,11 @@ public class BotonCampoEnRegion extends Button
     private Button boton;
     private CartaCampo carta;
     private Vista vista;
-	private Jugador jugadorAsociado;
+    private Jugador jugadorAsociado;
 
     public BotonCampoEnRegion(Vista vista, Jugador jugadorAsociado)
     {
-    	this.jugadorAsociado = jugadorAsociado;
+        this.jugadorAsociado = jugadorAsociado;
         this.vista = vista;
 
         boton = new Button();

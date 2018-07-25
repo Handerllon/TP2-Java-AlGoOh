@@ -3,7 +3,6 @@ package Vista.areaDeJuego;
 import Modelo.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 public class RegionCementerioVista implements ObservadorDeModelo
 {

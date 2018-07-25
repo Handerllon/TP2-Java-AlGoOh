@@ -226,7 +226,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     }
 
     @Override
-    public boolean requiereSacrificios(Carta carta) throws NoEsUnaCartaMonstruo
+    public boolean requiereSacrificios(Carta carta)
     {
         if (carta.esMonstruo() == true)
         {
@@ -238,7 +238,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     }
 
     @Override
-    public void setCartaMonstruo(Carta carta) throws NoEsUnaCartaMonstruo
+    public void setCartaMonstruo(Carta carta)
     {
         if (carta.esMonstruo() == true)
         {
@@ -250,19 +250,24 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     }
 
     @Override
-    public boolean haySuficientesSacrificios(Carta carta) throws NoEsUnaCartaMonstruo
+    public boolean haySuficientesSacrificios(Carta carta)
     {
         if (carta.esMonstruo() == false)
         {
             throw new NoEsUnaCartaMonstruo();
         } else
         {
-            return carta.obtenerPropietario().obtenerRegionMonstruos().cantidadCartas() >= ((CartaMonstruo) carta).getEstrellas();
+            if (((CartaMonstruo) carta).getEstrellas() >= 5)
+            {
+                return carta.obtenerPropietario().obtenerRegionMonstruos().cantidadCartas() >= ((CartaMonstruo) carta)
+                        .getEstrellas();
+            }
+            return true;
         }
     }
 
     @Override
-    public void setCartaMonstruo(Carta carta, Sacrificio sacrificios) throws NoEsUnaCartaMonstruo
+    public void setCartaMonstruo(Carta carta, Sacrificio sacrificios)
     {
         if (carta.esMonstruo() == true)
         {

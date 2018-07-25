@@ -22,7 +22,7 @@ public final class EscenaSorteoJugadorInicial implements EscenaVista
     private static String direccion_video_sorteo = "src/resources/video/draw_galaxy.mp4";
     private static int ANCHO_CAMPO_NOMBRE = 15;
     private static Vista vista;
-    private static EscenaVista proximaEscena = EscenaNula.obtenerInstancia();
+    private static EscenaVista proximaEscena = EscenaNula.getInstancia();
     private static MediaPlayer mplayer;
     private static EscenaSorteoJugadorInicial instancia = null;
     private ModeloObservable modelo;
@@ -36,11 +36,11 @@ public final class EscenaSorteoJugadorInicial implements EscenaVista
     {
         this.modelo = modelo;
         this.vista = vista;
-        this.primaryStage = this.vista.obtenerPrimaryStage();
+        this.primaryStage = this.vista.getPrimaryStage();
         this.inicializarEscena();
     }
 
-    public static EscenaSorteoJugadorInicial obtenerInstancia(ModeloObservable modelo, Vista vista)
+    public static EscenaSorteoJugadorInicial getInstancia(ModeloObservable modelo, Vista vista)
     {
         if (instancia == null)
         {
@@ -65,7 +65,7 @@ public final class EscenaSorteoJugadorInicial implements EscenaVista
         lblTitulo.setAlignment(Pos.BOTTOM_CENTER);
         lblTitulo.setStyle("-fx-font-weight: bolder; -fx-font-size: 12pt");
 
-        Label lblJugadorSorteado = new Label(this.vista.obtenerControlador().nombreJugadorActual());
+        Label lblJugadorSorteado = new Label(this.vista.getControlador().nombreJugadorActual());
         lblJugadorSorteado.setMinWidth(100);
         lblJugadorSorteado.setAlignment(Pos.BOTTOM_CENTER);
         lblJugadorSorteado.setStyle("-fx-font-weight: bolder; -fx-font-size: 12pt");
@@ -114,16 +114,16 @@ public final class EscenaSorteoJugadorInicial implements EscenaVista
     // --------------------------------------------------------------------
     private void salirBtn_click()
     {
-        this.vista.obtenerControlador().confirmarSalirPrograma();
+        this.vista.getControlador().confirmarSalirPrograma();
     }
 
     private void jugarBtn_click()
     {
-        this.vista.establecerProximaEscena(this.cambiarEscena());
+        this.vista.setProximaEscena(this.cambiarEscena());
         this.cerrar();
 
         // TODO: estas líneas deberían encapsular en un Command que levante el controlador.
-        this.vista.obtenerControlador().jugar();
+        this.vista.getControlador().jugar();
     }
 
     // --------------------------------------------------------------------
@@ -132,7 +132,7 @@ public final class EscenaSorteoJugadorInicial implements EscenaVista
     @Override
     public EscenaVista cambiarEscena()
     {
-        return EscenaTableroPrincipal.obtenerInstancia(this.modelo, this.vista);
+        return EscenaTableroPrincipal.getInstancia(this.modelo, this.vista);
     }
 
     @Override
@@ -158,7 +158,7 @@ public final class EscenaSorteoJugadorInicial implements EscenaVista
     public void finDeJuego()
     {
         this.stopMedia();
-        this.vista.establecerProximaEscena(EscenaFinDeJuego.obtenerInstancia(this.modelo, this.vista));
+        this.vista.setProximaEscena(EscenaFinDeJuego.getInstancia(this.modelo, this.vista));
     }
 
     @Override

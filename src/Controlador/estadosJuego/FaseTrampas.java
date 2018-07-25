@@ -15,7 +15,7 @@ public final class FaseTrampas implements Fase
         this.maquinaTurnos = maquinaTurnos;
     }
 
-    public static FaseTrampas obtenerInstancia(MaquinaTurnos maquinaTurnos)
+    public static FaseTrampas getInstancia(MaquinaTurnos maquinaTurnos)
     {
         if (instancia == null)
         {
@@ -37,10 +37,10 @@ public final class FaseTrampas implements Fase
     {
         if (noHayMasAtaques == true)
         {
-            return FaseFinal.obtenerInstancia(this.maquinaTurnos);
+            return FaseFinal.getInstancia(this.maquinaTurnos);
         } else
         {
-            return FaseAtaque.obtenerInstancia(this.maquinaTurnos);
+            return FaseAtaque.getInstancia(this.maquinaTurnos);
         }
     }
 
@@ -79,8 +79,4 @@ public final class FaseTrampas implements Fase
     {
         return false;
     }
-//    public void finalizarFase()
-//    {
-//        //this.controlador.actualizarEstado();
-//    }
 }

@@ -44,12 +44,12 @@ public final class EscenaTableroPrincipal implements EscenaVista
     {
         this.modelo = modelo;
         this.vista = vista;
-        this.primaryStage = this.vista.obtenerPrimaryStage();
+        this.primaryStage = this.vista.getPrimaryStage();
 
         this.inicializarEscena();
     }
 
-    public static EscenaTableroPrincipal obtenerInstancia(ModeloObservable modelo, Vista vista)
+    public static EscenaTableroPrincipal getInstancia(ModeloObservable modelo, Vista vista)
     {
         if (instancia == null)
         {
@@ -66,7 +66,7 @@ public final class EscenaTableroPrincipal implements EscenaVista
     private void inicializarEscena()
     {
         GridPane grid = new GridPane();
-        this.escenaTableroPrincipal = new Scene(grid, this.vista.obtenerResolucionHorizontal(), this.vista.obtenerResolucionVertical());
+        this.escenaTableroPrincipal = new Scene(grid, this.vista.getResolucionHorizontal(), this.vista.getResolucionVertical());
         this.primaryStage.setScene(this.escenaTableroPrincipal);
         this.primaryStage.setMaximized(true);
 
@@ -139,10 +139,10 @@ public final class EscenaTableroPrincipal implements EscenaVista
         // -------------------------------
 
         VidaVista vidas = new VidaVista(this.vista);
-        grid.add(vidas.obtenerVidaJugador(), 0, 5);
-        grid.setHalignment(vidas.obtenerVidaJugador(), HPos.CENTER);
-        grid.add(vidas.obtenerVidaOponente(), 2, 0);
-        grid.setHalignment(vidas.obtenerVidaOponente(), HPos.CENTER);
+        grid.add(vidas.getVidaJugador(), 0, 5);
+        grid.setHalignment(vidas.getVidaJugador(), HPos.CENTER);
+        grid.add(vidas.getVidaOponente(), 2, 0);
+        grid.setHalignment(vidas.getVidaOponente(), HPos.CENTER);
 
         // -------------------------------
         // Definición de botones.
@@ -169,7 +169,7 @@ public final class EscenaTableroPrincipal implements EscenaVista
     @Override
     public EscenaVista cambiarEscena()
     {
-        return EscenaFinDeJuego.obtenerInstancia(this.modelo, this.vista);
+        return EscenaFinDeJuego.getInstancia(this.modelo, this.vista);
     }
 
     @Override
@@ -202,7 +202,7 @@ public final class EscenaTableroPrincipal implements EscenaVista
     public void finDeJuego()
     {
         this.stopMedia();
-        this.vista.establecerProximaEscena(EscenaFinDeJuego.obtenerInstancia(this.modelo, this.vista));
+        this.vista.setProximaEscena(EscenaFinDeJuego.getInstancia(this.modelo, this.vista));
     }
 
     @Override

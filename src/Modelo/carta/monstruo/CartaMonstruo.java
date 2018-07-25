@@ -113,7 +113,7 @@ public abstract class CartaMonstruo extends Carta
         return (this.getPuntos() - cartaOponente.getPuntos());
     }
 
-    public int obtenerPuntosDeAtaque()
+    public int getPuntosDeAtaque()
     {
 
         return this.puntosAtaque;
@@ -208,7 +208,7 @@ public abstract class CartaMonstruo extends Carta
         if (cartaTrampa == null)
         {
 
-            this.oponente.disminuirPuntosVida(this.obtenerPuntosDeAtaque());
+            this.oponente.disminuirPuntosVida(this.getPuntosDeAtaque());
         } else
         {
             cartaTrampa.efecto(this, null);

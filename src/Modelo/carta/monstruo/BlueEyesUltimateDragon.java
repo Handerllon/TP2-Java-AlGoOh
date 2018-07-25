@@ -27,7 +27,7 @@ public class BlueEyesUltimateDragon extends CartaMonstruo
         // que si este nombre cambia, habría que cambiar todos los lugares donde se hubiera hardcodeado.
         CartaMonstruo cartaBlueEyesWhiteDragonMock = new BlueEyesWhiteDragon(null, null);
 
-        if (sacrificio.cantidadSacrificiosDe(cartaBlueEyesWhiteDragonMock.obtenerNombre()) < cantidadDragonesBlancosNecesarios)
+        if (sacrificio.cantidadSacrificiosDe(cartaBlueEyesWhiteDragonMock.getNombre()) < cantidadDragonesBlancosNecesarios)
         {
             throw new NoHayTresDragonesBlancosParaSacrificioError();
         } else
@@ -36,7 +36,7 @@ public class BlueEyesUltimateDragon extends CartaMonstruo
 
             for (int i = 0; i < cantidadDragonesBlancosNecesarios; i++)
             {
-                cartaASacrificar = sacrificio.getMonstruo(cartaBlueEyesWhiteDragonMock.obtenerNombre());
+                cartaASacrificar = sacrificio.getMonstruo(cartaBlueEyesWhiteDragonMock.getNombre());
                 this.jugador.destruirMonstruo(cartaASacrificar);
             }
         }

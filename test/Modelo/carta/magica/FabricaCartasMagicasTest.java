@@ -12,7 +12,7 @@ public class FabricaCartasMagicasTest
 
         FabricaCartasMagicas fabrica = new FabricaCartasMagicas(null, null);
 
-        CartaMagica unaCartaMagica = fabrica.obtenerCarta("Dark Hole");
+        CartaMagica unaCartaMagica = fabrica.getCarta("Dark Hole");
 
         CartaMagica cartaEsperada = new DarkHole(null, null);
 

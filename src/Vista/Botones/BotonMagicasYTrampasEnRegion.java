@@ -64,7 +64,7 @@ public class BotonMagicasYTrampasEnRegion extends Button
         Button botonEnRegion = new Button();
 
         //-----Tooltip del boton------
-        Image image = new Image(getClass().getClassLoader().getResource(this.carta.obtenerLocacionDeImagen()).toString());
+        Image image = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
         Tooltip tp = new Tooltip();
         tp.setGraphic(new ImageView(image));
 
@@ -74,7 +74,7 @@ public class BotonMagicasYTrampasEnRegion extends Button
         //----- Fondo del boton--------
         botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
         botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource(this.carta.obtenerLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+                .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         //------------------------------
 
         if (this.carta.getClass() == CartaMagica.class)
@@ -117,15 +117,15 @@ public class BotonMagicasYTrampasEnRegion extends Button
 
     private void magYTramEnRegionUsarBtn_Click()
     {
-        this.vista.obtenerControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
+        this.vista.getControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
     }
 
     private void magYTramEnRegionBtn_Click()
     {
 
-        popup.show(vista.obtenerPrimaryStage());
+        popup.show(vista.getPrimaryStage());
         javafx.geometry.Point2D point = this.botonDeLaCarta.localToScene(0.0, 0.0);
-        popup.setX(vista.obtenerPrimaryStage().getX() + point.getX());
-        popup.setY(vista.obtenerPrimaryStage().getY() + point.getY());
+        popup.setX(vista.getPrimaryStage().getX() + point.getX());
+        popup.setY(vista.getPrimaryStage().getY() + point.getY());
     }
 }

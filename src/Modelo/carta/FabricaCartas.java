@@ -29,46 +29,46 @@ public class FabricaCartas
 
     public CartaCampo crearCartaCampo(String nombre)
     {
-        return this.fabricaCartasCampo.obtenerCarta(nombre);
+        return this.fabricaCartasCampo.getCarta(nombre);
     }
 
     public CartaMagica crearCartaMagica(String nombre)
     {
-        return this.fabricaCartasMagicas.obtenerCarta(nombre);
+        return this.fabricaCartasMagicas.getCarta(nombre);
     }
 
     public CartaMonstruo crearCartaMonstruo(String nombre)
     {
-        return this.fabricaCartasMonstruo.obtenerCarta(nombre);
+        return this.fabricaCartasMonstruo.getCarta(nombre);
     }
 
     public CartaTrampa crearCartaTrampa(String nombre)
     {
-        return this.fabricaCartasTrampa.obtenerCarta(nombre);
+        return this.fabricaCartasTrampa.getCarta(nombre);
     }
 
-    public ArrayList<String> obtenerNombresCartasCampo()
+    public ArrayList<String> getNombresCartasCampo()
     {
-        return this.fabricaCartasCampo.obtenerNombres();
+        return this.fabricaCartasCampo.getNombres();
     }
 
-    public ArrayList<String> obtenerNombresCartasMagicas()
+    public ArrayList<String> getNombresCartasMagicas()
     {
-        return this.fabricaCartasMagicas.obtenerNombres();
+        return this.fabricaCartasMagicas.getNombres();
     }
 
-    public ArrayList<String> obtenerNombresCartasTrampa()
+    public ArrayList<String> getNombresCartasTrampa()
     {
-        return this.fabricaCartasTrampa.obtenerNombres();
+        return this.fabricaCartasTrampa.getNombres();
     }
 
-    public ArrayList<String> obtenerNombresCartasMonstruosNormales()
+    public ArrayList<String> getNombresCartasMonstruosNormales()
     {
-        return this.fabricaCartasMonstruo.obtenerNombresMonstruosNormales();
+        return this.fabricaCartasMonstruo.getNombresMonstruosNormales();
     }
 
-    public ArrayList<String> obtenerNombresCartasMonstruosNoNormales()
+    public ArrayList<String> getNombresCartasMonstruosNoNormales()
     {
-        return this.fabricaCartasMonstruo.obtenerNombresMonstruosNoNormales();
+        return this.fabricaCartasMonstruo.getNombresMonstruosNoNormales();
     }
 }

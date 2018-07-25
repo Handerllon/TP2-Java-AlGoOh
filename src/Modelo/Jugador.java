@@ -76,10 +76,10 @@ public class Jugador implements FinDeJuegoObservable
     {
         this.oponente = oponente;
 
-        this.regionMonstruos.establecerOponente(oponente);
-        this.regionMagicasYTrampas.establecerOponente(oponente);
-        this.regionCampo.establecerOponente(oponente);
-        this.cementerio.establecerOponente(oponente);
+        this.regionMonstruos.setOponente(oponente);
+        this.regionMagicasYTrampas.setOponente(oponente);
+        this.regionCampo.setOponente(oponente);
+        this.cementerio.setOponente(oponente);
 
         this.suscribirRegiones();
 
@@ -157,7 +157,7 @@ public class Jugador implements FinDeJuegoObservable
 
     public void destruirMonstruos()
     {
-        ArrayList<CartaMonstruo> cartas = this.regionMonstruos.obtenerCartas();
+        ArrayList<CartaMonstruo> cartas = this.regionMonstruos.getCartas();
 
         cartas.forEach(item -> this.cementerio.colocarCarta(item));
 
@@ -214,21 +214,21 @@ public class Jugador implements FinDeJuegoObservable
         return this.mano.cantidadDeCartas();
     }
 
-    public CartaMonstruo obtenerMonstruoConMenorAtaque()
+    public CartaMonstruo getMonstruoConMenorAtaque()
     {
 
-        return this.regionMonstruos.obtenerMonstruoConMenorAtaque();
+        return this.regionMonstruos.getMonstruoConMenorAtaque();
     }
 
-    public ArrayList<CartaMonstruo> obtenerCartasEnAreaMonstruo()
+    public ArrayList<CartaMonstruo> getCartasEnAreaMonstruo()
     {
-        return this.regionMonstruos.obtenerCartas();
+        return this.regionMonstruos.getCartas();
     }
 
     public CartaTrampa obtenerCartaTrampaAActivar()
     {
 
-        return this.regionMagicasYTrampas.obtenerCartaTrampaAActivar();
+        return this.regionMagicasYTrampas.getCartaTrampaAActivar();
     }
 
     public String obtenerNombre()
@@ -258,13 +258,13 @@ public class Jugador implements FinDeJuegoObservable
         return this.cementerio;
     }
 
-    public Mazo obtenerMazo()
+    public Mazo getMazo()
     {
 
         return this.mazo;
     }
 
-    public Mano obtenerMano()
+    public Mano getMano()
     {
 
         return this.mano;

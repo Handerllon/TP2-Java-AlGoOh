@@ -65,7 +65,7 @@ public class GridDeRegionMonstruos extends GridPane
         }
     }
 
-    public GridPane obtenerGrid()
+    public GridPane getGrid()
     {
 
         return this.grid;

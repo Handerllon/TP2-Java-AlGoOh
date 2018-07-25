@@ -1,4 +1,4 @@
-package Controlador.excepciones;
+package Controlador.excepciones.especificas;
 
 public class CartaNoPuedeCambiarOrientacionEnTurnoActualError extends RuntimeException
 {

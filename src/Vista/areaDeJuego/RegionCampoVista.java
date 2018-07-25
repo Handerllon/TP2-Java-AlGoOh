@@ -25,13 +25,13 @@ public class RegionCampoVista implements ObservadorDeModelo
     public Button getRegionCampoJugador()
     {
 
-        return botonCampoJugador.obtenerBoton();
+        return botonCampoJugador.getBoton();
     }
 
     public Button getRegionCampoOponente()
     {
 
-        return botonCampoOponente.obtenerBoton();
+        return botonCampoOponente.getBoton();
     }
 
     @Override

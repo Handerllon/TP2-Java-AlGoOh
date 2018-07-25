@@ -14,19 +14,19 @@ public class RegionMonstruos extends Region<CartaMonstruo>
         super(CAPACIDAD_REGION_MONSTRUOS, jugador);
     }
 
-    public CartaMonstruo obtenerMonstruoConMenorAtaque()
+    public CartaMonstruo getMonstruoConMenorAtaque()
     {
         CartaMonstruo cartaConAtaqueMinimo = null;
 
         int ataqueTope = Integer.MAX_VALUE;
 
-        ArrayList<CartaMonstruo> cartas = this.obtenerCartas();
+        ArrayList<CartaMonstruo> cartas = this.getCartas();
 
         for (int i = 0; i < cartas.size(); i++)
         {
-            if (cartas.get(i).obtenerPuntosDeAtaque() < ataqueTope)
+            if (cartas.get(i).getPuntosDeAtaque() < ataqueTope)
             {
-                ataqueTope = cartas.get(i).obtenerPuntosDeAtaque();
+                ataqueTope = cartas.get(i).getPuntosDeAtaque();
                 cartaConAtaqueMinimo = cartas.get(i);
             }
         }

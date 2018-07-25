@@ -39,11 +39,11 @@ public interface IModelo
 
     void setCartaMagica(Jugador jugador, Carta carta);
 
-    boolean requiereSacrificios(Carta carta) ;
+    boolean requiereSacrificios(Carta carta);
 
     void setCartaMonstruo(Carta carta);
 
-    boolean haySuficientesSacrificios(Carta carta) ;
+    boolean haySuficientesSacrificios(Carta carta);
 
-    void setCartaMonstruo(Carta carta, Sacrificio sacrificios) ;
+    void setCartaMonstruo(Carta carta, Sacrificio sacrificios);
 }

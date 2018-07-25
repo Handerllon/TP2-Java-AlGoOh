@@ -96,6 +96,6 @@ public class MazoVista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     private void tomarCartaBtn_Click(Jugador jugador)
     {
-        this.vista.obtenerControlador().tomarCarta(jugador);
+        this.vista.getControlador().tomarCarta(jugador);
     }
 }

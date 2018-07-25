@@ -25,7 +25,7 @@ public final class MaquinaTurnos
     {
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
-        this.faseActual = FaseInicial.obtenerInstancia(this);
+        this.faseActual = FaseInicial.getInstancia(this);
         this.cartasConCambioDeOrientacionEnTurno = new ArrayList<>();
         this.esPrimerTurno = true;
         this.seTomoCartaEnTurno = false;
@@ -35,7 +35,7 @@ public final class MaquinaTurnos
         this.sortearJugadorInicial();
     }
 
-    public static MaquinaTurnos obtenerInstancia(Jugador jugador1, Jugador jugador2)
+    public static MaquinaTurnos getInstancia(Jugador jugador1, Jugador jugador2)
     {
         if (instancia == null)
         {
@@ -83,7 +83,7 @@ public final class MaquinaTurnos
 
     private void swapJugadorActual()
     {
-        if (this.obtenerJugadorActual() == this.jugador1)
+        if (this.getJugadorActual() == this.jugador1)
         {
             this.jugadorActual = this.jugador2;
         } else
@@ -94,13 +94,13 @@ public final class MaquinaTurnos
 
     private void reiniciarFases()
     {
-        this.faseActual = FaseInicial.obtenerInstancia(this);
+        this.faseActual = FaseInicial.getInstancia(this);
     }
 
     // --------------------------------------------------------------------
     // Métodos de consultas.
     // --------------------------------------------------------------------
-    public Jugador obtenerJugadorActual()
+    public Jugador getJugadorActual()
     {
         return this.jugadorActual;
     }

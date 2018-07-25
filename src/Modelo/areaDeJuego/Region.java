@@ -21,7 +21,7 @@ public abstract class Region<T extends Carta> implements RegionObservable
         this.jugador = jugador;
     }
 
-    public void establecerOponente(Jugador oponente)
+    public void setOponente(Jugador oponente)
     {
         this.oponente = oponente;
     }
@@ -53,14 +53,14 @@ public abstract class Region<T extends Carta> implements RegionObservable
         return cartas.contains(carta);
     }
 
-    public ArrayList<T> obtenerCartas()
+    public ArrayList<T> getCartas()
     {
         return new ArrayList<>(this.cartas);
     }
 
     public void removerTodasLasCartas()
     {
-        ArrayList<T> cartasARemover = this.obtenerCartas();
+        ArrayList<T> cartasARemover = this.getCartas();
         cartasARemover.forEach(item -> this.removerCarta(item));
     }
 
@@ -74,12 +74,12 @@ public abstract class Region<T extends Carta> implements RegionObservable
         return this.cartas.isEmpty();
     }
 
-    public T obtenerUltimaCartaEnEntrar()
+    public T getUltimaCartaEnEntrar()
     {
         return this.ultimaCartaEnEntrar;
     }
 
-    public T obtenerUltimaCartaEnSalir()
+    public T getUltimaCartaEnSalir()
     {
         return this.ultimaCartaEnSalir;
     }

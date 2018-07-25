@@ -15,22 +15,22 @@ public class FabricaCartasMagicas
         this.oponente = oponente;
     }
 
-    public ArrayList<String> obtenerNombres()
+    public ArrayList<String> getNombres()
     {
         ArrayList<String> nombres = new ArrayList<String>();
 
         String nombre;
-        nombre = new DarkHole(jugador, oponente).obtenerNombre();
+        nombre = new DarkHole(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new Fissure(jugador, oponente).obtenerNombre();
+        nombre = new Fissure(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new PotOfGreed(jugador, oponente).obtenerNombre();
+        nombre = new PotOfGreed(jugador, oponente).getNombre();
         nombres.add(nombre);
 
         return nombres;
     }
 
-    public CartaMagica obtenerCarta(String nombreCarta)
+    public CartaMagica getCarta(String nombreCarta)
     {
         switch (nombreCarta)
         {

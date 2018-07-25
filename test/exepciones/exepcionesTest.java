@@ -33,7 +33,7 @@ public class exepcionesTest
 
         FabricaCartasCampo fabrica = new FabricaCartasCampo(null, null);
 
-        CartaCampo algo = fabrica.obtenerCarta("CartaSinNombre");
+        CartaCampo algo = fabrica.getCarta("CartaSinNombre");
     }
 
     @Test(expected = CartaInvalidaError.class)
@@ -42,7 +42,7 @@ public class exepcionesTest
 
         FabricaCartasMagicas fabrica = new FabricaCartasMagicas(null, null);
 
-        CartaMagica algo = fabrica.obtenerCarta("CartaSinNombre");
+        CartaMagica algo = fabrica.getCarta("CartaSinNombre");
     }
 
     @Test(expected = CartaInvalidaError.class)
@@ -51,7 +51,7 @@ public class exepcionesTest
 
         FabricaCartasTrampa fabrica = new FabricaCartasTrampa(null, null);
 
-        CartaTrampa algo = fabrica.obtenerCarta("CartaSinNombre");
+        CartaTrampa algo = fabrica.getCarta("CartaSinNombre");
     }
 
     @Test(expected = CartaInvalidaError.class)
@@ -60,7 +60,7 @@ public class exepcionesTest
 
         FabricaCartasMonstruo fabrica = new FabricaCartasMonstruo(null, null);
 
-        CartaMonstruo algo = fabrica.obtenerCarta("CartaSinNombre");
+        CartaMonstruo algo = fabrica.getCarta("CartaSinNombre");
     }
 
     @Test(expected = NoHayCartasParaSacrificarError.class)

@@ -17,7 +17,7 @@ public class MagicCylinder extends CartaTrampa
     public void efecto(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
     {
 
-        oponente.disminuirPuntosVida(cartaAtacante.obtenerPuntosDeAtaque());
+        oponente.disminuirPuntosVida(cartaAtacante.getPuntosDeAtaque());
     }
 
     public void efecto()

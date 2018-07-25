@@ -40,7 +40,7 @@ public class Sacrificio
         while (iterador.hasNext())
         {
             CartaMonstruo cartaActual = iterador.next();
-            if (cartaActual.obtenerNombre() == nombreCarta)
+            if (cartaActual.getNombre() == nombreCarta)
             {
                 return this.cartasASacrificar.remove(this.cartasASacrificar.indexOf(cartaActual));
             }
@@ -56,7 +56,7 @@ public class Sacrificio
 
         while (iterador.hasNext())
         {
-            if (iterador.next().obtenerNombre() == nombreCarta)
+            if (iterador.next().getNombre() == nombreCarta)
             {
                 cantidadSacrificios++;
             }

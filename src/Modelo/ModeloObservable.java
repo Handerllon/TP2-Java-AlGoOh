@@ -15,7 +15,7 @@ public interface ModeloObservable
     void notificarObservadores();
 
     // ------------------------------------
-    // Aquí va lo que se le quiere pedir al modelo siendo este un observable.
+    // Métodos de consultas.
     // ------------------------------------
     ArrayList<CartaMonstruo> getCartasEnRegionMonstruosJugador();
 

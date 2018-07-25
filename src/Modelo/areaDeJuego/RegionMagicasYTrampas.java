@@ -34,7 +34,7 @@ public class RegionMagicasYTrampas extends Region<Carta>
         carta.efecto();
     }
 
-    public CartaTrampa obtenerCartaTrampaAActivar()
+    public CartaTrampa getCartaTrampaAActivar()
     {
 
         CartaTrampa cartaTrampaBuscada = null;

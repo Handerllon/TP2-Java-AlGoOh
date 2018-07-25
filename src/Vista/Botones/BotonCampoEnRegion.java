@@ -36,7 +36,7 @@ public class BotonCampoEnRegion extends Button
         boton.setStyle(estiloRegion);
     }
 
-    public Button obtenerBoton()
+    public Button getBoton()
     {
 
         return boton;
@@ -56,7 +56,7 @@ public class BotonCampoEnRegion extends Button
         this.carta = unaCartaCampo;
         this.boton = this.crearBotonParaCartaEnRegion();
         Image image = new Image(getClass().getClassLoader()
-                .getResource(this.carta.obtenerLocacionDeImagen()).toString());
+                .getResource(this.carta.getLocacionDeImagen()).toString());
         Tooltip tp = new Tooltip();
         tp.setGraphic(new ImageView(image));
 
@@ -70,7 +70,7 @@ public class BotonCampoEnRegion extends Button
         //TODO: Hacer opciones que tiene una cartaCampo una vez que fue jugada
         botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
         botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource(this.carta.obtenerLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+                .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 
         return botonEnRegion;
     }

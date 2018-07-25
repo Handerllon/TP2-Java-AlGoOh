@@ -21,13 +21,13 @@ public class RegionMagicasYTrampasVista implements ObservadorDeModelo
     public GridPane getGridJugador()
     {
 
-        return gridJugador.obtenerGrid();
+        return gridJugador.getGrid();
     }
 
     public GridPane getGridOponente()
     {
 
-        return gridOponente.obtenerGrid();
+        return gridOponente.getGrid();
     }
 
     @Override

@@ -38,7 +38,7 @@ public class Vista implements ObservadorDeModelo
 
         this.controlador = controlador;
 
-        this.escenaVista = EscenaBienvenida.obtenerInstancia(this.modelo, this);
+        this.escenaVista = EscenaBienvenida.getInstancia(this.modelo, this);
     }
 
     // --------------------------------------------------------------------
@@ -50,7 +50,7 @@ public class Vista implements ObservadorDeModelo
         this.escenaVista.dibujarEscena();
     }
 
-    public void establecerProximaEscena(EscenaVista escenaVista)
+    public void setProximaEscena(EscenaVista escenaVista)
     {
         this.escenaVista = escenaVista;
     }
@@ -58,22 +58,22 @@ public class Vista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     // Métodos de consulta.
     // --------------------------------------------------------------------
-    public Stage obtenerPrimaryStage()
+    public Stage getPrimaryStage()
     {
         return this.primaryStage;
     }
 
-    public IControlador obtenerControlador()
+    public IControlador getControlador()
     {
         return this.controlador;
     }
 
-    public double obtenerResolucionHorizontal()
+    public double getResolucionHorizontal()
     {
         return this.RESOLUCION_HORIZONTAL;
     }
 
-    public double obtenerResolucionVertical()
+    public double getResolucionVertical()
     {
         return this.RESOLUCION_VERTICAL;
     }
@@ -135,7 +135,7 @@ public class Vista implements ObservadorDeModelo
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeOne)
         {
-            this.obtenerControlador().cerrarPrograma();
+            this.getControlador().cerrarPrograma();
         } else
         {
             // El usuario cerro la ventana o apretó NO.

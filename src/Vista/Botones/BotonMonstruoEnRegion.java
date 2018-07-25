@@ -65,7 +65,7 @@ public class BotonMonstruoEnRegion extends Button
 
         //-----Tooltip del boton------
         Image image = new Image(getClass().getClassLoader()
-                .getResource(this.carta.obtenerLocacionDeImagen()).toString());
+                .getResource(this.carta.getLocacionDeImagen()).toString());
         Tooltip tp = new Tooltip();
         tp.setGraphic(new ImageView(image));
 
@@ -75,7 +75,7 @@ public class BotonMonstruoEnRegion extends Button
         //----- Fondo del boton--------
         botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
         botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource(this.carta.obtenerLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+                .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         //------------------------------
 
         //----Opciones Del Boton -------
@@ -96,10 +96,10 @@ public class BotonMonstruoEnRegion extends Button
 
     private void MonstruoEnRegionBtn_Click(Popup popup, Button botonEnRegion)
     {
-        popup.show(this.vista.obtenerPrimaryStage());
+        popup.show(this.vista.getPrimaryStage());
         javafx.geometry.Point2D point = botonEnRegion.localToScene(0.0, 0.0);
-        popup.setX(this.vista.obtenerPrimaryStage().getX() + point.getX());
-        popup.setY(this.vista.obtenerPrimaryStage().getY() + point.getY());
+        popup.setX(this.vista.getPrimaryStage().getX() + point.getX());
+        popup.setY(this.vista.getPrimaryStage().getY() + point.getY());
     }
 
     private VBox crearVBoxCartaMonstruo(VBox vbox, Popup popup)
@@ -152,7 +152,7 @@ public class BotonMonstruoEnRegion extends Button
     private void cartaMonstruoAtacarOponenteBtn_Click()
     {
 
-        this.vista.obtenerControlador().atacar(this.carta, this.jugadorAsociado);
+        this.vista.getControlador().atacar(this.carta, this.jugadorAsociado);
     }
 
     private void cartaMonstruoAtacarMonstruoBtn_Click(int i, ArrayList<CartaMonstruo> cartasOponente)
@@ -161,17 +161,17 @@ public class BotonMonstruoEnRegion extends Button
         // TODO: ojo con esta condición, no estoy seguro que un array devuelva null si no está el i-ésimo elemento.
         if (cartasOponente.get(i) != null)
         {
-            this.vista.obtenerControlador().atacar(this.carta, cartasOponente.get(i), this.jugadorAsociado);
+            this.vista.getControlador().atacar(this.carta, cartasOponente.get(i), this.jugadorAsociado);
         }
     }
 
     private void cartaMonstruoCambiarModoBtn_Click()
     {
-        this.vista.obtenerControlador().cambiarModoCartaMonstruo(this.carta, null);
+        this.vista.getControlador().cambiarModoCartaMonstruo(this.carta, null);
     }
 
     private void flipCartaMonstruoBtn_Click()
     {
-        this.vista.obtenerControlador().flipCartaMonstruo(this.carta, null);
+        this.vista.getControlador().flipCartaMonstruo(this.carta, null);
     }
 }

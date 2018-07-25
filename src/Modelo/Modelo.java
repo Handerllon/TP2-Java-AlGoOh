@@ -38,14 +38,14 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         this.jugador1.agregarObsevadorFinDeJuego(this);
         this.jugador2.agregarObsevadorFinDeJuego(this);
 
-        this.jugador1.obtenerMazo().agregarObsevadorFinDeJuego(this);
-        this.jugador2.obtenerMazo().agregarObsevadorFinDeJuego(this);
+        this.jugador1.getMazo().agregarObsevadorFinDeJuego(this);
+        this.jugador2.getMazo().agregarObsevadorFinDeJuego(this);
 
-        this.jugador1.obtenerMano().agregarObsevadorFinDeJuego(this);
-        this.jugador2.obtenerMano().agregarObsevadorFinDeJuego(this);
+        this.jugador1.getMano().agregarObsevadorFinDeJuego(this);
+        this.jugador2.getMano().agregarObsevadorFinDeJuego(this);
     }
 
-    public static Modelo obtenerInstancia()
+    public static Modelo getInstancia()
     {
         if (instancia == null)
         {
@@ -59,29 +59,27 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         throw new CloneNotSupportedException();
     }
 
-    public void establecerNombreJugador(String nombreJugador)
+    public void setNombreJugador(String nombreJugador)
     {
         this.jugador1.establecerNombre(nombreJugador);
     }
 
-    public void establecerNombreOponente(String nombreJugador)
+    public void setNombreOponente(String nombreJugador)
     {
         this.jugador2.establecerNombre(nombreJugador);
     }
 
-    public Jugador getJugador()
-    {
-        return this.jugador1;
-    }
-
-    public Jugador getOponente()
-    {
-        return this.jugador2;
-    }
-
-    public CausaFinJuego obtenerCausaFinJuego()
+    public CausaFinJuego getCausaFinJuego()
     {
         return this.causaFinJuego;
+    }
+
+    // ------------------------------------
+    // Métodos de terminación.
+    // ------------------------------------
+    public void terminar()
+    {
+        System.out.println("Terminando Modelo.");
     }
 
     // --------------------------------------------------------------------
@@ -143,69 +141,82 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         }
     }
 
-    // --------------------------------------------------------------------
+    // ------------------------------------
     // Métodos de consultas.
-    // --------------------------------------------------------------------
+    // ------------------------------------
     @Override
     public ArrayList<CartaMonstruo> getCartasEnRegionMonstruosJugador()
     {
-        return this.jugador1.obtenerRegionMonstruos().obtenerCartas();
+        return this.jugador1.obtenerRegionMonstruos().getCartas();
     }
 
     @Override
     public ArrayList<CartaMonstruo> getCartasEnRegionMonstruosOponente()
     {
-        return this.jugador2.obtenerRegionMonstruos().obtenerCartas();
+        return this.jugador2.obtenerRegionMonstruos().getCartas();
     }
 
     @Override
     public ArrayList<Carta> getCartasEnRegionMagicasYTrampasJugador()
     {
-        return this.jugador1.obtenerRegionMagicasYTrampas().obtenerCartas();
+        return this.jugador1.obtenerRegionMagicasYTrampas().getCartas();
     }
 
     @Override
     public ArrayList<Carta> getCartasEnRegionMagicasYTrampasOponente()
     {
-        return this.jugador2.obtenerRegionMagicasYTrampas().obtenerCartas();
+        return this.jugador2.obtenerRegionMagicasYTrampas().getCartas();
     }
 
     @Override
     public ArrayList<CartaCampo> getCartasEnRegionCampoJugador()
     {
-        return this.jugador1.obtenerRegionCampo().obtenerCartas();
+        return this.jugador1.obtenerRegionCampo().getCartas();
     }
 
     @Override
     public ArrayList<CartaCampo> getCartasEnRegionCampoOponente()
     {
-        return this.jugador2.obtenerRegionCampo().obtenerCartas();
+        return this.jugador2.obtenerRegionCampo().getCartas();
     }
 
     @Override
     public int getCantidadCartasRestantesMazoJugador()
     {
-        return this.jugador1.obtenerMazo().cantidadCartas();
+        return this.jugador1.getMazo().cantidadCartas();
     }
 
     @Override
     public int getCantidadCartasRestantesMazoOponente()
     {
-        return this.jugador2.obtenerMazo().cantidadCartas();
+        return this.jugador2.getMazo().cantidadCartas();
     }
 
     @Override
     public ArrayList<Carta> getCartasManoJugador()
     {
-        return this.jugador1.obtenerMano().obtenerCartas();
+        return this.jugador1.getMano().obtenerCartas();
     }
 
     @Override
     public ArrayList<Carta> getCartasManoOponente()
     {
-        return this.jugador2.obtenerMano().obtenerCartas();
+        return this.jugador2.getMano().obtenerCartas();
     }
 
+    public Jugador getJugador()
+    {
+        return this.jugador1;
+    }
+
+    public Jugador getOponente()
+    {
+        return this.jugador2;
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de interfaz modelo.
+    // --------------------------------------------------------------------
     // ------------------------------------
     // Métodos de juego de cartas.
     // ------------------------------------
@@ -242,7 +253,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     {
         if (carta.esMonstruo() == true)
         {
-            carta.obtenerPropietario().enviarARegion((CartaMonstruo) carta);
+            carta.getPropietario().enviarARegion((CartaMonstruo) carta);
         } else
         {
             throw new NoEsUnaCartaMonstruo();
@@ -259,7 +270,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         {
             if (((CartaMonstruo) carta).getEstrellas() >= 5)
             {
-                return carta.obtenerPropietario().obtenerRegionMonstruos().cantidadCartas() >= ((CartaMonstruo) carta)
+                return carta.getPropietario().obtenerRegionMonstruos().cantidadCartas() >= ((CartaMonstruo) carta)
                         .getEstrellas();
             }
             return true;
@@ -271,7 +282,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     {
         if (carta.esMonstruo() == true)
         {
-            carta.obtenerPropietario().enviarARegion((CartaMonstruo) carta, sacrificios);
+            carta.getPropietario().enviarARegion((CartaMonstruo) carta, sacrificios);
         } else
         {
             throw new NoEsUnaCartaMonstruo();
@@ -361,20 +372,12 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     @Override
     public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada)
     {
-        cartaAtacante.obtenerPropietario().atacarOponente(cartaAtacante, cartaAtacada);
+        cartaAtacante.getPropietario().atacarOponente(cartaAtacante, cartaAtacada);
     }
 
     @Override
     public void atacar(CartaMonstruo cartaAtacante)
     {
-        cartaAtacante.obtenerPropietario().atacarOponente(cartaAtacante);
-    }
-
-    // ------------------------------------
-    // Métodos de terminación.
-    // ------------------------------------
-    public void terminar()
-    {
-        System.out.println("Terminando Modelo.");
+        cartaAtacante.getPropietario().atacarOponente(cartaAtacante);
     }
 }

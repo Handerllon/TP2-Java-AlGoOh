@@ -24,7 +24,7 @@ public final class EscenaBienvenida implements EscenaVista
     private static String direccion_video_bienvenida = "src/resources/video/welcome_yugioh.mp4";
     private static int ANCHO_CAMPO_NOMBRE = 15;
     private static Vista vista;
-    private static EscenaVista proximaEscena = EscenaNula.obtenerInstancia();
+    private static EscenaVista proximaEscena = EscenaNula.getInstancia();
     private static MediaPlayer mplayer;
     private static EscenaBienvenida instancia = null;
     private ModeloObservable modelo;
@@ -39,11 +39,11 @@ public final class EscenaBienvenida implements EscenaVista
     {
         this.modelo = modelo;
         this.vista = vista;
-        this.primaryStage = this.vista.obtenerPrimaryStage();
+        this.primaryStage = this.vista.getPrimaryStage();
         this.inicializarEscena();
     }
 
-    public static EscenaBienvenida obtenerInstancia(ModeloObservable modelo, Vista vista)
+    public static EscenaBienvenida getInstancia(ModeloObservable modelo, Vista vista)
     {
         if (instancia == null)
         {
@@ -133,16 +133,16 @@ public final class EscenaBienvenida implements EscenaVista
     // --------------------------------------------------------------------
     private void salirBtn_click()
     {
-        this.vista.obtenerControlador().confirmarSalirPrograma();
+        this.vista.getControlador().confirmarSalirPrograma();
     }
 
     private void okBtn_click()
     {
         // TODO: estas líneas deberían encapsular en un Command que levante el controlador.
-        this.vista.obtenerControlador().establecerNombreJugador(this.txtJugador1.getText());
-        this.vista.obtenerControlador().establecerNombreOponente(this.txtJugador2.getText());
+        this.vista.getControlador().setNombreJugador(this.txtJugador1.getText());
+        this.vista.getControlador().setNombreOponente(this.txtJugador2.getText());
 
-        this.vista.establecerProximaEscena(this.cambiarEscena());
+        this.vista.setProximaEscena(this.cambiarEscena());
         this.cerrar();
         // Ahora pasamos a la escena donde se muestra qué jugador salió sorteado.
         this.vista.mostrar();
@@ -154,7 +154,7 @@ public final class EscenaBienvenida implements EscenaVista
     @Override
     public EscenaVista cambiarEscena()
     {
-        return EscenaSorteoJugadorInicial.obtenerInstancia(this.modelo, this.vista);
+        return EscenaSorteoJugadorInicial.getInstancia(this.modelo, this.vista);
     }
 
     @Override
@@ -180,7 +180,7 @@ public final class EscenaBienvenida implements EscenaVista
     public void finDeJuego()
     {
         this.stopMedia();
-        this.vista.establecerProximaEscena(EscenaFinDeJuego.obtenerInstancia(this.modelo, this.vista));
+        this.vista.setProximaEscena(EscenaFinDeJuego.getInstancia(this.modelo, this.vista));
     }
 
     @Override

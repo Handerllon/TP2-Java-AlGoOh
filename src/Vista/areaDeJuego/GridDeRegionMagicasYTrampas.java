@@ -64,7 +64,7 @@ public class GridDeRegionMagicasYTrampas extends GridPane
         }
     }
 
-    public GridPane obtenerGrid()
+    public GridPane getGrid()
     {
 
         return this.grid;

@@ -22,12 +22,12 @@ public class AlGoOh extends Application
         primaryStage.setTitle("AlGoOh");
         primaryStage.setOnCloseRequest(e -> onCloseRequest_click(e));
 
-        this.modelo = Modelo.obtenerInstancia();
-        this.controlador = Controlador.obtenerInstancia(this.modelo);
+        this.modelo = Modelo.getInstancia();
+        this.controlador = Controlador.getInstancia(this.modelo);
 
         this.vista = new Vista(this.modelo, this.controlador, primaryStage);
 
-        this.controlador.establecerVista(this.vista);
+        this.controlador.setVista(this.vista);
 
         this.controlador.iniciar();
     }

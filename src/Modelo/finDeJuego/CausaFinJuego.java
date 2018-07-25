@@ -18,12 +18,12 @@ public abstract class CausaFinJuego
         this.jugadorAsociadoAlFin = jugadorAsociadoAlFin;
     }
 
-    public String obtenerCausa()
+    public String getCausa()
     {
         return this.tipoCausa;
     }
 
-    public String obtenerNombreJugador()
+    public String getNombreJugador()
     {
         return this.jugadorAsociadoAlFin.obtenerNombre();
     }

@@ -25,28 +25,28 @@ public class Mazo implements FinDeJuegoObservable
 
         FabricaCartas fabricaCartas = new FabricaCartas(jugador, oponente);
 
-        ArrayList<String> nombresMonstruosNoNormales = fabricaCartas.obtenerNombresCartasMonstruosNoNormales();
+        ArrayList<String> nombresMonstruosNoNormales = fabricaCartas.getNombresCartasMonstruosNoNormales();
         for (int i = 0; i < nombresMonstruosNoNormales.size() && cantidadCartas > 0; i++)
         {
             cartas.push(fabricaCartas.crearCartaMonstruo(nombresMonstruosNoNormales.get(i)));
             cantidadCartas--;
         }
 
-        ArrayList<String> nombresMagicas = fabricaCartas.obtenerNombresCartasMagicas();
+        ArrayList<String> nombresMagicas = fabricaCartas.getNombresCartasMagicas();
         for (int i = 0; i < nombresMagicas.size() && cantidadCartas > 0; i++)
         {
             cartas.push(fabricaCartas.crearCartaMagica(nombresMagicas.get(i)));
             cantidadCartas--;
         }
 
-        ArrayList<String> nombresCampo = fabricaCartas.obtenerNombresCartasCampo();
+        ArrayList<String> nombresCampo = fabricaCartas.getNombresCartasCampo();
         for (int i = 0; i < nombresCampo.size() && cantidadCartas > 0; i++)
         {
             cartas.push(fabricaCartas.crearCartaCampo(nombresCampo.get(i)));
             cantidadCartas--;
         }
 
-        ArrayList<String> nombresTrampas = fabricaCartas.obtenerNombresCartasTrampa();
+        ArrayList<String> nombresTrampas = fabricaCartas.getNombresCartasTrampa();
         for (int i = 0; i < nombresTrampas.size() && cantidadCartas > 0; i++)
         {
             cartas.push(fabricaCartas.crearCartaTrampa(nombresTrampas.get(i)));
@@ -54,7 +54,7 @@ public class Mazo implements FinDeJuegoObservable
         }
 
         // Agrego todas las que se pueden repetir.
-        ArrayList<String> nombresMonstruosNormales = fabricaCartas.obtenerNombresCartasMonstruosNormales();
+        ArrayList<String> nombresMonstruosNormales = fabricaCartas.getNombresCartasMonstruosNormales();
         for (int i = 0; cantidadCartas > 0; i++)
         {
             if (i == nombresMonstruosNormales.size())
@@ -86,7 +86,7 @@ public class Mazo implements FinDeJuegoObservable
         } else
         {
             this.notificarFinDeJuego(new CausaSinCartasEnMazo(this.jugador));
-            return CartaNula.obtenerInstancia();
+            return CartaNula.getInstancia();
         }
     }
 

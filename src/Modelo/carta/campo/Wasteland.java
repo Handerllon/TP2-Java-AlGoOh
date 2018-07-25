@@ -20,8 +20,8 @@ public class Wasteland extends CartaCampo
 
     public void efecto()
     {
-        ArrayList<CartaMonstruo> cartasMonstruoJugador = this.jugador.obtenerCartasEnAreaMonstruo();
-        ArrayList<CartaMonstruo> cartasMonstruoOponente = this.oponente.obtenerCartasEnAreaMonstruo();
+        ArrayList<CartaMonstruo> cartasMonstruoJugador = this.jugador.getCartasEnAreaMonstruo();
+        ArrayList<CartaMonstruo> cartasMonstruoOponente = this.oponente.getCartasEnAreaMonstruo();
 
         cartasMonstruoJugador.forEach(item -> this.modificarPuntosAtaque(item));
         cartasMonstruoOponente.forEach(item -> this.modificarPuntosDefensa(item));
@@ -29,8 +29,8 @@ public class Wasteland extends CartaCampo
 
     public void deshacerEfecto()
     {
-        ArrayList<CartaMonstruo> cartasMonstruoJugador = this.jugador.obtenerCartasEnAreaMonstruo();
-        ArrayList<CartaMonstruo> cartasMonstruoOponente = this.oponente.obtenerCartasEnAreaMonstruo();
+        ArrayList<CartaMonstruo> cartasMonstruoJugador = this.jugador.getCartasEnAreaMonstruo();
+        ArrayList<CartaMonstruo> cartasMonstruoOponente = this.oponente.getCartasEnAreaMonstruo();
 
         cartasMonstruoJugador.forEach(item -> this.restaurarPuntosAtaque(item));
         cartasMonstruoOponente.forEach(item -> this.restaurarPuntosDefensa(item));
@@ -38,7 +38,7 @@ public class Wasteland extends CartaCampo
 
     public void efecto(CartaMonstruo carta)
     {
-        if (carta.obtenerPropietario() == this.jugador)
+        if (carta.getPropietario() == this.jugador)
         {
             this.modificarPuntosAtaque(carta);
         } else
@@ -49,7 +49,7 @@ public class Wasteland extends CartaCampo
 
     public void deshacerEfecto(CartaMonstruo carta)
     {
-        if (carta.obtenerPropietario() == this.jugador)
+        if (carta.getPropietario() == this.jugador)
         {
             this.restaurarPuntosAtaque(carta);
         } else

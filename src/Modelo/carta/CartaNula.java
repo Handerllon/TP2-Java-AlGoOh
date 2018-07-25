@@ -12,7 +12,7 @@ public final class CartaNula extends Carta
         super(null, null, null);
     }
 
-    public static CartaNula obtenerInstancia()
+    public static CartaNula getInstancia()
     {
         if (instancia == null)
         {

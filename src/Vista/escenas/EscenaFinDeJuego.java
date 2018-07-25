@@ -39,12 +39,12 @@ public final class EscenaFinDeJuego implements EscenaVista
     {
         this.modelo = modelo;
         this.vista = vista;
-        this.primaryStage = this.vista.obtenerPrimaryStage();
+        this.primaryStage = this.vista.getPrimaryStage();
 
         this.inicializarEscena();
     }
 
-    public static EscenaFinDeJuego obtenerInstancia(ModeloObservable modelo, Vista vista)
+    public static EscenaFinDeJuego getInstancia(ModeloObservable modelo, Vista vista)
     {
         if (instancia == null)
         {
@@ -66,16 +66,16 @@ public final class EscenaFinDeJuego implements EscenaVista
 
         File f;
 
-        CausaFinJuego causaFinJuego = this.vista.obtenerControlador().obtenerCausaFinDeJuego();
+        CausaFinJuego causaFinJuego = this.vista.getControlador().getCausaFinDeJuego();
 
-        String nombreJugadorFinalizo = causaFinJuego.obtenerNombreJugador();
+        String nombreJugadorFinalizo = causaFinJuego.getNombreJugador();
         Label lblTitulo = new Label();
 
         lblTitulo.setMinWidth(100);
         lblTitulo.setAlignment(Pos.BOTTOM_CENTER);
         lblTitulo.setStyle("-fx-font-weight: bolder; -fx-font-size: 12pt");
 
-        if (causaFinJuego.obtenerCausa() == (new CausaCincoPartesExodiaReunidas(null)).obtenerCausa())
+        if (causaFinJuego.getCausa() == (new CausaCincoPartesExodiaReunidas(null)).getCausa())
         {
             f = new File(direccion_sonido_gano);
             lblTitulo.setText(nombreJugadorFinalizo + " GANADOR");
@@ -130,7 +130,7 @@ public final class EscenaFinDeJuego implements EscenaVista
     @Override
     public EscenaVista cambiarEscena()
     {
-        return EscenaNula.obtenerInstancia();
+        return EscenaNula.getInstancia();
     }
 
     @Override

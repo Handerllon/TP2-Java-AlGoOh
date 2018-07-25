@@ -12,7 +12,7 @@ public class FabricaCartasCampoTest
 
         FabricaCartasCampo fabrica = new FabricaCartasCampo(null, null);
 
-        CartaCampo unaCartaCampo = fabrica.obtenerCarta("Sogen");
+        CartaCampo unaCartaCampo = fabrica.getCarta("Sogen");
 
         CartaCampo cartaEsperada = new Sogen(null, null);
 

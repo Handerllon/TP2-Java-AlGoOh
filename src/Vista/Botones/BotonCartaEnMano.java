@@ -29,7 +29,7 @@ public class BotonCartaEnMano extends Button
         this.jugadorAsociado = jugador;
         this.carta = carta;
         this.vista = vista;
-        this.primaryStage = vista.obtenerPrimaryStage();
+        this.primaryStage = vista.getPrimaryStage();
 
         if (carta.getClass() == CartaMonstruo.class)
         {
@@ -53,7 +53,7 @@ public class BotonCartaEnMano extends Button
         Button boton = new Button();
 
         Image image = new Image(getClass().getClassLoader()
-                .getResource(this.carta.obtenerLocacionDeImagen()).toString());
+                .getResource(this.carta.getLocacionDeImagen()).toString());
         Tooltip tp = new Tooltip();
         tp.setGraphic(new ImageView(image));
 
@@ -93,7 +93,7 @@ public class BotonCartaEnMano extends Button
         Button boton = new Button();
 
         Image image = new Image(getClass().getClassLoader()
-                .getResource(this.carta.obtenerLocacionDeImagen()).toString());
+                .getResource(this.carta.getLocacionDeImagen()).toString());
         Tooltip tp = new Tooltip();
         tp.setGraphic(new ImageView(image));
 
@@ -136,7 +136,7 @@ public class BotonCartaEnMano extends Button
         Button boton = new Button();
 
         Image image = new Image(getClass().getClassLoader()
-                .getResource(this.carta.obtenerLocacionDeImagen()).toString());
+                .getResource(this.carta.getLocacionDeImagen()).toString());
         Tooltip tp = new Tooltip();
         tp.setGraphic(new ImageView(image));
 
@@ -197,24 +197,24 @@ public class BotonCartaEnMano extends Button
     // --------------------------------------------------------------------
     private void setBocaAbajoBtn_Click()
     {
-        this.vista.obtenerControlador().flipBocaAbajo(this.carta, this.jugadorAsociado);
+        this.vista.getControlador().flipBocaAbajo(this.carta, this.jugadorAsociado);
     }
 
     private void setBocaArribaBtn_Click()
     {
 
-        this.vista.obtenerControlador().flipBocaArriba(this.carta, this.jugadorAsociado);
+        this.vista.getControlador().flipBocaArriba(this.carta, this.jugadorAsociado);
     }
 
     private void setModoAtaqueBtn_Click()
     {
-        this.vista.obtenerControlador().setModoAtaque(this.carta, this.jugadorAsociado);
+        this.vista.getControlador().setModoAtaque(this.carta, this.jugadorAsociado);
     }
 
     private void setModoDefensaBtn_Click()
     {
 
-        this.vista.obtenerControlador().setModoDefensa(this.carta, this.jugadorAsociado);
+        this.vista.getControlador().setModoDefensa(this.carta, this.jugadorAsociado);
     }
 
     private Object cartaMonstruoJugarBtn_Click()
@@ -226,16 +226,16 @@ public class BotonCartaEnMano extends Button
     private void jugarCartaTrampaBtn_Click()
     {
 
-        this.vista.obtenerControlador().setCartaTrampa(this.carta, this.jugadorAsociado);
+        this.vista.getControlador().setCartaTrampa(this.carta, this.jugadorAsociado);
     }
 
     private void setCartaMagicaBtn_Click()
     {
-        this.vista.obtenerControlador().setCartaMagica(this.carta, this.jugadorAsociado);
+        this.vista.getControlador().setCartaMagica(this.carta, this.jugadorAsociado);
     }
 
     private void activarCartaMagicaBtn_Click()
     {
-        this.vista.obtenerControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
+        this.vista.getControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
     }
 }

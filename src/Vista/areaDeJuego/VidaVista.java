@@ -26,8 +26,8 @@ public class VidaVista implements ObservadorDeModelo
     private void inicializar()
     {
 
-        this.vidaJugador.setPrefSize((this.vista.obtenerResolucionHorizontal() * 200) / 1920, (this.vista.obtenerResolucionVertical() * 200) / 1080);
-        this.vidaOponente.setPrefSize((this.vista.obtenerResolucionHorizontal() * 200) / 1920, (this.vista.obtenerResolucionVertical() * 200) / 1080);
+        this.vidaJugador.setPrefSize((this.vista.getResolucionHorizontal() * 200) / 1920, (this.vista.getResolucionVertical() * 200) / 1080);
+        this.vidaOponente.setPrefSize((this.vista.getResolucionHorizontal() * 200) / 1920, (this.vista.getResolucionVertical() * 200) / 1080);
 
         this.vidaJugador.setText("    Vida: \n"
                 + "    8000");
@@ -42,13 +42,13 @@ public class VidaVista implements ObservadorDeModelo
         this.vidaOponente.setTextFill(Color.web("#910101"));
     }
 
-    public Label obtenerVidaJugador()
+    public Label getVidaJugador()
     {
 
         return this.vidaJugador;
     }
 
-    public Label obtenerVidaOponente()
+    public Label getVidaOponente()
     {
 
         return this.vidaOponente;

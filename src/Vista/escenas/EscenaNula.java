@@ -14,7 +14,7 @@ public final class EscenaNula implements EscenaVista
 
     }
 
-    public static EscenaNula obtenerInstancia()
+    public static EscenaNula getInstancia()
     {
         if (instancia == null)
         {

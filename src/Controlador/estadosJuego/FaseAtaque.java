@@ -14,7 +14,7 @@ public final class FaseAtaque implements Fase
         this.maquinaTurnos = maquinaTurnos;
     }
 
-    public static FaseAtaque obtenerInstancia(MaquinaTurnos maquinaTurnos)
+    public static FaseAtaque getInstancia(MaquinaTurnos maquinaTurnos)
     {
         if (instancia == null)
         {
@@ -34,7 +34,7 @@ public final class FaseAtaque implements Fase
     @Override
     public Fase avanzar()
     {
-        return FaseTrampas.obtenerInstancia(this.maquinaTurnos);
+        return FaseTrampas.getInstancia(this.maquinaTurnos);
     }
 
     @Override
@@ -72,8 +72,4 @@ public final class FaseAtaque implements Fase
     {
         return false;
     }
-//    public void finalizarFase()
-//    {
-//        this.vista.actualizarEstado();
-//    }
 }

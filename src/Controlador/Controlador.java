@@ -29,7 +29,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         this.modelo.agregarObsevadorFinDeJuego(this);
     }
 
-    public static Controlador obtenerInstancia(Modelo modelo)
+    public static Controlador getInstancia(Modelo modelo)
     {
         if (instancia == null)
         {
@@ -44,7 +44,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         throw new CloneNotSupportedException();
     }
 
-    public void establecerVista(Vista vista)
+    public void setVista(Vista vista)
     {
         this.vista = vista;
     }
@@ -54,7 +54,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     // ------------------------------------
     public void iniciar()
     {
-        this.maquinaTurnos = MaquinaTurnos.obtenerInstancia(this.modelo.getJugador(), this.modelo.getOponente());
+        this.maquinaTurnos = MaquinaTurnos.getInstancia(this.modelo.getJugador(), this.modelo.getOponente());
         // Vista va a mostrar la pantalla de bienvenida.
         this.vista.mostrar();
     }
@@ -68,14 +68,14 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     // --------------------------------------------------------------------
     // Interfaz con el modelo.
     // --------------------------------------------------------------------
-    public void establecerNombreJugador(String text)
+    public void setNombreJugador(String text)
     {
-        this.modelo.establecerNombreJugador(text);
+        this.modelo.setNombreJugador(text);
     }
 
-    public void establecerNombreOponente(String text)
+    public void setNombreOponente(String text)
     {
-        this.modelo.establecerNombreOponente(text);
+        this.modelo.setNombreOponente(text);
     }
 
     // --------------------------------------------------------------------
@@ -89,7 +89,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         this.modelo.terminar();
     }
 
-    public CausaFinJuego obtenerCausaFinDeJuego()
+    public CausaFinJuego getCausaFinDeJuego()
     {
         return this.causaFinDeJuego;
     }
@@ -128,13 +128,13 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
 
     private boolean jugadorPuedeJugar(Jugador jugador)
     {
-        return this.maquinaTurnos.obtenerJugadorActual() == jugador;
+        return this.maquinaTurnos.getJugadorActual() == jugador;
     }
 
     @Override
     public String nombreJugadorActual()
     {
-        return this.maquinaTurnos.obtenerJugadorActual().obtenerNombre();
+        return this.maquinaTurnos.getJugadorActual().obtenerNombre();
     }
 
     @Override
@@ -157,7 +157,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
             throw new NoSePuedeTomarCartaError();
         } else
         {
-            this.modelo.tomarCarta(this.maquinaTurnos.obtenerJugadorActual());
+            this.modelo.tomarCarta(this.maquinaTurnos.getJugadorActual());
             this.maquinaTurnos.seTomoCartaEnTurno();
         }
     }
@@ -227,7 +227,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     private boolean sePuedeMandarARegion(Carta carta, Jugador solicitante)
     {
 
-        if (carta.obtenerPropietario() != solicitante)
+        if (carta.getPropietario() != solicitante)
         {
             return false;
             //throw new SolicitanteNoEsPropietarioDeCartaError();
@@ -281,7 +281,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
 
     private boolean sePuedeEnviarARegionMyT(Carta carta, Jugador solicitante)
     {
-        if (carta.obtenerPropietario() != solicitante)
+        if (carta.getPropietario() != solicitante)
         {
             return false;
             //throw new SolicitanteNoEsPropietarioDeCartaError();
@@ -312,7 +312,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
 
     private boolean sePuedeEnviarMagicaARegionMyT(Carta carta, Jugador solicitante)
     {
-        if (carta.obtenerPropietario() != solicitante)
+        if (carta.getPropietario() != solicitante)
         {
             return false;
             //throw new SolicitanteNoEsPropietarioDeCartaError();

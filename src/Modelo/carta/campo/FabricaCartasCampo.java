@@ -15,20 +15,20 @@ public class FabricaCartasCampo
         this.oponente = oponente;
     }
 
-    public ArrayList<String> obtenerNombres()
+    public ArrayList<String> getNombres()
     {
         ArrayList<String> nombres = new ArrayList<String>();
 
         String nombre;
-        nombre = new Sogen(jugador, oponente).obtenerNombre();
+        nombre = new Sogen(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new Wasteland(jugador, oponente).obtenerNombre();
+        nombre = new Wasteland(jugador, oponente).getNombre();
         nombres.add(nombre);
 
         return nombres;
     }
 
-    public CartaCampo obtenerCarta(String nombreCarta)
+    public CartaCampo getCarta(String nombreCarta)
     {
         switch (nombreCarta)
         {

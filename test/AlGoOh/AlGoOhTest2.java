@@ -140,7 +140,7 @@ public class AlGoOhTest2
 
         CartaMagica cartaOllaDeLaCodicia = fabricaCartasJugador1.crearCartaMagica("Pot of Greed");
 
-        jugador1.obtenerMano().agregarCarta(cartaOllaDeLaCodicia);
+        jugador1.getMano().agregarCarta(cartaOllaDeLaCodicia);
 
         int cartasAntesDeJugar = jugador1.cantidadDeCartasEnMano();
 
@@ -384,18 +384,18 @@ public class AlGoOhTest2
     public void test10SeExtraenTodasLasCartasDelMazoDelJugadorYEstePierde()
     {
 
-        Modelo modelo = Modelo.obtenerInstancia();
+        Modelo modelo = Modelo.getInstancia();
         ;
-        modelo.establecerNombreJugador("J1");
-        modelo.establecerNombreOponente("J1");
+        modelo.setNombreJugador("J1");
+        modelo.setNombreOponente("J1");
 
         Jugador jugador = modelo.getJugador();
 
         for (int k = 0; k <= 40; k++)
-            jugador.obtenerMazo().tomarCarta();
+            jugador.getMazo().tomarCarta();
 
-        CausaFinJuego causaFinJuego = modelo.obtenerCausaFinJuego();
-        assertTrue(causaFinJuego.obtenerCausa() == "Sin cartas en el mazo");
+        CausaFinJuego causaFinJuego = modelo.getCausaFinJuego();
+        assertTrue(causaFinJuego.getCausa() == "Sin cartas en el mazo");
     }
 
     //    Colocar las 5 partes de exodia en la mano de un jugador, verificar que la partida
@@ -403,12 +403,12 @@ public class AlGoOhTest2
     @Test
     public void test11SeColocanLasCincoPartesDeExodiaEnLaManoDeUnJugadorYEsteGanaLaPartida()
     {
-        Modelo modelo = Modelo.obtenerInstancia();
+        Modelo modelo = Modelo.getInstancia();
         ;
-        modelo.establecerNombreJugador("J1");
-        modelo.establecerNombreOponente("J1");
+        modelo.setNombreJugador("J1");
+        modelo.setNombreOponente("J1");
 
-        Mano manoJugador1 = modelo.getJugador().obtenerMano();
+        Mano manoJugador1 = modelo.getJugador().getMano();
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(null, null);
         CartaMonstruo exodiaParte1 = fabricaCartasJugador1.crearCartaMonstruo("Exodia The Forbidden One");
@@ -423,7 +423,7 @@ public class AlGoOhTest2
         manoJugador1.agregarCarta(exodiaParte4);
         manoJugador1.agregarCarta(exodiaParte5);
 
-        CausaFinJuego causaFinJuego = modelo.obtenerCausaFinJuego();
-        assertTrue(causaFinJuego.obtenerCausa() == "Cinco partes de Exodia reunidas");
+        CausaFinJuego causaFinJuego = modelo.getCausaFinJuego();
+        assertTrue(causaFinJuego.getCausa() == "Cinco partes de Exodia reunidas");
     }
 }

@@ -20,13 +20,13 @@ public abstract class Carta
         this.rutaImagen = rutaImagen;
     }
 
-    public String obtenerLocacionDeImagen()
+    public String getLocacionDeImagen()
     {
 
         return this.rutaImagen;
     }
 
-    public String obtenerNombre()
+    public String getNombre()
     {
         return nombre;
     }
@@ -46,7 +46,7 @@ public abstract class Carta
         return this.orientacion instanceof OrientacionArriba;
     }
 
-    public Jugador obtenerPropietario()
+    public Jugador getPropietario()
     {
         return this.jugador;
     }

@@ -59,7 +59,7 @@ public class BotonesDeControl extends Button
     private void terminarTurnoBtn_click()
     {
 
-        this.vista.obtenerControlador().terminarTurno();
+        this.vista.getControlador().terminarTurno();
         this.vista.mostrarJugadorActual();
         this.vista.mostrarFaseActual();
     }
@@ -68,10 +68,10 @@ public class BotonesDeControl extends Button
     {
         try
         {
-            this.vista.obtenerControlador().avanzarProximaFase();
+            this.vista.getControlador().avanzarProximaFase();
         } catch (SeTerminaronLasFasesError seTerminaronLasFasesError)
         {
-            this.vista.obtenerControlador().terminarTurno();
+            this.vista.getControlador().terminarTurno();
             this.vista.mostrarJugadorActual();
         }
         this.vista.mostrarFaseActual();

@@ -10,11 +10,11 @@ public interface IControlador
 {
     void jugar();
 
-    void establecerNombreJugador(String text);
+    void setNombreJugador(String text);
 
-    void establecerNombreOponente(String text);
+    void setNombreOponente(String text);
 
-    CausaFinJuego obtenerCausaFinDeJuego();
+    CausaFinJuego getCausaFinDeJuego();
 
     // ------------------------------------
     // Métodos de fases y turnos.

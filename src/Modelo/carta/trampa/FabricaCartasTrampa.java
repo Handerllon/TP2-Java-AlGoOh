@@ -15,20 +15,20 @@ public class FabricaCartasTrampa
         this.oponente = oponente;
     }
 
-    public ArrayList<String> obtenerNombres()
+    public ArrayList<String> getNombres()
     {
         ArrayList<String> nombres = new ArrayList<String>();
 
         String nombre;
-        nombre = new MagicCylinder(jugador, oponente).obtenerNombre();
+        nombre = new MagicCylinder(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new Reinforcements(jugador, oponente).obtenerNombre();
+        nombre = new Reinforcements(jugador, oponente).getNombre();
         nombres.add(nombre);
 
         return nombres;
     }
 
-    public CartaTrampa obtenerCarta(String nombreCarta)
+    public CartaTrampa getCarta(String nombreCarta)
     {
         switch (nombreCarta)
         {

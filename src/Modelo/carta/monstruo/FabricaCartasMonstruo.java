@@ -15,57 +15,57 @@ public class FabricaCartasMonstruo
         this.oponente = oponente;
     }
 
-    public ArrayList<String> obtenerNombresMonstruosNormales()
+    public ArrayList<String> getNombresMonstruosNormales()
     {
         ArrayList<String> nombres = new ArrayList<String>();
 
         String nombre;
-        nombre = new AlexandriteDragon(jugador, oponente).obtenerNombre();
+        nombre = new AlexandriteDragon(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new AmphibianBeast(jugador, oponente).obtenerNombre();
+        nombre = new AmphibianBeast(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new AncientBrain(jugador, oponente).obtenerNombre();
+        nombre = new AncientBrain(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new AncientTool(jugador, oponente).obtenerNombre();
+        nombre = new AncientTool(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new Bitron(jugador, oponente).obtenerNombre();
+        nombre = new Bitron(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new BlueEyesWhiteDragon(jugador, oponente).obtenerNombre();
+        nombre = new BlueEyesWhiteDragon(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new CharcoalInpachi(jugador, oponente).obtenerNombre();
+        nombre = new CharcoalInpachi(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new GaiaTheFierceKnight(jugador, oponente).obtenerNombre();
+        nombre = new GaiaTheFierceKnight(jugador, oponente).getNombre();
         nombres.add(nombre);
 
         return nombres;
     }
 
-    public ArrayList<String> obtenerNombresMonstruosNoNormales()
+    public ArrayList<String> getNombresMonstruosNoNormales()
     {
         ArrayList<String> nombres = new ArrayList<String>();
 
         String nombre;
-        nombre = new BlueEyesUltimateDragon(jugador, oponente).obtenerNombre();
+        nombre = new BlueEyesUltimateDragon(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new ExodiaTheForbiddenOne(jugador, oponente).obtenerNombre();
+        nombre = new ExodiaTheForbiddenOne(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new Jinzo7(jugador, oponente).obtenerNombre();
+        nombre = new Jinzo7(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new LeftArmOfTheForbiddenOne(jugador, oponente).obtenerNombre();
+        nombre = new LeftArmOfTheForbiddenOne(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new LeftLegOfTheForbiddenOne(jugador, oponente).obtenerNombre();
+        nombre = new LeftLegOfTheForbiddenOne(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new ManEaterBug(jugador, oponente).obtenerNombre();
+        nombre = new ManEaterBug(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new RightArmOfTheForbiddenOne(jugador, oponente).obtenerNombre();
+        nombre = new RightArmOfTheForbiddenOne(jugador, oponente).getNombre();
         nombres.add(nombre);
-        nombre = new RightLegOfTheForbiddenOne(jugador, oponente).obtenerNombre();
+        nombre = new RightLegOfTheForbiddenOne(jugador, oponente).getNombre();
         nombres.add(nombre);
 
         return nombres;
     }
 
-    public CartaMonstruo obtenerCarta(String nombreCarta)
+    public CartaMonstruo getCarta(String nombreCarta)
     {
         switch (nombreCarta)
         {

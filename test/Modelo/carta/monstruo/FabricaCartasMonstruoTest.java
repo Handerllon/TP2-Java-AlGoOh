@@ -12,7 +12,7 @@ public class FabricaCartasMonstruoTest
 
         FabricaCartasMonstruo fabrica = new FabricaCartasMonstruo(null, null);
 
-        CartaMonstruo unaCartaMonstruo = fabrica.obtenerCarta("Alexandrite Dragon");
+        CartaMonstruo unaCartaMonstruo = fabrica.getCarta("Alexandrite Dragon");
 
         CartaMonstruo cartaEsperada = new AlexandriteDragon(null, null);
 

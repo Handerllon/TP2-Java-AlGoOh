@@ -34,7 +34,13 @@ public final class FaseAtaque implements Fase
     @Override
     public Fase avanzar()
     {
-        return FaseTrampas.getInstancia(this.maquinaTurnos);
+        return FaseFinal.getInstancia(this.maquinaTurnos);
+    }
+
+    @Override
+    public Fase retroceder()
+    {
+        return FasePreparacion.getInstancia(this.maquinaTurnos);
     }
 
     @Override

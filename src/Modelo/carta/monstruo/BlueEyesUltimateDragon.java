@@ -18,7 +18,7 @@ public class BlueEyesUltimateDragon extends CartaMonstruo
         this.nombre = "Blue-Eyes Ultimate Dragon";
     }
 
-    public void invocar(Sacrificio sacrificio)
+    public void summon(Sacrificio sacrificio)
     {
         int cantidadDragonesBlancosNecesarios = 3;
 

@@ -70,7 +70,7 @@ public class BotonesDeControl extends Button
         // múltiples catch.
         try
         {
-            this.vista.getControlador().avanzarProximaFase();
+            this.vista.getControlador().avanzarFase();
         } catch (SeTerminaronLasFasesError seTerminaronLasFasesError)
         {
             this.vista.getControlador().terminarTurno();

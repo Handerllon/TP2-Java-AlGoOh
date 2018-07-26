@@ -2,11 +2,12 @@ package Controlador;
 
 import Controlador.condicionesJuego.EstadoVerificador;
 import Controlador.condicionesJuego.VerificadorCondicionesJuego;
+import Controlador.estadosJuego.Fase;
+import Controlador.estadosJuego.FaseTrampa;
 import Controlador.estadosJuego.MaquinaTurnos;
 import Controlador.excepciones.*;
 import Modelo.Jugador;
 import Modelo.Modelo;
-import Modelo.areaDeJuego.RegionMagicasYTrampas;
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.magica.CartaMagica;
@@ -125,14 +126,14 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     }
 
     @Override
-    public void avanzarProximaFase() throws SeTerminaronLasFasesError
+    public void avanzarFase() throws SeTerminaronLasFasesError
     {
-        if (this.maquinaTurnos.faseActual().esFaseFinal())
+        if (this.maquinaTurnos.getFaseActual().esFaseFinal())
         {
             throw new SeTerminaronLasFasesError();
         } else
         {
-            this.maquinaTurnos.avanzarProximaFase();
+            this.maquinaTurnos.avanzarFase();
         }
     }
 
@@ -145,7 +146,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     @Override
     public String getNombreFaseActual()
     {
-        return this.maquinaTurnos.faseActual().getNombre();
+        return this.maquinaTurnos.getFaseActual().getNombre();
     }
 
     // ------------------------------------
@@ -358,13 +359,26 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
                 this.modelo.atacar((CartaMonstruo) cartaAtacante, cartaAAtacar);
                 this.maquinaTurnos.cartaAtaco((CartaMonstruo) cartaAtacante);
             }
+            
+            avanzarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
+            this.modelo.activarFaseTrampa(solicitante);
+            retrocederFase();
+        }
+    }
 
-            // TODO: avanzar a fase interna trampa.
-            RegionMagicasYTrampas regionMyTOponente = solicitante.getOponente().getRegionMagicasYTrampas();
-            regionMyTOponente.getCartaTrampaAUsar().efecto();
-            // TODO: calcular el daño.
-            // TODO: volver a fase ataque.
+    private void avanzarAFase(Fase fase)
+    {
+        this.maquinaTurnos.setFaseActual(fase);
+    }
 
+    private void retrocederFase() throws SeTerminaronLasFasesError
+    {
+        if (this.maquinaTurnos.getFaseActual().esFaseInicial())
+        {
+            throw new SeTerminaronLasFasesError();
+        } else
+        {
+            this.maquinaTurnos.retrocederFase();
         }
     }
 }

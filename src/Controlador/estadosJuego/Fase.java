@@ -4,6 +4,8 @@ public interface Fase
 {
     Fase avanzar();
 
+    Fase retroceder();
+
     String getNombre();
 
     boolean esFaseInicial();

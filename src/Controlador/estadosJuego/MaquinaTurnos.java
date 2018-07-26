@@ -65,9 +65,14 @@ public final class MaquinaTurnos
     // --------------------------------------------------------------------
     // Métodos de fases y turnos.
     // --------------------------------------------------------------------
-    public void avanzarProximaFase()
+    public void avanzarFase()
     {
         this.faseActual = this.faseActual.avanzar();
+    }
+
+    public void retrocederFase()
+    {
+        this.faseActual = this.faseActual.retroceder();
     }
 
     public void terminarTurno()
@@ -102,9 +107,14 @@ public final class MaquinaTurnos
         return this.jugadorActual;
     }
 
-    public Fase faseActual()
+    public Fase getFaseActual()
     {
         return this.faseActual;
+    }
+
+    public void setFaseActual(Fase fase)
+    {
+        this.faseActual = fase;
     }
 
     // ------------------------------------

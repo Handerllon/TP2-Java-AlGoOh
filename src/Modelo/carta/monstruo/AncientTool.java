@@ -16,7 +16,7 @@ public class AncientTool extends CartaMonstruo
         this.nombre = "Ancient Tool";
     }
 
-    public void invocar(Sacrificio sacrificio)
+    public void summon(Sacrificio sacrificio)
     {
         this.jugador.destruirMonstruo(sacrificio.getMonstruo());
         this.jugador.enviarARegion(this);

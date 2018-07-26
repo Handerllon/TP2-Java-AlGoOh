@@ -53,4 +53,6 @@ public interface IModelo
     void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada);
 
     void atacar(CartaMonstruo cartaAtacante);
+
+    void activarFaseTrampa(Jugador solicitante);
 }

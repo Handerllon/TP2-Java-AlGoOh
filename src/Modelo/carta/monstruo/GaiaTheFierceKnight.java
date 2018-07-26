@@ -16,7 +16,7 @@ public class GaiaTheFierceKnight extends CartaMonstruo
         this.nombre = "Gaia The Fierce Knight";
     }
 
-    public void invocar(Sacrificio sacrificio)
+    public void summon(Sacrificio sacrificio)
     {
         this.jugador.destruirMonstruo(sacrificio.getMonstruo());
         this.jugador.destruirMonstruo(sacrificio.getMonstruo());

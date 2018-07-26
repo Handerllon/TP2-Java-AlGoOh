@@ -38,6 +38,12 @@ public final class FaseInicial implements Fase
     }
 
     @Override
+    public Fase retroceder()
+    {
+        return FaseNula.getInstancia(this.maquinaTurnos);
+    }
+
+    @Override
     public String getNombre()
     {
         return nombreFase;

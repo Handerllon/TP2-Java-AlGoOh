@@ -47,7 +47,7 @@ public final class VerificadorCondicionesJuego
         if (!jugadorPuedeJugar(solicitante))
         {
             return new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (!this.maquinaTurnos.faseActual().esFaseInicial())
+        } else if (!this.maquinaTurnos.getFaseActual().esFaseInicial())
         {
             return new NoEsFaseInicialError();
         } else if (this.maquinaTurnos.yaTomoCartaEnTurno())
@@ -66,7 +66,7 @@ public final class VerificadorCondicionesJuego
         } else if (!jugadorPuedeJugar(solicitante))
         {
             return new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (!this.maquinaTurnos.faseActual().esFasePreparacion())
+        } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
         {
             return new NoEsFasePreparacionError();
         } else if (this.maquinaTurnos.yaMandoMonstruoARegionEnTurno())
@@ -94,7 +94,7 @@ public final class VerificadorCondicionesJuego
         } else if (!jugadorPuedeJugar(solicitante))
         {
             return new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (!this.maquinaTurnos.faseActual().esFasePreparacion())
+        } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
         {
             return new NoEsFaseFinalError();
         } else if (!carta.esMagica() && !carta.esTrampa())
@@ -113,7 +113,7 @@ public final class VerificadorCondicionesJuego
         } else if (!jugadorPuedeJugar(solicitante))
         {
             return new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (!this.maquinaTurnos.faseActual().esFaseFinal())
+        } else if (!this.maquinaTurnos.getFaseActual().esFaseFinal())
         {
             return new NoEsFaseFinalError();
         } else if (!carta.esMagica())
@@ -129,7 +129,7 @@ public final class VerificadorCondicionesJuego
         if (!jugadorPuedeJugar(solicitante))
         {
             return new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (!this.maquinaTurnos.faseActual().esFasePreparacion())
+        } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
         {
             return new NoEsFasePreparacionError();
         } else if (this.maquinaTurnos.yaColocoEnTurno(carta))
@@ -146,7 +146,7 @@ public final class VerificadorCondicionesJuego
         if (!jugadorPuedeJugar(solicitante))
         {
             return new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (!this.maquinaTurnos.faseActual().esFasePreparacion())
+        } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
         {
             return new NoEsFasePreparacionError();
         } else if (this.maquinaTurnos.yaColocoEnTurno(carta))
@@ -165,7 +165,7 @@ public final class VerificadorCondicionesJuego
         if (!jugadorPuedeJugar(solicitante))
         {
             return new JugadorNoPermitidoParaJugar(solicitante);
-        } else if (!this.maquinaTurnos.faseActual().esFaseAtaque())
+        } else if (!this.maquinaTurnos.getFaseActual().esFaseAtaque())
         {
             return new NoEsFaseAtaqueError();
         } else if (this.maquinaTurnos.esPrimerTurnoJuego())

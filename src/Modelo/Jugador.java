@@ -113,7 +113,7 @@ public class Jugador implements FinDeJuegoObservable
 
     public void enviarARegion(CartaMonstruo cartaMonstruo, Sacrificio sacrificio)
     {
-        cartaMonstruo.invocar(sacrificio);
+        cartaMonstruo.summon(sacrificio);
         this.mano.quitarCarta(cartaMonstruo);
     }
 

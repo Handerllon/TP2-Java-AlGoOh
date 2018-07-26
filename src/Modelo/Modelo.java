@@ -1,5 +1,6 @@
 package Modelo;
 
+import Modelo.areaDeJuego.RegionMagicasYTrampas;
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
@@ -392,5 +393,12 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     public void atacar(CartaMonstruo cartaAtacante)
     {
         cartaAtacante.getPropietario().atacar(cartaAtacante);
+    }
+
+    @Override
+    public void activarFaseTrampa(Jugador solicitante){
+        RegionMagicasYTrampas regionMyTOponente = solicitante.getOponente().getRegionMagicasYTrampas();
+        regionMyTOponente.getCartaTrampaAUsar().efecto();
+        // TODO: calcular el daño.
     }
 }

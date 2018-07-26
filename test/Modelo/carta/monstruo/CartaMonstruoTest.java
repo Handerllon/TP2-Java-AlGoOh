@@ -13,8 +13,8 @@ public class CartaMonstruoTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         CartaMonstruo carta = new GaiaTheFierceKnight(jugador1, jugador2);
 
@@ -27,8 +27,8 @@ public class CartaMonstruoTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         CartaMonstruo carta = new GaiaTheFierceKnight(jugador1, jugador2);
         carta.cambiarModo();

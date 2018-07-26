@@ -1,14 +1,16 @@
 package Modelo;
 
+import Controlador.excepciones.NoSePuedeAtacarError;
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
-import Modelo.carta.excepciones.NoEsCartaMagicaError;
-import Modelo.carta.excepciones.NoEsCartaMonstruo;
-import Modelo.carta.excepciones.NoEsCartaTrampa;
 import Modelo.carta.monstruo.CartaMonstruo;
+import Modelo.excepciones.NoEsCartaMagicaError;
+import Modelo.excepciones.NoEsCartaMonstruo;
+import Modelo.excepciones.NoEsCartaTrampa;
 
 public interface IModelo
 {
+    // TODO: el modelo es el que debe avisarle a la maquina de turnos si se pudo llevar a cabo la accion.
     // ------------------------------------
     // Métodos de juego de cartas.
     // ------------------------------------
@@ -50,9 +52,7 @@ public interface IModelo
     // ------------------------------------
     // Métodos de ataques.
     // ------------------------------------
-    void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada);
+    void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada) throws NoSePuedeAtacarError;
 
-    void atacar(CartaMonstruo cartaAtacante);
-
-
+    void atacar(CartaMonstruo cartaAtacante) throws NoSePuedeAtacarError;
 }

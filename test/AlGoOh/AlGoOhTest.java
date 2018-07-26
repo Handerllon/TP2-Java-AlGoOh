@@ -18,8 +18,8 @@ public class AlGoOhTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
@@ -37,8 +37,8 @@ public class AlGoOhTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
@@ -56,8 +56,8 @@ public class AlGoOhTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
@@ -73,8 +73,8 @@ public class AlGoOhTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
@@ -90,8 +90,8 @@ public class AlGoOhTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
@@ -108,8 +108,8 @@ public class AlGoOhTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -122,7 +122,7 @@ public class AlGoOhTest
         cartaJugador2.cambiarModo();
         jugador2.enviarARegion(cartaJugador2);
 
-        jugador1.atacarOponente(cartaJugador1, cartaJugador2);
+        jugador1.atacar(cartaJugador1, cartaJugador2);
 
         assertEquals(8000 - 900, jugador2.getPuntosDeVida(), 0);
 
@@ -136,8 +136,8 @@ public class AlGoOhTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -150,7 +150,7 @@ public class AlGoOhTest
         cartaJugador2.cambiarModo();
         jugador2.enviarARegion(cartaJugador2);
 
-        jugador1.atacarOponente(cartaJugador1, cartaJugador2);
+        jugador1.atacar(cartaJugador1, cartaJugador2);
 
         assertEquals(8000 - 900, jugador1.getPuntosDeVida(), 0);
 
@@ -164,8 +164,8 @@ public class AlGoOhTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -178,7 +178,7 @@ public class AlGoOhTest
         cartaJugador2.cambiarModo();
         jugador2.enviarARegion(cartaJugador2);
 
-        jugador1.atacarOponente(cartaJugador1, cartaJugador2);
+        jugador1.atacar(cartaJugador1, cartaJugador2);
 
         assertEquals(8000, jugador1.getPuntosDeVida(), 0);
         assertEquals(8000, jugador2.getPuntosDeVida(), 0);
@@ -193,8 +193,8 @@ public class AlGoOhTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -206,7 +206,7 @@ public class AlGoOhTest
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Alexandrite Dragon");
         jugador2.enviarARegion(cartaJugador2);
 
-        jugador1.atacarOponente(cartaJugador1, cartaJugador2);
+        jugador1.atacar(cartaJugador1, cartaJugador2);
 
         assertEquals(8000, jugador2.getPuntosDeVida(), 0);
 
@@ -220,8 +220,8 @@ public class AlGoOhTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -233,7 +233,7 @@ public class AlGoOhTest
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         jugador2.enviarARegion(cartaJugador2);
 
-        jugador1.atacarOponente(cartaJugador1, cartaJugador2);
+        jugador1.atacar(cartaJugador1, cartaJugador2);
 
         assertEquals(8000 - 100, jugador1.getPuntosDeVida(), 0);
 
@@ -247,8 +247,8 @@ public class AlGoOhTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -260,7 +260,7 @@ public class AlGoOhTest
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Alexandrite Dragon");
         jugador2.enviarARegion(cartaJugador2);
 
-        jugador1.atacarOponente(cartaJugador1, cartaJugador2);
+        jugador1.atacar(cartaJugador1, cartaJugador2);
 
         assertEquals(8000, jugador1.getPuntosDeVida(), 0);
         assertEquals(8000, jugador2.getPuntosDeVida(), 0);
@@ -275,8 +275,8 @@ public class AlGoOhTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
@@ -305,8 +305,8 @@ public class AlGoOhTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
@@ -328,8 +328,8 @@ public class AlGoOhTest
         Jugador jugador1 = new Jugador("J1");
         Jugador jugador2 = new Jugador("J2");
 
-        jugador1.establecerOponente(jugador2);
-        jugador2.establecerOponente(jugador1);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 

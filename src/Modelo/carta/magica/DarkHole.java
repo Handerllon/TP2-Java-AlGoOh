@@ -14,15 +14,10 @@ public class DarkHole extends CartaMagica
 
     public void efecto()
     {
-        if (this.orientacionArriba() == true)
+        if (this.estaBocaArriba() == true)
         {
             this.jugador.destruirMonstruos();
             this.oponente.destruirMonstruos();
         }
-    }
-
-    public void cambiarOrientacion()
-    {
-        this.orientacion.cambiarOrientacion(this);
     }
 }

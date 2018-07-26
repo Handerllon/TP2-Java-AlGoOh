@@ -33,7 +33,7 @@ public abstract class CartaMonstruo extends Carta
         this.actualizarPuntos();
     }
 
-    public void establecerModo(Modo modoNuevo)
+    public void setModo(Modo modoNuevo)
     {
         this.modo = modoNuevo;
     }
@@ -138,16 +138,14 @@ public abstract class CartaMonstruo extends Carta
     // que ella haga lo que tenga que hacer dependiendo del estado en que se encuentra? Además, capaz cada Modelo.carta
     // tenga una estrategia de ataque diferente, como la Modelo.carta come hombres.
     // TODO: Ver de nuevo funcionamiento de cartas trampa
-    public void atacarOponente(CartaMonstruo cartaOponente)
+    public void atacar(CartaMonstruo cartaOponente)
     {
-
-        // TODO: la Modelo.carta monstruo no debería saber sobre la Modelo.carta trampa...
-        CartaTrampa cartaTrampa = this.oponente.obtenerCartaTrampaAActivar();
+        // TODO: la carta monstruo no debería saber sobre la carta trampa...
+        CartaTrampa cartaTrampa = this.oponente.getCartaTrampaAActivar();
 
         // TODO: no es bueno preguntar si algo es null.
         if (cartaTrampa == null)
         {
-
             cartaOponente.recibirAtaque(this);
         } else if (!cartaTrampa.trampaCancelaAtaqueAMonstruo())
         {
@@ -156,6 +154,11 @@ public abstract class CartaMonstruo extends Carta
         } else
         {
             cartaTrampa.efecto(this, cartaOponente);
+        }
+
+        if (cartaOponente.estaBocaAbajo())
+        {
+            cartaOponente.cambiarOrientacion();
         }
     }
 
@@ -200,10 +203,10 @@ public abstract class CartaMonstruo extends Carta
         }
     }
 
-    public void atacarOponente()
+    public void atacar()
     {
 
-        CartaTrampa cartaTrampa = this.oponente.obtenerCartaTrampaAActivar();
+        CartaTrampa cartaTrampa = this.oponente.getCartaTrampaAActivar();
 
         if (cartaTrampa == null)
         {

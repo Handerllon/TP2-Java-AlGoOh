@@ -1,8 +1,10 @@
 package Modelo.carta.orientacion;
 
-import Modelo.carta.Carta;
-
 public interface Orientacion
 {
-    void cambiarOrientacion(Carta carta);
+    void cambiarOrientacion();
+
+    boolean estaBocaArriba();
+
+    boolean estaBocaAbajo();
 }

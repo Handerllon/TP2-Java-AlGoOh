@@ -1,14 +1,15 @@
 package Modelo;
 
+import Controlador.excepciones.NoSePuedeAtacarError;
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
-import Modelo.carta.excepciones.NoEsCartaMagicaError;
-import Modelo.carta.excepciones.NoEsCartaMonstruo;
-import Modelo.carta.excepciones.NoEsCartaTrampa;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.trampa.CartaTrampa;
+import Modelo.excepciones.NoEsCartaMagicaError;
+import Modelo.excepciones.NoEsCartaMonstruo;
+import Modelo.excepciones.NoEsCartaTrampa;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaFinJuegoNula;
 import Modelo.finDeJuego.FinDeJuegoObservable;
@@ -23,7 +24,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     private Jugador jugador2;
     private ArrayList<ObservadorDeModelo> observadoresDeModelo = new ArrayList<>();
     private ArrayList<ObservadorDeFinJuego> observadoresFinJuego = new ArrayList<>();
-    private CausaFinJuego causaFinJuego = CausaFinJuegoNula.obtenerInstancia();
+    private CausaFinJuego causaFinJuego = CausaFinJuegoNula.getInstancia();
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -33,8 +34,8 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         this.jugador1 = new Jugador();
         this.jugador2 = new Jugador();
 
-        this.jugador1.establecerOponente(this.jugador2);
-        this.jugador2.establecerOponente(this.jugador1);
+        this.jugador1.setOponente(this.jugador2);
+        this.jugador2.setOponente(this.jugador1);
 
         // Subscripciones a los eventos de fin de juego.
         this.jugador1.agregarObsevadorFinDeJuego(this);
@@ -63,12 +64,12 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
 
     public void setNombreJugador(String nombreJugador)
     {
-        this.jugador1.establecerNombre(nombreJugador);
+        this.jugador1.setNombre(nombreJugador);
     }
 
     public void setNombreOponente(String nombreJugador)
     {
-        this.jugador2.establecerNombre(nombreJugador);
+        this.jugador2.setNombre(nombreJugador);
     }
 
     public CausaFinJuego getCausaFinJuego()
@@ -149,37 +150,37 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     @Override
     public ArrayList<CartaMonstruo> getCartasEnRegionMonstruosJugador()
     {
-        return this.jugador1.obtenerRegionMonstruos().getCartas();
+        return this.jugador1.getRegionMonstruos().getCartas();
     }
 
     @Override
     public ArrayList<CartaMonstruo> getCartasEnRegionMonstruosOponente()
     {
-        return this.jugador2.obtenerRegionMonstruos().getCartas();
+        return this.jugador2.getRegionMonstruos().getCartas();
     }
 
     @Override
     public ArrayList<Carta> getCartasEnRegionMagicasYTrampasJugador()
     {
-        return this.jugador1.obtenerRegionMagicasYTrampas().getCartas();
+        return this.jugador1.getRegionMagicasYTrampas().getCartas();
     }
 
     @Override
     public ArrayList<Carta> getCartasEnRegionMagicasYTrampasOponente()
     {
-        return this.jugador2.obtenerRegionMagicasYTrampas().getCartas();
+        return this.jugador2.getRegionMagicasYTrampas().getCartas();
     }
 
     @Override
     public ArrayList<CartaCampo> getCartasEnRegionCampoJugador()
     {
-        return this.jugador1.obtenerRegionCampo().getCartas();
+        return this.jugador1.getRegionCampo().getCartas();
     }
 
     @Override
     public ArrayList<CartaCampo> getCartasEnRegionCampoOponente()
     {
-        return this.jugador2.obtenerRegionCampo().getCartas();
+        return this.jugador2.getRegionCampo().getCartas();
     }
 
     @Override
@@ -197,13 +198,13 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     @Override
     public ArrayList<Carta> getCartasManoJugador()
     {
-        return this.jugador1.getMano().obtenerCartas();
+        return this.jugador1.getMano().getCartas();
     }
 
     @Override
     public ArrayList<Carta> getCartasManoOponente()
     {
-        return this.jugador2.getMano().obtenerCartas();
+        return this.jugador2.getMano().getCartas();
     }
 
     public Jugador getJugador()
@@ -329,7 +330,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
 
         if (((CartaMonstruo) carta).getEstrellas() >= 5)
         {
-            return carta.getPropietario().obtenerRegionMonstruos().cantidadCartas() >= ((CartaMonstruo) carta)
+            return carta.getPropietario().getRegionMonstruos().cantidadCartas() >= ((CartaMonstruo) carta)
                     .getEstrellas();
         }
         return true;
@@ -341,7 +342,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     @Override
     public void flipBocaAbajo(Carta carta)
     {
-        if (carta.orientacionArriba())
+        if (carta.estaBocaArriba())
         {
             carta.cambiarOrientacion();
         }
@@ -350,7 +351,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     @Override
     public void flipBocaArriba(Carta carta)
     {
-        if (!carta.orientacionArriba())
+        if (!carta.estaBocaArriba())
         {
             carta.cambiarOrientacion();
         }
@@ -398,14 +399,40 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     // Métodos de ataques.
     // ------------------------------------
     @Override
-    public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada)
+    public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada) throws NoSePuedeAtacarError
     {
-        cartaAtacante.getPropietario().atacarOponente(cartaAtacante, cartaAtacada);
+        if (!cartaPuedeAtacar(cartaAtacante))
+        {
+            throw new NoSePuedeAtacarError();
+        } else
+        {
+            cartaAtacante.getPropietario().atacar(cartaAtacante, cartaAtacada);
+        }
     }
 
     @Override
-    public void atacar(CartaMonstruo cartaAtacante)
+    public void atacar(CartaMonstruo cartaAtacante) throws NoSePuedeAtacarError
     {
-        cartaAtacante.getPropietario().atacarOponente(cartaAtacante);
+        if (!cartaPuedeAtacar(cartaAtacante))
+        {
+            throw new NoSePuedeAtacarError();
+        } else
+        {
+            cartaAtacante.getPropietario().atacar(cartaAtacante);
+        }
+    }
+
+    private boolean cartaPuedeAtacar(CartaMonstruo carta)
+    {
+        if (carta.estaEnDefensa())
+        {
+            return false;
+            //throw new CartaEnDefensaNoPuedeAtacarError();
+        } else if (carta.estaBocaAbajo())
+        {
+            return false;
+            //throw new CartaBocaAbajoNoPuedeAtacarError();
+        }
+        return true;
     }
 }

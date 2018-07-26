@@ -2,19 +2,17 @@ package Modelo.carta;
 
 import Modelo.Jugador;
 import Modelo.carta.orientacion.Orientacion;
-import Modelo.carta.orientacion.OrientacionAbajo;
-import Modelo.carta.orientacion.OrientacionArriba;
 
-public abstract class Carta
+public abstract class Carta implements Orientacion
 {
     protected String nombre;
-    protected Orientacion orientacion;
+    protected boolean orientacionArriba;
     protected Jugador jugador, oponente;
     protected String rutaImagen;
 
     public Carta(Jugador jugador, Jugador oponente, String rutaImagen)
     {
-        this.orientacion = new OrientacionAbajo();
+        this.orientacionArriba = false;
         this.jugador = jugador;
         this.oponente = oponente;
         this.rutaImagen = rutaImagen;
@@ -31,31 +29,40 @@ public abstract class Carta
         return nombre;
     }
 
-    public void cambiarOrientacion()
-    {
-        this.orientacion.cambiarOrientacion(this);
-    }
-
-    public void establecerOrientacion(Orientacion orientacionNueva)
-    {
-        this.orientacion = orientacionNueva;
-    }
-
-    public boolean orientacionArriba()
-    {
-        return this.orientacion instanceof OrientacionArriba;
-    }
-
     public Jugador getPropietario()
     {
         return this.jugador;
     }
 
-    public boolean esParteExodia()
+    public Jugador getOponente()
     {
-        return false;
+        return this.oponente;
     }
 
+    // ------------------------------------
+    // Métodos de orientación de cartas.
+    // ------------------------------------
+    @Override
+    public void cambiarOrientacion()
+    {
+        this.orientacionArriba = !this.orientacionArriba;
+    }
+
+    @Override
+    public boolean estaBocaArriba()
+    {
+        return this.orientacionArriba == true;
+    }
+
+    @Override
+    public boolean estaBocaAbajo()
+    {
+        return !this.estaBocaArriba();
+    }
+
+    // ------------------------------------
+    // Métodos de tipo de carta.
+    // ------------------------------------
     public abstract boolean esCampo();
 
     public abstract boolean esMagica();
@@ -63,4 +70,9 @@ public abstract class Carta
     public abstract boolean esMonstruo();
 
     public abstract boolean esTrampa();
+
+    public boolean esParteExodia()
+    {
+        return false;
+    }
 }

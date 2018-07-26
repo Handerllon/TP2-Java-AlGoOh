@@ -12,7 +12,7 @@ public final class CartaMonstruoNula extends CartaMonstruo
         super(0, 0, null, null, null);
     }
 
-    public static CartaMonstruoNula obtenerInstancia()
+    public static CartaMonstruoNula getInstancia()
     {
         if (instancia == null)
         {

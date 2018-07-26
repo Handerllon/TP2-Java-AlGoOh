@@ -9,7 +9,7 @@ public final class CausaFinJuegoNula extends CausaFinJuego
         super("", null);
     }
 
-    public static CausaFinJuegoNula obtenerInstancia()
+    public static CausaFinJuegoNula getInstancia()
     {
         if (instancia == null)
         {

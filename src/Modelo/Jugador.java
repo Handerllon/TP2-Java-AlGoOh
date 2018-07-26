@@ -67,29 +67,10 @@ public class Jugador implements FinDeJuegoObservable
         this.cementerio = new RegionCementerio(this);
     }
 
-    public void establecerNombre(String nombreJugador)
-    {
-        this.nombre = nombreJugador;
-    }
-
-    public void establecerOponente(Jugador oponente)
-    {
-        this.oponente = oponente;
-
-        this.regionMonstruos.setOponente(oponente);
-        this.regionMagicasYTrampas.setOponente(oponente);
-        this.regionCampo.setOponente(oponente);
-        this.cementerio.setOponente(oponente);
-
-        this.suscribirRegiones();
-
-        this.crearMazo();
-    }
-
     private void suscribirRegiones()
     {
-        this.regionMonstruos.agregarObsevador(this.obtenerRegionCampo());
-        this.oponente.obtenerRegionMonstruos().agregarObsevador(this.obtenerRegionCampo());
+        this.regionMonstruos.agregarObsevador(this.getRegionCampo());
+        this.oponente.getRegionMonstruos().agregarObsevador(this.getRegionCampo());
     }
 
     private void crearMazo()
@@ -111,15 +92,34 @@ public class Jugador implements FinDeJuegoObservable
         }
     }
 
-    // --------------------------------------------------------------------
-    // Métodos de juego de cartas.
-    // --------------------------------------------------------------------
+    public Jugador getOponente()
+    {
+        return this.oponente;
+    }
+
+    public void setOponente(Jugador oponente)
+    {
+        this.oponente = oponente;
+
+        this.regionMonstruos.setOponente(oponente);
+        this.regionMagicasYTrampas.setOponente(oponente);
+        this.regionCampo.setOponente(oponente);
+        this.cementerio.setOponente(oponente);
+
+        this.suscribirRegiones();
+
+        this.crearMazo();
+    }
 
     public void enviarARegion(CartaMonstruo cartaMonstruo, Sacrificio sacrificio)
     {
         cartaMonstruo.invocar(sacrificio);
         this.mano.quitarCarta(cartaMonstruo);
     }
+
+    // --------------------------------------------------------------------
+    // Métodos de juego de cartas.
+    // --------------------------------------------------------------------
 
     public void enviarARegion(CartaMonstruo cartaMonstruo)
     {
@@ -174,15 +174,14 @@ public class Jugador implements FinDeJuegoObservable
     // Métodos de ataque.
     // --------------------------------------------------------------------
 
-    public void atacarOponente(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
+    public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAAtacar)
     {
-        cartaAtacante.atacarOponente(cartaOponente);
+        cartaAtacante.atacar(cartaAAtacar);
     }
 
-    public void atacarOponente(CartaMonstruo cartaAtacante)
+    public void atacar(CartaMonstruo cartaAtacante)
     {
-
-        cartaAtacante.atacarOponente();
+        cartaAtacante.atacar();
     }
 
     // --------------------------------------------------------------------
@@ -225,34 +224,39 @@ public class Jugador implements FinDeJuegoObservable
         return this.regionMonstruos.getCartas();
     }
 
-    public CartaTrampa obtenerCartaTrampaAActivar()
+    public CartaTrampa getCartaTrampaAActivar()
     {
 
         return this.regionMagicasYTrampas.getCartaTrampaAActivar();
     }
 
-    public String obtenerNombre()
+    public String getNombre()
     {
         return this.nombre;
     }
 
-    public RegionMonstruos obtenerRegionMonstruos()
+    public void setNombre(String nombreJugador)
+    {
+        this.nombre = nombreJugador;
+    }
+
+    public RegionMonstruos getRegionMonstruos()
     {
         return this.regionMonstruos;
     }
 
-    public RegionCampo obtenerRegionCampo()
+    public RegionCampo getRegionCampo()
     {
         return this.regionCampo;
     }
 
-    public RegionMagicasYTrampas obtenerRegionMagicasYTrampas()
+    public RegionMagicasYTrampas getRegionMagicasYTrampas()
     {
 
         return this.regionMagicasYTrampas;
     }
 
-    public RegionCementerio obtenerCementerio()
+    public RegionCementerio getCementerio()
     {
 
         return this.cementerio;

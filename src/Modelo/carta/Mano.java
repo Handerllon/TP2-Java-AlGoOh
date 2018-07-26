@@ -56,7 +56,7 @@ public class Mano implements FinDeJuegoObservable
         return this.cantidadDeCartas() == this.CANTIDAD_MAXIMA;
     }
 
-    public ArrayList<Carta> obtenerCartas()
+    public ArrayList<Carta> getCartas()
     {
         return this.cartas;
     }

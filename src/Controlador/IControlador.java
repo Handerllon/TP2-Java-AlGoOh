@@ -67,7 +67,5 @@ public interface IControlador
     // ------------------------------------
     // Métodos de ataques.
     // ------------------------------------
-    void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada, Jugador solicitante) throws NoSePuedeAtacarError;
-
     void atacar(CartaMonstruo cartaAtacante, Jugador solicitante) throws NoSePuedeAtacarError;
 }

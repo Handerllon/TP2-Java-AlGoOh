@@ -48,9 +48,9 @@ public class GridDeRegionMagicasYTrampas extends GridPane
 
         for (int i = 0; i < botones.size(); i++)
         {
-            this.grid.add(botones.get(i).obtenerBoton(), i, 0);
+            this.grid.add(botones.get(i).getBoton(), i, 0);
 
-            this.grid.setHalignment(botones.get(i).obtenerBoton(), HPos.CENTER);
+            this.grid.setHalignment(botones.get(i).getBoton(), HPos.CENTER);
         }
     }
 

@@ -38,7 +38,7 @@ public final class FaseInicial implements Fase
     }
 
     @Override
-    public String nombre()
+    public String getNombre()
     {
         return nombreFase;
     }

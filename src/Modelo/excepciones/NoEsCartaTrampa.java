@@ -1,4 +1,4 @@
-package Modelo.carta.excepciones;
+package Modelo.excepciones;
 
 public class NoEsCartaTrampa extends RuntimeException
 {

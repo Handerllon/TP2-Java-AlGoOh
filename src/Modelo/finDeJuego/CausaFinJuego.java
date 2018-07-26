@@ -25,6 +25,6 @@ public abstract class CausaFinJuego
 
     public String getNombreJugador()
     {
-        return this.jugadorAsociadoAlFin.obtenerNombre();
+        return this.jugadorAsociadoAlFin.getNombre();
     }
 }

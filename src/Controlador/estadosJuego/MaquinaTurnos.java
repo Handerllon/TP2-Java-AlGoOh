@@ -135,7 +135,7 @@ public final class MaquinaTurnos
         return this.esPrimerTurno;
     }
 
-    public boolean yaUsoAtaqueEnTurno(CartaMonstruo cartaMonstruo)
+    public boolean yaAtacoEnTurno(CartaMonstruo cartaMonstruo)
     {
         return this.cartasAtacaronEnTurnoActual.contains(cartaMonstruo);
     }

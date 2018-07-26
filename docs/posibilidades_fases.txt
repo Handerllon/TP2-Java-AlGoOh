@@ -36,12 +36,12 @@ Fase Batalla:
 	No puede atacar si es el primer turno.
 	
 		Mano:
-			Si toca alguna carta, le avisa con un tooltip que no puede jugarlas en esta fase.
+			Vista -> Si toca alguna carta, le avisa con un tooltip que no puede jugarlas en esta fase.
 			
 		Región Monstruo:
 			Si el usuario toca una:
 				si ya la usó para atacar, le avisa con un tooltip que no puede volver a atacar en el turno.
-				si no la usó para atacar, y no hay cartas en la región monstruo del oponente, ataca directamente 
+				Vista -> si no la usó para atacar, y no hay cartas en la región monstruo del oponente, ataca directamente 
 				al oponente.
 				si no la usó para atacar, y hay cartas en la región monstruo del oponente, le deja seleccionar 
 				la carta que quiere atacar. Si la carta oponente está boca abajo, se pone boca arriba luego del ataque.

@@ -39,7 +39,7 @@ public class BotonMonstruoEnRegion extends Button
         this.botonDeLaCarta.setStyle(estiloRegion);
     }
 
-    public Button obtenerBoton()
+    public Button getBoton()
     {
 
         return this.botonDeLaCarta;
@@ -124,6 +124,15 @@ public class BotonMonstruoEnRegion extends Button
         return vbox;
     }
 
+    // TODO: no me parece buena esta solucion ya que la vista va a tener que verificar si el jugador puede atacar a
+    // las cartas del oponente o al oponente directamente. O sea, no se le puede dar la opcion al jugador de atacar
+    // directamene al oponente si hay cartas en la región monstruo oponente para atacar. Lo que creo que debería
+    // suceder es que el jugador toca la carta monstruo para efectuar un ataque, este comando se le pasa al
+    // controlador, y luego el controlador realiza los chequeos que deba realizar. Si se habilita el ataque, van a
+    // suceder dos cosas en el controlador:
+    // 1. si no hay cartas en la región monstruo del oponente, se ataca directamente al oponente.
+    // 2. si hay cartas en la región monstruo del oponente, el controlador le va a pedir a la vista que le muestre al
+    // jugador un menú con las cartas que puede atacar (similar a cuando se le piden los sacrificios).
     private void cartaMonstruoAtacarBtn_Click()
     {
 
@@ -154,7 +163,8 @@ public class BotonMonstruoEnRegion extends Button
         // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
         // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
         // Ojo con tratar de atacar varias veces en el mismo turno.
-        this.vista.getControlador().atacar(this.carta, this.jugadorAsociado);
+        // Hay un solo metodo atacar() en IControlador.
+        //this.vista.getControlador().atacar(this.carta, this.jugadorAsociado);
     }
 
     private void cartaMonstruoAtacarMonstruoBtn_Click(int i, ArrayList<CartaMonstruo> cartasOponente)
@@ -166,7 +176,8 @@ public class BotonMonstruoEnRegion extends Button
             // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
             // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
             // Ojo con tratar de atacar varias veces en el mismo turno.
-            this.vista.getControlador().atacar(this.carta, cartasOponente.get(i), this.jugadorAsociado);
+            // Hay un solo metodo atacar() en IControlador.
+            //this.vista.getControlador().atacar(this.carta, cartasOponente.get(i), this.jugadorAsociado);
         }
     }
 

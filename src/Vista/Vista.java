@@ -4,6 +4,7 @@ import Controlador.IControlador;
 import Modelo.ModeloObservable;
 import Modelo.ObservadorDeModelo;
 import Modelo.carta.Sacrificio;
+import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.escenas.EscenaBienvenida;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
@@ -148,6 +149,12 @@ public class Vista implements ObservadorDeModelo
     }
 
     public Sacrificio pedirSacrificios()
+    {
+        // TODO.
+        return null;
+    }
+
+    public CartaMonstruo solicitarCartaAAtacar()
     {
         // TODO.
         return null;

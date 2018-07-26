@@ -45,7 +45,7 @@ public final class FaseTrampas implements Fase
     }
 
     @Override
-    public String nombre()
+    public String getNombre()
     {
         return nombreFase;
     }

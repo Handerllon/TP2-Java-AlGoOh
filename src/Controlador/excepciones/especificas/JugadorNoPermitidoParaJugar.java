@@ -11,7 +11,7 @@ public class JugadorNoPermitidoParaJugar extends RuntimeException
         this.responsable = jugador;
     }
 
-    public Jugador obtenerResponsable()
+    public Jugador getResponsable()
     {
         return this.responsable;
     }

@@ -46,7 +46,7 @@ public class Sacrificio
             }
         }
 
-        return CartaMonstruoNula.obtenerInstancia();
+        return CartaMonstruoNula.getInstancia();
     }
 
     public int cantidadSacrificiosDe(String nombreCarta)

@@ -39,7 +39,7 @@ public class BotonMagicasYTrampasEnRegion extends Button
         this.botonDeLaCarta.setStyle(estiloRegion);
     }
 
-    public Button obtenerBoton()
+    public Button getBoton()
     {
 
         return this.botonDeLaCarta;

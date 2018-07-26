@@ -2,8 +2,6 @@ package Controlador;
 
 import Controlador.estadosJuego.MaquinaTurnos;
 import Controlador.excepciones.*;
-import Controlador.excepciones.especificas.SolicitanteNoEsPropietarioDeCartaError;
-import Controlador.excepciones.especificas.YaSeMandoMonstruoARegionEnTurnoActual;
 import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
@@ -19,7 +17,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     private static Modelo modelo;
     private static Vista vista;
     private static Controlador instancia = null;
-    private static CausaFinJuego causaFinDeJuego = CausaFinJuegoNula.obtenerInstancia();
+    private static CausaFinJuego causaFinDeJuego = CausaFinJuegoNula.getInstancia();
     private MaquinaTurnos maquinaTurnos;
 
     // --------------------------------------------------------------------
@@ -121,11 +119,13 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     @Override
     public void avanzarProximaFase() throws SeTerminaronLasFasesError
     {
-        if (this.maquinaTurnos.faseActual().esFaseFinal() == false)
+        if (this.maquinaTurnos.faseActual().esFaseFinal())
+        {
+            throw new SeTerminaronLasFasesError();
+        } else
         {
             this.maquinaTurnos.avanzarProximaFase();
         }
-        throw new SeTerminaronLasFasesError();
     }
 
     private boolean jugadorPuedeJugar(Jugador jugador)
@@ -136,13 +136,13 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     @Override
     public String nombreJugadorActual()
     {
-        return this.maquinaTurnos.getJugadorActual().obtenerNombre();
+        return this.maquinaTurnos.getJugadorActual().getNombre();
     }
 
     @Override
     public String nombreFaseActual()
     {
-        return this.maquinaTurnos.faseActual().nombre();
+        return this.maquinaTurnos.faseActual().getNombre();
     }
 
     // ------------------------------------
@@ -427,19 +427,6 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     // Métodos de ataques.
     // ------------------------------------
     @Override
-    public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada, Jugador solicitante) throws NoSePuedeAtacarError
-    {
-        if (!sePuedeAtacar(cartaAtacante, solicitante))
-        {
-            throw new NoSePuedeAtacarError();
-        } else
-        {
-            this.modelo.atacar(cartaAtacante, cartaAtacada);
-            this.maquinaTurnos.cartaAtaco(cartaAtacante);
-        }
-    }
-
-    @Override
     public void atacar(CartaMonstruo cartaAtacante, Jugador solicitante) throws NoSePuedeAtacarError
     {
         if (!sePuedeAtacar(cartaAtacante, solicitante))
@@ -447,8 +434,16 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
             throw new NoSePuedeAtacarError();
         } else
         {
-            this.modelo.atacar(cartaAtacante);
-            this.maquinaTurnos.cartaAtaco(cartaAtacante);
+            if (cartaAtacante.getOponente().getRegionMonstruos().estaVacia())
+            {
+                this.modelo.atacar(cartaAtacante);
+                this.maquinaTurnos.cartaAtaco(cartaAtacante);
+            } else
+            {
+                CartaMonstruo cartaAAtacar = this.vista.solicitarCartaAAtacar();
+                this.modelo.atacar(cartaAtacante, cartaAAtacar);
+                this.maquinaTurnos.cartaAtaco(cartaAtacante);
+            }
         }
     }
 
@@ -466,7 +461,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         {
             return false;
             //throw new NoSeAtacaEnPrimerTurnoJuegoError();
-        } else if (this.maquinaTurnos.yaUsoAtaqueEnTurno(cartaAtacante))
+        } else if (this.maquinaTurnos.yaAtacoEnTurno(cartaAtacante))
         {
             return false;
             //throw new CartaYaAtacoEnTurnoActualError();

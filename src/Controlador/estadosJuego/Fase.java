@@ -4,7 +4,7 @@ public interface Fase
 {
     Fase avanzar();
 
-    String nombre();
+    String getNombre();
 
     boolean esFaseInicial();
 

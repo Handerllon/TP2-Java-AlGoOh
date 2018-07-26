@@ -126,7 +126,7 @@ public abstract class CartaMonstruo extends Carta
     // ***********************************************************************************
     // *************************** TODO: REFACTORIZAR ************************************
     // ***********************************************************************************
-    // TODO: hay alguna forma de no preguntar el estado de la Modelo.carta del oponente, utilizando solamente mensajes, y
+    // TODO: hay alguna forma de no preguntar el estado de la carta del oponente, utilizando solamente mensajes, y
     // que ella haga lo que tenga que hacer dependiendo del estado en que se encuentra? Además, capaz cada Modelo.carta
     // tenga una estrategia de ataque diferente, como la Modelo.carta come hombres.
     // TODO: Ver de nuevo funcionamiento de cartas trampa
@@ -154,7 +154,7 @@ public abstract class CartaMonstruo extends Carta
         }
     }
 
-    // TODO: la Modelo.carta monstruo no debería saber sobre reinforcements...
+    // TODO: la carta monstruo no debería saber sobre reinforcements...
     public void reinforcements()
     {
 

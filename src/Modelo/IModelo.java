@@ -1,12 +1,10 @@
 package Modelo;
 
-import Controlador.excepciones.NoSePuedeAtacarError;
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
+import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
-import Modelo.excepciones.NoEsCartaMagicaError;
-import Modelo.excepciones.NoEsCartaMonstruo;
-import Modelo.excepciones.NoEsCartaTrampa;
+import Modelo.carta.trampa.CartaTrampa;
 
 public interface IModelo
 {
@@ -16,43 +14,43 @@ public interface IModelo
     // ------------------------------------
     void tomarCarta(Jugador jugador);
 
-    void setCartaMagica(Jugador jugador, Carta carta) throws NoEsCartaMagicaError;
+    void setCartaMagica(Jugador jugador, CartaMagica carta);
 
-    void activarCartaMagica(Carta carta) throws NoEsCartaMagicaError;
+    void activarCartaMagica(CartaMagica carta);
 
-    void setCartaTrampa(Jugador jugador, Carta carta) throws NoEsCartaTrampa;
+    void setCartaTrampa(Jugador jugador, CartaTrampa carta);
 
-    void setCartaMonstruo(Carta carta) throws NoEsCartaMonstruo;
+    void setCartaMonstruo(CartaMonstruo carta);
 
-    void setCartaMonstruo(Carta carta, Sacrificio sacrificios) throws NoEsCartaMonstruo;
+    void setCartaMonstruo(CartaMonstruo carta, Sacrificio sacrificios);
 
-    void summonCartaMonstruo(Carta carta) throws NoEsCartaMonstruo;
+    void summonCartaMonstruo(CartaMonstruo carta);
 
-    void summonCartaMonstruo(Carta carta, Sacrificio sacrificios) throws NoEsCartaMonstruo;
+    void summonCartaMonstruo(CartaMonstruo carta, Sacrificio sacrificios);
 
-    boolean requiereSacrificios(Carta carta) throws NoEsCartaMonstruo;
+    boolean requiereSacrificios(CartaMonstruo carta);
 
-    boolean haySuficientesSacrificios(Carta carta) throws NoEsCartaMonstruo;
+    boolean haySuficientesSacrificios(CartaMonstruo carta);
 
     // ------------------------------------
     // Métodos de orientación de cartas.
     // ------------------------------------
+    void flipCarta(Carta carta);
+
     void flipBocaAbajo(Carta carta);
 
     void flipBocaArriba(Carta carta);
 
-    void setModoAtaque(Carta carta) throws NoEsCartaMonstruo;
+    void setModoAtaque(CartaMonstruo carta);
 
-    void setModoDefensa(Carta carta) throws NoEsCartaMonstruo;
-
-    void flipCartaMonstruo(CartaMonstruo carta);
+    void setModoDefensa(CartaMonstruo carta);
 
     void cambiarModoCartaMonstruo(CartaMonstruo carta);
 
     // ------------------------------------
     // Métodos de ataques.
     // ------------------------------------
-    void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada) throws NoSePuedeAtacarError;
+    void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada);
 
-    void atacar(CartaMonstruo cartaAtacante) throws NoSePuedeAtacarError;
+    void atacar(CartaMonstruo cartaAtacante);
 }

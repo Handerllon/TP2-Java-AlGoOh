@@ -3,7 +3,6 @@ package Controlador;
 import Controlador.excepciones.*;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
-import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.finDeJuego.CausaFinJuego;
 
 public interface IControlador
@@ -23,9 +22,9 @@ public interface IControlador
 
     void avanzarProximaFase() throws SeTerminaronLasFasesError;
 
-    String nombreJugadorActual();
+    String getNombreJugadorActual();
 
-    String nombreFaseActual();
+    String getNombreFaseActual();
 
     // ------------------------------------
     // Métodos de terminación.
@@ -52,7 +51,7 @@ public interface IControlador
     // ------------------------------------
     // Métodos de orientación de cartas.
     // ------------------------------------
-    void flipCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
+    void flipCarta(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
 
     void flipBocaAbajo(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
 
@@ -62,10 +61,10 @@ public interface IControlador
 
     void setModoDefensa(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
 
-    void cambiarModoCartaMonstruo(CartaMonstruo carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
+    void cambiarModoCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
 
     // ------------------------------------
     // Métodos de ataques.
     // ------------------------------------
-    void atacar(CartaMonstruo cartaAtacante, Jugador solicitante) throws NoSePuedeAtacarError;
+    void atacar(Carta cartaAtacante, Jugador solicitante) throws NoSePuedeAtacarError;
 }

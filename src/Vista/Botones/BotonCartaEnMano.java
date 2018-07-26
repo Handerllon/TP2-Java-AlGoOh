@@ -2,8 +2,6 @@ package Vista.Botones;
 
 import Modelo.Jugador;
 import Modelo.carta.Carta;
-import Modelo.carta.magica.CartaMagica;
-import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.Vista;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
@@ -31,10 +29,10 @@ public class BotonCartaEnMano extends Button
         this.vista = vista;
         this.primaryStage = vista.getPrimaryStage();
 
-        if (carta.getClass() == CartaMonstruo.class)
+        if (carta.esMonstruo())
         {
             this.botonDeLaCarta = this.crearBotonMonstruoEnMano();
-        } else if (carta.getClass() == CartaMagica.class)
+        } else if (carta.esMagica())
         {
             this.botonDeLaCarta = this.crearBotonCartaMagicaEnMano();
         } else

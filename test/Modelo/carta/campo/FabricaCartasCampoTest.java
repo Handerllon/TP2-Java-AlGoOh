@@ -2,7 +2,7 @@ package Modelo.carta.campo;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class FabricaCartasCampoTest
 {
@@ -14,8 +14,6 @@ public class FabricaCartasCampoTest
 
         CartaCampo unaCartaCampo = fabrica.getCarta("Sogen");
 
-        CartaCampo cartaEsperada = new Sogen(null, null);
-
-        assertEquals(cartaEsperada.getClass(), unaCartaCampo.getClass());
+        assertTrue(unaCartaCampo.esCampo());
     }
 }

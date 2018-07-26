@@ -2,7 +2,7 @@ package Modelo.carta.magica;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class FabricaCartasMagicasTest
 {
@@ -14,8 +14,6 @@ public class FabricaCartasMagicasTest
 
         CartaMagica unaCartaMagica = fabrica.getCarta("Dark Hole");
 
-        CartaMagica cartaEsperada = new DarkHole(null, null);
-
-        assertEquals(cartaEsperada.getClass(), unaCartaMagica.getClass());
+        assertTrue(unaCartaMagica.esMagica());
     }
 }

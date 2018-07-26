@@ -89,7 +89,7 @@ public class Vista implements ObservadorDeModelo
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Turno");
         alert.setHeaderText(null);
-        alert.setContentText("Turno del jugador " + this.controlador.nombreJugadorActual());
+        alert.setContentText("Turno del jugador " + this.controlador.getNombreJugadorActual());
         alert.showAndWait();
     }
 
@@ -98,7 +98,7 @@ public class Vista implements ObservadorDeModelo
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Turno");
         alert.setHeaderText(null);
-        alert.setContentText("Fase: " + this.controlador.nombreFaseActual());
+        alert.setContentText("Fase: " + this.controlador.getNombreFaseActual());
         alert.showAndWait();
     }
 

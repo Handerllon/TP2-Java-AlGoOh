@@ -2,7 +2,7 @@ package Modelo.excepciones;
 
 import Controlador.condicionesJuego.EstadoVerificador;
 
-public class CartaBocaAbajoNoPuedeAtacarError extends RuntimeException implements EstadoVerificador
+public class NoEsCartaMyTError extends RuntimeException implements EstadoVerificador
 {
     @Override
     public boolean esFallido()
@@ -13,6 +13,6 @@ public class CartaBocaAbajoNoPuedeAtacarError extends RuntimeException implement
     @Override
     public String getNombre()
     {
-        return "Carta boca abajo no puede atacar";
+        return "No es carta mágica o trampa";
     }
 }

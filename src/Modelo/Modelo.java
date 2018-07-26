@@ -1,15 +1,12 @@
 package Modelo;
 
-import Controlador.excepciones.NoSePuedeAtacarError;
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.trampa.CartaTrampa;
-import Modelo.excepciones.NoEsCartaMagicaError;
 import Modelo.excepciones.NoEsCartaMonstruo;
-import Modelo.excepciones.NoEsCartaTrampa;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaFinJuegoNula;
 import Modelo.finDeJuego.FinDeJuegoObservable;
@@ -230,40 +227,28 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     }
 
     @Override
-    public void setCartaMagica(Jugador jugador, Carta carta) throws NoEsCartaMagicaError
+    public void setCartaMagica(Jugador jugador, CartaMagica carta)
     {
-        if (!carta.esMagica())
-        {
-            throw new NoEsCartaMagicaError();
-        }
         this.flipBocaAbajo(carta);
-        jugador.enviarARegion((CartaMagica) carta);
+        jugador.enviarARegion(carta);
     }
 
     @Override
-    public void activarCartaMagica(Carta carta) throws NoEsCartaMagicaError
+    public void activarCartaMagica(CartaMagica carta)
     {
-        if (!carta.esMagica())
-        {
-            throw new NoEsCartaMagicaError();
-        }
         this.flipBocaArriba(carta);
-        ((CartaMagica) carta).efecto();
+        carta.efecto();
     }
 
     @Override
-    public void setCartaTrampa(Jugador jugador, Carta carta) throws NoEsCartaTrampa
+    public void setCartaTrampa(Jugador jugador, CartaTrampa carta)
     {
-        if (!carta.esTrampa())
-        {
-            throw new NoEsCartaTrampa();
-        }
         this.flipBocaAbajo(carta);
-        jugador.enviarARegion((CartaTrampa) carta);
+        jugador.enviarARegion(carta);
     }
 
     @Override
-    public void setCartaMonstruo(Carta carta) throws NoEsCartaMonstruo
+    public void setCartaMonstruo(CartaMonstruo carta) throws NoEsCartaMonstruo
     {
         if (!carta.esMonstruo())
         {
@@ -271,11 +256,11 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         }
         this.flipBocaAbajo(carta);
         this.setModoDefensa(carta);
-        carta.getPropietario().enviarARegion((CartaMonstruo) carta);
+        carta.getPropietario().enviarARegion(carta);
     }
 
     @Override
-    public void setCartaMonstruo(Carta carta, Sacrificio sacrificios) throws NoEsCartaMonstruo
+    public void setCartaMonstruo(CartaMonstruo carta, Sacrificio sacrificios) throws NoEsCartaMonstruo
     {
         if (!carta.esMonstruo())
         {
@@ -283,11 +268,11 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         }
         this.flipBocaAbajo(carta);
         this.setModoDefensa(carta);
-        carta.getPropietario().enviarARegion((CartaMonstruo) carta, sacrificios);
+        carta.getPropietario().enviarARegion(carta, sacrificios);
     }
 
     @Override
-    public void summonCartaMonstruo(Carta carta) throws NoEsCartaMonstruo
+    public void summonCartaMonstruo(CartaMonstruo carta) throws NoEsCartaMonstruo
     {
         if (!carta.esMonstruo())
         {
@@ -295,11 +280,11 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         }
         this.flipBocaArriba(carta);
         this.setModoAtaque(carta);
-        carta.getPropietario().enviarARegion((CartaMonstruo) carta);
+        carta.getPropietario().enviarARegion(carta);
     }
 
     @Override
-    public void summonCartaMonstruo(Carta carta, Sacrificio sacrificios) throws NoEsCartaMonstruo
+    public void summonCartaMonstruo(CartaMonstruo carta, Sacrificio sacrificios) throws NoEsCartaMonstruo
     {
         if (!carta.esMonstruo())
         {
@@ -307,31 +292,30 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         }
         this.flipBocaArriba(carta);
         this.setModoAtaque(carta);
-        carta.getPropietario().enviarARegion((CartaMonstruo) carta, sacrificios);
+        carta.getPropietario().enviarARegion(carta, sacrificios);
     }
 
     @Override
-    public boolean requiereSacrificios(Carta carta) throws NoEsCartaMonstruo
+    public boolean requiereSacrificios(CartaMonstruo carta) throws NoEsCartaMonstruo
     {
         if (!carta.esMonstruo())
         {
             throw new NoEsCartaMonstruo();
         }
-        return ((CartaMonstruo) carta).requiereSacrificio();
+        return (carta).requiereSacrificio();
     }
 
     @Override
-    public boolean haySuficientesSacrificios(Carta carta) throws NoEsCartaMonstruo
+    public boolean haySuficientesSacrificios(CartaMonstruo carta) throws NoEsCartaMonstruo
     {
         if (!carta.esMonstruo())
         {
             throw new NoEsCartaMonstruo();
         }
 
-        if (((CartaMonstruo) carta).getEstrellas() >= 5)
+        if (carta.getEstrellas() >= 5)
         {
-            return carta.getPropietario().getRegionMonstruos().cantidadCartas() >= ((CartaMonstruo) carta)
-                    .getEstrellas();
+            return carta.getPropietario().getRegionMonstruos().cantidadCartas() >= carta.getEstrellas();
         }
         return true;
     }
@@ -358,33 +342,33 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     }
 
     @Override
-    public void setModoAtaque(Carta carta) throws NoEsCartaMonstruo
+    public void setModoAtaque(CartaMonstruo carta) throws NoEsCartaMonstruo
     {
         if (!carta.esMonstruo())
         {
             throw new NoEsCartaMonstruo();
         }
-        if (!((CartaMonstruo) carta).estaEnAtaque())
+        if (!carta.estaEnAtaque())
         {
-            ((CartaMonstruo) carta).cambiarModo();
+            carta.cambiarModo();
         }
     }
 
     @Override
-    public void setModoDefensa(Carta carta) throws NoEsCartaMonstruo
+    public void setModoDefensa(CartaMonstruo carta) throws NoEsCartaMonstruo
     {
         if (!carta.esMonstruo())
         {
             throw new NoEsCartaMonstruo();
         }
-        if (!((CartaMonstruo) carta).estaEnDefensa())
+        if (!carta.estaEnDefensa())
         {
-            ((CartaMonstruo) carta).cambiarModo();
+            carta.cambiarModo();
         }
     }
 
     @Override
-    public void flipCartaMonstruo(CartaMonstruo carta)
+    public void flipCarta(Carta carta)
     {
         carta.cambiarOrientacion();
     }
@@ -399,40 +383,14 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     // Métodos de ataques.
     // ------------------------------------
     @Override
-    public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada) throws NoSePuedeAtacarError
+    public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAAtacar)
     {
-        if (!cartaPuedeAtacar(cartaAtacante))
-        {
-            throw new NoSePuedeAtacarError();
-        } else
-        {
-            cartaAtacante.getPropietario().atacar(cartaAtacante, cartaAtacada);
-        }
+        cartaAtacante.getPropietario().atacar(cartaAtacante, cartaAAtacar);
     }
 
     @Override
-    public void atacar(CartaMonstruo cartaAtacante) throws NoSePuedeAtacarError
+    public void atacar(CartaMonstruo cartaAtacante)
     {
-        if (!cartaPuedeAtacar(cartaAtacante))
-        {
-            throw new NoSePuedeAtacarError();
-        } else
-        {
-            cartaAtacante.getPropietario().atacar(cartaAtacante);
-        }
-    }
-
-    private boolean cartaPuedeAtacar(CartaMonstruo carta)
-    {
-        if (carta.estaEnDefensa())
-        {
-            return false;
-            //throw new CartaEnDefensaNoPuedeAtacarError();
-        } else if (carta.estaBocaAbajo())
-        {
-            return false;
-            //throw new CartaBocaAbajoNoPuedeAtacarError();
-        }
-        return true;
+        cartaAtacante.getPropietario().atacar(cartaAtacante);
     }
 }

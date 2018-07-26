@@ -97,9 +97,6 @@ public final class MaquinaTurnos
         this.faseActual = FaseInicial.getInstancia(this);
     }
 
-    // --------------------------------------------------------------------
-    // Métodos de consultas.
-    // --------------------------------------------------------------------
     public Jugador getJugadorActual()
     {
         return this.jugadorActual;
@@ -110,6 +107,9 @@ public final class MaquinaTurnos
         return this.faseActual;
     }
 
+    // ------------------------------------
+    // Métodos de acciones.
+    // ------------------------------------
     public void seCambioOrientacionCarta(Carta carta)
     {
         this.cartasConCambioDeOrientacionEnTurno.add(carta);
@@ -130,6 +130,9 @@ public final class MaquinaTurnos
         this.seTomoCartaEnTurno = true;
     }
 
+    // ------------------------------------
+    // Métodos de consulta de acciones.
+    // ------------------------------------
     public boolean esPrimerTurnoJuego()
     {
         return this.esPrimerTurno;

@@ -2,7 +2,7 @@ package Modelo.carta.monstruo;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class FabricaCartasMonstruoTest
 {
@@ -14,8 +14,6 @@ public class FabricaCartasMonstruoTest
 
         CartaMonstruo unaCartaMonstruo = fabrica.getCarta("Alexandrite Dragon");
 
-        CartaMonstruo cartaEsperada = new AlexandriteDragon(null, null);
-
-        assertEquals(cartaEsperada.getClass(), unaCartaMonstruo.getClass());
+        assertTrue(unaCartaMonstruo.esMonstruo());
     }
 }

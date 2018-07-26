@@ -2,7 +2,6 @@ package Vista.Botones;
 
 import Modelo.Jugador;
 import Modelo.carta.Carta;
-import Modelo.carta.magica.CartaMagica;
 import Vista.Vista;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -77,7 +76,7 @@ public class BotonMagicasYTrampasEnRegion extends Button
                 .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         //------------------------------
 
-        if (this.carta.getClass() == CartaMagica.class)
+        if (this.carta.esMagica())
         {
 
             this.crearBotonParaCartaMagicaEnRegion(botonEnRegion);

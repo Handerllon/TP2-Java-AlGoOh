@@ -16,8 +16,8 @@ public class DarkHole extends CartaMagica
     {
         if (this.estaBocaArriba() == true)
         {
-            this.jugador.destruirMonstruos();
-            this.oponente.destruirMonstruos();
+            this.getPropietario().destruirMonstruos();
+            this.getOponente().destruirMonstruos();
         }
     }
 }

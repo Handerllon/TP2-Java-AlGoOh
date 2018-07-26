@@ -7,7 +7,7 @@ public abstract class Carta implements Orientacion
 {
     protected String nombre;
     protected boolean orientacionArriba;
-    protected Jugador jugador, oponente;
+    private Jugador jugador, oponente;
     protected String rutaImagen;
 
     public Carta(Jugador jugador, Jugador oponente, String rutaImagen)

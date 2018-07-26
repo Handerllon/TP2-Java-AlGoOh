@@ -37,11 +37,11 @@ public class BlueEyesUltimateDragon extends CartaMonstruo
             for (int i = 0; i < cantidadDragonesBlancosNecesarios; i++)
             {
                 cartaASacrificar = sacrificio.getMonstruo(cartaBlueEyesWhiteDragonMock.getNombre());
-                this.jugador.destruirCarta(cartaASacrificar);
+                this.getPropietario().destruirCarta(cartaASacrificar);
             }
         }
 
-        this.jugador.enviarARegion(this);
+        this.getPropietario().enviarARegion(this);
     }
 
     @Override

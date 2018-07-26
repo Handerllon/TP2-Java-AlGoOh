@@ -16,8 +16,8 @@ public class Fissure extends CartaMagica
     public void efecto()
     {
 
-        CartaMonstruo cartaADestruir = this.oponente.getMonstruoConMenorAtaque();
+        CartaMonstruo cartaADestruir = this.getOponente().getMonstruoConMenorAtaque();
 
-        this.oponente.destruirCarta(cartaADestruir);
+        this.getOponente().destruirCarta(cartaADestruir);
     }
 }

@@ -20,8 +20,8 @@ public class Sogen extends CartaCampo
 
     public void efecto()
     {
-        ArrayList<CartaMonstruo> cartasMonstruoJugador = this.jugador.getCartasEnAreaMonstruo();
-        ArrayList<CartaMonstruo> cartasMonstruoOponente = this.oponente.getCartasEnAreaMonstruo();
+        ArrayList<CartaMonstruo> cartasMonstruoJugador = this.getPropietario().getCartasEnAreaMonstruo();
+        ArrayList<CartaMonstruo> cartasMonstruoOponente = this.getOponente().getCartasEnAreaMonstruo();
 
         cartasMonstruoJugador.forEach(item -> this.modificarPuntosDefensa(item));
         cartasMonstruoOponente.forEach(item -> this.modificarPuntosAtaque(item));
@@ -29,8 +29,8 @@ public class Sogen extends CartaCampo
 
     public void deshacerEfecto()
     {
-        ArrayList<CartaMonstruo> cartasMonstruoJugador = this.jugador.getCartasEnAreaMonstruo();
-        ArrayList<CartaMonstruo> cartasMonstruoOponente = this.oponente.getCartasEnAreaMonstruo();
+        ArrayList<CartaMonstruo> cartasMonstruoJugador = this.getPropietario().getCartasEnAreaMonstruo();
+        ArrayList<CartaMonstruo> cartasMonstruoOponente = this.getOponente().getCartasEnAreaMonstruo();
 
         cartasMonstruoJugador.forEach(item -> this.restaurarPuntosDefensa(item));
         cartasMonstruoOponente.forEach(item -> this.restaurarPuntosAtaque(item));
@@ -38,7 +38,7 @@ public class Sogen extends CartaCampo
 
     public void efecto(CartaMonstruo carta)
     {
-        if (carta.getPropietario() == this.jugador)
+        if (carta.getPropietario() == this.getPropietario())
         {
             this.modificarPuntosDefensa(carta);
         } else
@@ -49,7 +49,7 @@ public class Sogen extends CartaCampo
 
     public void deshacerEfecto(CartaMonstruo carta)
     {
-        if (carta.getPropietario() == this.jugador)
+        if (carta.getPropietario() == this.getPropietario())
         {
             this.restaurarPuntosDefensa(carta);
         } else

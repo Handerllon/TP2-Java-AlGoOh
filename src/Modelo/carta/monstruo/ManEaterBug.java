@@ -15,16 +15,22 @@ public class ManEaterBug extends CartaMonstruo
         this.nombre = "Man-Eater Bug";
     }
 
-    public void aplicarDaño(CartaMonstruo cartaAtacante)
+    @Override
+    public void cambiarOrientacion()
+    {
+        super.cambiarOrientacion();
+    }
+
+    public void recibirAtaque(CartaMonstruo cartaAtacante)
     {
 
-        if (this.estaBocaArriba() == false)
+        if (!this.estaBocaArriba())
         {
             this.cambiarOrientacion();
             this.efecto(cartaAtacante);
         } else
         {
-            super.aplicarDaño(cartaAtacante);
+            super.recibirAtaque(cartaAtacante);
         }
     }
 

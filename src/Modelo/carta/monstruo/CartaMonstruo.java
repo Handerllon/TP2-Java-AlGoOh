@@ -3,6 +3,8 @@ package Modelo.carta.monstruo;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
+import Modelo.carta.ataque.Ataque;
+import Modelo.carta.ataque.AtaqueDefault;
 import Modelo.carta.modo.Modo;
 import Modelo.carta.modo.ModoAtaque;
 import Modelo.carta.modo.ModoDefensa;
@@ -14,6 +16,7 @@ public abstract class CartaMonstruo extends Carta
     protected int puntos;
     protected int estrellas;
     protected Modo modo;
+    protected Ataque ataque;
 
     public CartaMonstruo(int puntosDefensa, int puntosAtaque, Jugador jugador, Jugador oponente, String locacionDeImagen)
     {
@@ -24,6 +27,8 @@ public abstract class CartaMonstruo extends Carta
 
         this.modo = new ModoDefensa();
         this.puntos = this.puntosDefensa;
+
+        this.ataque = new AtaqueDefault();
     }
 
     public void cambiarModo()
@@ -35,6 +40,11 @@ public abstract class CartaMonstruo extends Carta
     public void setModo(Modo modoNuevo)
     {
         this.modo = modoNuevo;
+    }
+
+    public void setAtaque(Ataque ataque)
+    {
+        this.ataque = ataque;
     }
 
     // --------------------------------------------------------------------
@@ -116,15 +126,10 @@ public abstract class CartaMonstruo extends Carta
         }
     }
 
-    private int calcularDiferenciaPuntos(CartaMonstruo cartaOponente)
+    private int calcularDiferenciaPuntosRespectoDeCarta(CartaMonstruo carta)
     {
-
-        return (this.getPuntos() - cartaOponente.getPuntos());
+        return (this.getPuntos() - carta.getPuntos());
     }
-
-    // --------------------------------------------------------------------
-    // Métodos de ataque.
-    // --------------------------------------------------------------------
 
     public int getPuntosDeAtaque()
     {
@@ -132,102 +137,54 @@ public abstract class CartaMonstruo extends Carta
         return this.puntosAtaque;
     }
 
-    // ***********************************************************************************
-    // *************************** TODO: REFACTORIZAR ************************************
-    // ***********************************************************************************
-    // TODO: hay alguna forma de no preguntar el estado de la carta del oponente, utilizando solamente mensajes, y
-    // que ella haga lo que tenga que hacer dependiendo del estado en que se encuentra? Además, capaz cada carta
-    // tenga una estrategia de ataque diferente, como la carta come hombres.
-    // TODO : Los puntos de ataque del monstruo afectado por la carta trampa deben volver a la normalidad una vez que
-    // termina el turno, ver como implementarlo.
-    public void atacar(CartaMonstruo cartaAAtacar)
+    // --------------------------------------------------------------------
+    // Métodos de ataque.
+    // --------------------------------------------------------------------
+    public void atacar(CartaMonstruo atacada)
     {
-        cartaAAtacar.recibirAtaque(this);
-
-        if (cartaAAtacar.estaBocaAbajo())
-        {
-            cartaAAtacar.cambiarOrientacion();
-        }
+        this.ataque.ejecutar(this, atacada);
     }
 
     public void atacar()
     {
-        this.getOponente().disminuirPuntosVida(this.getPuntosDeAtaque());
+        this.ataque.ejecutar(this);
     }
 
-    public void recibirAtaque(CartaMonstruo cartaAtacante)
+    public void recibirAtaque(CartaMonstruo atacante)
     {
 
         // La diferencia queda respecto de mi, el oponente de la atacante.
-        int diferenciaDePuntos = cartaAtacante.calcularDiferenciaPuntos(this);
+        int diferenciaDePuntos = atacante.calcularDiferenciaPuntosRespectoDeCarta(this);
 
-        if (this.enAtaque()) // Si estoy en ataque.
+        if (this.enAtaque())
         {
             if (diferenciaDePuntos > 0) // Si la atacante tiene más puntos.
             {
                 this.getPropietario().destruirCarta(this);
                 this.getPropietario().disminuirPuntosVida(Math.abs(diferenciaDePuntos));
-            } else if (diferenciaDePuntos < 0) // Si yo tengo más puntos.
+            } else if (diferenciaDePuntos < 0) // Si la atacada tiene más puntos.
             {
-                cartaAtacante.getPropietario().destruirCarta(cartaAtacante);
-                cartaAtacante.getPropietario().disminuirPuntosVida(Math.abs(diferenciaDePuntos));
+                atacante.getPropietario().destruirCarta(atacante);
+                atacante.getPropietario().disminuirPuntosVida(Math.abs(diferenciaDePuntos));
             } else
             {
                 this.getPropietario().destruirCarta(this);
-                cartaAtacante.getPropietario().destruirCarta(cartaAtacante);
+                atacante.getPropietario().destruirCarta(atacante);
             }
-        } else // Si estoy en defensa.
+        } else
         {
             if (diferenciaDePuntos > 0) // Si la atacante tiene más puntos.
             {
                 this.getPropietario().destruirCarta(this);
-            } else if (diferenciaDePuntos < 0) // Si yo tengo más puntos.
+            } else if (diferenciaDePuntos < 0) // Si la atacada tiene más puntos.
             {
-                cartaAtacante.getPropietario().disminuirPuntosVida(Math.abs(diferenciaDePuntos));
+                atacante.getPropietario().disminuirPuntosVida(Math.abs(diferenciaDePuntos));
             } else
             {
                 //No pasa nada
             }
         }
     }
-
-
-        /*
-        int diferenciaDePuntos = this.getPuntos() - cartaAAtacar.getPuntos();
-
-        if (cartaAAtacar.enAtaque())
-        {
-            if (diferenciaDePuntos > 0) // Si yo tengo mas puntos.
-            {
-                cartaAAtacar.getPropietario().destruirCarta(cartaAAtacar);
-                cartaAAtacar.getPropietario().disminuirPuntosVida(Math.abs(diferenciaDePuntos));
-            } else if (diferenciaDePuntos < 0) // Si la carta a atacar tiene mas puntos.
-            {
-                this.getPropietario().destruirCarta(this);
-                this.getPropietario().disminuirPuntosVida(Math.abs(diferenciaDePuntos));
-            } else
-            {
-                cartaAAtacar.getPropietario().destruirCarta(cartaAAtacar);
-                this.getPropietario().destruirCarta(this);
-            }
-        } else // Si la carta a atacar esta en defensa.
-        {
-            if (diferenciaDePuntos > 0) // Si yo tengo mas puntos.
-            {
-                cartaAAtacar.getPropietario().destruirCarta(cartaAAtacar);
-            } else if (diferenciaDePuntos < 0) // Si la carta a atacar tiene mas puntos.
-            {
-                this.getPropietario().disminuirPuntosVida(Math.abs(diferenciaDePuntos));
-            } else
-            {
-                //No pasa nada
-            }
-        }
-        */
-
-    // ***********************************************************************************
-    // *************************** TODO: REFACTORIZAR ************************************
-    // ***********************************************************************************
 
     // --------------------------------------------------------------------
     // Métodos de invocación.

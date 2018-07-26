@@ -1,6 +1,7 @@
 package Modelo.carta.monstruo;
 
 import Modelo.Jugador;
+import Modelo.carta.ataque.Ataque;
 
 public class ManEaterBug extends CartaMonstruo
 {
@@ -13,29 +14,45 @@ public class ManEaterBug extends CartaMonstruo
         super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente, rutaImagen);
         this.estrellas = 2;
         this.nombre = "Man-Eater Bug";
+        this.setAtaque(new AtaqueManEaterBug());
     }
 
     @Override
-    public void cambiarOrientacion()
+    public void recibirAtaque(CartaMonstruo atacante)
     {
-        super.cambiarOrientacion();
-    }
-
-    public void recibirAtaque(CartaMonstruo cartaAtacante)
-    {
-
         if (!this.estaBocaArriba())
         {
             this.cambiarOrientacion();
-            this.efecto(cartaAtacante);
-        } else
+            this.efecto(atacante);
+        } else // Ataque normal.
         {
-            super.recibirAtaque(cartaAtacante);
+            super.recibirAtaque(atacante);
         }
     }
 
+    // Unicamente se ejecuta cuando la carta se da vuelta.
     public void efecto(CartaMonstruo cartaADestruir)
     {
         cartaADestruir.getPropietario().destruirCarta(cartaADestruir);
+    }
+
+    private class AtaqueManEaterBug implements Ataque
+    {
+        @Override
+        public void ejecutar(CartaMonstruo atacante, CartaMonstruo atacada)
+        {
+            atacada.recibirAtaque(atacante);
+
+            if (atacada.estaBocaAbajo())
+            {
+                atacada.cambiarOrientacion();
+            }
+        }
+
+        @Override
+        public void ejecutar(CartaMonstruo atacante)
+        {
+            atacante.getOponente().disminuirPuntosVida(atacante.getPuntosDeAtaque());
+        }
     }
 }

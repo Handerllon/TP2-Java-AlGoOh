@@ -26,7 +26,7 @@ public class MagicCylinder extends CartaTrampa
     @Override
     public void efecto(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada)
     {
-
+        this.efecto(cartaAtacante);
     }
 
     @Override

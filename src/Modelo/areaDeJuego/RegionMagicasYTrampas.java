@@ -4,14 +4,16 @@ import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.trampa.CartaTrampa;
+import Modelo.carta.trampa.CartaTrampaNula;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class RegionMagicasYTrampas extends Region<Carta>
 {
     private static int CAPACIDAD_REGION_MAGICAS = 5;
-    protected ArrayList<CartaMagica> cartasMagicas = new ArrayList<>();
-    protected ArrayList<CartaTrampa> cartasTrampa = new ArrayList<>();
+    Queue<CartaMagica> cartasMagicas = new LinkedList<>();
+    Queue<CartaTrampa> cartasTrampa = new LinkedList<>();
 
     public RegionMagicasYTrampas(Jugador jugador)
     {
@@ -33,37 +35,32 @@ public class RegionMagicasYTrampas extends Region<Carta>
         carta.efecto();
     }
 
-    public ArrayList<CartaMagica> getCartasMagicas()
-    {
-        return this.cartasMagicas;
-    }
-
-    public ArrayList<CartaTrampa> getCartasTrampa()
-    {
-        return this.cartasTrampa;
-    }
-
     public boolean hayCartasTrampa()
     {
         return !this.cartasTrampa.isEmpty();
     }
 
-    public CartaTrampa getCartaTrampaAActivar()
+    public CartaTrampa getCartaTrampaAUsar()
     {
+        CartaTrampa cartaTrampa = CartaTrampaNula.getInstancia();
+        if (hayCartasTrampa() && hayCartasTrampaBocaArriba())
+            cartaTrampa = cartasTrampa.remove();
+        return cartaTrampa;
+    }
 
-        CartaTrampa cartaTrampaBuscada = null;
-
-        for (int i = 0; i < cartas.size(); i++)
+    public boolean hayCartasTrampaBocaArriba()
+    {
+        if (!hayCartasTrampa())
         {
-
-            if (cartas.get(i) instanceof CartaTrampa)
-            {
-
-                // TODO: evitar casteo porque rompe el principio de sustitución de Liskov.
-                cartaTrampaBuscada = (CartaTrampa) cartas.get(i);
-                return cartaTrampaBuscada;
-            }
+            return false;
         }
-        return cartaTrampaBuscada;
+
+        for (CartaTrampa cartaTrampa : cartasTrampa)
+        {
+            if (cartaTrampa.estaBocaArriba())
+                return true;
+        }
+
+        return false;
     }
 }

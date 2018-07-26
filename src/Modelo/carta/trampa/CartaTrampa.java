@@ -16,7 +16,6 @@ public abstract class CartaTrampa extends Carta
 
     public boolean trampaCancelaAtaqueAMonstruo()
     {
-
         return trampaCancelaAtaqueAMonstruo;
     }
 

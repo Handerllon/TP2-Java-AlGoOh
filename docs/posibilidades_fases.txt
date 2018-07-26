@@ -50,12 +50,10 @@ Fase Batalla:
 	TODO:
 	Fase interna Trampa:
 		Esta fase se activa siempre después de un ataque.
-		Si hay alguna carta trampa en la región MyT del oponente, y esta carta trampa está boca abajo, 
-		se le pregunta si la quiere activar:
-			Si dice que no, continúa el cálculo de daño.
-			Si dice que sí, se la pone boca arriba, y se usa su efecto.
-		Si había cartas trampa, y estaban activas (boca arriba), entonces se la utiliza.
+		Si hay alguna carta trampa en la región MyT del oponente boca arriba, se usa su efecto, y luego se
+		calcula el daño.
 		Las cartas trampa se activan 1 vez, de izquierda a derecha, y luego de usarla, van al cementerio.
+		Se vuelve a la fase batalla.
 
 Fase Final:
 	Permite activar las cartas mágicas en la región MyT:

@@ -227,7 +227,7 @@ public class Jugador implements FinDeJuegoObservable
     public CartaTrampa getCartaTrampaAActivar()
     {
 
-        return this.regionMagicasYTrampas.getCartaTrampaAActivar();
+        return this.regionMagicasYTrampas.getCartaTrampaAUsar();
     }
 
     public String getNombre()

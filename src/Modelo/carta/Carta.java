@@ -39,6 +39,11 @@ public abstract class Carta implements Orientacion
         return this.oponente;
     }
 
+    public void setOponente(Jugador oponente)
+    {
+        this.oponente = oponente;
+    }
+
     // ------------------------------------
     // Métodos de orientación de cartas.
     // ------------------------------------

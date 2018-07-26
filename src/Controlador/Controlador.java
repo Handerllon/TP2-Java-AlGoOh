@@ -351,17 +351,15 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         {
             if (((CartaMonstruo) cartaAtacante).getOponente().getRegionMonstruos().estaVacia())
             {
+                avanzarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
                 this.modelo.atacar((CartaMonstruo) cartaAtacante);
-                this.maquinaTurnos.cartaAtaco((CartaMonstruo) cartaAtacante);
             } else
             {
                 CartaMonstruo cartaAAtacar = this.vista.solicitarCartaAAtacar();
+                avanzarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
                 this.modelo.atacar((CartaMonstruo) cartaAtacante, cartaAAtacar);
-                this.maquinaTurnos.cartaAtaco((CartaMonstruo) cartaAtacante);
             }
-            
-            avanzarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
-            this.modelo.activarFaseTrampa(solicitante);
+            this.maquinaTurnos.cartaAtaco((CartaMonstruo) cartaAtacante);
             retrocederFase();
         }
     }

@@ -30,13 +30,19 @@ public final class CartaTrampaNula extends CartaTrampa
     }
 
     @Override
-    public void efecto(CartaMonstruo cartaMonstruoJugador, CartaMonstruo cartaMonstruoOponente)
+    public void efecto(CartaMonstruo cartaAtacante)
     {
 
     }
 
     @Override
-    public void efecto()
+    public void efecto(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada)
+    {
+
+    }
+
+    @Override
+    public void deshacerEfecto()
     {
 
     }

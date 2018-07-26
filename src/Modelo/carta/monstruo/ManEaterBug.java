@@ -15,7 +15,7 @@ public class ManEaterBug extends CartaMonstruo
         this.nombre = "Man-Eater Bug";
     }
 
-    public void recibirAtaque(CartaMonstruo cartaAtacante)
+    public void aplicarDaño(CartaMonstruo cartaAtacante)
     {
 
         if (this.estaBocaArriba() == false)
@@ -24,12 +24,12 @@ public class ManEaterBug extends CartaMonstruo
             this.efecto(cartaAtacante);
         } else
         {
-            super.recibirAtaque(cartaAtacante);
+            super.aplicarDaño(cartaAtacante);
         }
     }
 
     public void efecto(CartaMonstruo cartaADestruir)
     {
-        cartaADestruir.getPropietario().destruirMonstruo(cartaADestruir);
+        cartaADestruir.getPropietario().destruirCarta(cartaADestruir);
     }
 }

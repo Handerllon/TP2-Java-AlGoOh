@@ -111,15 +111,14 @@ public class Jugador implements FinDeJuegoObservable
         this.crearMazo();
     }
 
+    // --------------------------------------------------------------------
+    // Métodos de juego de cartas.
+    // --------------------------------------------------------------------
     public void enviarARegion(CartaMonstruo cartaMonstruo, Sacrificio sacrificio)
     {
         cartaMonstruo.summon(sacrificio);
         this.mano.quitarCarta(cartaMonstruo);
     }
-
-    // --------------------------------------------------------------------
-    // Métodos de juego de cartas.
-    // --------------------------------------------------------------------
 
     public void enviarARegion(CartaMonstruo cartaMonstruo)
     {
@@ -149,9 +148,21 @@ public class Jugador implements FinDeJuegoObservable
     // Métodos de juego de destrucción de cartas.
     // --------------------------------------------------------------------
 
-    public void destruirMonstruo(CartaMonstruo carta)
+    public void destruirCarta(CartaMonstruo carta)
     {
         this.regionMonstruos.removerCarta(carta);
+        this.cementerio.colocarCarta(carta);
+    }
+
+    public void destruirCarta(CartaTrampa carta)
+    {
+        this.regionMagicasYTrampas.removerCarta(carta);
+        this.cementerio.colocarCarta(carta);
+    }
+
+    public void destruirCarta(CartaCampo carta)
+    {
+        this.regionCampo.removerCarta(carta);
         this.cementerio.colocarCarta(carta);
     }
 
@@ -164,16 +175,11 @@ public class Jugador implements FinDeJuegoObservable
         this.regionMonstruos.removerTodasLasCartas();
     }
 
-    public void removerCarta(CartaCampo carta)
-    {
-        this.regionCampo.removerCarta(carta);
-        this.cementerio.colocarCarta(carta);
-    }
-
     // --------------------------------------------------------------------
     // Métodos de ataque.
     // --------------------------------------------------------------------
 
+    // TODO: estos se podrían borrar.
     public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAAtacar)
     {
         cartaAtacante.atacar(cartaAAtacar);

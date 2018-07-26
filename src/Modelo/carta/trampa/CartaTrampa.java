@@ -11,17 +11,19 @@ public abstract class CartaTrampa extends Carta
     public CartaTrampa(Jugador jugador, Jugador oponente, String locacionDeImagen)
     {
         super(jugador, oponente, locacionDeImagen);
-        trampaCancelaAtaqueAMonstruo = false;
+        this.trampaCancelaAtaqueAMonstruo = false;
     }
 
     public boolean trampaCancelaAtaqueAMonstruo()
     {
-        return trampaCancelaAtaqueAMonstruo;
+        return this.trampaCancelaAtaqueAMonstruo;
     }
 
-    public abstract void efecto(CartaMonstruo cartaMonstruoJugador, CartaMonstruo cartaMonstruoOponente);
+    public abstract void efecto(CartaMonstruo cartaAtacante);
 
-    public abstract void efecto();
+    public abstract void efecto(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada);
+
+    public abstract void deshacerEfecto();
 
     public boolean esCampo()
     {

@@ -5,7 +5,9 @@ import Modelo.carta.monstruo.CartaMonstruo;
 
 public class Reinforcements extends CartaTrampa
 {
-    private static String rutaImagen = "resources/imagenes/trampa/Reinforcements.jpg";
+    private static final String rutaImagen = "resources/imagenes/trampa/Reinforcements.jpg";
+    private static final int modificadorPuntosAtaque = 500;
+    private CartaMonstruo cartaAtacante, cartaAtacada;
 
     public Reinforcements(Jugador jugador, Jugador oponente)
     {
@@ -13,14 +15,24 @@ public class Reinforcements extends CartaTrampa
         this.nombre = "Reinforcements";
     }
 
-    public void efecto()
+    @Override
+    public void efecto(CartaMonstruo cartaAtacante)
     {
 
     }
 
-    public void efecto(CartaMonstruo cartaMonstruoJugador, CartaMonstruo cartaMonstruoOponente)
+    @Override
+    public void efecto(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada)
     {
+        this.cartaAtacante = cartaAtacante;
+        this.cartaAtacada = cartaAtacada;
 
-        cartaMonstruoOponente.reinforcements();
+        cartaAtacada.sumarPuntosAtaque(modificadorPuntosAtaque);
+    }
+
+    @Override
+    public void deshacerEfecto()
+    {
+        this.cartaAtacada.sumarPuntosAtaque(-modificadorPuntosAtaque);
     }
 }

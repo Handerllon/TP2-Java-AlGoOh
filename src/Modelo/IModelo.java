@@ -50,9 +50,9 @@ public interface IModelo
     // ------------------------------------
     // Métodos de ataques.
     // ------------------------------------
+    // Recibe la carta que ataca y la que es atacada.
     void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada);
 
+    // Recibe la carta que ataca.
     void atacar(CartaMonstruo cartaAtacante);
-
-    void activarFaseTrampa(Jugador solicitante);
 }

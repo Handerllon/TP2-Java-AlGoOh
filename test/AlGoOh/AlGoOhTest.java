@@ -97,7 +97,7 @@ public class AlGoOhTest
 
         CartaMonstruo carta = fabricaCartasJugador1.crearCartaMonstruo("Alexandrite Dragon");
         jugador1.enviarARegion(carta);
-        jugador1.destruirMonstruo(carta);
+        jugador1.destruirCarta(carta);
 
         assertTrue(jugador1.cartaEstaEnCementerio(carta));
     }

@@ -84,7 +84,9 @@ public abstract class Region<T extends Carta> implements RegionObservable
         return this.ultimaCartaEnSalir;
     }
 
+    // ------------------------------------
     // Metodos de región observable.
+    // ------------------------------------
     @Override
     public void agregarObsevador(ObservadorRegion observador)
     {

@@ -6,7 +6,6 @@ import Modelo.carta.Sacrificio;
 import Modelo.carta.modo.Modo;
 import Modelo.carta.modo.ModoAtaque;
 import Modelo.carta.modo.ModoDefensa;
-import Modelo.carta.trampa.CartaTrampa;
 
 public abstract class CartaMonstruo extends Carta
 {
@@ -81,6 +80,16 @@ public abstract class CartaMonstruo extends Carta
         return false;
     }
 
+    public boolean estaEnAtaque()
+    {
+        return this.modo.esAtaque();
+    }
+
+    public boolean estaEnDefensa()
+    {
+        return this.modo.esDefensa();
+    }
+
     // --------------------------------------------------------------------
     // Métodos sobre puntos.
     // --------------------------------------------------------------------
@@ -127,39 +136,27 @@ public abstract class CartaMonstruo extends Carta
     // *************************** TODO: REFACTORIZAR ************************************
     // ***********************************************************************************
     // TODO: hay alguna forma de no preguntar el estado de la carta del oponente, utilizando solamente mensajes, y
-    // que ella haga lo que tenga que hacer dependiendo del estado en que se encuentra? Además, capaz cada Modelo.carta
-    // tenga una estrategia de ataque diferente, como la Modelo.carta come hombres.
-    // TODO: Ver de nuevo funcionamiento de cartas trampa
-    public void atacar(CartaMonstruo cartaOponente)
+    // que ella haga lo que tenga que hacer dependiendo del estado en que se encuentra? Además, capaz cada carta
+    // tenga una estrategia de ataque diferente, como la carta come hombres.
+    // TODO : Los puntos de ataque del monstruo afectado por la carta trampa deben volver a la normalidad una vez que
+    // termina el turno, ver como implementarlo.
+    public void atacar(CartaMonstruo cartaAAtacar)
     {
-        // TODO: la carta monstruo no debería saber sobre la carta trampa...
-        CartaTrampa cartaTrampa = this.oponente.getCartaTrampaAActivar();
+        cartaAAtacar.aplicarDaño(this);
 
-        cartaTrampa.efecto(this, cartaOponente);
-        cartaOponente.recibirAtaque(this);
-
-        if (cartaOponente.estaBocaAbajo())
+        if (cartaAAtacar.estaBocaAbajo())
         {
-            cartaOponente.cambiarOrientacion();
+            cartaAAtacar.cambiarOrientacion();
         }
     }
 
-    // TODO: la carta monstruo no debería saber sobre reinforcements...
-    public void reinforcements()
+    public void atacar()
     {
-
-        this.puntosAtaque = this.puntosAtaque + 500;
-        if (this.enAtaque())
-        {
-            this.puntos = this.puntosAtaque;
-        }
+        this.oponente.disminuirPuntosVida(this.getPuntosDeAtaque());
     }
 
-    // ***********************************************************************************
-    // *************************** TODO: REFACTORIZAR ************************************
-    // ***********************************************************************************
-
-    public void recibirAtaque(CartaMonstruo cartaAtacante)
+    // Utilizamos cartaAtacante ya que es la carta misma la que debe saber cómo calcular su daño.
+    public void aplicarDaño(CartaMonstruo cartaAtacante)
     {
 
         int diferenciaDePuntos = cartaAtacante.calcularDiferenciaPuntos(this);
@@ -169,26 +166,23 @@ public abstract class CartaMonstruo extends Carta
 
             if (diferenciaDePuntos > 0)
             {
-
-                this.jugador.destruirMonstruo(this);
+                this.jugador.destruirCarta(this);
                 this.jugador.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
             } else if (diferenciaDePuntos < 0)
             {
-
-                this.oponente.destruirMonstruo(cartaAtacante);
+                this.oponente.destruirCarta(cartaAtacante);
                 this.oponente.disminuirPuntosVida(Math.abs(diferenciaDePuntos));
             } else
             {
-
-                this.jugador.destruirMonstruo(this);
-                this.oponente.destruirMonstruo(cartaAtacante);
+                this.jugador.destruirCarta(this);
+                this.oponente.destruirCarta(cartaAtacante);
             }
         } else
         {
             if (diferenciaDePuntos > 0)
             {
 
-                this.jugador.destruirMonstruo(this);
+                this.jugador.destruirCarta(this);
             } else if (diferenciaDePuntos < 0)
             {
 
@@ -200,22 +194,9 @@ public abstract class CartaMonstruo extends Carta
         }
     }
 
-    public void atacar()
-    {
-        this.oponente.disminuirPuntosVida(this.getPuntosDeAtaque());
-    }
-
-//    CartaTrampa cartaTrampa = this.oponente.getCartaTrampaAActivar();
-//
-//    // TODO: no preguntar si algo es null.
-//        if (cartaTrampa == null)
-//    {
-//
-//
-//    } else
-//    {
-//        cartaTrampa.efecto(this, null);
-//    }
+    // ***********************************************************************************
+    // *************************** TODO: REFACTORIZAR ************************************
+    // ***********************************************************************************
 
     // --------------------------------------------------------------------
     // Métodos de invocación.
@@ -228,15 +209,5 @@ public abstract class CartaMonstruo extends Carta
     public boolean requiereSacrificio()
     {
         return false;
-    }
-
-    public boolean estaEnAtaque()
-    {
-        return this.modo.esAtaque();
-    }
-
-    public boolean estaEnDefensa()
-    {
-        return this.modo.esDefensa();
     }
 }

@@ -18,7 +18,7 @@ public class AmphibianBeast extends CartaMonstruo
 
     public void summon(Sacrificio sacrificio)
     {
-        this.jugador.destruirMonstruo(sacrificio.getMonstruo());
+        this.jugador.destruirCarta(sacrificio.getMonstruo());
 
         this.jugador.enviarARegion(this);
     }

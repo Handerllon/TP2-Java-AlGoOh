@@ -386,19 +386,21 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     @Override
     public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAAtacar)
     {
-        cartaAtacante.getPropietario().atacar(cartaAtacante, cartaAAtacar);
+        RegionMagicasYTrampas regionMyTOponente = cartaAtacante.getOponente().getRegionMagicasYTrampas();
+        CartaTrampa cartaTrampaAUsar = regionMyTOponente.getCartaTrampaAUsar();
+        cartaTrampaAUsar.efecto(cartaAtacante,cartaAAtacar);
+        cartaAtacante.atacar(cartaAAtacar);
     }
 
     @Override
     public void atacar(CartaMonstruo cartaAtacante)
     {
-        cartaAtacante.getPropietario().atacar(cartaAtacante);
-    }
-
-    @Override
-    public void activarFaseTrampa(Jugador solicitante){
-        RegionMagicasYTrampas regionMyTOponente = solicitante.getOponente().getRegionMagicasYTrampas();
-        regionMyTOponente.getCartaTrampaAUsar().efecto();
-        // TODO: calcular el daño.
+        RegionMagicasYTrampas regionMyTOponente = cartaAtacante.getOponente().getRegionMagicasYTrampas();
+        CartaTrampa cartaTrampaAUsar = regionMyTOponente.getCartaTrampaAUsar();
+        cartaTrampaAUsar.efecto(cartaAtacante);
+        cartaAtacante.atacar();
+        // TODO: se podría sacar y hacer al final del turno.
+        cartaTrampaAUsar.deshacerEfecto();
+        cartaAtacante.getPropietario().destruirCarta(cartaAtacante);
     }
 }

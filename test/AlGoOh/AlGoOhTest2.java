@@ -17,8 +17,8 @@ import static org.junit.Assert.*;
 public class AlGoOhTest2
 {
     //Colocar un monstruo de cada lado del campo. Activo la Modelo.carta mágica Wasteland y
-//verificar que de un lado del campo, el ataque del monstruo aumenta en 200 puntos y
-//del otro lado del campo, se aumenta la defensa del monstruo en 300 puntos.
+    //verificar que de un lado del campo, el ataque del monstruo aumenta en 200 puntos y
+    //del otro lado del campo, se aumenta la defensa del monstruo en 300 puntos.
     @Test
     public void test01SeColocaCartaEnRegionDeMonstruosYSeActivaCartaWasteland()
     {
@@ -48,7 +48,7 @@ public class AlGoOhTest2
         assertEquals(puntosDeAtaqueEsperadosCartaJugador, cartaJugador1.getPuntos());
         assertEquals(puntosDeDefensaEsperadosCartaOponente, cartaJugador2.getPuntos());
 
-        jugador1.removerCarta(cartaWasteland);
+        jugador1.destruirCarta(cartaWasteland);
         puntosDeAtaqueEsperadosCartaJugador = 1000 + 200 - 200;
         puntosDeDefensaEsperadosCartaOponente = 2100 + 300 - 300;
         assertEquals(puntosDeAtaqueEsperadosCartaJugador, cartaJugador1.getPuntos());
@@ -87,8 +87,8 @@ public class AlGoOhTest2
     }
 
     //    Colocar un monstruo de cada lado del campo. activo la Modelo.carta mágica Sogen y
-//    verificar que de un lado del campo, la defensa del monstruo aumenta en 500 puntos
-//    y del otro lado del campo, se aumenta el ataque del monstruo en 200 puntos.
+    //    verificar que de un lado del campo, la defensa del monstruo aumenta en 500 puntos
+    //    y del otro lado del campo, se aumenta el ataque del monstruo en 200 puntos.
     @Test
     public void test02SeColocanMonstruosYSeUsaCartaSogen()
     {
@@ -118,7 +118,7 @@ public class AlGoOhTest2
         assertEquals(puntosDeDefensaEsperadosCartaJugador, cartaJugador1.getPuntos());
         assertEquals(puntosDeAtaqueEsperadosCartaOponente, cartaJugador2.getPuntos());
 
-        jugador1.removerCarta(cartaSogen);
+        jugador1.destruirCarta(cartaSogen);
         puntosDeDefensaEsperadosCartaJugador = 700 + 500 - 500;
         puntosDeAtaqueEsperadosCartaOponente = 100 + 200 - 200;
 
@@ -155,7 +155,7 @@ public class AlGoOhTest2
     }
 
     //    Colocar 2 monstruos en el campo enemigo, con diferente ataque. Activo la Modelo.carta
-//    mágica Fisura, y verificar que el de menor ataque es destruido.
+    //    mágica Fisura, y verificar que el de menor ataque es destruido.
     @Test
     public void test04SeJueganDosMonstruosEnemigosSeUsaLaCartaFisuraYElDeMenorAtaqueMuere()
     {
@@ -189,7 +189,7 @@ public class AlGoOhTest2
     }
 
     //    Colocar un monstruo en el campo enemigo. invoco a Jinzo #7 en mi lado del campo.
-//    Verificar que puedo atacar a los puntos de vida directamente.
+    //    Verificar que puedo atacar a los puntos de vida directamente.
     @Test
     public void test05SeColocaJinzoYSeAtacanLosPuntosDeVidaDirectamente()
     {
@@ -218,7 +218,7 @@ public class AlGoOhTest2
     }
 
     //    Invocar 3 dragones blancos de ojos azules, al Dragón definitivo de ojos azules
-//    sacrificando los 3 dragones el lado del campo del jugador que los invocó.
+    //    sacrificando los 3 dragones el lado del campo del jugador que los invocó.
     @Test
     public void test06SeJuegan3DragonesBlancosDeOjosAzulesYLuegoElDragonDefinitivoDeOjosAzules()
     {
@@ -276,11 +276,10 @@ public class AlGoOhTest2
         assertTrue(jugador1.cartaEstaEnRegionMonstruos(dragonDefinitivoDeOjosAzulesJugador1));
     }
 
-    //
-//    Colocar al Insecto come-hombres, en posición de defensa boca abajo. Invocar un
-//    monstruo enemigo y atacar al insecto. activo el efecto de volteo, señalando al
-//    atacante como objetivo, verificar que este se destruye, y que mi monstruo sigue en el
-//    campo. Verificar que nadie sufre daño a los puntos de vida.
+    //    Colocar al Insecto come-hombres, en posición de defensa boca abajo. Invocar un
+    //    monstruo enemigo y atacar al insecto. activo el efecto de volteo, señalando al
+    //    atacante como objetivo, verificar que este se destruye, y que mi monstruo sigue en el
+    //    campo. Verificar que nadie sufre daño a los puntos de vida.
     @Test
     public void test07UnMonstruoAtacaAlInsectoComeHombresQueSeEncuentraBocaAbajoYEsteEsDestruido()
     {
@@ -310,9 +309,9 @@ public class AlGoOhTest2
     }
 
     //    Colocar un monstruo del lado enemigo, luego coloco la carta trampa Cilindro mágico
-//    de mi lado del campo. Atacar con el monstruo y verificar que se activa la Modelo.carta
-//    trampa, se niega el ataque y el oponente recibe el daño directamente en sus puntos
-//    de vida.
+    //    de mi lado del campo. Atacar con el monstruo y verificar que se activa la carta
+    //    trampa, se niega el ataque y el oponente recibe el daño directamente en sus puntos
+    //    de vida.
     @Test
     public void test08SeColocaMonstruoDelLadoEnemigoEsteAtacaYSeActivaCorrectamenteLaCartaTrampaMagicCylinder()
     {
@@ -330,6 +329,7 @@ public class AlGoOhTest2
         jugador2.enviarARegion(monstruoJugador2);
 
         CartaTrampa trampaJugador1 = fabricaCartasJugador1.crearCartaTrampa("Magic Cylinder");
+        trampaJugador1.cambiarOrientacion();
         jugador1.enviarARegion(trampaJugador1);
 
         jugador2.atacar(monstruoJugador2);
@@ -342,11 +342,11 @@ public class AlGoOhTest2
 
     //Coloco un monstruo en posición de ataque (CharcoalInpachi) y la carta trampa Reinforcements de mi
     //lado del campo, coloco un monstruo en el campo enemigo (Bitron) (con 100 puntos mas de
-    //ataque que el primero) y atacar al primer monstruo. Verificar que se activa la Modelo.carta
+    //ataque que el primero) y atacar al primer monstruo. Verificar que se activa la carta
     //trampa, y el monstruo enemigo es destruido y se infligió 400 puntos de daño a la
     //vida del otro jugador.
     //
-    //TODO : Los puntos de ataque del monstruo afectado por la Modelo.carta trampa deben volver a la normalidad una vez que termina el turno, ver como implementar
+    //TODO : Los puntos de ataque del monstruo afectado por la carta trampa deben volver a la normalidad una vez que termina el turno, ver como implementar
     @Test
     public void test09SeColocanDosMonstruosConLaTrampaReinforcementsEnJuegoSeAtacaYSeVerificaQueSeActiveLaTrampa()
     {

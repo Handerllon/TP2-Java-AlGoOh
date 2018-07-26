@@ -6,6 +6,7 @@ import Modelo.carta.monstruo.CartaMonstruo;
 public class MagicCylinder extends CartaTrampa
 {
     private static String rutaImagen = "resources/imagenes/trampa/MagicCylinder.png";
+    CartaMonstruo cartaAtacante;
 
     public MagicCylinder(Jugador jugador, Jugador oponente)
     {
@@ -14,14 +15,24 @@ public class MagicCylinder extends CartaTrampa
         this.trampaCancelaAtaqueAMonstruo = true;
     }
 
-    public void efecto(CartaMonstruo cartaAtacante, CartaMonstruo cartaOponente)
+    @Override
+    public void efecto(CartaMonstruo cartaAtacante)
     {
-
-        oponente.disminuirPuntosVida(cartaAtacante.getPuntosDeAtaque());
+        this.cartaAtacante = cartaAtacante;
+        Jugador jugadorAtacante = cartaAtacante.getPropietario();
+        cartaAtacante.setOponente(jugadorAtacante);
     }
 
-    public void efecto()
+    @Override
+    public void efecto(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada)
     {
 
+    }
+
+    @Override
+    public void deshacerEfecto()
+    {
+        Jugador jugadorOponente = this.cartaAtacante.getPropietario().getOponente();
+        this.cartaAtacante.setOponente(jugadorOponente);
     }
 }

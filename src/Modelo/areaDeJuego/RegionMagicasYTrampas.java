@@ -33,6 +33,21 @@ public class RegionMagicasYTrampas extends Region<Carta>
         carta.efecto();
     }
 
+    public ArrayList<CartaMagica> getCartasMagicas()
+    {
+        return this.cartasMagicas;
+    }
+
+    public ArrayList<CartaTrampa> getCartasTrampa()
+    {
+        return this.cartasTrampa;
+    }
+
+    public boolean hayCartasTrampa()
+    {
+        return !this.cartasTrampa.isEmpty();
+    }
+
     public CartaTrampa getCartaTrampaAActivar()
     {
 

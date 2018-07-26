@@ -357,6 +357,28 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
                 this.modelo.atacar((CartaMonstruo) cartaAtacante, cartaAAtacar);
                 this.maquinaTurnos.cartaAtaco((CartaMonstruo) cartaAtacante);
             }
+
+            // chequear si hay cartas trampa en la región MyT del oponente.
+
+            if (solicitante.getOponente().getRegionMagicasYTrampas().hayCartasTrampa())
+            {
+
+            }
+            // si hay, y hay alguna boca abajo, enviarle a la vista una solicitud de activacion de cartas trampa
+            // que están boca abajo para que se den vuelta.
+            // si hay, recorrer de izq a derecha, y
+            //      si hay una boca arriba, usarla, mandarla al cementerio, y terminar la fase.
+
+            // calcular el daño.
+//            Fase interna Trampa:
+//        Esta fase se activa siempre después de un ataque.
+//                Si hay alguna carta trampa en la región MyT del oponente, y esta carta trampa está boca abajo,
+//            se le pregunta si la quiere activar:
+//        Si dice que no, continúa el cálculo de daño.
+//            Si dice que sí, se la pone boca arriba, y se usa su efecto.
+//            Si había cartas trampa, y estaban activas (boca arriba), entonces se la utiliza.
+//            Las cartas trampa se activan 1 vez, de izquierda a derecha, y luego de usarla, van al cementerio.
+
         }
     }
 }

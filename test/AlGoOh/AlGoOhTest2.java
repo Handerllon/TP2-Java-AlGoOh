@@ -309,7 +309,7 @@ public class AlGoOhTest2
         assertEquals(8000, jugador2.getPuntosDeVida(), 0);
     }
 
-    //    Colocar un monstruo del lado enemigo, luego coloco la Modelo.carta trampa Cilindro mágico
+    //    Colocar un monstruo del lado enemigo, luego coloco la carta trampa Cilindro mágico
 //    de mi lado del campo. Atacar con el monstruo y verificar que se activa la Modelo.carta
 //    trampa, se niega el ataque y el oponente recibe el daño directamente en sus puntos
 //    de vida.
@@ -340,7 +340,7 @@ public class AlGoOhTest2
         assertEquals(8000, jugador1.getPuntosDeVida(), 0);
     }
 
-    //Coloco un monstruo en posición de ataque (CharcoalInpachi) y la Modelo.carta trampa Reinforcements de mi
+    //Coloco un monstruo en posición de ataque (CharcoalInpachi) y la carta trampa Reinforcements de mi
     //lado del campo, coloco un monstruo en el campo enemigo (Bitron) (con 100 puntos mas de
     //ataque que el primero) y atacar al primer monstruo. Verificar que se activa la Modelo.carta
     //trampa, y el monstruo enemigo es destruido y se infligió 400 puntos de daño a la

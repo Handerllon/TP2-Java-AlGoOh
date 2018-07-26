@@ -135,18 +135,8 @@ public abstract class CartaMonstruo extends Carta
         // TODO: la carta monstruo no debería saber sobre la carta trampa...
         CartaTrampa cartaTrampa = this.oponente.getCartaTrampaAActivar();
 
-        // TODO: no preguntar si algo es null.
-        if (cartaTrampa == null)
-        {
-            cartaOponente.recibirAtaque(this);
-        } else if (!cartaTrampa.trampaCancelaAtaqueAMonstruo())
-        {
-            cartaTrampa.efecto(this, cartaOponente);
-            cartaOponente.recibirAtaque(this);
-        } else
-        {
-            cartaTrampa.efecto(this, cartaOponente);
-        }
+        cartaTrampa.efecto(this, cartaOponente);
+        cartaOponente.recibirAtaque(this);
 
         if (cartaOponente.estaBocaAbajo())
         {
@@ -212,19 +202,20 @@ public abstract class CartaMonstruo extends Carta
 
     public void atacar()
     {
-
-        CartaTrampa cartaTrampa = this.oponente.getCartaTrampaAActivar();
-
-        // TODO: no preguntar si algo es null.
-        if (cartaTrampa == null)
-        {
-
-            this.oponente.disminuirPuntosVida(this.getPuntosDeAtaque());
-        } else
-        {
-            cartaTrampa.efecto(this, null);
-        }
+        this.oponente.disminuirPuntosVida(this.getPuntosDeAtaque());
     }
+
+//    CartaTrampa cartaTrampa = this.oponente.getCartaTrampaAActivar();
+//
+//    // TODO: no preguntar si algo es null.
+//        if (cartaTrampa == null)
+//    {
+//
+//
+//    } else
+//    {
+//        cartaTrampa.efecto(this, null);
+//    }
 
     // --------------------------------------------------------------------
     // Métodos de invocación.

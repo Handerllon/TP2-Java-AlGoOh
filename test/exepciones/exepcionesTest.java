@@ -72,7 +72,7 @@ public class exepcionesTest
         //No hay cartas para sacrificar, y la Modelo.carta requiere sacrificios para ser invocada
         Sacrificio sacrificio = new Sacrificio();
 
-        carta.invocar(sacrificio);
+        carta.summon(sacrificio);
     }
 
     @Test(expected = NoHayTresDragonesBlancosParaSacrificioError.class)
@@ -84,7 +84,7 @@ public class exepcionesTest
         //No hay cartas para sacrificar, y la Modelo.carta requiere sacrificios para ser invocada
         Sacrificio sacrificio = new Sacrificio();
 
-        carta.invocar(sacrificio);
+        carta.summon(sacrificio);
     }
 
     @Test(expected = ManoLlenaError.class)

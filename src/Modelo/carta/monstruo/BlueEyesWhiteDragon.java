@@ -16,7 +16,7 @@ public class BlueEyesWhiteDragon extends CartaMonstruo
         this.nombre = "Blue-Eyes White Dragon";
     }
 
-    public void invocar(Sacrificio sacrificio)
+    public void summon(Sacrificio sacrificio)
     {
         this.jugador.destruirMonstruo(sacrificio.getMonstruo());
         this.jugador.destruirMonstruo(sacrificio.getMonstruo());

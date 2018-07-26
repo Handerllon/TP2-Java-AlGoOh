@@ -123,17 +123,9 @@ public abstract class CartaMonstruo extends Carta
     // Métodos de ataque.
     // --------------------------------------------------------------------
 
-    // TODO: la Modelo.carta monstruo no debería saber sobre reinforcements...
-    public void reinforcements()
-    {
-
-        this.puntosAtaque = this.puntosAtaque + 500;
-        if (this.enAtaque())
-        {
-            this.puntos = this.puntosAtaque;
-        }
-    }
-
+    // ***********************************************************************************
+    // *************************** TODO: REFACTORIZAR ************************************
+    // ***********************************************************************************
     // TODO: hay alguna forma de no preguntar el estado de la Modelo.carta del oponente, utilizando solamente mensajes, y
     // que ella haga lo que tenga que hacer dependiendo del estado en que se encuentra? Además, capaz cada Modelo.carta
     // tenga una estrategia de ataque diferente, como la Modelo.carta come hombres.
@@ -143,7 +135,7 @@ public abstract class CartaMonstruo extends Carta
         // TODO: la carta monstruo no debería saber sobre la carta trampa...
         CartaTrampa cartaTrampa = this.oponente.getCartaTrampaAActivar();
 
-        // TODO: no es bueno preguntar si algo es null.
+        // TODO: no preguntar si algo es null.
         if (cartaTrampa == null)
         {
             cartaOponente.recibirAtaque(this);
@@ -161,6 +153,21 @@ public abstract class CartaMonstruo extends Carta
             cartaOponente.cambiarOrientacion();
         }
     }
+
+    // TODO: la Modelo.carta monstruo no debería saber sobre reinforcements...
+    public void reinforcements()
+    {
+
+        this.puntosAtaque = this.puntosAtaque + 500;
+        if (this.enAtaque())
+        {
+            this.puntos = this.puntosAtaque;
+        }
+    }
+
+    // ***********************************************************************************
+    // *************************** TODO: REFACTORIZAR ************************************
+    // ***********************************************************************************
 
     public void recibirAtaque(CartaMonstruo cartaAtacante)
     {
@@ -208,6 +215,7 @@ public abstract class CartaMonstruo extends Carta
 
         CartaTrampa cartaTrampa = this.oponente.getCartaTrampaAActivar();
 
+        // TODO: no preguntar si algo es null.
         if (cartaTrampa == null)
         {
 
@@ -221,7 +229,7 @@ public abstract class CartaMonstruo extends Carta
     // --------------------------------------------------------------------
     // Métodos de invocación.
     // --------------------------------------------------------------------
-    public void invocar(Sacrificio sacrificio)
+    public void summon(Sacrificio sacrificio)
     {
 
     }

@@ -1,7 +1,6 @@
 package Modelo.carta.monstruo;
 
 import Modelo.Jugador;
-import Modelo.carta.ataque.Ataque;
 
 public class ManEaterBug extends CartaMonstruo
 {
@@ -14,7 +13,6 @@ public class ManEaterBug extends CartaMonstruo
         super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente, rutaImagen);
         this.estrellas = 2;
         this.nombre = "Man-Eater Bug";
-        this.setAtaque(new AtaqueManEaterBug());
     }
 
     @Override
@@ -30,29 +28,11 @@ public class ManEaterBug extends CartaMonstruo
         }
     }
 
-    // Unicamente se ejecuta cuando la carta se da vuelta.
+    // Unicamente se ejecuta cuando la carta se da vuelta, y puede ser en la fase preparación o en batalla (si
+    // la atacan.
+    // TODO: ver cómo hacer para que se active cuando se da vuelta en la fase preparación, luego de que fue invocada.
     public void efecto(CartaMonstruo cartaADestruir)
     {
         cartaADestruir.getPropietario().destruirCarta(cartaADestruir);
-    }
-
-    private class AtaqueManEaterBug implements Ataque
-    {
-        @Override
-        public void ejecutar(CartaMonstruo atacante, CartaMonstruo atacada)
-        {
-            atacada.recibirAtaque(atacante);
-
-            if (atacada.estaBocaAbajo())
-            {
-                atacada.cambiarOrientacion();
-            }
-        }
-
-        @Override
-        public void ejecutar(CartaMonstruo atacante)
-        {
-            atacante.getOponente().disminuirPuntosVida(atacante.getPuntosDeAtaque());
-        }
     }
 }

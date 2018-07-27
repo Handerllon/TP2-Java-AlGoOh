@@ -332,12 +332,13 @@ public class AlGoOhTest2
         trampaJugador1.cambiarOrientacion();
         jugador1.enviarARegion(trampaJugador1);
 
+        trampaJugador1.efecto(monstruoJugador2);
         jugador2.atacar(monstruoJugador2);
 
         int puntosDeVidaEsperadosJugador2 = 8000 - 100;
 
         assertEquals(puntosDeVidaEsperadosJugador2, jugador2.getPuntosDeVida());
-        assertEquals(8000, jugador1.getPuntosDeVida(), 0);
+        assertEquals(8000, jugador1.getPuntosDeVida());
     }
 
     //Coloco un monstruo en posición de ataque (CharcoalInpachi) y la carta trampa Reinforcements de mi

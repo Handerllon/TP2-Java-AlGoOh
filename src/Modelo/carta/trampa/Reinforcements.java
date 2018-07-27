@@ -20,6 +20,8 @@ public class Reinforcements extends CartaTrampa
     {
         this.cartaAtacada = cartaAtacada;
         cartaAtacada.sumarPuntosAtaque(modificadorPuntosAtaque);
+        this.notificarObservadores();
+        this.getPropietario().destruirCarta(this);
     }
 
     @Override

@@ -8,7 +8,7 @@ import Modelo.carta.trampa.CartaTrampa;
 
 public interface IModelo
 {
-    // TODO: el modelo es el que debe avisarle a la maquina de turnos si se pudo llevar a cabo la accion.
+    // TODO: el modelo es el que debe avisarle a la maquina de turnos si se pudo llevar a cabo la accion?
     // ------------------------------------
     // Métodos de juego de cartas.
     // ------------------------------------

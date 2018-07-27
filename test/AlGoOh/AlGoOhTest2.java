@@ -211,7 +211,7 @@ public class AlGoOhTest2
         cartaJugador2.cambiarModo();
         jugador2.enviarARegion(cartaJugador2);
 
-        jugador1.atacar(cartaJugador1);
+        cartaJugador1.atacar();
 
         int puntosDeVidaEsperados = 8000 - 500;
 
@@ -300,7 +300,7 @@ public class AlGoOhTest2
         monstruoJugador2.cambiarModo();
         jugador2.enviarARegion(monstruoJugador2);
 
-        jugador2.atacar(monstruoJugador2, insectoComeHombresJugador1);
+        monstruoJugador2.atacar(insectoComeHombresJugador1);
 
         assertTrue(jugador2.cartaEstaEnCementerio(monstruoJugador2));
         assertFalse(jugador1.cartaEstaEnCementerio(insectoComeHombresJugador1));
@@ -334,7 +334,7 @@ public class AlGoOhTest2
         jugador1.enviarARegion(cartaTrampaJugador1);
 
         cartaTrampaJugador1.efecto(monstruoJugador2, CartaMonstruoNula.getInstancia());
-        jugador2.atacar(monstruoJugador2);
+        monstruoJugador2.atacar();
         cartaTrampaJugador1.deshacerEfecto();
 
         int puntosDeVidaEsperadosJugador2 = 8000 - 100;
@@ -379,7 +379,7 @@ public class AlGoOhTest2
         int puntoMonstruoJugador1LuegoDeLaCartaTrampa = puntoMonstruoJugador1PrevioALaCartaTrampa + 500;
         assertEquals(puntoMonstruoJugador1LuegoDeLaCartaTrampa, monstruoJugador1.getPuntos());
 
-        jugador2.atacar(monstruoJugador2, monstruoJugador1);
+        monstruoJugador2.atacar(monstruoJugador1);
         cartaTrampaJugador1.deshacerEfecto();
 
         assertEquals(puntoMonstruoJugador1PrevioALaCartaTrampa, monstruoJugador1.getPuntos());

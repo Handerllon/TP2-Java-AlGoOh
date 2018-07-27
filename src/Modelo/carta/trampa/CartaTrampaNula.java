@@ -1,6 +1,7 @@
 package Modelo.carta.trampa;
 
 import Modelo.carta.CartaNula;
+import Modelo.carta.ObservadorDeCarta;
 import Modelo.carta.monstruo.CartaMonstruo;
 
 public final class CartaTrampaNula extends CartaTrampa
@@ -29,6 +30,30 @@ public final class CartaTrampaNula extends CartaTrampa
         throw new CloneNotSupportedException();
     }
 
+    // ------------------------------------
+    // Metodos de observador de modelo.
+    // ------------------------------------
+    @Override
+    public void agregarObsevador(ObservadorDeCarta observer)
+    {
+
+    }
+
+    @Override
+    public void quitarObservador(ObservadorDeCarta observer)
+    {
+
+    }
+
+    @Override
+    public void notificarObservadores()
+    {
+
+    }
+
+    // ------------------------------------
+    // Metodos de efecto de carta trampa.
+    // ------------------------------------
     @Override
     public void efecto(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada)
     {
@@ -39,10 +64,5 @@ public final class CartaTrampaNula extends CartaTrampa
     public void deshacerEfecto()
     {
 
-    }
-
-    public boolean trampaCancelaAtaqueAMonstruo()
-    {
-        return false;
     }
 }

@@ -9,6 +9,7 @@ import Controlador.excepciones.*;
 import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
+import Modelo.carta.ObservadorDeCarta;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
@@ -18,7 +19,9 @@ import Modelo.finDeJuego.CausaFinJuegoNula;
 import Modelo.finDeJuego.ObservadorDeFinJuego;
 import Vista.Vista;
 
-public final class Controlador implements ObservadorDeFinJuego, IControlador
+import java.util.ArrayList;
+
+public final class Controlador implements ObservadorDeFinJuego, IControlador, ObservadorDeCarta
 {
     private static Modelo modelo;
     private static Vista vista;
@@ -27,6 +30,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     private static VerificadorCondicionesJuego verificadorCondicionesJuego;
     private MaquinaTurnos maquinaTurnos;
     private EstadoVerificador estadoVerificador;
+    private ArrayList<CartaTrampa> cartasTrampaUtilizadas = new ArrayList<>();
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -103,6 +107,15 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
         return this.causaFinDeJuego;
     }
 
+    // --------------------------------------------------------------------
+    // Métodos de observador de cartas.
+    // --------------------------------------------------------------------
+    @Override
+    public void notificarUsoDeCarta(CartaTrampa cartaTrampa)
+    {
+        this.cartasTrampaUtilizadas.add(cartaTrampa);
+    }
+
     // ------------------------------------
     // Métodos de terminación.
     // ------------------------------------
@@ -123,6 +136,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
     public void terminarTurno()
     {
         this.maquinaTurnos.terminarTurno();
+        this.cartasTrampaUtilizadas.forEach(cartaTrampa -> cartaTrampa.deshacerEfecto());
     }
 
     @Override
@@ -352,11 +366,14 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador
             if (((CartaMonstruo) cartaAtacante).getOponente().getRegionMonstruos().estaVacia())
             {
                 avanzarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
+
                 this.modelo.atacar((CartaMonstruo) cartaAtacante);
             } else
             {
                 CartaMonstruo cartaAAtacar = this.vista.solicitarCartaAAtacar();
+
                 avanzarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
+
                 this.modelo.atacar((CartaMonstruo) cartaAtacante, cartaAAtacar);
             }
             this.maquinaTurnos.cartaAtaco((CartaMonstruo) cartaAtacante);

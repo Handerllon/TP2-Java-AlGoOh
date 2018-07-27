@@ -122,7 +122,7 @@ public class AlGoOhTest
         cartaJugador2.cambiarModo();
         jugador2.enviarARegion(cartaJugador2);
 
-        jugador1.atacar(cartaJugador1, cartaJugador2);
+        cartaJugador1.atacar(cartaJugador2);
 
         assertEquals(8000 - 900, jugador2.getPuntosDeVida(), 0);
 
@@ -150,7 +150,7 @@ public class AlGoOhTest
         cartaJugador2.cambiarModo();
         jugador2.enviarARegion(cartaJugador2);
 
-        jugador1.atacar(cartaJugador1, cartaJugador2);
+        cartaJugador1.atacar(cartaJugador2);
 
         assertEquals(8000 - 900, jugador1.getPuntosDeVida(), 0);
 
@@ -178,7 +178,7 @@ public class AlGoOhTest
         cartaJugador2.cambiarModo();
         jugador2.enviarARegion(cartaJugador2);
 
-        jugador1.atacar(cartaJugador1, cartaJugador2);
+        cartaJugador1.atacar(cartaJugador2);
 
         assertEquals(8000, jugador1.getPuntosDeVida(), 0);
         assertEquals(8000, jugador2.getPuntosDeVida(), 0);
@@ -206,7 +206,7 @@ public class AlGoOhTest
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Alexandrite Dragon");
         jugador2.enviarARegion(cartaJugador2);
 
-        jugador1.atacar(cartaJugador1, cartaJugador2);
+        cartaJugador1.atacar(cartaJugador2);
 
         assertEquals(8000, jugador2.getPuntosDeVida(), 0);
 
@@ -233,7 +233,7 @@ public class AlGoOhTest
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");
         jugador2.enviarARegion(cartaJugador2);
 
-        jugador1.atacar(cartaJugador1, cartaJugador2);
+        cartaJugador1.atacar(cartaJugador2);
 
         assertEquals(8000 - 100, jugador1.getPuntosDeVida(), 0);
 
@@ -260,7 +260,7 @@ public class AlGoOhTest
         CartaMonstruo cartaJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Alexandrite Dragon");
         jugador2.enviarARegion(cartaJugador2);
 
-        jugador1.atacar(cartaJugador1, cartaJugador2);
+        cartaJugador1.atacar(cartaJugador2);
 
         assertEquals(8000, jugador1.getPuntosDeVida(), 0);
         assertEquals(8000, jugador2.getPuntosDeVida(), 0);

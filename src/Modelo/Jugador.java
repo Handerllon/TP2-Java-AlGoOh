@@ -176,21 +176,6 @@ public class Jugador implements FinDeJuegoObservable
     }
 
     // --------------------------------------------------------------------
-    // Métodos de ataque.
-    // --------------------------------------------------------------------
-
-    // TODO: estos se podrían borrar.
-    public void atacar(CartaMonstruo cartaAtacante, CartaMonstruo cartaAAtacar)
-    {
-        cartaAtacante.atacar(cartaAAtacar);
-    }
-
-    public void atacar(CartaMonstruo cartaAtacante)
-    {
-        cartaAtacante.atacar();
-    }
-
-    // --------------------------------------------------------------------
     // Métodos de consultas.
     // --------------------------------------------------------------------
     public int getPuntosDeVida()

@@ -15,7 +15,6 @@ public class MagicCylinder extends CartaTrampa
     {
         super(jugador, oponente, rutaImagen);
         this.nombre = "Magic Cylinder";
-        this.trampaCancelaAtaqueAMonstruo = true;
         this.modificadorAtaque = new AtaqueModificadoMagicCylinder();
     }
 
@@ -24,6 +23,8 @@ public class MagicCylinder extends CartaTrampa
     {
         this.cartaAtacante = cartaAtacante;
         cartaAtacante.setAtaque(this.modificadorAtaque);
+        this.notificarObservadores();
+        this.getPropietario().destruirCarta(this);
     }
 
     @Override

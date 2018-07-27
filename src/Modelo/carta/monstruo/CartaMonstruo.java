@@ -6,7 +6,6 @@ import Modelo.carta.Sacrificio;
 import Modelo.carta.ataque.Ataque;
 import Modelo.carta.ataque.AtaqueDefault;
 import Modelo.carta.modo.Modo;
-import Modelo.carta.modo.ModoAtaque;
 import Modelo.carta.modo.ModoDefensa;
 
 public abstract class CartaMonstruo extends Carta
@@ -25,10 +24,10 @@ public abstract class CartaMonstruo extends Carta
         this.puntosDefensa = puntosDefensa;
         this.puntosAtaque = puntosAtaque;
 
-        this.modo = new ModoDefensa();
+        this.modo = ModoDefensa.getInstancia();
         this.puntos = this.puntosDefensa;
 
-        this.ataque = new AtaqueDefault();
+        this.ataque = AtaqueDefault.getInstancia();
     }
 
     public void cambiarModo()
@@ -57,12 +56,12 @@ public abstract class CartaMonstruo extends Carta
 
     public boolean enAtaque()
     {
-        return modo instanceof ModoAtaque;
+        return modo.esAtaque();
     }
 
     public boolean enDefensa()
     {
-        return modo instanceof ModoDefensa;
+        return modo.esDefensa();
     }
 
     public int getEstrellas()

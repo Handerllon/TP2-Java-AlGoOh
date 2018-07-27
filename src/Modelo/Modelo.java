@@ -6,6 +6,7 @@ import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
+import Modelo.carta.monstruo.CartaMonstruoNula;
 import Modelo.carta.trampa.CartaTrampa;
 import Modelo.excepciones.NoEsCartaMonstruo;
 import Modelo.finDeJuego.CausaFinJuego;
@@ -390,6 +391,9 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         CartaTrampa cartaTrampaAUsar = regionMyTOponente.getCartaTrampaAUsar();
         cartaTrampaAUsar.efecto(cartaAtacante,cartaAAtacar);
         cartaAtacante.atacar(cartaAAtacar);
+        // TODO: se podría sacar y hacer al final del turno.
+        cartaTrampaAUsar.deshacerEfecto();
+        cartaAtacante.getPropietario().destruirCarta(cartaAtacante);
     }
 
     @Override
@@ -397,7 +401,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     {
         RegionMagicasYTrampas regionMyTOponente = cartaAtacante.getOponente().getRegionMagicasYTrampas();
         CartaTrampa cartaTrampaAUsar = regionMyTOponente.getCartaTrampaAUsar();
-        cartaTrampaAUsar.efecto(cartaAtacante);
+        cartaTrampaAUsar.efecto(cartaAtacante, CartaMonstruoNula.getInstancia());
         cartaAtacante.atacar();
         // TODO: se podría sacar y hacer al final del turno.
         cartaTrampaAUsar.deshacerEfecto();

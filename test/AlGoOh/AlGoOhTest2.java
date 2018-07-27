@@ -8,6 +8,7 @@ import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
+import Modelo.carta.monstruo.CartaMonstruoNula;
 import Modelo.carta.trampa.CartaTrampa;
 import Modelo.finDeJuego.CausaFinJuego;
 import org.junit.Test;
@@ -332,7 +333,7 @@ public class AlGoOhTest2
         cartaTrampaJugador1.cambiarOrientacion();
         jugador1.enviarARegion(cartaTrampaJugador1);
 
-        cartaTrampaJugador1.efecto(monstruoJugador2);
+        cartaTrampaJugador1.efecto(monstruoJugador2, CartaMonstruoNula.getInstancia());
         jugador2.atacar(monstruoJugador2);
         cartaTrampaJugador1.deshacerEfecto();
 
@@ -347,8 +348,6 @@ public class AlGoOhTest2
     //ataque que el primero) y atacar al primer monstruo. Verificar que se activa la carta
     //trampa, y el monstruo enemigo es destruido y se infligió 400 puntos de daño a la
     //vida del otro jugador.
-    //
-    //TODO : Los puntos de ataque del monstruo afectado por la carta trampa deben volver a la normalidad una vez que termina el turno, ver como implementar
     @Test
     public void test09SeColocanDosMonstruosConLaTrampaReinforcementsEnJuegoSeAtacaYSeVerificaQueSeActiveLaTrampa()
     {
@@ -364,6 +363,7 @@ public class AlGoOhTest2
         CartaMonstruo monstruoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
         monstruoJugador1.cambiarModo();
         jugador1.enviarARegion(monstruoJugador1);
+        int puntoMonstruoJugador1PrevioALaCartaTrampa = monstruoJugador1.getPuntos();
 
         CartaTrampa cartaTrampaJugador1 = fabricaCartasJugador1.crearCartaTrampa("Reinforcements");
         cartaTrampaJugador1.cambiarOrientacion();
@@ -373,16 +373,23 @@ public class AlGoOhTest2
         monstruoJugador2.cambiarModo();
         jugador2.enviarARegion(monstruoJugador2);
 
-        cartaTrampaJugador1.efecto(monstruoJugador2);
+        assertEquals(puntoMonstruoJugador1PrevioALaCartaTrampa, monstruoJugador1.getPuntos());
+        cartaTrampaJugador1.efecto(monstruoJugador2, monstruoJugador1);
+
+        int puntoMonstruoJugador1LuegoDeLaCartaTrampa = puntoMonstruoJugador1PrevioALaCartaTrampa + 500;
+        assertEquals(puntoMonstruoJugador1LuegoDeLaCartaTrampa, monstruoJugador1.getPuntos());
+
         jugador2.atacar(monstruoJugador2, monstruoJugador1);
         cartaTrampaJugador1.deshacerEfecto();
+
+        assertEquals(puntoMonstruoJugador1PrevioALaCartaTrampa, monstruoJugador1.getPuntos());
 
         int puntosDeVidaEsperadosJugador2 = 8000 - 400;
 
         assertTrue(jugador2.cartaEstaEnCementerio(monstruoJugador2));
         assertFalse(jugador1.cartaEstaEnCementerio(monstruoJugador1));
-        assertEquals(puntosDeVidaEsperadosJugador2, jugador2.getPuntosDeVida(), 0);
-        assertEquals(8000, jugador1.getPuntosDeVida(), 0);
+        assertEquals(puntosDeVidaEsperadosJugador2, jugador2.getPuntosDeVida());
+        assertEquals(8000, jugador1.getPuntosDeVida());
     }
 
     //Extraer todas las cartas del mazo, y verificar que la partida terminó y el jugador

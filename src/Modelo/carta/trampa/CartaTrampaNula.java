@@ -30,12 +30,6 @@ public final class CartaTrampaNula extends CartaTrampa
     }
 
     @Override
-    public void efecto(CartaMonstruo cartaAtacante)
-    {
-
-    }
-
-    @Override
     public void efecto(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada)
     {
 

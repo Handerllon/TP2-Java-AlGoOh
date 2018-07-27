@@ -7,7 +7,7 @@ public class Reinforcements extends CartaTrampa
 {
     private static final String rutaImagen = "resources/imagenes/trampa/Reinforcements.jpg";
     private static final int modificadorPuntosAtaque = 500;
-    private CartaMonstruo cartaAtacante, cartaAtacada;
+    private CartaMonstruo cartaAtacada;
 
     public Reinforcements(Jugador jugador, Jugador oponente)
     {
@@ -16,17 +16,9 @@ public class Reinforcements extends CartaTrampa
     }
 
     @Override
-    public void efecto(CartaMonstruo cartaAtacante)
-    {
-
-    }
-
-    @Override
     public void efecto(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada)
     {
-        this.cartaAtacante = cartaAtacante;
         this.cartaAtacada = cartaAtacada;
-
         cartaAtacada.sumarPuntosAtaque(modificadorPuntosAtaque);
     }
 

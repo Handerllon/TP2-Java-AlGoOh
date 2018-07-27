@@ -328,12 +328,13 @@ public class AlGoOhTest2
         monstruoJugador2.cambiarModo();
         jugador2.enviarARegion(monstruoJugador2);
 
-        CartaTrampa trampaJugador1 = fabricaCartasJugador1.crearCartaTrampa("Magic Cylinder");
-        trampaJugador1.cambiarOrientacion();
-        jugador1.enviarARegion(trampaJugador1);
+        CartaTrampa cartaTrampaJugador1 = fabricaCartasJugador1.crearCartaTrampa("Magic Cylinder");
+        cartaTrampaJugador1.cambiarOrientacion();
+        jugador1.enviarARegion(cartaTrampaJugador1);
 
-        trampaJugador1.efecto(monstruoJugador2);
+        cartaTrampaJugador1.efecto(monstruoJugador2);
         jugador2.atacar(monstruoJugador2);
+        cartaTrampaJugador1.deshacerEfecto();
 
         int puntosDeVidaEsperadosJugador2 = 8000 - 100;
 
@@ -364,16 +365,19 @@ public class AlGoOhTest2
         monstruoJugador1.cambiarModo();
         jugador1.enviarARegion(monstruoJugador1);
 
+        CartaTrampa cartaTrampaJugador1 = fabricaCartasJugador1.crearCartaTrampa("Reinforcements");
+        cartaTrampaJugador1.cambiarOrientacion();
+        jugador1.enviarARegion(cartaTrampaJugador1);
+
         CartaMonstruo monstruoJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Bitron");
         monstruoJugador2.cambiarModo();
         jugador2.enviarARegion(monstruoJugador2);
 
-        CartaTrampa cartaTrampaReinforcements = fabricaCartasJugador1.crearCartaTrampa("Reinforcements");
-        jugador1.enviarARegion(cartaTrampaReinforcements);
+        cartaTrampaJugador1.efecto(monstruoJugador2);
+        jugador2.atacar(monstruoJugador2, monstruoJugador1);
+        cartaTrampaJugador1.deshacerEfecto();
 
         int puntosDeVidaEsperadosJugador2 = 8000 - 400;
-
-        jugador2.atacar(monstruoJugador2, monstruoJugador1);
 
         assertTrue(jugador2.cartaEstaEnCementerio(monstruoJugador2));
         assertFalse(jugador1.cartaEstaEnCementerio(monstruoJugador1));

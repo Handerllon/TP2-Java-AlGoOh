@@ -21,7 +21,6 @@ import java.io.File;
 
 public final class EscenaTableroPrincipal implements EscenaVista
 {
-    // TODO: levantar la resolucion automaticamente con alguna llamada al sistema.
     private static String RUTA_TABLERO = "resources/imagenes/tablero/tablero yogioh.png";
     private static String direccion_sonido_batalla = "src/resources/audio/battle.mp3";
     private static Vista vista;
@@ -73,7 +72,9 @@ public final class EscenaTableroPrincipal implements EscenaVista
         grid.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource(RUTA_TABLERO).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 
+        // -------------------------------
         // Estructura de la vista.
+        // -------------------------------
         grid.setGridLinesVisible(false);
         // TODO: número mágico.
         grid.setPadding(new Insets(5));

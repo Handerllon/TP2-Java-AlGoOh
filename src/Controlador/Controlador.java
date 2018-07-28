@@ -39,6 +39,7 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador, Ob
     {
         this.modelo = modelo;
         this.modelo.agregarObsevadorFinDeJuego(this);
+        this.maquinaTurnos = MaquinaTurnos.getInstancia(modelo.getJugador(), modelo.getOponente());
         this.verificadorCondicionesJuego = VerificadorCondicionesJuego.getInstancia(this.maquinaTurnos, modelo);
     }
 
@@ -67,7 +68,6 @@ public final class Controlador implements ObservadorDeFinJuego, IControlador, Ob
     // ------------------------------------
     public void iniciar()
     {
-        this.maquinaTurnos = MaquinaTurnos.getInstancia(this.modelo.getJugador(), this.modelo.getOponente());
         // Vista va a mostrar la pantalla de bienvenida.
         this.vista.mostrar();
     }

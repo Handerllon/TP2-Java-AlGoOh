@@ -1,9 +1,11 @@
 package Vista.carta;
 
+import Controlador.excepciones.NoSePuedeTomarCartaError;
 import Modelo.Jugador;
 import Modelo.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -11,7 +13,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.ImagePattern;
-import javafx.stage.Screen;
 
 public class MazoVista implements ObservadorDeModelo
 {
@@ -31,10 +32,10 @@ public class MazoVista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     public MazoVista(Vista vista)
     {
-        this.anchoDeCarta = Screen.getPrimary().getVisualBounds().getWidth() / relacionAnchoCartaPantalla;
-        this.altoDeCarta = this.anchoDeCarta * relacionAnchoAlto;
-
         this.vista = vista;
+
+        this.anchoDeCarta = vista.getResolucionHorizontal() / relacionAnchoCartaPantalla;
+        this.altoDeCarta = this.anchoDeCarta * relacionAnchoAlto;
 
         this.toolTipJugador = new Tooltip();
         this.toolTipOponente = new Tooltip();
@@ -97,10 +98,24 @@ public class MazoVista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     private void tomarCartaBtn_Click(Jugador jugador)
     {
-        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
-        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch. Recordar que si la mano está
-        // llena, la vista debe pedirle al usuario que descarte 1 de ellas. También podría hacerse que se descarte
-        // alguna al azar automáticamente.
-        this.vista.getControlador().tomarCarta(jugador);
+        // TODO: Recordar que si la mano está llena, la vista debe pedirle al usuario que descarte 1 de ellas.
+        // También podría hacerse que se descarte alguna al azar automáticamente.
+        try
+        {
+            this.vista.getControlador().tomarCarta(jugador);
+        } catch (NoSePuedeTomarCartaError error)
+        {
+            mostrarError(error);
+        }
+    }
+
+    private void mostrarError(NoSePuedeTomarCartaError error)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(error.getEstadoVerificador().getNombre());
+
+        alert.showAndWait();
     }
 }

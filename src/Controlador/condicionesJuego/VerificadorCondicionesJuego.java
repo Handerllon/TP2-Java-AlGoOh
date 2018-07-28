@@ -39,7 +39,7 @@ public final class VerificadorCondicionesJuego
 
     private boolean jugadorPuedeJugar(Jugador jugador)
     {
-        return this.maquinaTurnos.getJugadorActual() == jugador;
+        return this.maquinaTurnos.jugadorActualEsIgualA(jugador);
     }
 
     public EstadoVerificador sePuedeTomarCarta(Jugador solicitante)

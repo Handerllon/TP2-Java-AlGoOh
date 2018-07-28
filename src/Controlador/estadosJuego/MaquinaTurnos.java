@@ -88,7 +88,7 @@ public final class MaquinaTurnos
 
     private void swapJugadorActual()
     {
-        if (this.getJugadorActual() == this.jugador1)
+        if (this.jugadorActualEsIgualA(this.jugador1))
         {
             this.jugadorActual = this.jugador2;
         } else
@@ -115,6 +115,11 @@ public final class MaquinaTurnos
     public void setFaseActual(Fase fase)
     {
         this.faseActual = fase;
+    }
+
+    public boolean jugadorActualEsIgualA(Jugador jugador)
+    {
+        return getJugadorActual() == jugador;
     }
 
     // ------------------------------------

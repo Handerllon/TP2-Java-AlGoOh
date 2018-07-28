@@ -1,7 +1,5 @@
 package Modelo;
 
-import Modelo.areaDeJuego.Region;
-import Modelo.areaDeJuego.RegionMagicasYTrampas;
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
@@ -14,6 +12,8 @@ import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaFinJuegoNula;
 import Modelo.finDeJuego.FinDeJuegoObservable;
 import Modelo.observadores.*;
+import Modelo.region.Region;
+import Modelo.region.RegionMagicasYTrampas;
 
 import java.util.ArrayList;
 

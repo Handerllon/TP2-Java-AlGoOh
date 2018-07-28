@@ -1,17 +1,17 @@
 package exepciones;
 
-import Modelo.areaDeJuego.RegionMonstruos;
-import Modelo.areaDeJuego.excepciones.RegionSinEspacioLibre;
-import Modelo.carta.Mano;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.campo.FabricaCartasCampo;
 import Modelo.carta.excepciones.*;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.magica.FabricaCartasMagicas;
+import Modelo.carta.mano.Mano;
 import Modelo.carta.monstruo.*;
 import Modelo.carta.trampa.CartaTrampa;
 import Modelo.carta.trampa.FabricaCartasTrampa;
+import Modelo.region.RegionMonstruos;
+import Modelo.region.excepciones.RegionSinEspacioLibre;
 import org.junit.Test;
 
 public class exepcionesTest

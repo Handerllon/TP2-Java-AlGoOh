@@ -5,7 +5,8 @@ import Modelo.ModeloObservable;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.observadores.ObservadorDeModelo;
-import Vista.escenas.EscenaBienvenida;
+import Vista.escena.Escena;
+import Vista.escena.EscenaBienvenida;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -20,7 +21,7 @@ public class Vista implements ObservadorDeModelo
     private static ControladorInterfaz controlador;
     private static double RESOLUCION_HORIZONTAL;
     private static double RESOLUCION_VERTICAL;
-    private EscenaVista escenaVista;
+    private Escena escena;
     private Stage primaryStage;
 
     // --------------------------------------------------------------------
@@ -37,7 +38,7 @@ public class Vista implements ObservadorDeModelo
 
         this.controlador = controlador;
 
-        this.escenaVista = EscenaBienvenida.getInstancia(this.modelo, this);
+        this.escena = EscenaBienvenida.getInstancia(this.modelo, this);
     }
 
     // --------------------------------------------------------------------
@@ -46,12 +47,12 @@ public class Vista implements ObservadorDeModelo
 
     public void mostrar()
     {
-        this.escenaVista.dibujarEscena();
+        this.escena.dibujarEscena();
     }
 
-    public void setProximaEscena(EscenaVista escenaVista)
+    public void setProximaEscena(Escena escena)
     {
-        this.escenaVista = escenaVista;
+        this.escena = escena;
     }
 
     // --------------------------------------------------------------------
@@ -106,7 +107,7 @@ public class Vista implements ObservadorDeModelo
     @Override
     public void huboCambios()
     {
-        this.escenaVista.actualizarEstado();
+        this.escena.actualizarEstado();
     }
 
     // --------------------------------------------------------------------
@@ -114,8 +115,8 @@ public class Vista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     public void finDeJuego()
     {
-        this.escenaVista.finDeJuego();
-        this.escenaVista.dibujarEscena();
+        this.escena.finDeJuego();
+        this.escena.dibujarEscena();
     }
 
     public void confirmarSalirPrograma()
@@ -143,7 +144,7 @@ public class Vista implements ObservadorDeModelo
 
     public void cerrar()
     {
-        this.escenaVista.cerrar();
+        this.escena.cerrar();
     }
 
     public Sacrificio pedirSacrificios()

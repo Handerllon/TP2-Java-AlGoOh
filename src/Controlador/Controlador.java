@@ -23,11 +23,12 @@ import java.util.ArrayList;
 
 public final class Controlador implements ObservadorDeFinJuego, ControladorInterfaz, ObservadorDeCartaTrampa
 {
-    private static Modelo modelo;
-    private static Vista vista;
+    private static final int cantidadCartasTomarInicialmente = 5;
     private static Controlador instancia = null;
-    private static CausaFinJuego causaFinDeJuego = CausaFinJuegoNula.getInstancia();
-    private static VerificadorCondicionesJuego verificadorCondicionesJuego;
+    private Modelo modelo;
+    private Vista vista;
+    private CausaFinJuego causaFinDeJuego = CausaFinJuegoNula.getInstancia();
+    private VerificadorCondicionesJuego verificadorCondicionesJuego;
     private MaquinaTurnos maquinaTurnos;
     private EstadoVerificador estadoVerificador;
     private ArrayList<CartaTrampa> cartasTrampaUtilizadas = new ArrayList<>();
@@ -76,6 +77,14 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
     {
         // La vista pasa a la escena con el tablero principal.
         this.vista.mostrar();
+        // TODO: ver si esto funciona bien.
+        /*
+        for (int i = 0; i < cantidadCartasTomarInicialmente; i++)
+        {
+            this.modelo.tomarCarta(this.modelo.getJugador());
+            this.modelo.tomarCarta(this.modelo.getOponente());
+        }
+        */
     }
 
     // --------------------------------------------------------------------

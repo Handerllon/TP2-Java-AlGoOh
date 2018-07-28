@@ -1,18 +1,18 @@
 package Modelo;
 
-import Modelo.areaDeJuego.*;
 import Modelo.carta.Carta;
-import Modelo.carta.Mano;
-import Modelo.carta.Mazo;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.magica.CartaMagica;
+import Modelo.carta.mano.Mano;
+import Modelo.carta.mazo.Mazo;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.trampa.CartaTrampa;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaPuntosDeVidaNulos;
 import Modelo.finDeJuego.FinDeJuegoObservable;
 import Modelo.observadores.ObservadorDeFinJuego;
+import Modelo.region.*;
 
 import java.util.ArrayList;
 

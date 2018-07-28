@@ -1,6 +1,8 @@
 package Modelo.carta;
 
 import Modelo.Jugador;
+import Modelo.carta.mano.Mano;
+import Modelo.carta.mazo.Mazo;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

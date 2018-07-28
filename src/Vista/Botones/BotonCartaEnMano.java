@@ -1,13 +1,19 @@
 package Vista.Botones;
 
+import Controlador.excepciones.NoSePuedeCambiarOrientacionError;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Vista.Vista;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
@@ -58,6 +64,9 @@ public class BotonCartaEnMano extends Button
         boton.setTooltip(tp);
 
         boton.setPrefSize(anchoDeCarta, altoDeCarta);
+        
+        boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+                .getResource("resources/imagenes/tablero/Back.jpg").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 
         Popup popup = new Popup();
 
@@ -98,6 +107,8 @@ public class BotonCartaEnMano extends Button
         boton.setTooltip(tp);
 
         boton.setPrefSize(anchoDeCarta, altoDeCarta);
+        boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+                .getResource("resources/imagenes/tablero/Back.jpg").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 
         Popup popup = new Popup();
 
@@ -143,6 +154,9 @@ public class BotonCartaEnMano extends Button
         boton.setPrefSize(anchoDeCarta, altoDeCarta);
 
         Popup popup = new Popup();
+        
+        boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+                .getResource("resources/imagenes/tablero/Back.jpg").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 
         VBox vbox = new VBox();
 
@@ -195,9 +209,14 @@ public class BotonCartaEnMano extends Button
     // --------------------------------------------------------------------
     private void setBocaAbajoBtn_Click()
     {
-        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
-        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
-        this.vista.getControlador().flipBocaAbajo(this.carta, this.jugadorAsociado);
+        
+        try {
+        	this.vista.getControlador().flipBocaAbajo(this.carta, this.jugadorAsociado);
+        
+        }
+        catch (NoSePuedeCambiarOrientacionError e){
+        	//this.noSePuedeCambiarOrientacionErrorWarning();
+        }
     }
 
     private void setBocaArribaBtn_Click()

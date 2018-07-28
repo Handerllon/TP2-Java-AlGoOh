@@ -2,7 +2,7 @@ package Modelo.carta.ataque;
 
 import Modelo.carta.monstruo.CartaMonstruo;
 
-public interface Ataque
+public interface EstrategiaAtaque
 {
     void ejecutar(CartaMonstruo atacante, CartaMonstruo atacada);
 

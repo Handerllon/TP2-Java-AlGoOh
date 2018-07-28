@@ -1,29 +1,29 @@
 package Modelo.carta.trampa;
 
 import Modelo.Jugador;
-import Modelo.carta.ataque.Ataque;
-import Modelo.carta.ataque.AtaqueDefault;
-import Modelo.carta.ataque.AtaqueModificadoMagicCylinder;
+import Modelo.carta.ataque.EstrategiaAtaque;
+import Modelo.carta.ataque.EstrategiaAtaqueDefault;
+import Modelo.carta.ataque.EstrategiaAtaqueModificadoMagicCylinder;
 import Modelo.carta.monstruo.CartaMonstruo;
 
 public class MagicCylinder extends CartaTrampa
 {
     private static String rutaImagen = "resources/imagenes/trampa/MagicCylinder.png";
     CartaMonstruo cartaAtacante;
-    private Ataque modificadorAtaque;
+    private EstrategiaAtaque modificadorAtaque;
 
     public MagicCylinder(Jugador jugador, Jugador oponente)
     {
         super(jugador, oponente, rutaImagen);
         this.nombre = "Magic Cylinder";
-        this.modificadorAtaque = AtaqueModificadoMagicCylinder.getInstancia();
+        this.modificadorAtaque = EstrategiaAtaqueModificadoMagicCylinder.getInstancia();
     }
 
     @Override
     public void efecto(CartaMonstruo cartaAtacante, CartaMonstruo cartaAtacada)
     {
         this.cartaAtacante = cartaAtacante;
-        cartaAtacante.setAtaque(this.modificadorAtaque);
+        cartaAtacante.setEstrategiaAtaque(this.modificadorAtaque);
         this.notificarEventoCartaTrampa();
         this.getPropietario().destruirCarta(this);
     }
@@ -31,6 +31,6 @@ public class MagicCylinder extends CartaTrampa
     @Override
     public void deshacerEfecto()
     {
-        cartaAtacante.setAtaque(AtaqueDefault.getInstancia());
+        cartaAtacante.setEstrategiaAtaque(EstrategiaAtaqueDefault.getInstancia());
     }
 }

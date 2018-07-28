@@ -2,29 +2,29 @@ package Modelo.carta.ataque;
 
 import Modelo.carta.monstruo.CartaMonstruo;
 
-public final class AtaqueModificadoMagicCylinder implements Ataque
+public final class EstrategiaAtaqueDefault implements EstrategiaAtaque
 {
-    private static AtaqueModificadoMagicCylinder instancia = null;
+    private static EstrategiaAtaqueDefault instancia = null;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    private AtaqueModificadoMagicCylinder()
+    private EstrategiaAtaqueDefault()
     {
 
     }
 
-    public static AtaqueModificadoMagicCylinder getInstancia()
+    public static EstrategiaAtaqueDefault getInstancia()
     {
         if (instancia == null)
         {
-            instancia = new AtaqueModificadoMagicCylinder();
+            instancia = new EstrategiaAtaqueDefault();
         }
         return instancia;
     }
 
     @Override
-    public AtaqueModificadoMagicCylinder clone() throws CloneNotSupportedException
+    public EstrategiaAtaqueDefault clone() throws CloneNotSupportedException
     {
         throw new CloneNotSupportedException();
     }
@@ -35,12 +35,19 @@ public final class AtaqueModificadoMagicCylinder implements Ataque
     @Override
     public void ejecutar(CartaMonstruo atacante, CartaMonstruo atacada)
     {
-        this.ejecutar(atacante);
+        atacada.recibirAtaque(atacante);
+
+        if (atacada.estaBocaAbajo())
+        {
+            atacada.cambiarOrientacion();
+        }
     }
 
     @Override
     public void ejecutar(CartaMonstruo atacante)
     {
-        atacante.getPropietario().disminuirPuntosVida(atacante.getPuntosDeAtaque());
+        atacante.getOponente().disminuirPuntosVida(atacante.getPuntosDeAtaque());
     }
 }
+
+

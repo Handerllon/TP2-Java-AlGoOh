@@ -3,8 +3,8 @@ package Modelo.carta.monstruo;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
-import Modelo.carta.ataque.Ataque;
-import Modelo.carta.ataque.AtaqueDefault;
+import Modelo.carta.ataque.EstrategiaAtaque;
+import Modelo.carta.ataque.EstrategiaAtaqueDefault;
 import Modelo.carta.modo.Modo;
 import Modelo.carta.modo.ModoDefensa;
 
@@ -15,7 +15,7 @@ public abstract class CartaMonstruo extends Carta
     protected int puntos;
     protected int estrellas;
     protected Modo modo;
-    protected Ataque ataque;
+    protected EstrategiaAtaque estrategiaAtaque;
 
     public CartaMonstruo(int puntosDefensa, int puntosAtaque, Jugador jugador, Jugador oponente, String locacionDeImagen)
     {
@@ -27,13 +27,14 @@ public abstract class CartaMonstruo extends Carta
         this.modo = ModoDefensa.getInstancia();
         this.puntos = this.puntosDefensa;
 
-        this.ataque = AtaqueDefault.getInstancia();
+        this.estrategiaAtaque = EstrategiaAtaqueDefault.getInstancia();
     }
 
     public void cambiarModo()
     {
         this.modo.cambiarModo(this);
         this.actualizarPuntos();
+        super.notificarEvento();
     }
 
     public void setModo(Modo modoNuevo)
@@ -41,9 +42,9 @@ public abstract class CartaMonstruo extends Carta
         this.modo = modoNuevo;
     }
 
-    public void setAtaque(Ataque ataque)
+    public void setEstrategiaAtaque(EstrategiaAtaque estrategia)
     {
-        this.ataque = ataque;
+        this.estrategiaAtaque = estrategia;
     }
 
     // --------------------------------------------------------------------
@@ -141,12 +142,12 @@ public abstract class CartaMonstruo extends Carta
     // --------------------------------------------------------------------
     public void atacar(CartaMonstruo atacada)
     {
-        this.ataque.ejecutar(this, atacada);
+        this.estrategiaAtaque.ejecutar(this, atacada);
     }
 
     public void atacar()
     {
-        this.ataque.ejecutar(this);
+        this.estrategiaAtaque.ejecutar(this);
     }
 
     public void recibirAtaque(CartaMonstruo atacante)
@@ -178,9 +179,6 @@ public abstract class CartaMonstruo extends Carta
             } else if (diferenciaDePuntos < 0) // Si la atacada tiene más puntos.
             {
                 atacante.getPropietario().disminuirPuntosVida(Math.abs(diferenciaDePuntos));
-            } else
-            {
-                //No pasa nada
             }
         }
     }

@@ -44,7 +44,7 @@ public class RegionCementerioVista implements ObservadorDeModelo
     }
 
     @Override
-    public void actualizarEstado()
+    public void actualizar()
     {
         //TODO Ver que dibujarEscena en el cementerio
     }

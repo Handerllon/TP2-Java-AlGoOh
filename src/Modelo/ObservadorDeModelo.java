@@ -2,5 +2,5 @@ package Modelo;
 
 public interface ObservadorDeModelo
 {
-    void actualizarEstado();
+    void actualizar();
 }

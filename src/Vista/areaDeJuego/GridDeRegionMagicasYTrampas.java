@@ -32,7 +32,7 @@ public class GridDeRegionMagicasYTrampas extends GridPane
 
         this.botones = new ArrayList<BotonMagicasYTrampasEnRegion>();
 
-        anchoColumna = Screen.getPrimary().getVisualBounds().getWidth() / relacionAnchoColumnaPantalla;
+        anchoColumna = vista.getResolucionHorizontal() / relacionAnchoColumnaPantalla;
         ColumnConstraints columna0 = new ColumnConstraints(anchoColumna);
         ColumnConstraints columna1 = new ColumnConstraints(anchoColumna);
         ColumnConstraints columna2 = new ColumnConstraints(anchoColumna);

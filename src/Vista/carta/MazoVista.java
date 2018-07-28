@@ -45,7 +45,7 @@ public class MazoVista implements ObservadorDeModelo
         this.mazoOponente = inicializar(this.vista.getModelo().getOponente());
         this.mazoOponente.setTooltip(toolTipOponente);
 
-        this.actualizarEstado();
+        this.actualizar();
     }
 
     public Button inicializar(Jugador jugadorAsociado)
@@ -77,7 +77,7 @@ public class MazoVista implements ObservadorDeModelo
     }
 
     @Override
-    public void actualizarEstado()
+    public void actualizar()
     {
         this.actualizarMazoJugador(this.vista.getModelo().getCantidadCartasRestantesMazoJugador());
         this.actualizarMazoOponente(this.vista.getModelo().getCantidadCartasRestantesMazoOponente());

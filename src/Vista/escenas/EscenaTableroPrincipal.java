@@ -191,12 +191,12 @@ public final class EscenaTableroPrincipal implements EscenaVista
     @Override
     public void actualizarEstado()
     {
-        this.regionCampo.actualizarEstado();
-        this.regionMagicasYTrampas.actualizarEstado();
-        this.regionMonstruos.actualizarEstado();
-        this.regionCementerio.actualizarEstado();
-        this.manos.actualizarEstado();
-        this.mazos.actualizarEstado();
+        this.regionCampo.actualizar();
+        this.regionMagicasYTrampas.actualizar();
+        this.regionMonstruos.actualizar();
+        this.regionCementerio.actualizar();
+        this.manos.actualizar();
+        this.mazos.actualizar();
     }
 
     @Override

@@ -34,7 +34,6 @@ public class BotonMonstruoEnRegion extends Button
         this.vista = vista;
         this.botonDeLaCarta = new Button();
 
-        // TODO: generalizar el hardcodeo de los numeros.
         this.botonDeLaCarta.setPrefSize(anchoDeCarta, altoDeCarta);
         this.botonDeLaCarta.setStyle(estiloRegion);
     }
@@ -54,7 +53,7 @@ public class BotonMonstruoEnRegion extends Button
 
     public void actualizar(CartaMonstruo cartaMonstruo)
     {
-
+        // TODO: para que crear de nuevo el botón? por qué no lo actualiza con los datos nuevos?
         this.carta = cartaMonstruo;
         this.botonDeLaCarta = this.crearBotonParaCartaEnRegion();
     }
@@ -63,43 +62,36 @@ public class BotonMonstruoEnRegion extends Button
     {
         Button botonEnRegion = new Button();
 
-        //-----Tooltip del boton------
-        Image image = new Image(getClass().getClassLoader()
-                .getResource(this.carta.getLocacionDeImagen()).toString());
-        Tooltip tp = new Tooltip();
-        tp.setGraphic(new ImageView(image));
-
-        botonEnRegion.setTooltip(tp);
-        //----------------------------
-
-        //----- Fondo del boton--------
+        // -------------------------------
+        // Imagen del botón.
+        // -------------------------------
+        Image imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
         botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
-        botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-        //------------------------------
+        botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
+                .getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        // -------------------------------
 
-        //----Opciones Del Boton -------
+        // -------------------------------
+        // Tooltip del botón.
+        // -------------------------------
+        Tooltip tooltipBoton = new Tooltip();
+        tooltipBoton.setGraphic(new ImageView(imagenBoton));
+        botonEnRegion.setTooltip(tooltipBoton);
+        // -------------------------------
 
+        // -------------------------------
+        // Opciones del botón.
+        // -------------------------------
         Popup popup = new Popup();
-
         VBox vbox = new VBox();
 
         vbox = this.crearVBoxCartaMonstruo(vbox, popup);
-
         popup.getContent().addAll(vbox);
 
         botonEnRegion.setOnAction(e -> MonstruoEnRegionBtn_Click(popup, botonEnRegion));
-        //------------------------------
+        // -------------------------------
 
         return botonEnRegion;
-    }
-
-    private void MonstruoEnRegionBtn_Click(Popup popup, Button botonEnRegion)
-    {
-        popup.show(this.vista.getPrimaryStage());
-        javafx.geometry.Point2D point = botonEnRegion.localToScene(0.0, 0.0);
-        popup.setX(this.vista.getPrimaryStage().getX() + point.getX());
-        popup.setY(this.vista.getPrimaryStage().getY() + point.getY());
     }
 
     private VBox crearVBoxCartaMonstruo(VBox vbox, Popup popup)
@@ -124,6 +116,13 @@ public class BotonMonstruoEnRegion extends Button
         return vbox;
     }
 
+    private void MonstruoEnRegionBtn_Click(Popup popup, Button botonEnRegion)
+    {
+        popup.show(this.vista.getPrimaryStage());
+        javafx.geometry.Point2D point = botonEnRegion.localToScene(0.0, 0.0);
+        popup.setX(this.vista.getPrimaryStage().getX() + point.getX());
+        popup.setY(this.vista.getPrimaryStage().getY() + point.getY());
+    }
     // TODO: no me parece buena esta solucion ya que la vista va a tener que verificar si el jugador puede atacar a
     // las cartas del oponente o al oponente directamente. O sea, no se le puede dar la opcion al jugador de atacar
     // directamene al oponente si hay cartas en la región monstruo oponente para atacar. Lo que creo que debería

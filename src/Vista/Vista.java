@@ -106,7 +106,7 @@ public class Vista implements ObservadorDeModelo
     // Métodos de observador de modelo.
     // --------------------------------------------------------------------
     @Override
-    public void actualizarEstado()
+    public void actualizar()
     {
         this.escenaVista.actualizarEstado();
     }

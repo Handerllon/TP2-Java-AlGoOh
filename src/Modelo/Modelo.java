@@ -139,7 +139,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         for (int i = 0; i < this.observadoresDeModelo.size(); i++)
         {
 
-            this.observadoresDeModelo.get(i).actualizarEstado();
+            this.observadoresDeModelo.get(i).actualizar();
         }
     }
 

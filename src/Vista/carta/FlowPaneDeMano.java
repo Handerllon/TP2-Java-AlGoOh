@@ -22,7 +22,7 @@ public class FlowPaneDeMano extends FlowPane
         this.vista = vista;
         this.flowPane = new FlowPane();
         this.flowPane.setAlignment(Pos.CENTER);
-        this.botones = new ArrayList<BotonCartaEnMano>();
+        this.botones = new ArrayList<>();
     }
 
     public FlowPane getFlowPane()
@@ -36,10 +36,10 @@ public class FlowPaneDeMano extends FlowPane
 
         this.flowPane = new FlowPane();
         this.flowPane.setAlignment(Pos.CENTER);
-        this.botones = new ArrayList<BotonCartaEnMano>();
+        this.botones = new ArrayList<>();
     }
 
-    public void actualizarMano(ArrayList<Carta> cartasEnLaManoDelJugador)
+    public void actualizar(ArrayList<Carta> cartasEnLaManoDelJugador)
     {
 
         for (int i = 0; i < cartasEnLaManoDelJugador.size(); i++)

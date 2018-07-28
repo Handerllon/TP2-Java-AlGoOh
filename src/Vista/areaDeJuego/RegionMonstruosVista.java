@@ -31,11 +31,11 @@ public class RegionMonstruosVista implements ObservadorDeModelo
     }
 
     @Override
-    public void actualizarEstado()
+    public void actualizar()
     {
         this.gridJugador.clear();
         this.gridOponente.clear();
-        this.gridJugador.actualizarRegion(this.vista.getModelo().getCartasEnRegionMonstruosJugador());
-        this.gridOponente.actualizarRegion(this.vista.getModelo().getCartasEnRegionMonstruosOponente());
+        this.gridJugador.actualizar(this.vista.getModelo().getCartasEnRegionMonstruosJugador());
+        this.gridOponente.actualizar(this.vista.getModelo().getCartasEnRegionMonstruosOponente());
     }
 }

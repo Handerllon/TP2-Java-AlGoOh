@@ -2,13 +2,17 @@ package Modelo.carta;
 
 import Modelo.Jugador;
 import Modelo.carta.orientacion.Orientacion;
+import Modelo.observadores.ObservadorDeCarta;
 
-public abstract class Carta implements Orientacion
+import java.util.ArrayList;
+
+public abstract class Carta implements Orientacion, CartaObservable
 {
     protected String nombre;
     protected boolean orientacionArriba;
-    private Jugador jugador, oponente;
     protected String rutaImagen;
+    private Jugador jugador, oponente;
+    private ArrayList<ObservadorDeCarta> observadores = new ArrayList<>();
 
     public Carta(Jugador jugador, Jugador oponente, String rutaImagen)
     {
@@ -44,6 +48,27 @@ public abstract class Carta implements Orientacion
         this.oponente = oponente;
     }
 
+    // --------------------------------------------------------------------
+    // Metodos por ser observable de Carta.
+    // --------------------------------------------------------------------
+    @Override
+    public void agregarObsevador(ObservadorDeCarta observador)
+    {
+        observadores.add(observador);
+    }
+
+    @Override
+    public void quitarObservador(ObservadorDeCarta observador)
+    {
+        observadores.remove(observador);
+    }
+
+    @Override
+    public void notificarObservadores()
+    {
+        observadores.forEach(observador -> observador.notificar());
+    }
+
     // ------------------------------------
     // Métodos de orientación de cartas.
     // ------------------------------------
@@ -51,6 +76,7 @@ public abstract class Carta implements Orientacion
     public void cambiarOrientacion()
     {
         this.orientacionArriba = !this.orientacionArriba;
+        notificarObservadores();
     }
 
     @Override

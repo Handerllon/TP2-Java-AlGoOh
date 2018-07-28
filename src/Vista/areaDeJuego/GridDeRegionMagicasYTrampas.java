@@ -8,7 +8,6 @@ import javafx.geometry.HPos;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.stage.Screen;
 
 import java.util.ArrayList;
 

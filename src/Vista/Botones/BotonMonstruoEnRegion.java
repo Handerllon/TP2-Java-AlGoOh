@@ -123,6 +123,7 @@ public class BotonMonstruoEnRegion extends Button
         popup.setX(this.vista.getPrimaryStage().getX() + point.getX());
         popup.setY(this.vista.getPrimaryStage().getY() + point.getY());
     }
+
     // TODO: no me parece buena esta solucion ya que la vista va a tener que verificar si el jugador puede atacar a
     // las cartas del oponente o al oponente directamente. O sea, no se le puede dar la opcion al jugador de atacar
     // directamene al oponente si hay cartas en la región monstruo oponente para atacar. Lo que creo que debería
@@ -162,7 +163,7 @@ public class BotonMonstruoEnRegion extends Button
         // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
         // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
         // Ojo con tratar de atacar varias veces en el mismo turno.
-        // Hay un solo metodo atacar() en IControlador.
+        // Hay un solo metodo atacar() en ControladorInterfaz.
         //this.vista.getControlador().atacar(this.carta, this.jugadorAsociado);
     }
 
@@ -175,7 +176,7 @@ public class BotonMonstruoEnRegion extends Button
             // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
             // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
             // Ojo con tratar de atacar varias veces en el mismo turno.
-            // Hay un solo metodo atacar() en IControlador.
+            // Hay un solo metodo atacar() en ControladorInterfaz.
             //this.vista.getControlador().atacar(this.carta, cartasOponente.get(i), this.jugadorAsociado);
         }
     }

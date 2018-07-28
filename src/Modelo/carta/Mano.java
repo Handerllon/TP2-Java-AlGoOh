@@ -5,17 +5,19 @@ import Modelo.carta.excepciones.ManoLlenaError;
 import Modelo.finDeJuego.CausaCincoPartesExodiaReunidas;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.FinDeJuegoObservable;
-import Modelo.finDeJuego.ObservadorDeFinJuego;
+import Modelo.observadores.ObservadorDeFinJuego;
+import Modelo.observadores.ObservadorDeMano;
 
 import java.util.ArrayList;
 
-public class Mano implements FinDeJuegoObservable
+public class Mano implements FinDeJuegoObservable, ManoObservable
 {
     private static int CANTIDAD_MAXIMA = 7;
     private static int contadorPartesExodia;
     private ArrayList<Carta> cartas;
     private Jugador jugadorAsociado;
     private ArrayList<ObservadorDeFinJuego> observadoresFinJuegos = new ArrayList<>();
+    private ArrayList<ObservadorDeMano> observadoresMano = new ArrayList<>();
 
     public Mano(Jugador jugador)
     {
@@ -90,7 +92,7 @@ public class Mano implements FinDeJuegoObservable
     }
 
     // --------------------------------------------------------------------
-    // Metodos de observadores de fin de juego.
+    // Metodos por ser un observable de Fin De Juego.
     // --------------------------------------------------------------------
     @Override
     public void agregarObsevadorFinDeJuego(ObservadorDeFinJuego observador)
@@ -111,5 +113,26 @@ public class Mano implements FinDeJuegoObservable
     public void notificarFinDeJuego(CausaFinJuego causaFinJuego)
     {
         this.observadoresFinJuegos.forEach(item -> item.seLlegoAFinDeJuego(causaFinJuego));
+    }
+
+    // --------------------------------------------------------------------
+    // Metodos por ser observable de Mano.
+    // --------------------------------------------------------------------
+    @Override
+    public void agregarObsevador(ObservadorDeMano observador)
+    {
+        observadoresMano.add(observador);
+    }
+
+    @Override
+    public void quitarObservador(ObservadorDeMano observador)
+    {
+        observadoresMano.remove(observador);
+    }
+
+    @Override
+    public void notificarObservadores()
+    {
+        observadoresMano.forEach(observador -> observador.notificar());
     }
 }

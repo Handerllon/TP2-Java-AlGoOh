@@ -15,7 +15,7 @@ import Modelo.carta.trampa.CartaTrampa;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaPuntosDeVidaNulos;
 import Modelo.finDeJuego.FinDeJuegoObservable;
-import Modelo.finDeJuego.ObservadorDeFinJuego;
+import Modelo.observadores.ObservadorDeFinJuego;
 
 import java.util.ArrayList;
 

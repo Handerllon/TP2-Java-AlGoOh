@@ -2,7 +2,7 @@ package Vista.carta;
 
 import Controlador.excepciones.NoSePuedeTomarCartaError;
 import Modelo.Jugador;
-import Modelo.ObservadorDeModelo;
+import Modelo.observadores.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;

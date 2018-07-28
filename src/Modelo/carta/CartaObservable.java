@@ -1,5 +1,7 @@
 package Modelo.carta;
 
+import Modelo.observadores.ObservadorDeCarta;
+
 public interface CartaObservable
 {
     void agregarObsevador(ObservadorDeCarta observador);
@@ -7,8 +9,4 @@ public interface CartaObservable
     void quitarObservador(ObservadorDeCarta observador);
 
     void notificarObservadores();
-
-    // ------------------------------------
-    // Métodos de consultas.
-    // ------------------------------------
 }

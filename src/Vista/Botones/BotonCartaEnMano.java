@@ -6,10 +6,10 @@ import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Vista.Vista;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tooltip;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -67,7 +67,7 @@ public class BotonCartaEnMano extends Button
         boton.setTooltip(tp);
 
         boton.setPrefSize(anchoDeCarta, altoDeCarta);
-        
+
         boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource("resources/imagenes/tablero/Back.jpg").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -157,7 +157,7 @@ public class BotonCartaEnMano extends Button
         boton.setPrefSize(anchoDeCarta, altoDeCarta);
 
         Popup popup = new Popup();
-        
+
         boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource("resources/imagenes/tablero/Back.jpg").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -212,43 +212,45 @@ public class BotonCartaEnMano extends Button
     // --------------------------------------------------------------------
     private void setBocaAbajoBtn_Click()
     {
-        try {
-        	this.vista.getControlador().flipBocaAbajo(this.carta, this.jugadorAsociado);
-        
-        }
-        catch (NoSePuedeCambiarOrientacionError e){
-        	this.noSePuedeCambiarOrientacionErrorWarning();
+        try
+        {
+            this.vista.getControlador().flipBocaAbajo(this.carta, this.jugadorAsociado);
+        } catch (NoSePuedeCambiarOrientacionError e)
+        {
+            this.noSePuedeCambiarOrientacionErrorWarning();
         }
     }
 
-
-	private void setBocaArribaBtn_Click()
-    {  
-        try{
-        	this.vista.getControlador().flipBocaArriba(this.carta, this.jugadorAsociado);
-        }
-        catch (NoSePuedeCambiarOrientacionError e){
-        	this.noSePuedeCambiarOrientacionErrorWarning();
+    private void setBocaArribaBtn_Click()
+    {
+        try
+        {
+            this.vista.getControlador().flipBocaArriba(this.carta, this.jugadorAsociado);
+        } catch (NoSePuedeCambiarOrientacionError e)
+        {
+            this.noSePuedeCambiarOrientacionErrorWarning();
         }
     }
 
     private void setModoAtaqueBtn_Click()
-    {  
-        try{
-        	this.vista.getControlador().setModoAtaque(this.carta, this.jugadorAsociado);
-        }
-        catch (NoSePuedeCambiarOrientacionError e){
-        	this.noSePuedeCambiarOrientacionErrorWarning();
+    {
+        try
+        {
+            this.vista.getControlador().setModoAtaque(this.carta, this.jugadorAsociado);
+        } catch (NoSePuedeCambiarOrientacionError e)
+        {
+            this.noSePuedeCambiarOrientacionErrorWarning();
         }
     }
 
     private void setModoDefensaBtn_Click()
     {
-        try{
-        	this.vista.getControlador().setModoDefensa(this.carta, this.jugadorAsociado);
-        }
-        catch (NoSePuedeCambiarOrientacionError e){
-        	this.noSePuedeCambiarOrientacionErrorWarning();
+        try
+        {
+            this.vista.getControlador().setModoDefensa(this.carta, this.jugadorAsociado);
+        } catch (NoSePuedeCambiarOrientacionError e)
+        {
+            this.noSePuedeCambiarOrientacionErrorWarning();
         }
     }
 
@@ -260,56 +262,59 @@ public class BotonCartaEnMano extends Button
 
     private void setCartaTrampaBtn_Click()
     {
-        try{
-        	this.vista.getControlador().setCartaTrampa(this.carta, this.jugadorAsociado);
-        }
-        catch (NoSePuedeEnviarARegionMyT e){
-        	this.noSePuedeEnviarARegionMyTErrorWarning();
+        try
+        {
+            this.vista.getControlador().setCartaTrampa(this.carta, this.jugadorAsociado);
+        } catch (NoSePuedeEnviarARegionMyT e)
+        {
+            this.noSePuedeEnviarARegionMyTErrorWarning();
         }
     }
 
-	private void setCartaMagicaBtn_Click()
+    private void setCartaMagicaBtn_Click()
     {
-        try{
-        	this.vista.getControlador().setCartaMagica(this.carta, this.jugadorAsociado);
-        }
-        catch (NoSePuedeEnviarARegionMyT e){
-        	this.noSePuedeEnviarARegionMyTErrorWarning();
+        try
+        {
+            this.vista.getControlador().setCartaMagica(this.carta, this.jugadorAsociado);
+        } catch (NoSePuedeEnviarARegionMyT e)
+        {
+            this.noSePuedeEnviarARegionMyTErrorWarning();
         }
     }
 
     private void activarCartaMagicaBtn_Click()
     {
-        try{
-        	this.vista.getControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
-        }
-        catch (NoSePuedeEnviarARegionMyT e){
-        	this.noSePuedeEnviarARegionMyTErrorWarning();
+        try
+        {
+            this.vista.getControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
+        } catch (NoSePuedeEnviarARegionMyT e)
+        {
+            this.noSePuedeEnviarARegionMyTErrorWarning();
         }
     }
-    
+
     //---------------------
     //     WARNINGS
     //---------------------
-    
-    private void noSePuedeEnviarARegionMyTErrorWarning() {
-    	Alert alert = new Alert(AlertType.INFORMATION);
-    	
-    	//Podemos ponerle alguna otra cosa que no sea error
-    	alert.setTitle("Error");
-    	alert.setHeaderText(null);
-    	alert.setContentText("La carta elegida no puede ser enviada a la region magicas y trampas");
-    	
-    	
+
+    private void noSePuedeEnviarARegionMyTErrorWarning()
+    {
+        Alert alert = new Alert(AlertType.INFORMATION);
+
+        //Podemos ponerle alguna otra cosa que no sea error
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("La carta elegida no puede ser enviada a la region magicas y trampas");
     }
-    private void noSePuedeCambiarOrientacionErrorWarning() {
-    	
-    	Alert alert = new Alert(AlertType.INFORMATION);
-    	
-    	//Podemos ponerle alguna otra cosa que no sea error
-    	alert.setTitle("Error");
-    	alert.setHeaderText(null);
-    	alert.setContentText("No se puede cambiar la orientacion de la carta elegida");
-    	
+
+    private void noSePuedeCambiarOrientacionErrorWarning()
+    {
+
+        Alert alert = new Alert(AlertType.INFORMATION);
+
+        //Podemos ponerle alguna otra cosa que no sea error
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("No se puede cambiar la orientacion de la carta elegida");
     }
 }

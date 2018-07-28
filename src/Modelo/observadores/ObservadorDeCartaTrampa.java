@@ -1,8 +1,8 @@
-package Modelo.carta;
+package Modelo.observadores;
 
 import Modelo.carta.trampa.CartaTrampa;
 
-public interface ObservadorDeCarta
+public interface ObservadorDeCartaTrampa
 {
     void notificarUsoDeCarta(CartaTrampa cartaTrampa);
 }

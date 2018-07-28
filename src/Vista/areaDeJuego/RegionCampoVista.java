@@ -1,7 +1,7 @@
 package Vista.areaDeJuego;
 
-import Modelo.ObservadorDeModelo;
 import Modelo.carta.campo.CartaCampo;
+import Modelo.observadores.ObservadorDeModelo;
 import Vista.Botones.BotonCampoEnRegion;
 import Vista.Vista;
 import javafx.scene.control.Button;

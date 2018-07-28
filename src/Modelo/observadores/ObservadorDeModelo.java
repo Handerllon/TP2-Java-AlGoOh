@@ -1,4 +1,4 @@
-package Modelo;
+package Modelo.observadores;
 
 public interface ObservadorDeModelo
 {

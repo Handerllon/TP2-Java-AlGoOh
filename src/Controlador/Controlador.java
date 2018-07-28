@@ -9,19 +9,19 @@ import Controlador.excepciones.*;
 import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
-import Modelo.carta.ObservadorDeCarta;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.trampa.CartaTrampa;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaFinJuegoNula;
-import Modelo.finDeJuego.ObservadorDeFinJuego;
+import Modelo.observadores.ObservadorDeCartaTrampa;
+import Modelo.observadores.ObservadorDeFinJuego;
 import Vista.Vista;
 
 import java.util.ArrayList;
 
-public final class Controlador implements ObservadorDeFinJuego, IControlador, ObservadorDeCarta
+public final class Controlador implements ObservadorDeFinJuego, ControladorInterfaz, ObservadorDeCartaTrampa
 {
     private static Modelo modelo;
     private static Vista vista;

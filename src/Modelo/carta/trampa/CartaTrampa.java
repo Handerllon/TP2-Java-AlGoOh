@@ -2,15 +2,14 @@ package Modelo.carta.trampa;
 
 import Modelo.Jugador;
 import Modelo.carta.Carta;
-import Modelo.carta.CartaObservable;
-import Modelo.carta.ObservadorDeCarta;
 import Modelo.carta.monstruo.CartaMonstruo;
+import Modelo.observadores.ObservadorDeCartaTrampa;
 
 import java.util.ArrayList;
 
-public abstract class CartaTrampa extends Carta implements CartaObservable
+public abstract class CartaTrampa extends Carta implements CartaTrampaObservable
 {
-    protected ArrayList<ObservadorDeCarta> observadoresDeCartas = new ArrayList<>();
+    protected ArrayList<ObservadorDeCartaTrampa> observadoresDeCartasTrampa = new ArrayList<>();
 
     public CartaTrampa(Jugador jugador, Jugador oponente, String locacionDeImagen)
     {
@@ -21,24 +20,21 @@ public abstract class CartaTrampa extends Carta implements CartaObservable
     // Metodos de observador de modelo.
     // ------------------------------------
     @Override
-    public void agregarObsevador(ObservadorDeCarta observer)
+    public void agregarObsevadorCartaTrampa(ObservadorDeCartaTrampa observer)
     {
-        this.observadoresDeCartas.add(observer);
+        this.observadoresDeCartasTrampa.add(observer);
     }
 
     @Override
-    public void quitarObservador(ObservadorDeCarta observer)
+    public void quitarObservadorCartaTrampa(ObservadorDeCartaTrampa observer)
     {
-        this.observadoresDeCartas.remove(observer);
+        this.observadoresDeCartasTrampa.remove(observer);
     }
 
     @Override
-    public void notificarObservadores()
+    public void notificarObservadoresCartaTrampa()
     {
-        for (int i = 0; i < this.observadoresDeCartas.size(); i++)
-        {
-            this.observadoresDeCartas.get(i).notificarUsoDeCarta(this);
-        }
+        observadoresDeCartasTrampa.forEach(observador -> observador.notificarUsoDeCarta(this));
     }
 
     // ------------------------------------

@@ -24,7 +24,7 @@ public class MagicCylinder extends CartaTrampa
     {
         this.cartaAtacante = cartaAtacante;
         cartaAtacante.setAtaque(this.modificadorAtaque);
-        this.notificarObservadores();
+        this.notificarObservadoresCartaTrampa();
         this.getPropietario().destruirCarta(this);
     }
 

@@ -1,6 +1,6 @@
 package Vista.areaDeJuego;
 
-import Modelo.ObservadorDeModelo;
+import Modelo.observadores.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;

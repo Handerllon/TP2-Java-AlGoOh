@@ -1,7 +1,6 @@
 package Modelo.carta.trampa;
 
 import Modelo.carta.CartaNula;
-import Modelo.carta.ObservadorDeCarta;
 import Modelo.carta.monstruo.CartaMonstruo;
 
 public final class CartaTrampaNula extends CartaTrampa
@@ -28,27 +27,6 @@ public final class CartaTrampaNula extends CartaTrampa
     public CartaNula clone() throws CloneNotSupportedException
     {
         throw new CloneNotSupportedException();
-    }
-
-    // ------------------------------------
-    // Metodos de observador de modelo.
-    // ------------------------------------
-    @Override
-    public void agregarObsevador(ObservadorDeCarta observer)
-    {
-
-    }
-
-    @Override
-    public void quitarObservador(ObservadorDeCarta observer)
-    {
-
-    }
-
-    @Override
-    public void notificarObservadores()
-    {
-
     }
 
     // ------------------------------------

@@ -5,7 +5,7 @@ import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.finDeJuego.CausaFinJuego;
 
-public interface IControlador
+public interface ControladorInterfaz
 {
     void jugar();
 

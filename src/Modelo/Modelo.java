@@ -12,11 +12,12 @@ import Modelo.excepciones.NoEsCartaMonstruo;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaFinJuegoNula;
 import Modelo.finDeJuego.FinDeJuegoObservable;
-import Modelo.finDeJuego.ObservadorDeFinJuego;
+import Modelo.observadores.ObservadorDeFinJuego;
+import Modelo.observadores.ObservadorDeModelo;
 
 import java.util.ArrayList;
 
-public final class Modelo implements ModeloObservable, FinDeJuegoObservable, ObservadorDeFinJuego, IModelo
+public final class Modelo implements ModeloObservable, FinDeJuegoObservable, ObservadorDeFinJuego, ModeloInterfaz
 {
     private static Modelo instancia = null;
     private Jugador jugador1;
@@ -135,12 +136,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     @Override
     public void notificarObservadores()
     {
-
-        for (int i = 0; i < this.observadoresDeModelo.size(); i++)
-        {
-
-            this.observadoresDeModelo.get(i).actualizar();
-        }
+        observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.actualizar());
     }
 
     // ------------------------------------

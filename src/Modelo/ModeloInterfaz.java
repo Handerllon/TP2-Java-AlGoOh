@@ -6,7 +6,7 @@ import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.trampa.CartaTrampa;
 
-public interface IModelo
+public interface ModeloInterfaz
 {
     // TODO: el modelo es el que debe avisarle a la maquina de turnos si se pudo llevar a cabo la accion?
     // ------------------------------------

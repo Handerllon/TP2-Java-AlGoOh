@@ -4,7 +4,7 @@ import Modelo.Jugador;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaSinCartasEnMazo;
 import Modelo.finDeJuego.FinDeJuegoObservable;
-import Modelo.finDeJuego.ObservadorDeFinJuego;
+import Modelo.observadores.ObservadorDeFinJuego;
 
 import java.util.ArrayList;
 import java.util.Stack;

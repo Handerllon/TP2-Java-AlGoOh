@@ -1,4 +1,6 @@
-package Modelo.finDeJuego;
+package Modelo.observadores;
+
+import Modelo.finDeJuego.CausaFinJuego;
 
 public interface ObservadorDeFinJuego
 {

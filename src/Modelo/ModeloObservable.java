@@ -3,6 +3,7 @@ package Modelo;
 import Modelo.carta.Carta;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.monstruo.CartaMonstruo;
+import Modelo.observadores.ObservadorDeModelo;
 
 import java.util.ArrayList;
 

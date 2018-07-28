@@ -1,5 +1,7 @@
 package Modelo.areaDeJuego;
 
+import Modelo.observadores.ObservadorRegion;
+
 public interface RegionObservable
 {
     void agregarObsevador(ObservadorRegion observador);

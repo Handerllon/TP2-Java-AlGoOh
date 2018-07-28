@@ -1,4 +1,6 @@
-package Modelo.areaDeJuego;
+package Modelo.observadores;
+
+import Modelo.areaDeJuego.Region;
 
 public interface ObservadorRegion<R extends Region>
 {

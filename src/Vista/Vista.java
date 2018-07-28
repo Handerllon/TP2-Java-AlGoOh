@@ -1,10 +1,10 @@
 package Vista;
 
-import Controlador.IControlador;
+import Controlador.ControladorInterfaz;
 import Modelo.ModeloObservable;
-import Modelo.ObservadorDeModelo;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.monstruo.CartaMonstruo;
+import Modelo.observadores.ObservadorDeModelo;
 import Vista.escenas.EscenaBienvenida;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
@@ -19,7 +19,7 @@ import java.util.Optional;
 public class Vista implements ObservadorDeModelo
 {
     private static ModeloObservable modelo;
-    private static IControlador controlador;
+    private static ControladorInterfaz controlador;
     private static double RESOLUCION_HORIZONTAL;
     private static double RESOLUCION_VERTICAL;
     private EscenaVista escenaVista;
@@ -28,7 +28,7 @@ public class Vista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    public Vista(ModeloObservable modelo, IControlador controlador, Stage primaryStage)
+    public Vista(ModeloObservable modelo, ControladorInterfaz controlador, Stage primaryStage)
     {
         this.primaryStage = primaryStage;
         this.RESOLUCION_HORIZONTAL = Screen.getPrimary().getVisualBounds().getWidth();
@@ -64,7 +64,7 @@ public class Vista implements ObservadorDeModelo
         return this.primaryStage;
     }
 
-    public IControlador getControlador()
+    public ControladorInterfaz getControlador()
     {
         return this.controlador;
     }

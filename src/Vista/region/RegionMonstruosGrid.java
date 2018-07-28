@@ -12,10 +12,11 @@ import java.util.ArrayList;
 
 public class RegionMonstruosGrid extends GridPane
 {
+    private static double anchoColumna;
     // TODO: número mágico.
-    public static final double relacionAnchoColumnaPantalla = 7.25;
-    private static final double anchoFila = 160;
-    public static double anchoColumna;
+    private final double relacionAnchoColumnaPantalla = 7.25;
+    private final double anchoFila = 160;
+    private final int cantidadBotonesGrid = 5;
     private GridPane grid;
     private ArrayList<RegionMonstruoBoton> botones;
     private Vista vista;
@@ -44,23 +45,14 @@ public class RegionMonstruosGrid extends GridPane
         this.grid.getColumnConstraints().addAll(columna0, columna1, columna2, columna3, columna4);
         this.grid.getRowConstraints().addAll(fila1);
 
-        this.crearListaDeBotones();
-
-        // Se posicionan los botones en la grilla de la región monstruo.
-        for (int i = 0; i < botones.size(); i++)
+        RegionMonstruoBoton boton;
+        for (int i = 0; i < cantidadBotonesGrid; i++)
         {
-            this.grid.add(botones.get(i).getBoton(), i, 0);
-            this.grid.setHalignment(botones.get(i).getBoton(), HPos.CENTER);
-        }
-    }
-
-    private void crearListaDeBotones()
-    {
-        // TODO: número mágico.
-        for (int i = 0; i < 5; i++)
-        {
-            RegionMonstruoBoton boton = new RegionMonstruoBoton(this.vista, this.jugadorAsociado);
+            boton = new RegionMonstruoBoton(this.vista, this.jugadorAsociado);
             botones.add(boton);
+            // Se posicionan los botones en la grilla de la región monstruo.
+            this.grid.add(boton.getBoton(), i, 0);
+            this.grid.setHalignment(boton.getBoton(), HPos.CENTER);
         }
     }
 
@@ -72,16 +64,12 @@ public class RegionMonstruosGrid extends GridPane
 
     public void clear()
     {
-
-        for (int i = 0; i < botones.size(); i++)
-        {
-            botones.get(i).clear();
-        }
+        this.botones.forEach(boton -> boton.clear());
     }
 
     public void actualizar(ArrayList<CartaMonstruo> cartasEnRegionMonstruos)
     {
-
+        // TODO: reemplazar por lambda usando un iterator de cartasEnRegionMonstruo.
         for (int i = 0; i < cartasEnRegionMonstruos.size(); i++)
         {
             botones.get(i).actualizar(cartasEnRegionMonstruos.get(i));

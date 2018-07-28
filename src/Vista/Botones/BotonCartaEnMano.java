@@ -1,12 +1,15 @@
 package Vista.Botones;
 
 import Controlador.excepciones.NoSePuedeCambiarOrientacionError;
+import Controlador.excepciones.NoSePuedeEnviarARegionMyT;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Vista.Vista;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -209,35 +212,44 @@ public class BotonCartaEnMano extends Button
     // --------------------------------------------------------------------
     private void setBocaAbajoBtn_Click()
     {
-        
         try {
         	this.vista.getControlador().flipBocaAbajo(this.carta, this.jugadorAsociado);
         
         }
         catch (NoSePuedeCambiarOrientacionError e){
-        	//this.noSePuedeCambiarOrientacionErrorWarning();
+        	this.noSePuedeCambiarOrientacionErrorWarning();
         }
     }
 
-    private void setBocaArribaBtn_Click()
-    {
-        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
-        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
-        this.vista.getControlador().flipBocaArriba(this.carta, this.jugadorAsociado);
+
+	private void setBocaArribaBtn_Click()
+    {  
+        try{
+        	this.vista.getControlador().flipBocaArriba(this.carta, this.jugadorAsociado);
+        }
+        catch (NoSePuedeCambiarOrientacionError e){
+        	this.noSePuedeCambiarOrientacionErrorWarning();
+        }
     }
 
     private void setModoAtaqueBtn_Click()
-    {
-        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
-        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
-        this.vista.getControlador().setModoAtaque(this.carta, this.jugadorAsociado);
+    {  
+        try{
+        	this.vista.getControlador().setModoAtaque(this.carta, this.jugadorAsociado);
+        }
+        catch (NoSePuedeCambiarOrientacionError e){
+        	this.noSePuedeCambiarOrientacionErrorWarning();
+        }
     }
 
     private void setModoDefensaBtn_Click()
     {
-        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
-        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
-        this.vista.getControlador().setModoDefensa(this.carta, this.jugadorAsociado);
+        try{
+        	this.vista.getControlador().setModoDefensa(this.carta, this.jugadorAsociado);
+        }
+        catch (NoSePuedeCambiarOrientacionError e){
+        	this.noSePuedeCambiarOrientacionErrorWarning();
+        }
     }
 
     private Object cartaMonstruoJugarBtn_Click()
@@ -248,24 +260,56 @@ public class BotonCartaEnMano extends Button
 
     private void setCartaTrampaBtn_Click()
     {
-        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
-        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
-        // Ojo con las excepciones de región llena.
-        this.vista.getControlador().setCartaTrampa(this.carta, this.jugadorAsociado);
+        try{
+        	this.vista.getControlador().setCartaTrampa(this.carta, this.jugadorAsociado);
+        }
+        catch (NoSePuedeEnviarARegionMyT e){
+        	this.noSePuedeEnviarARegionMyTErrorWarning();
+        }
     }
 
-    private void setCartaMagicaBtn_Click()
+	private void setCartaMagicaBtn_Click()
     {
-        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
-        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
-        // Ojo con las excepciones de región llena.
-        this.vista.getControlador().setCartaMagica(this.carta, this.jugadorAsociado);
+        try{
+        	this.vista.getControlador().setCartaMagica(this.carta, this.jugadorAsociado);
+        }
+        catch (NoSePuedeEnviarARegionMyT e){
+        	this.noSePuedeEnviarARegionMyTErrorWarning();
+        }
     }
 
     private void activarCartaMagicaBtn_Click()
     {
-        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias, no son las únicas que
-        // aparecen en la interfaz ModeloObservador -> implementar múltiples catch.
-        this.vista.getControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
+        try{
+        	this.vista.getControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
+        }
+        catch (NoSePuedeEnviarARegionMyT e){
+        	this.noSePuedeEnviarARegionMyTErrorWarning();
+        }
+    }
+    
+    //---------------------
+    //     WARNINGS
+    //---------------------
+    
+    private void noSePuedeEnviarARegionMyTErrorWarning() {
+    	Alert alert = new Alert(AlertType.INFORMATION);
+    	
+    	//Podemos ponerle alguna otra cosa que no sea error
+    	alert.setTitle("Error");
+    	alert.setHeaderText(null);
+    	alert.setContentText("La carta elegida no puede ser enviada a la region magicas y trampas");
+    	
+    	
+    }
+    private void noSePuedeCambiarOrientacionErrorWarning() {
+    	
+    	Alert alert = new Alert(AlertType.INFORMATION);
+    	
+    	//Podemos ponerle alguna otra cosa que no sea error
+    	alert.setTitle("Error");
+    	alert.setHeaderText(null);
+    	alert.setContentText("No se puede cambiar la orientacion de la carta elegida");
+    	
     }
 }

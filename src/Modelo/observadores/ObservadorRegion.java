@@ -4,7 +4,10 @@ import Modelo.areaDeJuego.Region;
 
 public interface ObservadorRegion<R extends Region>
 {
-    void agregacionCarta(R region);
+    void ingresoCarta(R region);
 
-    void remocionCarta(R region);
+    void egresoCarta(R region);
+
+    // Notifica si hubo tanto una agregación como una remoción.
+    void huboCambios();
 }

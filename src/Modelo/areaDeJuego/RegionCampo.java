@@ -26,23 +26,32 @@ public class RegionCampo extends Region<CartaCampo> implements ObservadorRegion<
         carta.deshacerEfecto();
     }
 
+    // --------------------------------------------------------------------
+    // Metodos por ser un observable de Region.
+    // --------------------------------------------------------------------
     @Override
-    public void agregacionCarta(RegionMonstruos region)
+    public void ingresoCarta(RegionMonstruos region)
     {
         CartaMonstruo carta = region.getUltimaCartaEnEntrar();
-        if (this.estaVacia() == false)
+        if (!this.estaVacia())
         {
-            this.cartas.get(0).efecto(carta);
+            this.cartas.iterator().next().efecto(carta);
         }
     }
 
     @Override
-    public void remocionCarta(RegionMonstruos region)
+    public void egresoCarta(RegionMonstruos region)
     {
         CartaMonstruo carta = region.getUltimaCartaEnSalir();
-        if (this.estaVacia() == false)
+        if (!this.estaVacia())
         {
-            this.cartas.get(0).deshacerEfecto(carta);
+            this.cartas.iterator().next().deshacerEfecto(carta);
         }
+    }
+
+    @Override
+    public void huboCambios()
+    {
+        // No interesa saber si hubo cambios. Cada caso particular se implementa con los otros dos métodos.
     }
 }

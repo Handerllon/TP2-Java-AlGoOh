@@ -9,11 +9,11 @@ import java.util.ArrayList;
 
 public interface ModeloObservable
 {
-    void agregarObsevador(ObservadorDeModelo observador);
+    void registrarObsevador(ObservadorDeModelo observador);
 
-    void quitarObservador(ObservadorDeModelo observador);
+    void eliminarObservador(ObservadorDeModelo observador);
 
-    void notificarObservadores();
+    void notificarEvento();
 
     // ------------------------------------
     // Métodos de consultas.

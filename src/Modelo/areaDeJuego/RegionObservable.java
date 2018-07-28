@@ -4,11 +4,13 @@ import Modelo.observadores.ObservadorRegion;
 
 public interface RegionObservable
 {
-    void agregarObsevador(ObservadorRegion observador);
+    void registrarObsevador(ObservadorRegion observador);
 
-    void quitarObservador(ObservadorRegion observador);
+    void eliminarObservador(ObservadorRegion observador);
 
-    void notificarAgregacionCarta();
+    void notificarIngresoCarta();
 
-    void notificarRemocionCarta();
+    void notificarSalidaCarta();
+
+    void notificarCambios();
 }

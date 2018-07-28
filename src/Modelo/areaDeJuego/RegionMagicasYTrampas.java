@@ -37,14 +37,6 @@ public class RegionMagicasYTrampas extends Region<Carta>
         return !this.cartasTrampa.isEmpty();
     }
 
-    public CartaTrampa getCartaTrampaAUsar()
-    {
-        CartaTrampa cartaTrampa = CartaTrampaNula.getInstancia();
-        if (hayCartasTrampa() && hayCartasTrampaBocaArriba())
-            cartaTrampa = cartasTrampa.remove();
-        return cartaTrampa;
-    }
-
     public boolean hayCartasTrampaBocaArriba()
     {
         if (!hayCartasTrampa())
@@ -59,5 +51,16 @@ public class RegionMagicasYTrampas extends Region<Carta>
         }
 
         return false;
+    }
+
+    public CartaTrampa getCartaTrampaAUsar()
+    {
+        CartaTrampa cartaTrampa = CartaTrampaNula.getInstancia();
+        if (hayCartasTrampa() && hayCartasTrampaBocaArriba())
+        {
+            cartaTrampa = cartasTrampa.remove();
+            super.removerCarta(cartaTrampa);
+        }
+        return cartaTrampa;
     }
 }

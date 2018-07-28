@@ -16,6 +16,9 @@ public abstract class Region<T extends Carta> implements RegionObservable
     protected T ultimaCartaEnEntrar, ultimaCartaEnSalir;
     protected ArrayList<ObservadorRegion> observadoresRegion = new ArrayList<>();
 
+    // --------------------------------------------------------------------
+    // Métodos de construcción e inicialización.
+    // --------------------------------------------------------------------
     public Region(int capacidadMaxima, Jugador jugador)
     {
         this.capacidadMaxima = capacidadMaxima;
@@ -33,7 +36,7 @@ public abstract class Region<T extends Carta> implements RegionObservable
         {
             this.cartas.add(carta);
             this.ultimaCartaEnEntrar = carta;
-            this.notificarAgregacionCarta();
+            this.notificarIngresoCarta();
         } else
             throw new RegionSinEspacioLibre(this);
     }
@@ -44,25 +47,26 @@ public abstract class Region<T extends Carta> implements RegionObservable
         {
             this.ultimaCartaEnSalir = carta;
             this.cartas.remove(carta);
-            this.notificarRemocionCarta();
+            this.notificarSalidaCarta();
         } else
             throw new CartaNoExisteEnRegionError(carta);
-    }
-
-    public boolean contieneCarta(T carta)
-    {
-        return cartas.contains(carta);
-    }
-
-    public ArrayList<T> getCartas()
-    {
-        return new ArrayList<>(this.cartas);
     }
 
     public void removerTodasLasCartas()
     {
         ArrayList<T> cartasARemover = this.getCartas();
         cartasARemover.forEach(item -> this.removerCarta(item));
+        // No puedo avisarle a los observadores con notificarSalidaCarta() porque eso es
+        // para una sola carta.
+        this.notificarCambios();
+    }
+
+    // ------------------------------------
+    // Métodos de consultas.
+    // ------------------------------------
+    public boolean contieneCarta(T carta)
+    {
+        return cartas.contains(carta);
     }
 
     public boolean hayEspacioLibre()
@@ -75,6 +79,16 @@ public abstract class Region<T extends Carta> implements RegionObservable
         return this.cartas.isEmpty();
     }
 
+    public ArrayList<T> getCartas()
+    {
+        return new ArrayList<>(this.cartas);
+    }
+
+    public int getCantidadCartas()
+    {
+        return this.cartas.size();
+    }
+
     public T getUltimaCartaEnEntrar()
     {
         return this.ultimaCartaEnEntrar;
@@ -85,38 +99,44 @@ public abstract class Region<T extends Carta> implements RegionObservable
         return this.ultimaCartaEnSalir;
     }
 
-    // ------------------------------------
-    // Metodos de región observable.
-    // ------------------------------------
+    // --------------------------------------------------------------------
+    // Metodos por ser un observable de Región.
+    // --------------------------------------------------------------------
     @Override
-    public void agregarObsevador(ObservadorRegion observador)
+    public void registrarObsevador(ObservadorRegion observador)
     {
         this.observadoresRegion.add(observador);
     }
 
     @Override
-    public void quitarObservador(ObservadorRegion observador)
+    public void eliminarObservador(ObservadorRegion observador)
     {
-        if (this.observadoresRegion.isEmpty() == false)
+        this.observadoresRegion.remove(observador);
+    }
+
+    @Override
+    public void notificarIngresoCarta()
+    {
+        this.observadoresRegion.forEach(observador ->
         {
-            this.observadoresRegion.remove(observador);
-        }
+            observador.ingresoCarta(this);
+            observador.huboCambios();
+        });
     }
 
     @Override
-    public void notificarAgregacionCarta()
+    public void notificarSalidaCarta()
     {
-        this.observadoresRegion.forEach(item -> item.agregacionCarta(this));
+        this.observadoresRegion.forEach(observador ->
+        {
+            observador.egresoCarta(this);
+            observador.huboCambios();
+        });
     }
 
     @Override
-    public void notificarRemocionCarta()
+    public void notificarCambios()
     {
-        this.observadoresRegion.forEach(item -> item.remocionCarta(this));
-    }
-
-    public int cantidadCartas()
-    {
-        return this.cartas.size();
+        this.observadoresRegion.forEach(observador -> observador.huboCambios());
     }
 }

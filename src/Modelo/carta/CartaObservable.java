@@ -4,9 +4,9 @@ import Modelo.observadores.ObservadorDeCarta;
 
 public interface CartaObservable
 {
-    void agregarObsevador(ObservadorDeCarta observador);
+    void registrarObsevador(ObservadorDeCarta observador);
 
-    void quitarObservador(ObservadorDeCarta observador);
+    void eliminarObservador(ObservadorDeCarta observador);
 
-    void notificarObservadores();
+    void notificarEvento();
 }

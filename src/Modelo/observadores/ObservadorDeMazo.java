@@ -1,6 +1,6 @@
 package Modelo.observadores;
 
-public interface ObservadorDeMano
+public interface ObservadorDeMazo
 {
     void huboCambios();
 }

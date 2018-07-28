@@ -111,7 +111,7 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
     // Métodos de observador de cartas.
     // --------------------------------------------------------------------
     @Override
-    public void notificarUsoDeCarta(CartaTrampa cartaTrampa)
+    public void seUsoCartaTrampa(CartaTrampa cartaTrampa)
     {
         this.cartasTrampaUtilizadas.add(cartaTrampa);
     }

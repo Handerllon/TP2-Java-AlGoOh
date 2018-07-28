@@ -28,9 +28,10 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
 
     public void agregarCarta(Carta carta) throws ManoLlenaError
     {
-        if (this.manoLlena() == false)
+        if (!this.manoLlena())
         {
             this.cartas.add(carta);
+            this.notificarEvento();
             this.verificarAgregacionParteExodia(carta);
             this.verificarExodiaCompleto(carta);
         } else
@@ -41,9 +42,10 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
 
     public void quitarCarta(Carta carta)
     {
-        if (this.cartas.isEmpty() == false)
+        if (!this.cartas.isEmpty())
         {
             this.cartas.remove(carta);
+            this.notificarEvento();
             this.verificarRemocionParteExodia(carta);
         }
     }
@@ -103,10 +105,7 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
     @Override
     public void quitarObservadorFinDeJuego(ObservadorDeFinJuego observador)
     {
-        if (this.observadoresFinJuegos.isEmpty() == false)
-        {
-            this.observadoresFinJuegos.remove(observador);
-        }
+        this.observadoresFinJuegos.remove(observador);
     }
 
     @Override
@@ -119,20 +118,20 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
     // Metodos por ser observable de Mano.
     // --------------------------------------------------------------------
     @Override
-    public void agregarObsevador(ObservadorDeMano observador)
+    public void registrarObsevador(ObservadorDeMano observador)
     {
         observadoresMano.add(observador);
     }
 
     @Override
-    public void quitarObservador(ObservadorDeMano observador)
+    public void eliminarObservador(ObservadorDeMano observador)
     {
         observadoresMano.remove(observador);
     }
 
     @Override
-    public void notificarObservadores()
+    public void notificarEvento()
     {
-        observadoresMano.forEach(observador -> observador.notificar());
+        observadoresMano.forEach(observador -> observador.huboCambios());
     }
 }

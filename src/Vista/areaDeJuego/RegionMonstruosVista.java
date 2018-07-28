@@ -31,7 +31,7 @@ public class RegionMonstruosVista implements ObservadorDeModelo
     }
 
     @Override
-    public void actualizar()
+    public void huboCambios()
     {
         this.gridJugador.clear();
         this.gridOponente.clear();

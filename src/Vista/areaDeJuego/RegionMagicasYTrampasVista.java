@@ -31,7 +31,7 @@ public class RegionMagicasYTrampasVista implements ObservadorDeModelo
     }
 
     @Override
-    public void actualizar()
+    public void huboCambios()
     {
         this.gridJugador.clear();
         this.gridOponente.clear();

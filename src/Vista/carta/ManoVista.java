@@ -37,7 +37,7 @@ public class ManoVista implements ObservadorDeModelo
     }
 
     @Override
-    public void actualizar()
+    public void huboCambios()
     {
         this.manoJugador.clear();
         this.manoOponente.clear();

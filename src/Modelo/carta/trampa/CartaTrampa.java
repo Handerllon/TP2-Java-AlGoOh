@@ -20,21 +20,21 @@ public abstract class CartaTrampa extends Carta implements CartaTrampaObservable
     // Metodos de observador de modelo.
     // ------------------------------------
     @Override
-    public void agregarObsevadorCartaTrampa(ObservadorDeCartaTrampa observer)
+    public void registrarObsevadorCartaTrampa(ObservadorDeCartaTrampa observer)
     {
         this.observadoresDeCartasTrampa.add(observer);
     }
 
     @Override
-    public void quitarObservadorCartaTrampa(ObservadorDeCartaTrampa observer)
+    public void eliminarObservadorCartaTrampa(ObservadorDeCartaTrampa observer)
     {
         this.observadoresDeCartasTrampa.remove(observer);
     }
 
     @Override
-    public void notificarObservadoresCartaTrampa()
+    public void notificarEventoCartaTrampa()
     {
-        observadoresDeCartasTrampa.forEach(observador -> observador.notificarUsoDeCarta(this));
+        observadoresDeCartasTrampa.forEach(observador -> observador.seUsoCartaTrampa(this));
     }
 
     // ------------------------------------

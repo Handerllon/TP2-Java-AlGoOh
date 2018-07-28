@@ -1,0 +1,20 @@
+Modelo observa a:
+	Carta
+		notifica si hubo cambio de orientación.
+		
+	Mano:
+		notifica si se agregó una carta.
+		notifica si se quitó una carta.
+		
+	Mazo:
+		notifica si se tomó una carta.
+	
+	Region:
+		notifica si ingresó una carta.
+		notifica si salió una carta.
+		notifica si se removieron todas las cartas.
+		
+Vista observa a:
+	Modelo:
+		notifica si sucedió alguno de los eventos que observa.
+		La Vista luego le pide lo que necesita a Modelo mediante la interfaz ModeloObservable.

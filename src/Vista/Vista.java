@@ -14,8 +14,6 @@ import javafx.stage.Stage;
 
 import java.util.Optional;
 
-;
-
 public class Vista implements ObservadorDeModelo
 {
     private static ModeloObservable modelo;
@@ -35,7 +33,7 @@ public class Vista implements ObservadorDeModelo
         this.RESOLUCION_VERTICAL = Screen.getPrimary().getVisualBounds().getHeight();
 
         this.modelo = modelo;
-        this.modelo.agregarObsevador(this);
+        modelo.registrarObsevador(this);
 
         this.controlador = controlador;
 
@@ -106,7 +104,7 @@ public class Vista implements ObservadorDeModelo
     // Métodos de observador de modelo.
     // --------------------------------------------------------------------
     @Override
-    public void actualizar()
+    public void huboCambios()
     {
         this.escenaVista.actualizarEstado();
     }

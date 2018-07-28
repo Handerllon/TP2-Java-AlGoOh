@@ -58,7 +58,7 @@ public class VidaVista implements ObservadorDeModelo
     }
 
     @Override
-    public void actualizar()
+    public void huboCambios()
     {
 
         int nuevaVidaJugador = this.vista.getModelo().getJugador().getPuntosDeVida();

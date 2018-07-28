@@ -1,5 +1,6 @@
 package Modelo;
 
+import Modelo.areaDeJuego.Region;
 import Modelo.areaDeJuego.RegionMagicasYTrampas;
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
@@ -12,12 +13,12 @@ import Modelo.excepciones.NoEsCartaMonstruo;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaFinJuegoNula;
 import Modelo.finDeJuego.FinDeJuegoObservable;
-import Modelo.observadores.ObservadorDeFinJuego;
-import Modelo.observadores.ObservadorDeModelo;
+import Modelo.observadores.*;
 
 import java.util.ArrayList;
 
-public final class Modelo implements ModeloObservable, FinDeJuegoObservable, ObservadorDeFinJuego, ModeloInterfaz
+public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJuegoObservable, ObservadorDeFinJuego,
+        ObservadorRegion, ObservadorDeMazo, ObservadorDeMano, ObservadorDeCarta
 {
     private static Modelo instancia = null;
     private Jugador jugador1;
@@ -46,6 +47,19 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
 
         this.jugador1.getMano().agregarObsevadorFinDeJuego(this);
         this.jugador2.getMano().agregarObsevadorFinDeJuego(this);
+
+        // Subscripciones a los eventos de Región, Mazo, Mano, y Carta.
+        this.jugador1.getRegiones().forEach(region -> region.registrarObsevador(this));
+        this.jugador2.getRegiones().forEach(region -> region.registrarObsevador(this));
+
+        this.jugador1.getMazo().registrarObsevador(this);
+        this.jugador2.getMazo().registrarObsevador(this);
+
+        this.jugador1.getMano().registrarObsevador(this);
+        this.jugador2.getMano().registrarObsevador(this);
+
+        this.jugador1.getMazo().getCartas().forEach(carta -> carta.registrarObsevador(this));
+        this.jugador2.getMazo().getCartas().forEach(carta -> carta.registrarObsevador(this));
     }
 
     public static Modelo getInstancia()
@@ -86,7 +100,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     }
 
     // --------------------------------------------------------------------
-    // Metodos de observador de fin de juego.
+    // Metodos por ser un observable de Fin de Juego.
     // --------------------------------------------------------------------
     @Override
     public void agregarObsevadorFinDeJuego(ObservadorDeFinJuego observador)
@@ -97,10 +111,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     @Override
     public void quitarObservadorFinDeJuego(ObservadorDeFinJuego observador)
     {
-        if (this.observadoresFinJuego.isEmpty() == false)
-        {
-            this.observadoresFinJuego.remove(observador);
-        }
+        this.observadoresFinJuego.remove(observador);
     }
 
     @Override
@@ -109,8 +120,11 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
         this.observadoresFinJuego.forEach(item -> item.seLlegoAFinDeJuego(causaFinJuego));
     }
 
-    // El modelo es también un observador de fin de juego porque este le va a avisar al controlador cuando suceda
-    // uno de esos eventos.
+    // --------------------------------------------------------------------
+    // Metodos por ser un observador de Fin de Juego.
+    // El modelo es también un observador de fin de juego porque este le
+    // va a avisar al controlador cuando suceda uno de esos eventos.
+    // --------------------------------------------------------------------
     @Override
     public void seLlegoAFinDeJuego(CausaFinJuego causaFinJuego)
     {
@@ -119,24 +133,45 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
     }
 
     // --------------------------------------------------------------------
-    // Metodos de observador de modelo.
+    // Metodos por ser un observable de Modelo.
     // --------------------------------------------------------------------
     @Override
-    public void agregarObsevador(ObservadorDeModelo observer)
+    public void registrarObsevador(ObservadorDeModelo observer)
     {
         this.observadoresDeModelo.add(observer);
     }
 
     @Override
-    public void quitarObservador(ObservadorDeModelo observer)
+    public void eliminarObservador(ObservadorDeModelo observer)
     {
         this.observadoresDeModelo.remove(observer);
     }
 
     @Override
-    public void notificarObservadores()
+    public void notificarEvento()
     {
-        observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.actualizar());
+        observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.huboCambios());
+    }
+
+    // --------------------------------------------------------------------
+    // Metodos por ser un observador de Region, Mazo, Mano
+    // --------------------------------------------------------------------
+    @Override
+    public void ingresoCarta(Region region)
+    {
+
+    }
+
+    @Override
+    public void egresoCarta(Region region)
+    {
+
+    }
+
+    @Override
+    public void huboCambios()
+    {
+        notificarEvento();
     }
 
     // ------------------------------------
@@ -313,7 +348,7 @@ public final class Modelo implements ModeloObservable, FinDeJuegoObservable, Obs
 
         if (carta.getEstrellas() >= 5)
         {
-            return carta.getPropietario().getRegionMonstruos().cantidadCartas() >= carta.getEstrellas();
+            return carta.getPropietario().getRegionMonstruos().getCantidadCartas() >= carta.getEstrellas();
         }
         return true;
     }

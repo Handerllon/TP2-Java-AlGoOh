@@ -4,13 +4,9 @@ import Modelo.observadores.ObservadorDeCartaTrampa;
 
 public interface CartaTrampaObservable
 {
-    void agregarObsevadorCartaTrampa(ObservadorDeCartaTrampa observador);
+    void registrarObsevadorCartaTrampa(ObservadorDeCartaTrampa observador);
 
-    void quitarObservadorCartaTrampa(ObservadorDeCartaTrampa observador);
+    void eliminarObservadorCartaTrampa(ObservadorDeCartaTrampa observador);
 
-    void notificarObservadoresCartaTrampa();
-
-    // ------------------------------------
-    // Métodos de consultas.
-    // ------------------------------------
+    void notificarEventoCartaTrampa();
 }

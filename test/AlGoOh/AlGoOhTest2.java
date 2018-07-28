@@ -143,12 +143,12 @@ public class AlGoOhTest2
 
         jugador1.getMano().agregarCarta(cartaOllaDeLaCodicia);
 
-        int cartasAntesDeJugar = jugador1.cantidadDeCartasEnMano();
+        int cartasAntesDeJugar = jugador1.getCantidadDeCartasEnMano();
 
         jugador1.enviarARegion(cartaOllaDeLaCodicia);
         cartaOllaDeLaCodicia.efecto();
 
-        int cartasDespuesDeJugar = jugador1.cantidadDeCartasEnMano();
+        int cartasDespuesDeJugar = jugador1.getCantidadDeCartasEnMano();
 
         int diferencia = cartasDespuesDeJugar - cartasAntesDeJugar;
 

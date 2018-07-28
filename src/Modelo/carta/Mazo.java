@@ -5,16 +5,18 @@ import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaSinCartasEnMazo;
 import Modelo.finDeJuego.FinDeJuegoObservable;
 import Modelo.observadores.ObservadorDeFinJuego;
+import Modelo.observadores.ObservadorDeMazo;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Mazo implements FinDeJuegoObservable
+public class Mazo implements FinDeJuegoObservable, MazoObservable
 {
     private static int CANTIDAD_CARTAS_INICIALES = 40;
     private Jugador jugador, oponente;
     private Stack<Carta> cartas = new Stack<>();
     private ArrayList<ObservadorDeFinJuego> observadoresFinJuegos = new ArrayList<>();
+    private ArrayList<ObservadorDeMazo> observadoresMazo = new ArrayList<>();
 
     public Mazo(Jugador jugador, Jugador oponente)
     {
@@ -80,8 +82,9 @@ public class Mazo implements FinDeJuegoObservable
 
     public Carta tomarCarta()
     {
-        if (this.cartas.isEmpty() == false)
+        if (!this.cartas.isEmpty())
         {
+            this.notificarEvento();
             return this.cartas.pop();
         } else
         {
@@ -90,8 +93,13 @@ public class Mazo implements FinDeJuegoObservable
         }
     }
 
+    public Stack<Carta> getCartas()
+    {
+        return this.cartas;
+    }
+
     // --------------------------------------------------------------------
-    // Metodos de observadores de fin de juego.
+    // Metodos por ser un observable de Fin De Juego.
     // --------------------------------------------------------------------
     @Override
     public void agregarObsevadorFinDeJuego(ObservadorDeFinJuego observador)
@@ -102,10 +110,7 @@ public class Mazo implements FinDeJuegoObservable
     @Override
     public void quitarObservadorFinDeJuego(ObservadorDeFinJuego observador)
     {
-        if (this.observadoresFinJuegos.isEmpty() == false)
-        {
-            this.observadoresFinJuegos.remove(observador);
-        }
+        this.observadoresFinJuegos.remove(observador);
     }
 
     @Override
@@ -117,5 +122,26 @@ public class Mazo implements FinDeJuegoObservable
     public int cantidadCartas()
     {
         return cartas.size();
+    }
+
+    // --------------------------------------------------------------------
+    // Metodos por ser observable de Mano.
+    // --------------------------------------------------------------------
+    @Override
+    public void registrarObsevador(ObservadorDeMazo observador)
+    {
+        observadoresMazo.add(observador);
+    }
+
+    @Override
+    public void eliminarObservador(ObservadorDeMazo observador)
+    {
+        observadoresMazo.remove(observador);
+    }
+
+    @Override
+    public void notificarEvento()
+    {
+        observadoresMazo.forEach(observador -> observador.huboCambios());
     }
 }

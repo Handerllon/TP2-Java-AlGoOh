@@ -52,21 +52,21 @@ public abstract class Carta implements Orientacion, CartaObservable
     // Metodos por ser observable de Carta.
     // --------------------------------------------------------------------
     @Override
-    public void agregarObsevador(ObservadorDeCarta observador)
+    public void registrarObsevador(ObservadorDeCarta observador)
     {
         observadores.add(observador);
     }
 
     @Override
-    public void quitarObservador(ObservadorDeCarta observador)
+    public void eliminarObservador(ObservadorDeCarta observador)
     {
         observadores.remove(observador);
     }
 
     @Override
-    public void notificarObservadores()
+    public void notificarEvento()
     {
-        observadores.forEach(observador -> observador.notificar());
+        observadores.forEach(observador -> observador.huboCambios());
     }
 
     // ------------------------------------
@@ -76,7 +76,7 @@ public abstract class Carta implements Orientacion, CartaObservable
     public void cambiarOrientacion()
     {
         this.orientacionArriba = !this.orientacionArriba;
-        notificarObservadores();
+        notificarEvento();
     }
 
     @Override

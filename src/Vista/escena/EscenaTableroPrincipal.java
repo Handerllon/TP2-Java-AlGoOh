@@ -2,6 +2,8 @@ package Vista.escena;
 
 import Modelo.ModeloObservable;
 import Vista.EstadosJuegoBotones;
+import Vista.FaseActual;
+import Vista.TurnoActual;
 import Vista.VidaVista;
 import Vista.Vista;
 import Vista.carta.MazosVista;
@@ -14,6 +16,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -49,6 +52,8 @@ public final class EscenaTableroPrincipal implements Escena
     private Stage primaryStage;
     private Scene escenaTableroPrincipal;
     private EstadosJuegoBotones estadosJuegoBotones;
+	private TurnoActual turnoActual;
+	private FaseActual faseActual;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -65,6 +70,8 @@ public final class EscenaTableroPrincipal implements Escena
         this.regionesMagicasYTrampasVista = new RegionesMagicasYTrampasVista(this.vista);
         this.regionesCampoVista = new RegionesCampoVista(this.vista);
         this.regionesCementerioVista = new RegionesCementerioVista(this.vista);
+        this.turnoActual = new TurnoActual(this.vista);
+        this.faseActual = new FaseActual(this.vista);
 
         this.manosVista = new ManosVista(this.vista);
         this.mazosVista = new MazosVista(this.vista);
@@ -187,6 +194,11 @@ public final class EscenaTableroPrincipal implements Escena
         gridPane.setHalignment(estadosJuegoBotones.getBotonFinDeFase(), HPos.LEFT);
         gridPane.add(estadosJuegoBotones.getBotonFinDeTurno(), 2, 3);
         gridPane.setHalignment(estadosJuegoBotones.getBotonFinDeTurno(), HPos.LEFT);
+        
+        gridPane.add(turnoActual.getDisplayTurnoActual(), 0, 1);
+        //gridPane.setHalignment(turnoActual.getDisplayTurnoActual(), HPos.RIGHT);
+        gridPane.add(faseActual.getDisplayFaseActual(), 0, 2);
+        //gridPane.setHalignment(faseActual.getDisplayFaseActual(), HPos.RIGHT);
     }
 
     // --------------------------------------------------------------------
@@ -210,8 +222,8 @@ public final class EscenaTableroPrincipal implements Escena
     {
         this.playMedia();
         this.primaryStage.show();
-        this.vista.mostrarJugadorActual();
-        //this.vista.mostrarFaseActual();
+        this.mostrarJugadorActual();
+        this.mostrarFaseActual();
     }
 
     @Override
@@ -263,4 +275,21 @@ public final class EscenaTableroPrincipal implements Escena
     {
         return this.gridPane;
     }
+
+	@Override
+	public void mostrarJugadorActual() {
+		
+		gridPane.getChildren().remove(turnoActual.getDisplayTurnoActual());
+		this.turnoActual.actualizar();
+		gridPane.add(turnoActual.getDisplayTurnoActual(), 0, 1);
+		
+	}
+
+	@Override
+	public void mostrarFaseActual() {
+		
+		gridPane.getChildren().remove(faseActual.getDisplayFaseActual());
+		this.faseActual.actualizar();
+        gridPane.add(faseActual.getDisplayFaseActual(), 0, 2);
+	}
 }

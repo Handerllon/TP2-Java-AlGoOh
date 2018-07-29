@@ -58,7 +58,8 @@ public class MazosVista implements ObservadorDeModelo
         boton.setPrefSize(anchoDeCarta, altoDeCarta);
         boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource(rutaImagenReversoCarta).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-        boton.setOnAction(e -> tomarCartaBtn_Click(jugadorAsociado));
+        //TODO: Hacer rendicion en click del mazo (Con un popup o algo por el estilo)
+        //boton.setOnAction(e -> tomarCartaBtn_Click(jugadorAsociado));
 
         return boton;
     }

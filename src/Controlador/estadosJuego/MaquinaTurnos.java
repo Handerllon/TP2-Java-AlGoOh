@@ -211,5 +211,7 @@ public final class MaquinaTurnos
     {
         return this.cartasQueAtacaronEnTurnoActual.contains(cartaMonstruo);
     }
+
+	
 }
 

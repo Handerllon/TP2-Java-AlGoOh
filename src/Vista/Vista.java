@@ -94,23 +94,18 @@ public class Vista implements ObservadorDeModelo
 
     public void mostrarJugadorActual()
     {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Turno");
-        alert.setHeaderText(null);
-        alert.setContentText("Turno del jugador " + this.controlador.getNombreJugadorActual());
-        alert.showAndWait();
+        this.escena.mostrarJugadorActual();
     }
 
     public void mostrarFaseActual()
     {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Turno");
-        alert.setHeaderText(null);
-        alert.setContentText("Fase: " + this.controlador.getNombreFaseActual());
-        alert.showAndWait();
+    	
+        this.escena.mostrarFaseActual();
+        
     }
 
-    // --------------------------------------------------------------------
+
+	// --------------------------------------------------------------------
     // Métodos de observador de modelo.
     // --------------------------------------------------------------------
     @Override

@@ -186,4 +186,16 @@ public final class EscenaSorteoJugadorInicial implements Escena
     {
         return this.grid;
     }
+
+	@Override
+	public void mostrarJugadorActual() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mostrarFaseActual() {
+		// TODO Auto-generated method stub
+		
+	}
 }

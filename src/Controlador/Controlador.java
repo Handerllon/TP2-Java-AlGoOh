@@ -151,6 +151,7 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
     {
         this.maquinaTurnos.terminarTurno();
         this.cartasTrampaUtilizadas.forEach(cartaTrampa -> cartaTrampa.deshacerEfecto());
+        this.vista.mostrarJugadorActual();
     }
 
     @Override
@@ -446,4 +447,5 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
             this.maquinaTurnos.retrocederFase();
         }
     }
+
 }

@@ -32,7 +32,7 @@ public class EstadosJuegoBotones extends Button
 
     private Button crearBotonAvanzarProximaFase()
     {
-        Button boton = new Button("AVANZAR A PROXIMA FASE");
+        Button boton = new Button("TERMINAR FASE");
 
         boton.setOnAction(e -> avanzarProximaFaseBtn_click());
 
@@ -66,12 +66,22 @@ public class EstadosJuegoBotones extends Button
         {
             terminarTurnoBtn_click();
         }
+        
+        this.botonFinDeFase = this.crearBotonAvanzarProximaFase();
     }
+    /*
+    private Button actualizarBotonTerminarTurno()
+    {
+        Button boton = new Button("TERMINAR TURNO DE " + this.vista.getControlador().getNombreOponente());
 
+        boton.setOnAction(e -> terminarTurnoBtn_click());
+
+        return boton;
+    }
+    */
     private void terminarTurnoBtn_click()
     {
         this.vista.getControlador().terminarTurno();
-        this.vista.mostrarJugadorActual();
         Jugador jugadorActual = this.vista.getControlador().getJugadorActual();
         try
         {
@@ -80,5 +90,7 @@ public class EstadosJuegoBotones extends Button
         {
             this.vista.avisoManoLlena(manoLlena);
         }
+        //this.botonFinDeTurno = this.actualizarBotonTerminarTurno();
     }
+
 }

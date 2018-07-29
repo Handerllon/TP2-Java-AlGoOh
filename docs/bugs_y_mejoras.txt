@@ -1,5 +1,4 @@
 ﻿Mejoras:
-Que se muestre en el tablero qué parte le corresponde a cada jugador, poniendo el nombre del mismo. Podría ser al lado del mazo.
 
 Usar porcentajes para el tamaño de las cosas, ya fue hecho en la pantalla de tablero principal
 

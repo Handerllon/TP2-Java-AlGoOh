@@ -12,6 +12,8 @@ No mostrar los popups si el usuario cliquea la carta del oponente.
 Si el usuario aprieta un botón y sale un popup, que lo pueda cerrar clickeando en cualquier parte que no sea el popup.
 
 Bugs:
+1. Cuando al agarrar una carta cuando la mano esta llena, se elimina una carta al azar, esta desaparece pero la carta que fue agarrada
+no figura en la mano
 2. No se muestra la carta acostada si se le cambia el modo.
 3. No se muestra el reverso de la carta si se la "Posiciona" desde la mano a la región.
 4. Creo que hay un problema con la fase ataque/fase trampa.

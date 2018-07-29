@@ -4,6 +4,7 @@ import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Vista.Vista;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 
 import java.util.ArrayList;
@@ -33,12 +34,13 @@ public class ManosFlowPane extends FlowPane
     {
         this.flowPane = new FlowPane();
         this.flowPane.setAlignment(Pos.CENTER);
+        this.flowPane.setHgap(20);
         this.botones = new ArrayList<>();
     }
 
     public void actualizar(ArrayList<Carta> cartasEnMano)
     {
         cartasEnMano.forEach(carta -> this.botones.add(new ManoBoton(this.vista, carta, this.jugadorAsociado)));
-        this.botones.forEach(boton -> this.flowPane.getChildren().add(boton));
+        this.botones.forEach(boton -> this.flowPane.getChildren().add(boton.getBoton()));
     }
 }

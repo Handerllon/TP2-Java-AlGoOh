@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class RegionesMonstruosGrid extends GridPane
 {
     private static double anchoColumna;
-    // TODO: número mágico.
+    // Se uso como base una resolucion de 1920x1080
     private final double relacionAnchoColumnaPantalla = 7.25;
     private final double anchoFila = 160;
     private final int cantidadBotonesGrid = 5;
@@ -58,15 +58,24 @@ public class RegionesMonstruosGrid extends GridPane
             this.grid.setHalignment(boton.getBoton(), HPos.CENTER);
         }
     }
+    
+    public void clear() {
+    	// TODO: Ver como hacer mas lindo esto
+    	this.botones = new ArrayList<>();
+    	RegionesMonstruoBoton boton;
+        for (int i = 0; i < cantidadBotonesGrid; i++)
+        {
+            boton = new RegionesMonstruoBoton(this.vista, this.jugadorAsociado);
+            botones.add(boton);
+            // Se posicionan los botones en la grilla de la región monstruo.
+            this.grid.add(boton.getBoton(), i, 0);
+            this.grid.setHalignment(boton.getBoton(), HPos.CENTER);
+        }  	
+    }
 
     public GridPane getGrid()
     {
         return this.grid;
-    }
-
-    public void clear()
-    {
-        this.botones.forEach(boton -> boton.clear());
     }
 
     public void actualizar(ArrayList<CartaMonstruo> cartasEnRegionMonstruos)
@@ -75,6 +84,11 @@ public class RegionesMonstruosGrid extends GridPane
         for (int i = 0; i < cartasEnRegionMonstruos.size(); i++)
         {
             botones.get(i).actualizar(cartasEnRegionMonstruos.get(i));
+        }
+        this.grid.getChildren().clear();
+        for (int i = 0; i < this.botones.size() ; i++){
+        	this.grid.add(this.botones.get(i).getBoton(), i, 0);
+            this.grid.setHalignment(this.botones.get(i).getBoton(), HPos.CENTER);
         }
     }
 }

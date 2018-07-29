@@ -23,13 +23,12 @@ import javafx.stage.Stage;
 
 public class ManoBoton extends Button
 {
-    // TODO: número mágico.
+    // Se uso como base una resolucion de 1080x1920
     private static double anchoInicialCarta = 95.4;
     private static double altoInicialCarta = 139;
     private static String rutaImagenReversoCarta = "resources/imagenes/cartaReverso.jpg";
     private Stage primaryStage;
     private Carta carta;
-    private Button botonCarta;
     private Button boton;
     private Vista vista;
     private Jugador jugadorAsociado;
@@ -51,29 +50,31 @@ public class ManoBoton extends Button
         this.popup = new Popup();
         this.vbox = new VBox();
 
-        toolTip.setGraphic(new ImageView(imagenCarta));
-        boton.setTooltip(toolTip);
+        this.toolTip.setGraphic(new ImageView(imagenCarta));
+        this.boton.setTooltip(toolTip);
         double anchoCarta = (this.vista.getResolucionHorizontal() * anchoInicialCarta) / 1920;
         double altoCarta = (this.vista.getResolucionVertical() * altoInicialCarta) / 1080;
-        boton.setPrefSize(anchoCarta, altoCarta);
+        this.boton.setPrefSize(anchoCarta, altoCarta);
 
-        boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource(rutaImagenReversoCarta).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        this.boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+                .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 
         // Se decide qué tipo de botón crear.
+        
         if (carta.esMonstruo())
         {
-            this.botonCarta = this.crearBotonMonstruo();
+            this.crearBotonMonstruo();
         } else if (carta.esMagica())
         {
-            this.botonCarta = this.crearBotonCartaMagica();
+            this.crearBotonCartaMagica();
         } else if (carta.esTrampa())
         {
-            this.botonCarta = this.crearBotonCartaTrampa();
+        	this.crearBotonCartaTrampa();
         } else if (carta.esCampo())
         {
-            this.botonCarta = this.crearBotonCartaCampo();
+            this.crearBotonCartaCampo();
         }
+        
     }
 
     private void accionBtn_Click(Popup popup, Button boton)
@@ -86,13 +87,13 @@ public class ManoBoton extends Button
 
     public Button getBoton()
     {
-        return this.botonCarta;
+        return this.boton;
     }
 
     // --------------------------------------------------------------------
     // Botón Carta Monstruo.
     // --------------------------------------------------------------------
-    private Button crearBotonMonstruo()
+    private void crearBotonMonstruo()
     {
         // Se crea la VBox.
         Button b1 = new Button("Invocar");
@@ -109,7 +110,6 @@ public class ManoBoton extends Button
         popup.getContent().addAll(vbox);
         boton.setOnAction(e -> accionBtn_Click(popup, boton));
 
-        return boton;
     }
 
     // -------------------------------
@@ -140,7 +140,7 @@ public class ManoBoton extends Button
     // --------------------------------------------------------------------
     // Botón Carta Mágica.
     // --------------------------------------------------------------------
-    private Button crearBotonCartaMagica()
+    private void crearBotonCartaMagica()
     {
         // Se crea la VBox.
         Button b1 = new Button("Activar");
@@ -155,8 +155,6 @@ public class ManoBoton extends Button
         vbox.getChildren().addAll(b1, b2, b3);
         popup.getContent().addAll(vbox);
         boton.setOnAction(e -> accionBtn_Click(popup, boton));
-
-        return boton;
     }
 
     // -------------------------------
@@ -188,7 +186,7 @@ public class ManoBoton extends Button
     // --------------------------------------------------------------------
     // Botón Carta Trampa.
     // --------------------------------------------------------------------
-    private Button crearBotonCartaTrampa()
+    private void crearBotonCartaTrampa()
     {
         Button b1 = new Button("Posicionar");
         b1.setOnAction(e -> setCartaTrampaBtn_Click());
@@ -201,7 +199,6 @@ public class ManoBoton extends Button
         popup.getContent().addAll(vbox);
         boton.setOnAction(e -> accionBtn_Click(popup, boton));
 
-        return boton;
     }
 
     // -------------------------------
@@ -221,7 +218,7 @@ public class ManoBoton extends Button
     // --------------------------------------------------------------------
     // Botón Carta Campo.
     // --------------------------------------------------------------------
-    private Button crearBotonCartaCampo()
+    private void crearBotonCartaCampo()
     {
         // Se crea la VBox.
         Button b1 = new Button("Activar");
@@ -235,7 +232,6 @@ public class ManoBoton extends Button
         popup.getContent().addAll(vbox);
         boton.setOnAction(e -> accionBtn_Click(popup, boton));
 
-        return boton;
     }
 
     // -------------------------------

@@ -15,17 +15,17 @@ import javafx.scene.paint.ImagePattern;
 
 public class MazosVista implements ObservadorDeModelo
 {
-    private static double anchoDeCarta;
-    private static double altoDeCarta;
-    // TODO: número mágico.
-    private static double relacionAnchoAlto = 1.457;
-    private static double relacionAnchoCartaPantalla = 19.92;
+    private static double anchoInicialCarta = 95.4;
+    private static double altoInicialCarta = 131;
+    // Se uso como base una resolucion de 1920x1080
     private static String rutaImagenReversoCarta = "resources/imagenes/cartaReverso.jpg";
     private Vista vista;
     private Button mazoJugador;
     private Tooltip toolTipJugador;
     private Button mazoOponente;
     private Tooltip toolTipOponente;
+	private double anchoDeCarta;
+	private double altoDeCarta;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -34,8 +34,8 @@ public class MazosVista implements ObservadorDeModelo
     {
         this.vista = vista;
 
-        this.anchoDeCarta = vista.getResolucionHorizontal() / relacionAnchoCartaPantalla;
-        this.altoDeCarta = this.anchoDeCarta * relacionAnchoAlto;
+        this.anchoDeCarta = (vista.getResolucionHorizontal()*anchoInicialCarta)/1920;
+        this.altoDeCarta = (vista.getResolucionVertical()*altoInicialCarta)/1080;
 
         this.toolTipJugador = new Tooltip();
         this.toolTipOponente = new Tooltip();

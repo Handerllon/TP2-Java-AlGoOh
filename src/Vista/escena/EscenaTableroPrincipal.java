@@ -87,8 +87,8 @@ public final class EscenaTableroPrincipal implements Escena
         this.primaryStage.setScene(this.escenaTableroPrincipal);
         this.primaryStage.setMaximized(true);
 
-        grid.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource(RUTA_TABLERO).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        //grid.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+                //.getResource(RUTA_TABLERO).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         grid.setPrefSize(this.vista.getResolucionHorizontal(), this.vista.getResolucionVertical());
 
         // -------------------------------

@@ -79,13 +79,12 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
         // La vista pasa a la escena con el tablero principal.
         this.vista.mostrar();
         // TODO: ver si esto funciona bien.
-        /*
+        
         for (int i = 0; i < cantidadCartasTomarInicialmente; i++)
         {
             this.modelo.tomarCarta(this.modelo.getJugador());
             this.modelo.tomarCarta(this.modelo.getOponente());
         }
-        */
     }
 
     // --------------------------------------------------------------------

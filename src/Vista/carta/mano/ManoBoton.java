@@ -24,8 +24,8 @@ import javafx.stage.Stage;
 public class ManoBoton extends Button
 {
     // TODO: número mágico.
-    private static double anchoCarta = 95.4;
-    private static double altoCarta = 139;
+    private static double anchoInicialCarta = 95.4;
+    private static double altoInicialCarta = 139;
     private static String rutaImagenReversoCarta = "resources/imagenes/cartaReverso.jpg";
     private Stage primaryStage;
     private Carta carta;
@@ -53,6 +53,8 @@ public class ManoBoton extends Button
 
         toolTip.setGraphic(new ImageView(imagenCarta));
         boton.setTooltip(toolTip);
+        double anchoCarta = (this.vista.getResolucionHorizontal()*anchoInicialCarta)/1920;
+        double altoCarta = (this.vista.getResolucionVertical()*altoInicialCarta)/1080;
         boton.setPrefSize(anchoCarta, altoCarta);
 
         boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()

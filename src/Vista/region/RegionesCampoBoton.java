@@ -16,15 +16,17 @@ import javafx.scene.paint.ImagePattern;
 public class RegionesCampoBoton extends Button
 {
     private static String estiloRegion = "-fx-background-color: Transparent";
-    // TODO: número mágico.
-    private static double anchoDeCarta = 95.4;
-    private static double altoDeCarta = 139;
+    // Se uso como base una resolucion de 1920x1080 para los tamanos
+    private static double anchoInicialCarta = 95.4;
+    private static double altoInicialCarta = 139;
     private Button boton;
     private CartaCampo carta;
     private Vista vista;
     private Jugador jugadorAsociado;
     private Image imagenBoton;
     private Tooltip tooltip;
+	private double anchoDeCarta;
+	private double altoDeCarta;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -35,6 +37,9 @@ public class RegionesCampoBoton extends Button
         this.vista = vista;
 
         this.boton = new Button();
+        
+        this.anchoDeCarta = (this.vista.getResolucionHorizontal()*anchoInicialCarta)/1920;
+        this.altoDeCarta = (this.vista.getResolucionVertical()*altoInicialCarta)/1080;
         this.boton.setPrefSize(anchoDeCarta, altoDeCarta);
         this.boton.setStyle(estiloRegion);
 

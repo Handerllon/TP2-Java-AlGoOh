@@ -21,13 +21,15 @@ import javafx.stage.Popup;
 public class RegionesMonstruoBoton extends Button
 {
     private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
-    // TODO: número mágico.
-    private static double anchoDeCarta = 95.4;
-    private static double altoDeCarta = 139;
+    // Se uso como base una resolucion de 1920x1080 para los tamanos
+    private static double anchoInicialCarta = 95.4;
+    private static double altoInicialCarta = 139;
     private CartaMonstruo carta;
     private Button botonCarta;
     private Jugador jugadorAsociado;
     private Vista vista;
+	private double anchoDeCarta;
+	private double altoDeCarta;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -38,7 +40,9 @@ public class RegionesMonstruoBoton extends Button
         this.vista = vista;
 
         this.botonCarta = new Button();
-
+        
+        this.anchoDeCarta = (this.vista.getResolucionHorizontal()*anchoInicialCarta)/1920;
+        this.altoDeCarta = (this.vista.getResolucionVertical()*altoInicialCarta)/1080;
         this.botonCarta.setPrefSize(anchoDeCarta, altoDeCarta);
         this.botonCarta.setStyle(estiloRegion);
     }

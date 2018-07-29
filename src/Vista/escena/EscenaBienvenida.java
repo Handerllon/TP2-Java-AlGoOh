@@ -30,6 +30,7 @@ public final class EscenaBienvenida implements Escena
     private Scene escenaBienvenida;
     private Stage primaryStage;
     private TextField txtJugador1, txtJugador2;
+    private GridPane grid;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -39,6 +40,8 @@ public final class EscenaBienvenida implements Escena
         this.modelo = modelo;
         this.vista = vista;
         this.primaryStage = this.vista.getPrimaryStage();
+        this.grid = new GridPane();
+
         this.inicializarEscena();
     }
 
@@ -58,8 +61,7 @@ public final class EscenaBienvenida implements Escena
 
     private void inicializarEscena()
     {
-        GridPane grid = new GridPane();
-        this.escenaBienvenida = new Scene(grid);
+        this.escenaBienvenida = new Scene(this.grid);
         this.primaryStage.setScene(this.escenaBienvenida);
 
         Label lblTitulo = new Label("Ingresar nombres de jugadores");
@@ -111,20 +113,20 @@ public final class EscenaBienvenida implements Escena
         // -------------------------------
         // Configuración de la grilla.
         // -------------------------------
-        grid.setPadding(new Insets(10));
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setMinWidth(500);
+        this.grid.setPadding(new Insets(10));
+        this.grid.setHgap(10);
+        this.grid.setVgap(10);
+        this.grid.setMinWidth(500);
 
-        grid.addRow(0, lblTitulo);
-        grid.setColumnSpan(lblTitulo, 2);
-        grid.setHalignment(lblTitulo, HPos.CENTER);
-        grid.addRow(1, lblJugador1, txtJugador1);
-        grid.addRow(2, lblJugador2, txtJugador2);
-        grid.addRow(3, paneButtons);
-        grid.addRow(4, paneVideo);
-        grid.setColumnSpan(paneVideo, 2);
-        grid.setHalignment(paneVideo, HPos.CENTER);
+        this.grid.addRow(0, lblTitulo);
+        this.grid.setColumnSpan(lblTitulo, 2);
+        this.grid.setHalignment(lblTitulo, HPos.CENTER);
+        this.grid.addRow(1, lblJugador1, txtJugador1);
+        this.grid.addRow(2, lblJugador2, txtJugador2);
+        this.grid.addRow(3, paneButtons);
+        this.grid.addRow(4, paneVideo);
+        this.grid.setColumnSpan(paneVideo, 2);
+        this.grid.setHalignment(paneVideo, HPos.CENTER);
     }
 
     // --------------------------------------------------------------------
@@ -199,5 +201,11 @@ public final class EscenaBienvenida implements Escena
     {
         this.stopMedia();
         this.primaryStage.close();
+    }
+
+    @Override
+    public GridPane getGridPaneEscena()
+    {
+        return this.grid;
     }
 }

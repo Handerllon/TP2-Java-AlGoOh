@@ -30,6 +30,7 @@ public final class EscenaFinDeJuego implements Escena
     private ModeloObservable modelo;
     private Stage primaryStage;
     private Scene escenaFinDeJuego;
+    private GridPane grid;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -39,6 +40,8 @@ public final class EscenaFinDeJuego implements Escena
         this.modelo = modelo;
         this.vista = vista;
         this.primaryStage = this.vista.getPrimaryStage();
+
+        this.grid = new GridPane();
 
         this.inicializarEscena();
     }
@@ -59,8 +62,7 @@ public final class EscenaFinDeJuego implements Escena
 
     private void inicializarEscena()
     {
-        GridPane grid = new GridPane();
-        this.escenaFinDeJuego = new Scene(grid, 395, 296);
+        this.escenaFinDeJuego = new Scene(this.grid, 395, 296);
         this.primaryStage.setScene(this.escenaFinDeJuego);
 
         File f;
@@ -84,7 +86,7 @@ public final class EscenaFinDeJuego implements Escena
             lblTitulo.setText(nombreJugadorFinalizo + " PERDEDOR");
         }
 
-        grid.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+        this.grid.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource(this.direccion_imagen).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 
         // -------------------------------
@@ -106,15 +108,15 @@ public final class EscenaFinDeJuego implements Escena
         // -------------------------------
         // Setting grid.
         // -------------------------------
-        grid.setPadding(new Insets(10));
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setMinWidth(500);
+        this.grid.setPadding(new Insets(10));
+        this.grid.setHgap(10);
+        this.grid.setVgap(10);
+        this.grid.setMinWidth(500);
 
-        grid.addRow(0, lblTitulo);
-        grid.setHalignment(lblTitulo, HPos.CENTER);
-        grid.addRow(1, paneButtons);
-        grid.setHalignment(paneButtons, HPos.CENTER);
+        this.grid.addRow(0, lblTitulo);
+        this.grid.setHalignment(lblTitulo, HPos.CENTER);
+        this.grid.addRow(1, paneButtons);
+        this.grid.setHalignment(paneButtons, HPos.CENTER);
     }
 
     // --------------------------------------------------------------------
@@ -173,5 +175,11 @@ public final class EscenaFinDeJuego implements Escena
     public void cerrar()
     {
         this.primaryStage.close();
+    }
+
+    @Override
+    public GridPane getGridPaneEscena()
+    {
+        return this.grid;
     }
 }

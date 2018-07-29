@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -63,6 +64,11 @@ public class Vista implements ObservadorDeModelo
     public Stage getPrimaryStage()
     {
         return this.primaryStage;
+    }
+
+    public GridPane getGridPaneEscena()
+    {
+        return this.escena.getGridPaneEscena();
     }
 
     public ControladorInterfaz getControlador()

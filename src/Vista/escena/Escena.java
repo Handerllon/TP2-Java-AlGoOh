@@ -1,5 +1,7 @@
 package Vista.escena;
 
+import javafx.scene.layout.GridPane;
+
 public interface Escena
 {
     Escena cambiarEscena();
@@ -17,4 +19,6 @@ public interface Escena
     void stopMedia();
 
     void cerrar();
+
+    GridPane getGridPaneEscena();
 }

@@ -27,7 +27,7 @@ public final class EscenaSorteoJugadorInicial implements Escena
     private ModeloObservable modelo;
     private Scene escenaSorteoJugadorInicial;
     private Stage primaryStage;
-
+    private GridPane grid;
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
@@ -36,6 +36,9 @@ public final class EscenaSorteoJugadorInicial implements Escena
         this.modelo = modelo;
         this.vista = vista;
         this.primaryStage = this.vista.getPrimaryStage();
+
+        this.grid = new GridPane();
+
         this.inicializarEscena();
     }
 
@@ -55,8 +58,7 @@ public final class EscenaSorteoJugadorInicial implements Escena
 
     private void inicializarEscena()
     {
-        GridPane grid = new GridPane();
-        this.escenaSorteoJugadorInicial = new Scene(grid);
+        this.escenaSorteoJugadorInicial = new Scene(this.grid);
         this.primaryStage.setScene(this.escenaSorteoJugadorInicial);
 
         Label lblTitulo = new Label("Sorteo de jugador inicial.");
@@ -97,15 +99,15 @@ public final class EscenaSorteoJugadorInicial implements Escena
         // -------------------------------
         // Setting grid.
         // -------------------------------
-        grid.setPadding(new Insets(10));
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setMinWidth(500);
+        this.grid.setPadding(new Insets(10));
+        this.grid.setHgap(10);
+        this.grid.setVgap(10);
+        this.grid.setMinWidth(500);
 
-        grid.addRow(0, lblTitulo);
-        grid.addRow(1, lblJugadorSorteado);
-        grid.addRow(2, paneButtons);
-        grid.addRow(3, paneVideo);
+        this.grid.addRow(0, lblTitulo);
+        this.grid.addRow(1, lblJugadorSorteado);
+        this.grid.addRow(2, paneButtons);
+        this.grid.addRow(3, paneVideo);
     }
 
     // --------------------------------------------------------------------
@@ -176,5 +178,11 @@ public final class EscenaSorteoJugadorInicial implements Escena
     {
         this.stopMedia();
         this.primaryStage.close();
+    }
+
+    @Override
+    public GridPane getGridPaneEscena()
+    {
+        return this.grid;
     }
 }

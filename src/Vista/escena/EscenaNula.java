@@ -1,5 +1,7 @@
 package Vista.escena;
 
+import javafx.scene.layout.GridPane;
+
 public final class EscenaNula implements Escena
 {
     private static EscenaNula instancia = null;
@@ -72,5 +74,11 @@ public final class EscenaNula implements Escena
     public void cerrar()
     {
 
+    }
+
+    @Override
+    public GridPane getGridPaneEscena()
+    {
+        return null;
     }
 }

@@ -26,7 +26,7 @@ public final class EscenaTableroPrincipal implements Escena
 {
     private static EscenaTableroPrincipal instancia = null;
     private GridPane grid;
-    private String RUTA_TABLERO = "resources/imagenes/tablero.png";
+    private String RUTA_TABLERO = "resources/imagenes/fondoTableroGeneral.png";
     private String direccion_sonido_batalla = "src/resources/audio/battle.mp3";
     private Vista vista;
     private MediaPlayer mplayer;
@@ -89,22 +89,23 @@ public final class EscenaTableroPrincipal implements Escena
 
         grid.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource(RUTA_TABLERO).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        grid.setPrefSize(this.vista.getResolucionHorizontal(), this.vista.getResolucionVertical());
 
         // -------------------------------
         // Estructura de la vista.
         // -------------------------------
-        grid.setGridLinesVisible(false);
-        // TODO: números mágicos.
+        grid.setGridLinesVisible(true);
         grid.setPadding(new Insets(5));
-        ColumnConstraints column0 = new ColumnConstraints(300);
-        ColumnConstraints column1 = new ColumnConstraints(1310);
-        ColumnConstraints column2 = new ColumnConstraints(300);
-        RowConstraints row0 = new RowConstraints(160);
-        RowConstraints row1 = new RowConstraints(160);
-        RowConstraints row2 = new RowConstraints(160);
-        RowConstraints row3 = new RowConstraints(160);
-        RowConstraints row4 = new RowConstraints(160);
-        RowConstraints row5 = new RowConstraints(160);
+        //Se uso una resoulcion de 1080x1920 como base para los tamanos
+        ColumnConstraints column0 = new ColumnConstraints((this.vista.getResolucionHorizontal()*300)/1920);
+        ColumnConstraints column1 = new ColumnConstraints((this.vista.getResolucionHorizontal()*1310)/1920);
+        ColumnConstraints column2 = new ColumnConstraints((this.vista.getResolucionHorizontal()*300)/1920);
+        RowConstraints row0 = new RowConstraints((this.vista.getResolucionVertical()*170)/1080);
+        RowConstraints row1 = new RowConstraints((this.vista.getResolucionVertical()*170)/1080);
+        RowConstraints row2 = new RowConstraints((this.vista.getResolucionVertical()*170)/1080);
+        RowConstraints row3 = new RowConstraints((this.vista.getResolucionVertical()*170)/1080);
+        RowConstraints row4 = new RowConstraints((this.vista.getResolucionVertical()*170)/1080);
+        RowConstraints row5 = new RowConstraints((this.vista.getResolucionVertical()*170)/1080);
         grid.getColumnConstraints().addAll(column0, column1, column2);
         grid.getRowConstraints().addAll(row0, row1, row2, row3, row4, row5);
 

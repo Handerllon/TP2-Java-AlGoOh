@@ -28,8 +28,8 @@ public class RegionesMagicasYTrampasBoton extends Button
     private Popup popup;
     private Button botonDeLaCarta;
     private Jugador jugadorAsociado;
-	private double anchoDeCarta;
-	private double altoDeCarta;
+    private double anchoDeCarta;
+    private double altoDeCarta;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -39,9 +39,9 @@ public class RegionesMagicasYTrampasBoton extends Button
         this.jugadorAsociado = jugador;
         this.vista = vista;
         this.botonDeLaCarta = new Button();
-        
-        this.anchoDeCarta = (this.vista.getResolucionHorizontal()*anchoInicialCarta)/1920;
-        this.altoDeCarta = (this.vista.getResolucionVertical()*altoInicialCarta)/1080;
+
+        this.anchoDeCarta = (this.vista.getResolucionHorizontal() * anchoInicialCarta) / 1920;
+        this.altoDeCarta = (this.vista.getResolucionVertical() * altoInicialCarta) / 1080;
         this.botonDeLaCarta.setPrefSize(anchoDeCarta, altoDeCarta);
         this.botonDeLaCarta.setStyle(estiloRegion);
     }

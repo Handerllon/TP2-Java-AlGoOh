@@ -28,8 +28,8 @@ public class RegionesMonstruoBoton extends Button
     private Button botonCarta;
     private Jugador jugadorAsociado;
     private Vista vista;
-	private double anchoDeCarta;
-	private double altoDeCarta;
+    private double anchoDeCarta;
+    private double altoDeCarta;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -40,9 +40,9 @@ public class RegionesMonstruoBoton extends Button
         this.vista = vista;
 
         this.botonCarta = new Button();
-        
-        this.anchoDeCarta = (this.vista.getResolucionHorizontal()*anchoInicialCarta)/1920;
-        this.altoDeCarta = (this.vista.getResolucionVertical()*altoInicialCarta)/1080;
+
+        this.anchoDeCarta = (this.vista.getResolucionHorizontal() * anchoInicialCarta) / 1920;
+        this.altoDeCarta = (this.vista.getResolucionVertical() * altoInicialCarta) / 1080;
         this.botonCarta.setPrefSize(anchoDeCarta, altoDeCarta);
         this.botonCarta.setStyle(estiloRegion);
     }

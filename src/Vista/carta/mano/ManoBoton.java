@@ -53,8 +53,8 @@ public class ManoBoton extends Button
 
         toolTip.setGraphic(new ImageView(imagenCarta));
         boton.setTooltip(toolTip);
-        double anchoCarta = (this.vista.getResolucionHorizontal()*anchoInicialCarta)/1920;
-        double altoCarta = (this.vista.getResolucionVertical()*altoInicialCarta)/1080;
+        double anchoCarta = (this.vista.getResolucionHorizontal() * anchoInicialCarta) / 1920;
+        double altoCarta = (this.vista.getResolucionVertical() * altoInicialCarta) / 1080;
         boton.setPrefSize(anchoCarta, altoCarta);
 
         boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()

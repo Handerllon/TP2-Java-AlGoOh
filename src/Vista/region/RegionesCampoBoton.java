@@ -25,8 +25,8 @@ public class RegionesCampoBoton extends Button
     private Jugador jugadorAsociado;
     private Image imagenBoton;
     private Tooltip tooltip;
-	private double anchoDeCarta;
-	private double altoDeCarta;
+    private double anchoDeCarta;
+    private double altoDeCarta;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -37,9 +37,9 @@ public class RegionesCampoBoton extends Button
         this.vista = vista;
 
         this.boton = new Button();
-        
-        this.anchoDeCarta = (this.vista.getResolucionHorizontal()*anchoInicialCarta)/1920;
-        this.altoDeCarta = (this.vista.getResolucionVertical()*altoInicialCarta)/1080;
+
+        this.anchoDeCarta = (this.vista.getResolucionHorizontal() * anchoInicialCarta) / 1920;
+        this.altoDeCarta = (this.vista.getResolucionVertical() * altoInicialCarta) / 1080;
         this.boton.setPrefSize(anchoDeCarta, altoDeCarta);
         this.boton.setStyle(estiloRegion);
 

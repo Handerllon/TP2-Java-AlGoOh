@@ -28,6 +28,7 @@ public final class EscenaSorteoJugadorInicial implements Escena
     private Scene escenaSorteoJugadorInicial;
     private Stage primaryStage;
     private GridPane grid;
+
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------

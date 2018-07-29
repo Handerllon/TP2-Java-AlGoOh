@@ -27,8 +27,7 @@ public class RegionesCementerioVista implements ObservadorDeModelo
 
         Button boton = new Button();
 
-        
-        boton.setPrefSize((this.vista.getResolucionHorizontal()*95.4)/1920, (this.vista.getResolucionVertical()*130)/1080);
+        boton.setPrefSize((this.vista.getResolucionHorizontal() * 95.4) / 1920, (this.vista.getResolucionVertical() * 130) / 1080);
         boton.setStyle(estiloRegion);
 
         return boton;

@@ -1,5 +1,7 @@
 package Controlador.condicionesJuego;
 
+import Controlador.estadosJuego.EstadoVerificador;
+
 public class EstadoVerificadorBueno implements EstadoVerificador
 {
     @Override

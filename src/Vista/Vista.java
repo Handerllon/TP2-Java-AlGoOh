@@ -4,6 +4,7 @@ import Controlador.ControladorInterfaz;
 import Controlador.excepciones.*;
 import Modelo.ModeloObservable;
 import Modelo.carta.Sacrificio;
+import Modelo.carta.excepciones.ManoLlena;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.observadores.ObservadorDeModelo;
 import Vista.escena.Escena;
@@ -50,7 +51,7 @@ public class Vista implements ObservadorDeModelo
 
     public void mostrar()
     {
-        this.escena.dibujarEscena();
+        this.escena.mostrar();
     }
 
     public void setProximaEscena(Escena escena)
@@ -124,7 +125,7 @@ public class Vista implements ObservadorDeModelo
     public void finDeJuego()
     {
         this.escena.finDeJuego();
-        this.escena.dibujarEscena();
+        this.escena.mostrar();
     }
 
     public void confirmarSalirPrograma()
@@ -164,7 +165,8 @@ public class Vista implements ObservadorDeModelo
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Advertencia");
         alert.setHeaderText(null);
-        alert.setContentText("No se puede tomar carta. " + error.getEstadoVerificador().getNombre());
+        alert.setContentText(error.getNombreResponsable() + " :No se puede tomar carta. " + error.getEstadoVerificador()
+                .getNombre());
 
         alert.showAndWait();
     }
@@ -174,7 +176,7 @@ public class Vista implements ObservadorDeModelo
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Advertencia");
         alert.setHeaderText(null);
-        alert.setContentText("La carta monstruo no puede ser envíada a la región monstruo. " + error
+        alert.setContentText(error.getNombreResponsable() + " :La carta monstruo no puede ser envíada a la región monstruo. " + error
                 .getEstadoVerificador()
                 .getNombre());
 
@@ -186,7 +188,7 @@ public class Vista implements ObservadorDeModelo
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Advertencia");
         alert.setHeaderText(null);
-        alert.setContentText("La carta MyT no puede ser envíada a la región MyT. " + error.getEstadoVerificador()
+        alert.setContentText(error.getNombreResponsable() + " :La carta MyT no puede ser envíada a la región MyT. " + error.getEstadoVerificador()
                 .getNombre());
 
         alert.showAndWait();
@@ -197,7 +199,7 @@ public class Vista implements ObservadorDeModelo
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Advertencia");
         alert.setHeaderText(null);
-        alert.setContentText("La carta elegida no puede ser utilizada. " + error.getEstadoVerificador().getNombre());
+        alert.setContentText(error.getNombreResponsable() + " :La carta elegida no puede ser utilizada. " + error.getEstadoVerificador().getNombre());
 
         alert.showAndWait();
     }
@@ -207,7 +209,7 @@ public class Vista implements ObservadorDeModelo
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Advertencia");
         alert.setHeaderText(null);
-        alert.setContentText("La carta campo no puede ser envíada a la región campo. " + error.getEstadoVerificador()
+        alert.setContentText(error.getNombreResponsable() + " :La carta campo no puede ser envíada a la región campo. " + error.getEstadoVerificador()
                 .getNombre());
 
         alert.showAndWait();
@@ -218,7 +220,7 @@ public class Vista implements ObservadorDeModelo
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Advertencia");
         alert.setHeaderText(null);
-        alert.setContentText("No se puede cambiar la orientacion de la carta elegida. " + error.getEstadoVerificador()
+        alert.setContentText(error.getNombreResponsable() + " :No se puede cambiar la orientacion de la carta elegida. " + error.getEstadoVerificador()
                 .getNombre());
 
         alert.showAndWait();
@@ -229,7 +231,17 @@ public class Vista implements ObservadorDeModelo
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Advertencia");
         alert.setHeaderText(null);
-        alert.setContentText("No se puede atacar. " + error.getEstadoVerificador().getNombre());
+        alert.setContentText(error.getNombreResponsable() + " :No se puede atacar. " + error.getEstadoVerificador().getNombre());
+
+        alert.showAndWait();
+    }
+
+    public void avisoManoLlena(ManoLlena error)
+    {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Aviso");
+        alert.setHeaderText(null);
+        alert.setContentText(error.getNombreResponsable() + " :La mano estaba llena y se descartó una carta al azar. ");
 
         alert.showAndWait();
     }

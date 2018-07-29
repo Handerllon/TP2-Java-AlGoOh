@@ -6,7 +6,7 @@ public interface Escena
 {
     Escena cambiarEscena();
 
-    void dibujarEscena();
+    void mostrar();
 
     void actualizarEstado();
 

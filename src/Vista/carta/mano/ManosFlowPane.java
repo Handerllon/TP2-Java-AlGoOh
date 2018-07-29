@@ -4,7 +4,6 @@ import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Vista.Vista;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 
 import java.util.ArrayList;
@@ -15,12 +14,16 @@ public class ManosFlowPane extends FlowPane
     private ArrayList<ManoBoton> botones;
     private Vista vista;
     private Jugador jugadorAsociado;
+    private double horizontalGapFlowPaneButtons = 20;
+    private double verticalGapFlowPaneButtons = 20;
 
     public ManosFlowPane(Vista vista, Jugador jugador)
     {
         this.jugadorAsociado = jugador;
         this.vista = vista;
-        this.flowPane = new FlowPane();
+
+        this.flowPane = new FlowPane(horizontalGapFlowPaneButtons, verticalGapFlowPaneButtons);
+
         this.flowPane.setAlignment(Pos.CENTER);
         this.botones = new ArrayList<>();
     }
@@ -32,9 +35,8 @@ public class ManosFlowPane extends FlowPane
 
     public void clear()
     {
-        this.flowPane = new FlowPane();
+        this.flowPane = new FlowPane(horizontalGapFlowPaneButtons, verticalGapFlowPaneButtons);
         this.flowPane.setAlignment(Pos.CENTER);
-        this.flowPane.setHgap(20);
         this.botones = new ArrayList<>();
     }
 

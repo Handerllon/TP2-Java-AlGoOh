@@ -35,7 +35,7 @@ public interface ModeloInterfaz
 
     boolean requiereSacrificios(CartaMonstruo carta);
 
-    boolean haySuficientesSacrificios(CartaMonstruo carta);
+    boolean haySuficientesCartasParaSacrificar(CartaMonstruo carta);
 
     // ------------------------------------
     // Métodos de orientación de cartas.

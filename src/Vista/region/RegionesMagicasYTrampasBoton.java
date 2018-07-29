@@ -126,21 +126,23 @@ public class RegionesMagicasYTrampasBoton extends Button
     {
         try
         {
-            this.vista.getControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
+            this.vista.getControlador().activarCartaMagica(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeUsarMyTError error)
         {
             this.vista.mostrarError(error);
         }
+        popup.hide();
     }
 
     private void activarCartaTrampaBtn_Click()
     {
         try
         {
-            this.vista.getControlador().activarCartaTrampa(this.carta, this.jugadorAsociado);
+            this.vista.getControlador().activarCartaTrampa(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeUsarMyTError error)
         {
             this.vista.mostrarError(error);
         }
+        popup.hide();
     }
 }

@@ -21,7 +21,7 @@ import java.io.File;
 
 public final class EscenaFinDeJuego implements Escena
 {
-    private static String direccion_imagen = "resources/imagenes/tablero/end.jpg";
+    private static String direccion_imagen = "resources/imagenes/end.jpg";
     private static String direccion_sonido_gano = "src/resources/audio/winner.mp3";
     private static String direccion_sonido_perdio = "src/resources/audio/gameover.mp3";
     private static Vista vista;
@@ -135,7 +135,7 @@ public final class EscenaFinDeJuego implements Escena
     }
 
     @Override
-    public void dibujarEscena()
+    public void mostrar()
     {
         this.playMedia();
         this.primaryStage.show();
@@ -150,7 +150,7 @@ public final class EscenaFinDeJuego implements Escena
     @Override
     public boolean terminoElJuego()
     {
-        return false;
+        return true;
     }
 
     @Override

@@ -1,11 +1,13 @@
 package Controlador.condicionesJuego;
 
-public class YaSeMandoMonstruoARegionEnTurnoActual implements EstadoVerificador
+import Controlador.estadosJuego.EstadoVerificador;
+
+public class YaSeMandoMonstruoARegionEnTurnoActualError implements EstadoVerificador
 {
     @Override
     public boolean esFallido()
     {
-        return false;
+        return true;
     }
 
     @Override

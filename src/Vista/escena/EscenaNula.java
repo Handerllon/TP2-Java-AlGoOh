@@ -35,7 +35,7 @@ public final class EscenaNula implements Escena
     }
 
     @Override
-    public void dibujarEscena()
+    public void mostrar()
     {
 
     }

@@ -1,11 +1,13 @@
 package Controlador.condicionesJuego;
 
+import Controlador.estadosJuego.EstadoVerificador;
+
 public class NoEsFaseInicialError implements EstadoVerificador
 {
     @Override
     public boolean esFallido()
     {
-        return false;
+        return true;
     }
 
     @Override

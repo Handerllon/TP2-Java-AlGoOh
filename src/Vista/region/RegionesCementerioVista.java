@@ -51,6 +51,6 @@ public class RegionesCementerioVista implements ObservadorDeModelo
     @Override
     public void huboCambios()
     {
-        //TODO Ver que dibujarEscena en el cementerio
+        //TODO Ver que mostrar en el cementerio
     }
 }

@@ -1,6 +1,6 @@
-package Controlador.condicionesJuego;
+package Controlador.estadosJuego;
 
-import Controlador.estadosJuego.MaquinaTurnos;
+import Controlador.condicionesJuego.*;
 import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
@@ -49,11 +49,11 @@ public final class VerificadorCondicionesJuego
     {
         if (!jugadorPuedeJugar(solicitante))
         {
-            return new JugadorNoPermitidoParaJugar(solicitante);
+            return new JugadorNoPermitidoParaJugarError(solicitante);
         } else if (!this.maquinaTurnos.getFaseActual().esFaseInicial())
         {
             return new NoEsFaseInicialError();
-        } else if (this.maquinaTurnos.yaTomoCartaEnTurno())
+        } else if (this.maquinaTurnos.yaTomoCartaEnTurnoActual())
         {
             return new YaTomoCartaEnTurnoError();
         }
@@ -63,30 +63,26 @@ public final class VerificadorCondicionesJuego
     // -------------------
     // Cartas Monstruo.
     // -------------------
-    public EstadoVerificador sePuedeEnviarARegionMonstruo(Carta carta, Jugador solicitante)
+    public EstadoVerificador sePuedeEnviarARegionMonstruo(Jugador solicitante, Carta carta)
     {
-
         if (carta.getPropietario() != solicitante)
         {
             return new SolicitanteNoEsPropietarioDeCartaError();
         } else if (!jugadorPuedeJugar(solicitante))
         {
-            return new JugadorNoPermitidoParaJugar(solicitante);
+            return new JugadorNoPermitidoParaJugarError(solicitante);
         } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
         {
             return new NoEsFasePreparacionError();
-        } else if (this.maquinaTurnos.yaMandoMonstruoARegionEnTurno())
+        } else if (this.maquinaTurnos.yaMandoMonstruoARegionEnTurnoActual())
         {
-            return new YaSeMandoMonstruoARegionEnTurnoActual();
+            return new YaSeMandoMonstruoARegionEnTurnoActualError();
         } else if (!carta.esMonstruo())
         {
             return new NoEsCartaMonstruo();
-        } else
+        } else if (!this.modelo.haySuficientesCartasParaSacrificar((CartaMonstruo) carta))
         {
-            if (!this.modelo.haySuficientesSacrificios((CartaMonstruo) carta))
-            {
-                return new NoHaySuficientesSacrificiosError();
-            }
+            return new NoHaySuficientesCartasParaSacrificarError();
         }
 
         return new EstadoVerificadorBueno();
@@ -95,14 +91,14 @@ public final class VerificadorCondicionesJuego
     // -------------------
     // Cartas MyT.
     // -------------------
-    public EstadoVerificador sePuedeEnviarARegionMyT(Carta carta, Jugador solicitante)
+    public EstadoVerificador sePuedeEnviarARegionMyT(Jugador solicitante, Carta carta)
     {
         if (carta.getPropietario() != solicitante)
         {
             return new SolicitanteNoEsPropietarioDeCartaError();
         } else if (!jugadorPuedeJugar(solicitante))
         {
-            return new JugadorNoPermitidoParaJugar(solicitante);
+            return new JugadorNoPermitidoParaJugarError(solicitante);
         } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
         {
             return new NoEsFasePreparacionError();
@@ -114,14 +110,14 @@ public final class VerificadorCondicionesJuego
         return new EstadoVerificadorBueno();
     }
 
-    public EstadoVerificador sePuedeUsarTrampa(Carta carta, Jugador solicitante)
+    public EstadoVerificador sePuedeUsarTrampa(Jugador solicitante, Carta carta)
     {
         if (carta.getPropietario() != solicitante)
         {
             return new SolicitanteNoEsPropietarioDeCartaError();
         } else if (!jugadorPuedeJugar(solicitante))
         {
-            return new JugadorNoPermitidoParaJugar(solicitante);
+            return new JugadorNoPermitidoParaJugarError(solicitante);
         } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
         {
             return new NoEsFasePreparacionError();
@@ -133,14 +129,14 @@ public final class VerificadorCondicionesJuego
         return new EstadoVerificadorBueno();
     }
 
-    public EstadoVerificador sePuedeUsarMagica(Carta carta, Jugador solicitante)
+    public EstadoVerificador sePuedeUsarMagica(Jugador solicitante, Carta carta)
     {
         if (carta.getPropietario() != solicitante)
         {
             return new SolicitanteNoEsPropietarioDeCartaError();
         } else if (!jugadorPuedeJugar(solicitante))
         {
-            return new JugadorNoPermitidoParaJugar(solicitante);
+            return new JugadorNoPermitidoParaJugarError(solicitante);
         } else if (!this.maquinaTurnos.getFaseActual().esFaseFinal())
         {
             return new NoEsFaseFinalError();
@@ -151,14 +147,14 @@ public final class VerificadorCondicionesJuego
         return new EstadoVerificadorBueno();
     }
 
-    public EstadoVerificador sePuedeUsarCampo(Carta carta, Jugador solicitante)
+    public EstadoVerificador sePuedeUsarCampo(Jugador solicitante, Carta carta)
     {
         if (carta.getPropietario() != solicitante)
         {
             return new SolicitanteNoEsPropietarioDeCartaError();
         } else if (!jugadorPuedeJugar(solicitante))
         {
-            return new JugadorNoPermitidoParaJugar(solicitante);
+            return new JugadorNoPermitidoParaJugarError(solicitante);
         } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
         {
             return new NoEsFasePreparacionError();
@@ -172,16 +168,16 @@ public final class VerificadorCondicionesJuego
     // ----------------------------------------
     // Verificación de orientación de cartas.
     // ----------------------------------------
-    public EstadoVerificador sePuedeCambiarOrientacionCarta(Carta carta, Jugador solicitante)
+    public EstadoVerificador sePuedeCambiarOrientacionCarta(Jugador solicitante, Carta carta)
     {
 
         if (!jugadorPuedeJugar(solicitante))
         {
-            return new JugadorNoPermitidoParaJugar(solicitante);
+            return new JugadorNoPermitidoParaJugarError(solicitante);
         } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
         {
             return new NoEsFasePreparacionError();
-        } else if (this.maquinaTurnos.yaColocoEnTurno(carta))
+        } else if (this.maquinaTurnos.yaCambioOrientacionEnTurnoActual(carta))
         {
             return new CartaNoPuedeCambiarOrientacionEnTurnoActualError();
         }
@@ -189,16 +185,16 @@ public final class VerificadorCondicionesJuego
         return new EstadoVerificadorBueno();
     }
 
-    public EstadoVerificador sePuedeCambiarModoCarta(Carta carta, Jugador solicitante)
+    public EstadoVerificador sePuedeCambiarModoCarta(Jugador solicitante, Carta carta)
     {
 
         if (!jugadorPuedeJugar(solicitante))
         {
-            return new JugadorNoPermitidoParaJugar(solicitante);
+            return new JugadorNoPermitidoParaJugarError(solicitante);
         } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
         {
             return new NoEsFasePreparacionError();
-        } else if (this.maquinaTurnos.yaColocoEnTurno(carta))
+        } else if (this.maquinaTurnos.yaCambioOrientacionEnTurnoActual(carta))
         {
             return new CartaNoPuedeCambiarOrientacionEnTurnoActualError();
         } else if (!carta.esMonstruo())
@@ -216,11 +212,11 @@ public final class VerificadorCondicionesJuego
     {
         if (!jugadorPuedeJugar(solicitante))
         {
-            return new JugadorNoPermitidoParaJugar(solicitante);
+            return new JugadorNoPermitidoParaJugarError(solicitante);
         } else if (!this.maquinaTurnos.getFaseActual().esFaseAtaque())
         {
             return new NoEsFaseAtaqueError();
-        } else if (this.maquinaTurnos.esPrimerTurnoJuego())
+        } else if (this.maquinaTurnos.esElPrimerTurnoDelJuego())
         {
             return new NoSeAtacaEnPrimerTurnoJuegoError();
         } else if (!cartaAtacante.esMonstruo())
@@ -232,7 +228,7 @@ public final class VerificadorCondicionesJuego
         } else if (cartaAtacante.estaBocaAbajo())
         {
             return new CartaBocaAbajoNoPuedeAtacarError();
-        } else if (this.maquinaTurnos.yaAtacoEnTurno((CartaMonstruo) cartaAtacante))
+        } else if (this.maquinaTurnos.cartaYaAtacoEnTurnoActual((CartaMonstruo) cartaAtacante))
         {
             return new CartaYaAtacoEnTurnoActualError();
         }

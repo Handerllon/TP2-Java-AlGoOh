@@ -2,6 +2,7 @@ package Vista.carta;
 
 import Controlador.excepciones.NoSePuedeTomarCartaError;
 import Modelo.Jugador;
+import Modelo.carta.excepciones.ManoLlena;
 import Modelo.observadores.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.geometry.Insets;
@@ -24,8 +25,8 @@ public class MazosVista implements ObservadorDeModelo
     private Tooltip toolTipJugador;
     private Button mazoOponente;
     private Tooltip toolTipOponente;
-	private double anchoDeCarta;
-	private double altoDeCarta;
+    private double anchoDeCarta;
+    private double altoDeCarta;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -34,8 +35,8 @@ public class MazosVista implements ObservadorDeModelo
     {
         this.vista = vista;
 
-        this.anchoDeCarta = (vista.getResolucionHorizontal()*anchoInicialCarta)/1920;
-        this.altoDeCarta = (vista.getResolucionVertical()*altoInicialCarta)/1080;
+        this.anchoDeCarta = (vista.getResolucionHorizontal() * anchoInicialCarta) / 1920;
+        this.altoDeCarta = (vista.getResolucionVertical() * altoInicialCarta) / 1080;
 
         this.toolTipJugador = new Tooltip();
         this.toolTipOponente = new Tooltip();
@@ -85,6 +86,9 @@ public class MazosVista implements ObservadorDeModelo
         } catch (NoSePuedeTomarCartaError error)
         {
             this.vista.mostrarError(error);
+        } catch (ManoLlena manoLlena)
+        {
+            this.vista.avisoManoLlena(manoLlena);
         }
     }
 

@@ -1,11 +1,13 @@
 package Controlador.condicionesJuego;
 
-public class NoHaySuficientesSacrificiosError implements EstadoVerificador
+import Controlador.estadosJuego.EstadoVerificador;
+
+public class NoHaySuficientesCartasParaSacrificarError implements EstadoVerificador
 {
     @Override
     public boolean esFallido()
     {
-        return false;
+        return true;
     }
 
     @Override

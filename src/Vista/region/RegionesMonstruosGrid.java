@@ -58,11 +58,12 @@ public class RegionesMonstruosGrid extends GridPane
             this.grid.setHalignment(boton.getBoton(), HPos.CENTER);
         }
     }
-    
-    public void clear() {
-    	// TODO: Ver como hacer mas lindo esto
-    	this.botones = new ArrayList<>();
-    	RegionesMonstruoBoton boton;
+
+    public void clear()
+    {
+        // TODO: Ver como hacer mas lindo esto
+        this.botones = new ArrayList<>();
+        RegionesMonstruoBoton boton;
         for (int i = 0; i < cantidadBotonesGrid; i++)
         {
             boton = new RegionesMonstruoBoton(this.vista, this.jugadorAsociado);
@@ -70,7 +71,7 @@ public class RegionesMonstruosGrid extends GridPane
             // Se posicionan los botones en la grilla de la región monstruo.
             this.grid.add(boton.getBoton(), i, 0);
             this.grid.setHalignment(boton.getBoton(), HPos.CENTER);
-        }  	
+        }
     }
 
     public GridPane getGrid()
@@ -86,8 +87,9 @@ public class RegionesMonstruosGrid extends GridPane
             botones.get(i).actualizar(cartasEnRegionMonstruos.get(i));
         }
         this.grid.getChildren().clear();
-        for (int i = 0; i < this.botones.size() ; i++){
-        	this.grid.add(this.botones.get(i).getBoton(), i, 0);
+        for (int i = 0; i < this.botones.size(); i++)
+        {
+            this.grid.add(this.botones.get(i).getBoton(), i, 0);
             this.grid.setHalignment(this.botones.get(i).getBoton(), HPos.CENTER);
         }
     }

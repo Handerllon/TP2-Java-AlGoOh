@@ -87,7 +87,7 @@ public class exepcionesTest
         carta.summon(sacrificio);
     }
 
-    @Test(expected = ManoLlenaError.class)
+    @Test(expected = ManoLlena.class)
     public void test08NoSePuedenAgregarCartasALaMano()
     {
         Mano mano = new Mano(null);

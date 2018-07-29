@@ -25,18 +25,18 @@ import java.io.File;
 public final class EscenaTableroPrincipal implements Escena
 {
     private static EscenaTableroPrincipal instancia = null;
-    private GridPane grid;
+    private GridPane gridPane;
     private String RUTA_TABLERO = "resources/imagenes/fondoTableroGeneral.png";
     private String direccion_sonido_batalla = "src/resources/audio/battle.mp3";
     private Vista vista;
     private MediaPlayer mplayer;
-    private RegionesMonstruoVista regionesMonstruo;
-    private RegionesMagicasYTrampasVista regionesMagicasYTrampas;
-    private RegionesCampoVista regionesCampo;
-    private RegionesCementerioVista regionesCementerio;
-    private ManosVista manos;
-    private MazosVista mazos;
-    private VidaVista vidas;
+    private RegionesMonstruoVista regionesMonstruoVista;
+    private RegionesMagicasYTrampasVista regionesMagicasYTrampasVista;
+    private RegionesCampoVista regionesCampoVista;
+    private RegionesCementerioVista regionesCementerioVista;
+    private ManosVista manosVista;
+    private MazosVista mazosVista;
+    private VidaVista vidasVista;
     private ModeloObservable modelo;
     private Stage primaryStage;
     private Scene escenaTableroPrincipal;
@@ -51,16 +51,16 @@ public final class EscenaTableroPrincipal implements Escena
         this.vista = vista;
         this.primaryStage = this.vista.getPrimaryStage();
 
-        this.grid = new GridPane();
+        this.gridPane = new GridPane();
 
-        this.regionesMonstruo = new RegionesMonstruoVista(this.vista);
-        this.regionesMagicasYTrampas = new RegionesMagicasYTrampasVista(this.vista);
-        this.regionesCampo = new RegionesCampoVista(this.vista);
-        this.regionesCementerio = new RegionesCementerioVista(this.vista);
+        this.regionesMonstruoVista = new RegionesMonstruoVista(this.vista);
+        this.regionesMagicasYTrampasVista = new RegionesMagicasYTrampasVista(this.vista);
+        this.regionesCampoVista = new RegionesCampoVista(this.vista);
+        this.regionesCementerioVista = new RegionesCementerioVista(this.vista);
 
-        this.manos = new ManosVista(this.vista);
-        this.mazos = new MazosVista(this.vista);
-        this.vidas = new VidaVista(this.vista);
+        this.manosVista = new ManosVista(this.vista);
+        this.mazosVista = new MazosVista(this.vista);
+        this.vidasVista = new VidaVista(this.vista);
 
         this.estadosJuegoBotones = new EstadosJuegoBotones(this.vista);
 
@@ -83,19 +83,19 @@ public final class EscenaTableroPrincipal implements Escena
 
     private void inicializarEscena()
     {
-        this.escenaTableroPrincipal = new Scene(grid, this.vista.getResolucionHorizontal(), this.vista.getResolucionVertical());
+        this.escenaTableroPrincipal = new Scene(gridPane, this.vista.getResolucionHorizontal(), this.vista.getResolucionVertical());
         this.primaryStage.setScene(this.escenaTableroPrincipal);
         this.primaryStage.setMaximized(true);
 
-        //grid.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+        //gridPane.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
         //.getResource(RUTA_TABLERO).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-        grid.setPrefSize(this.vista.getResolucionHorizontal(), this.vista.getResolucionVertical());
+        gridPane.setPrefSize(this.vista.getResolucionHorizontal(), this.vista.getResolucionVertical());
 
         // -------------------------------
         // Estructura de la vista.
         // -------------------------------
-        grid.setGridLinesVisible(false);
-        grid.setPadding(new Insets(5));
+        gridPane.setGridLinesVisible(false);
+        gridPane.setPadding(new Insets(5));
         //Se uso una resoulcion de 1080x1920 como base para los tamanos
         ColumnConstraints column0 = new ColumnConstraints((this.vista.getResolucionHorizontal() * 300) / 1920);
         ColumnConstraints column1 = new ColumnConstraints((this.vista.getResolucionHorizontal() * 1310) / 1920);
@@ -106,71 +106,77 @@ public final class EscenaTableroPrincipal implements Escena
         RowConstraints row3 = new RowConstraints((this.vista.getResolucionVertical() * 170) / 1080);
         RowConstraints row4 = new RowConstraints((this.vista.getResolucionVertical() * 170) / 1080);
         RowConstraints row5 = new RowConstraints((this.vista.getResolucionVertical() * 170) / 1080);
-        grid.getColumnConstraints().addAll(column0, column1, column2);
-        grid.getRowConstraints().addAll(row0, row1, row2, row3, row4, row5);
+        gridPane.getColumnConstraints().addAll(column0, column1, column2);
+        gridPane.getRowConstraints().addAll(row0, row1, row2, row3, row4, row5);
+
+        // Se configura la grid pane.
+        setGridPaneVista();
 
         // -------------------------------
-        // Regiones.
-        // -------------------------------
-        grid.add(regionesMonstruo.getGridJugador(), 1, 3);
-        grid.setHalignment(regionesMonstruo.getGridJugador(), HPos.CENTER);
-        grid.add(regionesMonstruo.getGridOponente(), 1, 2);
-        grid.setHalignment(regionesMonstruo.getGridOponente(), HPos.CENTER);
-
-        grid.add(regionesMagicasYTrampas.getGridJugador(), 1, 4);
-        grid.setHalignment(regionesMagicasYTrampas.getGridJugador(), HPos.CENTER);
-        grid.add(regionesMagicasYTrampas.getGridOponente(), 1, 1);
-        grid.setHalignment(regionesMagicasYTrampas.getGridOponente(), HPos.CENTER);
-
-        grid.add(regionesCampo.getRegionCampoJugador(), 0, 4);
-        grid.setHalignment(regionesCampo.getRegionCampoJugador(), HPos.CENTER);
-        grid.add(regionesCampo.getRegionCampoOponente(), 2, 1);
-        grid.setHalignment(regionesCampo.getRegionCampoOponente(), HPos.CENTER);
-
-        grid.add(regionesCementerio.getCementerioJugador(), 0, 3);
-        grid.setHalignment(regionesCementerio.getCementerioJugador(), HPos.CENTER);
-        grid.add(regionesCementerio.getCementerioOponente(), 2, 2);
-        grid.setHalignment(regionesCementerio.getCementerioOponente(), HPos.CENTER);
-
-        // -------------------------------
-        // Manos.
-        // -------------------------------
-        grid.add(manos.getManoJugador(), 1, 5);
-        grid.setHalignment(manos.getManoJugador(), HPos.CENTER);
-        grid.add(manos.getManoOponente(), 1, 0);
-        grid.setHalignment(manos.getManoOponente(), HPos.CENTER);
-
-        // -------------------------------
-        // Mazos.
-        // -------------------------------
-        grid.add(mazos.getMazoJugador(), 2, 5);
-        grid.setHalignment(mazos.getMazoJugador(), HPos.CENTER);
-        grid.add(mazos.getMazoOponente(), 0, 0);
-        grid.setHalignment(mazos.getMazoOponente(), HPos.CENTER);
-
-        // -------------------------------
-        // Vida.
-        // -------------------------------
-        grid.add(vidas.getVidaJugador(), 0, 5);
-        grid.setHalignment(vidas.getVidaJugador(), HPos.CENTER);
-        grid.add(vidas.getVidaOponente(), 2, 0);
-        grid.setHalignment(vidas.getVidaOponente(), HPos.CENTER);
-
-        // -------------------------------
-        // Botones de estado de juego.
-        // -------------------------------
-        grid.add(estadosJuegoBotones.getBotonFinDeFase(), 2, 4);
-        grid.setHalignment(estadosJuegoBotones.getBotonFinDeFase(), HPos.CENTER);
-        grid.add(estadosJuegoBotones.getBotonFinDeTurno(), 2, 3);
-        grid.setHalignment(estadosJuegoBotones.getBotonFinDeTurno(), HPos.CENTER);
-
-        // -------------------------------
-        // Audio.
+        // Multimedia.
         // -------------------------------
         File f = new File(direccion_sonido_batalla);
         Media media = new Media(f.toURI().toString());
         this.mplayer = new MediaPlayer(media);
         this.mplayer.setCycleCount(MediaPlayer.INDEFINITE);
+    }
+
+    private void setGridPaneVista()
+    {
+        // -------------------------------
+        // Regiones.
+        // -------------------------------
+        gridPane.add(regionesMonstruoVista.getGridJugador(), 1, 3);
+        gridPane.setHalignment(regionesMonstruoVista.getGridJugador(), HPos.CENTER);
+        gridPane.add(regionesMonstruoVista.getGridOponente(), 1, 2);
+        gridPane.setHalignment(regionesMonstruoVista.getGridOponente(), HPos.CENTER);
+
+        gridPane.add(regionesMagicasYTrampasVista.getGridJugador(), 1, 4);
+        gridPane.setHalignment(regionesMagicasYTrampasVista.getGridJugador(), HPos.CENTER);
+        gridPane.add(regionesMagicasYTrampasVista.getGridOponente(), 1, 1);
+        gridPane.setHalignment(regionesMagicasYTrampasVista.getGridOponente(), HPos.CENTER);
+
+        gridPane.add(regionesCampoVista.getRegionCampoJugador(), 0, 4);
+        gridPane.setHalignment(regionesCampoVista.getRegionCampoJugador(), HPos.CENTER);
+        gridPane.add(regionesCampoVista.getRegionCampoOponente(), 2, 1);
+        gridPane.setHalignment(regionesCampoVista.getRegionCampoOponente(), HPos.CENTER);
+
+        gridPane.add(regionesCementerioVista.getCementerioJugador(), 0, 3);
+        gridPane.setHalignment(regionesCementerioVista.getCementerioJugador(), HPos.CENTER);
+        gridPane.add(regionesCementerioVista.getCementerioOponente(), 2, 2);
+        gridPane.setHalignment(regionesCementerioVista.getCementerioOponente(), HPos.CENTER);
+
+        // -------------------------------
+        // Manos.
+        // -------------------------------
+        gridPane.add(manosVista.getManoJugador(), 1, 5);
+        gridPane.setHalignment(manosVista.getManoJugador(), HPos.CENTER);
+        gridPane.add(manosVista.getManoOponente(), 1, 0);
+        gridPane.setHalignment(manosVista.getManoOponente(), HPos.CENTER);
+
+        // -------------------------------
+        // Mazos.
+        // -------------------------------
+        gridPane.add(mazosVista.getMazoJugador(), 2, 5);
+        gridPane.setHalignment(mazosVista.getMazoJugador(), HPos.CENTER);
+        gridPane.add(mazosVista.getMazoOponente(), 0, 0);
+        gridPane.setHalignment(mazosVista.getMazoOponente(), HPos.CENTER);
+
+        // -------------------------------
+        // Vida.
+        // -------------------------------
+        gridPane.add(vidasVista.getVidaJugador(), 0, 5);
+        gridPane.setHalignment(vidasVista.getVidaJugador(), HPos.CENTER);
+        gridPane.add(vidasVista.getVidaOponente(), 2, 0);
+        gridPane.setHalignment(vidasVista.getVidaOponente(), HPos.CENTER);
+
+        // -------------------------------
+        // Botones de estado de juego.
+        // -------------------------------
+        gridPane.add(estadosJuegoBotones.getBotonFinDeFase(), 2, 4);
+        gridPane.setHalignment(estadosJuegoBotones.getBotonFinDeFase(), HPos.CENTER);
+        gridPane.add(estadosJuegoBotones.getBotonFinDeTurno(), 2, 3);
+        gridPane.setHalignment(estadosJuegoBotones.getBotonFinDeTurno(), HPos.CENTER);
     }
 
     // --------------------------------------------------------------------
@@ -190,87 +196,33 @@ public final class EscenaTableroPrincipal implements Escena
     }
 
     @Override
-    public void dibujarEscena()
+    public void mostrar()
     {
         this.playMedia();
         this.primaryStage.show();
         this.vista.mostrarJugadorActual();
-        this.vista.mostrarFaseActual();
+        //this.vista.mostrarFaseActual();
     }
 
     @Override
     public void actualizarEstado()
     {
-        this.regionesCampo.huboCambios();
-        this.regionesMagicasYTrampas.huboCambios();
-        this.regionesMonstruo.huboCambios();
-        this.regionesCementerio.huboCambios();
-        this.manos.huboCambios();
-        this.mazos.huboCambios();
+        this.regionesCampoVista.huboCambios();
+        this.regionesMagicasYTrampasVista.huboCambios();
+        this.regionesMonstruoVista.huboCambios();
+        this.regionesCementerioVista.huboCambios();
+        this.manosVista.huboCambios();
+        this.mazosVista.huboCambios();
         this.actualizarDibujo();
     }
 
-    private void actualizarDibujo() {
-    	
-    	grid.getChildren().clear();
-    	
-    	// -------------------------------
-        // Regiones.
-        // -------------------------------
-        grid.add(regionesMonstruo.getGridJugador(), 1, 3);
-        grid.setHalignment(regionesMonstruo.getGridJugador(), HPos.CENTER);
-        grid.add(regionesMonstruo.getGridOponente(), 1, 2);
-        grid.setHalignment(regionesMonstruo.getGridOponente(), HPos.CENTER);
+    private void actualizarDibujo()
+    {
+        gridPane.getChildren().clear();
+        setGridPaneVista();
+    }
 
-        grid.add(regionesMagicasYTrampas.getGridJugador(), 1, 4);
-        grid.setHalignment(regionesMagicasYTrampas.getGridJugador(), HPos.CENTER);
-        grid.add(regionesMagicasYTrampas.getGridOponente(), 1, 1);
-        grid.setHalignment(regionesMagicasYTrampas.getGridOponente(), HPos.CENTER);
-
-        grid.add(regionesCampo.getRegionCampoJugador(), 0, 4);
-        grid.setHalignment(regionesCampo.getRegionCampoJugador(), HPos.CENTER);
-        grid.add(regionesCampo.getRegionCampoOponente(), 2, 1);
-        grid.setHalignment(regionesCampo.getRegionCampoOponente(), HPos.CENTER);
-
-        grid.add(regionesCementerio.getCementerioJugador(), 0, 3);
-        grid.setHalignment(regionesCementerio.getCementerioJugador(), HPos.CENTER);
-        grid.add(regionesCementerio.getCementerioOponente(), 2, 2);
-        grid.setHalignment(regionesCementerio.getCementerioOponente(), HPos.CENTER);
-
-        // -------------------------------
-        // Manos.
-        // -------------------------------
-        grid.add(manos.getManoJugador(), 1, 5);
-        grid.setHalignment(manos.getManoJugador(), HPos.CENTER);
-        grid.add(manos.getManoOponente(), 1, 0);
-        grid.setHalignment(manos.getManoOponente(), HPos.CENTER);
-
-        // -------------------------------
-        // Mazos.
-        // -------------------------------
-        grid.add(mazos.getMazoJugador(), 2, 5);
-        grid.setHalignment(mazos.getMazoJugador(), HPos.CENTER);
-        grid.add(mazos.getMazoOponente(), 0, 0);
-        grid.setHalignment(mazos.getMazoOponente(), HPos.CENTER);
-
-        // -------------------------------
-        // Vida.
-        // -------------------------------
-        grid.add(vidas.getVidaJugador(), 0, 5);
-        grid.setHalignment(vidas.getVidaJugador(), HPos.CENTER);
-        grid.add(vidas.getVidaOponente(), 2, 0);
-        grid.setHalignment(vidas.getVidaOponente(), HPos.CENTER);
-
-        // -------------------------------
-        // Botones de estado de juego.
-        // -------------------------------
-        grid.add(estadosJuegoBotones.getBotonFinDeFase(), 2, 4);
-        grid.setHalignment(estadosJuegoBotones.getBotonFinDeFase(), HPos.CENTER);
-        grid.add(estadosJuegoBotones.getBotonFinDeTurno(), 2, 3);
-        grid.setHalignment(estadosJuegoBotones.getBotonFinDeTurno(), HPos.CENTER);
-	}
-
-	@Override
+    @Override
     public void finDeJuego()
     {
         this.stopMedia();
@@ -299,6 +251,6 @@ public final class EscenaTableroPrincipal implements Escena
     @Override
     public GridPane getGridPaneEscena()
     {
-        return this.grid;
+        return this.gridPane;
     }
 }

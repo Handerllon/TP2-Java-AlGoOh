@@ -1,12 +1,13 @@
 package Controlador.condicionesJuego;
 
+import Controlador.estadosJuego.EstadoVerificador;
 import Modelo.Jugador;
 
-public class JugadorNoPermitidoParaJugar implements EstadoVerificador
+public class JugadorNoPermitidoParaJugarError implements EstadoVerificador
 {
     Jugador responsable;
 
-    public JugadorNoPermitidoParaJugar(Jugador jugador)
+    public JugadorNoPermitidoParaJugarError(Jugador jugador)
     {
         this.responsable = jugador;
     }

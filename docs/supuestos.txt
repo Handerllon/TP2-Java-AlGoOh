@@ -6,3 +6,7 @@ al oponente.
     2. si hay cartas en la región monstruo del oponente, el controlador le va a pedir 
 a la vista que le muestre al jugador un menú con las cartas que puede atacar (similar 
 a cuando se le piden los sacrificios).
+
+Si la mano está llena al tomar una carta, se quita una carta al azar.
+
+No se puede atacar en el primer turno.

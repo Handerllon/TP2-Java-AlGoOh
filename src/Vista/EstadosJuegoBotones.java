@@ -1,6 +1,8 @@
 package Vista;
 
-import Controlador.excepciones.SeTerminaronLasFasesError;
+import Controlador.excepciones.SeTerminaronLasFases;
+import Modelo.Jugador;
+import Modelo.carta.excepciones.ManoLlena;
 import javafx.scene.control.Button;
 
 public class EstadosJuegoBotones extends Button
@@ -55,26 +57,28 @@ public class EstadosJuegoBotones extends Button
     // --------------------------------------------------------------------
     // Implementación acción botones.
     // --------------------------------------------------------------------
-    private void terminarTurnoBtn_click()
-    {
-
-        this.vista.getControlador().terminarTurno();
-        this.vista.mostrarJugadorActual();
-        this.vista.mostrarFaseActual();
-    }
-
     private void avanzarProximaFaseBtn_click()
     {
-        // TODO: Implementar las acciones en caso que larguen excepciones. Ojo que son varias -> implementar
-        // múltiples catch.
         try
         {
             this.vista.getControlador().avanzarFase();
-        } catch (SeTerminaronLasFasesError seTerminaronLasFasesError)
+        } catch (SeTerminaronLasFases seTerminaronLasFases)
         {
-            this.vista.getControlador().terminarTurno();
-            this.vista.mostrarJugadorActual();
+            terminarTurnoBtn_click();
         }
-        this.vista.mostrarFaseActual();
+    }
+
+    private void terminarTurnoBtn_click()
+    {
+        this.vista.getControlador().terminarTurno();
+        this.vista.mostrarJugadorActual();
+        Jugador jugadorActual = this.vista.getControlador().getJugadorActual();
+        try
+        {
+            this.vista.getControlador().tomarCarta(jugadorActual);
+        } catch (ManoLlena manoLlena)
+        {
+            this.vista.avisoManoLlena(manoLlena);
+        }
     }
 }

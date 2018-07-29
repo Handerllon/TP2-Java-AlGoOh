@@ -60,7 +60,6 @@ public class ManoBoton extends Button
                 .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 
         // Se decide qué tipo de botón crear.
-        
         if (carta.esMonstruo())
         {
             this.crearBotonMonstruo();
@@ -69,12 +68,14 @@ public class ManoBoton extends Button
             this.crearBotonCartaMagica();
         } else if (carta.esTrampa())
         {
-        	this.crearBotonCartaTrampa();
+            this.crearBotonCartaTrampa();
         } else if (carta.esCampo())
         {
             this.crearBotonCartaCampo();
         }
-        
+
+        popup.getContent().addAll(vbox);
+        boton.setOnAction(e -> accionBtn_Click(popup, boton));
     }
 
     private void accionBtn_Click(Popup popup, Button boton)
@@ -107,9 +108,6 @@ public class ManoBoton extends Button
         b3.setOnAction(e -> popup.hide());
 
         vbox.getChildren().addAll(b1, b2, b3);
-        popup.getContent().addAll(vbox);
-        boton.setOnAction(e -> accionBtn_Click(popup, boton));
-
     }
 
     // -------------------------------
@@ -119,22 +117,24 @@ public class ManoBoton extends Button
     {
         try
         {
-            this.vista.getControlador().summonCartaMonstruo(this.carta, this.jugadorAsociado);
+            this.vista.getControlador().summonCartaMonstruo(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeEnviarCartaMonstruoARegionError error)
         {
             this.vista.mostrarError(error);
         }
+        popup.hide();
     }
 
     private void setCartaMonstruoBtn_Click()
     {
         try
         {
-            this.vista.getControlador().setCartaMonstruo(this.carta, this.jugadorAsociado);
+            this.vista.getControlador().setCartaMonstruo(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeEnviarCartaMonstruoARegionError error)
         {
             this.vista.mostrarError(error);
         }
+        popup.hide();
     }
 
     // --------------------------------------------------------------------
@@ -153,8 +153,6 @@ public class ManoBoton extends Button
         b3.setOnAction(e -> popup.hide());
 
         vbox.getChildren().addAll(b1, b2, b3);
-        popup.getContent().addAll(vbox);
-        boton.setOnAction(e -> accionBtn_Click(popup, boton));
     }
 
     // -------------------------------
@@ -164,11 +162,12 @@ public class ManoBoton extends Button
     {
         try
         {
-            this.vista.getControlador().setCartaMagica(this.carta, this.jugadorAsociado);
+            this.vista.getControlador().setCartaMagica(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeEnviarMyTARegionError error)
         {
             this.vista.mostrarError(error);
         }
+        popup.hide();
     }
 
     private void activarCartaMagicaBtn_Click()
@@ -176,11 +175,12 @@ public class ManoBoton extends Button
         try
         {
             // TODO: hay que implementar que se pueda activar directamente desde la mano.
-            this.vista.getControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
+            this.vista.getControlador().activarCartaMagica(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeUsarMyTError error)
         {
             this.vista.mostrarError(error);
         }
+        popup.hide();
     }
 
     // --------------------------------------------------------------------
@@ -196,9 +196,6 @@ public class ManoBoton extends Button
         b2.setOnAction(e -> popup.hide());
 
         vbox.getChildren().addAll(b1, b2);
-        popup.getContent().addAll(vbox);
-        boton.setOnAction(e -> accionBtn_Click(popup, boton));
-
     }
 
     // -------------------------------
@@ -208,11 +205,12 @@ public class ManoBoton extends Button
     {
         try
         {
-            this.vista.getControlador().setCartaTrampa(this.carta, this.jugadorAsociado);
+            this.vista.getControlador().setCartaTrampa(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeEnviarMyTARegionError error)
         {
             this.vista.mostrarError(error);
         }
+        popup.hide();
     }
 
     // --------------------------------------------------------------------
@@ -229,9 +227,6 @@ public class ManoBoton extends Button
         b2.setOnAction(e -> popup.hide());
 
         vbox.getChildren().addAll(b1, b2);
-        popup.getContent().addAll(vbox);
-        boton.setOnAction(e -> accionBtn_Click(popup, boton));
-
     }
 
     // -------------------------------
@@ -241,10 +236,11 @@ public class ManoBoton extends Button
     {
         try
         {
-            this.vista.getControlador().activarCartaCampo(this.carta, this.jugadorAsociado);
+            this.vista.getControlador().activarCartaCampo(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeEnviarARegionCampoError error)
         {
             this.vista.mostrarError(error);
         }
+        popup.hide();
     }
 }

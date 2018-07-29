@@ -24,12 +24,17 @@ public class RegionesMonstruoBoton extends Button
     // Se uso como base una resolucion de 1920x1080 para los tamanos
     private static double anchoInicialCarta = 95.4;
     private static double altoInicialCarta = 139;
+    private Tooltip tooltipBoton;
     private CartaMonstruo carta;
     private Button botonCarta;
     private Jugador jugadorAsociado;
     private Vista vista;
     private double anchoDeCarta;
     private double altoDeCarta;
+    private Image imagenBoton;
+    private Button botonEnRegion;
+    private Popup popup;
+    private VBox vbox;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -45,6 +50,12 @@ public class RegionesMonstruoBoton extends Button
         this.altoDeCarta = (this.vista.getResolucionVertical() * altoInicialCarta) / 1080;
         this.botonCarta.setPrefSize(anchoDeCarta, altoDeCarta);
         this.botonCarta.setStyle(estiloRegion);
+
+        this.botonEnRegion = new Button();
+        this.tooltipBoton = new Tooltip();
+
+        this.popup = new Popup();
+        this.vbox = new VBox();
     }
 
     public Button getBoton()
@@ -68,12 +79,10 @@ public class RegionesMonstruoBoton extends Button
 
     private Button crearBotonCarta()
     {
-        Button botonEnRegion = new Button();
-
         // -------------------------------
         // Imagen del botón.
         // -------------------------------
-        Image imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
+        this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
         botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
         botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
                 .getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
@@ -82,7 +91,6 @@ public class RegionesMonstruoBoton extends Button
         // -------------------------------
         // Tooltip del botón.
         // -------------------------------
-        Tooltip tooltipBoton = new Tooltip();
         tooltipBoton.setGraphic(new ImageView(imagenBoton));
         botonEnRegion.setTooltip(tooltipBoton);
         // -------------------------------
@@ -90,20 +98,6 @@ public class RegionesMonstruoBoton extends Button
         // -------------------------------
         // Opciones del botón.
         // -------------------------------
-        Popup popup = new Popup();
-        VBox vbox = new VBox();
-
-        vbox = this.crearVBoxCartaMonstruo(vbox, popup);
-        popup.getContent().addAll(vbox);
-
-        botonEnRegion.setOnAction(e -> monstruoEnRegionBtn_Click(popup, botonEnRegion));
-        // -------------------------------
-
-        return botonEnRegion;
-    }
-
-    private VBox crearVBoxCartaMonstruo(VBox vbox, Popup popup)
-    {
         Button b1 = new Button("Atacar");
         b1.setOnAction(e -> cartaMonstruoAtacarBtn_Click());
 
@@ -118,8 +112,12 @@ public class RegionesMonstruoBoton extends Button
         b4.setOnAction(e -> popup.hide());
 
         vbox.getChildren().addAll(b1, b2, b3, b4);
+        popup.getContent().addAll(vbox);
 
-        return vbox;
+        botonEnRegion.setOnAction(e -> monstruoEnRegionBtn_Click(popup, botonEnRegion));
+        // -------------------------------
+
+        return botonEnRegion;
     }
 
     // --------------------------------------------------------------------
@@ -137,32 +135,35 @@ public class RegionesMonstruoBoton extends Button
     {
         try
         {
-            this.vista.getControlador().atacar(this.carta, this.jugadorAsociado);
+            this.vista.getControlador().atacar(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeAtacarError error)
         {
             this.vista.mostrarError(error);
         }
+        popup.hide();
     }
 
     private void cambiarModoCartaMonstruoBtn_Click()
     {
         try
         {
-            this.vista.getControlador().cambiarModoCartaMonstruo(this.carta, this.jugadorAsociado);
+            this.vista.getControlador().cambiarModoCartaMonstruo(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeCambiarOrientacionError error)
         {
             this.vista.mostrarError(error);
         }
+        popup.hide();
     }
 
     private void flipCartaMonstruoBtn_Click()
     {
         try
         {
-            this.vista.getControlador().flipCarta(this.carta, this.jugadorAsociado);
+            this.vista.getControlador().flipCarta(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeCambiarOrientacionError error)
         {
             this.vista.mostrarError(error);
         }
+        popup.hide();
     }
 }

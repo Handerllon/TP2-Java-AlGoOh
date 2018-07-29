@@ -2,7 +2,7 @@ package Modelo.carta.mano;
 
 import Modelo.Jugador;
 import Modelo.carta.Carta;
-import Modelo.carta.excepciones.ManoLlenaError;
+import Modelo.carta.excepciones.ManoLlena;
 import Modelo.finDeJuego.CausaCincoPartesExodiaReunidas;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.FinDeJuegoObservable;
@@ -10,10 +10,11 @@ import Modelo.observadores.ObservadorDeFinJuego;
 import Modelo.observadores.ObservadorDeMano;
 
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Mano implements FinDeJuegoObservable, ManoObservable
 {
-    private static int CANTIDAD_MAXIMA = 7;
+    private static int CANTIDAD_MAXIMA = 6;
     private static int contadorPartesExodia;
     private ArrayList<Carta> cartas;
     private Jugador jugadorAsociado;
@@ -27,20 +28,21 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
         this.jugadorAsociado = jugador;
     }
 
-    public void agregarCarta(Carta carta) throws ManoLlenaError
+    public void agregarCarta(Carta carta) throws ManoLlena
     {
         if (!this.manoLlena())
         {
             this.cartas.add(carta);
-            this.notificarEvento();
             this.verificarAgregacionParteExodia(carta);
             this.verificarExodiaCompleto(carta);
+            this.notificarEvento();
         } else
         {
-            // TODO: Recordar que si la mano está llena, la vista debe pedirle al usuario que descarte 1 de ellas.
-            // También podría hacerse que se descarte alguna al azar automáticamente.
-            quitarCarta(getCartas().iterator().next());
-            throw new ManoLlenaError();
+            // Se quita una carta al azar.
+            // nextInt produce un conjunto abierto, asique se le suma 1 para incluir el límite superior.
+            int randomNum = ThreadLocalRandom.current().nextInt(0, cantidadDeCartas() + 1);
+            quitarCarta(getCartas().get(randomNum));
+            throw new ManoLlena(this.jugadorAsociado);
         }
     }
 

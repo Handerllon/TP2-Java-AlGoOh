@@ -1,4 +1,4 @@
-package Controlador.condicionesJuego;
+package Controlador.estadosJuego;
 
 public interface EstadoVerificador
 {

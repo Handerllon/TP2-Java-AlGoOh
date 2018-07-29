@@ -20,11 +20,13 @@ public interface ControladorInterfaz
     // ------------------------------------
     void terminarTurno();
 
-    void avanzarFase() throws SeTerminaronLasFasesError;
+    void avanzarFase() throws SeTerminaronLasFases;
 
     String getNombreJugadorActual();
 
     String getNombreFaseActual();
+
+    Jugador getJugadorActual();
 
     // ------------------------------------
     // Métodos de terminación.
@@ -38,40 +40,40 @@ public interface ControladorInterfaz
     // ------------------------------------
     void tomarCarta(Jugador solicitante) throws NoSePuedeTomarCartaError;
 
-    void setCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeEnviarCartaMonstruoARegionError;
+    void setCartaMonstruo(Jugador solicitante, Carta carta) throws NoSePuedeEnviarCartaMonstruoARegionError;
 
-    void summonCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeEnviarCartaMonstruoARegionError;
+    void summonCartaMonstruo(Jugador solicitante, Carta carta) throws NoSePuedeEnviarCartaMonstruoARegionError;
 
     // Set.
-    void setCartaTrampa(Carta carta, Jugador solicitante) throws NoSePuedeEnviarMyTARegionError;
+    void setCartaTrampa(Jugador solicitante, Carta carta) throws NoSePuedeEnviarMyTARegionError;
 
-    void setCartaMagica(Carta carta, Jugador solicitante) throws NoSePuedeEnviarMyTARegionError;
+    void setCartaMagica(Jugador solicitante, Carta carta) throws NoSePuedeEnviarMyTARegionError;
 
     // Activar.
-    void activarCartaTrampa(Carta carta, Jugador solicitante) throws NoSePuedeUsarMyTError;
+    void activarCartaTrampa(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError;
 
-    void activarCartaMagica(Carta carta, Jugador solicitante) throws NoSePuedeUsarMyTError;
+    void activarCartaMagica(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError;
 
-    void activarCartaCampo(Carta carta, Jugador solicitante) throws NoSePuedeEnviarARegionCampoError;
+    void activarCartaCampo(Jugador solicitante, Carta carta) throws NoSePuedeEnviarARegionCampoError;
 
     // ------------------------------------
     // Métodos de orientación de cartas.
     // ------------------------------------
-    void flipCarta(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
+    void flipCarta(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
 
-    void cambiarModoCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
+    void cambiarModoCartaMonstruo(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
 
     // TODO: me parece que estos no tienen sentido.
-    void flipBocaAbajo(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
+    void flipBocaAbajo(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
 
-    void flipBocaArriba(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
+    void flipBocaArriba(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
 
-    void setModoAtaque(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
+    void setModoAtaque(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
 
-    void setModoDefensa(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
+    void setModoDefensa(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
 
     // ------------------------------------
     // Métodos de ataques.
     // ------------------------------------
-    void atacar(Carta cartaAtacante, Jugador solicitante) throws NoSePuedeAtacarError;
+    void atacar(Jugador solicitante, Carta cartaAtacante) throws NoSePuedeAtacarError;
 }

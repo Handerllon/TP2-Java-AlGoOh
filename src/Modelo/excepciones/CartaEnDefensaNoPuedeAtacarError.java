@@ -1,6 +1,6 @@
 package Modelo.excepciones;
 
-import Controlador.condicionesJuego.EstadoVerificador;
+import Controlador.estadosJuego.EstadoVerificador;
 
 public class CartaEnDefensaNoPuedeAtacarError extends RuntimeException implements EstadoVerificador
 {

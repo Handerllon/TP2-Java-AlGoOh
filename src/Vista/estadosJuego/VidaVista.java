@@ -1,7 +1,7 @@
-package Vista;
+package Vista.estadosJuego;
 
 import Modelo.observadores.ObservadorDeModelo;
-import javafx.geometry.Pos;
+import Vista.Vista;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -31,12 +31,12 @@ public class VidaVista implements ObservadorDeModelo
         this.vidaOponente.setPrefSize((this.vista.getResolucionHorizontal() * 200) / 1920, (this.vista.getResolucionVertical() * 200) / 1080);
 
         // TODO: número mágico. Por qué no se usa algún porcentaje de alguna medida? por ej., de la resolución horiz.?
-        this.vidaJugador.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical()*0.05));
-        this.vidaOponente.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical()*0.05));
+        this.vidaJugador.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical() * 0.05));
+        this.vidaOponente.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical() * 0.05));
 
         this.vidaJugador.setTextFill(Color.web("#910101"));
         this.vidaOponente.setTextFill(Color.web("#910101"));
-        
+
         this.huboCambios();
     }
 
@@ -56,6 +56,6 @@ public class VidaVista implements ObservadorDeModelo
     public void huboCambios()
     {
         this.vidaJugador.setText(this.vista.getModelo().getJugador().getNombre() + "\n" + this.vista.getModelo().getJugador().getPuntosDeVida());
-        this.vidaOponente.setText(this.vista.getModelo().getOponente().getNombre() +"\n" + this.vista.getModelo().getOponente().getPuntosDeVida());
+        this.vidaOponente.setText(this.vista.getModelo().getOponente().getNombre() + "\n" + this.vista.getModelo().getOponente().getPuntosDeVida());
     }
 }

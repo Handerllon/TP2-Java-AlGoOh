@@ -75,7 +75,6 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
     {
         // La vista pasa a la escena con el tablero principal.
         this.vista.mostrar();
-        // TODO: ver si esto funciona bien.
 
         for (int i = 0; i < cantidadCartasTomarInicialmente; i++)
         {
@@ -83,13 +82,7 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
             this.modelo.tomarCarta(this.modelo.getOponente());
         }
 
-        try
-        {
-            tomarCarta(getJugadorActual());
-        } catch (ManoLlena manoLlena)
-        {
-            this.vista.avisoManoLlena(manoLlena);
-        }
+        this.accionarFaseInicialAutomatica();
     }
 
     // --------------------------------------------------------------------
@@ -151,7 +144,14 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
     {
         this.maquinaTurnos.terminarTurno();
         this.cartasTrampaUtilizadas.forEach(cartaTrampa -> cartaTrampa.deshacerEfecto());
-        this.vista.mostrarJugadorActual();
+        this.notificarFinDeTurno();
+
+        this.accionarFaseInicialAutomatica();
+    }
+
+    private void notificarFinDeTurno()
+    {
+        this.vista.huboFinDeTurno();
     }
 
     @Override
@@ -163,6 +163,32 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
         } else
         {
             this.maquinaTurnos.avanzarFase();
+        }
+
+        this.notificarAvanceDeFase();
+    }
+
+    private void notificarAvanceDeFase()
+    {
+        this.vista.huboAvanceDeFase();
+    }
+
+    private void accionarFaseInicialAutomatica()
+    {
+        try
+        {
+            tomarCarta(getJugadorActual());
+        } catch (ManoLlena manoLlena)
+        {
+            this.vista.avisoManoLlena(manoLlena);
+        }
+
+        try
+        {
+            this.avanzarFase();
+        } catch (SeTerminaronLasFases seTerminaronLasFases)
+        {
+            this.vista.getControlador().terminarTurno();
         }
     }
 
@@ -198,8 +224,6 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
         {
             this.modelo.tomarCarta(getJugadorActual());
             this.maquinaTurnos.seTomaCartaEnTurnoActual();
-            avanzarFase();
-            this.vista.mostrarFaseActual();
         }
     }
 
@@ -447,5 +471,4 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
             this.maquinaTurnos.retrocederFase();
         }
     }
-
 }

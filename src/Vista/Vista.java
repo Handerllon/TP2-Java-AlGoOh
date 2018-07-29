@@ -72,6 +72,11 @@ public class Vista implements ObservadorDeModelo
         return this.escena.getGridPaneEscena();
     }
 
+    public ModeloObservable getModelo()
+    {
+        return this.modelo;
+    }
+
     public ControladorInterfaz getControlador()
     {
         return this.controlador;
@@ -87,31 +92,41 @@ public class Vista implements ObservadorDeModelo
         return this.RESOLUCION_VERTICAL;
     }
 
-    public ModeloObservable getModelo()
-    {
-        return this.modelo;
-    }
-
-    public void mostrarJugadorActual()
-    {
-        this.escena.mostrarJugadorActual();
-    }
-
-    public void mostrarFaseActual()
-    {
-    	
-        this.escena.mostrarFaseActual();
-        
-    }
-
-
-	// --------------------------------------------------------------------
+    // --------------------------------------------------------------------
     // Métodos de observador de modelo.
     // --------------------------------------------------------------------
     @Override
     public void huboCambios()
     {
         this.escena.actualizarEstado();
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de observador de controlador.
+    // --------------------------------------------------------------------
+    public void huboAvanceDeFase()
+    {
+        this.escena.mostrarFaseActual();
+    }
+
+    public void huboFinDeTurno()
+    {
+        this.escena.mostrarJugadorActual();
+    }
+
+    // -------------------------------
+    // Solicitudes al usuario.
+    // -------------------------------
+    public Sacrificio pedirSacrificios()
+    {
+        // TODO.
+        return null;
+    }
+
+    public CartaMonstruo solicitarCartaAAtacar()
+    {
+        // TODO.
+        return null;
     }
 
     // --------------------------------------------------------------------
@@ -239,20 +254,5 @@ public class Vista implements ObservadorDeModelo
         alert.setContentText(error.getNombreResponsable() + " :La mano estaba llena y se descartó una carta al azar. ");
 
         alert.showAndWait();
-    }
-
-    // -------------------------------
-    // Solicitudes al usuario.
-    // -------------------------------
-    public Sacrificio pedirSacrificios()
-    {
-        // TODO.
-        return null;
-    }
-
-    public CartaMonstruo solicitarCartaAAtacar()
-    {
-        // TODO.
-        return null;
     }
 }

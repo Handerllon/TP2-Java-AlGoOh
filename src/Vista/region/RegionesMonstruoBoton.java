@@ -84,23 +84,24 @@ public class RegionesMonstruoBoton extends Button
         // -------------------------------
         // Imagen del botón.
         // -------------------------------
-    	botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
-        if (this.carta.enDefensa() && this.carta.estaBocaAbajo()){
-            this.botonEnRegion.getTransforms().add(new Rotate(90, anchoDeCarta/2,altoDeCarta/2));
+        botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
+        if (this.carta.enDefensa() && this.carta.estaBocaAbajo())
+        {
+            this.botonEnRegion.getTransforms().add(new Rotate(90, anchoDeCarta / 2, altoDeCarta / 2));
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
-        			.getClassLoader().getResource(backDeCartaLocacion).toString())), CornerRadii.EMPTY, Insets.EMPTY))); 
-        }
-        else if (this.carta.enDefensa()){
-            this.botonEnRegion.getTransforms().add(new Rotate(90, anchoDeCarta/2,altoDeCarta/2));
+                    .getClassLoader().getResource(backDeCartaLocacion).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        } else if (this.carta.enDefensa())
+        {
+            this.botonEnRegion.getTransforms().add(new Rotate(90, anchoDeCarta / 2, altoDeCarta / 2));
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
-        			.getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY))); 
+                    .getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        } else
+        {
+            botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
+                    .getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+            this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
         }
-        else{
-        	botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
-        			.getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));        	
-        	this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
-        }
-        
+
         // -------------------------------
 
         // -------------------------------

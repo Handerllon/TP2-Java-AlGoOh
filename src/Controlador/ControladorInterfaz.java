@@ -23,7 +23,7 @@ public interface ControladorInterfaz
     void avanzarFase() throws SeTerminaronLasFases;
 
     String getNombreJugadorActual();
-    
+
     String getNombreFaseActual();
 
     Jugador getJugadorActual();
@@ -76,5 +76,4 @@ public interface ControladorInterfaz
     // Métodos de ataques.
     // ------------------------------------
     void atacar(Jugador solicitante, Carta cartaAtacante) throws NoSePuedeAtacarError;
-
 }

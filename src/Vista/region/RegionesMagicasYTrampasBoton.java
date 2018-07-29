@@ -76,16 +76,17 @@ public class RegionesMagicasYTrampasBoton extends Button
         // -------------------------------
         Image imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
         botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
-        if (this.carta.estaBocaAbajo()){
-        	botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-        			.getResource(backDeCartaLocacion).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-        }
-        else{
-        	Tooltip tooltipBoton = new Tooltip();
-        	tooltipBoton.setGraphic(new ImageView(imagenBoton));
-        	botonEnRegion.setTooltip(tooltipBoton);
-        	botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-        			.getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        if (this.carta.estaBocaAbajo())
+        {
+            botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+                    .getResource(backDeCartaLocacion).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        } else
+        {
+            Tooltip tooltipBoton = new Tooltip();
+            tooltipBoton.setGraphic(new ImageView(imagenBoton));
+            botonEnRegion.setTooltip(tooltipBoton);
+            botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+                    .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         }
         // -------------------------------
 

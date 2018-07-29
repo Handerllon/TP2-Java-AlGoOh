@@ -36,18 +36,18 @@ public class RegionesMonstruosGrid extends GridPane
 
         this.botones = new ArrayList<>();
 
-        anchoColumna = (vista.getResolucionHorizontal() / relacionAnchoColumnaPantalla)/1.7;
+        anchoColumna = (vista.getResolucionHorizontal() / relacionAnchoColumnaPantalla) / 1.7;
         ColumnConstraints columna0 = new ColumnConstraints(anchoColumna);
         ColumnConstraints columna1 = new ColumnConstraints(anchoColumna);
         ColumnConstraints columna2 = new ColumnConstraints(anchoColumna);
         ColumnConstraints columna3 = new ColumnConstraints(anchoColumna);
         ColumnConstraints columna4 = new ColumnConstraints(anchoColumna);
 
-        RowConstraints fila1 = new RowConstraints((this.vista.getResolucionHorizontal()*160)/1920);
+        RowConstraints fila1 = new RowConstraints((this.vista.getResolucionHorizontal() * 160) / 1920);
 
         this.grid.getColumnConstraints().addAll(columna0, columna1, columna2, columna3, columna4);
         this.grid.getRowConstraints().addAll(fila1);
-        
+
         this.grid.setAlignment(Pos.CENTER);
 
         RegionesMonstruoBoton boton;

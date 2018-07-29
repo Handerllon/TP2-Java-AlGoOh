@@ -1,29 +1,22 @@
 package Vista.escena;
 
 import Modelo.ModeloObservable;
-import Vista.EstadosJuegoBotones;
-import Vista.FaseActual;
-import Vista.TurnoActual;
-import Vista.VidaVista;
-import Vista.Vista;
+import Vista.*;
 import Vista.carta.MazosVista;
 import Vista.carta.mano.ManosVista;
+import Vista.estadosJuego.EstadosJuegoBotones;
+import Vista.estadosJuego.FaseActualVista;
+import Vista.estadosJuego.TurnoActualVista;
+import Vista.estadosJuego.VidaVista;
 import Vista.region.RegionesCampoVista;
 import Vista.region.RegionesCementerioVista;
 import Vista.region.RegionesMagicasYTrampasVista;
 import Vista.region.RegionesMonstruoVista;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
@@ -35,7 +28,7 @@ public final class EscenaTableroPrincipal implements Escena
 {
     private static EscenaTableroPrincipal instancia = null;
     private static double porcentajeDePantallaVertical = 0.157;
-    private static double porcentajeDePantallaHorizontal = 0.520;
+    private static double porcentajeDePantallaHorizontal = 0.52;
     private GridPane gridPane;
     private String RUTA_TABLERO = "resources/imagenes/fondoTableroGeneral.png";
     private String direccion_sonido_batalla = "src/resources/audio/battle.mp3";
@@ -52,8 +45,8 @@ public final class EscenaTableroPrincipal implements Escena
     private Stage primaryStage;
     private Scene escenaTableroPrincipal;
     private EstadosJuegoBotones estadosJuegoBotones;
-	private TurnoActual turnoActual;
-	private FaseActual faseActual;
+    private TurnoActualVista turnoActualVista;
+    private FaseActualVista faseActualVista;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -70,8 +63,8 @@ public final class EscenaTableroPrincipal implements Escena
         this.regionesMagicasYTrampasVista = new RegionesMagicasYTrampasVista(this.vista);
         this.regionesCampoVista = new RegionesCampoVista(this.vista);
         this.regionesCementerioVista = new RegionesCementerioVista(this.vista);
-        this.turnoActual = new TurnoActual(this.vista);
-        this.faseActual = new FaseActual(this.vista);
+        this.turnoActualVista = new TurnoActualVista(this.vista);
+        this.faseActualVista = new FaseActualVista(this.vista);
 
         this.manosVista = new ManosVista(this.vista);
         this.mazosVista = new MazosVista(this.vista);
@@ -103,7 +96,7 @@ public final class EscenaTableroPrincipal implements Escena
         this.primaryStage.setMaximized(true);
 
         gridPane.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-        		.getResource(RUTA_TABLERO).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+                .getResource(RUTA_TABLERO).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         gridPane.setPrefSize(this.vista.getResolucionHorizontal(), this.vista.getResolucionVertical());
 
         // -------------------------------
@@ -112,20 +105,20 @@ public final class EscenaTableroPrincipal implements Escena
         gridPane.setGridLinesVisible(false);
         gridPane.setPadding(new Insets(5));
         //Se uso una resoulcion de 1080x1920 como base para los tamanos
-        ColumnConstraints column0 = new ColumnConstraints(this.vista.getResolucionHorizontal()*(1-porcentajeDePantallaHorizontal)/2);
-        ColumnConstraints column1 = new ColumnConstraints(this.vista.getResolucionHorizontal()*porcentajeDePantallaHorizontal);
-        ColumnConstraints column2 = new ColumnConstraints(this.vista.getResolucionHorizontal()*(1-porcentajeDePantallaHorizontal)/2);
-        RowConstraints row0 = new RowConstraints(this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
-        RowConstraints row1 = new RowConstraints(this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
-        RowConstraints row2 = new RowConstraints(this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
-        RowConstraints row3 = new RowConstraints(this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
-        RowConstraints row4 = new RowConstraints(this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
-        RowConstraints row5 = new RowConstraints(this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
+        ColumnConstraints column0 = new ColumnConstraints(this.vista.getResolucionHorizontal() * (1 - porcentajeDePantallaHorizontal) / 2);
+        ColumnConstraints column1 = new ColumnConstraints(this.vista.getResolucionHorizontal() * porcentajeDePantallaHorizontal);
+        ColumnConstraints column2 = new ColumnConstraints(this.vista.getResolucionHorizontal() * (1 - porcentajeDePantallaHorizontal) / 2);
+        RowConstraints row0 = new RowConstraints(this.vista.getResolucionVertical() * porcentajeDePantallaVertical);
+        RowConstraints row1 = new RowConstraints(this.vista.getResolucionVertical() * porcentajeDePantallaVertical);
+        RowConstraints row2 = new RowConstraints(this.vista.getResolucionVertical() * porcentajeDePantallaVertical);
+        RowConstraints row3 = new RowConstraints(this.vista.getResolucionVertical() * porcentajeDePantallaVertical);
+        RowConstraints row4 = new RowConstraints(this.vista.getResolucionVertical() * porcentajeDePantallaVertical);
+        RowConstraints row5 = new RowConstraints(this.vista.getResolucionVertical() * porcentajeDePantallaVertical);
         gridPane.getColumnConstraints().addAll(column0, column1, column2);
         gridPane.getRowConstraints().addAll(row0, row1, row2, row3, row4, row5);
 
         gridPane.setGridLinesVisible(true);
-        
+
         // Se configura la grid pane.
         setGridPaneVista();
 
@@ -194,11 +187,14 @@ public final class EscenaTableroPrincipal implements Escena
         gridPane.setHalignment(estadosJuegoBotones.getBotonFinDeFase(), HPos.LEFT);
         gridPane.add(estadosJuegoBotones.getBotonFinDeTurno(), 2, 3);
         gridPane.setHalignment(estadosJuegoBotones.getBotonFinDeTurno(), HPos.LEFT);
-        
-        gridPane.add(turnoActual.getDisplayTurnoActual(), 0, 1);
-        //gridPane.setHalignment(turnoActual.getDisplayTurnoActual(), HPos.RIGHT);
-        gridPane.add(faseActual.getDisplayFaseActual(), 0, 2);
-        //gridPane.setHalignment(faseActual.getDisplayFaseActual(), HPos.RIGHT);
+
+        // -------------------------------
+        // Estados de juego.
+        // -------------------------------
+        gridPane.add(turnoActualVista.getDisplayTurnoActual(), 0, 1);
+        //gridPane.setHalignment(turnoActualVista.getDisplayTurnoActual(), HPos.RIGHT);
+        gridPane.add(faseActualVista.getLabelFaseActual(), 0, 2);
+        //gridPane.setHalignment(faseActualVista.getLabelFaseActual(), HPos.RIGHT);
     }
 
     // --------------------------------------------------------------------
@@ -276,20 +272,19 @@ public final class EscenaTableroPrincipal implements Escena
         return this.gridPane;
     }
 
-	@Override
-	public void mostrarJugadorActual() {
-		
-		gridPane.getChildren().remove(turnoActual.getDisplayTurnoActual());
-		this.turnoActual.actualizar();
-		gridPane.add(turnoActual.getDisplayTurnoActual(), 0, 1);
-		
-	}
+    @Override
+    public void mostrarJugadorActual()
+    {
+        gridPane.getChildren().remove(turnoActualVista.getDisplayTurnoActual());
+        this.turnoActualVista.actualizar();
+        gridPane.add(turnoActualVista.getDisplayTurnoActual(), 0, 1);
+    }
 
-	@Override
-	public void mostrarFaseActual() {
-		
-		gridPane.getChildren().remove(faseActual.getDisplayFaseActual());
-		this.faseActual.actualizar();
-        gridPane.add(faseActual.getDisplayFaseActual(), 0, 2);
-	}
+    @Override
+    public void mostrarFaseActual()
+    {
+        gridPane.getChildren().remove(faseActualVista.getLabelFaseActual());
+        this.faseActualVista.actualizar();
+        gridPane.add(faseActualVista.getLabelFaseActual(), 0, 2);
+    }
 }

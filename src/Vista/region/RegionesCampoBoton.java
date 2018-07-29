@@ -15,7 +15,7 @@ import javafx.scene.paint.ImagePattern;
 
 public class RegionesCampoBoton extends Button
 {
-	private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
+    private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
     // Se uso como base una resolucion de 1920x1080 para los tamanos
     private static double anchoInicialCarta = 95.4;
     private static double altoInicialCarta = 139;

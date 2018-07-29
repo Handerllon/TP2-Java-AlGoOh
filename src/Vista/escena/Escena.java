@@ -19,9 +19,9 @@ public interface Escena
     void stopMedia();
 
     void cerrar();
-    
+
     void mostrarJugadorActual();
-    
+
     void mostrarFaseActual();
 
     GridPane getGridPaneEscena();

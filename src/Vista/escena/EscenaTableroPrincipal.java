@@ -94,7 +94,7 @@ public final class EscenaTableroPrincipal implements Escena
         // -------------------------------
         // Estructura de la vista.
         // -------------------------------
-        grid.setGridLinesVisible(true);
+        grid.setGridLinesVisible(false);
         grid.setPadding(new Insets(5));
         //Se uso una resoulcion de 1080x1920 como base para los tamanos
         ColumnConstraints column0 = new ColumnConstraints((this.vista.getResolucionHorizontal() * 300) / 1920);
@@ -207,9 +207,70 @@ public final class EscenaTableroPrincipal implements Escena
         this.regionesCementerio.huboCambios();
         this.manos.huboCambios();
         this.mazos.huboCambios();
+        this.actualizarDibujo();
     }
 
-    @Override
+    private void actualizarDibujo() {
+    	
+    	grid.getChildren().clear();
+    	
+    	// -------------------------------
+        // Regiones.
+        // -------------------------------
+        grid.add(regionesMonstruo.getGridJugador(), 1, 3);
+        grid.setHalignment(regionesMonstruo.getGridJugador(), HPos.CENTER);
+        grid.add(regionesMonstruo.getGridOponente(), 1, 2);
+        grid.setHalignment(regionesMonstruo.getGridOponente(), HPos.CENTER);
+
+        grid.add(regionesMagicasYTrampas.getGridJugador(), 1, 4);
+        grid.setHalignment(regionesMagicasYTrampas.getGridJugador(), HPos.CENTER);
+        grid.add(regionesMagicasYTrampas.getGridOponente(), 1, 1);
+        grid.setHalignment(regionesMagicasYTrampas.getGridOponente(), HPos.CENTER);
+
+        grid.add(regionesCampo.getRegionCampoJugador(), 0, 4);
+        grid.setHalignment(regionesCampo.getRegionCampoJugador(), HPos.CENTER);
+        grid.add(regionesCampo.getRegionCampoOponente(), 2, 1);
+        grid.setHalignment(regionesCampo.getRegionCampoOponente(), HPos.CENTER);
+
+        grid.add(regionesCementerio.getCementerioJugador(), 0, 3);
+        grid.setHalignment(regionesCementerio.getCementerioJugador(), HPos.CENTER);
+        grid.add(regionesCementerio.getCementerioOponente(), 2, 2);
+        grid.setHalignment(regionesCementerio.getCementerioOponente(), HPos.CENTER);
+
+        // -------------------------------
+        // Manos.
+        // -------------------------------
+        grid.add(manos.getManoJugador(), 1, 5);
+        grid.setHalignment(manos.getManoJugador(), HPos.CENTER);
+        grid.add(manos.getManoOponente(), 1, 0);
+        grid.setHalignment(manos.getManoOponente(), HPos.CENTER);
+
+        // -------------------------------
+        // Mazos.
+        // -------------------------------
+        grid.add(mazos.getMazoJugador(), 2, 5);
+        grid.setHalignment(mazos.getMazoJugador(), HPos.CENTER);
+        grid.add(mazos.getMazoOponente(), 0, 0);
+        grid.setHalignment(mazos.getMazoOponente(), HPos.CENTER);
+
+        // -------------------------------
+        // Vida.
+        // -------------------------------
+        grid.add(vidas.getVidaJugador(), 0, 5);
+        grid.setHalignment(vidas.getVidaJugador(), HPos.CENTER);
+        grid.add(vidas.getVidaOponente(), 2, 0);
+        grid.setHalignment(vidas.getVidaOponente(), HPos.CENTER);
+
+        // -------------------------------
+        // Botones de estado de juego.
+        // -------------------------------
+        grid.add(estadosJuegoBotones.getBotonFinDeFase(), 2, 4);
+        grid.setHalignment(estadosJuegoBotones.getBotonFinDeFase(), HPos.CENTER);
+        grid.add(estadosJuegoBotones.getBotonFinDeTurno(), 2, 3);
+        grid.setHalignment(estadosJuegoBotones.getBotonFinDeTurno(), HPos.CENTER);
+	}
+
+	@Override
     public void finDeJuego()
     {
         this.stopMedia();

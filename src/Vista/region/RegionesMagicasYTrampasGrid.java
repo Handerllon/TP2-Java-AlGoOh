@@ -64,7 +64,17 @@ public class RegionesMagicasYTrampasGrid extends GridPane
 
     public void clear()
     {
-        this.botones.forEach(boton -> boton.clear());
+    	// TODO: Ver como hacer mas lindo esto
+        this.botones = new ArrayList<>();
+        RegionesMagicasYTrampasBoton boton;
+        for (int i = 0; i < cantidadBotonesGrid; i++)
+        {
+            boton = new RegionesMagicasYTrampasBoton(this.vista, this.jugadorAsociado);
+            this.botones.add(boton);
+            // Se posicionan los botones en la grilla de la región monstruo.
+            this.grid.add(boton.getBoton(), i, 0);
+            this.grid.setHalignment(boton.getBoton(), HPos.CENTER);
+        }
     }
 
     public void actualizarRegion(ArrayList<Carta> cartasEnRegionMagicasYTrampas)
@@ -73,6 +83,12 @@ public class RegionesMagicasYTrampasGrid extends GridPane
         for (int i = 0; i < cartasEnRegionMagicasYTrampas.size(); i++)
         {
             botones.get(i).actualizar(cartasEnRegionMagicasYTrampas.get(i));
+        }
+        this.grid.getChildren().clear();
+        for (int i = 0; i < this.botones.size(); i++)
+        {
+            this.grid.add(this.botones.get(i).getBoton(), i, 0);
+            this.grid.setHalignment(this.botones.get(i).getBoton(), HPos.CENTER);
         }
     }
 }

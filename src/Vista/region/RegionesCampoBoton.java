@@ -15,7 +15,7 @@ import javafx.scene.paint.ImagePattern;
 
 public class RegionesCampoBoton extends Button
 {
-    private static String estiloRegion = "-fx-background-color: Transparent";
+	private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
     // Se uso como base una resolucion de 1920x1080 para los tamanos
     private static double anchoInicialCarta = 95.4;
     private static double altoInicialCarta = 139;
@@ -64,6 +64,7 @@ public class RegionesCampoBoton extends Button
 
         //TODO: Hacer opciones que tiene una cartaCampo una vez que fue jugada
         this.boton.setPrefSize(anchoDeCarta, altoDeCarta);
+        this.boton.setStyle(null);
         this.boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 

@@ -16,11 +16,13 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Popup;
 
 public class RegionesMonstruoBoton extends Button
 {
     private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
+    private static String backDeCartaLocacion = "resources/imagenes/cartaReverso.jpg";
     // Se uso como base una resolucion de 1920x1080 para los tamanos
     private static double anchoInicialCarta = 95.4;
     private static double altoInicialCarta = 139;
@@ -82,10 +84,23 @@ public class RegionesMonstruoBoton extends Button
         // -------------------------------
         // Imagen del botón.
         // -------------------------------
-        this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
-        botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
-        botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
-                .getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+    	botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
+        if (this.carta.enDefensa() && this.carta.estaBocaAbajo()){
+            this.botonEnRegion.getTransforms().add(new Rotate(90, anchoDeCarta/2,altoDeCarta/2));
+            botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
+        			.getClassLoader().getResource(backDeCartaLocacion).toString())), CornerRadii.EMPTY, Insets.EMPTY))); 
+        }
+        else if (this.carta.enDefensa()){
+            this.botonEnRegion.getTransforms().add(new Rotate(90, anchoDeCarta/2,altoDeCarta/2));
+            botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
+        			.getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY))); 
+        }
+        else{
+        	botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
+        			.getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));        	
+        	this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
+        }
+        
         // -------------------------------
 
         // -------------------------------

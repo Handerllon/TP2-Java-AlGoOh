@@ -21,6 +21,7 @@ public class RegionesMagicasYTrampasBoton extends Button
 {
     private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
     // Se uso como base una resolucion de 1920x1080 para los tamanos
+    private static String backDeCartaLocacion = "resources/imagenes/cartaReverso.jpg";
     private static double anchoInicialCarta = 95.4;
     private static double altoInicialCarta = 139;
     private Carta carta;
@@ -75,16 +76,22 @@ public class RegionesMagicasYTrampasBoton extends Button
         // -------------------------------
         Image imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
         botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
-        botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        if (this.carta.estaBocaAbajo()){
+        	botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+        			.getResource(backDeCartaLocacion).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        }
+        else{
+        	Tooltip tooltipBoton = new Tooltip();
+        	tooltipBoton.setGraphic(new ImageView(imagenBoton));
+        	botonEnRegion.setTooltip(tooltipBoton);
+        	botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+        			.getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        }
         // -------------------------------
 
         // -------------------------------
         // Tooltip del botón.
         // -------------------------------
-        Tooltip tooltipBoton = new Tooltip();
-        tooltipBoton.setGraphic(new ImageView(imagenBoton));
-        botonEnRegion.setTooltip(tooltipBoton);
         // -------------------------------
 
         // Se crea el botón.

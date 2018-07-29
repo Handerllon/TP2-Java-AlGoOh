@@ -3,7 +3,7 @@ package Vista;
 import Controlador.excepciones.SeTerminaronLasFasesError;
 import javafx.scene.control.Button;
 
-public class EstadosJuegoBoton extends Button
+public class EstadosJuegoBotones extends Button
 {
     private Button botonFinDeTurno;
     private Button botonFinDeFase;
@@ -12,7 +12,7 @@ public class EstadosJuegoBoton extends Button
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    public EstadosJuegoBoton(Vista vista)
+    public EstadosJuegoBotones(Vista vista)
     {
         this.vista = vista;
         this.botonFinDeFase = this.crearBotonAvanzarProximaFase();

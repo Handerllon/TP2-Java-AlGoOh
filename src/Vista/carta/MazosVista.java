@@ -5,7 +5,6 @@ import Modelo.Jugador;
 import Modelo.observadores.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -14,13 +13,14 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.ImagePattern;
 
-public class MazoVista implements ObservadorDeModelo
+public class MazosVista implements ObservadorDeModelo
 {
     private static double anchoDeCarta;
     private static double altoDeCarta;
     // TODO: número mágico.
     private static double relacionAnchoAlto = 1.457;
     private static double relacionAnchoCartaPantalla = 19.92;
+    private static String rutaImagenReversoCarta = "resources/imagenes/cartaReverso.jpg";
     private Vista vista;
     private Button mazoJugador;
     private Tooltip toolTipJugador;
@@ -30,7 +30,7 @@ public class MazoVista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    public MazoVista(Vista vista)
+    public MazosVista(Vista vista)
     {
         this.vista = vista;
 
@@ -40,30 +40,28 @@ public class MazoVista implements ObservadorDeModelo
         this.toolTipJugador = new Tooltip();
         this.toolTipOponente = new Tooltip();
 
-        this.mazoJugador = inicializar(this.vista.getModelo().getJugador());
+        this.mazoJugador = crearBotonMazo(this.vista.getModelo().getJugador());
+        this.mazoOponente = crearBotonMazo(this.vista.getModelo().getOponente());
+
         this.mazoJugador.setTooltip(toolTipJugador);
-        this.mazoOponente = inicializar(this.vista.getModelo().getOponente());
         this.mazoOponente.setTooltip(toolTipOponente);
 
         this.huboCambios();
     }
 
-    public Button inicializar(Jugador jugadorAsociado)
+    public Button crearBotonMazo(Jugador jugadorAsociado)
     {
 
         Button boton = new Button();
 
         boton.setPrefSize(anchoDeCarta, altoDeCarta);
         boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource("resources/imagenes/tablero/Back.jpg").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+                .getResource(rutaImagenReversoCarta).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         boton.setOnAction(e -> tomarCartaBtn_Click(jugadorAsociado));
 
         return boton;
     }
 
-    // --------------------------------------------------------------------
-    // Métodos de escena.
-    // --------------------------------------------------------------------
     public Button getMazoJugador()
     {
 
@@ -76,6 +74,23 @@ public class MazoVista implements ObservadorDeModelo
         return mazoOponente;
     }
 
+    // --------------------------------------------------------------------
+    // Implementación acción botones.
+    // --------------------------------------------------------------------
+    private void tomarCartaBtn_Click(Jugador jugador)
+    {
+        try
+        {
+            this.vista.getControlador().tomarCarta(jugador);
+        } catch (NoSePuedeTomarCartaError error)
+        {
+            this.vista.mostrarError(error);
+        }
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de observador de modelo.
+    // --------------------------------------------------------------------
     @Override
     public void huboCambios()
     {
@@ -91,31 +106,5 @@ public class MazoVista implements ObservadorDeModelo
     private void actualizarMazoOponente(int numeroDeCartas)
     {
         this.toolTipOponente.setText(Integer.toString(numeroDeCartas));
-    }
-
-    // --------------------------------------------------------------------
-    // Implementación acción botones.
-    // --------------------------------------------------------------------
-    private void tomarCartaBtn_Click(Jugador jugador)
-    {
-        // TODO: Recordar que si la mano está llena, la vista debe pedirle al usuario que descarte 1 de ellas.
-        // También podría hacerse que se descarte alguna al azar automáticamente.
-        try
-        {
-            this.vista.getControlador().tomarCarta(jugador);
-        } catch (NoSePuedeTomarCartaError error)
-        {
-            mostrarError(error);
-        }
-    }
-
-    private void mostrarError(NoSePuedeTomarCartaError error)
-    {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(error.getEstadoVerificador().getNombre());
-
-        alert.showAndWait();
     }
 }

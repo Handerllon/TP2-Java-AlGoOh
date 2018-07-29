@@ -7,18 +7,21 @@ import javafx.scene.control.Button;
 
 import java.util.ArrayList;
 
-public class RegionCampoVista implements ObservadorDeModelo
+public class RegionesCampoVista implements ObservadorDeModelo
 {
     private Vista vista;
-    private RegionCampoBoton botonCampoJugador;
-    private RegionCampoBoton botonCampoOponente;
+    private RegionesCampoBoton botonCampoJugador;
+    private RegionesCampoBoton botonCampoOponente;
 
-    public RegionCampoVista(Vista vista)
+    // --------------------------------------------------------------------
+    // Métodos de construcción e inicialización.
+    // --------------------------------------------------------------------
+    public RegionesCampoVista(Vista vista)
     {
         this.vista = vista;
 
-        this.botonCampoJugador = new RegionCampoBoton(this.vista, this.vista.getModelo().getJugador());
-        this.botonCampoOponente = new RegionCampoBoton(this.vista, this.vista.getModelo().getOponente());
+        this.botonCampoJugador = new RegionesCampoBoton(this.vista, this.vista.getModelo().getJugador());
+        this.botonCampoOponente = new RegionesCampoBoton(this.vista, this.vista.getModelo().getOponente());
     }
 
     public Button getRegionCampoJugador()
@@ -33,6 +36,9 @@ public class RegionCampoVista implements ObservadorDeModelo
         return botonCampoOponente.getBoton();
     }
 
+    // --------------------------------------------------------------------
+    // Métodos de observador de modelo.
+    // --------------------------------------------------------------------
     @Override
     public void huboCambios()
     {

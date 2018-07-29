@@ -1,13 +1,14 @@
 package Vista.carta.mano;
 
-import Controlador.excepciones.NoSePuedeCambiarOrientacionError;
-import Controlador.excepciones.NoSePuedeEnviarARegionMyT;
+import Controlador.excepciones.NoSePuedeEnviarARegionCampoError;
+import Controlador.excepciones.NoSePuedeEnviarCartaMonstruoARegionError;
+import Controlador.excepciones.NoSePuedeEnviarMyTARegionError;
+import Controlador.excepciones.NoSePuedeUsarMyTError;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Vista.Vista;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -23,13 +24,19 @@ import javafx.stage.Stage;
 public class ManoBoton extends Button
 {
     // TODO: número mágico.
-    private static double anchoDeCarta = 95.4;
-    private static double altoDeCarta = 139;
-    Stage primaryStage;
+    private static double anchoCarta = 95.4;
+    private static double altoCarta = 139;
+    private static String rutaImagenReversoCarta = "resources/imagenes/cartaReverso.jpg";
+    private Stage primaryStage;
     private Carta carta;
-    private Button botonDeLaCarta;
+    private Button botonCarta;
+    private Button boton;
     private Vista vista;
     private Jugador jugadorAsociado;
+    private Tooltip toolTip;
+    private Popup popup;
+    private VBox vbox;
+    private Image imagenCarta;
 
     public ManoBoton(Vista vista, Carta carta, Jugador jugador)
     {
@@ -38,247 +45,129 @@ public class ManoBoton extends Button
         this.vista = vista;
         this.primaryStage = vista.getPrimaryStage();
 
+        this.imagenCarta = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
+        this.boton = new Button();
+        this.toolTip = new Tooltip();
+        this.popup = new Popup();
+        this.vbox = new VBox();
+
+        toolTip.setGraphic(new ImageView(imagenCarta));
+        boton.setTooltip(toolTip);
+        boton.setPrefSize(anchoCarta, altoCarta);
+
+        boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+                .getResource(rutaImagenReversoCarta).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+
+        // Se decide qué tipo de botón crear.
         if (carta.esMonstruo())
         {
-            this.botonDeLaCarta = this.crearBotonMonstruoEnMano();
+            this.botonCarta = this.crearBotonMonstruo();
         } else if (carta.esMagica())
         {
-            this.botonDeLaCarta = this.crearBotonCartaMagicaEnMano();
-        } else
-            this.botonDeLaCarta = this.crearBotonCartaTrampaEnMano();
-    }
-
-    public Button getBoton()
-    {
-
-        return this.botonDeLaCarta;
-    }
-
-    private Button crearBotonCartaTrampaEnMano()
-    {
-
-        Button boton = new Button();
-
-        Image image = new Image(getClass().getClassLoader()
-                .getResource(this.carta.getLocacionDeImagen()).toString());
-        Tooltip tp = new Tooltip();
-        tp.setGraphic(new ImageView(image));
-
-        boton.setTooltip(tp);
-
-        boton.setPrefSize(anchoDeCarta, altoDeCarta);
-
-        boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource("resources/imagenes/tablero/Back.jpg").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-
-        Popup popup = new Popup();
-
-        VBox vbox = new VBox();
-
-        vbox = this.crearVBoxCartaTrampaEnMano(vbox, popup);
-
-        popup.getContent().addAll(vbox);
-
-        boton.setOnAction(e -> accionBtn_Click(popup, boton));
-
-        return boton;
-    }
-
-    private VBox crearVBoxCartaTrampaEnMano(VBox vbox, Popup popup)
-    {
-        Button b1 = new Button("Jugar");
-        Button b2 = new Button("Cerrar");
-
-        b1.setOnAction(e -> setCartaTrampaBtn_Click());
-
-        b2.setOnAction(e -> popup.hide());
-
-        vbox.getChildren().addAll(b1, b2);
-
-        return vbox;
-    }
-
-    private Button crearBotonCartaMagicaEnMano()
-    {
-        Button boton = new Button();
-
-        Image image = new Image(getClass().getClassLoader()
-                .getResource(this.carta.getLocacionDeImagen()).toString());
-        Tooltip tp = new Tooltip();
-        tp.setGraphic(new ImageView(image));
-
-        boton.setTooltip(tp);
-
-        boton.setPrefSize(anchoDeCarta, altoDeCarta);
-        boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource("resources/imagenes/tablero/Back.jpg").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-
-        Popup popup = new Popup();
-
-        VBox vbox = new VBox();
-
-        vbox = this.crearVBoxCartaMagicaEnMano(vbox, popup);
-
-        popup.getContent().addAll(vbox);
-
-        boton.setOnAction(e -> accionBtn_Click(popup, boton));
-
-        return boton;
-    }
-
-    private VBox crearVBoxCartaMagicaEnMano(VBox vbox, Popup popup)
-    {
-        Button b1 = new Button("Jugar Boca Arriba");
-        Button b2 = new Button("Jugar Boca Abajo");
-        Button b3 = new Button("Cerrar");
-
-        b1.setOnAction(e -> activarCartaMagicaBtn_Click());
-
-        b2.setOnAction(e -> setCartaMagicaBtn_Click());
-
-        b3.setOnAction(e -> popup.hide());
-
-        vbox.getChildren().addAll(b1, b2, b3);
-
-        return vbox;
-    }
-
-    private Button crearBotonMonstruoEnMano()
-    {
-        Button boton = new Button();
-
-        Image image = new Image(getClass().getClassLoader()
-                .getResource(this.carta.getLocacionDeImagen()).toString());
-        Tooltip tp = new Tooltip();
-        tp.setGraphic(new ImageView(image));
-
-        boton.setTooltip(tp);
-
-        boton.setPrefSize(anchoDeCarta, altoDeCarta);
-
-        Popup popup = new Popup();
-
-        boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource("resources/imagenes/tablero/Back.jpg").toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-
-        VBox vbox = new VBox();
-
-        vbox = this.crearVBoxCartaMonstruoEnMano(vbox, popup, primaryStage);
-
-        popup.getContent().addAll(vbox);
-
-        boton.setOnAction(e -> accionBtn_Click(popup, boton));
-
-        return boton;
+            this.botonCarta = this.crearBotonCartaMagica();
+        } else if (carta.esTrampa())
+        {
+            this.botonCarta = this.crearBotonCartaTrampa();
+        } else if (carta.esCampo())
+        {
+            this.botonCarta = this.crearBotonCartaCampo();
+        }
     }
 
     private void accionBtn_Click(Popup popup, Button boton)
     {
-
         popup.show(primaryStage);
-        javafx.geometry.Point2D point = boton.localToScene(0.0, 0.0);
+        Point2D point = boton.localToScene(0.0, 0.0);
         popup.setX(primaryStage.getX() + point.getX());
         popup.setY(primaryStage.getY() + point.getY());
     }
 
-    private VBox crearVBoxCartaMonstruoEnMano(VBox vbox, Popup popup, Stage primaryStage)
+    public Button getBoton()
     {
-        Button b1 = new Button("Jugar");
-        Button b2 = new Button("Orientar En Defensa");
-        Button b3 = new Button("Orientar En Ataque");
-        Button b4 = new Button("Boca arriba");
-        Button b5 = new Button("Boca abajo");
-        Button b6 = new Button("Cerrar");
-
-        b1.setOnAction(e -> cartaMonstruoJugarBtn_Click());
-
-        b2.setOnAction(e -> setModoDefensaBtn_Click());
-
-        b3.setOnAction(e -> setModoAtaqueBtn_Click());
-
-        b4.setOnAction(e -> setBocaArribaBtn_Click());
-
-        b5.setOnAction(e -> setBocaAbajoBtn_Click());
-
-        b6.setOnAction(e -> popup.hide());
-
-        vbox.getChildren().addAll(b1, b2);
-
-        return vbox;
+        return this.botonCarta;
     }
 
     // --------------------------------------------------------------------
+    // Botón Carta Monstruo.
+    // --------------------------------------------------------------------
+    private Button crearBotonMonstruo()
+    {
+        // Se crea la VBox.
+        Button b1 = new Button("Invocar");
+        b1.setOnAction(e -> summonCartaMonstruoBtn_Click());
+
+        Button b2 = new Button("Posicionar");
+        b2.setOnAction(e -> setCartaMonstruoBtn_Click());
+
+        // TODO: no debería ser un closeRequest?
+        Button b3 = new Button("Cerrar");
+        b3.setOnAction(e -> popup.hide());
+
+        vbox.getChildren().addAll(b1, b2, b3);
+        popup.getContent().addAll(vbox);
+        boton.setOnAction(e -> accionBtn_Click(popup, boton));
+
+        return boton;
+    }
+
+    // -------------------------------
     // Implementación de botones.
+    // -------------------------------
+    private void summonCartaMonstruoBtn_Click()
+    {
+        try
+        {
+            this.vista.getControlador().summonCartaMonstruo(this.carta, this.jugadorAsociado);
+        } catch (NoSePuedeEnviarCartaMonstruoARegionError error)
+        {
+            this.vista.mostrarError(error);
+        }
+    }
+
+    private void setCartaMonstruoBtn_Click()
+    {
+        try
+        {
+            this.vista.getControlador().setCartaMonstruo(this.carta, this.jugadorAsociado);
+        } catch (NoSePuedeEnviarCartaMonstruoARegionError error)
+        {
+            this.vista.mostrarError(error);
+        }
+    }
+
     // --------------------------------------------------------------------
-    private void setBocaAbajoBtn_Click()
+    // Botón Carta Mágica.
+    // --------------------------------------------------------------------
+    private Button crearBotonCartaMagica()
     {
-        try
-        {
-            this.vista.getControlador().flipBocaAbajo(this.carta, this.jugadorAsociado);
-        } catch (NoSePuedeCambiarOrientacionError e)
-        {
-            this.noSePuedeCambiarOrientacionErrorWarning();
-        }
+        // Se crea la VBox.
+        Button b1 = new Button("Activar");
+        b1.setOnAction(e -> activarCartaMagicaBtn_Click());
+        Button b2 = new Button("Posicionar");
+        b2.setOnAction(e -> setCartaMagicaBtn_Click());
+
+        // TODO: no debería ser un closeRequest?
+        Button b3 = new Button("Cerrar");
+        b3.setOnAction(e -> popup.hide());
+
+        vbox.getChildren().addAll(b1, b2, b3);
+        popup.getContent().addAll(vbox);
+        boton.setOnAction(e -> accionBtn_Click(popup, boton));
+
+        return boton;
     }
 
-    private void setBocaArribaBtn_Click()
-    {
-        try
-        {
-            this.vista.getControlador().flipBocaArriba(this.carta, this.jugadorAsociado);
-        } catch (NoSePuedeCambiarOrientacionError e)
-        {
-            this.noSePuedeCambiarOrientacionErrorWarning();
-        }
-    }
-
-    private void setModoAtaqueBtn_Click()
-    {
-        try
-        {
-            this.vista.getControlador().setModoAtaque(this.carta, this.jugadorAsociado);
-        } catch (NoSePuedeCambiarOrientacionError e)
-        {
-            this.noSePuedeCambiarOrientacionErrorWarning();
-        }
-    }
-
-    private void setModoDefensaBtn_Click()
-    {
-        try
-        {
-            this.vista.getControlador().setModoDefensa(this.carta, this.jugadorAsociado);
-        } catch (NoSePuedeCambiarOrientacionError e)
-        {
-            this.noSePuedeCambiarOrientacionErrorWarning();
-        }
-    }
-
-    private Object cartaMonstruoJugarBtn_Click()
-    {
-        // TODO: Implementar.
-        return null;
-    }
-
-    private void setCartaTrampaBtn_Click()
-    {
-        try
-        {
-            this.vista.getControlador().setCartaTrampa(this.carta, this.jugadorAsociado);
-        } catch (NoSePuedeEnviarARegionMyT e)
-        {
-            this.noSePuedeEnviarARegionMyTErrorWarning();
-        }
-    }
-
+    // -------------------------------
+    // Implementación de botones.
+    // -------------------------------
     private void setCartaMagicaBtn_Click()
     {
         try
         {
             this.vista.getControlador().setCartaMagica(this.carta, this.jugadorAsociado);
-        } catch (NoSePuedeEnviarARegionMyT e)
+        } catch (NoSePuedeEnviarMyTARegionError error)
         {
-            this.noSePuedeEnviarARegionMyTErrorWarning();
+            this.vista.mostrarError(error);
         }
     }
 
@@ -286,35 +175,78 @@ public class ManoBoton extends Button
     {
         try
         {
+            // TODO: hay que implementar que se pueda activar directamente desde la mano.
             this.vista.getControlador().activarCartaMagica(this.carta, this.jugadorAsociado);
-        } catch (NoSePuedeEnviarARegionMyT e)
+        } catch (NoSePuedeUsarMyTError error)
         {
-            this.noSePuedeEnviarARegionMyTErrorWarning();
+            this.vista.mostrarError(error);
         }
     }
 
-    //---------------------
-    //     WARNINGS
-    //---------------------
-
-    private void noSePuedeEnviarARegionMyTErrorWarning()
+    // --------------------------------------------------------------------
+    // Botón Carta Trampa.
+    // --------------------------------------------------------------------
+    private Button crearBotonCartaTrampa()
     {
-        Alert alert = new Alert(AlertType.INFORMATION);
+        Button b1 = new Button("Posicionar");
+        b1.setOnAction(e -> setCartaTrampaBtn_Click());
 
-        //Podemos ponerle alguna otra cosa que no sea error
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("La carta elegida no puede ser enviada a la region magicas y trampas");
+        // TODO: no debería ser un closeRequest?
+        Button b2 = new Button("Cerrar");
+        b2.setOnAction(e -> popup.hide());
+
+        vbox.getChildren().addAll(b1, b2);
+        popup.getContent().addAll(vbox);
+        boton.setOnAction(e -> accionBtn_Click(popup, boton));
+
+        return boton;
     }
 
-    private void noSePuedeCambiarOrientacionErrorWarning()
+    // -------------------------------
+    // Implementación de botones.
+    // -------------------------------
+    private void setCartaTrampaBtn_Click()
     {
+        try
+        {
+            this.vista.getControlador().setCartaTrampa(this.carta, this.jugadorAsociado);
+        } catch (NoSePuedeEnviarMyTARegionError error)
+        {
+            this.vista.mostrarError(error);
+        }
+    }
 
-        Alert alert = new Alert(AlertType.INFORMATION);
+    // --------------------------------------------------------------------
+    // Botón Carta Campo.
+    // --------------------------------------------------------------------
+    private Button crearBotonCartaCampo()
+    {
+        // Se crea la VBox.
+        Button b1 = new Button("Activar");
+        b1.setOnAction(e -> activarCartaCampoBtn_Click());
 
-        //Podemos ponerle alguna otra cosa que no sea error
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("No se puede cambiar la orientacion de la carta elegida");
+        // TODO: no debería ser un closeRequest?
+        Button b2 = new Button("Cerrar");
+        b2.setOnAction(e -> popup.hide());
+
+        vbox.getChildren().addAll(b1, b2);
+        popup.getContent().addAll(vbox);
+        boton.setOnAction(e -> accionBtn_Click(popup, boton));
+
+        return boton;
+    }
+
+    // -------------------------------
+    // Implementación de botones.
+    // -------------------------------
+    private void activarCartaCampoBtn_Click()
+    {
+        try
+        {
+            this.vista.getControlador().activarCartaCampo(this.carta, this.jugadorAsociado);
+        } catch (NoSePuedeEnviarARegionCampoError error)
+        {
+            this.vista.mostrarError(error);
+        }
     }
 }

@@ -10,6 +10,7 @@ import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
+import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.trampa.CartaTrampa;
@@ -190,57 +191,58 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
     }
 
     @Override
-    public void setCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeMandarCartaARegionError
+    public void setCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeEnviarCartaMonstruoARegionError
     {
-        estadoVerificador = verificadorCondicionesJuego.sePuedeMandarARegionMonstruo(carta, solicitante);
+        estadoVerificador = verificadorCondicionesJuego.sePuedeEnviarARegionMonstruo(carta, solicitante);
         if (estadoVerificador.esFallido())
         {
-            throw new NoSePuedeMandarCartaARegionError(estadoVerificador);
+            throw new NoSePuedeEnviarCartaMonstruoARegionError(estadoVerificador);
         } else
         {
             if (!this.modelo.requiereSacrificios((CartaMonstruo) carta))
             {
 
-                this.modelo.setCartaMonstruo((CartaMonstruo) carta);
+                this.modelo.setCartaMonstruo(solicitante, (CartaMonstruo) carta);
                 this.maquinaTurnos.seColocoCartaEnRegion(carta);
             } else
             {
                 Sacrificio sacrificios = this.vista.pedirSacrificios();
-                this.modelo.setCartaMonstruo((CartaMonstruo) carta, sacrificios);
+                this.modelo.setCartaMonstruo(solicitante, (CartaMonstruo) carta, sacrificios);
                 this.maquinaTurnos.seColocoCartaEnRegion(carta);
             }
         }
     }
 
     @Override
-    public void summonCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeMandarCartaARegionError
+    public void summonCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeEnviarCartaMonstruoARegionError
     {
-        estadoVerificador = verificadorCondicionesJuego.sePuedeMandarARegionMonstruo(carta, solicitante);
+        estadoVerificador = verificadorCondicionesJuego.sePuedeEnviarARegionMonstruo(carta, solicitante);
         if (estadoVerificador.esFallido())
         {
-            throw new NoSePuedeMandarCartaARegionError(estadoVerificador);
+            throw new NoSePuedeEnviarCartaMonstruoARegionError(estadoVerificador);
         } else
         {
             if (!this.modelo.requiereSacrificios((CartaMonstruo) carta))
             {
-                this.modelo.summonCartaMonstruo((CartaMonstruo) carta);
+                this.modelo.summonCartaMonstruo(solicitante, (CartaMonstruo) carta);
                 this.maquinaTurnos.seColocoCartaEnRegion(carta);
             } else
             {
                 Sacrificio sacrificios = this.vista.pedirSacrificios();
-                this.modelo.summonCartaMonstruo((CartaMonstruo) carta, sacrificios);
+                this.modelo.summonCartaMonstruo(solicitante, (CartaMonstruo) carta, sacrificios);
                 this.maquinaTurnos.seColocoCartaEnRegion(carta);
             }
         }
     }
 
+    // Set.
     @Override
-    public void setCartaTrampa(Carta carta, Jugador solicitante) throws NoSePuedeEnviarARegionMyT
+    public void setCartaTrampa(Carta carta, Jugador solicitante) throws NoSePuedeEnviarMyTARegionError
     {
         estadoVerificador = verificadorCondicionesJuego.sePuedeEnviarARegionMyT(carta, solicitante);
         if (estadoVerificador.esFallido())
         {
-            throw new NoSePuedeEnviarARegionMyT(estadoVerificador);
+            throw new NoSePuedeUsarMyTError(estadoVerificador);
         } else
         {
             this.modelo.setCartaTrampa(solicitante, (CartaTrampa) carta);
@@ -248,28 +250,55 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
     }
 
     @Override
-    public void setCartaMagica(Carta carta, Jugador solicitante) throws NoSePuedeEnviarARegionMyT
+    public void setCartaMagica(Carta carta, Jugador solicitante) throws NoSePuedeEnviarMyTARegionError
     {
         estadoVerificador = verificadorCondicionesJuego.sePuedeEnviarARegionMyT(carta, solicitante);
         if (estadoVerificador.esFallido())
         {
-            throw new NoSePuedeEnviarARegionMyT(estadoVerificador);
+            throw new NoSePuedeUsarMyTError(estadoVerificador);
         } else
         {
             this.modelo.setCartaMagica(solicitante, (CartaMagica) carta);
         }
     }
 
+    // Activar.
     @Override
-    public void activarCartaMagica(Carta carta, Jugador solicitante) throws NoSePuedeEnviarARegionMyT
+    public void activarCartaTrampa(Carta carta, Jugador solicitante) throws NoSePuedeUsarMyTError
     {
-        estadoVerificador = verificadorCondicionesJuego.sePuedeEnviarMagicaARegionMyT(carta, solicitante);
+        estadoVerificador = verificadorCondicionesJuego.sePuedeUsarTrampa(carta, solicitante);
         if (estadoVerificador.esFallido())
         {
-            throw new NoSePuedeEnviarARegionMyT(estadoVerificador);
+            throw new NoSePuedeUsarMyTError(estadoVerificador);
+        } else
+        {
+            this.modelo.activarCartaTrampa(solicitante, (CartaTrampa) carta);
+        }
+    }
+
+    @Override
+    public void activarCartaMagica(Carta carta, Jugador solicitante) throws NoSePuedeUsarMyTError
+    {
+        estadoVerificador = verificadorCondicionesJuego.sePuedeUsarMagica(carta, solicitante);
+        if (estadoVerificador.esFallido())
+        {
+            throw new NoSePuedeUsarMyTError(estadoVerificador);
         } else
         {
             this.modelo.activarCartaMagica((CartaMagica) carta);
+        }
+    }
+
+    @Override
+    public void activarCartaCampo(Carta carta, Jugador solicitante) throws NoSePuedeEnviarARegionCampoError
+    {
+        estadoVerificador = verificadorCondicionesJuego.sePuedeUsarCampo(carta, solicitante);
+        if (estadoVerificador.esFallido())
+        {
+            throw new NoSePuedeEnviarARegionCampoError(estadoVerificador);
+        } else
+        {
+            this.modelo.activarCartaCampo(solicitante, (CartaCampo) carta);
         }
     }
 

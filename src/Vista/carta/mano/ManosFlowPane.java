@@ -8,14 +8,14 @@ import javafx.scene.layout.FlowPane;
 
 import java.util.ArrayList;
 
-public class ManoFlowPane extends FlowPane
+public class ManosFlowPane extends FlowPane
 {
     private FlowPane flowPane;
     private ArrayList<ManoBoton> botones;
     private Vista vista;
     private Jugador jugadorAsociado;
 
-    public ManoFlowPane(Vista vista, Jugador jugador)
+    public ManosFlowPane(Vista vista, Jugador jugador)
     {
         this.jugadorAsociado = jugador;
         this.vista = vista;

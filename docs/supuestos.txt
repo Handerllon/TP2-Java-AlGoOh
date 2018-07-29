@@ -1,0 +1,8 @@
+El jugador toca la carta monstruo para efectuar un ataque, este comando se le pasa 
+al controlador, y luego el controlador realiza los chequeos que deba realizar. Si 
+se habilita el ataque, van a suceder dos cosas en el controlador:
+    1. si no hay cartas en la región monstruo del oponente, se ataca directamente 
+al oponente.
+    2. si hay cartas en la región monstruo del oponente, el controlador le va a pedir 
+a la vista que le muestre al jugador un menú con las cartas que puede atacar (similar 
+a cuando se le piden los sacrificios).

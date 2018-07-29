@@ -2,6 +2,7 @@ package Modelo;
 
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
+import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.trampa.CartaTrampa;
@@ -20,13 +21,17 @@ public interface ModeloInterfaz
 
     void setCartaTrampa(Jugador jugador, CartaTrampa carta);
 
-    void setCartaMonstruo(CartaMonstruo carta);
+    void activarCartaTrampa(Jugador jugador, CartaTrampa carta);
 
-    void setCartaMonstruo(CartaMonstruo carta, Sacrificio sacrificios);
+    void activarCartaCampo(Jugador jugador, CartaCampo carta);
 
-    void summonCartaMonstruo(CartaMonstruo carta);
+    void setCartaMonstruo(Jugador jugador, CartaMonstruo carta);
 
-    void summonCartaMonstruo(CartaMonstruo carta, Sacrificio sacrificios);
+    void setCartaMonstruo(Jugador jugador, CartaMonstruo carta, Sacrificio sacrificios);
+
+    void summonCartaMonstruo(Jugador jugador, CartaMonstruo carta);
+
+    void summonCartaMonstruo(Jugador jugador, CartaMonstruo carta, Sacrificio sacrificios);
 
     boolean requiereSacrificios(CartaMonstruo carta);
 

@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.ControladorInterfaz;
+import Controlador.excepciones.*;
 import Modelo.ModeloObservable;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.monstruo.CartaMonstruo;
@@ -8,6 +9,7 @@ import Modelo.observadores.ObservadorDeModelo;
 import Vista.escena.Escena;
 import Vista.escena.EscenaBienvenida;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Screen;
@@ -147,6 +149,88 @@ public class Vista implements ObservadorDeModelo
         this.escena.cerrar();
     }
 
+    // -------------------------------
+    // Avisos de advertencias.
+    // -------------------------------
+    // TODO: los mandamos a alguna clase?
+    public void mostrarError(NoSePuedeTomarCartaError error)
+    {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Advertencia");
+        alert.setHeaderText(null);
+        alert.setContentText("No se puede tomar carta. " + error.getEstadoVerificador().getNombre());
+
+        alert.showAndWait();
+    }
+
+    public void mostrarError(NoSePuedeEnviarCartaMonstruoARegionError error)
+    {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Advertencia");
+        alert.setHeaderText(null);
+        alert.setContentText("La carta monstruo no puede ser envíada a la región monstruo. " + error
+                .getEstadoVerificador()
+                .getNombre());
+
+        alert.showAndWait();
+    }
+
+    public void mostrarError(NoSePuedeEnviarMyTARegionError error)
+    {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Advertencia");
+        alert.setHeaderText(null);
+        alert.setContentText("La carta MyT no puede ser envíada a la región MyT. " + error.getEstadoVerificador()
+                .getNombre());
+
+        alert.showAndWait();
+    }
+
+    public void mostrarError(NoSePuedeUsarMyTError error)
+    {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Advertencia");
+        alert.setHeaderText(null);
+        alert.setContentText("La carta elegida no puede ser utilizada. " + error.getEstadoVerificador().getNombre());
+
+        alert.showAndWait();
+    }
+
+    public void mostrarError(NoSePuedeEnviarARegionCampoError error)
+    {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Advertencia");
+        alert.setHeaderText(null);
+        alert.setContentText("La carta campo no puede ser envíada a la región campo. " + error.getEstadoVerificador()
+                .getNombre());
+
+        alert.showAndWait();
+    }
+
+    public void mostrarError(NoSePuedeCambiarOrientacionError error)
+    {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Advertencia");
+        alert.setHeaderText(null);
+        alert.setContentText("No se puede cambiar la orientacion de la carta elegida. " + error.getEstadoVerificador()
+                .getNombre());
+
+        alert.showAndWait();
+    }
+
+    public void mostrarError(NoSePuedeAtacarError error)
+    {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Advertencia");
+        alert.setHeaderText(null);
+        alert.setContentText("No se puede atacar. " + error.getEstadoVerificador().getNombre());
+
+        alert.showAndWait();
+    }
+
+    // -------------------------------
+    // Solicitudes al usuario.
+    // -------------------------------
     public Sacrificio pedirSacrificios()
     {
         // TODO.

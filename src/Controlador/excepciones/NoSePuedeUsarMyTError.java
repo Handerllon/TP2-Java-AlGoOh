@@ -2,11 +2,11 @@ package Controlador.excepciones;
 
 import Controlador.condicionesJuego.EstadoVerificador;
 
-public class NoSePuedeMandarCartaARegionError extends RuntimeException
+public class NoSePuedeUsarMyTError extends RuntimeException
 {
     EstadoVerificador estadoVerificador;
 
-    public NoSePuedeMandarCartaARegionError(EstadoVerificador estadoVerificador)
+    public NoSePuedeUsarMyTError(EstadoVerificador estadoVerificador)
     {
         this.estadoVerificador = estadoVerificador;
     }

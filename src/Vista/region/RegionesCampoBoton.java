@@ -13,7 +13,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.ImagePattern;
 
-public class RegionCampoBoton extends Button
+public class RegionesCampoBoton extends Button
 {
     private static String estiloRegion = "-fx-background-color: Transparent";
     // TODO: número mágico.
@@ -23,27 +23,31 @@ public class RegionCampoBoton extends Button
     private CartaCampo carta;
     private Vista vista;
     private Jugador jugadorAsociado;
+    private Image imagenBoton;
+    private Tooltip tooltip;
 
-    public RegionCampoBoton(Vista vista, Jugador jugadorAsociado)
+    // --------------------------------------------------------------------
+    // Métodos de construcción e inicialización.
+    // --------------------------------------------------------------------
+    public RegionesCampoBoton(Vista vista, Jugador jugadorAsociado)
     {
         this.jugadorAsociado = jugadorAsociado;
         this.vista = vista;
 
-        boton = new Button();
+        this.boton = new Button();
+        this.boton.setPrefSize(anchoDeCarta, altoDeCarta);
+        this.boton.setStyle(estiloRegion);
 
-        boton.setPrefSize(anchoDeCarta, altoDeCarta);
-        boton.setStyle(estiloRegion);
+        this.tooltip = new Tooltip();
     }
 
     public Button getBoton()
     {
-
         return boton;
     }
 
     public void clear()
     {
-
         this.boton = new Button();
         boton.setStyle(estiloRegion);
         this.boton.setPrefSize(anchoDeCarta, altoDeCarta);
@@ -51,25 +55,17 @@ public class RegionCampoBoton extends Button
 
     public void actualizarImagen(CartaCampo carta)
     {
-
         this.carta = carta;
-        this.boton = this.crearBotonParaCartaEnRegion();
-        Image image = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
-        Tooltip tooltip = new Tooltip();
-        tooltip.setGraphic(new ImageView(image));
-
-        this.boton.setTooltip(tooltip);
-    }
-
-    private Button crearBotonParaCartaEnRegion()
-    {
-        Button botonEnRegion = new Button();
 
         //TODO: Hacer opciones que tiene una cartaCampo una vez que fue jugada
-        botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
-        botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+        this.boton.setPrefSize(anchoDeCarta, altoDeCarta);
+        this.boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 
-        return botonEnRegion;
+        this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
+
+        this.tooltip.setGraphic(new ImageView(this.imagenBoton));
+
+        this.boton.setTooltip(this.tooltip);
     }
 }

@@ -4,14 +4,17 @@ import Modelo.observadores.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.scene.control.Button;
 
-public class RegionCementerioVista implements ObservadorDeModelo
+public class RegionesCementerioVista implements ObservadorDeModelo
 {
     private static String estiloRegion = "-fx-background-color: Transparent";
     private Vista vista;
     private Button botonCementerioJugador;
     private Button botonCementerioOponente;
 
-    public RegionCementerioVista(Vista vista)
+    // --------------------------------------------------------------------
+    // Métodos de construcción e inicialización.
+    // --------------------------------------------------------------------
+    public RegionesCementerioVista(Vista vista)
     {
         this.vista = vista;
 
@@ -43,6 +46,9 @@ public class RegionCementerioVista implements ObservadorDeModelo
         return botonCementerioOponente;
     }
 
+    // --------------------------------------------------------------------
+    // Métodos de observador de modelo.
+    // --------------------------------------------------------------------
     @Override
     public void huboCambios()
     {

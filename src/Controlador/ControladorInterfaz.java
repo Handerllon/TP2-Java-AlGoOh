@@ -38,21 +38,30 @@ public interface ControladorInterfaz
     // ------------------------------------
     void tomarCarta(Jugador solicitante) throws NoSePuedeTomarCartaError;
 
-    void setCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeMandarCartaARegionError;
+    void setCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeEnviarCartaMonstruoARegionError;
 
-    void summonCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeMandarCartaARegionError;
+    void summonCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeEnviarCartaMonstruoARegionError;
 
-    void setCartaTrampa(Carta carta, Jugador solicitante) throws NoSePuedeEnviarARegionMyT;
+    // Set.
+    void setCartaTrampa(Carta carta, Jugador solicitante) throws NoSePuedeEnviarMyTARegionError;
 
-    void setCartaMagica(Carta carta, Jugador solicitante) throws NoSePuedeEnviarARegionMyT;
+    void setCartaMagica(Carta carta, Jugador solicitante) throws NoSePuedeEnviarMyTARegionError;
 
-    void activarCartaMagica(Carta carta, Jugador solicitante) throws NoSePuedeEnviarARegionMyT;
+    // Activar.
+    void activarCartaTrampa(Carta carta, Jugador solicitante) throws NoSePuedeUsarMyTError;
+
+    void activarCartaMagica(Carta carta, Jugador solicitante) throws NoSePuedeUsarMyTError;
+
+    void activarCartaCampo(Carta carta, Jugador solicitante) throws NoSePuedeEnviarARegionCampoError;
 
     // ------------------------------------
     // Métodos de orientación de cartas.
     // ------------------------------------
     void flipCarta(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
 
+    void cambiarModoCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
+
+    // TODO: me parece que estos no tienen sentido.
     void flipBocaAbajo(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
 
     void flipBocaArriba(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
@@ -60,8 +69,6 @@ public interface ControladorInterfaz
     void setModoAtaque(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
 
     void setModoDefensa(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
-
-    void cambiarModoCartaMonstruo(Carta carta, Jugador solicitante) throws NoSePuedeCambiarOrientacionError;
 
     // ------------------------------------
     // Métodos de ataques.

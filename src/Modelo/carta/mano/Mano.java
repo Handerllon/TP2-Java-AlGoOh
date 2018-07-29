@@ -37,6 +37,9 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
             this.verificarExodiaCompleto(carta);
         } else
         {
+            // TODO: Recordar que si la mano está llena, la vista debe pedirle al usuario que descarte 1 de ellas.
+            // También podría hacerse que se descarte alguna al azar automáticamente.
+            quitarCarta(getCartas().iterator().next());
             throw new ManoLlenaError();
         }
     }

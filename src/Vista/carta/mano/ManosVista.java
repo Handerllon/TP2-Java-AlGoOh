@@ -4,26 +4,23 @@ import Modelo.observadores.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.scene.layout.FlowPane;
 
-public class ManoVista implements ObservadorDeModelo
+public class ManosVista implements ObservadorDeModelo
 {
     private Vista vista;
-    private ManoFlowPane manoJugador;
-    private ManoFlowPane manoOponente;
+    private ManosFlowPane manoJugador;
+    private ManosFlowPane manoOponente;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    public ManoVista(Vista vista)
+    public ManosVista(Vista vista)
     {
         this.vista = vista;
 
-        this.manoJugador = new ManoFlowPane(this.vista, this.vista.getModelo().getJugador());
-        this.manoOponente = new ManoFlowPane(this.vista, this.vista.getModelo().getOponente());
+        this.manoJugador = new ManosFlowPane(this.vista, this.vista.getModelo().getJugador());
+        this.manoOponente = new ManosFlowPane(this.vista, this.vista.getModelo().getOponente());
     }
 
-    // --------------------------------------------------------------------
-    // Métodos de escena.
-    // --------------------------------------------------------------------
     public FlowPane getManoJugador()
     {
 
@@ -36,6 +33,9 @@ public class ManoVista implements ObservadorDeModelo
         return manoOponente.getFlowPane();
     }
 
+    // --------------------------------------------------------------------
+    // Métodos de observador de modelo.
+    // --------------------------------------------------------------------
     @Override
     public void huboCambios()
     {

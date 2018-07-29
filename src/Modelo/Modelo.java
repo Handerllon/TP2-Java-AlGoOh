@@ -266,6 +266,7 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         jugador.enviarARegion(carta);
     }
 
+    // TODO: ver cómo hacer para que se active desde la mano.
     @Override
     public void activarCartaMagica(CartaMagica carta)
     {
@@ -280,8 +281,24 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         jugador.enviarARegion(carta);
     }
 
+    // TODO: esto está mal. La carta creo que ya está en el campo.
     @Override
-    public void setCartaMonstruo(CartaMonstruo carta) throws NoEsCartaMonstruo
+    public void activarCartaTrampa(Jugador jugador, CartaTrampa carta)
+    {
+        this.flipBocaArriba(carta);
+        jugador.enviarARegion(carta);
+    }
+
+    @Override
+    public void activarCartaCampo(Jugador jugador, CartaCampo carta)
+    {
+
+        this.flipBocaArriba(carta);
+        jugador.enviarARegion(carta);
+    }
+
+    @Override
+    public void setCartaMonstruo(Jugador jugador, CartaMonstruo carta) throws NoEsCartaMonstruo
     {
         if (!carta.esMonstruo())
         {
@@ -289,11 +306,11 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         }
         this.flipBocaAbajo(carta);
         this.setModoDefensa(carta);
-        carta.getPropietario().enviarARegion(carta);
+        jugador.enviarARegion(carta);
     }
 
     @Override
-    public void setCartaMonstruo(CartaMonstruo carta, Sacrificio sacrificios) throws NoEsCartaMonstruo
+    public void setCartaMonstruo(Jugador jugador, CartaMonstruo carta, Sacrificio sacrificios) throws NoEsCartaMonstruo
     {
         if (!carta.esMonstruo())
         {
@@ -301,11 +318,11 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         }
         this.flipBocaAbajo(carta);
         this.setModoDefensa(carta);
-        carta.getPropietario().enviarARegion(carta, sacrificios);
+        jugador.enviarARegion(carta, sacrificios);
     }
 
     @Override
-    public void summonCartaMonstruo(CartaMonstruo carta) throws NoEsCartaMonstruo
+    public void summonCartaMonstruo(Jugador jugador, CartaMonstruo carta) throws NoEsCartaMonstruo
     {
         if (!carta.esMonstruo())
         {
@@ -313,11 +330,11 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         }
         this.flipBocaArriba(carta);
         this.setModoAtaque(carta);
-        carta.getPropietario().enviarARegion(carta);
+        jugador.enviarARegion(carta);
     }
 
     @Override
-    public void summonCartaMonstruo(CartaMonstruo carta, Sacrificio sacrificios) throws NoEsCartaMonstruo
+    public void summonCartaMonstruo(Jugador jugador, CartaMonstruo carta, Sacrificio sacrificios) throws NoEsCartaMonstruo
     {
         if (!carta.esMonstruo())
         {
@@ -325,7 +342,7 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         }
         this.flipBocaArriba(carta);
         this.setModoAtaque(carta);
-        carta.getPropietario().enviarARegion(carta, sacrificios);
+        jugador.enviarARegion(carta, sacrificios);
     }
 
     @Override

@@ -1,15 +1,15 @@
 package Vista.escena;
 
 import Modelo.ModeloObservable;
-import Vista.EstadosJuegoBoton;
+import Vista.EstadosJuegoBotones;
 import Vista.VidaVista;
 import Vista.Vista;
-import Vista.carta.MazoVista;
-import Vista.carta.mano.ManoVista;
-import Vista.region.RegionCampoVista;
-import Vista.region.RegionCementerioVista;
-import Vista.region.RegionMagicasYTrampasVista;
-import Vista.region.RegionMonstruosVista;
+import Vista.carta.MazosVista;
+import Vista.carta.mano.ManosVista;
+import Vista.region.RegionesCampoVista;
+import Vista.region.RegionesCementerioVista;
+import Vista.region.RegionesMagicasYTrampasVista;
+import Vista.region.RegionesMonstruoVista;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -25,22 +25,22 @@ import java.io.File;
 public final class EscenaTableroPrincipal implements Escena
 {
     private static EscenaTableroPrincipal instancia = null;
-    GridPane grid;
-    private String RUTA_TABLERO = "resources/imagenes/tablero/tablero yogioh.png";
+    private GridPane grid;
+    private String RUTA_TABLERO = "resources/imagenes/tablero.png";
     private String direccion_sonido_batalla = "src/resources/audio/battle.mp3";
     private Vista vista;
     private MediaPlayer mplayer;
-    private RegionMonstruosVista regionMonstruos;
-    private RegionMagicasYTrampasVista regionMagicasYTrampas;
-    private RegionCampoVista regionCampo;
-    private RegionCementerioVista regionCementerio;
-    private ManoVista manos;
-    private MazoVista mazos;
+    private RegionesMonstruoVista regionesMonstruo;
+    private RegionesMagicasYTrampasVista regionesMagicasYTrampas;
+    private RegionesCampoVista regionesCampo;
+    private RegionesCementerioVista regionesCementerio;
+    private ManosVista manos;
+    private MazosVista mazos;
     private VidaVista vidas;
     private ModeloObservable modelo;
     private Stage primaryStage;
     private Scene escenaTableroPrincipal;
-    private EstadosJuegoBoton botones;
+    private EstadosJuegoBotones estadosJuegoBotones;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -53,16 +53,16 @@ public final class EscenaTableroPrincipal implements Escena
 
         this.grid = new GridPane();
 
-        this.regionMonstruos = new RegionMonstruosVista(this.vista);
-        this.regionMagicasYTrampas = new RegionMagicasYTrampasVista(this.vista);
-        this.regionCampo = new RegionCampoVista(this.vista);
-        this.regionCementerio = new RegionCementerioVista(this.vista);
+        this.regionesMonstruo = new RegionesMonstruoVista(this.vista);
+        this.regionesMagicasYTrampas = new RegionesMagicasYTrampasVista(this.vista);
+        this.regionesCampo = new RegionesCampoVista(this.vista);
+        this.regionesCementerio = new RegionesCementerioVista(this.vista);
 
-        this.manos = new ManoVista(this.vista);
-        this.mazos = new MazoVista(this.vista);
+        this.manos = new ManosVista(this.vista);
+        this.mazos = new MazosVista(this.vista);
         this.vidas = new VidaVista(this.vista);
 
-        this.botones = new EstadosJuegoBoton(this.vista);
+        this.estadosJuegoBotones = new EstadosJuegoBotones(this.vista);
 
         this.inicializarEscena();
     }
@@ -111,25 +111,25 @@ public final class EscenaTableroPrincipal implements Escena
         // -------------------------------
         // Regiones.
         // -------------------------------
-        grid.add(regionMonstruos.getGridJugador(), 1, 3);
-        grid.setHalignment(regionMonstruos.getGridJugador(), HPos.CENTER);
-        grid.add(regionMonstruos.getGridOponente(), 1, 2);
-        grid.setHalignment(regionMonstruos.getGridOponente(), HPos.CENTER);
+        grid.add(regionesMonstruo.getGridJugador(), 1, 3);
+        grid.setHalignment(regionesMonstruo.getGridJugador(), HPos.CENTER);
+        grid.add(regionesMonstruo.getGridOponente(), 1, 2);
+        grid.setHalignment(regionesMonstruo.getGridOponente(), HPos.CENTER);
 
-        grid.add(regionMagicasYTrampas.getGridJugador(), 1, 4);
-        grid.setHalignment(regionMagicasYTrampas.getGridJugador(), HPos.CENTER);
-        grid.add(regionMagicasYTrampas.getGridOponente(), 1, 1);
-        grid.setHalignment(regionMagicasYTrampas.getGridOponente(), HPos.CENTER);
+        grid.add(regionesMagicasYTrampas.getGridJugador(), 1, 4);
+        grid.setHalignment(regionesMagicasYTrampas.getGridJugador(), HPos.CENTER);
+        grid.add(regionesMagicasYTrampas.getGridOponente(), 1, 1);
+        grid.setHalignment(regionesMagicasYTrampas.getGridOponente(), HPos.CENTER);
 
-        grid.add(regionCampo.getRegionCampoJugador(), 0, 4);
-        grid.setHalignment(regionCampo.getRegionCampoJugador(), HPos.CENTER);
-        grid.add(regionCampo.getRegionCampoOponente(), 2, 1);
-        grid.setHalignment(regionCampo.getRegionCampoOponente(), HPos.CENTER);
+        grid.add(regionesCampo.getRegionCampoJugador(), 0, 4);
+        grid.setHalignment(regionesCampo.getRegionCampoJugador(), HPos.CENTER);
+        grid.add(regionesCampo.getRegionCampoOponente(), 2, 1);
+        grid.setHalignment(regionesCampo.getRegionCampoOponente(), HPos.CENTER);
 
-        grid.add(regionCementerio.getCementerioJugador(), 0, 3);
-        grid.setHalignment(regionCementerio.getCementerioJugador(), HPos.CENTER);
-        grid.add(regionCementerio.getCementerioOponente(), 2, 2);
-        grid.setHalignment(regionCementerio.getCementerioOponente(), HPos.CENTER);
+        grid.add(regionesCementerio.getCementerioJugador(), 0, 3);
+        grid.setHalignment(regionesCementerio.getCementerioJugador(), HPos.CENTER);
+        grid.add(regionesCementerio.getCementerioOponente(), 2, 2);
+        grid.setHalignment(regionesCementerio.getCementerioOponente(), HPos.CENTER);
 
         // -------------------------------
         // Manos.
@@ -156,12 +156,12 @@ public final class EscenaTableroPrincipal implements Escena
         grid.setHalignment(vidas.getVidaOponente(), HPos.CENTER);
 
         // -------------------------------
-        // Definición de botones.
+        // Botones de estado de juego.
         // -------------------------------
-        grid.add(botones.getBotonFinDeFase(), 2, 4);
-        grid.setHalignment(botones.getBotonFinDeFase(), HPos.CENTER);
-        grid.add(botones.getBotonFinDeTurno(), 2, 3);
-        grid.setHalignment(botones.getBotonFinDeTurno(), HPos.CENTER);
+        grid.add(estadosJuegoBotones.getBotonFinDeFase(), 2, 4);
+        grid.setHalignment(estadosJuegoBotones.getBotonFinDeFase(), HPos.CENTER);
+        grid.add(estadosJuegoBotones.getBotonFinDeTurno(), 2, 3);
+        grid.setHalignment(estadosJuegoBotones.getBotonFinDeTurno(), HPos.CENTER);
 
         // -------------------------------
         // Audio.
@@ -200,10 +200,10 @@ public final class EscenaTableroPrincipal implements Escena
     @Override
     public void actualizarEstado()
     {
-        this.regionCampo.huboCambios();
-        this.regionMagicasYTrampas.huboCambios();
-        this.regionMonstruos.huboCambios();
-        this.regionCementerio.huboCambios();
+        this.regionesCampo.huboCambios();
+        this.regionesMagicasYTrampas.huboCambios();
+        this.regionesMonstruo.huboCambios();
+        this.regionesCementerio.huboCambios();
         this.manos.huboCambios();
         this.mazos.huboCambios();
     }

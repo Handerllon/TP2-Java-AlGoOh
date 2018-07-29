@@ -5,10 +5,7 @@ import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
 import Modelo.carta.monstruo.CartaMonstruo;
-import Modelo.excepciones.CartaBocaAbajoNoPuedeAtacarError;
-import Modelo.excepciones.CartaEnDefensaNoPuedeAtacarError;
-import Modelo.excepciones.NoEsCartaMonstruo;
-import Modelo.excepciones.NoEsCartaMyTError;
+import Modelo.excepciones.*;
 
 public final class VerificadorCondicionesJuego
 {
@@ -37,11 +34,17 @@ public final class VerificadorCondicionesJuego
         throw new CloneNotSupportedException();
     }
 
+    // ------------------------------------
+    // Verificación de juego de jugador.
+    // ------------------------------------
     private boolean jugadorPuedeJugar(Jugador jugador)
     {
         return this.maquinaTurnos.jugadorActualEsIgualA(jugador);
     }
 
+    // ------------------------------------
+    // Verificación de juego de cartas.
+    // ------------------------------------
     public EstadoVerificador sePuedeTomarCarta(Jugador solicitante)
     {
         if (!jugadorPuedeJugar(solicitante))
@@ -57,7 +60,10 @@ public final class VerificadorCondicionesJuego
         return new EstadoVerificadorBueno();
     }
 
-    public EstadoVerificador sePuedeMandarARegionMonstruo(Carta carta, Jugador solicitante)
+    // -------------------
+    // Cartas Monstruo.
+    // -------------------
+    public EstadoVerificador sePuedeEnviarARegionMonstruo(Carta carta, Jugador solicitante)
     {
 
         if (carta.getPropietario() != solicitante)
@@ -86,6 +92,9 @@ public final class VerificadorCondicionesJuego
         return new EstadoVerificadorBueno();
     }
 
+    // -------------------
+    // Cartas MyT.
+    // -------------------
     public EstadoVerificador sePuedeEnviarARegionMyT(Carta carta, Jugador solicitante)
     {
         if (carta.getPropietario() != solicitante)
@@ -96,7 +105,7 @@ public final class VerificadorCondicionesJuego
             return new JugadorNoPermitidoParaJugar(solicitante);
         } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
         {
-            return new NoEsFaseFinalError();
+            return new NoEsFasePreparacionError();
         } else if (!carta.esMagica() && !carta.esTrampa())
         {
             return new NoEsCartaMyTError();
@@ -105,7 +114,26 @@ public final class VerificadorCondicionesJuego
         return new EstadoVerificadorBueno();
     }
 
-    public EstadoVerificador sePuedeEnviarMagicaARegionMyT(Carta carta, Jugador solicitante)
+    public EstadoVerificador sePuedeUsarTrampa(Carta carta, Jugador solicitante)
+    {
+        if (carta.getPropietario() != solicitante)
+        {
+            return new SolicitanteNoEsPropietarioDeCartaError();
+        } else if (!jugadorPuedeJugar(solicitante))
+        {
+            return new JugadorNoPermitidoParaJugar(solicitante);
+        } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
+        {
+            return new NoEsFasePreparacionError();
+        } else if (!carta.esTrampa())
+        {
+            return new NoEsCartaMyTError();
+        }
+
+        return new EstadoVerificadorBueno();
+    }
+
+    public EstadoVerificador sePuedeUsarMagica(Carta carta, Jugador solicitante)
     {
         if (carta.getPropietario() != solicitante)
         {
@@ -123,6 +151,27 @@ public final class VerificadorCondicionesJuego
         return new EstadoVerificadorBueno();
     }
 
+    public EstadoVerificador sePuedeUsarCampo(Carta carta, Jugador solicitante)
+    {
+        if (carta.getPropietario() != solicitante)
+        {
+            return new SolicitanteNoEsPropietarioDeCartaError();
+        } else if (!jugadorPuedeJugar(solicitante))
+        {
+            return new JugadorNoPermitidoParaJugar(solicitante);
+        } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
+        {
+            return new NoEsFasePreparacionError();
+        } else if (!carta.esCampo())
+        {
+            return new NoEsCartaCampoError();
+        }
+        return new EstadoVerificadorBueno();
+    }
+
+    // ----------------------------------------
+    // Verificación de orientación de cartas.
+    // ----------------------------------------
     public EstadoVerificador sePuedeCambiarOrientacionCarta(Carta carta, Jugador solicitante)
     {
 
@@ -160,6 +209,9 @@ public final class VerificadorCondicionesJuego
         return new EstadoVerificadorBueno();
     }
 
+    // ----------------------------------------
+    // Verificación de ataque de cartas.
+    // ----------------------------------------
     public EstadoVerificador sePuedeAtacar(Carta cartaAtacante, Jugador solicitante)
     {
         if (!jugadorPuedeJugar(solicitante))

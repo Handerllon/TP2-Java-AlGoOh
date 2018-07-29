@@ -1,16 +1,15 @@
 ﻿Mejoras:
 Que se muestre en el tablero qué parte le corresponde a cada jugador, poniendo el nombre del mismo. Podría ser al lado del mazo.
 
-Que las cartas en las regiones monstro y MyT no estén tan separadas así aprovechamos usuarios con pantallas más chicas.
+Usar porcentajes para el tamaño de las cosas, ya fue hecho en la pantalla de tablero principal
 
 Hacerle un marco al popup de las cartas.
 
 Separar algunos píxeles los botones del popup de las cartas.
-
-No mostrar los popups si el usuario cliquea la carta del oponente.
 
 Si el usuario aprieta un botón y sale un popup, que lo pueda cerrar clickeando en cualquier parte que no sea el popup.
 
 Bugs:
 4. Creo que hay un problema con la fase ataque/fase trampa.
 5. PotOfGreed debería funcionar bien.
+6.No mostrar los popups si el usuario cliquea la carta del oponente.

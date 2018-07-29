@@ -4,6 +4,7 @@ import Modelo.Jugador;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.Vista;
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -15,7 +16,6 @@ public class RegionesMonstruosGrid extends GridPane
     private static double anchoColumna;
     // Se uso como base una resolucion de 1920x1080
     private final double relacionAnchoColumnaPantalla = 7.25;
-    private final double anchoFila = 160;
     private final int cantidadBotonesGrid = 5;
     private GridPane grid;
     private ArrayList<RegionesMonstruoBoton> botones;
@@ -36,17 +36,19 @@ public class RegionesMonstruosGrid extends GridPane
 
         this.botones = new ArrayList<>();
 
-        anchoColumna = vista.getResolucionHorizontal() / relacionAnchoColumnaPantalla;
+        anchoColumna = (vista.getResolucionHorizontal() / relacionAnchoColumnaPantalla)/1.7;
         ColumnConstraints columna0 = new ColumnConstraints(anchoColumna);
         ColumnConstraints columna1 = new ColumnConstraints(anchoColumna);
         ColumnConstraints columna2 = new ColumnConstraints(anchoColumna);
         ColumnConstraints columna3 = new ColumnConstraints(anchoColumna);
         ColumnConstraints columna4 = new ColumnConstraints(anchoColumna);
 
-        RowConstraints fila1 = new RowConstraints(anchoFila);
+        RowConstraints fila1 = new RowConstraints((this.vista.getResolucionHorizontal()*160)/1920);
 
         this.grid.getColumnConstraints().addAll(columna0, columna1, columna2, columna3, columna4);
         this.grid.getRowConstraints().addAll(fila1);
+        
+        this.grid.setAlignment(Pos.CENTER);
 
         RegionesMonstruoBoton boton;
         for (int i = 0; i < cantidadBotonesGrid; i++)

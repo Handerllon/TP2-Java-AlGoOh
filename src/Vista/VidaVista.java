@@ -1,6 +1,7 @@
 package Vista;
 
 import Modelo.observadores.ObservadorDeModelo;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -29,15 +30,14 @@ public class VidaVista implements ObservadorDeModelo
         this.vidaJugador.setPrefSize((this.vista.getResolucionHorizontal() * 200) / 1920, (this.vista.getResolucionVertical() * 200) / 1080);
         this.vidaOponente.setPrefSize((this.vista.getResolucionHorizontal() * 200) / 1920, (this.vista.getResolucionVertical() * 200) / 1080);
 
-        this.vidaJugador.setText("    Vida: \n" + this.vista.getModelo().getJugador().getPuntosDeVida());
-        this.vidaOponente.setText("   Vida: \n" + this.vista.getModelo().getOponente().getPuntosDeVida());
-
         // TODO: número mágico. Por qué no se usa algún porcentaje de alguna medida? por ej., de la resolución horiz.?
-        this.vidaJugador.setFont(new Font("Times New Roman", 50));
-        this.vidaOponente.setFont(new Font("Times New Roman", 50));
+        this.vidaJugador.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical()*0.05));
+        this.vidaOponente.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical()*0.05));
 
         this.vidaJugador.setTextFill(Color.web("#910101"));
         this.vidaOponente.setTextFill(Color.web("#910101"));
+        
+        this.huboCambios();
     }
 
     public Label getVidaJugador()
@@ -55,7 +55,7 @@ public class VidaVista implements ObservadorDeModelo
     @Override
     public void huboCambios()
     {
-        this.vidaJugador.setText("    Vida: \n" + this.vista.getModelo().getJugador().getPuntosDeVida());
-        this.vidaOponente.setText("   Vida: \n" + this.vista.getModelo().getOponente().getPuntosDeVida());
+        this.vidaJugador.setText(this.vista.getModelo().getJugador().getNombre() + "\n" + this.vista.getModelo().getJugador().getPuntosDeVida());
+        this.vidaOponente.setText(this.vista.getModelo().getOponente().getNombre() +"\n" + this.vista.getModelo().getOponente().getPuntosDeVida());
     }
 }

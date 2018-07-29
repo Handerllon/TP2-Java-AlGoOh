@@ -12,12 +12,18 @@ import Vista.region.RegionesMagicasYTrampasVista;
 import Vista.region.RegionesMonstruoVista;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -25,6 +31,8 @@ import java.io.File;
 public final class EscenaTableroPrincipal implements Escena
 {
     private static EscenaTableroPrincipal instancia = null;
+    private static double porcentajeDePantallaVertical = 0.157;
+    private static double porcentajeDePantallaHorizontal = 0.520;
     private GridPane gridPane;
     private String RUTA_TABLERO = "resources/imagenes/fondoTableroGeneral.png";
     private String direccion_sonido_batalla = "src/resources/audio/battle.mp3";
@@ -87,8 +95,8 @@ public final class EscenaTableroPrincipal implements Escena
         this.primaryStage.setScene(this.escenaTableroPrincipal);
         this.primaryStage.setMaximized(true);
 
-        //gridPane.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-        //.getResource(RUTA_TABLERO).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        gridPane.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+        		.getResource(RUTA_TABLERO).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         gridPane.setPrefSize(this.vista.getResolucionHorizontal(), this.vista.getResolucionVertical());
 
         // -------------------------------
@@ -97,18 +105,20 @@ public final class EscenaTableroPrincipal implements Escena
         gridPane.setGridLinesVisible(false);
         gridPane.setPadding(new Insets(5));
         //Se uso una resoulcion de 1080x1920 como base para los tamanos
-        ColumnConstraints column0 = new ColumnConstraints((this.vista.getResolucionHorizontal() * 300) / 1920);
-        ColumnConstraints column1 = new ColumnConstraints((this.vista.getResolucionHorizontal() * 1310) / 1920);
-        ColumnConstraints column2 = new ColumnConstraints((this.vista.getResolucionHorizontal() * 300) / 1920);
-        RowConstraints row0 = new RowConstraints((this.vista.getResolucionVertical() * 170) / 1080);
-        RowConstraints row1 = new RowConstraints((this.vista.getResolucionVertical() * 170) / 1080);
-        RowConstraints row2 = new RowConstraints((this.vista.getResolucionVertical() * 170) / 1080);
-        RowConstraints row3 = new RowConstraints((this.vista.getResolucionVertical() * 170) / 1080);
-        RowConstraints row4 = new RowConstraints((this.vista.getResolucionVertical() * 170) / 1080);
-        RowConstraints row5 = new RowConstraints((this.vista.getResolucionVertical() * 170) / 1080);
+        ColumnConstraints column0 = new ColumnConstraints(this.vista.getResolucionHorizontal()*(1-porcentajeDePantallaHorizontal)/2);
+        ColumnConstraints column1 = new ColumnConstraints(this.vista.getResolucionHorizontal()*porcentajeDePantallaHorizontal);
+        ColumnConstraints column2 = new ColumnConstraints(this.vista.getResolucionHorizontal()*(1-porcentajeDePantallaHorizontal)/2);
+        RowConstraints row0 = new RowConstraints(this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
+        RowConstraints row1 = new RowConstraints(this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
+        RowConstraints row2 = new RowConstraints(this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
+        RowConstraints row3 = new RowConstraints(this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
+        RowConstraints row4 = new RowConstraints(this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
+        RowConstraints row5 = new RowConstraints(this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
         gridPane.getColumnConstraints().addAll(column0, column1, column2);
         gridPane.getRowConstraints().addAll(row0, row1, row2, row3, row4, row5);
 
+        gridPane.setGridLinesVisible(true);
+        
         // Se configura la grid pane.
         setGridPaneVista();
 
@@ -137,14 +147,14 @@ public final class EscenaTableroPrincipal implements Escena
         gridPane.setHalignment(regionesMagicasYTrampasVista.getGridOponente(), HPos.CENTER);
 
         gridPane.add(regionesCampoVista.getRegionCampoJugador(), 0, 4);
-        gridPane.setHalignment(regionesCampoVista.getRegionCampoJugador(), HPos.CENTER);
+        gridPane.setHalignment(regionesCampoVista.getRegionCampoJugador(), HPos.RIGHT);
         gridPane.add(regionesCampoVista.getRegionCampoOponente(), 2, 1);
-        gridPane.setHalignment(regionesCampoVista.getRegionCampoOponente(), HPos.CENTER);
+        gridPane.setHalignment(regionesCampoVista.getRegionCampoOponente(), HPos.LEFT);
 
         gridPane.add(regionesCementerioVista.getCementerioJugador(), 0, 3);
-        gridPane.setHalignment(regionesCementerioVista.getCementerioJugador(), HPos.CENTER);
+        gridPane.setHalignment(regionesCementerioVista.getCementerioJugador(), HPos.RIGHT);
         gridPane.add(regionesCementerioVista.getCementerioOponente(), 2, 2);
-        gridPane.setHalignment(regionesCementerioVista.getCementerioOponente(), HPos.CENTER);
+        gridPane.setHalignment(regionesCementerioVista.getCementerioOponente(), HPos.LEFT);
 
         // -------------------------------
         // Manos.
@@ -158,25 +168,25 @@ public final class EscenaTableroPrincipal implements Escena
         // Mazos.
         // -------------------------------
         gridPane.add(mazosVista.getMazoJugador(), 2, 5);
-        gridPane.setHalignment(mazosVista.getMazoJugador(), HPos.CENTER);
+        gridPane.setHalignment(mazosVista.getMazoJugador(), HPos.LEFT);
         gridPane.add(mazosVista.getMazoOponente(), 0, 0);
-        gridPane.setHalignment(mazosVista.getMazoOponente(), HPos.CENTER);
+        gridPane.setHalignment(mazosVista.getMazoOponente(), HPos.RIGHT);
 
         // -------------------------------
         // Vida.
         // -------------------------------
         gridPane.add(vidasVista.getVidaJugador(), 0, 5);
-        gridPane.setHalignment(vidasVista.getVidaJugador(), HPos.CENTER);
+        gridPane.setHalignment(vidasVista.getVidaJugador(), HPos.RIGHT);
         gridPane.add(vidasVista.getVidaOponente(), 2, 0);
-        gridPane.setHalignment(vidasVista.getVidaOponente(), HPos.CENTER);
+        gridPane.setHalignment(vidasVista.getVidaOponente(), HPos.LEFT);
 
         // -------------------------------
         // Botones de estado de juego.
         // -------------------------------
         gridPane.add(estadosJuegoBotones.getBotonFinDeFase(), 2, 4);
-        gridPane.setHalignment(estadosJuegoBotones.getBotonFinDeFase(), HPos.CENTER);
+        gridPane.setHalignment(estadosJuegoBotones.getBotonFinDeFase(), HPos.LEFT);
         gridPane.add(estadosJuegoBotones.getBotonFinDeTurno(), 2, 3);
-        gridPane.setHalignment(estadosJuegoBotones.getBotonFinDeTurno(), HPos.CENTER);
+        gridPane.setHalignment(estadosJuegoBotones.getBotonFinDeTurno(), HPos.LEFT);
     }
 
     // --------------------------------------------------------------------

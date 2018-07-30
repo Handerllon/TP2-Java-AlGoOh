@@ -22,15 +22,13 @@ public class RegionesMagicasYTrampasBoton extends Button
     private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
     // Se uso como base una resolucion de 1920x1080 para los tamanos
     private static String backDeCartaLocacion = "resources/imagenes/cartaReverso.jpg";
-    private static double anchoInicialCarta = 95.4;
-    private static double altoInicialCarta = 139;
+    private static double porcentajeDeAnchoDeLaCarta = 0.0496;
+    private static double porcentajeDeAltoDeLaCarta = 0.1287;
     private Carta carta;
     private Vista vista;
     private Popup popup;
     private Button botonDeLaCarta;
     private Jugador jugadorAsociado;
-    private double anchoDeCarta;
-    private double altoDeCarta;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -41,9 +39,8 @@ public class RegionesMagicasYTrampasBoton extends Button
         this.vista = vista;
         this.botonDeLaCarta = new Button();
 
-        this.anchoDeCarta = (this.vista.getResolucionHorizontal() * anchoInicialCarta) / 1920;
-        this.altoDeCarta = (this.vista.getResolucionVertical() * altoInicialCarta) / 1080;
-        this.botonDeLaCarta.setPrefSize(anchoDeCarta, altoDeCarta);
+        this.botonDeLaCarta.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta,
+        		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
         this.botonDeLaCarta.setStyle(estiloRegion);
     }
 
@@ -57,12 +54,12 @@ public class RegionesMagicasYTrampasBoton extends Button
     {
         this.botonDeLaCarta = new Button();
         botonDeLaCarta.setStyle(estiloRegion);
-        this.botonDeLaCarta.setPrefSize(anchoDeCarta, altoDeCarta);
+        this.botonDeLaCarta.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta,
+        		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
     }
 
     public void actualizar(Carta carta)
     {
-        // TODO: para que crear de nuevo el botón? por qué no lo actualiza con los datos nuevos?
         this.carta = carta;
         this.botonDeLaCarta = this.crearBotonCarta();
     }
@@ -75,7 +72,8 @@ public class RegionesMagicasYTrampasBoton extends Button
         // Imagen del botón.
         // -------------------------------
         Image imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
-        botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
+        botonEnRegion.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta,
+        		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
         if (this.carta.estaBocaAbajo())
         {
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()

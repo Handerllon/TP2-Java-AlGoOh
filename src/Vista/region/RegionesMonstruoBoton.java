@@ -24,15 +24,13 @@ public class RegionesMonstruoBoton extends Button
     private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
     private static String backDeCartaLocacion = "resources/imagenes/cartaReverso.jpg";
     // Se uso como base una resolucion de 1920x1080 para los tamanos
-    private static double anchoInicialCarta = 95.4;
-    private static double altoInicialCarta = 139;
+    private static double porcentajeDeAnchoDeLaCarta = 0.0496;
+    private static double porcentajeDeAltoDeLaCarta = 0.1287;
     private Tooltip tooltipBoton;
     private CartaMonstruo carta;
     private Button botonCarta;
     private Jugador jugadorAsociado;
     private Vista vista;
-    private double anchoDeCarta;
-    private double altoDeCarta;
     private Image imagenBoton;
     private Button botonEnRegion;
     private Popup popup;
@@ -48,9 +46,8 @@ public class RegionesMonstruoBoton extends Button
 
         this.botonCarta = new Button();
 
-        this.anchoDeCarta = (this.vista.getResolucionHorizontal() * anchoInicialCarta) / 1920;
-        this.altoDeCarta = (this.vista.getResolucionVertical() * altoInicialCarta) / 1080;
-        this.botonCarta.setPrefSize(anchoDeCarta, altoDeCarta);
+        this.botonCarta.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta, 
+        		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
         this.botonCarta.setStyle(estiloRegion);
 
         this.botonEnRegion = new Button();
@@ -69,12 +66,12 @@ public class RegionesMonstruoBoton extends Button
     {
         this.botonCarta = new Button();
         botonCarta.setStyle(estiloRegion);
-        this.botonCarta.setPrefSize(anchoDeCarta, altoDeCarta);
+        this.botonCarta.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta,
+        		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
     }
 
     public void actualizar(CartaMonstruo cartaMonstruo)
     {
-        // TODO: para que crear de nuevo el botón? por qué no lo actualiza con los datos nuevos?
         this.carta = cartaMonstruo;
         this.botonCarta = this.crearBotonCarta();
     }
@@ -84,15 +81,18 @@ public class RegionesMonstruoBoton extends Button
         // -------------------------------
         // Imagen del botón.
         // -------------------------------
-        botonEnRegion.setPrefSize(anchoDeCarta, altoDeCarta);
+        botonEnRegion.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta, 
+        		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
         if (this.carta.enDefensa() && this.carta.estaBocaAbajo())
         {
-            this.botonEnRegion.getTransforms().add(new Rotate(90, anchoDeCarta / 2, altoDeCarta / 2));
+            this.botonEnRegion.getTransforms().add(new Rotate(90, (this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta) / 2,
+            		(this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta) / 2));
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
                     .getClassLoader().getResource(backDeCartaLocacion).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         } else if (this.carta.enDefensa())
         {
-            this.botonEnRegion.getTransforms().add(new Rotate(90, anchoDeCarta / 2, altoDeCarta / 2));
+            this.botonEnRegion.getTransforms().add(new Rotate(90, (this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta) / 2,
+            		(this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta) / 2));
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
                     .getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         } else

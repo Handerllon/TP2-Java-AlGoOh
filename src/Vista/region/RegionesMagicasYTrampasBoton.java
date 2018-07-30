@@ -76,7 +76,6 @@ public class RegionesMagicasYTrampasBoton extends Button
         // -------------------------------
         // Imagen del botón.
         // -------------------------------
-        Image imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
         botonEnRegion.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
                 this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
         if (this.carta.estaBocaAbajo())
@@ -85,9 +84,6 @@ public class RegionesMagicasYTrampasBoton extends Button
                     .getResource(backDeCartaLocacion).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         } else
         {
-            Tooltip tooltipBoton = new Tooltip();
-            tooltipBoton.setGraphic(new ImageView(imagenBoton));
-            botonEnRegion.setTooltip(tooltipBoton);
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                     .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         }
@@ -101,6 +97,14 @@ public class RegionesMagicasYTrampasBoton extends Button
         // -------------------------------
         // Tooltip del botón.
         // -------------------------------
+        if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado){
+        Image imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
+        Tooltip tooltipBoton = new Tooltip();
+        tooltipBoton.setGraphic(new ImageView(imagenBoton));
+        botonEnRegion.setTooltip(tooltipBoton);
+        }
+        
+        
         // TODO: Implementar la vista de la carta.
         // -------------------------------
 

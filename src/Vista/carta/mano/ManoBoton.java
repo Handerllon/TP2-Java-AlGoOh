@@ -29,6 +29,7 @@ public class ManoBoton extends Button
     // Se uso como base una resolucion de 1080x1920
     private static double porcentajeDeAnchoDeLaCarta = 0.0496;
     private static double porcentajeDeAltoDeLaCarta = 0.1287;
+    private static String locacionDeBackDeCarta = "resources/imagenes/cartaReverso.jpg";
     private Stage primaryStage;
     private Carta carta;
     private Button boton;
@@ -49,18 +50,26 @@ public class ManoBoton extends Button
         this.vista = vista;
         this.primaryStage = vista.getPrimaryStage();
 
-        this.imagenCarta = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
         this.boton = new Button();
         this.toolTip = new Tooltip();
         this.popup = new Popup();
         this.vbox = new VBox();
+        this.boton.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta, 
+        		this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
+        
+        //Tooltip y background
+        if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado){
+        	this.imagenCarta = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
+        	this.toolTip.setGraphic(new ImageView(imagenCarta));
+        	this.boton.setTooltip(toolTip);
+        	this.boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+        			.getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        }
+        else{
+        	this.boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+        			.getResource(locacionDeBackDeCarta).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+        }
 
-        this.toolTip.setGraphic(new ImageView(imagenCarta));
-        this.boton.setTooltip(toolTip);
-        this.boton.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta, this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
-
-        this.boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 
         URL mediaUrl;
         mediaUrl = this.getClass().getClassLoader().getResource("resources/audio/card_move.wav");

@@ -108,27 +108,31 @@ public class RegionesMonstruoBoton extends Button
                     (this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta) / 2));
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
                     .getClassLoader().getResource(backDeCartaLocacion).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+         // Tooltip del botón.
+            if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado){
+            	this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
+                tooltipBoton.setGraphic(new ImageView(imagenBoton));
+                botonEnRegion.setTooltip(tooltipBoton);
+            }
         } else if (this.carta.enDefensa())
         {
             this.botonEnRegion.getTransforms().add(new Rotate(90, (this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta) / 2,
                     (this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta) / 2));
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
                     .getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+         // Tooltip del botón.
+            this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
+            tooltipBoton.setGraphic(new ImageView(imagenBoton));
+            botonEnRegion.setTooltip(tooltipBoton);
         } else
         {
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
                     .getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+         // Tooltip del botón.
             this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
+            tooltipBoton.setGraphic(new ImageView(imagenBoton));
+            botonEnRegion.setTooltip(tooltipBoton);
         }
-
-        // -------------------------------
-
-        // -------------------------------
-        // Tooltip del botón.
-        // -------------------------------
-        tooltipBoton.setGraphic(new ImageView(imagenBoton));
-        botonEnRegion.setTooltip(tooltipBoton);
-        // -------------------------------
 
         // -------------------------------
         // Opciones del botón.

@@ -10,7 +10,13 @@ public abstract class CartaMagica extends Carta
         super(jugador, oponente, locacionDeImagen);
     }
 
-    public abstract void efecto();
+    public void efecto()
+    {
+        this.efectoParticular();
+        this.getPropietario().destruirCarta(this);
+    }
+
+    protected abstract void efectoParticular();
 
     public boolean esCampo()
     {

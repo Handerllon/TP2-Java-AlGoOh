@@ -12,7 +12,7 @@ public class DarkHole extends CartaMagica
         this.nombre = "Dark Hole";
     }
 
-    public void efecto()
+    protected void efectoParticular()
     {
         if (this.estaBocaArriba())
         {

@@ -14,11 +14,20 @@ Fase preparación:
 						el usuario seleccionó "invocar", la carta va boca arriba en posición de ataque.
 						el usuario seleccionó "posicionar en región", la carta va boca abajo en posición de defensa.
 			
-		Mágicas y trampa:
-			El usuario selecciona "activar" (activate), entonces va a la región MyT boca arriba.
+		Mágicas:
+			El usuario selecciona "activar" (activate), entonces va a la región MyT boca arriba y se activa el efecto.
 			El usuario selecciona "posicionar" (set), entonces va a la región MyT boca abajo.
 			Puede enviar todas las que quiera en el turno.
 			Vista -> Si la región se llena, le avisa con un tooltip que no pueden entrar más en la región MyT.
+			
+		Trampa:
+			El usuario selecciona "posicionar" (set), entonces va a la región MyT boca abajo.
+			Puede enviar todas las que quiera en el turno.
+			Vista -> Si la región se llena, le avisa con un tooltip que no pueden entrar más en la región MyT.
+			
+		Campo:
+			El usuario solamente la puede "activar" y queda en la región Campo.
+			Si ya había una carta campo, se manda la vieja al cementerio, y se activa la nueva que entró.
 			
 	Región Monstruo:
 			Si toco una carta, puedo cambiarle el modo (ataque o defensa), pero solo 1 vez por turno.
@@ -50,12 +59,14 @@ Fase Batalla:
 	TODO:
 	Fase interna Trampa:
 		Esta fase se activa siempre después de un ataque.
-		Si hay alguna carta trampa en la región MyT del oponente boca arriba, se usa su efecto, y luego se
+		Si hay alguna carta trampa en la región MyT del oponente se la da vuelta, se usa su efecto, y luego se
 		calcula el daño.
 		Las cartas trampa se activan 1 vez, de izquierda a derecha, y luego de usarla, van al cementerio.
 		Se vuelve a la fase batalla.
 
+
 Fase Final:
+	TODO: ver cuántas se activan y cómo?
 	Permite activar las cartas mágicas en la región MyT:
 		si está boca abajo, se la da vuelta.
 	Puede suceder que las condiciones para utilizar la carta no se den, como con Fissure y Dark Hole.

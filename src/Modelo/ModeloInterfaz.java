@@ -16,7 +16,7 @@ public interface ModeloInterfaz
 
     void setCartaMagica(Jugador jugador, CartaMagica carta);
 
-    void activarCartaMagica(CartaMagica carta);
+    void activarCartaMagica(Jugador jugador, CartaMagica carta);
 
     void setCartaTrampa(Jugador jugador, CartaTrampa carta);
 

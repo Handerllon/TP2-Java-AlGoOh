@@ -2,7 +2,6 @@ package Modelo.region;
 
 import Modelo.Jugador;
 import Modelo.carta.Carta;
-import Modelo.carta.excepciones.CartaNoExisteEnRegionError;
 import Modelo.observadores.ObservadorRegion;
 import Modelo.region.excepciones.RegionSinEspacioLibre;
 
@@ -41,7 +40,7 @@ public abstract class Region<T extends Carta> implements RegionObservable
             throw new RegionSinEspacioLibre(this);
     }
 
-    public void removerCarta(T carta) throws CartaNoExisteEnRegionError
+    public void removerCarta(T carta)
     {
         if (this.contieneCarta(carta))
         {
@@ -49,7 +48,9 @@ public abstract class Region<T extends Carta> implements RegionObservable
             this.cartas.remove(carta);
             this.notificarSalidaCarta();
         } else
-            throw new CartaNoExisteEnRegionError(carta);
+        {
+            // Se decide no avisarle a nadie.
+        }
     }
 
     public void removerTodasLasCartas()

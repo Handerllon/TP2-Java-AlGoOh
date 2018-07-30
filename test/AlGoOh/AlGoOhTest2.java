@@ -127,7 +127,7 @@ public class AlGoOhTest2
         assertEquals(puntosDeAtaqueEsperadosCartaOponente, cartaJugador2.getPuntos());
     }
 
-    //    Activar la Modelo.carta mágica Olla de la codicia, y verificar que tomo 2 cartas del mazo.
+    //    Activar la carta mágica Olla de la codicia, y verificar que tomo 2 cartas del mazo.
     @Test
     public void test03SeUsaCartaOllaDeLaCodiciaYSeVerificaQueLaCantidadDeCartasEnLaManoSeanCorrectas()
     {
@@ -146,6 +146,7 @@ public class AlGoOhTest2
         int cartasAntesDeJugar = jugador1.getCantidadDeCartasEnMano();
 
         jugador1.enviarARegion(cartaOllaDeLaCodicia);
+        cartaOllaDeLaCodicia.cambiarOrientacion();
         cartaOllaDeLaCodicia.efecto();
 
         int cartasDespuesDeJugar = jugador1.getCantidadDeCartasEnMano();

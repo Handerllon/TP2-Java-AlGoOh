@@ -44,15 +44,21 @@ public interface ControladorInterfaz
 
     void summonCartaMonstruo(Jugador solicitante, Carta carta) throws NoSePuedeEnviarCartaMonstruoARegionError;
 
+    // -------------
     // Set.
+    // -------------
     void setCartaTrampa(Jugador solicitante, Carta carta) throws NoSePuedeEnviarMyTARegionError;
 
     void setCartaMagica(Jugador solicitante, Carta carta) throws NoSePuedeEnviarMyTARegionError;
 
+    // -------------
     // Activar.
+    // -------------
     void activarCartaTrampa(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError;
 
     void activarCartaMagica(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError;
+
+    void activarCartaMagicaDesdeRegionMyT(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError;
 
     void activarCartaCampo(Jugador solicitante, Carta carta) throws NoSePuedeEnviarARegionCampoError;
 

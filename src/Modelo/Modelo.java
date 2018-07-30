@@ -171,7 +171,8 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     }
 
     @Override
-    public void notificarCambioEnPuntosDeVida(){
+    public void notificarCambioEnPuntosDeVida()
+    {
         observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.cambiaronLosPuntosDeVida());
     }
 
@@ -320,9 +321,8 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         jugador.enviarARegion(carta);
     }
 
-    // TODO: ver cómo hacer para que se active desde la mano.
     @Override
-    public void activarCartaMagica(CartaMagica carta)
+    public void activarCartaMagica(Jugador jugador, CartaMagica carta)
     {
         this.flipBocaArriba(carta);
         carta.efecto();

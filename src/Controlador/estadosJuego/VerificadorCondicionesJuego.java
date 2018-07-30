@@ -135,7 +135,25 @@ public final class VerificadorCondicionesJuego
         return new EstadoVerificadorBueno();
     }
 
-    public EstadoVerificador sePuedeUsarMagica(Jugador solicitante, Carta carta)
+    public EstadoVerificador sePuedeActivarMagicaDesdeMano(Jugador solicitante, Carta carta)
+    {
+        if (carta.getPropietario() != solicitante)
+        {
+            return new SolicitanteNoEsPropietarioDeCartaError();
+        } else if (!jugadorPuedeJugar(solicitante))
+        {
+            return new JugadorNoPermitidoParaJugarError(solicitante);
+        } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
+        {
+            return new NoEsFasePreparacionError();
+        } else if (!carta.esMagica())
+        {
+            return new NoEsCartaMyTError();
+        }
+        return new EstadoVerificadorBueno();
+    }
+
+    public EstadoVerificador sePuedeActivarMagicaDesdeRegionMyT(Jugador solicitante, Carta carta)
     {
         if (carta.getPropietario() != solicitante)
         {

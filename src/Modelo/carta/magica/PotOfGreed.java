@@ -12,9 +12,12 @@ public class PotOfGreed extends CartaMagica
         this.nombre = "Pot of Greed";
     }
 
-    public void efecto()
+    protected void efectoParticular()
     {
-        this.getPropietario().tomarCarta();
-        this.getPropietario().tomarCarta();
+        if (this.estaBocaArriba())
+        {
+            this.getPropietario().tomarCarta();
+            this.getPropietario().tomarCarta();
+        }
     }
 }

@@ -13,11 +13,14 @@ public class Fissure extends CartaMagica
         this.nombre = "Fissure";
     }
 
-    public void efecto()
+    protected void efectoParticular()
     {
 
-        CartaMonstruo cartaADestruir = this.getOponente().getMonstruoConMenorAtaque();
+        if (this.estaBocaArriba())
+        {
+            CartaMonstruo cartaADestruir = this.getOponente().getMonstruoConMenorAtaque();
 
-        this.getOponente().destruirCarta(cartaADestruir);
+            this.getOponente().destruirCarta(cartaADestruir);
+        }
     }
 }

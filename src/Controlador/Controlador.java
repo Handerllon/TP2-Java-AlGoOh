@@ -291,7 +291,10 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
         }
     }
 
+    // -------------
     // Set.
+    // -------------
+    // Envía la carta trampa a la región mágicas y trampa con orientación boca abajo.
     @Override
     public void setCartaTrampa(Jugador solicitante, Carta carta) throws NoSePuedeEnviarMyTARegionError
     {
@@ -305,6 +308,7 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
         }
     }
 
+    // Se usa desde la mano: Envía la carta mágica a la región mágicas y trampa con orientación boca abajo.
     @Override
     public void setCartaMagica(Jugador solicitante, Carta carta) throws NoSePuedeEnviarMyTARegionError
     {
@@ -318,7 +322,10 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
         }
     }
 
+    // -------------
     // Activar.
+    // -------------
+    // Se usa desde la región MyT: activa la carta trampa, poniéndola boca arriba.
     @Override
     public void activarCartaTrampa(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError
     {
@@ -332,16 +339,31 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
         }
     }
 
+    // Se usa desde la mano: activa la carta mágica, poniéndola boca arriba.
     @Override
     public void activarCartaMagica(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError
     {
-        estadoVerificador = verificadorCondicionesJuego.sePuedeUsarMagica(solicitante, carta);
+        estadoVerificador = verificadorCondicionesJuego.sePuedeActivarMagicaDesdeMano(solicitante, carta);
         if (estadoVerificador.esFallido())
         {
             throw new NoSePuedeUsarMyTError(solicitante, estadoVerificador);
         } else
         {
-            this.modelo.activarCartaMagica((CartaMagica) carta);
+            this.modelo.activarCartaMagica(solicitante, (CartaMagica) carta);
+        }
+    }
+
+    // Se usa desde la región MyT: activa la carta mágica, poniéndola boca arriba.
+    @Override
+    public void activarCartaMagicaDesdeRegionMyT(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError
+    {
+        estadoVerificador = verificadorCondicionesJuego.sePuedeActivarMagicaDesdeRegionMyT(solicitante, carta);
+        if (estadoVerificador.esFallido())
+        {
+            throw new NoSePuedeUsarMyTError(solicitante, estadoVerificador);
+        } else
+        {
+            this.modelo.activarCartaMagica(solicitante, (CartaMagica) carta);
         }
     }
 

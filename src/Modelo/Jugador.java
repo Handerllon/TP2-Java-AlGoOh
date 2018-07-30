@@ -139,6 +139,9 @@ public class Jugador implements FinDeJuegoObservable, JugadorObservable
         this.mano.quitarCarta(cartaTrampa);
     }
 
+    // --------------------------------------------------------------------
+    // Métodos de juego de destrucción de cartas.
+    // --------------------------------------------------------------------
     public void destruirCarta(CartaMonstruo carta)
     {
         this.regionMonstruos.removerCarta(carta);
@@ -150,10 +153,6 @@ public class Jugador implements FinDeJuegoObservable, JugadorObservable
         this.regionMagicasYTrampas.removerCarta(carta);
         this.regionCementerio.colocarCarta(carta);
     }
-
-    // --------------------------------------------------------------------
-    // Métodos de juego de destrucción de cartas.
-    // --------------------------------------------------------------------
 
     public void destruirCarta(CartaCampo carta)
     {
@@ -168,6 +167,12 @@ public class Jugador implements FinDeJuegoObservable, JugadorObservable
         cartas.forEach(item -> this.regionCementerio.colocarCarta(item));
 
         this.regionMonstruos.removerTodasLasCartas();
+    }
+
+    public void destruirCarta(CartaMagica cartaMagica)
+    {
+        this.regionMagicasYTrampas.removerCarta(cartaMagica);
+        this.regionCementerio.colocarCarta(cartaMagica);
     }
 
     // --------------------------------------------------------------------

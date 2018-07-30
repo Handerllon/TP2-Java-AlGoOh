@@ -11,7 +11,7 @@ public abstract class Carta implements Orientacion, CartaObservable
     protected String nombre;
     protected boolean orientacionArriba;
     protected String rutaImagen;
-    private Jugador jugador, oponente;
+    protected Jugador jugador, oponente;
     private ArrayList<ObservadorDeCarta> observadores = new ArrayList<>();
 
     public Carta(Jugador jugador, Jugador oponente, String rutaImagen)

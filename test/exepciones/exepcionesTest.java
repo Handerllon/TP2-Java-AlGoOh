@@ -3,7 +3,10 @@ package exepciones;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.campo.FabricaCartasCampo;
-import Modelo.carta.excepciones.*;
+import Modelo.carta.excepciones.CartaInvalidaError;
+import Modelo.carta.excepciones.ManoLlena;
+import Modelo.carta.excepciones.NoHayCartasParaSacrificarError;
+import Modelo.carta.excepciones.NoHayTresDragonesBlancosParaSacrificioError;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.magica.FabricaCartasMagicas;
 import Modelo.carta.mano.Mano;
@@ -16,17 +19,6 @@ import org.junit.Test;
 
 public class exepcionesTest
 {
-    @Test(expected = CartaNoExisteEnRegionError.class)
-    public void test01CartaNoExisteEnRegion()
-    {
-
-        RegionMonstruos region = new RegionMonstruos(null);
-
-        CartaMonstruo unaCartaMonstruo = new GaiaTheFierceKnight(null, null);
-
-        region.removerCarta(unaCartaMonstruo);
-    }
-
     @Test(expected = CartaInvalidaError.class)
     public void test02CartaInvalidaErrorEnFabricaDeCartasCampo()
     {

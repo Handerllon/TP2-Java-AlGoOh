@@ -11,6 +11,9 @@ public class VidaVista implements ObservadorDeModelo
     private Vista vista;
     private Label vidaJugador;
     private Label vidaOponente;
+    private double porcentajeDePantallaHorizontal = 10.41;
+    private double porcentajeDePantallaVertical = 18.51;
+    private double porcentajeDeTamanioDeFuente = 0.05;
 
     public VidaVista(Vista vista)
     {
@@ -26,14 +29,11 @@ public class VidaVista implements ObservadorDeModelo
 
     private void inicializar()
     {
+        this.vidaJugador.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDePantallaHorizontal, this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
+        this.vidaOponente.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDePantallaHorizontal, this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
 
-        // TODO: número mágico. Para qué se divide por 1920?
-        this.vidaJugador.setPrefSize((this.vista.getResolucionHorizontal() * 200) / 1920, (this.vista.getResolucionVertical() * 200) / 1080);
-        this.vidaOponente.setPrefSize((this.vista.getResolucionHorizontal() * 200) / 1920, (this.vista.getResolucionVertical() * 200) / 1080);
-
-        // TODO: número mágico. Por qué no se usa algún porcentaje de alguna medida? por ej., de la resolución horiz.?
-        this.vidaJugador.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical() * 0.05));
-        this.vidaOponente.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical() * 0.05));
+        this.vidaJugador.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical() * porcentajeDeTamanioDeFuente));
+        this.vidaOponente.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical() * porcentajeDeTamanioDeFuente));
 
         this.vidaJugador.setTextFill(Color.web("#910101"));
         this.vidaOponente.setTextFill(Color.web("#910101"));

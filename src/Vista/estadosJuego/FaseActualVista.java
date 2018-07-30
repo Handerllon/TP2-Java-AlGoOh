@@ -9,14 +9,17 @@ public class FaseActualVista
 {
     private Vista vista;
     private Label labelFaseActual;
+    private double porcentajeDePantallaHorizontal = 0.48;
+    private double porcentajeDePantallaVertical = 0.157;
+    private double porcentajeDeTamanioDeFuente = 0.05;
 
     public FaseActualVista(Vista vista)
     {
         this.vista = vista;
         this.labelFaseActual = new Label();
 
-        this.labelFaseActual.setPrefSize((this.vista.getResolucionHorizontal() * (1 - 0.520)), this.vista.getResolucionVertical() * 0.157);
-        this.labelFaseActual.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical() * 0.05));
+        this.labelFaseActual.setPrefSize((this.vista.getResolucionHorizontal() * porcentajeDePantallaHorizontal), this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
+        this.labelFaseActual.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical()*porcentajeDeTamanioDeFuente));
         this.labelFaseActual.setTextFill(Color.web("#910101"));
 
         actualizar();

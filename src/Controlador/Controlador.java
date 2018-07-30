@@ -254,7 +254,7 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
                 this.modelo.setCartaMonstruo(solicitante, (CartaMonstruo) carta);
             } else
             {
-                Sacrificio sacrificios = this.vista.pedirSacrificios();
+                Sacrificio sacrificios = this.modelo.getSacrificio((CartaMonstruo)carta);
                 this.modelo.setCartaMonstruo(solicitante, (CartaMonstruo) carta, sacrificios);
             }
             this.maquinaTurnos.seColocaCartaMonstruoEnRegionEnTurnoActual();
@@ -276,7 +276,7 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
                 this.modelo.summonCartaMonstruo(solicitante, (CartaMonstruo) carta);
             } else
             {
-                Sacrificio sacrificios = this.vista.pedirSacrificios();
+            	Sacrificio sacrificios = this.modelo.getSacrificio((CartaMonstruo)carta);
                 this.modelo.summonCartaMonstruo(solicitante, (CartaMonstruo) carta, sacrificios);
             }
             this.maquinaTurnos.seColocaCartaMonstruoEnRegionEnTurnoActual();

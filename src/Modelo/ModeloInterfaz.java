@@ -34,6 +34,8 @@ public interface ModeloInterfaz
 
     void summonCartaMonstruo(Jugador jugador, CartaMonstruo carta, Sacrificio sacrificios);
 
+    Sacrificio getSacrificio(CartaMonstruo carta);
+    
     boolean requiereSacrificios(CartaMonstruo carta);
 
     boolean haySuficientesCartasParaSacrificar(CartaMonstruo carta);

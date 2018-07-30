@@ -165,15 +165,6 @@ public class Vista implements ObservadorDeModelo
         this.escena.mostrarJugadorActual();
     }
 
-    // -------------------------------
-    // Solicitudes al usuario.
-    // -------------------------------
-    public Sacrificio pedirSacrificios()
-    {
-        return null;
-    }
-
-
     // --------------------------------------------------------------------
     // Métodos de terminación.
     // --------------------------------------------------------------------

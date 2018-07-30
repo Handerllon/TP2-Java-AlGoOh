@@ -9,18 +9,7 @@ Separar algunos píxeles los botones del popup de las cartas.
 Si el usuario aprieta un botón y sale un popup, que lo pueda cerrar clickeando en cualquier parte que no sea el popup.
 
 Bugs:
-1. Implementar en Vista esta parte del código, ya que lo necesito para el bug "2":
-	// -------------------------------
-    // Solicitudes al usuario.
-    // -------------------------------
-    public Sacrificio pedirSacrificios()
-    {
-        // TODO.
-        return null;
-    }
-	
-La primera arma un objeto Sacrificio a partir de los que le indica el jugador.
-	
+1. Implementar los sacrificios automaticos
 2. Creo que hay un problema con la fase ataque/fase trampa.
 3. Hacer uso de los observers particulares así aceleramos todo.
 4. RegionesCementerioVista: que se vea el reverso de la carta cuando hay al menos 1 carta en el cementerio.
@@ -28,3 +17,4 @@ La primera arma un objeto Sacrificio a partir de los que le indica el jugador.
 6. Si queda tiempo: No mostrar los popups si el usuario cliquea la carta del oponente.
 7. Hay un bug con el conteo de las partes de exodia: cuenta todas las partes presentes en ambas manos.
 8. Cuando se pierde por quedarse sin cartas, tira un NullPtrException.
+9. Ver caso de carta Jinzo#7

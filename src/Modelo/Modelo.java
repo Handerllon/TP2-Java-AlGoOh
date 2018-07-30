@@ -408,6 +408,12 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         this.setModoDefensa(carta);
         jugador.enviarARegion(carta);
     }
+    
+    @Override
+	public Sacrificio getSacrificio(CartaMonstruo carta) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
     @Override
     public void setCartaMonstruo(Jugador jugador, CartaMonstruo carta, Sacrificio sacrificios)
@@ -523,4 +529,6 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
 
         cartaAtacante.atacar();
     }
+
+	
 }

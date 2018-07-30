@@ -62,7 +62,6 @@ public class RegionesMonstruosGrid extends GridPane
 
     public void clear()
     {
-        // TODO: Ver como hacer mas lindo esto
         this.botones = new ArrayList<>();
         RegionesMonstruoBoton boton;
         for (int i = 0; i < cantidadBotonesGrid; i++)
@@ -82,7 +81,6 @@ public class RegionesMonstruosGrid extends GridPane
 
     public void actualizar(ArrayList<CartaMonstruo> cartasEnRegionMonstruos)
     {
-        // TODO: reemplazar por lambda usando un iterator de cartasEnRegionMonstruo.
         for (int i = 0; i < cartasEnRegionMonstruos.size(); i++)
         {
             botones.get(i).actualizar(cartasEnRegionMonstruos.get(i));

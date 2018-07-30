@@ -85,14 +85,12 @@ public final class EscenaNula implements Escena
     @Override
     public void mostrarJugadorActual()
     {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void mostrarFaseActual()
     {
-        // TODO Auto-generated method stub
 
     }
 }

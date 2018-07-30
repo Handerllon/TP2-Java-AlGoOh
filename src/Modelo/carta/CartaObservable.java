@@ -8,5 +8,5 @@ public interface CartaObservable
 
     void eliminarObservador(ObservadorDeCarta observador);
 
-    void notificarEvento();
+    void notificarCambioDeOrientacionDeCarta();
 }

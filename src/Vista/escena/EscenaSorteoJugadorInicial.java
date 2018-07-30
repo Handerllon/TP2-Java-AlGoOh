@@ -9,25 +9,31 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.net.URL;
 
 public final class EscenaSorteoJugadorInicial implements Escena
 {
     private static String direccion_video_sorteo = "src/resources/video/draw_galaxy.mp4";
+    private static String direccion_sonido_sorteo = "src/resources/audio/player_draw.mp3";
     private static int ANCHO_CAMPO_NOMBRE = 15;
     private static Vista vista;
     private static Escena proximaEscena = EscenaNula.getInstancia();
-    private static MediaPlayer mplayer;
+    private static MediaPlayer mplayerVideo;
+    private static MediaPlayer mplayerMusic;
     private static EscenaSorteoJugadorInicial instancia = null;
     private ModeloObservable modelo;
     private Scene escenaSorteoJugadorInicial;
     private Stage primaryStage;
     private GridPane grid;
+    private AudioClip audioClipPlayButton;
+    private double playButtonVolume = 0.3;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -86,16 +92,27 @@ public final class EscenaSorteoJugadorInicial implements Escena
         HBox paneButtons = new HBox(10, btnOK, btnSalir);
 
         // -------------------------------
-        // Video.
+        // Multimedia.
         // -------------------------------
-        File f = new File(direccion_video_sorteo);
-        Media media = new Media(f.toURI().toString());
-        this.mplayer = new MediaPlayer(media);
-        this.mplayer.setCycleCount(MediaPlayer.INDEFINITE);
-        MediaView mview = new MediaView(mplayer);
+        File fVideo = new File(direccion_video_sorteo);
+        Media video = new Media(fVideo.toURI().toString());
+        this.mplayerVideo = new MediaPlayer(video);
+        this.mplayerVideo.setCycleCount(MediaPlayer.INDEFINITE);
+        MediaView mview = new MediaView(mplayerVideo);
         mview.setFitWidth(700);
         mview.setFitHeight(500);
         HBox paneVideo = new HBox(mview);
+
+        File fMusic = new File(direccion_sonido_sorteo);
+        Media music = new Media(fMusic.toURI().toString());
+        this.mplayerMusic = new MediaPlayer(music);
+        this.mplayerMusic.setVolume(0.05);
+        this.mplayerMusic.setCycleCount(MediaPlayer.INDEFINITE);
+
+        URL mediaUrl;
+        mediaUrl = this.getClass().getClassLoader().getResource("resources/audio/start.wav");
+        this.audioClipPlayButton = new AudioClip(mediaUrl.toExternalForm());
+        this.audioClipPlayButton.setVolume(playButtonVolume);
 
         // -------------------------------
         // Setting grid.
@@ -121,6 +138,7 @@ public final class EscenaSorteoJugadorInicial implements Escena
 
     private void jugarBtn_click()
     {
+        this.audioClipPlayButton.play();
         this.vista.setProximaEscena(this.cambiarEscena());
         this.cerrar();
 
@@ -159,19 +177,21 @@ public final class EscenaSorteoJugadorInicial implements Escena
     public void finDeJuego()
     {
         this.stopMedia();
-        this.vista.setProximaEscena(EscenaFinDeJuego.getInstancia(this.modelo, this.vista));
+        this.vista.setProximaEscena(new EscenaFinDeJuego(this.modelo, this.vista));
     }
 
     @Override
     public void playMedia()
     {
-        this.mplayer.play();
+        this.mplayerVideo.play();
+        this.mplayerMusic.play();
     }
 
     @Override
     public void stopMedia()
     {
-        this.mplayer.stop();
+        this.mplayerVideo.stop();
+        this.mplayerMusic.stop();
     }
 
     @Override
@@ -190,14 +210,12 @@ public final class EscenaSorteoJugadorInicial implements Escena
     @Override
     public void mostrarJugadorActual()
     {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void mostrarFaseActual()
     {
-        // TODO Auto-generated method stub
 
     }
 }

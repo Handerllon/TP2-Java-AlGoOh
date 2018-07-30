@@ -48,10 +48,4 @@ public class RegionCampo extends Region<CartaCampo> implements ObservadorRegion<
             this.cartas.iterator().next().deshacerEfecto(carta);
         }
     }
-
-    @Override
-    public void huboCambios()
-    {
-        // No interesa saber si hubo cambios. Cada caso particular se implementa con los otros dos métodos.
-    }
 }

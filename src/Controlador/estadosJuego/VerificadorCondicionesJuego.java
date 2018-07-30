@@ -74,9 +74,9 @@ public final class VerificadorCondicionesJuego
         } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
         {
             return new NoEsFasePreparacionError();
-        } else if (this.maquinaTurnos.yaMandoMonstruoARegionEnTurnoActual())
+        } else if (this.maquinaTurnos.seColocoCartaMonstruoEnRegionEnTurnoActual())
         {
-            return new YaSeMandoMonstruoARegionEnTurnoActualError();
+            return new YaSeMandoCartaMonstruoARegionEnTurnoActualError();
         } else if (!carta.esMonstruo())
         {
             return new NoEsCartaMonstruo();
@@ -171,7 +171,7 @@ public final class VerificadorCondicionesJuego
         return new EstadoVerificadorBueno();
     }
 
-    public EstadoVerificador sePuedeUsarCampo(Jugador solicitante, Carta carta)
+    public EstadoVerificador sePuedeActivarCampoDesdeMano(Jugador solicitante, Carta carta)
     {
         if (carta.getPropietario() != solicitante)
         {
@@ -204,6 +204,9 @@ public final class VerificadorCondicionesJuego
         } else if (this.maquinaTurnos.yaCambioOrientacionEnTurnoActual(carta))
         {
             return new CartaNoPuedeCambiarOrientacionEnTurnoActualError();
+        } else if (this.maquinaTurnos.yaMandoCartaARegionEnTurnoActual(carta))
+        {
+            return new YaSeMandoCartaARegionEnTurnoActualError();
         }
 
         return new EstadoVerificadorBueno();
@@ -211,7 +214,6 @@ public final class VerificadorCondicionesJuego
 
     public EstadoVerificador sePuedeCambiarModoCarta(Jugador solicitante, Carta carta)
     {
-
         if (!jugadorPuedeJugar(solicitante))
         {
             return new JugadorNoPermitidoParaJugarError(solicitante);
@@ -224,6 +226,9 @@ public final class VerificadorCondicionesJuego
         } else if (!carta.esMonstruo())
         {
             return new NoEsCartaMonstruo();
+        } else if (this.maquinaTurnos.yaMandoCartaARegionEnTurnoActual(carta))
+        {
+            return new YaSeMandoCartaARegionEnTurnoActualError();
         }
 
         return new EstadoVerificadorBueno();

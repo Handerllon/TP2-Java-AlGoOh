@@ -4,12 +4,10 @@ import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.campo.FabricaCartasCampo;
 import Modelo.carta.excepciones.CartaInvalidaError;
-import Modelo.carta.excepciones.ManoLlena;
 import Modelo.carta.excepciones.NoHayCartasParaSacrificarError;
 import Modelo.carta.excepciones.NoHayTresDragonesBlancosParaSacrificioError;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.magica.FabricaCartasMagicas;
-import Modelo.carta.mano.Mano;
 import Modelo.carta.monstruo.*;
 import Modelo.carta.trampa.CartaTrampa;
 import Modelo.carta.trampa.FabricaCartasTrampa;
@@ -77,19 +75,6 @@ public class exepcionesTest
         Sacrificio sacrificio = new Sacrificio();
 
         carta.summon(sacrificio);
-    }
-
-    @Test(expected = ManoLlena.class)
-    public void test08NoSePuedenAgregarCartasALaMano()
-    {
-        Mano mano = new Mano(null);
-
-        CartaMonstruo carta = new GaiaTheFierceKnight(null, null);
-
-        for (int i = 0; i < 8; i++)
-        {
-            mano.agregarCarta(carta);
-        }
     }
 
     @Test(expected = RegionSinEspacioLibre.class)

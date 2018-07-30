@@ -7,7 +7,6 @@ import Modelo.Modelo;
 import Modelo.carta.Carta;
 import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
-import Modelo.carta.excepciones.ManoLlena;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.trampa.CartaTrampa;
@@ -78,8 +77,8 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
 
         for (int i = 0; i < cantidadCartasTomarInicialmente; i++)
         {
-            this.modelo.tomarCarta(this.modelo.getJugador());
-            this.modelo.tomarCarta(this.modelo.getOponente());
+            this.modelo.tomarCarta(getJugadorActual());
+            this.modelo.tomarCarta(getJugadorActual().getOponente());
         }
 
         this.accionarFaseInicialAutomatica();
@@ -194,13 +193,7 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
 
     private void accionarFaseInicialAutomatica()
     {
-        try
-        {
-            tomarCarta(getJugadorActual());
-        } catch (ManoLlena manoLlena)
-        {
-            this.vista.avisoManoLlena(manoLlena);
-        }
+        tomarCarta(getJugadorActual());
 
         try
         {
@@ -259,13 +252,13 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
             {
 
                 this.modelo.setCartaMonstruo(solicitante, (CartaMonstruo) carta);
-                this.maquinaTurnos.seColocaCartaMonstruoEnRegionEnTurnoActual((CartaMonstruo) carta);
             } else
             {
                 Sacrificio sacrificios = this.vista.pedirSacrificios();
                 this.modelo.setCartaMonstruo(solicitante, (CartaMonstruo) carta, sacrificios);
-                this.maquinaTurnos.seColocaCartaMonstruoEnRegionEnTurnoActual((CartaMonstruo) carta);
             }
+            this.maquinaTurnos.seColocaCartaMonstruoEnRegionEnTurnoActual();
+            this.maquinaTurnos.seColocaCartaEnRegionEnTurnoActual(carta);
         }
     }
 
@@ -281,27 +274,27 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
             if (!this.modelo.requiereSacrificios((CartaMonstruo) carta))
             {
                 this.modelo.summonCartaMonstruo(solicitante, (CartaMonstruo) carta);
-                this.maquinaTurnos.seColocaCartaMonstruoEnRegionEnTurnoActual((CartaMonstruo) carta);
             } else
             {
                 Sacrificio sacrificios = this.vista.pedirSacrificios();
                 this.modelo.summonCartaMonstruo(solicitante, (CartaMonstruo) carta, sacrificios);
-                this.maquinaTurnos.seColocaCartaMonstruoEnRegionEnTurnoActual((CartaMonstruo) carta);
             }
+            this.maquinaTurnos.seColocaCartaMonstruoEnRegionEnTurnoActual();
+            this.maquinaTurnos.seColocaCartaEnRegionEnTurnoActual(carta);
         }
     }
 
     // -------------
     // Set.
     // -------------
-    // Envía la carta trampa a la región mágicas y trampa con orientación boca abajo.
+    // Se usa desde la mano: Envía la carta trampa a la región mágicas y trampa con orientación boca abajo.
     @Override
     public void setCartaTrampa(Jugador solicitante, Carta carta) throws NoSePuedeEnviarMyTARegionError
     {
         estadoVerificador = verificadorCondicionesJuego.sePuedeEnviarARegionMyT(solicitante, carta);
         if (estadoVerificador.esFallido())
         {
-            throw new NoSePuedeUsarMyTError(solicitante, estadoVerificador);
+            throw new NoSePuedeEnviarMyTARegionError(solicitante, estadoVerificador);
         } else
         {
             this.modelo.setCartaTrampa(solicitante, (CartaTrampa) carta);
@@ -315,7 +308,7 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
         estadoVerificador = verificadorCondicionesJuego.sePuedeEnviarARegionMyT(solicitante, carta);
         if (estadoVerificador.esFallido())
         {
-            throw new NoSePuedeUsarMyTError(solicitante, estadoVerificador);
+            throw new NoSePuedeEnviarMyTARegionError(solicitante, estadoVerificador);
         } else
         {
             this.modelo.setCartaMagica(solicitante, (CartaMagica) carta);
@@ -341,7 +334,7 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
 
     // Se usa desde la mano: activa la carta mágica, poniéndola boca arriba.
     @Override
-    public void activarCartaMagica(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError
+    public void activarCartaMagicaDesdeMano(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError
     {
         estadoVerificador = verificadorCondicionesJuego.sePuedeActivarMagicaDesdeMano(solicitante, carta);
         if (estadoVerificador.esFallido())
@@ -349,7 +342,7 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
             throw new NoSePuedeUsarMyTError(solicitante, estadoVerificador);
         } else
         {
-            this.modelo.activarCartaMagica(solicitante, (CartaMagica) carta);
+            this.modelo.activarCartaMagicaDesdeMano(solicitante, (CartaMagica) carta);
         }
     }
 
@@ -363,14 +356,14 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
             throw new NoSePuedeUsarMyTError(solicitante, estadoVerificador);
         } else
         {
-            this.modelo.activarCartaMagica(solicitante, (CartaMagica) carta);
+            this.modelo.activarCartaMagicaDesdeRegionMyT(solicitante, (CartaMagica) carta);
         }
     }
 
     @Override
-    public void activarCartaCampo(Jugador solicitante, Carta carta) throws NoSePuedeEnviarARegionCampoError
+    public void activarCartaCampoDesdeMano(Jugador solicitante, Carta carta) throws NoSePuedeEnviarARegionCampoError
     {
-        estadoVerificador = verificadorCondicionesJuego.sePuedeUsarCampo(solicitante, carta);
+        estadoVerificador = verificadorCondicionesJuego.sePuedeActivarCampoDesdeMano(solicitante, carta);
         if (estadoVerificador.esFallido())
         {
             throw new NoSePuedeEnviarARegionCampoError(solicitante, estadoVerificador);
@@ -398,6 +391,21 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
     }
 
     @Override
+    public void cambiarModoCartaMonstruo(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError
+    {
+        estadoVerificador = verificadorCondicionesJuego.sePuedeCambiarModoCarta(solicitante, carta);
+        if (estadoVerificador.esFallido())
+        {
+            throw new NoSePuedeCambiarOrientacionError(solicitante, estadoVerificador);
+        } else
+        {
+            this.modelo.cambiarModoCartaMonstruo((CartaMonstruo) carta);
+            this.maquinaTurnos.seCambiaOrientacionCartaEnTurnoActual(carta);
+        }
+    }
+
+    /*
+    @Override
     public void flipBocaAbajo(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError
     {
         estadoVerificador = verificadorCondicionesJuego.sePuedeCambiarOrientacionCarta(solicitante, carta);
@@ -421,20 +429,6 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
         } else
         {
             this.modelo.flipBocaArriba(carta);
-            this.maquinaTurnos.seCambiaOrientacionCartaEnTurnoActual(carta);
-        }
-    }
-
-    @Override
-    public void cambiarModoCartaMonstruo(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError
-    {
-        estadoVerificador = verificadorCondicionesJuego.sePuedeCambiarModoCarta(solicitante, carta);
-        if (estadoVerificador.esFallido())
-        {
-            throw new NoSePuedeCambiarOrientacionError(solicitante, estadoVerificador);
-        } else
-        {
-            this.modelo.cambiarModoCartaMonstruo((CartaMonstruo) carta);
             this.maquinaTurnos.seCambiaOrientacionCartaEnTurnoActual(carta);
         }
     }
@@ -466,6 +460,7 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
             this.maquinaTurnos.seCambiaOrientacionCartaEnTurnoActual(carta);
         }
     }
+    */
 
     // ------------------------------------
     // Métodos de ataques.

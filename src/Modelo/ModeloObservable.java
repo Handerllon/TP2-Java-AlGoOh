@@ -21,7 +21,15 @@ public interface ModeloObservable
 
     void notificarEgresoCartaAMano();
 
+    void notificarIngresoCartaARegion();
+
+    void notificarEgresoCartaARegion();
+
     void notificarCambioEnPuntosDeVida();
+
+    void notificarCambioDeOrientacionCarta();
+
+    void notificarCambioDeModoCarta();
 
     // ------------------------------------
     // Métodos de consultas.

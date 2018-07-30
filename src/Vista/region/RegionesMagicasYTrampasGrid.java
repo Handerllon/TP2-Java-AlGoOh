@@ -65,7 +65,6 @@ public class RegionesMagicasYTrampasGrid extends GridPane
 
     public void clear()
     {
-        // TODO: Ver como hacer mas lindo esto
         this.botones = new ArrayList<>();
         RegionesMagicasYTrampasBoton boton;
         for (int i = 0; i < cantidadBotonesGrid; i++)
@@ -80,7 +79,6 @@ public class RegionesMagicasYTrampasGrid extends GridPane
 
     public void actualizarRegion(ArrayList<Carta> cartasEnRegionMagicasYTrampas)
     {
-        // TODO: reemplazar por lambda usando un iterator de cartasEnRegionMonstruo.
         for (int i = 0; i < cartasEnRegionMagicasYTrampas.size(); i++)
         {
             botones.get(i).actualizar(cartasEnRegionMagicasYTrampas.get(i));

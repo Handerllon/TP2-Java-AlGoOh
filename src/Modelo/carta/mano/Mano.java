@@ -2,7 +2,6 @@ package Modelo.carta.mano;
 
 import Modelo.Jugador;
 import Modelo.carta.Carta;
-import Modelo.carta.excepciones.ManoLlena;
 import Modelo.finDeJuego.CausaCincoPartesExodiaReunidas;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.FinDeJuegoObservable;
@@ -28,7 +27,7 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
         this.jugadorAsociado = jugador;
     }
 
-    public void agregarCarta(Carta carta) throws ManoLlena
+    public void agregarCarta(Carta carta)
     {
         if (this.manoLlena())
         {
@@ -37,20 +36,11 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
             // en cero.
             int randomNum = ThreadLocalRandom.current().nextInt(0, cantidadDeCartas());
             quitarCarta(getCartas().get(randomNum));
-
-            this.cartas.add(carta);
-            this.verificarAgregacionParteExodia(carta);
-            this.verificarExodiaCompleto(carta);
-            this.notificarIngresoDeCartaAMano();
-
-            throw new ManoLlena(this.jugadorAsociado);
-        } else
-        {
-            this.cartas.add(carta);
-            this.verificarAgregacionParteExodia(carta);
-            this.verificarExodiaCompleto(carta);
-            this.notificarIngresoDeCartaAMano();
         }
+        this.cartas.add(carta);
+        this.verificarAgregacionParteExodia(carta);
+        this.verificarExodiaCompleto(carta);
+        this.notificarIngresoDeCartaAMano();
     }
 
     public void quitarCarta(Carta carta)
@@ -58,8 +48,8 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
         if (!this.cartas.isEmpty())
         {
             this.cartas.remove(carta);
-            this.notificarEgresoDeCartaAMano();
             this.verificarRemocionParteExodia(carta);
+            this.notificarEgresoDeCartaAMano();
         }
     }
 

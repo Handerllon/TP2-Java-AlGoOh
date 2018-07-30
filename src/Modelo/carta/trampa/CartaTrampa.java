@@ -16,9 +16,9 @@ public abstract class CartaTrampa extends Carta implements CartaTrampaObservable
         super(jugador, oponente, locacionDeImagen);
     }
 
-    // ------------------------------------
-    // Metodos de observador de modelo.
-    // ------------------------------------
+    // --------------------------------------
+    // Metodos de observador de carta trampa.
+    // --------------------------------------
     @Override
     public void registrarObsevadorCartaTrampa(ObservadorDeCartaTrampa observer)
     {

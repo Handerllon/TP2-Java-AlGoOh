@@ -10,7 +10,5 @@ public interface RegionObservable
 
     void notificarIngresoCarta();
 
-    void notificarSalidaCarta();
-
-    void notificarCambios();
+    void notificarEgresoDeCarta();
 }

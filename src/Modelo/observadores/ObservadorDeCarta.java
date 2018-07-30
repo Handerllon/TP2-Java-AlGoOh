@@ -2,5 +2,5 @@ package Modelo.observadores;
 
 public interface ObservadorDeCarta
 {
-    void huboCambios();
+    void cartaCambioDeOrientacion();
 }

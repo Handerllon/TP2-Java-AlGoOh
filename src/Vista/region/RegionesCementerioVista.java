@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 public class RegionesCementerioVista implements ObservadorDeModelo
 {
     private static String estiloRegion = "-fx-background-color: Transparent";
+    private static String rutaImagenReversoCarta = "resources/imagenes/cartaReverso.jpg";
     private Vista vista;
     private static double porcentajeDeAnchoDeLaCarta = 0.0496;
     private static double porcentajeDeAltoDeLaCarta = 0.1287;
@@ -55,7 +56,7 @@ public class RegionesCementerioVista implements ObservadorDeModelo
     @Override
     public void huboCambios()
     {
-        //TODO Ver que mostrar en el cementerio
+        //TODO: cuando hay al menos 1 carta en el cementerio, se debería mostrar 'rutaImagenReversoCarta'.
     }
 
     @Override
@@ -77,7 +78,31 @@ public class RegionesCementerioVista implements ObservadorDeModelo
     }
 
     @Override
+    public void ingresoCartaARegion()
+    {
+
+    }
+
+    @Override
+    public void egresoCartaARegion()
+    {
+
+    }
+
+    @Override
     public void cambiaronLosPuntosDeVida()
+    {
+
+    }
+
+    @Override
+    public void cartaCambioDeOrientacion()
+    {
+
+    }
+
+    @Override
+    public void cartaCambioDeModo()
     {
 
     }

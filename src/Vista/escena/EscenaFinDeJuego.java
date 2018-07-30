@@ -19,14 +19,14 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public final class EscenaFinDeJuego implements Escena
+public class EscenaFinDeJuego implements Escena
 {
+    private static final double soundGameEndVolume = 0.3;
     private static String direccion_imagen = "resources/imagenes/end.jpg";
-    private static String direccion_sonido_gano = "src/resources/audio/winner.mp3";
-    private static String direccion_sonido_perdio = "src/resources/audio/gameover.mp3";
+    private static String direccion_sonido_gano = "src/resources/audio/winner_2.wav";
+    private static String direccion_sonido_perdio = "src/resources/audio/gameover_2.wav";
     private static Vista vista;
     private static MediaPlayer mplayer;
-    private static EscenaFinDeJuego instancia = null;
     private ModeloObservable modelo;
     private Stage primaryStage;
     private Scene escenaFinDeJuego;
@@ -35,7 +35,7 @@ public final class EscenaFinDeJuego implements Escena
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
     // --------------------------------------------------------------------
-    private EscenaFinDeJuego(ModeloObservable modelo, Vista vista)
+    public EscenaFinDeJuego(ModeloObservable modelo, Vista vista)
     {
         this.modelo = modelo;
         this.vista = vista;
@@ -44,20 +44,6 @@ public final class EscenaFinDeJuego implements Escena
         this.grid = new GridPane();
 
         this.inicializarEscena();
-    }
-
-    public static EscenaFinDeJuego getInstancia(ModeloObservable modelo, Vista vista)
-    {
-        if (instancia == null)
-        {
-            instancia = new EscenaFinDeJuego(modelo, vista);
-        }
-        return instancia;
-    }
-
-    public EscenaFinDeJuego clone() throws CloneNotSupportedException
-    {
-        throw new CloneNotSupportedException();
     }
 
     private void inicializarEscena()
@@ -94,7 +80,7 @@ public final class EscenaFinDeJuego implements Escena
         // -------------------------------
         Media media = new Media(f.toURI().toString());
         this.mplayer = new MediaPlayer(media);
-        this.mplayer.setCycleCount(MediaPlayer.INDEFINITE);
+        this.mplayer.setVolume(this.soundGameEndVolume);
 
         // -------------------------------
         // Buttons definitions.
@@ -186,14 +172,12 @@ public final class EscenaFinDeJuego implements Escena
     @Override
     public void mostrarJugadorActual()
     {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void mostrarFaseActual()
     {
-        // TODO Auto-generated method stub
 
     }
 }

@@ -58,6 +58,7 @@ public class Mazo implements FinDeJuegoObservable, MazoObservable
             cantidadCartas--;
         }
 
+
         // Agrego todas las que se pueden repetir.
         ArrayList<String> nombresMonstruosNormales = fabricaCartas.getNombresCartasMonstruosNormales();
         for (int i = 0; cantidadCartas > 0; i++)

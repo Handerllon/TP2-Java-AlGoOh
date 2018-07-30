@@ -7,8 +7,11 @@ import Modelo.carta.ataque.EstrategiaAtaque;
 import Modelo.carta.ataque.EstrategiaAtaqueDefault;
 import Modelo.carta.modo.Modo;
 import Modelo.carta.modo.ModoDefensa;
+import Modelo.observadores.ObservadorDeCartaMonstruo;
 
-public abstract class CartaMonstruo extends Carta
+import java.util.ArrayList;
+
+public abstract class CartaMonstruo extends Carta implements CartaMonstruoObservable
 {
     protected int puntosAtaque;
     protected int puntosDefensa;
@@ -16,6 +19,7 @@ public abstract class CartaMonstruo extends Carta
     protected int estrellas;
     protected Modo modo;
     protected EstrategiaAtaque estrategiaAtaque;
+    protected ArrayList<ObservadorDeCartaMonstruo> observadoresDeCartasMonstruo = new ArrayList<>();
 
     public CartaMonstruo(int puntosDefensa, int puntosAtaque, Jugador jugador, Jugador oponente, String locacionDeImagen)
     {
@@ -34,7 +38,7 @@ public abstract class CartaMonstruo extends Carta
     {
         this.modo.cambiarModo(this);
         this.actualizarPuntos();
-        super.notificarEvento();
+        this.notificarCambioDeModoDeCarta();
     }
 
     public void setModo(Modo modoNuevo)
@@ -45,6 +49,27 @@ public abstract class CartaMonstruo extends Carta
     public void setEstrategiaAtaque(EstrategiaAtaque estrategia)
     {
         this.estrategiaAtaque = estrategia;
+    }
+
+    // ------------------------------------------
+    // Metodos de observador de carta monstruo.
+    // ------------------------------------------
+    @Override
+    public void registrarObsevador(ObservadorDeCartaMonstruo observador)
+    {
+        this.observadoresDeCartasMonstruo.add(observador);
+    }
+
+    @Override
+    public void eliminarObservador(ObservadorDeCartaMonstruo observador)
+    {
+        this.observadoresDeCartasMonstruo.remove(observador);
+    }
+
+    @Override
+    public void notificarCambioDeModoDeCarta()
+    {
+        observadoresDeCartasMonstruo.forEach(observador -> observador.cartaCambioDeModo());
     }
 
     // --------------------------------------------------------------------

@@ -10,5 +10,13 @@ public interface ObservadorDeModelo
 
     void egresoCartaAMano();
 
+    void ingresoCartaARegion();
+
+    void egresoCartaARegion();
+
     void cambiaronLosPuntosDeVida();
+
+    void cartaCambioDeOrientacion();
+
+    void cartaCambioDeModo();
 }

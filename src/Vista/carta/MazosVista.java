@@ -10,7 +10,10 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.ImagePattern;
+
+import java.net.URL;
 
 public class MazosVista implements ObservadorDeModelo
 {
@@ -23,6 +26,8 @@ public class MazosVista implements ObservadorDeModelo
     private Tooltip toolTipJugador;
     private Button mazoOponente;
     private Tooltip toolTipOponente;
+    private AudioClip audioClipCardDraw;
+    private double cardDrawVolume = 1;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -31,7 +36,7 @@ public class MazosVista implements ObservadorDeModelo
     {
         this.vista = vista;
         // TODO: Para cuando se implemente los observadores puntuales:
-        // vista.getModelo().registrarObsevador(this);
+        vista.getModelo().registrarObsevador(this);
 
         this.toolTipJugador = new Tooltip();
         this.toolTipOponente = new Tooltip();
@@ -41,6 +46,11 @@ public class MazosVista implements ObservadorDeModelo
 
         this.mazoJugador.setTooltip(toolTipJugador);
         this.mazoOponente.setTooltip(toolTipOponente);
+
+        URL mediaUrl;
+        mediaUrl = this.getClass().getClassLoader().getResource("resources/audio/card_draw.wav");
+        this.audioClipCardDraw = new AudioClip(mediaUrl.toExternalForm());
+        this.audioClipCardDraw.setVolume(cardDrawVolume);
 
         this.huboCambios();
     }
@@ -92,7 +102,7 @@ public class MazosVista implements ObservadorDeModelo
     @Override
     public void seTomoCartaDeMazo()
     {
-
+        audioClipCardDraw.play();
     }
 
     @Override
@@ -108,7 +118,31 @@ public class MazosVista implements ObservadorDeModelo
     }
 
     @Override
+    public void ingresoCartaARegion()
+    {
+
+    }
+
+    @Override
+    public void egresoCartaARegion()
+    {
+
+    }
+
+    @Override
     public void cambiaronLosPuntosDeVida()
+    {
+
+    }
+
+    @Override
+    public void cartaCambioDeOrientacion()
+    {
+
+    }
+
+    @Override
+    public void cartaCambioDeModo()
     {
 
     }

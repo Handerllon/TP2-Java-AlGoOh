@@ -14,8 +14,11 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Popup;
+
+import java.net.URL;
 
 public class RegionesMagicasYTrampasBoton extends Button
 {
@@ -29,6 +32,8 @@ public class RegionesMagicasYTrampasBoton extends Button
     private Popup popup;
     private Button botonDeLaCarta;
     private Jugador jugadorAsociado;
+    private AudioClip audioClipCardActivation;
+    private double cardActivationVolume = 0.3;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -39,8 +44,8 @@ public class RegionesMagicasYTrampasBoton extends Button
         this.vista = vista;
         this.botonDeLaCarta = new Button();
 
-        this.botonDeLaCarta.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta,
-        		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
+        this.botonDeLaCarta.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
         this.botonDeLaCarta.setStyle(estiloRegion);
     }
 
@@ -54,8 +59,8 @@ public class RegionesMagicasYTrampasBoton extends Button
     {
         this.botonDeLaCarta = new Button();
         botonDeLaCarta.setStyle(estiloRegion);
-        this.botonDeLaCarta.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta,
-        		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
+        this.botonDeLaCarta.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
     }
 
     public void actualizar(Carta carta)
@@ -72,8 +77,8 @@ public class RegionesMagicasYTrampasBoton extends Button
         // Imagen del botón.
         // -------------------------------
         Image imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
-        botonEnRegion.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta,
-        		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
+        botonEnRegion.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
         if (this.carta.estaBocaAbajo())
         {
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
@@ -88,9 +93,15 @@ public class RegionesMagicasYTrampasBoton extends Button
         }
         // -------------------------------
 
+        URL mediaUrl;
+        mediaUrl = this.getClass().getClassLoader().getResource("resources/audio/card_activation.wav");
+        this.audioClipCardActivation = new AudioClip(mediaUrl.toExternalForm());
+        this.audioClipCardActivation.setVolume(cardActivationVolume);
+
         // -------------------------------
         // Tooltip del botón.
         // -------------------------------
+        // TODO: Implementar la vista de la carta.
         // -------------------------------
 
         // Se crea el botón.
@@ -98,12 +109,10 @@ public class RegionesMagicasYTrampasBoton extends Button
         VBox vbox = new VBox();
 
         Button b1 = new Button("Activar");
+        // Las cartas trampa se activan solamente en la fase trampa, y de forma automática.
         if (this.carta.esMagica())
         {
-            b1.setOnAction(e -> activarCartaMagicaBtn_Click());
-        } else if (this.carta.esTrampa())
-        {
-            b1.setOnAction(e -> activarCartaTrampaBtn_Click());
+            b1.setOnAction(e -> activarCartaMagicaDesdeRegionBtn_Click());
         }
 
         Button b2 = new Button("Cerrar");
@@ -128,26 +137,20 @@ public class RegionesMagicasYTrampasBoton extends Button
         popup.setY(vista.getPrimaryStage().getY() + point.getY());
     }
 
-    private void activarCartaMagicaBtn_Click()
+    private void activarCartaMagicaDesdeRegionBtn_Click()
     {
+        Boolean thrown = false;
         try
         {
-            this.vista.getControlador().activarCartaMagica(this.jugadorAsociado, this.carta);
+            this.vista.getControlador().activarCartaMagicaDesdeRegionMyT(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeUsarMyTError error)
         {
+            thrown = true;
             this.vista.mostrarError(error);
         }
-        popup.hide();
-    }
-
-    private void activarCartaTrampaBtn_Click()
-    {
-        try
+        if (!thrown)
         {
-            this.vista.getControlador().activarCartaTrampa(this.jugadorAsociado, this.carta);
-        } catch (NoSePuedeUsarMyTError error)
-        {
-            this.vista.mostrarError(error);
+            this.audioClipCardActivation.play();
         }
         popup.hide();
     }

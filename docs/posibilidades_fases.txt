@@ -66,8 +66,6 @@ Fase Batalla:
 
 
 Fase Final:
-	TODO: ver cuántas se activan y cómo?
 	Permite activar las cartas mágicas en la región MyT:
 		si está boca abajo, se la da vuelta.
 	Puede suceder que las condiciones para utilizar la carta no se den, como con Fissure y Dark Hole.
-	Si se usa Pot of Greed, la mano no puede estar llena.

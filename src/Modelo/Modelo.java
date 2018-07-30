@@ -17,7 +17,7 @@ import Modelo.region.RegionMagicasYTrampas;
 import java.util.ArrayList;
 
 public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJuegoObservable, ObservadorDeFinJuego,
-        ObservadorRegion, ObservadorDeMazo, ObservadorDeMano, ObservadorDeCarta, ObservadorDeJugador
+        ObservadorRegion, ObservadorDeMazo, ObservadorDeMano, ObservadorDeCarta, ObservadorDeJugador, ObservadorDeCartaMonstruo
 {
     private static Modelo instancia = null;
     private Jugador jugador1;
@@ -171,9 +171,33 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     }
 
     @Override
+    public void notificarIngresoCartaARegion()
+    {
+        observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.ingresoCartaARegion());
+    }
+
+    @Override
+    public void notificarEgresoCartaARegion()
+    {
+        observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.egresoCartaARegion());
+    }
+
+    @Override
     public void notificarCambioEnPuntosDeVida()
     {
         observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.cambiaronLosPuntosDeVida());
+    }
+
+    @Override
+    public void notificarCambioDeOrientacionCarta()
+    {
+        observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.cartaCambioDeOrientacion());
+    }
+
+    @Override
+    public void notificarCambioDeModoCarta()
+    {
+        observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.cartaCambioDeModo());
     }
 
     // --------------------------------------------------------------------
@@ -182,19 +206,33 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     @Override
     public void ingresoCarta(Region region)
     {
-
+        notificarEvento();
+        // TODO: Para cuando se implemente los observadores puntuales:
+        // notificarIngresoCartaARegion()
     }
 
     @Override
     public void egresoCarta(Region region)
     {
-
+        notificarEvento();
+        // TODO: Para cuando se implemente los observadores puntuales:
+        // notificarEgresoCartaARegion()
     }
 
     @Override
-    public void huboCambios()
+    public void cartaCambioDeOrientacion()
     {
         notificarEvento();
+        // TODO: Para cuando se implemente los observadores puntuales:
+        //notificarCambioDeOrientacionCarta();
+    }
+
+    @Override
+    public void cartaCambioDeModo()
+    {
+        notificarEvento();
+        // TODO: Para cuando se implemente los observadores puntuales:
+        //notificarCambioDeModoCarta();
     }
 
     @Override
@@ -202,7 +240,7 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     {
         notificarEvento();
         // TODO: Para cuando se implemente los observadores puntuales:
-        //notificarTomaDeCartaDeMazo();
+        notificarTomaDeCartaDeMazo();
     }
 
     @Override
@@ -322,10 +360,18 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     }
 
     @Override
-    public void activarCartaMagica(Jugador jugador, CartaMagica carta)
+    public void activarCartaMagicaDesdeRegionMyT(Jugador jugador, CartaMagica carta)
     {
         this.flipBocaArriba(carta);
         carta.efecto();
+    }
+
+    @Override
+    public void activarCartaMagicaDesdeMano(Jugador jugador, CartaMagica carta)
+    {
+        this.flipBocaArriba(carta);
+        carta.efecto();
+        carta.getPropietario().getMano().quitarCarta(carta);
     }
 
     @Override
@@ -335,18 +381,22 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         jugador.enviarARegion(carta);
     }
 
-    // TODO: esto está mal. La carta creo que ya está en el campo.
+    // TODO: esto está mal. La carta  ya está en el campo.
     @Override
     public void activarCartaTrampa(Jugador jugador, CartaTrampa carta)
     {
         this.flipBocaArriba(carta);
-        jugador.enviarARegion(carta);
+        //jugador.enviarARegion(carta);
     }
 
     @Override
     public void activarCartaCampo(Jugador jugador, CartaCampo carta)
     {
-
+        if (!jugador.getRegionCampo().estaVacia())
+        {
+            CartaCampo cartaCampo = jugador.getRegionCampo().getUltimaCartaEnEntrar();
+            jugador.destruirCarta(cartaCampo);
+        }
         this.flipBocaArriba(carta);
         jugador.enviarARegion(carta);
     }
@@ -458,6 +508,7 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     {
         RegionMagicasYTrampas regionMyTOponente = cartaAtacante.getOponente().getRegionMagicasYTrampas();
         CartaTrampa cartaTrampaAUsar = regionMyTOponente.getCartaTrampaAUsar();
+        this.flipBocaArriba(cartaTrampaAUsar);
         cartaTrampaAUsar.efecto(cartaAtacante, cartaAAtacar);
 
         cartaAtacante.atacar(cartaAAtacar);

@@ -1,7 +1,7 @@
 package Vista.escena;
 
 import Modelo.ModeloObservable;
-import Vista.*;
+import Vista.Vista;
 import Vista.carta.MazosVista;
 import Vista.carta.mano.ManosVista;
 import Vista.estadosJuego.EstadosJuegoBotones;
@@ -31,7 +31,7 @@ public final class EscenaTableroPrincipal implements Escena
     private static double porcentajeDePantallaHorizontal = 0.52;
     private GridPane gridPane;
     private String RUTA_TABLERO = "resources/imagenes/fondoTableroGeneral.png";
-    private String direccion_sonido_batalla = "src/resources/audio/battle.mp3";
+    private String direccion_sonido_batalla = "src/resources/audio/battle_2.wav";
     private Vista vista;
     private MediaPlayer mplayer;
     private RegionesMonstruoVista regionesMonstruoVista;
@@ -47,6 +47,7 @@ public final class EscenaTableroPrincipal implements Escena
     private EstadosJuegoBotones estadosJuegoBotones;
     private TurnoActualVista turnoActualVista;
     private FaseActualVista faseActualVista;
+    private double soundBattleVolume = 0.1;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -128,6 +129,8 @@ public final class EscenaTableroPrincipal implements Escena
         File f = new File(direccion_sonido_batalla);
         Media media = new Media(f.toURI().toString());
         this.mplayer = new MediaPlayer(media);
+        this.mplayer.setVolume(this.soundBattleVolume);
+
         this.mplayer.setCycleCount(MediaPlayer.INDEFINITE);
     }
 
@@ -202,7 +205,7 @@ public final class EscenaTableroPrincipal implements Escena
     @Override
     public Escena cambiarEscena()
     {
-        return EscenaFinDeJuego.getInstancia(this.modelo, this.vista);
+        return new EscenaFinDeJuego(this.modelo, this.vista);
     }
 
     @Override
@@ -243,7 +246,7 @@ public final class EscenaTableroPrincipal implements Escena
     public void finDeJuego()
     {
         this.stopMedia();
-        this.vista.setProximaEscena(EscenaFinDeJuego.getInstancia(this.modelo, this.vista));
+        this.vista.setProximaEscena(new EscenaFinDeJuego(this.modelo, this.vista));
     }
 
     @Override

@@ -8,9 +8,31 @@ Separar algunos píxeles los botones del popup de las cartas.
 
 Si el usuario aprieta un botón y sale un popup, que lo pueda cerrar clickeando en cualquier parte que no sea el popup.
 
-Ver de que el jugador pueda rendirse apretando el mazo (pueude hacerse o no).
-
 Bugs:
-4. Creo que hay un problema con la fase ataque/fase trampa.
-5. PotOfGreed debería funcionar bien.
-6.No mostrar los popups si el usuario cliquea la carta del oponente.
+1. Implementar en Vista esta parte del código, ya que lo necesito para el bug "2":
+	// -------------------------------
+    // Solicitudes al usuario.
+    // -------------------------------
+    public Sacrificio pedirSacrificios()
+    {
+        // TODO.
+        return null;
+    }
+
+    public CartaMonstruo solicitarCartaAAtacar()
+    {
+        // TODO.
+        return null;
+    }
+	
+La primera arma un objeto Sacrificio a partir de los que le indica el jugador.
+La segunda devuelve la carta monstruo del oponente que el jugador quiere atacar. No debería poder elegirse otra 
+carta que no sea las de la región monstruo del oponente.
+	
+2. Creo que hay un problema con la fase ataque/fase trampa.
+3. Hacer uso de los observers particulares así aceleramos todo.
+4. RegionesCementerioVista: que se vea el reverso de la carta cuando hay al menos 1 carta en el cementerio.
+5. RegionesMagicasYTrampasBoton línea 104: implementar que solamente el jugador actual pueda ver el tooltip. Hay que pedírselo al controlador.
+6. Si queda tiempo: No mostrar los popups si el usuario cliquea la carta del oponente.
+7. Hay un bug con el conteo de las partes de exodia: cuenta todas las partes presentes en ambas manos.
+8. Cuando se pierde por quedarse sin cartas, tira un NullPtrException.

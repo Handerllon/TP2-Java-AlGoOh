@@ -79,7 +79,31 @@ public class VidaVista implements ObservadorDeModelo
     }
 
     @Override
+    public void ingresoCartaARegion()
+    {
+
+    }
+
+    @Override
+    public void egresoCartaARegion()
+    {
+
+    }
+
+    @Override
     public void cambiaronLosPuntosDeVida()
+    {
+
+    }
+
+    @Override
+    public void cartaCambioDeOrientacion()
+    {
+
+    }
+
+    @Override
+    public void cartaCambioDeModo()
     {
 
     }

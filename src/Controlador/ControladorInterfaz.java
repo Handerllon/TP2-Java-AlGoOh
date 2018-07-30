@@ -56,11 +56,11 @@ public interface ControladorInterfaz
     // -------------
     void activarCartaTrampa(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError;
 
-    void activarCartaMagica(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError;
+    void activarCartaMagicaDesdeMano(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError;
 
     void activarCartaMagicaDesdeRegionMyT(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError;
 
-    void activarCartaCampo(Jugador solicitante, Carta carta) throws NoSePuedeEnviarARegionCampoError;
+    void activarCartaCampoDesdeMano(Jugador solicitante, Carta carta) throws NoSePuedeEnviarARegionCampoError;
 
     // ------------------------------------
     // Métodos de orientación de cartas.
@@ -70,6 +70,7 @@ public interface ControladorInterfaz
     void cambiarModoCartaMonstruo(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
 
     // TODO: me parece que estos no tienen sentido.
+    /*
     void flipBocaAbajo(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
 
     void flipBocaArriba(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
@@ -77,6 +78,7 @@ public interface ControladorInterfaz
     void setModoAtaque(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
 
     void setModoDefensa(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
+    */
 
     // ------------------------------------
     // Métodos de ataques.

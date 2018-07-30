@@ -46,7 +46,7 @@ public abstract class Region<T extends Carta> implements RegionObservable
         {
             this.ultimaCartaEnSalir = carta;
             this.cartas.remove(carta);
-            this.notificarSalidaCarta();
+            this.notificarEgresoDeCarta();
         } else
         {
             // Se decide no avisarle a nadie.
@@ -56,10 +56,8 @@ public abstract class Region<T extends Carta> implements RegionObservable
     public void removerTodasLasCartas()
     {
         ArrayList<T> cartasARemover = this.getCartas();
+        // removerCarta() ya notifica.
         cartasARemover.forEach(item -> this.removerCarta(item));
-        // No puedo avisarle a los observadores con notificarSalidaCarta() porque eso es
-        // para una sola carta.
-        this.notificarCambios();
     }
 
     // ------------------------------------
@@ -118,26 +116,12 @@ public abstract class Region<T extends Carta> implements RegionObservable
     @Override
     public void notificarIngresoCarta()
     {
-        this.observadoresRegion.forEach(observador ->
-        {
-            observador.ingresoCarta(this);
-            observador.huboCambios();
-        });
+        this.observadoresRegion.forEach(observador -> observador.ingresoCarta(this));
     }
 
     @Override
-    public void notificarSalidaCarta()
+    public void notificarEgresoDeCarta()
     {
-        this.observadoresRegion.forEach(observador ->
-        {
-            observador.egresoCarta(this);
-            observador.huboCambios();
-        });
-    }
-
-    @Override
-    public void notificarCambios()
-    {
-        this.observadoresRegion.forEach(observador -> observador.huboCambios());
+        this.observadoresRegion.forEach(observador -> observador.egresoCarta(this));
     }
 }

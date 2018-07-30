@@ -60,7 +60,6 @@ public class RegionesCampoBoton extends Button
     {
         this.carta = carta;
 
-        //TODO: Hacer opciones que tiene una cartaCampo una vez que fue jugada
         this.boton.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta,
         		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
         this.boton.setStyle(null);

@@ -4,7 +4,6 @@ import Controlador.ControladorInterfaz;
 import Controlador.excepciones.*;
 import Modelo.ModeloObservable;
 import Modelo.carta.Sacrificio;
-import Modelo.carta.excepciones.ManoLlena;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.observadores.ObservadorDeModelo;
 import Vista.escena.Escena;
@@ -123,7 +122,31 @@ public class Vista implements ObservadorDeModelo
     }
 
     @Override
+    public void ingresoCartaARegion()
+    {
+
+    }
+
+    @Override
+    public void egresoCartaARegion()
+    {
+
+    }
+
+    @Override
     public void cambiaronLosPuntosDeVida()
+    {
+
+    }
+
+    @Override
+    public void cartaCambioDeOrientacion()
+    {
+
+    }
+
+    @Override
+    public void cartaCambioDeModo()
     {
 
     }
@@ -146,13 +169,11 @@ public class Vista implements ObservadorDeModelo
     // -------------------------------
     public Sacrificio pedirSacrificios()
     {
-        // TODO.
         return null;
     }
 
     public CartaMonstruo solicitarCartaAAtacar()
     {
-        // TODO.
         return null;
     }
 
@@ -229,10 +250,5 @@ public class Vista implements ObservadorDeModelo
     public void mostrarError(NoSePuedeAtacarError error)
     {
         erroresVista.mostrarError(error);
-    }
-
-    public void avisoManoLlena(ManoLlena aviso)
-    {
-        erroresVista.avisoManoLlena(aviso);
     }
 }

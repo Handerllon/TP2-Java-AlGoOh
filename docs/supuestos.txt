@@ -7,6 +7,10 @@ al oponente.
 a la vista que le muestre al jugador un menú con las cartas que puede atacar (similar 
 a cuando se le piden los sacrificios).
 
-Si la mano está llena al tomar una carta, se quita una carta al azar.
+Si la mano está llena y se toma una carta, se quita una carta al azar de la mano.
 
 No se puede atacar en el primer turno.
+
+Cuando hay una carta campo, e ingresa una nueva, se desactiva la vieja y se la manda al cementerio.
+
+Se pueden activar todas las cartas mágicas que se quieran en la fase final.

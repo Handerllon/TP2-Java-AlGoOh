@@ -15,9 +15,12 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Popup;
+
+import java.net.URL;
 
 public class RegionesMonstruoBoton extends Button
 {
@@ -35,6 +38,9 @@ public class RegionesMonstruoBoton extends Button
     private Button botonEnRegion;
     private Popup popup;
     private VBox vbox;
+    private AudioClip audioClipCardFlip, audioClipCardAttack;
+    private double cardFlipVolume = 0.7;
+    private double cardAttackVolume = 0.3;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -46,8 +52,8 @@ public class RegionesMonstruoBoton extends Button
 
         this.botonCarta = new Button();
 
-        this.botonCarta.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta, 
-        		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
+        this.botonCarta.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
         this.botonCarta.setStyle(estiloRegion);
 
         this.botonEnRegion = new Button();
@@ -55,6 +61,15 @@ public class RegionesMonstruoBoton extends Button
 
         this.popup = new Popup();
         this.vbox = new VBox();
+
+        URL mediaUrl;
+        mediaUrl = this.getClass().getClassLoader().getResource("resources/audio/card_flip.wav");
+        this.audioClipCardFlip = new AudioClip(mediaUrl.toExternalForm());
+        this.audioClipCardFlip.setVolume(cardFlipVolume);
+
+        mediaUrl = this.getClass().getClassLoader().getResource("resources/audio/card_attack.wav");
+        this.audioClipCardAttack = new AudioClip(mediaUrl.toExternalForm());
+        this.audioClipCardAttack.setVolume(cardAttackVolume);
     }
 
     public Button getBoton()
@@ -66,8 +81,8 @@ public class RegionesMonstruoBoton extends Button
     {
         this.botonCarta = new Button();
         botonCarta.setStyle(estiloRegion);
-        this.botonCarta.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta,
-        		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
+        this.botonCarta.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
     }
 
     public void actualizar(CartaMonstruo cartaMonstruo)
@@ -81,18 +96,18 @@ public class RegionesMonstruoBoton extends Button
         // -------------------------------
         // Imagen del botón.
         // -------------------------------
-        botonEnRegion.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta, 
-        		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
+        botonEnRegion.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
         if (this.carta.enDefensa() && this.carta.estaBocaAbajo())
         {
-            this.botonEnRegion.getTransforms().add(new Rotate(90, (this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta) / 2,
-            		(this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta) / 2));
+            this.botonEnRegion.getTransforms().add(new Rotate(90, (this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta) / 2,
+                    (this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta) / 2));
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
                     .getClassLoader().getResource(backDeCartaLocacion).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         } else if (this.carta.enDefensa())
         {
-            this.botonEnRegion.getTransforms().add(new Rotate(90, (this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta) / 2,
-            		(this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta) / 2));
+            this.botonEnRegion.getTransforms().add(new Rotate(90, (this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta) / 2,
+                    (this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta) / 2));
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
                     .getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         } else
@@ -123,11 +138,16 @@ public class RegionesMonstruoBoton extends Button
         Button b3 = new Button("Dar Vuelta");
         b3.setOnAction(e -> flipCartaMonstruoBtn_Click());
 
-        // TODO: no debería ser un closeRequest?
         Button b4 = new Button("Cerrar");
         b4.setOnAction(e -> popup.hide());
 
-        vbox.getChildren().addAll(b1, b2, b3, b4);
+        if (this.carta.estaBocaArriba())
+        {
+            vbox.getChildren().addAll(b1, b2, b4);
+        } else
+        {
+            vbox.getChildren().addAll(b1, b2, b3, b4);
+        }
         popup.getContent().addAll(vbox);
 
         botonEnRegion.setOnAction(e -> monstruoEnRegionBtn_Click(popup, botonEnRegion));
@@ -149,36 +169,57 @@ public class RegionesMonstruoBoton extends Button
 
     private void cartaMonstruoAtacarBtn_Click()
     {
+        Boolean thrown = false;
         try
         {
             this.vista.getControlador().atacar(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeAtacarError error)
         {
+            thrown = true;
             this.vista.mostrarError(error);
+        }
+
+        if (!thrown)
+        {
+            this.audioClipCardAttack.play();
         }
         popup.hide();
     }
 
     private void cambiarModoCartaMonstruoBtn_Click()
     {
+        Boolean thrown = false;
         try
         {
             this.vista.getControlador().cambiarModoCartaMonstruo(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeCambiarOrientacionError error)
         {
+            thrown = true;
             this.vista.mostrarError(error);
+        }
+
+        if (!thrown)
+        {
+            this.audioClipCardFlip.play();
         }
         popup.hide();
     }
 
     private void flipCartaMonstruoBtn_Click()
     {
+        Boolean thrown = false;
         try
         {
             this.vista.getControlador().flipCarta(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeCambiarOrientacionError error)
         {
+            thrown = true;
             this.vista.mostrarError(error);
+        }
+
+        if (!thrown)
+        {
+            this.audioClipCardFlip.play();
         }
         popup.hide();
     }

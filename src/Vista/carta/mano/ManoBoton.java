@@ -17,9 +17,12 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+
+import java.net.URL;
 
 public class ManoBoton extends Button
 {
@@ -35,6 +38,9 @@ public class ManoBoton extends Button
     private Popup popup;
     private VBox vbox;
     private Image imagenCarta;
+    private AudioClip audioClipCardMove, audioClipCardActivation;
+    private double cardActivationVolume = 0.3;
+    private double cardMoveVolume = 0.3;
 
     public ManoBoton(Vista vista, Carta carta, Jugador jugador)
     {
@@ -55,6 +61,15 @@ public class ManoBoton extends Button
 
         this.boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+
+        URL mediaUrl;
+        mediaUrl = this.getClass().getClassLoader().getResource("resources/audio/card_move.wav");
+        this.audioClipCardMove = new AudioClip(mediaUrl.toExternalForm());
+        this.audioClipCardMove.setVolume(cardMoveVolume);
+
+        mediaUrl = this.getClass().getClassLoader().getResource("resources/audio/card_activation.wav");
+        this.audioClipCardActivation = new AudioClip(mediaUrl.toExternalForm());
+        this.audioClipCardActivation.setVolume(cardActivationVolume);
 
         // Se decide qué tipo de botón crear.
         if (carta.esMonstruo())
@@ -100,7 +115,6 @@ public class ManoBoton extends Button
         Button b2 = new Button("Posicionar");
         b2.setOnAction(e -> setCartaMonstruoBtn_Click());
 
-        // TODO: no debería ser un closeRequest?
         Button b3 = new Button("Cerrar");
         b3.setOnAction(e -> popup.hide());
 
@@ -112,24 +126,38 @@ public class ManoBoton extends Button
     // -------------------------------
     private void summonCartaMonstruoBtn_Click()
     {
+        Boolean thrown = false;
         try
         {
             this.vista.getControlador().summonCartaMonstruo(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeEnviarCartaMonstruoARegionError error)
         {
+            thrown = true;
             this.vista.mostrarError(error);
+        }
+
+        if (!thrown)
+        {
+            this.audioClipCardMove.play();
         }
         popup.hide();
     }
 
     private void setCartaMonstruoBtn_Click()
     {
+        Boolean thrown = false;
         try
         {
             this.vista.getControlador().setCartaMonstruo(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeEnviarCartaMonstruoARegionError error)
         {
+            thrown = true;
             this.vista.mostrarError(error);
+        }
+
+        if (!thrown)
+        {
+            this.audioClipCardMove.play();
         }
         popup.hide();
     }
@@ -141,11 +169,10 @@ public class ManoBoton extends Button
     {
         // Se crea la VBox.
         Button b1 = new Button("Activar");
-        b1.setOnAction(e -> activarCartaMagicaBtn_Click());
+        b1.setOnAction(e -> activarCartaMagicaDesdeManoBtn_Click());
         Button b2 = new Button("Posicionar");
         b2.setOnAction(e -> setCartaMagicaBtn_Click());
 
-        // TODO: no debería ser un closeRequest?
         Button b3 = new Button("Cerrar");
         b3.setOnAction(e -> popup.hide());
 
@@ -157,25 +184,38 @@ public class ManoBoton extends Button
     // -------------------------------
     private void setCartaMagicaBtn_Click()
     {
+        Boolean thrown = false;
         try
         {
             this.vista.getControlador().setCartaMagica(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeEnviarMyTARegionError error)
         {
+            thrown = true;
             this.vista.mostrarError(error);
+        }
+
+        if (!thrown)
+        {
+            this.audioClipCardMove.play();
         }
         popup.hide();
     }
 
-    private void activarCartaMagicaBtn_Click()
+    private void activarCartaMagicaDesdeManoBtn_Click()
     {
+        Boolean thrown = false;
         try
         {
-            // TODO: hay que implementar que se pueda activar directamente desde la mano.
-            this.vista.getControlador().activarCartaMagica(this.jugadorAsociado, this.carta);
+            this.vista.getControlador().activarCartaMagicaDesdeMano(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeUsarMyTError error)
         {
+            thrown = true;
             this.vista.mostrarError(error);
+        }
+
+        if (!thrown)
+        {
+            this.audioClipCardActivation.play();
         }
         popup.hide();
     }
@@ -188,7 +228,6 @@ public class ManoBoton extends Button
         Button b1 = new Button("Posicionar");
         b1.setOnAction(e -> setCartaTrampaBtn_Click());
 
-        // TODO: no debería ser un closeRequest?
         Button b2 = new Button("Cerrar");
         b2.setOnAction(e -> popup.hide());
 
@@ -200,12 +239,19 @@ public class ManoBoton extends Button
     // -------------------------------
     private void setCartaTrampaBtn_Click()
     {
+        Boolean thrown = false;
         try
         {
             this.vista.getControlador().setCartaTrampa(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeEnviarMyTARegionError error)
         {
+            thrown = true;
             this.vista.mostrarError(error);
+        }
+
+        if (!thrown)
+        {
+            this.audioClipCardMove.play();
         }
         popup.hide();
     }
@@ -219,7 +265,6 @@ public class ManoBoton extends Button
         Button b1 = new Button("Activar");
         b1.setOnAction(e -> activarCartaCampoBtn_Click());
 
-        // TODO: no debería ser un closeRequest?
         Button b2 = new Button("Cerrar");
         b2.setOnAction(e -> popup.hide());
 
@@ -231,12 +276,19 @@ public class ManoBoton extends Button
     // -------------------------------
     private void activarCartaCampoBtn_Click()
     {
+        Boolean thrown = false;
         try
         {
-            this.vista.getControlador().activarCartaCampo(this.jugadorAsociado, this.carta);
+            this.vista.getControlador().activarCartaCampoDesdeMano(this.jugadorAsociado, this.carta);
         } catch (NoSePuedeEnviarARegionCampoError error)
         {
+            thrown = true;
             this.vista.mostrarError(error);
+        }
+
+        if (!thrown)
+        {
+            this.audioClipCardActivation.play();
         }
         popup.hide();
     }

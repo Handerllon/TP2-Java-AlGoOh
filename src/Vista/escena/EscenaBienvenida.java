@@ -104,6 +104,7 @@ public final class EscenaBienvenida implements Escena
         File f = new File(direccion_video_bienvenida);
         Media media = new Media(f.toURI().toString());
         this.mplayer = new MediaPlayer(media);
+        this.mplayer.setVolume(0.05);
         this.mplayer.setCycleCount(MediaPlayer.INDEFINITE);
         MediaView mview = new MediaView(mplayer);
         mview.setFitWidth(700);
@@ -139,7 +140,6 @@ public final class EscenaBienvenida implements Escena
 
     private void okBtn_click()
     {
-        // TODO: estas líneas deberían encapsular en un Command que levante el controlador.
         this.vista.getControlador().setNombreJugador(this.txtJugador1.getText());
         this.vista.getControlador().setNombreOponente(this.txtJugador2.getText());
 
@@ -181,7 +181,7 @@ public final class EscenaBienvenida implements Escena
     public void finDeJuego()
     {
         this.stopMedia();
-        this.vista.setProximaEscena(EscenaFinDeJuego.getInstancia(this.modelo, this.vista));
+        this.vista.setProximaEscena(new EscenaFinDeJuego(this.modelo, this.vista));
     }
 
     @Override

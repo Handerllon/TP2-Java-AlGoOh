@@ -3,7 +3,6 @@ package Controlador.estadosJuego;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.carta.monstruo.CartaMonstruo;
-import Modelo.carta.monstruo.CartaMonstruoNula;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -16,7 +15,7 @@ public final class MaquinaTurnos
     private ArrayList<Carta> cartasQueCambiaronOrientacionEnTurnoActual;
     private boolean esElPrimerTurnoDelJuego;
     private ArrayList<CartaMonstruo> cartasQueAtacaronEnTurnoActual;
-    private CartaMonstruo cartaMonstruoColocadaEnRegionEnTurnoActual;
+    private ArrayList<Carta> cartasQueSeColocaronEnRegionEnTurnoActual;
     private boolean seTomoUnaCartaEnTurno;
     private boolean seColocoCartaMonstruoEnRegionEnTurnoActual;
 
@@ -38,8 +37,8 @@ public final class MaquinaTurnos
         // Sobre colocación de cartas.
         // ---------------------------------------------------
         this.seTomoUnaCartaEnTurno = false;
-        this.cartaMonstruoColocadaEnRegionEnTurnoActual = CartaMonstruoNula.getInstancia();
         this.seColocoCartaMonstruoEnRegionEnTurnoActual = false;
+        this.cartasQueSeColocaronEnRegionEnTurnoActual = new ArrayList<>();
 
         // ---------------------------------------------------
         // Sobre ataques de cartas.
@@ -106,7 +105,7 @@ public final class MaquinaTurnos
         // ---------------------------------------------------
         this.seTomoUnaCartaEnTurno = false;
         this.seColocoCartaMonstruoEnRegionEnTurnoActual = false;
-        this.cartaMonstruoColocadaEnRegionEnTurnoActual = CartaMonstruoNula.getInstancia();
+        this.cartasQueSeColocaronEnRegionEnTurnoActual.clear();
 
         // ---------------------------------------------------
         // Sobre ataques de cartas.
@@ -183,15 +182,24 @@ public final class MaquinaTurnos
         return this.seTomoUnaCartaEnTurno;
     }
 
-    public void seColocaCartaMonstruoEnRegionEnTurnoActual(CartaMonstruo carta)
+    public void seColocaCartaMonstruoEnRegionEnTurnoActual()
     {
         this.seColocoCartaMonstruoEnRegionEnTurnoActual = true;
-        this.cartaMonstruoColocadaEnRegionEnTurnoActual = carta;
     }
 
-    public boolean yaMandoMonstruoARegionEnTurnoActual()
+    public boolean seColocoCartaMonstruoEnRegionEnTurnoActual()
     {
         return this.seColocoCartaMonstruoEnRegionEnTurnoActual;
+    }
+
+    public void seColocaCartaEnRegionEnTurnoActual(Carta carta)
+    {
+        this.cartasQueSeColocaronEnRegionEnTurnoActual.add(carta);
+    }
+
+    public boolean yaMandoCartaARegionEnTurnoActual(Carta carta)
+    {
+        return this.cartasQueSeColocaronEnRegionEnTurnoActual.contains(carta);
     }
 
     // ---------------------------------------------------

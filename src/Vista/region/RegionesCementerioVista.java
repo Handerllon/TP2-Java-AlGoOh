@@ -8,6 +8,8 @@ public class RegionesCementerioVista implements ObservadorDeModelo
 {
     private static String estiloRegion = "-fx-background-color: Transparent";
     private Vista vista;
+    private static double porcentajeDeAnchoDeLaCarta = 0.0496;
+    private static double porcentajeDeAltoDeLaCarta = 0.1287;
     private Button botonCementerioJugador;
     private Button botonCementerioOponente;
 
@@ -29,7 +31,7 @@ public class RegionesCementerioVista implements ObservadorDeModelo
 
         Button boton = new Button();
 
-        boton.setPrefSize((this.vista.getResolucionHorizontal() * 95.4) / 1920, (this.vista.getResolucionVertical() * 130) / 1080);
+        boton.setPrefSize((this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta), (this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta));
         boton.setStyle(estiloRegion);
 
         return boton;

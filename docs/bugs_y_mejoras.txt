@@ -8,6 +8,8 @@ Separar algunos píxeles los botones del popup de las cartas.
 
 Si el usuario aprieta un botón y sale un popup, que lo pueda cerrar clickeando en cualquier parte que no sea el popup.
 
+Ver de que el jugador pueda rendirse apretando el mazo (pueude hacerse o no).
+
 Bugs:
 4. Creo que hay un problema con la fase ataque/fase trampa.
 5. PotOfGreed debería funcionar bien.

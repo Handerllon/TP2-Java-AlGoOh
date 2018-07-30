@@ -1,8 +1,6 @@
 package Vista.carta;
 
-import Controlador.excepciones.NoSePuedeTomarCartaError;
 import Modelo.Jugador;
-import Modelo.carta.excepciones.ManoLlena;
 import Modelo.observadores.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.geometry.Insets;
@@ -16,8 +14,8 @@ import javafx.scene.paint.ImagePattern;
 
 public class MazosVista implements ObservadorDeModelo
 {
-    private static double anchoInicialCarta = 95.4;
-    private static double altoInicialCarta = 131;
+	private static double porcentajeDeAnchoDeLaCarta = 0.0496;
+    private static double porcentajeDeAltoDeLaCarta = 0.1287;;
     // Se uso como base una resolucion de 1920x1080
     private static String rutaImagenReversoCarta = "resources/imagenes/cartaReverso.jpg";
     private Vista vista;
@@ -25,8 +23,6 @@ public class MazosVista implements ObservadorDeModelo
     private Tooltip toolTipJugador;
     private Button mazoOponente;
     private Tooltip toolTipOponente;
-    private double anchoDeCarta;
-    private double altoDeCarta;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -36,9 +32,6 @@ public class MazosVista implements ObservadorDeModelo
         this.vista = vista;
         // TODO: Para cuando se implemente los observadores puntuales:
         // vista.getModelo().registrarObsevador(this);
-
-        this.anchoDeCarta = (vista.getResolucionHorizontal() * anchoInicialCarta) / 1920;
-        this.altoDeCarta = (vista.getResolucionVertical() * altoInicialCarta) / 1080;
 
         this.toolTipJugador = new Tooltip();
         this.toolTipOponente = new Tooltip();
@@ -57,11 +50,9 @@ public class MazosVista implements ObservadorDeModelo
 
         Button boton = new Button();
 
-        boton.setPrefSize(anchoDeCarta, altoDeCarta);
+        boton.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta, this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
         boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource(rutaImagenReversoCarta).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-        //TODO: Hacer rendicion en click del mazo (Con un popup o algo por el estilo)
-        //boton.setOnAction(e -> tomarCartaBtn_Click(jugadorAsociado));
 
         return boton;
     }
@@ -76,23 +67,6 @@ public class MazosVista implements ObservadorDeModelo
     {
 
         return mazoOponente;
-    }
-
-    // --------------------------------------------------------------------
-    // Implementación acción botones.
-    // --------------------------------------------------------------------
-    private void tomarCartaBtn_Click(Jugador jugador)
-    {
-        try
-        {
-            this.vista.getControlador().tomarCarta(jugador);
-        } catch (NoSePuedeTomarCartaError error)
-        {
-            this.vista.mostrarError(error);
-        } catch (ManoLlena manoLlena)
-        {
-            this.vista.avisoManoLlena(manoLlena);
-        }
     }
 
     // --------------------------------------------------------------------

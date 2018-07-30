@@ -26,7 +26,6 @@ public class ManoBoton extends Button
     // Se uso como base una resolucion de 1080x1920
     private static double porcentajeDeAnchoDeLaCarta = 0.0496;
     private static double porcentajeDeAltoDeLaCarta = 0.1287;
-    private static String rutaImagenReversoCarta = "resources/imagenes/cartaReverso.jpg";
     private Stage primaryStage;
     private Carta carta;
     private Button boton;

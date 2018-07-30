@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.ImagePattern;
@@ -21,6 +22,7 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Popup;
 
 import java.net.URL;
+import java.util.ArrayList;
 
 public class RegionesMonstruoBoton extends Button
 {
@@ -37,6 +39,7 @@ public class RegionesMonstruoBoton extends Button
     private Image imagenBoton;
     private Button botonEnRegion;
     private Popup popup;
+    private Popup popupDeSeleccion;
     private VBox vbox;
     private AudioClip audioClipCardFlip, audioClipCardAttack;
     private double cardFlipVolume = 0.7;
@@ -60,6 +63,7 @@ public class RegionesMonstruoBoton extends Button
         this.tooltipBoton = new Tooltip();
 
         this.popup = new Popup();
+        this.popupDeSeleccion = new Popup();
         this.vbox = new VBox();
 
         URL mediaUrl;
@@ -129,24 +133,28 @@ public class RegionesMonstruoBoton extends Button
         // -------------------------------
         // Opciones del botón.
         // -------------------------------
-        Button b1 = new Button("Atacar");
-        b1.setOnAction(e -> cartaMonstruoAtacarBtn_Click());
+        Button botonAtacar = new Button("Atacar");
+        botonAtacar.setOnAction(e -> cartaMonstruoAtacarBtn_Click());
 
-        Button b2 = new Button("Cambiar modo");
-        b2.setOnAction(e -> cambiarModoCartaMonstruoBtn_Click());
+        Button botonCambiarModo = new Button("Cambiar modo");
+        botonCambiarModo.setOnAction(e -> cambiarModoCartaMonstruoBtn_Click());
 
-        Button b3 = new Button("Dar Vuelta");
-        b3.setOnAction(e -> flipCartaMonstruoBtn_Click());
+        Button botonDarVuelta = new Button("Dar Vuelta");
+        botonDarVuelta.setOnAction(e -> flipCartaMonstruoBtn_Click());
 
-        Button b4 = new Button("Cerrar");
-        b4.setOnAction(e -> popup.hide());
+        Button botonCerrar = new Button("Cerrar");
+        botonCerrar.setOnAction(e -> popup.hide());
 
-        if (this.carta.estaBocaArriba())
+        if (this.carta.estaBocaArriba() && this.carta.enDefensa())
         {
-            vbox.getChildren().addAll(b1, b2, b4);
-        } else
+            vbox.getChildren().addAll(botonCambiarModo, botonCerrar);
+        } 
+        else if(this.carta.estaBocaArriba() && this.carta.enAtaque()){
+        	vbox.getChildren().addAll(botonAtacar, botonCambiarModo, botonCerrar);
+        }
+        else
         {
-            vbox.getChildren().addAll(b1, b2, b3, b4);
+            vbox.getChildren().addAll(botonCambiarModo, botonDarVuelta, botonCerrar);
         }
         popup.getContent().addAll(vbox);
 
@@ -169,7 +177,9 @@ public class RegionesMonstruoBoton extends Button
 
     private void cartaMonstruoAtacarBtn_Click()
     {
-        Boolean thrown = false;
+        
+    	Boolean thrown = false;
+		
         try
         {
             this.vista.getControlador().atacar(this.jugadorAsociado, this.carta);

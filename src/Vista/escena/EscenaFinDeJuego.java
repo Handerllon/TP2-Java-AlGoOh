@@ -1,6 +1,8 @@
 package Vista.escena;
 
 import Modelo.ModeloObservable;
+import Modelo.carta.Carta;
+import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.finDeJuego.CausaCincoPartesExodiaReunidas;
 import Modelo.finDeJuego.CausaFinJuego;
 import Vista.Vista;
@@ -180,4 +182,12 @@ public class EscenaFinDeJuego implements Escena
     {
 
     }
+
+	@Override
+	public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante) {
+		
+		
+	}
+
+
 }

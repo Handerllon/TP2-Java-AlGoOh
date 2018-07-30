@@ -3,6 +3,7 @@ package Controlador;
 import Controlador.excepciones.*;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
+import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.finDeJuego.CausaFinJuego;
 
 public interface ControladorInterfaz
@@ -69,19 +70,10 @@ public interface ControladorInterfaz
 
     void cambiarModoCartaMonstruo(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
 
-    // TODO: me parece que estos no tienen sentido.
-    /*
-    void flipBocaAbajo(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
-
-    void flipBocaArriba(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
-
-    void setModoAtaque(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
-
-    void setModoDefensa(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError;
-    */
-
     // ------------------------------------
     // Métodos de ataques.
     // ------------------------------------
     void atacar(Jugador solicitante, Carta cartaAtacante) throws NoSePuedeAtacarError;
+
+	void atacarCarta(Jugador solicitante, CartaMonstruo cartaAtacante, CartaMonstruo cartaSolicitada);
 }

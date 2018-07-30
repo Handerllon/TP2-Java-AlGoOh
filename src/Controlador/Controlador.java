@@ -404,63 +404,6 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
         }
     }
 
-    /*
-    @Override
-    public void flipBocaAbajo(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError
-    {
-        estadoVerificador = verificadorCondicionesJuego.sePuedeCambiarOrientacionCarta(solicitante, carta);
-        if (estadoVerificador.esFallido())
-        {
-            throw new NoSePuedeCambiarOrientacionError(solicitante, estadoVerificador);
-        } else
-        {
-            this.modelo.flipBocaAbajo(carta);
-            this.maquinaTurnos.seCambiaOrientacionCartaEnTurnoActual(carta);
-        }
-    }
-
-    @Override
-    public void flipBocaArriba(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError
-    {
-        estadoVerificador = verificadorCondicionesJuego.sePuedeCambiarOrientacionCarta(solicitante, carta);
-        if (estadoVerificador.esFallido())
-        {
-            throw new NoSePuedeCambiarOrientacionError(solicitante, estadoVerificador);
-        } else
-        {
-            this.modelo.flipBocaArriba(carta);
-            this.maquinaTurnos.seCambiaOrientacionCartaEnTurnoActual(carta);
-        }
-    }
-
-    @Override
-    public void setModoAtaque(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError
-    {
-        estadoVerificador = verificadorCondicionesJuego.sePuedeCambiarModoCarta(solicitante, carta);
-        if (estadoVerificador.esFallido())
-        {
-            throw new NoSePuedeCambiarOrientacionError(solicitante, estadoVerificador);
-        } else
-        {
-            this.modelo.setModoAtaque((CartaMonstruo) carta);
-            this.maquinaTurnos.seCambiaOrientacionCartaEnTurnoActual(carta);
-        }
-    }
-
-    @Override
-    public void setModoDefensa(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError
-    {
-        estadoVerificador = verificadorCondicionesJuego.sePuedeCambiarModoCarta(solicitante, carta);
-        if (estadoVerificador.esFallido())
-        {
-            throw new NoSePuedeCambiarOrientacionError(solicitante, estadoVerificador);
-        } else
-        {
-            this.modelo.setModoDefensa((CartaMonstruo) carta);
-            this.maquinaTurnos.seCambiaOrientacionCartaEnTurnoActual(carta);
-        }
-    }
-    */
 
     // ------------------------------------
     // Métodos de ataques.
@@ -479,16 +422,25 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
                 cambiarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
 
                 this.modelo.atacar((CartaMonstruo) cartaAtacante);
+                this.maquinaTurnos.cartaAtacaEnTurnoActual((CartaMonstruo) cartaAtacante);
+                retrocederFase();
             } else
             {
-                CartaMonstruo cartaAAtacar = this.vista.solicitarCartaAAtacar();
-
-                cambiarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
-
-                this.modelo.atacar((CartaMonstruo) cartaAtacante, cartaAAtacar);
+                this.vista.solicitarCartaAAtacar((CartaMonstruo)cartaAtacante);
             }
-            this.maquinaTurnos.cartaAtacaEnTurnoActual((CartaMonstruo) cartaAtacante);
-            retrocederFase();
         }
     }
+
+	@Override
+	public void atacarCarta(Jugador solicitante, CartaMonstruo cartaAtacante, CartaMonstruo cartaSolicitada) {
+		
+		
+		cambiarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
+
+        this.modelo.atacar((CartaMonstruo) cartaAtacante, cartaSolicitada);
+        
+        this.maquinaTurnos.cartaAtacaEnTurnoActual((CartaMonstruo) cartaAtacante);
+        retrocederFase();
+
+	}
 }

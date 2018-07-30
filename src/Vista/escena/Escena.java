@@ -1,5 +1,7 @@
 package Vista.escena;
 
+import Modelo.carta.Carta;
+import Modelo.carta.monstruo.CartaMonstruo;
 import javafx.scene.layout.GridPane;
 
 public interface Escena
@@ -25,4 +27,7 @@ public interface Escena
     void mostrarFaseActual();
 
     GridPane getGridPaneEscena();
+
+	void solicitarCartaAAtacar(CartaMonstruo cartaAtacante);
+
 }

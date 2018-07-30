@@ -18,16 +18,8 @@ Bugs:
         // TODO.
         return null;
     }
-
-    public CartaMonstruo solicitarCartaAAtacar()
-    {
-        // TODO.
-        return null;
-    }
 	
 La primera arma un objeto Sacrificio a partir de los que le indica el jugador.
-La segunda devuelve la carta monstruo del oponente que el jugador quiere atacar. No debería poder elegirse otra 
-carta que no sea las de la región monstruo del oponente.
 	
 2. Creo que hay un problema con la fase ataque/fase trampa.
 3. Hacer uso de los observers particulares así aceleramos todo.

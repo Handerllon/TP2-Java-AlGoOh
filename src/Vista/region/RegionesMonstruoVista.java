@@ -16,6 +16,8 @@ public class RegionesMonstruoVista implements ObservadorDeModelo
     public RegionesMonstruoVista(Vista vista)
     {
         this.vista = vista;
+        // TODO: Para cuando se implemente los observadores puntuales:
+        // vista.getModelo().registrarObsevador(this);
 
         this.gridJugador = new RegionesMonstruosGrid(this.vista, this.vista.getModelo().getJugador());
         this.gridOponente = new RegionesMonstruosGrid(this.vista, this.vista.getModelo().getOponente());
@@ -43,5 +45,11 @@ public class RegionesMonstruoVista implements ObservadorDeModelo
         this.gridOponente.clear();
         this.gridJugador.actualizar(this.vista.getModelo().getCartasEnRegionMonstruosJugador());
         this.gridOponente.actualizar(this.vista.getModelo().getCartasEnRegionMonstruosOponente());
+    }
+
+    @Override
+    public void seTomoCartaDeMazo()
+    {
+
     }
 }

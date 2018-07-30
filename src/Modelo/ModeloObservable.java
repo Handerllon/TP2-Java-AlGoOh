@@ -15,6 +15,8 @@ public interface ModeloObservable
 
     void notificarEvento();
 
+    void notificarTomaDeCartaDeMazo();
+
     // ------------------------------------
     // Métodos de consultas.
     // ------------------------------------

@@ -83,6 +83,9 @@ public final class VerificadorCondicionesJuego
         } else if (!this.modelo.haySuficientesCartasParaSacrificar((CartaMonstruo) carta))
         {
             return new NoHaySuficientesCartasParaSacrificarError();
+        } else if (!solicitante.getRegionMonstruos().hayEspacioLibre())
+        {
+            return new NoHayEspacioLibreEnRegionMonstruo();
         }
 
         return new EstadoVerificadorBueno();
@@ -105,6 +108,9 @@ public final class VerificadorCondicionesJuego
         } else if (!carta.esMagica() && !carta.esTrampa())
         {
             return new NoEsCartaMyTError();
+        } else if (!solicitante.getRegionMagicasYTrampas().hayEspacioLibre())
+        {
+            return new NoHayEspacioLibreEnRegionMyT();
         }
 
         return new EstadoVerificadorBueno();

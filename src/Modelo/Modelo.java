@@ -152,6 +152,12 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.huboCambios());
     }
 
+    @Override
+    public void notificarTomaDeCartaDeMazo()
+    {
+        observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.seTomoCartaDeMazo());
+    }
+
     // --------------------------------------------------------------------
     // Metodos por ser un observador de Region, Mazo, Mano
     // --------------------------------------------------------------------
@@ -171,6 +177,14 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     public void huboCambios()
     {
         notificarEvento();
+    }
+
+    @Override
+    public void seTomoCartaDeMazo()
+    {
+        notificarEvento();
+        // TODO: Para cuando se implemente los observadores puntuales:
+        //notificarTomaDeCartaDeMazo();
     }
 
     // ------------------------------------

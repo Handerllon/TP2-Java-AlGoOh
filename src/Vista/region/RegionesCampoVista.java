@@ -19,6 +19,8 @@ public class RegionesCampoVista implements ObservadorDeModelo
     public RegionesCampoVista(Vista vista)
     {
         this.vista = vista;
+        // TODO: Para cuando se implemente los observadores puntuales:
+        // vista.getModelo().registrarObsevador(this);
 
         this.botonCampoJugador = new RegionesCampoBoton(this.vista, this.vista.getModelo().getJugador());
         this.botonCampoOponente = new RegionesCampoBoton(this.vista, this.vista.getModelo().getOponente());
@@ -68,5 +70,11 @@ public class RegionesCampoVista implements ObservadorDeModelo
         {
 
         }
+    }
+
+    @Override
+    public void seTomoCartaDeMazo()
+    {
+
     }
 }

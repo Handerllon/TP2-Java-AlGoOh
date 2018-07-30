@@ -85,20 +85,28 @@ public class Mazo implements FinDeJuegoObservable, MazoObservable
 
     public Carta tomarCarta()
     {
+        Carta carta;
         if (!this.cartas.isEmpty())
         {
-            this.notificarEvento();
-            return this.cartas.pop();
+            carta = this.cartas.pop();
+            this.notificarTomaDeCartaDeMazo();
         } else
         {
+            carta = CartaNula.getInstancia();
             this.notificarFinDeJuego(new CausaSinCartasEnMazo(this.jugador));
-            return CartaNula.getInstancia();
         }
+
+        return carta;
     }
 
     public Stack<Carta> getCartas()
     {
         return this.cartas;
+    }
+
+    public int cantidadCartas()
+    {
+        return cartas.size();
     }
 
     // --------------------------------------------------------------------
@@ -122,11 +130,6 @@ public class Mazo implements FinDeJuegoObservable, MazoObservable
         this.observadoresFinJuegos.forEach(item -> item.seLlegoAFinDeJuego(causaFinJuego));
     }
 
-    public int cantidadCartas()
-    {
-        return cartas.size();
-    }
-
     // --------------------------------------------------------------------
     // Metodos por ser observable de Mano.
     // --------------------------------------------------------------------
@@ -143,8 +146,8 @@ public class Mazo implements FinDeJuegoObservable, MazoObservable
     }
 
     @Override
-    public void notificarEvento()
+    public void notificarTomaDeCartaDeMazo()
     {
-        observadoresMazo.forEach(observador -> observador.huboCambios());
+        observadoresMazo.forEach(observador -> observador.seTomoCartaDeMazo());
     }
 }

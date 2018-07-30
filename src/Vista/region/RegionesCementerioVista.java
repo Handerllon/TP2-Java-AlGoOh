@@ -17,6 +17,8 @@ public class RegionesCementerioVista implements ObservadorDeModelo
     public RegionesCementerioVista(Vista vista)
     {
         this.vista = vista;
+        // TODO: Para cuando se implemente los observadores puntuales:
+        // vista.getModelo().registrarObsevador(this);
 
         this.botonCementerioJugador = this.inicializarBoton();
         this.botonCementerioOponente = this.inicializarBoton();
@@ -52,5 +54,11 @@ public class RegionesCementerioVista implements ObservadorDeModelo
     public void huboCambios()
     {
         //TODO Ver que mostrar en el cementerio
+    }
+
+    @Override
+    public void seTomoCartaDeMazo()
+    {
+
     }
 }

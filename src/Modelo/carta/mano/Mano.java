@@ -30,24 +30,26 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
 
     public void agregarCarta(Carta carta) throws ManoLlena
     {
-        if (!this.manoLlena())
-        {
-            this.cartas.add(carta);
-            this.verificarAgregacionParteExodia(carta);
-            this.verificarExodiaCompleto(carta);
-            this.notificarEvento();
-        } else
+        if (this.manoLlena())
         {
             // Se quita una carta al azar.
             // nextInt produce un conjunto abierto, por lo que no hay que sumarle 1 ya que el array de cartas arranca
             // en cero.
             int randomNum = ThreadLocalRandom.current().nextInt(0, cantidadDeCartas());
             quitarCarta(getCartas().get(randomNum));
+
             this.cartas.add(carta);
             this.verificarAgregacionParteExodia(carta);
             this.verificarExodiaCompleto(carta);
             this.notificarEvento();
+
             throw new ManoLlena(this.jugadorAsociado);
+        } else
+        {
+            this.cartas.add(carta);
+            this.verificarAgregacionParteExodia(carta);
+            this.verificarExodiaCompleto(carta);
+            this.notificarEvento();
         }
     }
 

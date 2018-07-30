@@ -9,8 +9,8 @@ import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.observadores.ObservadorDeModelo;
 import Vista.escena.Escena;
 import Vista.escena.EscenaBienvenida;
+import Vista.estadosJuego.ErroresVista;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
@@ -27,6 +27,7 @@ public class Vista implements ObservadorDeModelo
     private static double RESOLUCION_VERTICAL;
     private Escena escena;
     private Stage primaryStage;
+    private ErroresVista erroresVista;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -43,6 +44,8 @@ public class Vista implements ObservadorDeModelo
         this.controlador = controlador;
 
         this.escena = EscenaBienvenida.getInstancia(this.modelo, this);
+
+        this.erroresVista = new ErroresVista();
     }
 
     // --------------------------------------------------------------------
@@ -99,6 +102,11 @@ public class Vista implements ObservadorDeModelo
     public void huboCambios()
     {
         this.escena.actualizarEstado();
+    }
+    @Override
+    public void seTomoCartaDeMazo()
+    {
+
     }
 
     // --------------------------------------------------------------------
@@ -169,90 +177,43 @@ public class Vista implements ObservadorDeModelo
     // -------------------------------
     // Avisos de advertencias.
     // -------------------------------
-    // TODO: los mandamos a alguna clase?
     public void mostrarError(NoSePuedeTomarCartaError error)
     {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Advertencia");
-        alert.setHeaderText(null);
-        alert.setContentText(error.getNombreResponsable() + " :No se puede tomar carta. " + error.getEstadoVerificador()
-                .getNombre());
-
-        alert.showAndWait();
+        erroresVista.mostrarError(error);
     }
 
     public void mostrarError(NoSePuedeEnviarCartaMonstruoARegionError error)
     {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Advertencia");
-        alert.setHeaderText(null);
-        alert.setContentText(error.getNombreResponsable() + " :La carta monstruo no puede ser envíada a la región monstruo. " + error
-                .getEstadoVerificador()
-                .getNombre());
-
-        alert.showAndWait();
+        erroresVista.mostrarError(error);
     }
 
     public void mostrarError(NoSePuedeEnviarMyTARegionError error)
     {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Advertencia");
-        alert.setHeaderText(null);
-        alert.setContentText(error.getNombreResponsable() + " :La carta MyT no puede ser envíada a la región MyT. " + error.getEstadoVerificador()
-                .getNombre());
-
-        alert.showAndWait();
+        erroresVista.mostrarError(error);
     }
 
     public void mostrarError(NoSePuedeUsarMyTError error)
     {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Advertencia");
-        alert.setHeaderText(null);
-        alert.setContentText(error.getNombreResponsable() + " :La carta elegida no puede ser utilizada. " + error.getEstadoVerificador().getNombre());
-
-        alert.showAndWait();
+        erroresVista.mostrarError(error);
     }
 
     public void mostrarError(NoSePuedeEnviarARegionCampoError error)
     {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Advertencia");
-        alert.setHeaderText(null);
-        alert.setContentText(error.getNombreResponsable() + " :La carta campo no puede ser envíada a la región campo. " + error.getEstadoVerificador()
-                .getNombre());
-
-        alert.showAndWait();
+        erroresVista.mostrarError(error);
     }
 
     public void mostrarError(NoSePuedeCambiarOrientacionError error)
     {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Advertencia");
-        alert.setHeaderText(null);
-        alert.setContentText(error.getNombreResponsable() + " :No se puede cambiar la orientacion de la carta elegida. " + error.getEstadoVerificador()
-                .getNombre());
-
-        alert.showAndWait();
+        erroresVista.mostrarError(error);
     }
 
     public void mostrarError(NoSePuedeAtacarError error)
     {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Advertencia");
-        alert.setHeaderText(null);
-        alert.setContentText(error.getNombreResponsable() + " :No se puede atacar. " + error.getEstadoVerificador().getNombre());
-
-        alert.showAndWait();
+        erroresVista.mostrarError(error);
     }
 
-    public void avisoManoLlena(ManoLlena error)
+    public void avisoManoLlena(ManoLlena aviso)
     {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Aviso");
-        alert.setHeaderText(null);
-        alert.setContentText(error.getNombreResponsable() + " :La mano estaba llena y se descartó una carta al azar. ");
-
-        alert.showAndWait();
+        erroresVista.avisoManoLlena(aviso);
     }
 }

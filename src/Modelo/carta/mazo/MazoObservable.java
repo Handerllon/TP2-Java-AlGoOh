@@ -8,5 +8,5 @@ public interface MazoObservable
 
     void eliminarObservador(ObservadorDeMazo observador);
 
-    void notificarEvento();
+    void notificarTomaDeCartaDeMazo();
 }

@@ -16,6 +16,8 @@ public class RegionesMagicasYTrampasVista implements ObservadorDeModelo
     public RegionesMagicasYTrampasVista(Vista vista)
     {
         this.vista = vista;
+        // TODO: Para cuando se implemente los observadores puntuales:
+        // vista.getModelo().registrarObsevador(this);
 
         this.gridJugador = new RegionesMagicasYTrampasGrid(this.vista, this.vista.getModelo().getJugador());
         this.gridOponente = new RegionesMagicasYTrampasGrid(this.vista, this.vista.getModelo().getOponente());
@@ -43,5 +45,11 @@ public class RegionesMagicasYTrampasVista implements ObservadorDeModelo
         this.gridOponente.clear();
         this.gridJugador.actualizarRegion(this.vista.getModelo().getCartasEnRegionMagicasYTrampasJugador());
         this.gridOponente.actualizarRegion(this.vista.getModelo().getCartasEnRegionMagicasYTrampasOponente());
+    }
+
+    @Override
+    public void seTomoCartaDeMazo()
+    {
+
     }
 }

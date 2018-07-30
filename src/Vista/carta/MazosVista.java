@@ -34,6 +34,8 @@ public class MazosVista implements ObservadorDeModelo
     public MazosVista(Vista vista)
     {
         this.vista = vista;
+        // TODO: Para cuando se implemente los observadores puntuales:
+        // vista.getModelo().registrarObsevador(this);
 
         this.anchoDeCarta = (vista.getResolucionHorizontal() * anchoInicialCarta) / 1920;
         this.altoDeCarta = (vista.getResolucionVertical() * altoInicialCarta) / 1080;
@@ -111,5 +113,11 @@ public class MazosVista implements ObservadorDeModelo
     private void actualizarMazoOponente(int numeroDeCartas)
     {
         this.toolTipOponente.setText(Integer.toString(numeroDeCartas));
+    }
+
+    @Override
+    public void seTomoCartaDeMazo()
+    {
+
     }
 }

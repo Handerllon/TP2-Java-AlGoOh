@@ -16,6 +16,7 @@ public class ManosVista implements ObservadorDeModelo
     public ManosVista(Vista vista)
     {
         this.vista = vista;
+        vista.getModelo().registrarObsevador(this);
 
         this.manoJugador = new ManosFlowPane(this.vista, this.vista.getModelo().getJugador());
         this.manoOponente = new ManosFlowPane(this.vista, this.vista.getModelo().getOponente());
@@ -43,5 +44,11 @@ public class ManosVista implements ObservadorDeModelo
         this.manoOponente.clear();
         this.manoJugador.actualizar(this.vista.getModelo().getCartasManoJugador());
         this.manoOponente.actualizar(this.vista.getModelo().getCartasManoOponente());
+    }
+
+    @Override
+    public void seTomoCartaDeMazo()
+    {
+
     }
 }

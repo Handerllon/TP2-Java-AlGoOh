@@ -14,8 +14,9 @@ public class VidaVista implements ObservadorDeModelo
 
     public VidaVista(Vista vista)
     {
-
         this.vista = vista;
+        // TODO: Para cuando se implemente los observadores puntuales:
+        // vista.getModelo().registrarObsevador(this);
 
         this.vidaJugador = new Label();
         this.vidaOponente = new Label();
@@ -57,5 +58,11 @@ public class VidaVista implements ObservadorDeModelo
     {
         this.vidaJugador.setText(this.vista.getModelo().getJugador().getNombre() + "\n" + this.vista.getModelo().getJugador().getPuntosDeVida());
         this.vidaOponente.setText(this.vista.getModelo().getOponente().getNombre() + "\n" + this.vista.getModelo().getOponente().getPuntosDeVida());
+    }
+
+    @Override
+    public void seTomoCartaDeMazo()
+    {
+
     }
 }

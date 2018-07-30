@@ -24,8 +24,8 @@ import javafx.stage.Stage;
 public class ManoBoton extends Button
 {
     // Se uso como base una resolucion de 1080x1920
-    private static double anchoInicialCarta = 95.4;
-    private static double altoInicialCarta = 139;
+    private static double porcentajeDeAnchoDeLaCarta = 0.0496;
+    private static double porcentajeDeAltoDeLaCarta = 0.1287;
     private static String rutaImagenReversoCarta = "resources/imagenes/cartaReverso.jpg";
     private Stage primaryStage;
     private Carta carta;
@@ -52,9 +52,7 @@ public class ManoBoton extends Button
 
         this.toolTip.setGraphic(new ImageView(imagenCarta));
         this.boton.setTooltip(toolTip);
-        double anchoCarta = (this.vista.getResolucionHorizontal() * anchoInicialCarta) / 1920;
-        double altoCarta = (this.vista.getResolucionVertical() * altoInicialCarta) / 1080;
-        this.boton.setPrefSize(anchoCarta, altoCarta);
+        this.boton.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta, this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
 
         this.boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));

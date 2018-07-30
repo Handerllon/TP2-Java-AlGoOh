@@ -192,9 +192,7 @@ public final class EscenaTableroPrincipal implements Escena
         // Estados de juego.
         // -------------------------------
         gridPane.add(turnoActualVista.getDisplayTurnoActual(), 0, 1);
-        //gridPane.setHalignment(turnoActualVista.getDisplayTurnoActual(), HPos.RIGHT);
         gridPane.add(faseActualVista.getLabelFaseActual(), 0, 2);
-        //gridPane.setHalignment(faseActualVista.getLabelFaseActual(), HPos.RIGHT);
     }
 
     // --------------------------------------------------------------------
@@ -231,6 +229,7 @@ public final class EscenaTableroPrincipal implements Escena
         this.regionesCementerioVista.huboCambios();
         this.manosVista.huboCambios();
         this.mazosVista.huboCambios();
+        this.vidasVista.huboCambios();
         this.actualizarDibujo();
     }
 

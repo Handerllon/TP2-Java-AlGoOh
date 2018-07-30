@@ -52,4 +52,22 @@ public class RegionesMonstruoVista implements ObservadorDeModelo
     {
 
     }
+
+    @Override
+    public void ingresoCartaAMano()
+    {
+
+    }
+
+    @Override
+    public void egresoCartaAMano()
+    {
+
+    }
+
+    @Override
+    public void cambiaronLosPuntosDeVida()
+    {
+
+    }
 }

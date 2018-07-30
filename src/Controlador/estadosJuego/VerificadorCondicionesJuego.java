@@ -214,6 +214,7 @@ public final class VerificadorCondicionesJuego
     // ----------------------------------------
     // Verificación de ataque de cartas.
     // ----------------------------------------
+    // Se supone que la carta ya está en el campo.
     public EstadoVerificador sePuedeAtacar(Carta cartaAtacante, Jugador solicitante)
     {
         if (!jugadorPuedeJugar(solicitante))

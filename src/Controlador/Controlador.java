@@ -165,12 +165,31 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
             this.maquinaTurnos.avanzarFase();
         }
 
-        this.notificarAvanceDeFase();
+        this.notificarCambioDeFase();
     }
 
-    private void notificarAvanceDeFase()
+    private void cambiarAFase(Fase fase)
     {
-        this.vista.huboAvanceDeFase();
+        this.maquinaTurnos.setFaseActual(fase);
+        this.notificarCambioDeFase();
+    }
+
+    private void notificarCambioDeFase()
+    {
+        this.vista.huboCambioDeFase();
+    }
+
+    private void retrocederFase() throws SeTerminaronLasFases
+    {
+        if (this.maquinaTurnos.getFaseActual().esFaseInicial())
+        {
+            throw new SeTerminaronLasFases();
+        } else
+        {
+            this.maquinaTurnos.retrocederFase();
+        }
+
+        this.notificarCambioDeFase();
     }
 
     private void accionarFaseInicialAutomatica()
@@ -440,35 +459,19 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
         {
             if (((CartaMonstruo) cartaAtacante).getOponente().getRegionMonstruos().estaVacia())
             {
-                avanzarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
+                cambiarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
 
                 this.modelo.atacar((CartaMonstruo) cartaAtacante);
             } else
             {
                 CartaMonstruo cartaAAtacar = this.vista.solicitarCartaAAtacar();
 
-                avanzarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
+                cambiarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
 
                 this.modelo.atacar((CartaMonstruo) cartaAtacante, cartaAAtacar);
             }
             this.maquinaTurnos.cartaAtacaEnTurnoActual((CartaMonstruo) cartaAtacante);
             retrocederFase();
-        }
-    }
-
-    private void avanzarAFase(Fase fase)
-    {
-        this.maquinaTurnos.setFaseActual(fase);
-    }
-
-    private void retrocederFase() throws SeTerminaronLasFases
-    {
-        if (this.maquinaTurnos.getFaseActual().esFaseInicial())
-        {
-            throw new SeTerminaronLasFases();
-        } else
-        {
-            this.maquinaTurnos.retrocederFase();
         }
     }
 }

@@ -12,11 +12,12 @@ import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaPuntosDeVidaNulos;
 import Modelo.finDeJuego.FinDeJuegoObservable;
 import Modelo.observadores.ObservadorDeFinJuego;
+import Modelo.observadores.ObservadorDeJugador;
 import Modelo.region.*;
 
 import java.util.ArrayList;
 
-public class Jugador implements FinDeJuegoObservable
+public class Jugador implements FinDeJuegoObservable, JugadorObservable
 {
     private static final int puntosDeVidaIniciales = 8000;
     // ----------------------------------------
@@ -38,6 +39,7 @@ public class Jugador implements FinDeJuegoObservable
     // Observadores.
     // ----------------------------------------
     private ArrayList<ObservadorDeFinJuego> observadoresFinJuegos = new ArrayList<>();
+    private ArrayList<ObservadorDeJugador> observadoresJugador = new ArrayList<>();
 
     public Jugador()
     {
@@ -92,6 +94,7 @@ public class Jugador implements FinDeJuegoObservable
     public void disminuirPuntosVida(int puntosARestar)
     {
         this.puntosDeVida -= puntosARestar;
+        this.notificarCambioEnPuntosDeVida();
         if (this.puntosDeVida <= 0)
         {
             this.notificarFinDeJuego(new CausaPuntosDeVidaNulos(this));
@@ -271,6 +274,27 @@ public class Jugador implements FinDeJuegoObservable
     public void notificarFinDeJuego(CausaFinJuego causaFinJuego)
     {
         this.observadoresFinJuegos.forEach(item -> item.seLlegoAFinDeJuego(causaFinJuego));
+    }
+
+    // --------------------------------------------------------------------
+    // Metodos por ser observable de Jugador.
+    // --------------------------------------------------------------------
+    @Override
+    public void registrarObsevador(ObservadorDeJugador observador)
+    {
+        observadoresJugador.add(observador);
+    }
+
+    @Override
+    public void eliminarObservador(ObservadorDeJugador observador)
+    {
+        observadoresJugador.remove(observador);
+    }
+
+    @Override
+    public void notificarCambioEnPuntosDeVida()
+    {
+        observadoresJugador.forEach(observador -> observador.cambiaronLosPuntosDeVida());
     }
 }
 

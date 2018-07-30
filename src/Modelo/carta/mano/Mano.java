@@ -41,7 +41,7 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
             this.cartas.add(carta);
             this.verificarAgregacionParteExodia(carta);
             this.verificarExodiaCompleto(carta);
-            this.notificarEvento();
+            this.notificarIngresoDeCartaAMano();
 
             throw new ManoLlena(this.jugadorAsociado);
         } else
@@ -49,7 +49,7 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
             this.cartas.add(carta);
             this.verificarAgregacionParteExodia(carta);
             this.verificarExodiaCompleto(carta);
-            this.notificarEvento();
+            this.notificarIngresoDeCartaAMano();
         }
     }
 
@@ -58,7 +58,7 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
         if (!this.cartas.isEmpty())
         {
             this.cartas.remove(carta);
-            this.notificarEvento();
+            this.notificarEgresoDeCartaAMano();
             this.verificarRemocionParteExodia(carta);
         }
     }
@@ -143,8 +143,14 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
     }
 
     @Override
-    public void notificarEvento()
+    public void notificarIngresoDeCartaAMano()
     {
-        observadoresMano.forEach(observador -> observador.huboCambios());
+        observadoresMano.forEach(observador -> observador.ingresoCartaAMano());
+    }
+
+    @Override
+    public void notificarEgresoDeCartaAMano()
+    {
+        observadoresMano.forEach(observador -> observador.egresoCartaAMano());
     }
 }

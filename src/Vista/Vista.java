@@ -103,8 +103,27 @@ public class Vista implements ObservadorDeModelo
     {
         this.escena.actualizarEstado();
     }
+
     @Override
     public void seTomoCartaDeMazo()
+    {
+
+    }
+
+    @Override
+    public void ingresoCartaAMano()
+    {
+
+    }
+
+    @Override
+    public void egresoCartaAMano()
+    {
+
+    }
+
+    @Override
+    public void cambiaronLosPuntosDeVida()
     {
 
     }
@@ -112,7 +131,7 @@ public class Vista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     // Métodos de observador de controlador.
     // --------------------------------------------------------------------
-    public void huboAvanceDeFase()
+    public void huboCambioDeFase()
     {
         this.escena.mostrarFaseActual();
     }

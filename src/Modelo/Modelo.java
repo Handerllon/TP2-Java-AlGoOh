@@ -17,7 +17,7 @@ import Modelo.region.RegionMagicasYTrampas;
 import java.util.ArrayList;
 
 public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJuegoObservable, ObservadorDeFinJuego,
-        ObservadorRegion, ObservadorDeMazo, ObservadorDeMano, ObservadorDeCarta
+        ObservadorRegion, ObservadorDeMazo, ObservadorDeMano, ObservadorDeCarta, ObservadorDeJugador
 {
     private static Modelo instancia = null;
     private Jugador jugador1;
@@ -158,6 +158,23 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.seTomoCartaDeMazo());
     }
 
+    @Override
+    public void notificarIngresoCartaAMano()
+    {
+        observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.ingresoCartaAMano());
+    }
+
+    @Override
+    public void notificarEgresoCartaAMano()
+    {
+        observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.egresoCartaAMano());
+    }
+
+    @Override
+    public void notificarCambioEnPuntosDeVida(){
+        observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.cambiaronLosPuntosDeVida());
+    }
+
     // --------------------------------------------------------------------
     // Metodos por ser un observador de Region, Mazo, Mano
     // --------------------------------------------------------------------
@@ -185,6 +202,30 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         notificarEvento();
         // TODO: Para cuando se implemente los observadores puntuales:
         //notificarTomaDeCartaDeMazo();
+    }
+
+    @Override
+    public void ingresoCartaAMano()
+    {
+        notificarEvento();
+        // TODO: Para cuando se implemente los observadores puntuales:
+        //notificarIngresoCartaAMano();
+    }
+
+    @Override
+    public void egresoCartaAMano()
+    {
+        notificarEvento();
+        // TODO: Para cuando se implemente los observadores puntuales:
+        //notificarEgresoCartaAMano();
+    }
+
+    @Override
+    public void cambiaronLosPuntosDeVida()
+    {
+        notificarEvento();
+        // TODO: Para cuando se implemente los observadores puntuales:
+        //notificarCambioEnPuntosDeVida();
     }
 
     // ------------------------------------

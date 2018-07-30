@@ -77,4 +77,22 @@ public class RegionesCampoVista implements ObservadorDeModelo
     {
 
     }
+
+    @Override
+    public void ingresoCartaAMano()
+    {
+
+    }
+
+    @Override
+    public void egresoCartaAMano()
+    {
+
+    }
+
+    @Override
+    public void cambiaronLosPuntosDeVida()
+    {
+
+    }
 }

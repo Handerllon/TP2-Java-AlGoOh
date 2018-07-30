@@ -8,5 +8,7 @@ public interface ManoObservable
 
     void eliminarObservador(ObservadorDeMano observador);
 
-    void notificarEvento();
+    void notificarEgresoDeCartaAMano();
+
+    void notificarIngresoDeCartaAMano();
 }

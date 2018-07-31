@@ -1,7 +1,6 @@
 package Modelo;
 
 import Modelo.carta.Carta;
-import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
@@ -408,20 +407,6 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         this.setModoDefensa(carta);
         jugador.enviarARegion(carta);
     }
-    
-    @Override
-	public Sacrificio getSacrificio(CartaMonstruo carta) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-    @Override
-    public void setCartaMonstruo(Jugador jugador, CartaMonstruo carta, Sacrificio sacrificios)
-    {
-        this.flipBocaAbajo(carta);
-        this.setModoDefensa(carta);
-        jugador.enviarARegion(carta, sacrificios);
-    }
 
     @Override
     public void summonCartaMonstruo(Jugador jugador, CartaMonstruo carta)
@@ -432,27 +417,9 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     }
 
     @Override
-    public void summonCartaMonstruo(Jugador jugador, CartaMonstruo carta, Sacrificio sacrificios)
+    public boolean seCumplenCondicionesDeSacrificiosRequeridos(CartaMonstruo carta)
     {
-        this.flipBocaArriba(carta);
-        this.setModoAtaque(carta);
-        jugador.enviarARegion(carta, sacrificios);
-    }
-
-    @Override
-    public boolean requiereSacrificios(CartaMonstruo carta)
-    {
-        return (carta).requiereSacrificio();
-    }
-
-    @Override
-    public boolean haySuficientesCartasParaSacrificar(CartaMonstruo carta)
-    {
-        if (carta.getEstrellas() >= 5)
-        {
-            return carta.getPropietario().getRegionMonstruos().getCantidadCartas() >= carta.getEstrellas();
-        }
-        return true;
+        return carta.seCumplenCondicionesDeSacrificiosRequeridos();
     }
 
     // ------------------------------------
@@ -529,6 +496,4 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
 
         cartaAtacante.atacar();
     }
-
-	
 }

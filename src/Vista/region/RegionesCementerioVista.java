@@ -8,9 +8,9 @@ public class RegionesCementerioVista implements ObservadorDeModelo
 {
     private static String estiloRegion = "-fx-background-color: Transparent";
     private static String rutaImagenReversoCarta = "resources/imagenes/cartaReverso.jpg";
-    private Vista vista;
     private static double porcentajeDeAnchoDeLaCarta = 0.0496;
     private static double porcentajeDeAltoDeLaCarta = 0.1287;
+    private Vista vista;
     private Button botonCementerioJugador;
     private Button botonCementerioOponente;
 

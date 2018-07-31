@@ -1,11 +1,10 @@
 package exepciones;
 
-import Modelo.carta.Sacrificio;
+import Modelo.Jugador;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.campo.FabricaCartasCampo;
 import Modelo.carta.excepciones.CartaInvalidaError;
-import Modelo.carta.excepciones.NoHayCartasParaSacrificarError;
-import Modelo.carta.excepciones.NoHayTresDragonesBlancosParaSacrificioError;
+import Modelo.carta.excepciones.SacrificiosInsuficientesError;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.magica.FabricaCartasMagicas;
 import Modelo.carta.monstruo.*;
@@ -53,28 +52,32 @@ public class exepcionesTest
         CartaMonstruo algo = fabrica.getCarta("CartaSinNombre");
     }
 
-    @Test(expected = NoHayCartasParaSacrificarError.class)
+    @Test(expected = SacrificiosInsuficientesError.class)
     public void test06NoHayCartasParaSacrificarError()
     {
+        Jugador jugador1 = new Jugador("J1");
+        Jugador jugador2 = new Jugador("J2");
 
-        CartaMonstruo carta = new BlueEyesWhiteDragon(null, null);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
-        //No hay cartas para sacrificar, y la Modelo.carta requiere sacrificios para ser invocada
-        Sacrificio sacrificio = new Sacrificio();
+        CartaMonstruo carta = new BlueEyesWhiteDragon(jugador1, jugador2);
 
-        carta.summon(sacrificio);
+        carta.summon();
     }
 
-    @Test(expected = NoHayTresDragonesBlancosParaSacrificioError.class)
+    @Test(expected = SacrificiosInsuficientesError.class)
     public void test07NoHayCartasParaSacrificarError()
     {
+        Jugador jugador1 = new Jugador("J1");
+        Jugador jugador2 = new Jugador("J2");
 
-        CartaMonstruo carta = new BlueEyesUltimateDragon(null, null);
+        jugador1.setOponente(jugador2);
+        jugador2.setOponente(jugador1);
 
-        //No hay cartas para sacrificar, y la Modelo.carta requiere sacrificios para ser invocada
-        Sacrificio sacrificio = new Sacrificio();
+        CartaMonstruo carta = new BlueEyesUltimateDragon(jugador1, jugador2);
 
-        carta.summon(sacrificio);
+        carta.summon();
     }
 
     @Test(expected = RegionSinEspacioLibre.class)

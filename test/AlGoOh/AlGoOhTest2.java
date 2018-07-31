@@ -3,7 +3,6 @@ package AlGoOh;
 import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.FabricaCartas;
-import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.mano.Mano;
@@ -237,39 +236,25 @@ public class AlGoOhTest2
         jugador1.enviarARegion(primerSacrificio1Jugador1);
         CartaMonstruo primerSacrificio2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
         jugador1.enviarARegion(primerSacrificio2Jugador1);
-        Sacrificio sacrificios1 = new Sacrificio();
-        sacrificios1.agregarCarta(primerSacrificio1Jugador1);
-        sacrificios1.agregarCarta(primerSacrificio2Jugador1);
         CartaMonstruo primerDragonBlancoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
-        jugador1.enviarARegion(primerDragonBlancoJugador1, sacrificios1);
+        jugador1.enviarARegion(primerDragonBlancoJugador1);
 
         CartaMonstruo segundoSacrificio1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
         jugador1.enviarARegion(segundoSacrificio1Jugador1);
         CartaMonstruo segundoSacrificio2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
         jugador1.enviarARegion(segundoSacrificio2Jugador1);
-        Sacrificio sacrificios2 = new Sacrificio();
-        sacrificios2.agregarCarta(segundoSacrificio1Jugador1);
-        sacrificios2.agregarCarta(segundoSacrificio2Jugador1);
         CartaMonstruo segundoDragonBlancoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
-        jugador1.enviarARegion(segundoDragonBlancoJugador1, sacrificios2);
+        jugador1.enviarARegion(segundoDragonBlancoJugador1);
 
         CartaMonstruo tercerSacrificio1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
         jugador1.enviarARegion(tercerSacrificio1Jugador1);
         CartaMonstruo tercerSacrificio2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
         jugador1.enviarARegion(tercerSacrificio2Jugador1);
-        Sacrificio sacrificios3 = new Sacrificio();
-        sacrificios3.agregarCarta(tercerSacrificio1Jugador1);
-        sacrificios3.agregarCarta(tercerSacrificio2Jugador1);
         CartaMonstruo tercerDragonBlancoJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
-        jugador1.enviarARegion(tercerDragonBlancoJugador1, sacrificios3);
-
-        Sacrificio sacrificioFinal = new Sacrificio();
-        sacrificioFinal.agregarCarta(primerDragonBlancoJugador1);
-        sacrificioFinal.agregarCarta(segundoDragonBlancoJugador1);
-        sacrificioFinal.agregarCarta(tercerDragonBlancoJugador1);
+        jugador1.enviarARegion(tercerDragonBlancoJugador1);
 
         CartaMonstruo dragonDefinitivoDeOjosAzulesJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes Ultimate Dragon");
-        jugador1.enviarARegion(dragonDefinitivoDeOjosAzulesJugador1, sacrificioFinal);
+        jugador1.enviarARegion(dragonDefinitivoDeOjosAzulesJugador1);
 
         assertTrue(jugador1.cartaEstaEnCementerio(primerDragonBlancoJugador1));
         assertTrue(jugador1.cartaEstaEnCementerio(segundoDragonBlancoJugador1));

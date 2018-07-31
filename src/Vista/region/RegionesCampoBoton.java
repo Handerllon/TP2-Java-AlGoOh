@@ -36,8 +36,8 @@ public class RegionesCampoBoton extends Button
 
         this.boton = new Button();
 
-        this.boton.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta,
-        		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
+        this.boton.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
         this.boton.setStyle(estiloRegion);
 
         this.tooltip = new Tooltip();
@@ -52,16 +52,16 @@ public class RegionesCampoBoton extends Button
     {
         this.boton = new Button();
         boton.setStyle(estiloRegion);
-        this.boton.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta,
-        		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
+        this.boton.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
     }
 
     public void actualizarImagen(CartaCampo carta)
     {
         this.carta = carta;
 
-        this.boton.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta,
-        		this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
+        this.boton.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
         this.boton.setStyle(null);
         this.boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));

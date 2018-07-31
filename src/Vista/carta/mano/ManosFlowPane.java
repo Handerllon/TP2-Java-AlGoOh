@@ -22,8 +22,8 @@ public class ManosFlowPane extends FlowPane
         this.jugadorAsociado = jugador;
         this.vista = vista;
 
-        this.flowPane = new FlowPane(this.vista.getResolucionHorizontal()*horizontalGapFlowPaneButtons,
-        		this.vista.getResolucionVertical()*verticalGapFlowPaneButtons);
+        this.flowPane = new FlowPane(this.vista.getResolucionHorizontal() * horizontalGapFlowPaneButtons,
+                this.vista.getResolucionVertical() * verticalGapFlowPaneButtons);
 
         this.flowPane.setAlignment(Pos.CENTER);
         this.botones = new ArrayList<>();
@@ -36,8 +36,8 @@ public class ManosFlowPane extends FlowPane
 
     public void clear()
     {
-    	this.flowPane = new FlowPane(this.vista.getResolucionHorizontal()*horizontalGapFlowPaneButtons,
-        		this.vista.getResolucionVertical()*verticalGapFlowPaneButtons);
+        this.flowPane = new FlowPane(this.vista.getResolucionHorizontal() * horizontalGapFlowPaneButtons,
+                this.vista.getResolucionVertical() * verticalGapFlowPaneButtons);
         this.flowPane.setAlignment(Pos.CENTER);
         this.botones = new ArrayList<>();
     }

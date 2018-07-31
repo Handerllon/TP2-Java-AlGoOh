@@ -75,5 +75,5 @@ public interface ControladorInterfaz
     // ------------------------------------
     void atacar(Jugador solicitante, Carta cartaAtacante) throws NoSePuedeAtacarError;
 
-	void atacarCarta(Jugador solicitante, CartaMonstruo cartaAtacante, CartaMonstruo cartaSolicitada);
+    void atacarCarta(Jugador solicitante, CartaMonstruo cartaAtacante, CartaMonstruo cartaSolicitada);
 }

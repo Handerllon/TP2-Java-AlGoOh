@@ -29,8 +29,8 @@ public class VidaVista implements ObservadorDeModelo
 
     private void inicializar()
     {
-        this.vidaJugador.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDePantallaHorizontal, this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
-        this.vidaOponente.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDePantallaHorizontal, this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
+        this.vidaJugador.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDePantallaHorizontal, this.vista.getResolucionVertical() * porcentajeDePantallaVertical);
+        this.vidaOponente.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDePantallaHorizontal, this.vista.getResolucionVertical() * porcentajeDePantallaVertical);
 
         this.vidaJugador.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical() * porcentajeDeTamanioDeFuente));
         this.vidaOponente.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical() * porcentajeDeTamanioDeFuente));

@@ -2,7 +2,6 @@ package AlGoOh;
 
 import Modelo.Jugador;
 import Modelo.carta.FabricaCartas;
-import Modelo.carta.Sacrificio;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.trampa.CartaTrampa;
@@ -310,16 +309,15 @@ public class AlGoOhTest
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
-        CartaMonstruo carta1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
-        jugador1.enviarARegion(carta1Jugador1);
+        CartaMonstruo carta1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
+        CartaMonstruo carta2 = fabricaCartasJugador1.crearCartaMonstruo("Amphibian Beast");
 
-        CartaMonstruo carta2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Amphibian Beast");
-        Sacrificio sacrificios = new Sacrificio();
-        sacrificios.agregarCarta(carta1Jugador1);
-        jugador1.enviarARegion(carta2Jugador1, sacrificios);
+        jugador1.enviarARegion(carta1);
 
-        assertTrue(jugador1.cartaEstaEnCementerio(carta1Jugador1));
-        assertTrue(jugador1.cartaEstaEnRegionMonstruos(carta2Jugador1));
+        jugador1.enviarARegion(carta2);
+
+        assertTrue(jugador1.cartaEstaEnCementerio(carta1));
+        assertTrue(jugador1.cartaEstaEnRegionMonstruos(carta2));
     }
 
     @Test
@@ -333,19 +331,17 @@ public class AlGoOhTest
 
         FabricaCartas fabricaCartasJugador1 = new FabricaCartas(jugador1, jugador2);
 
-        CartaMonstruo carta1Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
-        jugador1.enviarARegion(carta1Jugador1);
-        CartaMonstruo carta2Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
-        jugador1.enviarARegion(carta2Jugador1);
+        CartaMonstruo carta1 = fabricaCartasJugador1.crearCartaMonstruo("Charcoal Inpachi");
+        CartaMonstruo carta2 = fabricaCartasJugador1.crearCartaMonstruo("Bitron");
+        CartaMonstruo carta3 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
 
-        CartaMonstruo carta3Jugador1 = fabricaCartasJugador1.crearCartaMonstruo("Blue-Eyes White Dragon");
-        Sacrificio sacrificios = new Sacrificio();
-        sacrificios.agregarCarta(carta1Jugador1);
-        sacrificios.agregarCarta(carta2Jugador1);
-        jugador1.enviarARegion(carta3Jugador1, sacrificios);
+        jugador1.enviarARegion(carta1);
+        jugador1.enviarARegion(carta2);
 
-        assertTrue(jugador1.cartaEstaEnCementerio(carta1Jugador1));
-        assertTrue(jugador1.cartaEstaEnCementerio(carta2Jugador1));
-        assertTrue(jugador1.cartaEstaEnRegionMonstruos(carta3Jugador1));
+        jugador1.enviarARegion(carta3);
+
+        assertTrue(jugador1.cartaEstaEnCementerio(carta1));
+        assertTrue(jugador1.cartaEstaEnCementerio(carta2));
+        assertTrue(jugador1.cartaEstaEnRegionMonstruos(carta3));
     }
 }

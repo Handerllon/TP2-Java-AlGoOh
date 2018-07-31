@@ -5,7 +5,6 @@ import Controlador.excepciones.*;
 import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
-import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
@@ -248,15 +247,7 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
             throw new NoSePuedeEnviarCartaMonstruoARegionError(solicitante, estadoVerificador);
         } else
         {
-            if (!this.modelo.requiereSacrificios((CartaMonstruo) carta))
-            {
-
-                this.modelo.setCartaMonstruo(solicitante, (CartaMonstruo) carta);
-            } else
-            {
-                Sacrificio sacrificios = this.modelo.getSacrificio((CartaMonstruo)carta);
-                this.modelo.setCartaMonstruo(solicitante, (CartaMonstruo) carta, sacrificios);
-            }
+            this.modelo.setCartaMonstruo(solicitante, (CartaMonstruo) carta);
             this.maquinaTurnos.seColocaCartaMonstruoEnRegionEnTurnoActual();
             this.maquinaTurnos.seColocaCartaEnRegionEnTurnoActual(carta);
         }
@@ -271,14 +262,7 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
             throw new NoSePuedeEnviarCartaMonstruoARegionError(solicitante, estadoVerificador);
         } else
         {
-            if (!this.modelo.requiereSacrificios((CartaMonstruo) carta))
-            {
-                this.modelo.summonCartaMonstruo(solicitante, (CartaMonstruo) carta);
-            } else
-            {
-            	Sacrificio sacrificios = this.modelo.getSacrificio((CartaMonstruo)carta);
-                this.modelo.summonCartaMonstruo(solicitante, (CartaMonstruo) carta, sacrificios);
-            }
+            this.modelo.summonCartaMonstruo(solicitante, (CartaMonstruo) carta);
             this.maquinaTurnos.seColocaCartaMonstruoEnRegionEnTurnoActual();
             this.maquinaTurnos.seColocaCartaEnRegionEnTurnoActual(carta);
         }
@@ -404,7 +388,6 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
         }
     }
 
-
     // ------------------------------------
     // Métodos de ataques.
     // ------------------------------------
@@ -426,21 +409,20 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
                 retrocederFase();
             } else
             {
-                this.vista.solicitarCartaAAtacar((CartaMonstruo)cartaAtacante);
+                this.vista.solicitarCartaAAtacar((CartaMonstruo) cartaAtacante);
             }
         }
     }
 
-	@Override
-	public void atacarCarta(Jugador solicitante, CartaMonstruo cartaAtacante, CartaMonstruo cartaSolicitada) {
-		
-		
-		cambiarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
+    @Override
+    public void atacarCarta(Jugador solicitante, CartaMonstruo cartaAtacante, CartaMonstruo cartaSolicitada)
+    {
+
+        cambiarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
 
         this.modelo.atacar((CartaMonstruo) cartaAtacante, cartaSolicitada);
-        
+
         this.maquinaTurnos.cartaAtacaEnTurnoActual((CartaMonstruo) cartaAtacante);
         retrocederFase();
-
-	}
+    }
 }

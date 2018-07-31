@@ -18,8 +18,8 @@ public class FaseActualVista
         this.vista = vista;
         this.labelFaseActual = new Label();
 
-        this.labelFaseActual.setPrefSize((this.vista.getResolucionHorizontal() * porcentajeDePantallaHorizontal), this.vista.getResolucionVertical()*porcentajeDePantallaVertical);
-        this.labelFaseActual.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical()*porcentajeDeTamanioDeFuente));
+        this.labelFaseActual.setPrefSize((this.vista.getResolucionHorizontal() * porcentajeDePantallaHorizontal), this.vista.getResolucionVertical() * porcentajeDePantallaVertical);
+        this.labelFaseActual.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical() * porcentajeDeTamanioDeFuente));
         this.labelFaseActual.setTextFill(Color.web("#910101"));
 
         actualizar();

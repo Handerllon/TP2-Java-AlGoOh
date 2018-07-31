@@ -53,13 +53,6 @@ public abstract class Region<T extends Carta> implements RegionObservable
         }
     }
 
-    public void removerTodasLasCartas()
-    {
-        ArrayList<T> cartasARemover = this.getCartas();
-        // removerCarta() ya notifica.
-        cartasARemover.forEach(item -> this.removerCarta(item));
-    }
-
     // ------------------------------------
     // Métodos de consultas.
     // ------------------------------------

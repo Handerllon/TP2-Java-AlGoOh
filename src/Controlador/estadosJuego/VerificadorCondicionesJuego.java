@@ -4,6 +4,7 @@ import Controlador.condicionesJuego.*;
 import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
+import Modelo.carta.excepciones.SacrificiosInsuficientesError;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.excepciones.*;
 
@@ -80,10 +81,12 @@ public final class VerificadorCondicionesJuego
         } else if (!carta.esMonstruo())
         {
             return new NoEsCartaMonstruo();
-        } else if (!this.modelo.haySuficientesCartasParaSacrificar((CartaMonstruo) carta))
+        } // A partir de aquí ya se que es CartaMonstruo.
+        else if (!this.modelo.seCumplenCondicionesDeSacrificiosRequeridos((CartaMonstruo) carta))
         {
-            return new NoHaySuficientesCartasParaSacrificarError();
-        } else if (!solicitante.getRegionMonstruos().hayEspacioLibre())
+            return new SacrificiosInsuficientesError();
+        } else if (!solicitante.getRegionMonstruos().hayEspacioLibre() && !((CartaMonstruo) carta)
+                .requiereSacrificios())
         {
             return new NoHayEspacioLibreEnRegionMonstruo();
         }

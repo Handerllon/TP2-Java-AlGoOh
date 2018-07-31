@@ -3,8 +3,6 @@ package Vista;
 import Controlador.ControladorInterfaz;
 import Controlador.excepciones.*;
 import Modelo.ModeloObservable;
-import Modelo.carta.Carta;
-import Modelo.carta.Sacrificio;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.observadores.ObservadorDeModelo;
 import Vista.escena.Escena;
@@ -240,9 +238,9 @@ public class Vista implements ObservadorDeModelo
         erroresVista.mostrarError(error);
     }
 
-	public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante) {
-		
-		this.escena.solicitarCartaAAtacar(cartaAtacante);
-		
-	}
+    public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante)
+    {
+
+        this.escena.solicitarCartaAAtacar(cartaAtacante);
+    }
 }

@@ -1,7 +1,6 @@
 package Modelo.carta.monstruo;
 
 import Modelo.Jugador;
-import Modelo.carta.Sacrificio;
 
 public class AmphibianBeast extends CartaMonstruo
 {
@@ -16,16 +15,15 @@ public class AmphibianBeast extends CartaMonstruo
         this.nombre = "Amphibian Beast";
     }
 
-    public void summon(Sacrificio sacrificio)
+    @Override
+    public boolean requiereSacrificios()
     {
-        this.getPropietario().destruirCarta(sacrificio.getMonstruo());
-
-        this.getPropietario().enviarARegion(this);
+        return true;
     }
 
     @Override
-    public boolean requiereSacrificio()
+    public int getCantidadSacrificiosRequeridos()
     {
-        return true;
+        return 1;
     }
 }

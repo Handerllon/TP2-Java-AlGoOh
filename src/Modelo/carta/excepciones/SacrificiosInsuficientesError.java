@@ -1,8 +1,8 @@
-package Controlador.condicionesJuego;
+package Modelo.carta.excepciones;
 
 import Controlador.estadosJuego.EstadoVerificador;
 
-public class NoHaySuficientesCartasParaSacrificarError implements EstadoVerificador
+public class SacrificiosInsuficientesError extends RuntimeException implements EstadoVerificador
 {
     @Override
     public boolean esFallido()
@@ -13,6 +13,6 @@ public class NoHaySuficientesCartasParaSacrificarError implements EstadoVerifica
     @Override
     public String getNombre()
     {
-        return "No hay suficientes sacrificios";
+        return "No hay suficientes sacrificios.";
     }
 }

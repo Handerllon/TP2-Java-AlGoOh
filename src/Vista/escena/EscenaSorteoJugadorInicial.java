@@ -1,7 +1,6 @@
 package Vista.escena;
 
 import Modelo.ModeloObservable;
-import Modelo.carta.Carta;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.Vista;
 import javafx.geometry.Insets;
@@ -221,10 +220,9 @@ public final class EscenaSorteoJugadorInicial implements Escena
 
     }
 
-	@Override
-	public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante) {
-		
-		
-	}
+    @Override
+    public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante)
+    {
 
+    }
 }

@@ -1,6 +1,5 @@
 package Vista.escena;
 
-import Modelo.carta.Carta;
 import Modelo.carta.monstruo.CartaMonstruo;
 import javafx.scene.layout.GridPane;
 
@@ -28,6 +27,5 @@ public interface Escena
 
     GridPane getGridPaneEscena();
 
-	void solicitarCartaAAtacar(CartaMonstruo cartaAtacante);
-
+    void solicitarCartaAAtacar(CartaMonstruo cartaAtacante);
 }

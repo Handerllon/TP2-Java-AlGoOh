@@ -1,7 +1,6 @@
 package Modelo.carta.monstruo;
 
 import Modelo.Jugador;
-import Modelo.carta.Sacrificio;
 
 public class BlueEyesWhiteDragon extends CartaMonstruo
 {
@@ -16,17 +15,15 @@ public class BlueEyesWhiteDragon extends CartaMonstruo
         this.nombre = "Blue-Eyes White Dragon";
     }
 
-    public void summon(Sacrificio sacrificio)
+    @Override
+    public boolean requiereSacrificios()
     {
-        this.getPropietario().destruirCarta(sacrificio.getMonstruo());
-        this.getPropietario().destruirCarta(sacrificio.getMonstruo());
-
-        this.getPropietario().enviarARegion(this);
+        return true;
     }
 
     @Override
-    public boolean requiereSacrificio()
+    public int getCantidadSacrificiosRequeridos()
     {
-        return true;
+        return 2;
     }
 }

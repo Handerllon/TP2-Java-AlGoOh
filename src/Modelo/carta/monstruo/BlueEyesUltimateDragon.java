@@ -1,8 +1,9 @@
 package Modelo.carta.monstruo;
 
 import Modelo.Jugador;
-import Modelo.carta.Sacrificio;
-import Modelo.carta.excepciones.NoHayTresDragonesBlancosParaSacrificioError;
+import Modelo.carta.excepciones.SacrificiosInsuficientesError;
+
+import java.util.ArrayList;
 
 public class BlueEyesUltimateDragon extends CartaMonstruo
 {
@@ -18,35 +19,75 @@ public class BlueEyesUltimateDragon extends CartaMonstruo
         this.nombre = "Blue-Eyes Ultimate Dragon";
     }
 
-    public void summon(Sacrificio sacrificio)
+    @Override
+    protected ArrayList<CartaMonstruo> getSacrificios()
     {
-        int cantidadDragonesBlancosNecesarios = 3;
-
-        // TODO: ver esto.
-        // Se crea una Modelo.carta Dragón Blanco de Ojos Azules para obtener su nombre, y no hardcodearlo en el código, ya
+        // Se crea un Dragón Blanco de Ojos Azules para obtener su nombre, y no hardcodearlo en el código, ya
         // que si este nombre cambia, habría que cambiar todos los lugares donde se hubiera hardcodeado.
         CartaMonstruo cartaBlueEyesWhiteDragonMock = new BlueEyesWhiteDragon(null, null);
 
-        if (sacrificio.cantidadSacrificiosDe(cartaBlueEyesWhiteDragonMock.getNombre()) < cantidadDragonesBlancosNecesarios)
-        {
-            throw new NoHayTresDragonesBlancosParaSacrificioError();
-        } else
-        {
-            CartaMonstruo cartaASacrificar;
+        // Se verifica si hay la cantidad de Blue-Eyes White Dragons requeridos.
+        ArrayList<CartaMonstruo> cartasEnRegionMonstruo = this.getPropietario().getRegionMonstruos().getCartas();
 
-            for (int i = 0; i < cantidadDragonesBlancosNecesarios; i++)
+        ArrayList<CartaMonstruo> cartasASacrificar = new ArrayList<>();
+
+        CartaMonstruo cartaMonstruo;
+
+        int cantidadSacrificiosContabilizados = 0;
+        for (int k = 0; k < cartasEnRegionMonstruo.size(); k++)
+        {
+
+            cartaMonstruo = cartasEnRegionMonstruo.get(k);
+
+            if (cartaMonstruo.getNombre() == cartaBlueEyesWhiteDragonMock.getNombre())
             {
-                cartaASacrificar = sacrificio.getMonstruo(cartaBlueEyesWhiteDragonMock.getNombre());
-                this.getPropietario().destruirCarta(cartaASacrificar);
+                cantidadSacrificiosContabilizados++;
+                cartasASacrificar.add(cartaMonstruo);
             }
         }
 
-        this.getPropietario().enviarARegion(this);
+        if (cantidadSacrificiosContabilizados < getCantidadSacrificiosRequeridos())
+        {
+            throw new SacrificiosInsuficientesError();
+        } else
+        {
+            return cartasASacrificar;
+        }
     }
 
     @Override
-    public boolean requiereSacrificio()
+    public boolean requiereSacrificios()
     {
+        return true;
+    }
+
+    @Override
+    public int getCantidadSacrificiosRequeridos()
+    {
+        // Este monstruo requiere 3 Blue-Eyes White Dragon.
+        return 3;
+    }
+
+    @Override
+    public boolean seCumplenCondicionesDeSacrificiosRequeridos()
+    {
+        CartaMonstruo cartaBlueEyesWhiteDragonMock = new BlueEyesWhiteDragon(null, null);
+        ArrayList<CartaMonstruo> cartasEnRegionMonstruo = this.getPropietario().getRegionMonstruos().getCartas();
+
+        int cantidadSacrificiosContabilizados = 0;
+        for (int k = 0; k < cartasEnRegionMonstruo.size(); k++)
+        {
+            if (cartasEnRegionMonstruo.get(k).getNombre() == cartaBlueEyesWhiteDragonMock.getNombre())
+            {
+                cantidadSacrificiosContabilizados++;
+            }
+        }
+
+        if (cantidadSacrificiosContabilizados < getCantidadSacrificiosRequeridos())
+        {
+            return false;
+        }
+
         return true;
     }
 }

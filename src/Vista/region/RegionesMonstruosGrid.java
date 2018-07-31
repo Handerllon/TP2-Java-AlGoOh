@@ -36,13 +36,13 @@ public class RegionesMonstruosGrid extends GridPane
 
         this.botones = new ArrayList<>();
 
-        ColumnConstraints columna0 = new ColumnConstraints(this.vista.getResolucionHorizontal()*porcentajeHorizontalDePantalla);
-        ColumnConstraints columna1 = new ColumnConstraints(this.vista.getResolucionHorizontal()*porcentajeHorizontalDePantalla);
-        ColumnConstraints columna2 = new ColumnConstraints(this.vista.getResolucionHorizontal()*porcentajeHorizontalDePantalla);
-        ColumnConstraints columna3 = new ColumnConstraints(this.vista.getResolucionHorizontal()*porcentajeHorizontalDePantalla);
-        ColumnConstraints columna4 = new ColumnConstraints(this.vista.getResolucionHorizontal()*porcentajeHorizontalDePantalla);
+        ColumnConstraints columna0 = new ColumnConstraints(this.vista.getResolucionHorizontal() * porcentajeHorizontalDePantalla);
+        ColumnConstraints columna1 = new ColumnConstraints(this.vista.getResolucionHorizontal() * porcentajeHorizontalDePantalla);
+        ColumnConstraints columna2 = new ColumnConstraints(this.vista.getResolucionHorizontal() * porcentajeHorizontalDePantalla);
+        ColumnConstraints columna3 = new ColumnConstraints(this.vista.getResolucionHorizontal() * porcentajeHorizontalDePantalla);
+        ColumnConstraints columna4 = new ColumnConstraints(this.vista.getResolucionHorizontal() * porcentajeHorizontalDePantalla);
 
-        RowConstraints fila1 = new RowConstraints((this.vista.getResolucionHorizontal()*porcentajeVerticalDePantalla));
+        RowConstraints fila1 = new RowConstraints((this.vista.getResolucionHorizontal() * porcentajeVerticalDePantalla));
 
         this.grid.getColumnConstraints().addAll(columna0, columna1, columna2, columna3, columna4);
         this.grid.getRowConstraints().addAll(fila1);

@@ -1,7 +1,6 @@
 package Modelo.carta.monstruo;
 
 import Modelo.Jugador;
-import Modelo.carta.Sacrificio;
 
 public class AncientTool extends CartaMonstruo
 {
@@ -16,15 +15,15 @@ public class AncientTool extends CartaMonstruo
         this.nombre = "Ancient Tool";
     }
 
-    public void summon(Sacrificio sacrificio)
+    @Override
+    public boolean requiereSacrificios()
     {
-        this.getPropietario().destruirCarta(sacrificio.getMonstruo());
-        this.getPropietario().enviarARegion(this);
+        return true;
     }
 
     @Override
-    public boolean requiereSacrificio()
+    public int getCantidadSacrificiosRequeridos()
     {
-        return true;
+        return 1;
     }
 }

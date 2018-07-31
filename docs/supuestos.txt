@@ -14,3 +14,7 @@ No se puede atacar en el primer turno.
 Cuando hay una carta campo, e ingresa una nueva, se desactiva la vieja y se la manda al cementerio.
 
 Se pueden activar todas las cartas mágicas que se quieran en la fase final.
+
+Cuando se requieren sacrificios, se selecciona automáticamente las cartas con la menor cantidad de estrellas 
+en el campo, y se las elimina de izquierda a derecha. Para que las cartas se puedan sacrificar, deben estar 
+en la región monstruo.

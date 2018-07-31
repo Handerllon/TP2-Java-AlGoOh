@@ -17,8 +17,9 @@ import java.net.URL;
 
 public class MazosVista implements ObservadorDeModelo
 {
-	private static double porcentajeDeAnchoDeLaCarta = 0.0496;
-    private static double porcentajeDeAltoDeLaCarta = 0.1287;;
+    private static double porcentajeDeAnchoDeLaCarta = 0.0496;
+    private static double porcentajeDeAltoDeLaCarta = 0.1287;
+    ;
     // Se uso como base una resolucion de 1920x1080
     private static String rutaImagenReversoCarta = "resources/imagenes/cartaReverso.jpg";
     private Vista vista;
@@ -60,7 +61,7 @@ public class MazosVista implements ObservadorDeModelo
 
         Button boton = new Button();
 
-        boton.setPrefSize(this.vista.getResolucionHorizontal()*porcentajeDeAnchoDeLaCarta, this.vista.getResolucionVertical()*porcentajeDeAltoDeLaCarta);
+        boton.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta, this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
         boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                 .getResource(rutaImagenReversoCarta).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 

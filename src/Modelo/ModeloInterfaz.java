@@ -1,7 +1,6 @@
 package Modelo;
 
 import Modelo.carta.Carta;
-import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
@@ -28,17 +27,9 @@ public interface ModeloInterfaz
 
     void setCartaMonstruo(Jugador jugador, CartaMonstruo carta);
 
-    void setCartaMonstruo(Jugador jugador, CartaMonstruo carta, Sacrificio sacrificios);
-
     void summonCartaMonstruo(Jugador jugador, CartaMonstruo carta);
 
-    void summonCartaMonstruo(Jugador jugador, CartaMonstruo carta, Sacrificio sacrificios);
-
-    Sacrificio getSacrificio(CartaMonstruo carta);
-    
-    boolean requiereSacrificios(CartaMonstruo carta);
-
-    boolean haySuficientesCartasParaSacrificar(CartaMonstruo carta);
+    boolean seCumplenCondicionesDeSacrificiosRequeridos(CartaMonstruo carta);
 
     // ------------------------------------
     // Métodos de orientación de cartas.

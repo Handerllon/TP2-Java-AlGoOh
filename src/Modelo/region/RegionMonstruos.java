@@ -2,6 +2,7 @@ package Modelo.region;
 
 import Modelo.Jugador;
 import Modelo.carta.monstruo.CartaMonstruo;
+import Modelo.carta.monstruo.CartaMonstruoNula;
 
 import java.util.ArrayList;
 
@@ -16,18 +17,24 @@ public class RegionMonstruos extends Region<CartaMonstruo>
 
     public CartaMonstruo getMonstruoConMenorAtaque()
     {
-        CartaMonstruo cartaConAtaqueMinimo = null;
+        CartaMonstruo cartaConAtaqueMinimo = CartaMonstruoNula.getInstancia();
 
-        int ataqueTope = Integer.MAX_VALUE;
-
-        ArrayList<CartaMonstruo> cartas = this.getCartas();
-
-        for (int i = 0; i < cartas.size(); i++)
+        if (!this.estaVacia())
         {
-            if (cartas.get(i).getPuntosDeAtaque() < ataqueTope)
+            ArrayList<CartaMonstruo> cartas = this.getCartas();
+            CartaMonstruo cartaMonstruo;
+            int puntosDeAtaque, ataqueTope = Integer.MAX_VALUE;
+
+            for (int i = 0; i < cartas.size(); i++)
             {
-                ataqueTope = cartas.get(i).getPuntosDeAtaque();
-                cartaConAtaqueMinimo = cartas.get(i);
+                cartaMonstruo = cartas.get(i);
+                puntosDeAtaque = cartaMonstruo.getPuntosDeAtaque();
+
+                if (puntosDeAtaque < ataqueTope)
+                {
+                    ataqueTope = puntosDeAtaque;
+                    cartaConAtaqueMinimo = cartaMonstruo;
+                }
             }
         }
 

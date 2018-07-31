@@ -2,9 +2,9 @@ package Modelo.carta.monstruo;
 
 import Modelo.Jugador;
 import Modelo.carta.Carta;
-import Modelo.carta.Sacrificio;
 import Modelo.carta.ataque.EstrategiaAtaque;
 import Modelo.carta.ataque.EstrategiaAtaqueDefault;
+import Modelo.carta.excepciones.SacrificiosInsuficientesError;
 import Modelo.carta.modo.Modo;
 import Modelo.carta.modo.ModoDefensa;
 import Modelo.observadores.ObservadorDeCartaMonstruo;
@@ -211,13 +211,66 @@ public abstract class CartaMonstruo extends Carta implements CartaMonstruoObserv
     // --------------------------------------------------------------------
     // Métodos de invocación.
     // --------------------------------------------------------------------
-    public void summon(Sacrificio sacrificio)
+    // Realiza los sacrificios necesarios para la invocación, si se requieren.
+    public void summon() throws SacrificiosInsuficientesError
     {
-
+        ArrayList<CartaMonstruo> cartasASacrificar = getSacrificios();
+        cartasASacrificar.forEach(cartaASacrificar -> this.getPropietario().destruirCarta(cartaASacrificar));
     }
 
-    public boolean requiereSacrificio()
+    protected ArrayList<CartaMonstruo> getSacrificios()
+    {
+        ArrayList<CartaMonstruo> cartasEnRegionMonstruo = this.getPropietario().getRegionMonstruos().getCartas();
+        if (cartasEnRegionMonstruo.size() < getCantidadSacrificiosRequeridos())
+        {
+            throw new SacrificiosInsuficientesError();
+        } else
+        {
+            ArrayList<CartaMonstruo> cartasASacrificar = new ArrayList<>();
+
+            CartaMonstruo cartaMonstruo, cartaConAtaqueMinimo = CartaMonstruoNula.getInstancia();
+
+            int puntosDeAtaque, puntosMinimos;
+
+            for (int i = 0; i < getCantidadSacrificiosRequeridos(); i++)
+            {
+                // Se busca la carta con ataque mínimo.
+                puntosMinimos = Integer.MAX_VALUE;
+                for (int k = 0; k < cartasEnRegionMonstruo.size(); k++)
+                {
+                    cartaMonstruo = cartasEnRegionMonstruo.get(k);
+                    puntosDeAtaque = cartaMonstruo.getPuntosDeAtaque();
+
+                    if (puntosDeAtaque < puntosMinimos)
+                    {
+                        puntosMinimos = puntosDeAtaque;
+                        cartaConAtaqueMinimo = cartaMonstruo;
+                    }
+                }
+                cartasEnRegionMonstruo.remove(cartaConAtaqueMinimo);
+
+                cartasASacrificar.add(cartaConAtaqueMinimo);
+            }
+            return cartasASacrificar;
+        }
+    }
+
+    public boolean requiereSacrificios()
     {
         return false;
+    }
+
+    public int getCantidadSacrificiosRequeridos()
+    {
+        return 0;
+    }
+
+    public boolean seCumplenCondicionesDeSacrificiosRequeridos()
+    {
+        if (this.getPropietario().getRegionMonstruos().getCartas().size() < getCantidadSacrificiosRequeridos())
+        {
+            return false;
+        }
+        return true;
     }
 }

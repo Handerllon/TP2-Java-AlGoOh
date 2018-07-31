@@ -1,7 +1,6 @@
 package Modelo;
 
 import Modelo.carta.Carta;
-import Modelo.carta.Sacrificio;
 import Modelo.carta.campo.CartaCampo;
 import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.mano.Mano;
@@ -109,14 +108,9 @@ public class Jugador implements FinDeJuegoObservable, JugadorObservable
         this.mano.agregarCarta(mazo.tomarCarta());
     }
 
-    public void enviarARegion(CartaMonstruo cartaMonstruo, Sacrificio sacrificio)
-    {
-        cartaMonstruo.summon(sacrificio);
-        this.mano.quitarCarta(cartaMonstruo);
-    }
-
     public void enviarARegion(CartaMonstruo cartaMonstruo)
     {
+        cartaMonstruo.summon();
         this.regionMonstruos.colocarCarta(cartaMonstruo);
         this.mano.quitarCarta(cartaMonstruo);
     }
@@ -162,11 +156,8 @@ public class Jugador implements FinDeJuegoObservable, JugadorObservable
 
     public void destruirMonstruos()
     {
-        ArrayList<CartaMonstruo> cartas = this.regionMonstruos.getCartas();
-
-        cartas.forEach(item -> this.regionCementerio.colocarCarta(item));
-
-        this.regionMonstruos.removerTodasLasCartas();
+        this.regionMonstruos.getCartas().forEach(item -> this.regionCementerio.colocarCarta(item));
+        this.regionMonstruos.getCartas().forEach(item -> this.regionMonstruos.removerCarta(item));
     }
 
     public void destruirCarta(CartaMagica cartaMagica)

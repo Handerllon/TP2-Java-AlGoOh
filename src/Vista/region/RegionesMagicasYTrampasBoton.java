@@ -97,14 +97,14 @@ public class RegionesMagicasYTrampasBoton extends Button
         // -------------------------------
         // Tooltip del botón.
         // -------------------------------
-        if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado){
-        Image imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
-        Tooltip tooltipBoton = new Tooltip();
-        tooltipBoton.setGraphic(new ImageView(imagenBoton));
-        botonEnRegion.setTooltip(tooltipBoton);
+        if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado)
+        {
+            Image imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
+            Tooltip tooltipBoton = new Tooltip();
+            tooltipBoton.setGraphic(new ImageView(imagenBoton));
+            botonEnRegion.setTooltip(tooltipBoton);
         }
-        
-        
+
         // TODO: Implementar la vista de la carta.
         // -------------------------------
 

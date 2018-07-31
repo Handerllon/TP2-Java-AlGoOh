@@ -1,7 +1,6 @@
 package Vista.escena;
 
 import Modelo.ModeloObservable;
-import Modelo.carta.Carta;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.Vista;
 import Vista.carta.MazosVista;
@@ -10,16 +9,9 @@ import Vista.estadosJuego.EstadosJuegoBotones;
 import Vista.estadosJuego.FaseActualVista;
 import Vista.estadosJuego.TurnoActualVista;
 import Vista.estadosJuego.VidaVista;
-import Vista.region.BotonDeCartaMonstruoSolicitada;
-import Vista.region.RegionesCampoVista;
-import Vista.region.RegionesCementerioVista;
-import Vista.region.RegionesMagicasYTrampasVista;
-import Vista.region.RegionesMonstruoVista;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import Vista.region.*;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -299,44 +291,43 @@ public final class EscenaTableroPrincipal implements Escena
         gridPane.add(faseActualVista.getLabelFaseActual(), 0, 2);
     }
 
-	@Override
-	public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante) {
-		       
-		Popup popup = new Popup();
+    @Override
+    public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante)
+    {
+
+        Popup popup = new Popup();
         ArrayList<BotonDeCartaMonstruoSolicitada> botonesDeCartas = new ArrayList<BotonDeCartaMonstruoSolicitada>();
         HBox hbox = new HBox();
-		
-		
-		if (this.vista.getControlador().getJugadorActual() == this.modelo.getJugador()){
-			this.vista.getModelo().getCartasEnRegionMonstruosOponente().forEach(cartaDelOponente 
-					-> botonesDeCartas.add(new BotonDeCartaMonstruoSolicitada(this.vista, cartaAtacante, cartaDelOponente,popup)));
-		}
-		else{
-			this.vista.getModelo().getCartasEnRegionMonstruosJugador().forEach(cartaDelOponente 
-					-> botonesDeCartas.add(new BotonDeCartaMonstruoSolicitada(this.vista, cartaAtacante, cartaDelOponente,popup)));
-		}
-		
-		Button b1 = new Button("Close");
-		
-		b1.setOnAction(e -> cerrarPopupBtn_Click(popup));
-		
-		botonesDeCartas.forEach(boton -> hbox.getChildren().add(boton.getBoton()));
-		
-		hbox.getChildren().add(b1);
-		
-		popup.show(this.vista.getPrimaryStage());
 
-		popup.getContent().add(hbox);
-		
-		popup.setX(this.vista.getResolucionHorizontal()/2);
-		popup.setY(this.vista.getResolucionVertical()/2);
-		
-		
-	}
+        if (this.vista.getControlador().getJugadorActual() == this.modelo.getJugador())
+        {
+            this.vista.getModelo().getCartasEnRegionMonstruosOponente().forEach(cartaDelOponente
+                    -> botonesDeCartas.add(new BotonDeCartaMonstruoSolicitada(this.vista, cartaAtacante, cartaDelOponente, popup)));
+        } else
+        {
+            this.vista.getModelo().getCartasEnRegionMonstruosJugador().forEach(cartaDelOponente
+                    -> botonesDeCartas.add(new BotonDeCartaMonstruoSolicitada(this.vista, cartaAtacante, cartaDelOponente, popup)));
+        }
 
-	private void cerrarPopupBtn_Click(Popup popup) {
-		
-		popup.hide();
-	}
+        Button b1 = new Button("Close");
 
+        b1.setOnAction(e -> cerrarPopupBtn_Click(popup));
+
+        botonesDeCartas.forEach(boton -> hbox.getChildren().add(boton.getBoton()));
+
+        hbox.getChildren().add(b1);
+
+        popup.show(this.vista.getPrimaryStage());
+
+        popup.getContent().add(hbox);
+
+        popup.setX(this.vista.getResolucionHorizontal() / 2);
+        popup.setY(this.vista.getResolucionVertical() / 2);
+    }
+
+    private void cerrarPopupBtn_Click(Popup popup)
+    {
+
+        popup.hide();
+    }
 }

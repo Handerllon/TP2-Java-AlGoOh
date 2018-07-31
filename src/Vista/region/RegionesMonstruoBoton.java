@@ -14,7 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.ImagePattern;
@@ -22,7 +21,6 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Popup;
 
 import java.net.URL;
-import java.util.ArrayList;
 
 public class RegionesMonstruoBoton extends Button
 {
@@ -108,9 +106,10 @@ public class RegionesMonstruoBoton extends Button
                     (this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta) / 2));
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
                     .getClassLoader().getResource(backDeCartaLocacion).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-         // Tooltip del botón.
-            if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado){
-            	this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
+            // Tooltip del botón.
+            if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado)
+            {
+                this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
                 tooltipBoton.setGraphic(new ImageView(imagenBoton));
                 botonEnRegion.setTooltip(tooltipBoton);
             }
@@ -120,7 +119,7 @@ public class RegionesMonstruoBoton extends Button
                     (this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta) / 2));
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
                     .getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-         // Tooltip del botón.
+            // Tooltip del botón.
             this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
             tooltipBoton.setGraphic(new ImageView(imagenBoton));
             botonEnRegion.setTooltip(tooltipBoton);
@@ -128,7 +127,7 @@ public class RegionesMonstruoBoton extends Button
         {
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
                     .getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-         // Tooltip del botón.
+            // Tooltip del botón.
             this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
             tooltipBoton.setGraphic(new ImageView(imagenBoton));
             botonEnRegion.setTooltip(tooltipBoton);
@@ -152,11 +151,10 @@ public class RegionesMonstruoBoton extends Button
         if (this.carta.estaBocaArriba() && this.carta.enDefensa())
         {
             vbox.getChildren().addAll(botonCambiarModo, botonCerrar);
-        } 
-        else if(this.carta.estaBocaArriba() && this.carta.enAtaque()){
-        	vbox.getChildren().addAll(botonAtacar, botonCambiarModo, botonCerrar);
-        }
-        else
+        } else if (this.carta.estaBocaArriba() && this.carta.enAtaque())
+        {
+            vbox.getChildren().addAll(botonAtacar, botonCambiarModo, botonCerrar);
+        } else
         {
             vbox.getChildren().addAll(botonCambiarModo, botonDarVuelta, botonCerrar);
         }
@@ -181,9 +179,9 @@ public class RegionesMonstruoBoton extends Button
 
     private void cartaMonstruoAtacarBtn_Click()
     {
-        
-    	Boolean thrown = false;
-		
+
+        Boolean thrown = false;
+
         try
         {
             this.vista.getControlador().atacar(this.jugadorAsociado, this.carta);

@@ -2,9 +2,9 @@ package Controlador.estadosJuego;
 
 public final class FaseTrampa implements Fase
 {
-    private static final String nombreFase = "Trampas";
+    private static String nombreFase = "Trampas";
     private static FaseTrampa instancia = null;
-    private final MaquinaTurnos maquinaTurnos;
+    private MaquinaTurnos maquinaTurnos;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.

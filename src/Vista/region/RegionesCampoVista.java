@@ -19,8 +19,8 @@ public class RegionesCampoVista implements ObservadorDeModelo
     public RegionesCampoVista(Vista vista)
     {
         this.vista = vista;
-        // TODO: Para cuando se implemente los observadores puntuales:
-        // vista.getModelo().registrarObsevador(this);
+
+        vista.getModelo().registrarObsevador(this);
 
         this.botonCampoJugador = new RegionesCampoBoton(this.vista, this.vista.getModelo().getJugador());
         this.botonCampoOponente = new RegionesCampoBoton(this.vista, this.vista.getModelo().getOponente());
@@ -36,18 +36,6 @@ public class RegionesCampoVista implements ObservadorDeModelo
     {
 
         return botonCampoOponente.getBoton();
-    }
-
-    // --------------------------------------------------------------------
-    // Métodos de observador de modelo.
-    // --------------------------------------------------------------------
-    @Override
-    public void huboCambios()
-    {
-        this.botonCampoJugador.clear();
-        this.botonCampoOponente.clear();
-        this.actualizarRegionJugador(this.vista.getModelo().getCartasEnRegionCampoJugador());
-        this.actualizarRegionOponente(this.vista.getModelo().getCartasEnRegionCampoOponente());
     }
 
     private void actualizarRegionJugador(ArrayList<CartaCampo> cartasCampo)
@@ -72,6 +60,20 @@ public class RegionesCampoVista implements ObservadorDeModelo
         }
     }
 
+    private void actualizar()
+    {
+        this.botonCampoJugador.clear();
+        this.actualizarRegionJugador(this.vista.getModelo().getCartasEnRegionCampoJugador());
+
+        this.botonCampoOponente.clear();
+        this.actualizarRegionOponente(this.vista.getModelo().getCartasEnRegionCampoOponente());
+
+        this.vista.actualizarDibujo();
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de observador de modelo.
+    // --------------------------------------------------------------------
     @Override
     public void seTomoCartaDeMazo()
     {
@@ -93,13 +95,13 @@ public class RegionesCampoVista implements ObservadorDeModelo
     @Override
     public void ingresoCartaARegion()
     {
-
+        this.actualizar();
     }
 
     @Override
     public void egresoCartaARegion()
     {
-
+        this.actualizar();
     }
 
     @Override
@@ -111,7 +113,7 @@ public class RegionesCampoVista implements ObservadorDeModelo
     @Override
     public void cartaCambioDeOrientacion()
     {
-
+        this.actualizar();
     }
 
     @Override

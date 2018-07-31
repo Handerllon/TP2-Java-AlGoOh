@@ -2,13 +2,14 @@ package Vista.carta.mano;
 
 import Modelo.Jugador;
 import Modelo.carta.Carta;
+import Modelo.observadores.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.geometry.Pos;
 import javafx.scene.layout.FlowPane;
 
 import java.util.ArrayList;
 
-public class ManosFlowPane extends FlowPane
+public class ManosFlowPane extends FlowPane implements ObservadorDeModelo
 {
     private FlowPane flowPane;
     private ArrayList<ManoBoton> botones;
@@ -21,6 +22,8 @@ public class ManosFlowPane extends FlowPane
     {
         this.jugadorAsociado = jugador;
         this.vista = vista;
+
+        vista.getModelo().registrarObsevador(this);
 
         this.flowPane = new FlowPane(this.vista.getResolucionHorizontal() * horizontalGapFlowPaneButtons,
                 this.vista.getResolucionVertical() * verticalGapFlowPaneButtons);
@@ -46,5 +49,57 @@ public class ManosFlowPane extends FlowPane
     {
         cartasEnMano.forEach(carta -> this.botones.add(new ManoBoton(this.vista, carta, this.jugadorAsociado)));
         this.botones.forEach(boton -> this.flowPane.getChildren().add(boton.getBoton()));
+    }
+
+    @Override
+    public void seTomoCartaDeMazo()
+    {
+
+    }
+
+    @Override
+    public void ingresoCartaAMano()
+    {
+        clear();
+        actualizar(jugadorAsociado.getMano().getCartas());
+        this.vista.actualizarDibujo();
+    }
+
+    @Override
+    public void egresoCartaAMano()
+    {
+        clear();
+        actualizar(jugadorAsociado.getMano().getCartas());
+        this.vista.actualizarDibujo();
+    }
+
+    @Override
+    public void ingresoCartaARegion()
+    {
+
+    }
+
+    @Override
+    public void egresoCartaARegion()
+    {
+
+    }
+
+    @Override
+    public void cambiaronLosPuntosDeVida()
+    {
+
+    }
+
+    @Override
+    public void cartaCambioDeOrientacion()
+    {
+
+    }
+
+    @Override
+    public void cartaCambioDeModo()
+    {
+
     }
 }

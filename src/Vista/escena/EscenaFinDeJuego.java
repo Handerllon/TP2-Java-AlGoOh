@@ -22,7 +22,7 @@ import java.io.File;
 
 public class EscenaFinDeJuego implements Escena
 {
-    private static final double soundGameEndVolume = 0.3;
+    private static double soundGameEndVolume = 0.3;
     private static String direccion_imagen = "resources/imagenes/end.jpg";
     private static String direccion_sonido_gano = "src/resources/audio/winner_2.wav";
     private static String direccion_sonido_perdio = "src/resources/audio/gameover_2.wav";
@@ -129,15 +129,9 @@ public class EscenaFinDeJuego implements Escena
     }
 
     @Override
-    public void actualizarEstado()
+    public void actualizarDibujo()
     {
 
-    }
-
-    @Override
-    public boolean terminoElJuego()
-    {
-        return true;
     }
 
     @Override
@@ -162,24 +156,6 @@ public class EscenaFinDeJuego implements Escena
     public void cerrar()
     {
         this.primaryStage.close();
-    }
-
-    @Override
-    public GridPane getGridPaneEscena()
-    {
-        return this.grid;
-    }
-
-    @Override
-    public void mostrarJugadorActual()
-    {
-
-    }
-
-    @Override
-    public void mostrarFaseActual()
-    {
-
     }
 
     @Override

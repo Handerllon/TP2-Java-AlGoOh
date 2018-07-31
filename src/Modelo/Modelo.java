@@ -46,7 +46,10 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         this.jugador1.getMano().agregarObsevadorFinDeJuego(this);
         this.jugador2.getMano().agregarObsevadorFinDeJuego(this);
 
-        // Subscripciones a los eventos de Región, Mazo, Mano, y Carta.
+        // Subscripciones a los eventos de Región, Mazo, Mano, Carta, y Jugador.
+        this.jugador1.registrarObsevador(this);
+        this.jugador2.registrarObsevador(this);
+
         this.jugador1.getRegiones().forEach(region -> region.registrarObsevador(this));
         this.jugador2.getRegiones().forEach(region -> region.registrarObsevador(this));
 
@@ -58,6 +61,9 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
 
         this.jugador1.getMazo().getCartas().forEach(carta -> carta.registrarObsevador(this));
         this.jugador2.getMazo().getCartas().forEach(carta -> carta.registrarObsevador(this));
+
+        this.jugador1.getMazo().getCartasMonstruo().forEach(cartaMonstruo -> cartaMonstruo.registrarObsevadorCartaMonstruo(this));
+        this.jugador2.getMazo().getCartasMonstruo().forEach(cartaMonstruo -> cartaMonstruo.registrarObsevadorCartaMonstruo(this));
     }
 
     public static Modelo getInstancia()
@@ -146,12 +152,6 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     }
 
     @Override
-    public void notificarEvento()
-    {
-        observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.huboCambios());
-    }
-
-    @Override
     public void notificarTomaDeCartaDeMazo()
     {
         observadoresDeModelo.forEach(observadorDeModelo -> observadorDeModelo.seTomoCartaDeMazo());
@@ -205,70 +205,60 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     @Override
     public void ingresoCarta(Region region)
     {
-        notificarEvento();
-        // TODO: Para cuando se implemente los observadores puntuales:
-        // notificarIngresoCartaARegion()
+        notificarIngresoCartaARegion();
     }
 
     @Override
     public void egresoCarta(Region region)
     {
-        notificarEvento();
-        // TODO: Para cuando se implemente los observadores puntuales:
-        // notificarEgresoCartaARegion()
+        notificarEgresoCartaARegion();
     }
 
     @Override
     public void cartaCambioDeOrientacion()
     {
-        notificarEvento();
-        // TODO: Para cuando se implemente los observadores puntuales:
-        //notificarCambioDeOrientacionCarta();
+        notificarCambioDeOrientacionCarta();
     }
 
     @Override
     public void cartaCambioDeModo()
     {
-        notificarEvento();
-        // TODO: Para cuando se implemente los observadores puntuales:
-        //notificarCambioDeModoCarta();
+        notificarCambioDeModoCarta();
     }
 
     @Override
     public void seTomoCartaDeMazo()
     {
-        notificarEvento();
-        // TODO: Para cuando se implemente los observadores puntuales:
         notificarTomaDeCartaDeMazo();
     }
 
     @Override
     public void ingresoCartaAMano()
     {
-        notificarEvento();
-        // TODO: Para cuando se implemente los observadores puntuales:
-        //notificarIngresoCartaAMano();
+        notificarIngresoCartaAMano();
     }
 
     @Override
     public void egresoCartaAMano()
     {
-        notificarEvento();
-        // TODO: Para cuando se implemente los observadores puntuales:
-        //notificarEgresoCartaAMano();
+        notificarEgresoCartaAMano();
     }
 
     @Override
     public void cambiaronLosPuntosDeVida()
     {
-        notificarEvento();
-        // TODO: Para cuando se implemente los observadores puntuales:
-        //notificarCambioEnPuntosDeVida();
+        notificarCambioEnPuntosDeVida();
     }
 
     // ------------------------------------
     // Métodos de consultas.
     // ------------------------------------
+    @Override
+    public ArrayList<CartaMonstruo> getCartasEnRegionMonstruosDe(Jugador jugador)
+    {
+        return jugador.getRegionMonstruos().getCartas();
+    }
+
     @Override
     public ArrayList<CartaMonstruo> getCartasEnRegionMonstruosJugador()
     {
@@ -279,6 +269,12 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     public ArrayList<CartaMonstruo> getCartasEnRegionMonstruosOponente()
     {
         return this.jugador2.getRegionMonstruos().getCartas();
+    }
+
+    @Override
+    public ArrayList<Carta> getCartasEnRegionMagicasYTrampasDe(Jugador jugador)
+    {
+        return jugador.getRegionMagicasYTrampas().getCartas();
     }
 
     @Override
@@ -294,6 +290,12 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     }
 
     @Override
+    public ArrayList<CartaCampo> getCartasEnRegionCampoDe(Jugador jugador)
+    {
+        return jugador.getRegionCampo().getCartas();
+    }
+
+    @Override
     public ArrayList<CartaCampo> getCartasEnRegionCampoJugador()
     {
         return this.jugador1.getRegionCampo().getCartas();
@@ -303,6 +305,12 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     public ArrayList<CartaCampo> getCartasEnRegionCampoOponente()
     {
         return this.jugador2.getRegionCampo().getCartas();
+    }
+
+    @Override
+    public int getCantidadCartasRestantesMazoDe(Jugador jugador)
+    {
+        return jugador.getMazo().cantidadCartas();
     }
 
     @Override
@@ -318,15 +326,9 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     }
 
     @Override
-    public ArrayList<Carta> getCartasManoJugador()
+    public ArrayList<Carta> getCartasEnManoDe(Jugador jugador)
     {
-        return this.jugador1.getMano().getCartas();
-    }
-
-    @Override
-    public ArrayList<Carta> getCartasManoOponente()
-    {
-        return this.jugador2.getMano().getCartas();
+        return jugador.getMano().getCartas();
     }
 
     public Jugador getJugador()

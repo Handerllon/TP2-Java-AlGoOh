@@ -4,20 +4,18 @@ import Controlador.ControladorInterfaz;
 import Controlador.excepciones.*;
 import Modelo.ModeloObservable;
 import Modelo.carta.monstruo.CartaMonstruo;
-import Modelo.observadores.ObservadorDeModelo;
 import Vista.escena.Escena;
 import Vista.escena.EscenaBienvenida;
 import Vista.estadosJuego.ErroresVista;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.util.Optional;
 
-public class Vista implements ObservadorDeModelo
+public class Vista
 {
     private static ModeloObservable modelo;
     private static ControladorInterfaz controlador;
@@ -37,7 +35,6 @@ public class Vista implements ObservadorDeModelo
         this.RESOLUCION_VERTICAL = Screen.getPrimary().getVisualBounds().getHeight();
 
         this.modelo = modelo;
-        modelo.registrarObsevador(this);
 
         this.controlador = controlador;
 
@@ -68,11 +65,6 @@ public class Vista implements ObservadorDeModelo
         return this.primaryStage;
     }
 
-    public GridPane getGridPaneEscena()
-    {
-        return this.escena.getGridPaneEscena();
-    }
-
     public ModeloObservable getModelo()
     {
         return this.modelo;
@@ -92,75 +84,10 @@ public class Vista implements ObservadorDeModelo
     {
         return this.RESOLUCION_VERTICAL;
     }
-
-    // --------------------------------------------------------------------
-    // Métodos de observador de modelo.
-    // --------------------------------------------------------------------
-    @Override
-    public void huboCambios()
+    
+    public void actualizarDibujo()
     {
-        this.escena.actualizarEstado();
-    }
-
-    @Override
-    public void seTomoCartaDeMazo()
-    {
-
-    }
-
-    @Override
-    public void ingresoCartaAMano()
-    {
-
-    }
-
-    @Override
-    public void egresoCartaAMano()
-    {
-
-    }
-
-    @Override
-    public void ingresoCartaARegion()
-    {
-
-    }
-
-    @Override
-    public void egresoCartaARegion()
-    {
-
-    }
-
-    @Override
-    public void cambiaronLosPuntosDeVida()
-    {
-
-    }
-
-    @Override
-    public void cartaCambioDeOrientacion()
-    {
-
-    }
-
-    @Override
-    public void cartaCambioDeModo()
-    {
-
-    }
-
-    // --------------------------------------------------------------------
-    // Métodos de observador de controlador.
-    // --------------------------------------------------------------------
-    public void huboCambioDeFase()
-    {
-        this.escena.mostrarFaseActual();
-    }
-
-    public void huboFinDeTurno()
-    {
-        this.escena.mostrarJugadorActual();
+        this.escena.actualizarDibujo();
     }
 
     // --------------------------------------------------------------------

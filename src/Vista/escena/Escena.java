@@ -1,7 +1,6 @@
 package Vista.escena;
 
 import Modelo.carta.monstruo.CartaMonstruo;
-import javafx.scene.layout.GridPane;
 
 public interface Escena
 {
@@ -9,9 +8,7 @@ public interface Escena
 
     void mostrar();
 
-    void actualizarEstado();
-
-    boolean terminoElJuego();
+    void actualizarDibujo();
 
     void finDeJuego();
 
@@ -20,12 +17,6 @@ public interface Escena
     void stopMedia();
 
     void cerrar();
-
-    void mostrarJugadorActual();
-
-    void mostrarFaseActual();
-
-    GridPane getGridPaneEscena();
 
     void solicitarCartaAAtacar(CartaMonstruo cartaAtacante);
 }

@@ -2,6 +2,7 @@ package Vista.region;
 
 import Modelo.Jugador;
 import Modelo.carta.Carta;
+import Modelo.observadores.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -11,11 +12,11 @@ import javafx.scene.layout.RowConstraints;
 
 import java.util.ArrayList;
 
-public class RegionesMagicasYTrampasGrid extends GridPane
+public class RegionesMagicasYTrampasGrid extends GridPane implements ObservadorDeModelo
 {
     private static double porcentajeHorizontalDePantalla = 0.082;
     private static double porcentajeVerticalDePantalla = 0.157;
-    private final int cantidadBotonesGrid = 5;
+    private int cantidadBotonesGrid = 5;
     private GridPane grid;
     private ArrayList<RegionesMagicasYTrampasBoton> botones;
     private Vista vista;
@@ -30,9 +31,9 @@ public class RegionesMagicasYTrampasGrid extends GridPane
 
         this.vista = vista;
 
-        this.grid = new GridPane();
+        vista.getModelo().registrarObsevador(this);
 
-        this.botones = new ArrayList<RegionesMagicasYTrampasBoton>();
+        this.grid = new GridPane();
 
         ColumnConstraints columna0 = new ColumnConstraints(this.vista.getResolucionHorizontal() * porcentajeHorizontalDePantalla);
         ColumnConstraints columna1 = new ColumnConstraints(this.vista.getResolucionHorizontal() * porcentajeHorizontalDePantalla);
@@ -47,23 +48,10 @@ public class RegionesMagicasYTrampasGrid extends GridPane
 
         this.grid.setAlignment(Pos.CENTER);
 
-        RegionesMagicasYTrampasBoton boton;
-        for (int i = 0; i < cantidadBotonesGrid; i++)
-        {
-            boton = new RegionesMagicasYTrampasBoton(this.vista, this.jugadorAsociado);
-            botones.add(boton);
-            // Se posicionan los botones en la grilla de la región monstruo.
-            this.grid.add(boton.getBoton(), i, 0);
-            this.grid.setHalignment(boton.getBoton(), HPos.CENTER);
-        }
+        this.actualizarRegion();
     }
 
-    public GridPane getGrid()
-    {
-        return this.grid;
-    }
-
-    public void clear()
+    public void actualizarRegion()
     {
         this.botones = new ArrayList<>();
         RegionesMagicasYTrampasBoton boton;
@@ -75,19 +63,79 @@ public class RegionesMagicasYTrampasGrid extends GridPane
             this.grid.add(boton.getBoton(), i, 0);
             this.grid.setHalignment(boton.getBoton(), HPos.CENTER);
         }
-    }
 
-    public void actualizarRegion(ArrayList<Carta> cartasEnRegionMagicasYTrampas)
-    {
+        ArrayList<Carta> cartasEnRegionMagicasYTrampas = this.vista.getModelo().getCartasEnRegionMagicasYTrampasDe
+                (this.jugadorAsociado);
+
         for (int i = 0; i < cartasEnRegionMagicasYTrampas.size(); i++)
         {
             botones.get(i).actualizar(cartasEnRegionMagicasYTrampas.get(i));
         }
+
         this.grid.getChildren().clear();
+
         for (int i = 0; i < this.botones.size(); i++)
         {
             this.grid.add(this.botones.get(i).getBoton(), i, 0);
             this.grid.setHalignment(this.botones.get(i).getBoton(), HPos.CENTER);
         }
+
+        this.vista.actualizarDibujo();
+    }
+
+    public GridPane getGrid()
+    {
+        return this.grid;
+    }
+
+    // --------------------------------------------------------------------
+    // Métodos de observador de modelo.
+    // --------------------------------------------------------------------
+    @Override
+    public void seTomoCartaDeMazo()
+    {
+
+    }
+
+    @Override
+    public void ingresoCartaAMano()
+    {
+
+    }
+
+    @Override
+    public void egresoCartaAMano()
+    {
+
+    }
+
+    @Override
+    public void ingresoCartaARegion()
+    {
+        actualizarRegion();
+    }
+
+    @Override
+    public void egresoCartaARegion()
+    {
+        actualizarRegion();
+    }
+
+    @Override
+    public void cambiaronLosPuntosDeVida()
+    {
+
+    }
+
+    @Override
+    public void cartaCambioDeOrientacion()
+    {
+        actualizarRegion();
+    }
+
+    @Override
+    public void cartaCambioDeModo()
+    {
+
     }
 }

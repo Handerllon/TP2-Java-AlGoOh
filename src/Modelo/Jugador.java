@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class Jugador implements FinDeJuegoObservable, JugadorObservable
 {
-    private static final int puntosDeVidaIniciales = 8000;
+    private static int puntosDeVidaIniciales = 8000;
     // ----------------------------------------
     // Atributos varios.
     // ----------------------------------------

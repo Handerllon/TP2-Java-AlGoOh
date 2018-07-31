@@ -5,8 +5,8 @@ import Modelo.carta.monstruo.CartaMonstruo;
 
 public class Reinforcements extends CartaTrampa
 {
-    private static final String rutaImagen = "resources/imagenes/trampa/Reinforcements.jpg";
-    private static final int modificadorPuntosAtaque = 500;
+    private static String rutaImagen = "resources/imagenes/trampa/Reinforcements.jpg";
+    private static int modificadorPuntosAtaque = 500;
     private CartaMonstruo cartaAtacada;
 
     public Reinforcements(Jugador jugador, Jugador oponente)

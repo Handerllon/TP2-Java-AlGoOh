@@ -55,13 +55,13 @@ public abstract class CartaMonstruo extends Carta implements CartaMonstruoObserv
     // Metodos de observador de carta monstruo.
     // ------------------------------------------
     @Override
-    public void registrarObsevador(ObservadorDeCartaMonstruo observador)
+    public void registrarObsevadorCartaMonstruo(ObservadorDeCartaMonstruo observador)
     {
         this.observadoresDeCartasMonstruo.add(observador);
     }
 
     @Override
-    public void eliminarObservador(ObservadorDeCartaMonstruo observador)
+    public void eliminarObservadorCartaMonstruo(ObservadorDeCartaMonstruo observador)
     {
         this.observadoresDeCartasMonstruo.remove(observador);
     }

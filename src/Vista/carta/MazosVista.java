@@ -1,6 +1,7 @@
 package Vista.carta;
 
 import Modelo.Jugador;
+import Modelo.ModeloObservable;
 import Modelo.observadores.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.geometry.Insets;
@@ -23,6 +24,7 @@ public class MazosVista implements ObservadorDeModelo
     // Se uso como base una resolucion de 1920x1080
     private static String rutaImagenReversoCarta = "resources/imagenes/cartaReverso.jpg";
     private Vista vista;
+    private ModeloObservable modelo;
     private Button mazoJugador;
     private Tooltip toolTipJugador;
     private Button mazoOponente;
@@ -36,14 +38,15 @@ public class MazosVista implements ObservadorDeModelo
     public MazosVista(Vista vista)
     {
         this.vista = vista;
-        // TODO: Para cuando se implemente los observadores puntuales:
-        vista.getModelo().registrarObsevador(this);
+        this.modelo = vista.getModelo();
+
+        this.modelo.registrarObsevador(this);
 
         this.toolTipJugador = new Tooltip();
         this.toolTipOponente = new Tooltip();
 
-        this.mazoJugador = crearBotonMazo(this.vista.getModelo().getJugador());
-        this.mazoOponente = crearBotonMazo(this.vista.getModelo().getOponente());
+        this.mazoJugador = crearBotonMazo(this.modelo.getJugador());
+        this.mazoOponente = crearBotonMazo(this.modelo.getOponente());
 
         this.mazoJugador.setTooltip(toolTipJugador);
         this.mazoOponente.setTooltip(toolTipOponente);
@@ -52,8 +55,6 @@ public class MazosVista implements ObservadorDeModelo
         mediaUrl = this.getClass().getClassLoader().getResource("resources/audio/card_draw.wav");
         this.audioClipCardDraw = new AudioClip(mediaUrl.toExternalForm());
         this.audioClipCardDraw.setVolume(cardDrawVolume);
-
-        this.huboCambios();
     }
 
     public Button crearBotonMazo(Jugador jugadorAsociado)
@@ -83,13 +84,6 @@ public class MazosVista implements ObservadorDeModelo
     // --------------------------------------------------------------------
     // Métodos de observador de modelo.
     // --------------------------------------------------------------------
-    @Override
-    public void huboCambios()
-    {
-        this.actualizarMazoJugador(this.vista.getModelo().getCantidadCartasRestantesMazoJugador());
-        this.actualizarMazoOponente(this.vista.getModelo().getCantidadCartasRestantesMazoOponente());
-    }
-
     private void actualizarMazoJugador(int numeroDeCartas)
     {
         this.toolTipJugador.setText(Integer.toString(numeroDeCartas));
@@ -104,6 +98,9 @@ public class MazosVista implements ObservadorDeModelo
     public void seTomoCartaDeMazo()
     {
         audioClipCardDraw.play();
+        this.actualizarMazoJugador(this.modelo.getCantidadCartasRestantesMazoJugador());
+        this.actualizarMazoOponente(this.modelo.getCantidadCartasRestantesMazoOponente());
+        this.vista.actualizarDibujo();
     }
 
     @Override

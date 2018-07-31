@@ -47,20 +47,20 @@ public class RegionesMagicasYTrampasBoton extends Button
         this.botonDeLaCarta.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
                 this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
         this.botonDeLaCarta.setStyle(estiloRegion);
+
+        // -------------------------------
+        // Multimedia del botón.
+        // -------------------------------
+        URL mediaUrl;
+        mediaUrl = this.getClass().getClassLoader().getResource("resources/audio/card_activation.wav");
+        this.audioClipCardActivation = new AudioClip(mediaUrl.toExternalForm());
+        this.audioClipCardActivation.setVolume(cardActivationVolume);
     }
 
     public Button getBoton()
     {
 
         return this.botonDeLaCarta;
-    }
-
-    public void clear()
-    {
-        this.botonDeLaCarta = new Button();
-        botonDeLaCarta.setStyle(estiloRegion);
-        this.botonDeLaCarta.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
-                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
     }
 
     public void actualizar(Carta carta)
@@ -82,21 +82,19 @@ public class RegionesMagicasYTrampasBoton extends Button
         {
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                     .getResource(backDeCartaLocacion).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-        } else
+        }
+
+        if (this.carta.estaBocaArriba())
         {
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                     .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         }
         // -------------------------------
 
-        URL mediaUrl;
-        mediaUrl = this.getClass().getClassLoader().getResource("resources/audio/card_activation.wav");
-        this.audioClipCardActivation = new AudioClip(mediaUrl.toExternalForm());
-        this.audioClipCardActivation.setVolume(cardActivationVolume);
-
         // -------------------------------
         // Tooltip del botón.
         // -------------------------------
+        // Solamente se muestran los tooltips de las cartas del jugador actual.
         if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado)
         {
             Image imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
@@ -109,22 +107,25 @@ public class RegionesMagicasYTrampasBoton extends Button
         this.popup = new Popup();
         VBox vbox = new VBox();
 
-        Button b1 = new Button("Activar");
+        Button botonActivar = new Button("Activar");
         // Las cartas trampa se activan solamente en la fase trampa, y de forma automática.
         if (this.carta.esMagica())
         {
-            b1.setOnAction(e -> activarCartaMagicaDesdeRegionBtn_Click());
+            botonActivar.setOnAction(e -> activarCartaMagicaDesdeRegionBtn_Click());
         }
 
-        Button b2 = new Button("Cerrar");
-        b2.setOnAction(e -> popup.hide());
+        Button botonCerrar = new Button("Cerrar");
+        botonCerrar.setOnAction(e -> popup.hide());
 
-        vbox.getChildren().addAll(b1, b2);
+        vbox.getChildren().addAll(botonActivar, botonCerrar);
         popup.getContent().addAll(vbox);
 
-        if(this.vista.getControlador().getJugadorActual() == this.jugadorAsociado){
-        	botonEnRegion.setOnAction(e -> magYTramEnRegionBtn_Click());
-        }
+        // TODO: No está funcionando esto:
+//        if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado)
+//        {
+//            botonEnRegion.setOnAction(e -> magYTramEnRegionBtn_Click());
+//        }
+        botonEnRegion.setOnAction(e -> magYTramEnRegionBtn_Click());
 
         return botonEnRegion;
     }

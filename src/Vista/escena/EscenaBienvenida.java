@@ -167,15 +167,9 @@ public final class EscenaBienvenida implements Escena
     }
 
     @Override
-    public void actualizarEstado()
+    public void actualizarDibujo()
     {
 
-    }
-
-    @Override
-    public boolean terminoElJuego()
-    {
-        return false;
     }
 
     @Override
@@ -202,24 +196,6 @@ public final class EscenaBienvenida implements Escena
     {
         this.stopMedia();
         this.primaryStage.close();
-    }
-
-    @Override
-    public GridPane getGridPaneEscena()
-    {
-        return this.grid;
-    }
-
-    @Override
-    public void mostrarJugadorActual()
-    {
-
-    }
-
-    @Override
-    public void mostrarFaseActual()
-    {
-
     }
 
     @Override

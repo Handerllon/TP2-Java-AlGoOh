@@ -2,6 +2,7 @@ package Controlador;
 
 import Controlador.estadosJuego.*;
 import Controlador.excepciones.*;
+import Controlador.observadores.ObservadorDeControlador;
 import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
@@ -17,9 +18,10 @@ import Vista.Vista;
 
 import java.util.ArrayList;
 
-public final class Controlador implements ObservadorDeFinJuego, ControladorInterfaz, ObservadorDeCartaTrampa
+public final class Controlador implements ControladorObservable, ObservadorDeFinJuego, ControladorInterfaz,
+        ObservadorDeCartaTrampa
 {
-    private static final int cantidadCartasTomarInicialmente = 5;
+    private static int cantidadCartasTomarInicialmente = 5;
     private static Controlador instancia = null;
     private Modelo modelo;
     private Vista vista;
@@ -28,6 +30,7 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
     private MaquinaTurnos maquinaTurnos;
     private EstadoVerificador estadoVerificador;
     private ArrayList<CartaTrampa> cartasTrampaUtilizadas = new ArrayList<>();
+    private ArrayList<ObservadorDeControlador> observadoresDeControlador = new ArrayList<>();
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -134,6 +137,33 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
         this.vista.cerrar();
     }
 
+    // --------------------------------------------------------------------
+    // Metodos por ser un observable de Controlador.
+    // --------------------------------------------------------------------
+    @Override
+    public void registrarObsevador(ObservadorDeControlador observador)
+    {
+        this.observadoresDeControlador.add(observador);
+    }
+
+    @Override
+    public void eliminarObservador(ObservadorDeControlador observador)
+    {
+        this.observadoresDeControlador.remove(observador);
+    }
+
+    @Override
+    public void notificarFinDeTurno()
+    {
+        observadoresDeControlador.forEach(observador -> observador.seTerminoElTurno());
+    }
+
+    @Override
+    public void notificarFinDeFase()
+    {
+        observadoresDeControlador.forEach(observador -> observador.seTerminoLaFase());
+    }
+
     // ------------------------------------
     // Métodos de fases y turnos.
     // ------------------------------------
@@ -147,11 +177,6 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
         this.accionarFaseInicialAutomatica();
     }
 
-    private void notificarFinDeTurno()
-    {
-        this.vista.huboFinDeTurno();
-    }
-
     @Override
     public void avanzarFase() throws SeTerminaronLasFases
     {
@@ -163,18 +188,13 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
             this.maquinaTurnos.avanzarFase();
         }
 
-        this.notificarCambioDeFase();
+        this.notificarFinDeFase();
     }
 
     private void cambiarAFase(Fase fase)
     {
         this.maquinaTurnos.setFaseActual(fase);
-        this.notificarCambioDeFase();
-    }
-
-    private void notificarCambioDeFase()
-    {
-        this.vista.huboCambioDeFase();
+        this.notificarFinDeFase();
     }
 
     private void retrocederFase() throws SeTerminaronLasFases
@@ -187,7 +207,7 @@ public final class Controlador implements ObservadorDeFinJuego, ControladorInter
             this.maquinaTurnos.retrocederFase();
         }
 
-        this.notificarCambioDeFase();
+        this.notificarFinDeFase();
     }
 
     private void accionarFaseInicialAutomatica()

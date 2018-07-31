@@ -57,13 +57,9 @@ public class RegionesMonstruoBoton extends Button
                 this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
         this.botonCarta.setStyle(estiloRegion);
 
-        this.botonEnRegion = new Button();
-        this.tooltipBoton = new Tooltip();
-
-        this.popup = new Popup();
-        this.popupDeSeleccion = new Popup();
-        this.vbox = new VBox();
-
+        // -------------------------------
+        // Multimedia del botón.
+        // -------------------------------
         URL mediaUrl;
         mediaUrl = this.getClass().getClassLoader().getResource("resources/audio/card_flip.wav");
         this.audioClipCardFlip = new AudioClip(mediaUrl.toExternalForm());
@@ -79,14 +75,6 @@ public class RegionesMonstruoBoton extends Button
         return this.botonCarta;
     }
 
-    public void clear()
-    {
-        this.botonCarta = new Button();
-        botonCarta.setStyle(estiloRegion);
-        this.botonCarta.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
-                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
-    }
-
     public void actualizar(CartaMonstruo cartaMonstruo)
     {
         this.carta = cartaMonstruo;
@@ -95,39 +83,44 @@ public class RegionesMonstruoBoton extends Button
 
     private Button crearBotonCarta()
     {
+        this.botonEnRegion = new Button();
+        this.tooltipBoton = new Tooltip();
+
+        this.popup = new Popup();
+        this.popupDeSeleccion = new Popup();
+        this.vbox = new VBox();
         // -------------------------------
         // Imagen del botón.
         // -------------------------------
         botonEnRegion.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
                 this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
-        if (this.carta.enDefensa() && this.carta.estaBocaAbajo())
+
+        // Se la rota si está en defensa.
+        if (this.carta.enDefensa())
         {
             this.botonEnRegion.getTransforms().add(new Rotate(90, (this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta) / 2,
                     (this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta) / 2));
+        }
+
+        // Se le pone el background.
+        if (this.carta.estaBocaAbajo())
+        {
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
                     .getClassLoader().getResource(backDeCartaLocacion).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-            // Tooltip del botón.
-            if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado)
-            {
-                this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
-                tooltipBoton.setGraphic(new ImageView(imagenBoton));
-                botonEnRegion.setTooltip(tooltipBoton);
-            }
-        } else if (this.carta.enDefensa())
-        {
-            this.botonEnRegion.getTransforms().add(new Rotate(90, (this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta) / 2,
-                    (this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta) / 2));
-            botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
-                    .getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-            // Tooltip del botón.
-            this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
-            tooltipBoton.setGraphic(new ImageView(imagenBoton));
-            botonEnRegion.setTooltip(tooltipBoton);
-        } else
+        }
+
+        if (this.carta.estaBocaArriba())
         {
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
                     .getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
-            // Tooltip del botón.
+        }
+
+        // -------------------------------
+        // Tooltip del botón.
+        // -------------------------------
+        // Solamente se muestran los tooltips de las cartas del jugador actual.
+        if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado)
+        {
             this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
             tooltipBoton.setGraphic(new ImageView(imagenBoton));
             botonEnRegion.setTooltip(tooltipBoton);
@@ -148,6 +141,7 @@ public class RegionesMonstruoBoton extends Button
         Button botonCerrar = new Button("Cerrar");
         botonCerrar.setOnAction(e -> popup.hide());
 
+        // Se decide qué botón mostrar según el estado de la carta.
         if (this.carta.estaBocaArriba() && this.carta.enDefensa())
         {
             vbox.getChildren().addAll(botonCambiarModo, botonCerrar);
@@ -159,10 +153,16 @@ public class RegionesMonstruoBoton extends Button
             vbox.getChildren().addAll(botonCambiarModo, botonDarVuelta, botonCerrar);
         }
         popup.getContent().addAll(vbox);
-        
-        if(this.vista.getControlador().getJugadorActual() == this.jugadorAsociado){
-        botonEnRegion.setOnAction(e -> monstruoEnRegionBtn_Click(popup, botonEnRegion));
-        }
+
+        // Solamente se muestran los tooltips de las cartas del jugador actual.
+        // TODO: No está funcionando esto:
+//        if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado)
+//        {
+//            botonEnRegion.setOnAction(e -> monstruoEnRegionBtn_Click());
+//        }
+
+        botonEnRegion.setOnAction(e -> monstruoEnRegionBtn_Click());
+
         // -------------------------------
 
         return botonEnRegion;
@@ -171,12 +171,12 @@ public class RegionesMonstruoBoton extends Button
     // --------------------------------------------------------------------
     // Implementación acción botones.
     // --------------------------------------------------------------------
-    private void monstruoEnRegionBtn_Click(Popup popup, Button botonEnRegion)
+    private void monstruoEnRegionBtn_Click()
     {
-        popup.show(this.vista.getPrimaryStage());
-        Point2D point = botonEnRegion.localToScene(0.0, 0.0);
-        popup.setX(this.vista.getPrimaryStage().getX() + point.getX());
-        popup.setY(this.vista.getPrimaryStage().getY() + point.getY());
+        this.popup.show(this.vista.getPrimaryStage());
+        Point2D point = this.botonEnRegion.localToScene(0.0, 0.0);
+        this.popup.setX(this.vista.getPrimaryStage().getX() + point.getX());
+        this.popup.setY(this.vista.getPrimaryStage().getY() + point.getY());
     }
 
     private void cartaMonstruoAtacarBtn_Click()

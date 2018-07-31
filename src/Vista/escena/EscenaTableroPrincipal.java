@@ -57,6 +57,7 @@ public final class EscenaTableroPrincipal implements Escena
     {
         this.modelo = modelo;
         this.vista = vista;
+
         this.primaryStage = this.vista.getPrimaryStage();
 
         this.gridPane = new GridPane();
@@ -202,7 +203,6 @@ public final class EscenaTableroPrincipal implements Escena
     // --------------------------------------------------------------------
     // Métodos de escena.
     // --------------------------------------------------------------------
-
     @Override
     public Escena cambiarEscena()
     {
@@ -210,34 +210,16 @@ public final class EscenaTableroPrincipal implements Escena
     }
 
     @Override
-    public boolean terminoElJuego()
-    {
-        return false;
-    }
-
-    @Override
     public void mostrar()
     {
         this.playMedia();
         this.primaryStage.show();
-        this.mostrarJugadorActual();
-        this.mostrarFaseActual();
+        this.turnoActualVista.seTerminoElTurno();
+        this.faseActualVista.seTerminoLaFase();
     }
 
     @Override
-    public void actualizarEstado()
-    {
-        this.regionesCampoVista.huboCambios();
-        this.regionesMagicasYTrampasVista.huboCambios();
-        this.regionesMonstruoVista.huboCambios();
-        this.regionesCementerioVista.huboCambios();
-        this.manosVista.huboCambios();
-        this.mazosVista.huboCambios();
-        this.vidasVista.huboCambios();
-        this.actualizarDibujo();
-    }
-
-    private void actualizarDibujo()
+    public void actualizarDibujo()
     {
         gridPane.getChildren().clear();
         setGridPaneVista();
@@ -267,28 +249,6 @@ public final class EscenaTableroPrincipal implements Escena
     {
         this.stopMedia();
         this.primaryStage.close();
-    }
-
-    @Override
-    public GridPane getGridPaneEscena()
-    {
-        return this.gridPane;
-    }
-
-    @Override
-    public void mostrarJugadorActual()
-    {
-        gridPane.getChildren().remove(turnoActualVista.getDisplayTurnoActual());
-        this.turnoActualVista.actualizar();
-        gridPane.add(turnoActualVista.getDisplayTurnoActual(), 0, 1);
-    }
-
-    @Override
-    public void mostrarFaseActual()
-    {
-        gridPane.getChildren().remove(faseActualVista.getLabelFaseActual());
-        this.faseActualVista.actualizar();
-        gridPane.add(faseActualVista.getLabelFaseActual(), 0, 2);
     }
 
     @Override

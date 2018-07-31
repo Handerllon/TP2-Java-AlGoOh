@@ -20,8 +20,8 @@ public class RegionesCementerioVista implements ObservadorDeModelo
     public RegionesCementerioVista(Vista vista)
     {
         this.vista = vista;
-        // TODO: Para cuando se implemente los observadores puntuales:
-        // vista.getModelo().registrarObsevador(this);
+
+        vista.getModelo().registrarObsevador(this);
 
         this.botonCementerioJugador = this.inicializarBoton();
         this.botonCementerioOponente = this.inicializarBoton();
@@ -54,12 +54,6 @@ public class RegionesCementerioVista implements ObservadorDeModelo
     // Métodos de observador de modelo.
     // --------------------------------------------------------------------
     @Override
-    public void huboCambios()
-    {
-        //TODO: cuando hay al menos 1 carta en el cementerio, se debería mostrar 'rutaImagenReversoCarta'.
-    }
-
-    @Override
     public void seTomoCartaDeMazo()
     {
 
@@ -80,7 +74,8 @@ public class RegionesCementerioVista implements ObservadorDeModelo
     @Override
     public void ingresoCartaARegion()
     {
-
+        //TODO: cuando hay al menos 1 carta en el cementerio, se debería mostrar 'rutaImagenReversoCarta'.
+        this.vista.actualizarDibujo();
     }
 
     @Override

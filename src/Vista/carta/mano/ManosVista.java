@@ -1,12 +1,13 @@
 package Vista.carta.mano;
 
-import Modelo.observadores.ObservadorDeModelo;
+import Modelo.ModeloObservable;
 import Vista.Vista;
 import javafx.scene.layout.FlowPane;
 
-public class ManosVista implements ObservadorDeModelo
+public class ManosVista
 {
     private Vista vista;
+    private ModeloObservable modelo;
     private ManosFlowPane manoJugador;
     private ManosFlowPane manoOponente;
 
@@ -16,10 +17,12 @@ public class ManosVista implements ObservadorDeModelo
     public ManosVista(Vista vista)
     {
         this.vista = vista;
-        vista.getModelo().registrarObsevador(this);
+        this.modelo = vista.getModelo();
 
-        this.manoJugador = new ManosFlowPane(this.vista, this.vista.getModelo().getJugador());
-        this.manoOponente = new ManosFlowPane(this.vista, this.vista.getModelo().getOponente());
+        //vista.getModelo().registrarObsevador(this);
+
+        this.manoJugador = new ManosFlowPane(this.vista, this.modelo.getJugador());
+        this.manoOponente = new ManosFlowPane(this.vista, this.modelo.getOponente());
     }
 
     public FlowPane getManoJugador()
@@ -32,65 +35,5 @@ public class ManosVista implements ObservadorDeModelo
     {
 
         return manoOponente.getFlowPane();
-    }
-
-    // --------------------------------------------------------------------
-    // Métodos de observador de modelo.
-    // --------------------------------------------------------------------
-    @Override
-    public void huboCambios()
-    {
-        this.manoJugador.clear();
-        this.manoOponente.clear();
-        this.manoJugador.actualizar(this.vista.getModelo().getCartasManoJugador());
-        this.manoOponente.actualizar(this.vista.getModelo().getCartasManoOponente());
-    }
-
-    @Override
-    public void seTomoCartaDeMazo()
-    {
-
-    }
-
-    @Override
-    public void ingresoCartaAMano()
-    {
-
-    }
-
-    @Override
-    public void egresoCartaAMano()
-    {
-
-    }
-
-    @Override
-    public void ingresoCartaARegion()
-    {
-
-    }
-
-    @Override
-    public void egresoCartaARegion()
-    {
-
-    }
-
-    @Override
-    public void cambiaronLosPuntosDeVida()
-    {
-
-    }
-
-    @Override
-    public void cartaCambioDeOrientacion()
-    {
-
-    }
-
-    @Override
-    public void cartaCambioDeModo()
-    {
-
     }
 }

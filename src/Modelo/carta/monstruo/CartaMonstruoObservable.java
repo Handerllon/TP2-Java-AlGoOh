@@ -4,9 +4,9 @@ import Modelo.observadores.ObservadorDeCartaMonstruo;
 
 public interface CartaMonstruoObservable
 {
-    void registrarObsevador(ObservadorDeCartaMonstruo observador);
+    void registrarObsevadorCartaMonstruo(ObservadorDeCartaMonstruo observador);
 
-    void eliminarObservador(ObservadorDeCartaMonstruo observador);
+    void eliminarObservadorCartaMonstruo(ObservadorDeCartaMonstruo observador);
 
     void notificarCambioDeModoDeCarta();
 }

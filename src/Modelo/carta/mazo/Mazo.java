@@ -4,6 +4,7 @@ import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.carta.CartaNula;
 import Modelo.carta.FabricaCartas;
+import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaSinCartasEnMazo;
 import Modelo.finDeJuego.FinDeJuegoObservable;
@@ -102,6 +103,20 @@ public class Mazo implements FinDeJuegoObservable, MazoObservable
     public Stack<Carta> getCartas()
     {
         return this.cartas;
+    }
+
+    public Stack<CartaMonstruo> getCartasMonstruo()
+    {
+        Stack<CartaMonstruo> cartasMonstruo = new Stack<>();
+        this.cartas.forEach(carta ->
+        {
+            if (carta.esMonstruo())
+            {
+                cartasMonstruo.push((CartaMonstruo) carta);
+            }
+        });
+
+        return cartasMonstruo;
     }
 
     public int cantidadCartas()

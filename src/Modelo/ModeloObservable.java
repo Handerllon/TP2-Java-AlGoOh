@@ -13,8 +13,6 @@ public interface ModeloObservable
 
     void eliminarObservador(ObservadorDeModelo observador);
 
-    void notificarEvento();
-
     void notificarTomaDeCartaDeMazo();
 
     void notificarIngresoCartaAMano();
@@ -34,25 +32,31 @@ public interface ModeloObservable
     // ------------------------------------
     // Métodos de consultas.
     // ------------------------------------
+    ArrayList<CartaMonstruo> getCartasEnRegionMonstruosDe(Jugador jugador);
+
     ArrayList<CartaMonstruo> getCartasEnRegionMonstruosJugador();
 
     ArrayList<CartaMonstruo> getCartasEnRegionMonstruosOponente();
+
+    ArrayList<Carta> getCartasEnRegionMagicasYTrampasDe(Jugador jugador);
 
     ArrayList<Carta> getCartasEnRegionMagicasYTrampasJugador();
 
     ArrayList<Carta> getCartasEnRegionMagicasYTrampasOponente();
 
+    ArrayList<CartaCampo> getCartasEnRegionCampoDe(Jugador jugador);
+
     ArrayList<CartaCampo> getCartasEnRegionCampoJugador();
 
     ArrayList<CartaCampo> getCartasEnRegionCampoOponente();
+
+    int getCantidadCartasRestantesMazoDe(Jugador jugador);
 
     int getCantidadCartasRestantesMazoJugador();
 
     int getCantidadCartasRestantesMazoOponente();
 
-    ArrayList<Carta> getCartasManoJugador();
-
-    ArrayList<Carta> getCartasManoOponente();
+    ArrayList<Carta> getCartasEnManoDe(Jugador jugador);
 
     Jugador getJugador();
 

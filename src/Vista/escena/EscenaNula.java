@@ -1,7 +1,6 @@
 package Vista.escena;
 
 import Modelo.carta.monstruo.CartaMonstruo;
-import javafx.scene.layout.GridPane;
 
 public final class EscenaNula implements Escena
 {
@@ -42,15 +41,9 @@ public final class EscenaNula implements Escena
     }
 
     @Override
-    public void actualizarEstado()
+    public void actualizarDibujo()
     {
 
-    }
-
-    @Override
-    public boolean terminoElJuego()
-    {
-        return true;
     }
 
     @Override
@@ -73,24 +66,6 @@ public final class EscenaNula implements Escena
 
     @Override
     public void cerrar()
-    {
-
-    }
-
-    @Override
-    public GridPane getGridPaneEscena()
-    {
-        return null;
-    }
-
-    @Override
-    public void mostrarJugadorActual()
-    {
-
-    }
-
-    @Override
-    public void mostrarFaseActual()
     {
 
     }

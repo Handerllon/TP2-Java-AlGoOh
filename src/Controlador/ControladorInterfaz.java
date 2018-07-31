@@ -1,6 +1,7 @@
 package Controlador;
 
 import Controlador.excepciones.*;
+import Controlador.observadores.ObservadorDeControlador;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.carta.monstruo.CartaMonstruo;
@@ -28,6 +29,8 @@ public interface ControladorInterfaz
     String getNombreFaseActual();
 
     Jugador getJugadorActual();
+
+    void registrarObsevador(ObservadorDeControlador observadorDeControlador);
 
     // ------------------------------------
     // Métodos de terminación.

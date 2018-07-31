@@ -266,33 +266,9 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     }
 
     @Override
-    public ArrayList<CartaMonstruo> getCartasEnRegionMonstruosJugador()
-    {
-        return this.jugador1.getRegionMonstruos().getCartas();
-    }
-
-    @Override
-    public ArrayList<CartaMonstruo> getCartasEnRegionMonstruosOponente()
-    {
-        return this.jugador2.getRegionMonstruos().getCartas();
-    }
-
-    @Override
     public ArrayList<Carta> getCartasEnRegionMagicasYTrampasDe(Jugador jugador)
     {
         return jugador.getRegionMagicasYTrampas().getCartas();
-    }
-
-    @Override
-    public ArrayList<Carta> getCartasEnRegionMagicasYTrampasJugador()
-    {
-        return this.jugador1.getRegionMagicasYTrampas().getCartas();
-    }
-
-    @Override
-    public ArrayList<Carta> getCartasEnRegionMagicasYTrampasOponente()
-    {
-        return this.jugador2.getRegionMagicasYTrampas().getCartas();
     }
 
     @Override
@@ -302,39 +278,9 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     }
 
     @Override
-    public ArrayList<CartaCampo> getCartasEnRegionCampoJugador()
-    {
-        return this.jugador1.getRegionCampo().getCartas();
-    }
-
-    @Override
-    public ArrayList<CartaCampo> getCartasEnRegionCampoOponente()
-    {
-        return this.jugador2.getRegionCampo().getCartas();
-    }
-
-    @Override
     public int getCantidadCartasRestantesMazoDe(Jugador jugador)
     {
         return jugador.getMazo().cantidadCartas();
-    }
-
-    @Override
-    public int getCantidadCartasRestantesMazoJugador()
-    {
-        return this.jugador1.getMazo().cantidadCartas();
-    }
-
-    @Override
-    public int getCantidadCartasRestantesMazoOponente()
-    {
-        return this.jugador2.getMazo().cantidadCartas();
-    }
-
-    @Override
-    public ArrayList<Carta> getCartasEnManoDe(Jugador jugador)
-    {
-        return jugador.getMano().getCartas();
     }
 
     public Jugador getJugador()

@@ -2,6 +2,7 @@ package Vista.region;
 
 import Modelo.Jugador;
 import Modelo.carta.campo.CartaCampo;
+import Modelo.observadores.ObservadorDeModelo;
 import Vista.Vista;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -13,7 +14,9 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.ImagePattern;
 
-public class RegionesCampoBoton extends Button
+import java.util.ArrayList;
+
+public class RegionesCampoBoton extends Button implements ObservadorDeModelo
 {
     private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
     // Se uso como base una resolucion de 1920x1080 para los tamanos
@@ -34,13 +37,10 @@ public class RegionesCampoBoton extends Button
         this.jugadorAsociado = jugadorAsociado;
         this.vista = vista;
 
-        this.boton = new Button();
+        // TODO: implementar el observer pero para cartas campo así no se actualiza cada vez que se mueven otras cartas.
+        vista.getModelo().registrarObsevador(this);
 
-        this.boton.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
-                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
-        this.boton.setStyle(estiloRegion);
-
-        this.tooltip = new Tooltip();
+        actualizar();
     }
 
     public Button getBoton()
@@ -48,28 +48,85 @@ public class RegionesCampoBoton extends Button
         return boton;
     }
 
-    public void clear()
+    public void actualizar()
     {
+        this.tooltip = new Tooltip();
+
         this.boton = new Button();
-        boton.setStyle(estiloRegion);
+        this.boton.setStyle(estiloRegion);
         this.boton.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
                 this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
+
+        ArrayList<CartaCampo> cartasCampoJugador = this.vista.getModelo().getCartasEnRegionCampoDe(jugadorAsociado);
+        for (int i = 0; i < cartasCampoJugador.size(); i++)
+        {
+
+            this.carta = cartasCampoJugador.get(i);
+
+            this.boton.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+                    this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
+            this.boton.setStyle(null);
+            this.boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+                    .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+
+            this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
+
+            this.tooltip.setGraphic(new ImageView(this.imagenBoton));
+
+            this.boton.setTooltip(this.tooltip);
+        }
+
+        this.vista.actualizarDibujo();
     }
 
-    public void actualizarImagen(CartaCampo carta)
+    // --------------------------------------------------------------------
+    // Métodos de observador de modelo.
+    // --------------------------------------------------------------------
+    @Override
+    public void seTomoCartaDeMazo()
     {
-        this.carta = carta;
 
-        this.boton.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
-                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
-        this.boton.setStyle(null);
-        this.boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+    }
 
-        this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
+    @Override
+    public void ingresoCartaAMano()
+    {
 
-        this.tooltip.setGraphic(new ImageView(this.imagenBoton));
+    }
 
-        this.boton.setTooltip(this.tooltip);
+    @Override
+    public void egresoCartaAMano()
+    {
+
+    }
+
+    @Override
+    public void ingresoCartaARegion()
+    {
+        this.actualizar();
+    }
+
+    @Override
+    public void egresoCartaARegion()
+    {
+        this.actualizar();
+    }
+
+    @Override
+    public void cambiaronLosPuntosDeVida()
+    {
+
+    }
+
+    @Override
+    public void cartaCambioDeOrientacion()
+    {
+        this.actualizar();
+    }
+
+    @Override
+    public void cartaCambioDeModo()
+    {
+
     }
 }

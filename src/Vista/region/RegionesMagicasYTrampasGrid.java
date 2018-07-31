@@ -1,5 +1,6 @@
 package Vista.region;
 
+import Controlador.observadores.ObservadorDeControlador;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.observadores.ObservadorDeModelo;
@@ -12,7 +13,7 @@ import javafx.scene.layout.RowConstraints;
 
 import java.util.ArrayList;
 
-public class RegionesMagicasYTrampasGrid extends GridPane implements ObservadorDeModelo
+public class RegionesMagicasYTrampasGrid extends GridPane implements ObservadorDeModelo, ObservadorDeControlador
 {
     private static double porcentajeHorizontalDePantalla = 0.082;
     private static double porcentajeVerticalDePantalla = 0.157;
@@ -32,6 +33,8 @@ public class RegionesMagicasYTrampasGrid extends GridPane implements ObservadorD
         this.vista = vista;
 
         vista.getModelo().registrarObsevador(this);
+
+        this.vista.getControlador().registrarObsevador(this);
 
         this.grid = new GridPane();
 
@@ -137,5 +140,20 @@ public class RegionesMagicasYTrampasGrid extends GridPane implements ObservadorD
     public void cartaCambioDeModo()
     {
 
+    }
+
+    // --------------------------------------------------------------------
+    // Metodos por ser un observador de Controlador.
+    // --------------------------------------------------------------------
+    @Override
+    public void seTerminoElTurno()
+    {
+
+    }
+
+    @Override
+    public void seTerminoLaFase()
+    {
+        actualizarRegion();
     }
 }

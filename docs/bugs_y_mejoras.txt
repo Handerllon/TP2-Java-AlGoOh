@@ -11,12 +11,8 @@ Bugs:
 
 2. Ver caso de carta Jinzo#7
 
-3. No me deja poner en defensa desde región monstruo con el popup. Ver TODO en código.
-
-4. Si una carta ataca, pasa el turno, y quiere volver a atacar, no aparece el popup. Ver TODO en código.
-
 5. Hay un bug con el conteo de las partes de exodia: cuenta todas las partes presentes en ambas manos.
 
-6 Cuando se pierde por quedarse sin cartas, tira un NullPtrException.
+6. Cuando se pierde por quedarse sin cartas, tira un NullPtrException.
 
 7. Si el usuario aprieta un botón y sale un popup, que lo pueda cerrar clickeando en cualquier parte que no sea el popup.

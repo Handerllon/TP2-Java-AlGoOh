@@ -1,5 +1,6 @@
 package Vista.region;
 
+import Controlador.observadores.ObservadorDeControlador;
 import Modelo.Jugador;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.observadores.ObservadorDeModelo;
@@ -12,7 +13,7 @@ import javafx.scene.layout.RowConstraints;
 
 import java.util.ArrayList;
 
-public class RegionesMonstruosGrid extends GridPane implements ObservadorDeModelo
+public class RegionesMonstruosGrid extends GridPane implements ObservadorDeModelo, ObservadorDeControlador
 {
     // Se uso como base una resolucion de 1920x1080
     private static double porcentajeHorizontalDePantalla = 0.082;
@@ -34,6 +35,7 @@ public class RegionesMonstruosGrid extends GridPane implements ObservadorDeModel
         this.vista = vista;
 
         vista.getModelo().registrarObsevador(this);
+        this.vista.getControlador().registrarObsevador(this);
 
         this.grid = new GridPane();
 
@@ -139,6 +141,21 @@ public class RegionesMonstruosGrid extends GridPane implements ObservadorDeModel
 
     @Override
     public void cartaCambioDeModo()
+    {
+        actualizarRegion();
+    }
+
+    // --------------------------------------------------------------------
+    // Metodos por ser un observador de Controlador.
+    // --------------------------------------------------------------------
+    @Override
+    public void seTerminoElTurno()
+    {
+
+    }
+
+    @Override
+    public void seTerminoLaFase()
     {
         actualizarRegion();
     }

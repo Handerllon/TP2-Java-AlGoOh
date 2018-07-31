@@ -101,8 +101,8 @@ public class MazosVista implements ObservadorDeModelo
     public void seTomoCartaDeMazo()
     {
         audioClipCardDraw.play();
-        this.actualizarMazoJugador(this.modelo.getCantidadCartasRestantesMazoJugador());
-        this.actualizarMazoOponente(this.modelo.getCantidadCartasRestantesMazoOponente());
+        this.actualizarMazoJugador(this.modelo.getCantidadCartasRestantesMazoDe(this.modelo.getJugador()));
+        this.actualizarMazoOponente(this.modelo.getCantidadCartasRestantesMazoDe(this.modelo.getOponente()));
         this.vista.actualizarDibujo();
     }
 

@@ -34,12 +34,12 @@ public abstract class CartaCampo extends Carta
 
     protected void restaurarPuntosAtaque(CartaMonstruo cartaMonstruo)
     {
-        cartaMonstruo.sumarPuntosAtaque(-this.modificadorAtaque);
+        cartaMonstruo.restarPuntosAtaque(this.modificadorAtaque);
     }
 
     protected void restaurarPuntosDefensa(CartaMonstruo cartaMonstruo)
     {
-        cartaMonstruo.sumarPuntosDefensa(-this.modificadorDefensa);
+        cartaMonstruo.restarPuntosDefensa(this.modificadorDefensa);
     }
 
     public boolean esCampo()

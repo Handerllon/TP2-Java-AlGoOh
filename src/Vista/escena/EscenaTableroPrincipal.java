@@ -251,21 +251,24 @@ public final class EscenaTableroPrincipal implements Escena
         this.primaryStage.close();
     }
 
+    // ----------------------
+    // Métodos de ataque.
+    // ----------------------
     @Override
     public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante)
     {
 
         Popup popup = new Popup();
-        ArrayList<BotonDeCartaMonstruoSolicitada> botonesDeCartas = new ArrayList<BotonDeCartaMonstruoSolicitada>();
+        ArrayList<BotonDeCartaMonstruoSolicitada> botonesDeCartas = new ArrayList<>();
         HBox hbox = new HBox();
 
         if (this.vista.getControlador().getJugadorActual() == this.modelo.getJugador())
         {
-            this.vista.getModelo().getCartasEnRegionMonstruosOponente().forEach(cartaDelOponente
+            this.vista.getModelo().getCartasEnRegionMonstruosDe(this.vista.getModelo().getOponente()).forEach(cartaDelOponente
                     -> botonesDeCartas.add(new BotonDeCartaMonstruoSolicitada(this.vista, cartaAtacante, cartaDelOponente, popup)));
         } else
         {
-            this.vista.getModelo().getCartasEnRegionMonstruosJugador().forEach(cartaDelOponente
+            this.vista.getModelo().getCartasEnRegionMonstruosDe(this.modelo.getJugador()).forEach(cartaDelOponente
                     -> botonesDeCartas.add(new BotonDeCartaMonstruoSolicitada(this.vista, cartaAtacante, cartaDelOponente, popup)));
         }
 

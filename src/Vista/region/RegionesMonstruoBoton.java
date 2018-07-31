@@ -155,13 +155,10 @@ public class RegionesMonstruoBoton extends Button
         popup.getContent().addAll(vbox);
 
         // Solamente se muestran los tooltips de las cartas del jugador actual.
-        // TODO: No está funcionando esto:
-//        if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado)
-//        {
-//            botonEnRegion.setOnAction(e -> monstruoEnRegionBtn_Click());
-//        }
-
-        botonEnRegion.setOnAction(e -> monstruoEnRegionBtn_Click());
+        if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado)
+        {
+            botonEnRegion.setOnAction(e -> monstruoEnRegionBtn_Click());
+        }
 
         // -------------------------------
 

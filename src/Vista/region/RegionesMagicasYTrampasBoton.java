@@ -120,12 +120,10 @@ public class RegionesMagicasYTrampasBoton extends Button
         vbox.getChildren().addAll(botonActivar, botonCerrar);
         popup.getContent().addAll(vbox);
 
-        // TODO: No está funcionando esto:
-//        if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado)
-//        {
-//            botonEnRegion.setOnAction(e -> magYTramEnRegionBtn_Click());
-//        }
-        botonEnRegion.setOnAction(e -> magYTramEnRegionBtn_Click());
+        if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado)
+        {
+            botonEnRegion.setOnAction(e -> magYTramEnRegionBtn_Click());
+        }
 
         return botonEnRegion;
     }

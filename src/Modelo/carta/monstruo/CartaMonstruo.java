@@ -146,6 +146,12 @@ public abstract class CartaMonstruo extends Carta implements CartaMonstruoObserv
         this.actualizarPuntos();
     }
 
+    public void restarPuntosDefensa(int puntos)
+    {
+        this.puntosDefensa = this.puntosDefensa - puntos;
+        this.actualizarPuntos();
+    }
+
     private void actualizarPuntos()
     {
         if (this.enAtaque())

@@ -34,29 +34,11 @@ public interface ModeloObservable
     // ------------------------------------
     ArrayList<CartaMonstruo> getCartasEnRegionMonstruosDe(Jugador jugador);
 
-    ArrayList<CartaMonstruo> getCartasEnRegionMonstruosJugador();
-
-    ArrayList<CartaMonstruo> getCartasEnRegionMonstruosOponente();
-
     ArrayList<Carta> getCartasEnRegionMagicasYTrampasDe(Jugador jugador);
-
-    ArrayList<Carta> getCartasEnRegionMagicasYTrampasJugador();
-
-    ArrayList<Carta> getCartasEnRegionMagicasYTrampasOponente();
 
     ArrayList<CartaCampo> getCartasEnRegionCampoDe(Jugador jugador);
 
-    ArrayList<CartaCampo> getCartasEnRegionCampoJugador();
-
-    ArrayList<CartaCampo> getCartasEnRegionCampoOponente();
-
     int getCantidadCartasRestantesMazoDe(Jugador jugador);
-
-    int getCantidadCartasRestantesMazoJugador();
-
-    int getCantidadCartasRestantesMazoOponente();
-
-    ArrayList<Carta> getCartasEnManoDe(Jugador jugador);
 
     Jugador getJugador();
 

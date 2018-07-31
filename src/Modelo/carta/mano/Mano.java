@@ -76,7 +76,7 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
 
         if (this.contadorPartesExodia == 5)
         {
-            this.notificarFinDeJuego(new CausaCincoPartesExodiaReunidas(this.jugadorAsociado));
+            this.notificarFinDeJuego(CausaCincoPartesExodiaReunidas.getInstancia(this.jugadorAsociado));
         }
     }
 

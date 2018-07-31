@@ -4,7 +4,7 @@ import Modelo.Jugador;
 
 public abstract class CausaFinJuego
 {
-    private String tipoCausa;
+    private String nombreCausa;
     private Jugador jugadorAsociadoAlFin;
 
     private CausaFinJuego()
@@ -14,17 +14,32 @@ public abstract class CausaFinJuego
 
     public CausaFinJuego(String causa, Jugador jugadorAsociadoAlFin)
     {
-        this.tipoCausa = causa;
+        this.nombreCausa = causa;
         this.jugadorAsociadoAlFin = jugadorAsociadoAlFin;
     }
 
-    public String getCausa()
+    public String getNombreCausa()
     {
-        return this.tipoCausa;
+        return this.nombreCausa;
     }
 
     public String getNombreJugador()
     {
         return this.jugadorAsociadoAlFin.getNombre();
+    }
+
+    public boolean debidoASinCartasEnMazo()
+    {
+        return false;
+    }
+
+    public boolean debidoAPuntosDeVidaNulos()
+    {
+        return false;
+    }
+
+    public boolean debidoACincoPartesDeExodiaReunidas()
+    {
+        return false;
     }
 }

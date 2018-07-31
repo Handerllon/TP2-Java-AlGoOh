@@ -96,7 +96,7 @@ public class Jugador implements FinDeJuegoObservable, JugadorObservable
         this.notificarCambioEnPuntosDeVida();
         if (this.puntosDeVida <= 0)
         {
-            this.notificarFinDeJuego(new CausaPuntosDeVidaNulos(this));
+            this.notificarFinDeJuego(CausaPuntosDeVidaNulos.getInstancia(this));
         }
     }
 

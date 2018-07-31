@@ -95,14 +95,6 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         return this.causaFinJuego;
     }
 
-    // ------------------------------------
-    // Métodos de terminación.
-    // ------------------------------------
-    public void terminar()
-    {
-        System.out.println("Terminando Modelo.");
-    }
-
     // --------------------------------------------------------------------
     // Metodos por ser un observable de Fin de Juego.
     // --------------------------------------------------------------------

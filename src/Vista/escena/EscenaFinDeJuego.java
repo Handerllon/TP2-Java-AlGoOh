@@ -2,7 +2,6 @@ package Vista.escena;
 
 import Modelo.ModeloObservable;
 import Modelo.carta.monstruo.CartaMonstruo;
-import Modelo.finDeJuego.CausaCincoPartesExodiaReunidas;
 import Modelo.finDeJuego.CausaFinJuego;
 import Vista.Vista;
 import javafx.geometry.HPos;
@@ -16,6 +15,7 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -49,32 +49,43 @@ public class EscenaFinDeJuego implements Escena
 
     private void inicializarEscena()
     {
-        this.escenaFinDeJuego = new Scene(this.grid, 395, 296);
+        Image imagenBack = new Image(getClass().getClassLoader().getResource(this.direccion_imagen).toString());
+
+        this.escenaFinDeJuego = new Scene(this.grid, imagenBack.getWidth(), imagenBack.getHeight());
         this.primaryStage.setScene(this.escenaFinDeJuego);
 
         File f;
 
         CausaFinJuego causaFinJuego = this.vista.getControlador().getCausaFinDeJuego();
 
-        String nombreJugadorFinalizo = causaFinJuego.getNombreJugador();
         Label lblTitulo = new Label();
 
         lblTitulo.setMinWidth(100);
         lblTitulo.setAlignment(Pos.BOTTOM_CENTER);
-        lblTitulo.setStyle("-fx-font-weight: bolder; -fx-font-size: 12pt");
 
-        if (causaFinJuego.getCausa() == (new CausaCincoPartesExodiaReunidas(null)).getCausa())
+        lblTitulo.setFont(new Font("Bauhaus 93", 20));
+//        lblTitulo.setTextFill(Color.web("#910101"));
+        lblTitulo.setStyle("-fx-font-weight: bolder; -fx-text-fill: yellow");
+
+        this.grid.setBackground(new Background(new BackgroundFill(new ImagePattern(imagenBack), CornerRadii.EMPTY, Insets.EMPTY)));
+
+        // -------------------------------
+        // Causa de fin de juego.
+        // -------------------------------
+        f = new File(direccion_sonido_perdio);
+
+        String nombreJugadorFinalizo = causaFinJuego.getNombreJugador();
+        if (causaFinJuego.debidoACincoPartesDeExodiaReunidas())
         {
             f = new File(direccion_sonido_gano);
-            lblTitulo.setText(nombreJugadorFinalizo + " GANADOR");
-        } else
+            lblTitulo.setText("Cinco partes de Exodia reuidas.\n" + nombreJugadorFinalizo + " gana el juego.");
+        } else if (causaFinJuego.debidoAPuntosDeVidaNulos())
         {
-            f = new File(direccion_sonido_perdio);
-            lblTitulo.setText(nombreJugadorFinalizo + " PERDEDOR");
+            lblTitulo.setText("Puntos de vida nulos.\n" + nombreJugadorFinalizo + " pierde el juego.");
+        } else if (causaFinJuego.debidoASinCartasEnMazo())
+        {
+            lblTitulo.setText("Sin cartas en el mazo.\n" + nombreJugadorFinalizo + " pierde el juego.");
         }
-
-        this.grid.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
-                .getResource(this.direccion_imagen).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 
         // -------------------------------
         // Audio.
@@ -125,6 +136,7 @@ public class EscenaFinDeJuego implements Escena
     public void mostrar()
     {
         this.playMedia();
+        this.primaryStage.centerOnScreen();
         this.primaryStage.show();
     }
 

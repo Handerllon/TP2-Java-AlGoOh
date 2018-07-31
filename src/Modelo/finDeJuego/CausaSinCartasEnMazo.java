@@ -2,12 +2,27 @@ package Modelo.finDeJuego;
 
 import Modelo.Jugador;
 
-public class CausaSinCartasEnMazo extends CausaFinJuego
+public final class CausaSinCartasEnMazo extends CausaFinJuego
 {
     private static String CAUSA = "Sin cartas en el mazo";
+    private static CausaSinCartasEnMazo instancia = null;
 
-    public CausaSinCartasEnMazo(Jugador jugadorAsociadoAlFin)
+    private CausaSinCartasEnMazo(Jugador jugadorAsociadoAlFin)
     {
         super(CAUSA, jugadorAsociadoAlFin);
+    }
+
+    public static CausaSinCartasEnMazo getInstancia(Jugador jugadorAsociadoAlFin)
+    {
+        if (instancia == null)
+        {
+            instancia = new CausaSinCartasEnMazo(jugadorAsociadoAlFin);
+        }
+        return instancia;
+    }
+
+    public boolean debidoASinCartasEnMazo()
+    {
+        return true;
     }
 }

@@ -23,7 +23,7 @@ public final class CausaFinJuegoNula extends CausaFinJuego
         throw new CloneNotSupportedException();
     }
 
-    public String getCausa()
+    public String getNombreCausa()
     {
         return "";
     }

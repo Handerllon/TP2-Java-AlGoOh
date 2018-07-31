@@ -22,6 +22,11 @@ public abstract class Carta implements Orientacion, CartaObservable
         this.rutaImagen = rutaImagen;
     }
 
+    public Carta()
+    {
+
+    }
+
     public String getLocacionDeImagen()
     {
 

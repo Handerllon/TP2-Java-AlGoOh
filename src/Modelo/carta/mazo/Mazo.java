@@ -95,7 +95,7 @@ public class Mazo implements FinDeJuegoObservable, MazoObservable
         } else
         {
             carta = CartaNula.getInstancia();
-            this.notificarFinDeJuego(new CausaSinCartasEnMazo(this.jugador));
+            this.notificarFinDeJuego(CausaSinCartasEnMazo.getInstancia(this.jugador));
         }
 
         return carta;

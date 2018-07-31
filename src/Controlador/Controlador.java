@@ -109,7 +109,6 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
     {
         this.causaFinDeJuego = causaFinJuego;
         this.vista.finDeJuego();
-        this.modelo.terminar();
     }
 
     public CausaFinJuego getCausaFinDeJuego()

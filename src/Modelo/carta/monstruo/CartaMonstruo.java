@@ -129,7 +129,7 @@ public abstract class CartaMonstruo extends Carta implements CartaMonstruoObserv
     {
         return false;
     }
-    
+
     public void efecto()
     {
 

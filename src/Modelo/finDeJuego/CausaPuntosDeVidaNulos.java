@@ -2,12 +2,27 @@ package Modelo.finDeJuego;
 
 import Modelo.Jugador;
 
-public class CausaPuntosDeVidaNulos extends CausaFinJuego
+public final class CausaPuntosDeVidaNulos extends CausaFinJuego
 {
     private static String CAUSA = "Puntos De Vida Nulos";
+    private static CausaPuntosDeVidaNulos instancia = null;
 
-    public CausaPuntosDeVidaNulos(Jugador jugadorAsociadoAlFin)
+    private CausaPuntosDeVidaNulos(Jugador jugadorAsociadoAlFin)
     {
         super(CAUSA, jugadorAsociadoAlFin);
+    }
+
+    public static CausaPuntosDeVidaNulos getInstancia(Jugador jugadorAsociadoAlFin)
+    {
+        if (instancia == null)
+        {
+            instancia = new CausaPuntosDeVidaNulos(jugadorAsociadoAlFin);
+        }
+        return instancia;
+    }
+
+    public boolean debidoAPuntosDeVidaNulos()
+    {
+        return true;
     }
 }

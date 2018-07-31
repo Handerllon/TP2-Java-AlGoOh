@@ -159,8 +159,10 @@ public class RegionesMonstruoBoton extends Button
             vbox.getChildren().addAll(botonCambiarModo, botonDarVuelta, botonCerrar);
         }
         popup.getContent().addAll(vbox);
-
+        
+        if(this.vista.getControlador().getJugadorActual() == this.jugadorAsociado){
         botonEnRegion.setOnAction(e -> monstruoEnRegionBtn_Click(popup, botonEnRegion));
+        }
         // -------------------------------
 
         return botonEnRegion;

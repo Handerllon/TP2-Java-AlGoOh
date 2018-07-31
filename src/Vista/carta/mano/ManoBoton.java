@@ -96,7 +96,9 @@ public class ManoBoton extends Button
         }
 
         popup.getContent().addAll(vbox);
-        boton.setOnAction(e -> accionBtn_Click(popup, boton));
+        if(this.vista.getControlador().getJugadorActual() == this.jugadorAsociado){
+        	boton.setOnAction(e -> accionBtn_Click(popup, boton));
+        }
     }
 
     private void accionBtn_Click(Popup popup, Button boton)

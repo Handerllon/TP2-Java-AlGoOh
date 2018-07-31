@@ -105,9 +105,6 @@ public class RegionesMagicasYTrampasBoton extends Button
             botonEnRegion.setTooltip(tooltipBoton);
         }
 
-        // TODO: Implementar la vista de la carta.
-        // -------------------------------
-
         // Se crea el botón.
         this.popup = new Popup();
         VBox vbox = new VBox();
@@ -125,7 +122,9 @@ public class RegionesMagicasYTrampasBoton extends Button
         vbox.getChildren().addAll(b1, b2);
         popup.getContent().addAll(vbox);
 
-        botonEnRegion.setOnAction(e -> magYTramEnRegionBtn_Click());
+        if(this.vista.getControlador().getJugadorActual() == this.jugadorAsociado){
+        	botonEnRegion.setOnAction(e -> magYTramEnRegionBtn_Click());
+        }
 
         return botonEnRegion;
     }

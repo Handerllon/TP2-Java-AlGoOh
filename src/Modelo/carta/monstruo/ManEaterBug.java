@@ -13,6 +13,8 @@ public class ManEaterBug extends CartaMonstruo
         super(PUNTOS_DEFENSA, PUNTOS_ATAQUE, jugador, oponente, rutaImagen);
         this.estrellas = 2;
         this.nombre = "Man-Eater Bug";
+        // Tiene que comenzar boca arriba así no se activa el efecto cuando se la manda desde la mano al campo.
+        this.orientacionArriba = true;
     }
 
     @Override

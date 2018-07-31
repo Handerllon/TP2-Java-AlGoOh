@@ -14,7 +14,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Mano implements FinDeJuegoObservable, ManoObservable
 {
     private static int CANTIDAD_MAXIMA = 6;
-    private static int contadorPartesExodia;
     private ArrayList<Carta> cartas;
     private Jugador jugadorAsociado;
     private ArrayList<ObservadorDeFinJuego> observadoresFinJuegos = new ArrayList<>();
@@ -23,7 +22,6 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
     public Mano(Jugador jugador)
     {
         this.cartas = new ArrayList<>();
-        this.contadorPartesExodia = 0;
         this.jugadorAsociado = jugador;
     }
 
@@ -38,8 +36,7 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
             quitarCarta(getCartas().get(randomNum));
         }
         this.cartas.add(carta);
-        this.verificarAgregacionParteExodia(carta);
-        this.verificarExodiaCompleto(carta);
+        this.verificarExodiaCompleto();
         this.notificarIngresoDeCartaAMano();
     }
 
@@ -48,9 +45,9 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
         if (!this.cartas.isEmpty())
         {
             this.cartas.remove(carta);
-            this.verificarRemocionParteExodia(carta);
             this.notificarEgresoDeCartaAMano();
         }
+        this.verificarExodiaCompleto();
     }
 
     public int cantidadDeCartas()
@@ -71,28 +68,19 @@ public class Mano implements FinDeJuegoObservable, ManoObservable
     // --------------------------------------------------------------------
     // Metodos de verificación de fin de juego.
     // --------------------------------------------------------------------
-    private void verificarExodiaCompleto(Carta carta)
+    private void verificarExodiaCompleto()
     {
-
-        if (this.contadorPartesExodia == 5)
+        int contadorPartesExodia = 0;
+        for (int k = 0; k < this.cartas.size(); k++)
+        {
+            if (this.cartas.get(k).esParteExodia())
+            {
+                contadorPartesExodia++;
+            }
+        }
+        if (contadorPartesExodia == 5)
         {
             this.notificarFinDeJuego(CausaCincoPartesExodiaReunidas.getInstancia(this.jugadorAsociado));
-        }
-    }
-
-    private void verificarAgregacionParteExodia(Carta carta)
-    {
-        if (carta.esParteExodia())
-        {
-            this.contadorPartesExodia++;
-        }
-    }
-
-    private void verificarRemocionParteExodia(Carta carta)
-    {
-        if (carta.esParteExodia())
-        {
-            this.contadorPartesExodia--;
         }
     }
 

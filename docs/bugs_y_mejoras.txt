@@ -7,8 +7,6 @@ Hacerle un marco al popup de las cartas.
 Separar algunos píxeles los botones del popup de las cartas.
 
 Bugs:
-1. Hay un bug con el conteo de las partes de exodia: cuenta todas las partes presentes en ambas manos.
+1. RegionesCementerioVista: que se vea el reverso de la carta cuando hay al menos 1 carta en el cementerio.
 
-3. RegionesCementerioVista: que se vea el reverso de la carta cuando hay al menos 1 carta en el cementerio.
-
-4. Si el usuario aprieta un botón y sale un popup, que lo pueda cerrar clickeando en cualquier parte que no sea el popup.
+2. Si el usuario aprieta un botón y sale un popup, que lo pueda cerrar clickeando en cualquier parte que no sea el popup.

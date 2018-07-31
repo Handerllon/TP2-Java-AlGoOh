@@ -26,7 +26,7 @@ public class Jugador implements FinDeJuegoObservable, JugadorObservable
     private Jugador oponente;
     private int puntosDeVida = puntosDeVidaIniciales;
     private Mazo mazo;
-    private Mano mano = new Mano(this);
+    private Mano mano;
     // ----------------------------------------
     // Regiones.
     // ----------------------------------------
@@ -42,12 +42,14 @@ public class Jugador implements FinDeJuegoObservable, JugadorObservable
 
     public Jugador()
     {
-
+        this.mano = new Mano(this);
     }
 
     public Jugador(String unNombre)
     {
         this.nombre = unNombre;
+
+        this.mano = new Mano(this);
     }
 
     private void suscribirRegiones()

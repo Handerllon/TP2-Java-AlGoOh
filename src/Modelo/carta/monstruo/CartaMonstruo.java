@@ -125,6 +125,16 @@ public abstract class CartaMonstruo extends Carta implements CartaMonstruoObserv
         return this.modo.esDefensa();
     }
 
+    public boolean tieneQuickEffect()
+    {
+        return false;
+    }
+    
+    public void efecto()
+    {
+
+    }
+
     // --------------------------------------------------------------------
     // Métodos sobre puntos.
     // --------------------------------------------------------------------

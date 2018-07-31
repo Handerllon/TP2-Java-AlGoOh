@@ -19,4 +19,9 @@ public class Jinzo7 extends CartaMonstruo
     {
         this.getOponente().disminuirPuntosVida(this.puntosAtaque);
     }
+
+    public boolean tieneQuickEffect()
+    {
+        return true;
+    }
 }

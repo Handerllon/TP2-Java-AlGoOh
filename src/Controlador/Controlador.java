@@ -421,6 +421,11 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
         if (estadoVerificador.esFallido())
         {
             throw new NoSePuedeAtacarError(solicitante, estadoVerificador);
+        } else if (((CartaMonstruo) cartaAtacante).tieneQuickEffect())
+        {
+            ((CartaMonstruo) cartaAtacante).efecto();
+            // En realidad no se sabe si atacó, solamente que se uso, pero a los efectos es lo mismo.
+            this.maquinaTurnos.cartaAtacaEnTurnoActual((CartaMonstruo) cartaAtacante);
         } else
         {
             if (((CartaMonstruo) cartaAtacante).getOponente().getRegionMonstruos().estaVacia())

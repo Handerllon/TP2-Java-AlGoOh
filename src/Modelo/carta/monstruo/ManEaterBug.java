@@ -16,12 +16,31 @@ public class ManEaterBug extends CartaMonstruo
     }
 
     @Override
+    public void cambiarOrientacion()
+    {
+        if (this.estaBocaAbajo())
+        {
+            this.orientacionArriba = true;
+            if (!this.getPropietario().getOponente().getRegionMonstruos().estaVacia())
+            {
+                this.efecto(this.getPropietario().getOponente().getRegionMonstruos().getUltimaCartaEnEntrar());
+            }
+        } else
+        {
+            this.orientacionArriba = false;
+        }
+
+        notificarCambioDeOrientacionDeCarta();
+    }
+
+    @Override
     public void recibirAtaque(CartaMonstruo atacante)
     {
-        if (!this.estaBocaArriba())
+        if (this.estaBocaAbajo())
         {
-            this.cambiarOrientacion();
+            this.orientacionArriba = true;
             this.efecto(atacante);
+            notificarCambioDeOrientacionDeCarta();
         } else // Ataque normal.
         {
             super.recibirAtaque(atacante);
@@ -30,9 +49,13 @@ public class ManEaterBug extends CartaMonstruo
 
     // Unicamente se ejecuta cuando la carta se da vuelta, y puede ser en la fase preparación o en batalla (si
     // la atacan.
-    // TODO: ver cómo hacer para que se active cuando se da vuelta en la fase preparación, luego de que fue invocada.
     public void efecto(CartaMonstruo cartaADestruir)
     {
         cartaADestruir.getPropietario().destruirCarta(cartaADestruir);
+    }
+
+    public boolean tieneFlipEffect()
+    {
+        return true;
     }
 }

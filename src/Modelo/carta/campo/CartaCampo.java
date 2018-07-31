@@ -14,11 +14,13 @@ public abstract class CartaCampo extends Carta
         super(jugador, oponente, locacionDeImagen);
     }
 
+    // Se les aplica a todas las cartas de las regiones monstruo.
     public abstract void efecto();
 
-    public abstract void efecto(CartaMonstruo carta);
-
     public abstract void deshacerEfecto();
+
+    // Se les aplica solamente a la carta especificada.
+    public abstract void efecto(CartaMonstruo carta);
 
     public abstract void deshacerEfecto(CartaMonstruo carta);
 

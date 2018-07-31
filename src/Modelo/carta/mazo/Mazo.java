@@ -5,6 +5,7 @@ import Modelo.carta.Carta;
 import Modelo.carta.CartaNula;
 import Modelo.carta.FabricaCartas;
 import Modelo.carta.monstruo.CartaMonstruo;
+import Modelo.carta.trampa.CartaTrampa;
 import Modelo.finDeJuego.CausaFinJuego;
 import Modelo.finDeJuego.CausaSinCartasEnMazo;
 import Modelo.finDeJuego.FinDeJuegoObservable;
@@ -117,6 +118,20 @@ public class Mazo implements FinDeJuegoObservable, MazoObservable
         });
 
         return cartasMonstruo;
+    }
+
+    public Stack<CartaTrampa> getCartasTrampa()
+    {
+        Stack<CartaTrampa> cartasTrampa = new Stack<>();
+        this.cartas.forEach(carta ->
+        {
+            if (carta.esTrampa())
+            {
+                cartasTrampa.push((CartaTrampa) carta);
+            }
+        });
+
+        return cartasTrampa;
     }
 
     public int cantidadCartas()

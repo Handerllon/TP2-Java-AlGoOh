@@ -6,14 +6,13 @@ import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.trampa.CartaTrampa;
 import Modelo.carta.trampa.CartaTrampaNula;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayList;
 
 public class RegionMagicasYTrampas extends Region<Carta>
 {
     private static int CAPACIDAD_REGION_MAGICAS = 5;
-    Queue<CartaMagica> cartasMagicas = new LinkedList<>();
-    Queue<CartaTrampa> cartasTrampa = new LinkedList<>();
+    ArrayList<CartaMagica> cartasMagicas = new ArrayList<>();
+    ArrayList<CartaTrampa> cartasTrampa = new ArrayList<>();
 
     public RegionMagicasYTrampas(Jugador jugador)
     {
@@ -32,6 +31,16 @@ public class RegionMagicasYTrampas extends Region<Carta>
         super.colocarCarta(carta);
     }
 
+    public void removerCarta(CartaTrampa carta){
+        this.cartasTrampa.remove(carta);
+        super.removerCarta(carta);
+    }
+
+    public void removerCarta(CartaMagica carta){
+        this.cartasMagicas.remove(carta);
+        super.removerCarta(carta);
+    }
+
     public boolean hayCartasTrampa()
     {
         return !this.cartasTrampa.isEmpty();
@@ -42,8 +51,7 @@ public class RegionMagicasYTrampas extends Region<Carta>
         CartaTrampa cartaTrampa = CartaTrampaNula.getInstancia();
         if (hayCartasTrampa())
         {
-            cartaTrampa = cartasTrampa.remove();
-            super.removerCarta(cartaTrampa);
+            cartaTrampa = cartasTrampa.iterator().next();
         }
         return cartaTrampa;
     }

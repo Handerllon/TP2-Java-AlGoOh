@@ -1,11 +1,14 @@
 package Modelo.carta.trampa;
 
 import Modelo.carta.CartaNula;
+import Modelo.carta.ataque.EstrategiaAtaque;
+import Modelo.carta.ataque.EstrategiaAtaqueDefault;
 import Modelo.carta.monstruo.CartaMonstruo;
 
 public final class CartaTrampaNula extends CartaTrampa
 {
     private static CartaTrampaNula instancia = null;
+    private EstrategiaAtaque modificadorAtaque;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -13,6 +16,8 @@ public final class CartaTrampaNula extends CartaTrampa
     private CartaTrampaNula()
     {
         super(null, null, null);
+        this.nombre = "";
+        this.modificadorAtaque = EstrategiaAtaqueDefault.getInstancia();
     }
 
     public static CartaTrampaNula getInstancia()

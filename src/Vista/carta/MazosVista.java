@@ -51,6 +51,9 @@ public class MazosVista implements ObservadorDeModelo
         this.mazoJugador.setTooltip(toolTipJugador);
         this.mazoOponente.setTooltip(toolTipOponente);
 
+        // -------------------------------
+        // Multimedia del botón.
+        // -------------------------------
         URL mediaUrl;
         mediaUrl = this.getClass().getClassLoader().getResource("resources/audio/card_draw.wav");
         this.audioClipCardDraw = new AudioClip(mediaUrl.toExternalForm());

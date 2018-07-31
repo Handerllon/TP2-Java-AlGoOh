@@ -7,13 +7,16 @@ Hacerle un marco al popup de las cartas.
 Separar algunos píxeles los botones del popup de las cartas.
 
 Bugs:
-1. Si no hay cartas, Fissure funciona igual. Creo que está bien esto, podría ser un supuesto, o las cartas efecto deberían
-chequear que se cumplan las condiciones?
-2. Creo que hay un problema con la fase ataque/fase trampa.
-4. RegionesCementerioVista: que se vea el reverso de la carta cuando hay al menos 1 carta en el cementerio.
-7. Hay un bug con el conteo de las partes de exodia: cuenta todas las partes presentes en ambas manos.
-8. Cuando se pierde por quedarse sin cartas, tira un NullPtrException.
-9. Ver caso de carta Jinzo#7
-11. Si el usuario aprieta un botón y sale un popup, que lo pueda cerrar clickeando en cualquier parte que no sea el popup.
-12. No me deja poner en defensa desde región monstruo con el popup. Ver TODO en código.
-13. Si una carta ataca, pasa el turno, y quiere volver a atacar, no aparece el popup. Ver TODO en código.
+1. RegionesCementerioVista: que se vea el reverso de la carta cuando hay al menos 1 carta en el cementerio.
+
+2. Ver caso de carta Jinzo#7
+
+3. No me deja poner en defensa desde región monstruo con el popup. Ver TODO en código.
+
+4. Si una carta ataca, pasa el turno, y quiere volver a atacar, no aparece el popup. Ver TODO en código.
+
+5. Hay un bug con el conteo de las partes de exodia: cuenta todas las partes presentes en ambas manos.
+
+6 Cuando se pierde por quedarse sin cartas, tira un NullPtrException.
+
+7. Si el usuario aprieta un botón y sale un popup, que lo pueda cerrar clickeando en cualquier parte que no sea el popup.

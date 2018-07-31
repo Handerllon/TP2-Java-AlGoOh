@@ -57,7 +57,9 @@ public class ManoBoton extends Button
         this.boton.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
                 this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
 
-        //Tooltip y background
+        // -------------------------------
+        // Imagen del botón.
+        // -------------------------------
         if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado)
         {
             this.imagenCarta = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
@@ -71,6 +73,9 @@ public class ManoBoton extends Button
                     .getResource(locacionDeBackDeCarta).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         }
 
+        // -------------------------------
+        // Multimedia del botón.
+        // -------------------------------
         URL mediaUrl;
         mediaUrl = this.getClass().getClassLoader().getResource("resources/audio/card_move.wav");
         this.audioClipCardMove = new AudioClip(mediaUrl.toExternalForm());
@@ -96,6 +101,7 @@ public class ManoBoton extends Button
         }
 
         popup.getContent().addAll(vbox);
+
         if (this.vista.getControlador().getJugadorActual() == this.jugadorAsociado)
         {
             boton.setOnAction(e -> accionBtn_Click(popup, boton));

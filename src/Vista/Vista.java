@@ -84,10 +84,15 @@ public class Vista
     {
         return this.RESOLUCION_VERTICAL;
     }
-    
+
     public void actualizarDibujo()
     {
         this.escena.actualizarDibujo();
+    }
+
+    public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante)
+    {
+        this.escena.solicitarCartaAAtacar(cartaAtacante);
     }
 
     // --------------------------------------------------------------------
@@ -163,11 +168,5 @@ public class Vista
     public void mostrarError(NoSePuedeAtacarError error)
     {
         erroresVista.mostrarError(error);
-    }
-
-    public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante)
-    {
-
-        this.escena.solicitarCartaAAtacar(cartaAtacante);
     }
 }

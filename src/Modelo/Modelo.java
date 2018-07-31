@@ -250,6 +250,12 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         notificarCambioEnPuntosDeVida();
     }
 
+    public void agregarObservadorCartasTrampa(ObservadorDeCartaTrampa observador)
+    {
+        this.jugador1.getMazo().getCartasTrampa().forEach(cartaTrampa -> cartaTrampa.registrarObsevadorCartaTrampa(observador));
+        this.jugador2.getMazo().getCartasTrampa().forEach(cartaTrampa -> cartaTrampa.registrarObsevadorCartaTrampa(observador));
+    }
+
     // ------------------------------------
     // Métodos de consultas.
     // ------------------------------------
@@ -493,7 +499,9 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     public void atacar(CartaMonstruo cartaAtacante)
     {
         RegionMagicasYTrampas regionMyTOponente = cartaAtacante.getOponente().getRegionMagicasYTrampas();
+        // No la remueve, solamente tomo una referencia a la carta.
         CartaTrampa cartaTrampaAUsar = regionMyTOponente.getCartaTrampaAUsar();
+        this.flipBocaArriba(cartaTrampaAUsar);
         cartaTrampaAUsar.efecto(cartaAtacante, CartaMonstruoNula.getInstancia());
 
         cartaAtacante.atacar();

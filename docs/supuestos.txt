@@ -18,3 +18,7 @@ Se pueden activar todas las cartas mágicas que se quieran en la fase final.
 Cuando se requieren sacrificios, se selecciona automáticamente las cartas con la menor cantidad de estrellas 
 en el campo, y se las elimina de izquierda a derecha. Para que las cartas se puedan sacrificar, deben estar 
 en la región monstruo.
+
+Las cartas efectos una vez que se usan van al cementerio, independientemente si el efecto fue efectivo. Por ejemplo,
+si se usa un Black hole y no hay cartas en las regiones monstruo, no se va a eliminar a ninguna, y la carta va a 
+ir al cementerio.

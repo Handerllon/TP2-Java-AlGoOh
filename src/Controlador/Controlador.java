@@ -39,6 +39,8 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
     {
         this.modelo = modelo;
         this.modelo.agregarObsevadorFinDeJuego(this);
+        this.modelo.agregarObservadorCartasTrampa(this);
+
         this.maquinaTurnos = MaquinaTurnos.getInstancia(modelo.getJugador(), modelo.getOponente());
         this.verificadorCondicionesJuego = VerificadorCondicionesJuego.getInstancia(this.maquinaTurnos, modelo);
     }
@@ -116,7 +118,7 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
     }
 
     // --------------------------------------------------------------------
-    // Métodos de observador de cartas.
+    // Métodos de observador de cartas trampa.
     // --------------------------------------------------------------------
     @Override
     public void seUsoCartaTrampa(CartaTrampa cartaTrampa)
@@ -172,6 +174,7 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
     {
         this.maquinaTurnos.terminarTurno();
         this.cartasTrampaUtilizadas.forEach(cartaTrampa -> cartaTrampa.deshacerEfecto());
+        this.cartasTrampaUtilizadas.clear();
         this.notificarFinDeTurno();
 
         this.accionarFaseInicialAutomatica();
@@ -434,14 +437,14 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
         }
     }
 
+    // Se supone que previamente a este método se utilizó el método atacar(), con lo cual ya está realizada la
+    // verificación si el jugador puede atacar.
     @Override
     public void atacarCarta(Jugador solicitante, CartaMonstruo cartaAtacante, CartaMonstruo cartaSolicitada)
     {
-
         cambiarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
 
         this.modelo.atacar((CartaMonstruo) cartaAtacante, cartaSolicitada);
-
         this.maquinaTurnos.cartaAtacaEnTurnoActual((CartaMonstruo) cartaAtacante);
         retrocederFase();
     }

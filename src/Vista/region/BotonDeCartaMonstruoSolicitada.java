@@ -65,7 +65,6 @@ public class BotonDeCartaMonstruoSolicitada
 
     private void seleccionDeCarataBtn_Click()
     {
-
         this.vista.getControlador().atacarCarta(this.cartaAtacante.getPropietario(), this.cartaAtacante, this.cartaSolicitada);
         this.audioClipCardAttack.play();
         this.popup.hide();

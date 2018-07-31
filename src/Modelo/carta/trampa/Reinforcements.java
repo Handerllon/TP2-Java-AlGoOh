@@ -20,13 +20,13 @@ public class Reinforcements extends CartaTrampa
     {
         this.cartaAtacada = cartaAtacada;
         cartaAtacada.sumarPuntosAtaque(modificadorPuntosAtaque);
-        this.notificarEventoCartaTrampa();
         this.getPropietario().destruirCarta(this);
+        this.notificarEventoCartaTrampa();
     }
 
     @Override
     public void deshacerEfecto()
     {
-        this.cartaAtacada.sumarPuntosAtaque(-modificadorPuntosAtaque);
+        this.cartaAtacada.restarPuntosAtaque(modificadorPuntosAtaque);
     }
 }

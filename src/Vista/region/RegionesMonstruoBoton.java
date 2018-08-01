@@ -92,7 +92,9 @@ public class RegionesMonstruoBoton extends Button
         this.tooltipBoton = new Tooltip();
 
         this.popup = new Popup();
+        popup.setAutoHide(true);
         this.popupDeSeleccion = new Popup();
+        popup.setAutoHide(true);
         this.vbox = new VBox();
         // -------------------------------
         // Imagen del botón.

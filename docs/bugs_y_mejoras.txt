@@ -1,6 +1,0 @@
-﻿Mejoras:
-
-1. Separar algunos píxeles los botones del popup de las cartas.
-
-Bugs:
-1. Si el usuario aprieta un botón y sale un popup, que lo pueda cerrar clickeando en cualquier parte que no sea el popup.

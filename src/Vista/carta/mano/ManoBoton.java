@@ -7,12 +7,14 @@ import Controlador.excepciones.NoSePuedeUsarMyTError;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Vista.Vista;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -53,6 +55,7 @@ public class ManoBoton extends Button
         this.boton = new Button();
         this.toolTip = new Tooltip();
         this.popup = new Popup();
+        popup.setAutoHide(true);
         this.vbox = new VBox();
         this.boton.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
                 this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
@@ -114,6 +117,7 @@ public class ManoBoton extends Button
         Point2D point = boton.localToScene(0.0, 0.0);
         popup.setX(primaryStage.getX() + point.getX());
         popup.setY(primaryStage.getY() + point.getY());
+
     }
 
     public Button getBoton()

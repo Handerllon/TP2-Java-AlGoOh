@@ -253,6 +253,7 @@ public final class EscenaTableroPrincipal implements Escena
     {
 
         Popup popup = new Popup();
+        popup.setAutoHide(true);
         ArrayList<BotonDeCartaMonstruoSolicitada> botonesDeCartas = new ArrayList<>();
         HBox hbox = new HBox();
 

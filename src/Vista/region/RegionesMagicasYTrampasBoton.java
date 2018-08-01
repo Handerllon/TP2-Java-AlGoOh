@@ -110,6 +110,7 @@ public class RegionesMagicasYTrampasBoton extends Button
 
         // Se crea el botón.
         this.popup = new Popup();
+        popup.setAutoHide(true);
         VBox vbox = new VBox();
 
         Button botonActivar = new Button("Activar");

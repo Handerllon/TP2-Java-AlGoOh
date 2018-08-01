@@ -18,6 +18,7 @@ public class RegionesMonstruosGrid extends GridPane implements ObservadorDeModel
     // Se uso como base una resolucion de 1920x1080
     private static double porcentajeHorizontalDePantalla = 0.082;
     private static double porcentajeVerticalDePantalla = 0.157;
+    private static String locacionFondo = "resources/imagenes/RegionMonstruosFondo.jpg";
     private int cantidadBotonesGrid = 5;
     private GridPane grid;
     private ArrayList<RegionesMonstruoBoton> botones;

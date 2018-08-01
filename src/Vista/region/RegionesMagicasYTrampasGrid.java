@@ -17,6 +17,7 @@ public class RegionesMagicasYTrampasGrid extends GridPane implements ObservadorD
 {
     private static double porcentajeHorizontalDePantalla = 0.082;
     private static double porcentajeVerticalDePantalla = 0.157;
+    private static String locacionFondo = "resources/imagenes/RegionMagicasYTrampasFondo.jpg";
     private int cantidadBotonesGrid = 5;
     private GridPane grid;
     private ArrayList<RegionesMagicasYTrampasBoton> botones;

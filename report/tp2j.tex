@@ -79,48 +79,67 @@
 \clearpage
 \section{Objetivo del trabajo}
 
-El objetivo de este trabajo práctico es lograr utilizar todos los conceptos sobre la teoría de programación orientada a objetos vistos en la cursada, para poder realizar y llevar a cabo un juego muy similar al Yu-Gi-Oh.
+En el presente trabajo práctico se desarrolla una aplicación que implementa el juego de cartas Yu-Gi-Oh! utilizando el lenguaje de programación Java. Se busca cumplir los siguientes objetivos:
+\begin{itemize}
+	\item realizar un análisis de la problemática planteada y su modelado mediante notación UML.
+	\item aplicar la teoría de programación orientada a objetos estudiada en el curso.
+	\item utilizar la técnica de desarrollo \emph{Test-Driven Development}.
+	\item implementar y aplicar patrones de diseño para resolver problemas puntuales en la implementación del juego.
+	\item realizar la interacción con los jugadores mediante una interfaz gráfica de usuario utilizando la plataforma JavaFX.
+	\item tomar conciencia del uso del paradigma de orientación a objetos para modelar problemas que presentan una complejidad media.
+\end{itemize}
 
 \section{Supuestos}
 
-A medida que fuimos desarrollando el trabajo práctico, tuvimos que adoptar ciertos supuestos que nos fueron surgiendo durante la realización del mismo pero que ninguno de ellos se contradiga con lo aclarado en la consigna del mismo.
+Durante la programación de la aplicación y de las iteraciones en la comprensión del enunciado del trabajo, se realizaron varios supuestos que no estaban especificados en el mismo. Los mismos se basaron en las reglas del juego original \cite{reglas_juego}, intentando mantener la dificultad relativa del juego, y de no complicar innecesariamente la implementación. A continuación se describe cada uno de ellos.
 
-\bigskip
-
-{\large \raggedright \textbf{Fases}}
-
-\begin{description}
-
-
-\item[Fase Inicial] El usuario solo puede tomar una carta.
-
-\item[Fase Preparación] El usuario puede jugar la cantidad de cartas mágicas y trampas que desee.
-
-\item[Fase Preparación] Una carta puede cambiar de modo o estado una sola vez por turno.
-
-\item[Fase Batalla] Solamente se entra en fase de batalla si hay monstruos boca arriba y en ataque.
-
-\item[Fase Batalla] Una carta puede pasar de boca abajo a boca arriba, pero no al revés.
-
-\item[Fase Batalla] No se puede atacar en el primer turno.
-
-\item[Fase Batalla] Cada monstruo ataca una vez por turno.
-
-\item[Fase Batalla] Una carta pasa a estar boca arriba luego de recibir un ataque.
-
-\item[Fase Interna Trampa] Esta fase se activa siempre despues de un ataque.
-
-\item[Fase Final] Se pueden usar las cartas magicas que el jugador quiera.
-
-\item[Fase Final] Si se usa Pot of Greed, la mano no puede estar llena.
-
-\end{description}
+\begin{itemize}
+	\item Si la mano de un jugador tiene seis cartas (condición de mano llena), y el mismo toma una del mazo, entonces se va a descartar una carta de la mano del jugador. El descarte se realiza de forma automática y aleatoria, sin aviso al jugador. Dicha decisión se fundamenta en que nos pareció que le agrega dificultad al juego, ya que el usuario debe preveer este tipo de situación cuando planea diferentes estrategias de juego.
+	
+	\item No se puede realizar un ataque en el primer turno del juego, ya que el oponente correría con desventaja por no haber sido sorteado inicialmente para jugar.
+	
+	\item Cuando hay una carta campo, e ingresa una nueva, se desactiva la vieja y se la manda al cementerio.
+	
+	\item Se pueden activar todas las cartas mágicas que se quieran en la fase final.
+	
+	\item Cuando se requieren sacrificios, se selecciona automáticamente las cartas con la menor cantidad de estrellas 
+	en el campo, y se las elimina de izquierda a derecha. Además, para que las cartas se puedan sacrificar, deben estar 
+	en la región monstruo.
+	
+	\item Una vez utilizadas las cartas efecto, estas van al cementerio, independientemente si el efecto se efectuó. Por ejemplo, si se usa una carta Black Hole y no hay cartas en las regiones monstruo de ningún oponente, no se va a eliminar a ninguna, y la carta va a ir al cementerio. Esto simplifica la implementación, ya que no se debe verificar las condiciones particulares del juego.
+	
+	\item Si el jugador ataca a una carta de su oponente que se encuentra boca abajo, la misma pasa a estar boca arriba luego del cálculo de puntos de vida.
+\end{itemize}
 
 \section{Modelo de dominio}
 
-	
-En esta sección, explicaremos sin demasiados detalles las clases que utilizamos y las responsabilidades de las mismas.
+[Explicar los elementos más relevantes del diseño. Es decir: qué
+entidades se han creado, qué responsabilidades tienen asignadas, cómo
+se relacionan, etc]
 
+Debido a que las reglas de juego son independientes de la presentación gráfica a los jugadores, y por la existencia de turnos y fases, se decidió dividir la aplicación en tres componentes que interactúan entre sí y hacen uso del patrón de arquitectura/diseño Modelo-Vista-Controlador (MVC).
+
+
+Modelo observa a:
+Carta
+notifica si hubo cambio de orientación.
+
+Mano:
+notifica si se agregó una carta.
+notifica si se quitó una carta.
+
+Mazo:
+notifica si se tomó una carta.
+
+Region:
+notifica si ingresó una carta.
+notifica si salió una carta.
+notifica si se removieron todas las cartas.
+
+Vista observa a:
+Modelo:
+notifica si sucedió alguno de los eventos que observa.
+La Vista luego le pide lo que necesita a Modelo mediante la interfaz ModeloObservable.
 
 \begin{description}
 
@@ -181,6 +200,11 @@ En esta sección, explicaremos sin demasiados detalles las clases que utilizamos
 
 \clearpage
 \section{Diagramas de clases}
+
+[ Varios diagramas de clases, mostrando la relación estática entre las
+clases, pueden agregar todo el texto necesario para aclarar y explicar su
+diseño, recuerden que la idea de todo el documento es que quede
+documentado y entendible como está hecho el TP]
 
 El diagrama de la figura 4.1, muestra como se relaciona la clase Jugador con las regiones, con el mazo y con la mano. Ademas, muestra el hecho de que las regiones, el mazo y la mano, contienen cartas. Por otro lado, un jugador, contiene una referencia de otro jugador (oponente).
 
@@ -275,6 +299,11 @@ distintas transiciones de los mismos para varias entidades del trabajo
 práctico ]
 
 \section{Detalles de implementación}
+[Explicar los elementos más relevantes del diseño. Es decir: qué
+entidades se han creado, qué responsabilidades tienen asignadas, cómo
+se relacionan, etc]
+
+
 
 
 {\large\textbf{Progreso}}
@@ -422,6 +451,8 @@ capturadas.]
 	\bibitem{libro_fontela1} Fontela, Carlos - \emph{Programación Orientada a Objetos con Smalltalk, Java y UML.} - 3\textsuperscript{ra} edición - Versión Beta 0.6.
 	
 	\bibitem{fowler_model} Fowler, M. - \hyperref{https://martinfowler.com/distributedComputing/purpose.pdf}{}{}{What's a model for?}
+	
+	\bibitem{fowler_model} Fowler, M. - \hyperref{https://www.yugioh-card.com/en/rulebook/SD_RuleBook_EN_10.pdf}{}{}{Yu-Gi-Oh! TRADING CARD GAME rulebook}
 \end{thebibliography}
 \endgroup
 

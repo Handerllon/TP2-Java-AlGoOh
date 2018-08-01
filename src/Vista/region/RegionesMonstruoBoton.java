@@ -120,6 +120,9 @@ public class RegionesMonstruoBoton extends Button
         {
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
                     .getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+            this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
+            tooltipBoton.setGraphic(new ImageView(imagenBoton));
+            botonEnRegion.setTooltip(tooltipBoton);
         }
 
         // -------------------------------

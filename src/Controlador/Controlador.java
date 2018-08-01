@@ -324,20 +324,6 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
     // -------------
     // Activar.
     // -------------
-    // Se usa desde la región MyT: activa la carta trampa, poniéndola boca arriba.
-    @Override
-    public void activarCartaTrampa(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError
-    {
-        estadoVerificador = verificadorCondicionesJuego.sePuedeUsarTrampa(solicitante, carta);
-        if (estadoVerificador.esFallido())
-        {
-            throw new NoSePuedeUsarMyTError(solicitante, estadoVerificador);
-        } else
-        {
-            this.modelo.activarCartaTrampa(solicitante, (CartaTrampa) carta);
-        }
-    }
-
     // Se usa desde la mano: activa la carta mágica, poniéndola boca arriba.
     @Override
     public void activarCartaMagicaDesdeMano(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError

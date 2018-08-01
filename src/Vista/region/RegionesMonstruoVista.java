@@ -6,8 +6,7 @@ import javafx.scene.layout.GridPane;
 public class RegionesMonstruoVista
 {
     private Vista vista;
-    private RegionesMonstruosGrid gridJugador;
-    private RegionesMonstruosGrid gridOponente;
+    private RegionesMonstruosGrid gridJugador1, gridJugador2;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -16,19 +15,19 @@ public class RegionesMonstruoVista
     {
         this.vista = vista;
 
-        this.gridJugador = new RegionesMonstruosGrid(this.vista, this.vista.getModelo().getJugador());
-        this.gridOponente = new RegionesMonstruosGrid(this.vista, this.vista.getModelo().getOponente());
+        this.gridJugador1 = new RegionesMonstruosGrid(this.vista, this.vista.getModelo().getJugador());
+        this.gridJugador2 = new RegionesMonstruosGrid(this.vista, this.vista.getModelo().getOponente());
     }
 
-    public GridPane getGridJugador()
+    public GridPane getGridJugador1()
     {
 
-        return gridJugador.getGrid();
+        return gridJugador1.getGrid();
     }
 
-    public GridPane getGridOponente()
+    public GridPane getGridJugador2()
     {
 
-        return gridOponente.getGrid();
+        return gridJugador2.getGrid();
     }
 }

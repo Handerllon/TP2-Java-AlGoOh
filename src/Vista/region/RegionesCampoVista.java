@@ -6,8 +6,7 @@ import javafx.scene.control.Button;
 public class RegionesCampoVista
 {
     private Vista vista;
-    private RegionesCampoBoton botonCampoJugador;
-    private RegionesCampoBoton botonCampoOponente;
+    private RegionesCampoBoton botonCampoJugador1, botonCampoJugador2;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -16,19 +15,19 @@ public class RegionesCampoVista
     {
         this.vista = vista;
 
-        this.botonCampoJugador = new RegionesCampoBoton(this.vista, this.vista.getModelo().getJugador());
-        this.botonCampoOponente = new RegionesCampoBoton(this.vista, this.vista.getModelo().getOponente());
+        this.botonCampoJugador1 = new RegionesCampoBoton(this.vista, this.vista.getModelo().getJugador());
+        this.botonCampoJugador2 = new RegionesCampoBoton(this.vista, this.vista.getModelo().getOponente());
     }
 
-    public Button getRegionCampoJugador()
+    public Button getRegionCampoJugador1()
     {
 
-        return botonCampoJugador.getBoton();
+        return botonCampoJugador1.getBotonCarta();
     }
 
-    public Button getRegionCampoOponente()
+    public Button getRegionCampoJugador2()
     {
 
-        return botonCampoOponente.getBoton();
+        return botonCampoJugador2.getBotonCarta();
     }
 }

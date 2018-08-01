@@ -40,6 +40,8 @@ public interface ModeloObservable
 
     int getCantidadCartasRestantesMazoDe(Jugador jugador);
 
+    int getCantidadCartasCementerioDe(Jugador jugador);
+
     Jugador getJugador();
 
     Jugador getOponente();

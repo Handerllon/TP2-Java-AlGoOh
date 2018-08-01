@@ -6,7 +6,6 @@ import Vista.Vista;
 import Vista.carta.MazosVista;
 import Vista.carta.mano.ManosVista;
 import Vista.estadosJuego.EstadosJuegoBotones;
-import Vista.estadosJuego.FaseActualVista;
 import Vista.estadosJuego.TurnoActualVista;
 import Vista.estadosJuego.VidaVista;
 import Vista.region.*;
@@ -18,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -47,7 +47,6 @@ public final class EscenaTableroPrincipal implements Escena
     private Scene escenaTableroPrincipal;
     private EstadosJuegoBotones estadosJuegoBotones;
     private TurnoActualVista turnoActualVista;
-    private FaseActualVista faseActualVista;
     private double soundBattleVolume = 0.1;
 
     // --------------------------------------------------------------------
@@ -67,7 +66,6 @@ public final class EscenaTableroPrincipal implements Escena
         this.regionesCampoVista = new RegionesCampoVista(this.vista);
         this.regionesCementerioVista = new RegionesCementerioVista(this.vista);
         this.turnoActualVista = new TurnoActualVista(this.vista);
-        this.faseActualVista = new FaseActualVista(this.vista);
 
         this.manosVista = new ManosVista(this.vista);
         this.mazosVista = new MazosVista(this.vista);
@@ -120,8 +118,6 @@ public final class EscenaTableroPrincipal implements Escena
         gridPane.getColumnConstraints().addAll(column0, column1, column2);
         gridPane.getRowConstraints().addAll(row0, row1, row2, row3, row4, row5);
 
-        gridPane.setGridLinesVisible(true);
-
         // Se configura la grid pane.
         setGridPaneVista();
 
@@ -141,63 +137,61 @@ public final class EscenaTableroPrincipal implements Escena
         // -------------------------------
         // Regiones.
         // -------------------------------
-        gridPane.add(regionesMonstruoVista.getGridJugador(), 1, 3);
-        gridPane.setHalignment(regionesMonstruoVista.getGridJugador(), HPos.CENTER);
-        gridPane.add(regionesMonstruoVista.getGridOponente(), 1, 2);
-        gridPane.setHalignment(regionesMonstruoVista.getGridOponente(), HPos.CENTER);
+        gridPane.add(regionesMonstruoVista.getGridJugador1(), 1, 3);
+        gridPane.add(regionesMonstruoVista.getGridJugador2(), 1, 2);
+        gridPane.setHalignment(regionesMonstruoVista.getGridJugador1(), HPos.CENTER);
+        gridPane.setHalignment(regionesMonstruoVista.getGridJugador2(), HPos.CENTER);
 
-        gridPane.add(regionesMagicasYTrampasVista.getGridJugador(), 1, 4);
-        gridPane.setHalignment(regionesMagicasYTrampasVista.getGridJugador(), HPos.CENTER);
-        gridPane.add(regionesMagicasYTrampasVista.getGridOponente(), 1, 1);
-        gridPane.setHalignment(regionesMagicasYTrampasVista.getGridOponente(), HPos.CENTER);
+        gridPane.add(regionesMagicasYTrampasVista.getGridJugador1(), 1, 4);
+        gridPane.add(regionesMagicasYTrampasVista.getGridJugador2(), 1, 1);
+        gridPane.setHalignment(regionesMagicasYTrampasVista.getGridJugador1(), HPos.CENTER);
+        gridPane.setHalignment(regionesMagicasYTrampasVista.getGridJugador2(), HPos.CENTER);
 
-        gridPane.add(regionesCampoVista.getRegionCampoJugador(), 0, 4);
-        gridPane.setHalignment(regionesCampoVista.getRegionCampoJugador(), HPos.RIGHT);
-        gridPane.add(regionesCampoVista.getRegionCampoOponente(), 2, 1);
-        gridPane.setHalignment(regionesCampoVista.getRegionCampoOponente(), HPos.LEFT);
+        gridPane.add(regionesCampoVista.getRegionCampoJugador1(), 0, 3);
+        gridPane.add(regionesCampoVista.getRegionCampoJugador2(), 2, 2);
+        gridPane.setHalignment(regionesCampoVista.getRegionCampoJugador1(), HPos.RIGHT);
+        gridPane.setHalignment(regionesCampoVista.getRegionCampoJugador2(), HPos.LEFT);
 
-        gridPane.add(regionesCementerioVista.getCementerioJugador(), 0, 3);
-        gridPane.setHalignment(regionesCementerioVista.getCementerioJugador(), HPos.RIGHT);
-        gridPane.add(regionesCementerioVista.getCementerioOponente(), 2, 2);
-        gridPane.setHalignment(regionesCementerioVista.getCementerioOponente(), HPos.LEFT);
+        gridPane.add(regionesCementerioVista.getCementerioJugador1(), 2, 3);
+        gridPane.add(regionesCementerioVista.getCementerioJugador2(), 0, 2);
+        gridPane.setHalignment(regionesCementerioVista.getCementerioJugador1(), HPos.CENTER);
+        gridPane.setHalignment(regionesCementerioVista.getCementerioJugador2(), HPos.CENTER);
 
         // -------------------------------
         // Manos.
         // -------------------------------
         gridPane.add(manosVista.getManoJugador(), 1, 5);
-        gridPane.setHalignment(manosVista.getManoJugador(), HPos.CENTER);
         gridPane.add(manosVista.getManoOponente(), 1, 0);
+        gridPane.setHalignment(manosVista.getManoJugador(), HPos.CENTER);
         gridPane.setHalignment(manosVista.getManoOponente(), HPos.CENTER);
 
         // -------------------------------
         // Mazos.
         // -------------------------------
-        gridPane.add(mazosVista.getMazoJugador(), 2, 5);
-        gridPane.setHalignment(mazosVista.getMazoJugador(), HPos.LEFT);
-        gridPane.add(mazosVista.getMazoOponente(), 0, 0);
-        gridPane.setHalignment(mazosVista.getMazoOponente(), HPos.RIGHT);
+        gridPane.add(mazosVista.getPaneMazoJugador1(), 2, 5);
+        gridPane.add(mazosVista.getPaneMazoJugador2(), 0, 0);
+        gridPane.setHalignment(mazosVista.getPaneMazoJugador1(), HPos.LEFT);
+        gridPane.setHalignment(mazosVista.getPaneMazoJugador2(), HPos.RIGHT);
 
         // -------------------------------
         // Vida.
         // -------------------------------
-        gridPane.add(vidasVista.getVidaJugador(), 0, 5);
-        gridPane.setHalignment(vidasVista.getVidaJugador(), HPos.RIGHT);
-        gridPane.add(vidasVista.getVidaOponente(), 2, 0);
-        gridPane.setHalignment(vidasVista.getVidaOponente(), HPos.LEFT);
-
-        // -------------------------------
-        // Botones de estado de juego.
-        // -------------------------------
-        gridPane.add(estadosJuegoBotones.getBotonFinDeFase(), 2, 4);
-        gridPane.setHalignment(estadosJuegoBotones.getBotonFinDeFase(), HPos.LEFT);
-        gridPane.add(estadosJuegoBotones.getBotonFinDeTurno(), 2, 3);
-        gridPane.setHalignment(estadosJuegoBotones.getBotonFinDeTurno(), HPos.LEFT);
+        gridPane.add(vidasVista.getVidaJugador1(), 0, 5);
+        gridPane.add(vidasVista.getVidaJugador2(), 2, 0);
+        gridPane.setHalignment(vidasVista.getVidaJugador1(), HPos.CENTER);
+        gridPane.setHalignment(vidasVista.getVidaJugador2(), HPos.CENTER);
 
         // -------------------------------
         // Estados de juego.
         // -------------------------------
-        gridPane.add(turnoActualVista.getDisplayTurnoActual(), 0, 1);
-        gridPane.add(faseActualVista.getLabelFaseActual(), 0, 2);
+        gridPane.add(turnoActualVista.getPaneEstados(), 0, 1);
+        gridPane.setHalignment(turnoActualVista.getPaneEstados(), HPos.CENTER);
+
+        // -------------------------------
+        // Botones de estado de juego.
+        // -------------------------------
+        gridPane.add(estadosJuegoBotones.getPaneButtons(), 0, 4);
+        gridPane.setHalignment(estadosJuegoBotones.getPaneButtons(), HPos.CENTER);
     }
 
     // --------------------------------------------------------------------
@@ -215,7 +209,7 @@ public final class EscenaTableroPrincipal implements Escena
         this.playMedia();
         this.primaryStage.show();
         this.turnoActualVista.seTerminoElTurno();
-        this.faseActualVista.seTerminoLaFase();
+        this.turnoActualVista.seTerminoLaFase();
     }
 
     @Override
@@ -272,7 +266,7 @@ public final class EscenaTableroPrincipal implements Escena
                     -> botonesDeCartas.add(new BotonDeCartaMonstruoSolicitada(this.vista, cartaAtacante, cartaDelOponente, popup)));
         }
 
-        Button b1 = new Button("Close");
+        Button b1 = new Button("Cerrar");
 
         b1.setOnAction(e -> cerrarPopupBtn_Click(popup));
 
@@ -286,11 +280,21 @@ public final class EscenaTableroPrincipal implements Escena
 
         popup.setX(this.vista.getResolucionHorizontal() / 2);
         popup.setY(this.vista.getResolucionVertical() / 2);
+
+        hbox.setStyle(
+                "-fx-border-color: navy, black;" +
+                        "-fx-border-width: 5, 5;" +
+                        "-fx-border-radius: 0, 0;" +
+                        "-fx-border-insets: 0, 5;" +
+                        "-fx-border-style: solid inside, dotted outside;");
+        String color = "0xff0000";
+        double transparencia = 1;
+        Background backgroundBotones = new Background(new BackgroundFill(Color.web(color, transparencia), CornerRadii.EMPTY, Insets.EMPTY));
+        hbox.setBackground(backgroundBotones);
     }
 
     private void cerrarPopupBtn_Click(Popup popup)
     {
-
         popup.hide();
     }
 }

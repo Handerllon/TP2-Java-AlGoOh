@@ -45,8 +45,6 @@ public final class EscenaSorteoJugadorInicial implements Escena
         this.vista = vista;
         this.primaryStage = this.vista.getPrimaryStage();
 
-        this.grid = new GridPane();
-
         this.inicializarEscena();
     }
 
@@ -66,6 +64,8 @@ public final class EscenaSorteoJugadorInicial implements Escena
 
     private void inicializarEscena()
     {
+        this.grid = new GridPane();
+
         this.escenaSorteoJugadorInicial = new Scene(this.grid);
         this.primaryStage.setScene(this.escenaSorteoJugadorInicial);
 

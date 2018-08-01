@@ -16,6 +16,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Popup;
@@ -24,8 +25,7 @@ import java.net.URL;
 
 public class RegionesMonstruoBoton extends Button
 {
-    private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
-    private static String backDeCartaLocacion = "resources/imagenes/cartaReverso.jpg";
+    private static String rutaImagenReversoCarta = "resources/imagenes/cartaReverso.jpg";
     // Se uso como base una resolucion de 1920x1080 para los tamanos
     private static double porcentajeDeAnchoDeLaCarta = 0.0496;
     private static double porcentajeDeAltoDeLaCarta = 0.1287;
@@ -55,7 +55,12 @@ public class RegionesMonstruoBoton extends Button
 
         this.botonCarta.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
                 this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
-        this.botonCarta.setStyle(estiloRegion);
+
+        this.botonCarta.setStyle("-fx-border-width: 5px ; -fx-border-color: Black");
+        String color = "0xff5733";
+        double transparencia = 0.8;
+        Background backgroundCarta = new Background(new BackgroundFill(Color.web(color,transparencia), CornerRadii.EMPTY, Insets.EMPTY));
+        this.botonCarta.setBackground(backgroundCarta);
 
         // -------------------------------
         // Multimedia del botón.
@@ -106,7 +111,7 @@ public class RegionesMonstruoBoton extends Button
         if (this.carta.estaBocaAbajo())
         {
             botonEnRegion.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass()
-                    .getClassLoader().getResource(backDeCartaLocacion).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
+                    .getClassLoader().getResource(rutaImagenReversoCarta).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
         }
 
         if (this.carta.estaBocaArriba())

@@ -15,6 +15,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Popup;
 
@@ -22,7 +23,6 @@ import java.net.URL;
 
 public class RegionesMagicasYTrampasBoton extends Button
 {
-    private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
     // Se uso como base una resolucion de 1920x1080 para los tamanos
     private static String backDeCartaLocacion = "resources/imagenes/cartaReverso.jpg";
     private static double porcentajeDeAnchoDeLaCarta = 0.0496;
@@ -30,7 +30,7 @@ public class RegionesMagicasYTrampasBoton extends Button
     private Carta carta;
     private Vista vista;
     private Popup popup;
-    private Button botonDeLaCarta;
+    private Button botonCarta;
     private Jugador jugadorAsociado;
     private AudioClip audioClipCardActivation;
     private double cardActivationVolume = 0.3;
@@ -42,11 +42,16 @@ public class RegionesMagicasYTrampasBoton extends Button
     {
         this.jugadorAsociado = jugador;
         this.vista = vista;
-        this.botonDeLaCarta = new Button();
+        this.botonCarta = new Button();
 
-        this.botonDeLaCarta.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+        this.botonCarta.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
                 this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
-        this.botonDeLaCarta.setStyle(estiloRegion);
+
+        this.botonCarta.setStyle("-fx-border-width: 5px ; -fx-border-color: Black");
+        String color = "0x11968e";
+        double transparencia = 0.8;
+        Background backgroundCarta = new Background(new BackgroundFill(Color.web(color, transparencia), CornerRadii.EMPTY, Insets.EMPTY));
+        this.botonCarta.setBackground(backgroundCarta);
 
         // -------------------------------
         // Multimedia del botón.
@@ -60,13 +65,13 @@ public class RegionesMagicasYTrampasBoton extends Button
     public Button getBoton()
     {
 
-        return this.botonDeLaCarta;
+        return this.botonCarta;
     }
 
     public void actualizar(Carta carta)
     {
         this.carta = carta;
-        this.botonDeLaCarta = this.crearBotonCarta();
+        this.botonCarta = this.crearBotonCarta();
     }
 
     private Button crearBotonCarta()
@@ -134,7 +139,7 @@ public class RegionesMagicasYTrampasBoton extends Button
     private void magYTramEnRegionBtn_Click()
     {
         popup.show(vista.getPrimaryStage());
-        Point2D point = this.botonDeLaCarta.localToScene(0.0, 0.0);
+        Point2D point = this.botonCarta.localToScene(0.0, 0.0);
         popup.setX(vista.getPrimaryStage().getX() + point.getX());
         popup.setY(vista.getPrimaryStage().getY() + point.getY());
     }

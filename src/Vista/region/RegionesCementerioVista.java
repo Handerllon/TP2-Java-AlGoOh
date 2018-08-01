@@ -1,27 +1,33 @@
 package Vista.region;
 
+import Modelo.Jugador;
 import Modelo.observadores.ObservadorDeModelo;
 import Vista.Vista;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 
 public class RegionesCementerioVista implements ObservadorDeModelo
 {
-    private static String estiloRegion = "-fx-background-color: Transparent";
+    //    private static String estiloRegion = "-fx-background-color: Transparent";
     private static String rutaImagenReversoCarta = "resources/imagenes/cartaReverso.jpg";
     private static double porcentajeDeAnchoDeLaCarta = 0.0496;
     private static double porcentajeDeAltoDeLaCarta = 0.1287;
+    private Image imagenReversoCarta;
     private Vista vista;
-    private Button botonCementerioJugador;
-    private Button botonCementerioOponente;
-	private StackPane stackJugador;
-	private StackPane stackOponente;
+    private StackPane stackJugador1, stackJugador2;
+    private double porcentajeDeTamanioDeFuente = 0.02;
+    private Jugador jugador1, jugador2;
+    private Button botonCartaJugador1, botonCartaJugador2;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -32,34 +38,73 @@ public class RegionesCementerioVista implements ObservadorDeModelo
 
         vista.getModelo().registrarObsevador(this);
 
-        this.botonCementerioJugador = this.inicializarBoton();
-        this.botonCementerioOponente = this.inicializarBoton();
-        
-        this.stackJugador = new StackPane();
-        this.stackOponente = new StackPane();
+        this.jugador1 = vista.getModelo().getJugador();
+        this.jugador2 = vista.getModelo().getOponente();
+
+        this.stackJugador1 = new StackPane();
+        this.stackJugador2 = new StackPane();
+
+        this.imagenReversoCarta = new Image(rutaImagenReversoCarta);
+
+        String color = "0x6d817e";
+        double transparencia = 0.8;
+        Background backgroundMazoCementerioVacio = new Background(new BackgroundFill(Color.web(color, transparencia), CornerRadii.EMPTY, Insets.EMPTY));
+
+        this.botonCartaJugador1 = new Button();
+        this.botonCartaJugador1.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
+        this.botonCartaJugador1.setStyle("-fx-border-width: 5px ; -fx-border-color: Black");
+        this.botonCartaJugador1.setBackground(backgroundMazoCementerioVacio);
+
+        this.botonCartaJugador2 = new Button();
+        this.botonCartaJugador2.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
+        this.botonCartaJugador2.setStyle("-fx-border-width: 5px ; -fx-border-color: Black");
+        this.botonCartaJugador2.setBackground(backgroundMazoCementerioVacio);
+
+        this.stackJugador1.setAlignment(Pos.CENTER_LEFT);
+        this.stackJugador2.setAlignment(Pos.CENTER_RIGHT);
+
+        this.stackJugador1.getChildren().addAll(this.botonCartaJugador1);
+        this.stackJugador2.getChildren().addAll(this.botonCartaJugador2);
+
+        // Se actualiza la región.
+        this.ingresoCartaARegion();
     }
 
-    private Button inicializarBoton()
+    private void actualizarStackPaneDe(Jugador jugador, StackPane stackPaneJugador)
     {
+        Button mazoCementerio = new Button();
+        mazoCementerio.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+                this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
+        mazoCementerio.setStyle("-fx-border-width: 5px ; -fx-border-color: Black");
+        mazoCementerio.setBackground(new Background(new BackgroundFill(new ImagePattern(this.imagenReversoCarta), CornerRadii.EMPTY, Insets.EMPTY)));
 
-        Button boton = new Button();
+        int fontSizeInPoints = (int) Math.floor(this.vista.getResolucionVertical() * porcentajeDeTamanioDeFuente);
 
-        boton.setPrefSize((this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta), (this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta));
-        boton.setStyle(estiloRegion);
+        Label label = new Label();
+        label.setAlignment(Pos.CENTER);
 
-        return boton;
+        // Style.
+        label.setPrefSize((this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta), this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
+        label.setTextFill(Color.web("#910101"));
+        label.setFont(new Font("Bauhaus 93", fontSizeInPoints));
+
+        label.setText(Integer.toString(this.vista.getModelo().getCantidadCartasCementerioDe(jugador)));
+
+        stackPaneJugador.getChildren().addAll(mazoCementerio, label);
     }
 
-    public StackPane getCementerioJugador()
+    public StackPane getCementerioJugador1()
     {
 
-        return stackJugador;
+        return stackJugador1;
     }
 
-    public StackPane getCementerioOponente()
+    public StackPane getCementerioJugador2()
     {
 
-        return stackOponente;
+        return stackJugador2;
     }
 
     // --------------------------------------------------------------------
@@ -86,36 +131,16 @@ public class RegionesCementerioVista implements ObservadorDeModelo
     @Override
     public void ingresoCartaARegion()
     {
-        //TODO: cuando hay al menos 1 carta en el cementerio, se debería mostrar 'rutaImagenReversoCarta'.
-    	
-    	Rectangle mazo1 = new Rectangle((this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta), 
-    			(this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta));
-    	Rectangle mazo2 = new Rectangle((this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta), 
-    			(this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta));
-    	
-    	Image img1 = new Image(rutaImagenReversoCarta);
-    	mazo1.setFill(new ImagePattern(img1));
-    	Image img2 = new Image(rutaImagenReversoCarta);
-    	mazo2.setFill(new ImagePattern(img2));
-    	
-    	Label label1 = new Label();
-    	Label label2 = new Label();
-    	
-    	label1.setAlignment(Pos.CENTER);
-    	label2.setAlignment(Pos.CENTER);
-    	
-    	label1.setStyle("-fx-text-fill: white");
-    	label2.setStyle("-fx-text-fill: white");
-    	
-    	label1.setText(Integer.toString(this.vista.getModelo().getJugador().getCantidadDeCartasEnMano()));
-    	label2.setText(Integer.toString(this.vista.getModelo().getOponente().getCantidadDeCartasEnMano()));
-    	    	
-    	this.stackJugador.setAlignment(Pos.CENTER_RIGHT);
-    	this.stackOponente.setAlignment(Pos.CENTER_LEFT);
-    	
-    	this.stackJugador.getChildren().addAll(mazo1,label1);
-    	this.stackOponente.getChildren().addAll(mazo2,label2);
-    	
+        if (this.vista.getModelo().getCantidadCartasCementerioDe(jugador1) > 0)
+        {
+            this.actualizarStackPaneDe(jugador1, stackJugador1);
+        }
+
+        if (this.vista.getModelo().getCantidadCartasCementerioDe(jugador2) > 0)
+        {
+            this.actualizarStackPaneDe(jugador2, stackJugador2);
+        }
+
         this.vista.actualizarDibujo();
     }
 

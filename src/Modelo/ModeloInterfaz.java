@@ -21,8 +21,6 @@ public interface ModeloInterfaz
 
     void setCartaTrampa(Jugador jugador, CartaTrampa carta);
 
-    void activarCartaTrampa(Jugador jugador, CartaTrampa carta);
-
     void activarCartaCampo(Jugador jugador, CartaCampo carta);
 
     void setCartaMonstruo(Jugador jugador, CartaMonstruo carta);

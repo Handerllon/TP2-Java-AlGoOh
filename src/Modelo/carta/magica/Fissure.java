@@ -2,6 +2,7 @@ package Modelo.carta.magica;
 
 import Modelo.Jugador;
 import Modelo.carta.monstruo.CartaMonstruo;
+import Modelo.carta.monstruo.CartaMonstruoNula;
 
 public class Fissure extends CartaMagica
 {
@@ -20,7 +21,10 @@ public class Fissure extends CartaMagica
         {
             CartaMonstruo cartaADestruir = this.getOponente().getMonstruoConMenorAtaque();
 
-            this.getOponente().destruirCarta(cartaADestruir);
+            if (CartaMonstruoNula.getInstancia() != cartaADestruir)
+            {
+                this.getOponente().destruirCarta(cartaADestruir);
+            }
         }
     }
 }

@@ -58,8 +58,6 @@ public interface ControladorInterfaz
     // -------------
     // Activar.
     // -------------
-    void activarCartaTrampa(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError;
-
     void activarCartaMagicaDesdeMano(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError;
 
     void activarCartaMagicaDesdeRegionMyT(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError;

@@ -12,17 +12,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 
 import java.util.ArrayList;
 
 public class RegionesCampoBoton extends Button implements ObservadorDeModelo
 {
-    private static String estiloRegion = "-fx-background-color: Transparent ; -fx-border-width: 5px ; -fx-border-color: Black";
     // Se uso como base una resolucion de 1920x1080 para los tamanos
     private static double porcentajeDeAnchoDeLaCarta = 0.0496;
     private static double porcentajeDeAltoDeLaCarta = 0.1287;
-    private Button boton;
+    private Button botonCarta;
     private CartaCampo carta;
     private Vista vista;
     private Jugador jugadorAsociado;
@@ -43,19 +43,24 @@ public class RegionesCampoBoton extends Button implements ObservadorDeModelo
         actualizar();
     }
 
-    public Button getBoton()
+    public Button getBotonCarta()
     {
-        return boton;
+        return botonCarta;
     }
 
     public void actualizar()
     {
         this.tooltip = new Tooltip();
 
-        this.boton = new Button();
-        this.boton.setStyle(estiloRegion);
-        this.boton.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+        this.botonCarta = new Button();
+        this.botonCarta.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
                 this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
+
+        this.botonCarta.setStyle("-fx-border-width: 5px ; -fx-border-color: Black");
+        String color = "0x0ba250";
+        double transparencia = 0.8;
+        Background backgroundCarta = new Background(new BackgroundFill(Color.web(color, transparencia), CornerRadii.EMPTY, Insets.EMPTY));
+        this.botonCarta.setBackground(backgroundCarta);
 
         ArrayList<CartaCampo> cartasCampoJugador = this.vista.getModelo().getCartasEnRegionCampoDe(jugadorAsociado);
         for (int i = 0; i < cartasCampoJugador.size(); i++)
@@ -63,17 +68,17 @@ public class RegionesCampoBoton extends Button implements ObservadorDeModelo
 
             this.carta = cartasCampoJugador.get(i);
 
-            this.boton.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
+            this.botonCarta.setPrefSize(this.vista.getResolucionHorizontal() * porcentajeDeAnchoDeLaCarta,
                     this.vista.getResolucionVertical() * porcentajeDeAltoDeLaCarta);
-            this.boton.setStyle(null);
-            this.boton.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
+            this.botonCarta.setStyle(null);
+            this.botonCarta.setBackground(new Background(new BackgroundFill(new ImagePattern(new Image(getClass().getClassLoader()
                     .getResource(this.carta.getLocacionDeImagen()).toString())), CornerRadii.EMPTY, Insets.EMPTY)));
 
             this.imagenBoton = new Image(getClass().getClassLoader().getResource(this.carta.getLocacionDeImagen()).toString());
 
             this.tooltip.setGraphic(new ImageView(this.imagenBoton));
 
-            this.boton.setTooltip(this.tooltip);
+            this.botonCarta.setTooltip(this.tooltip);
         }
 
         this.vista.actualizarDibujo();

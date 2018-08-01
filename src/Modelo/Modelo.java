@@ -275,6 +275,12 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         return jugador.getMazo().cantidadCartas();
     }
 
+    @Override
+    public int getCantidadCartasCementerioDe(Jugador jugador)
+    {
+        return jugador.getRegionCementerio().getCantidadCartas();
+    }
+
     public Jugador getJugador()
     {
         return this.jugador1;
@@ -324,14 +330,6 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
     {
         this.flipBocaAbajo(carta);
         jugador.enviarARegion(carta);
-    }
-
-    // TODO: esto está mal. La carta  ya está en el campo.
-    @Override
-    public void activarCartaTrampa(Jugador jugador, CartaTrampa carta)
-    {
-        this.flipBocaArriba(carta);
-        //jugador.enviarARegion(carta);
     }
 
     @Override

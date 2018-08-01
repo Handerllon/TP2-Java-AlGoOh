@@ -6,8 +6,7 @@ import javafx.scene.layout.GridPane;
 public class RegionesMagicasYTrampasVista
 {
     private Vista vista;
-    private RegionesMagicasYTrampasGrid gridJugador;
-    private RegionesMagicasYTrampasGrid gridOponente;
+    private RegionesMagicasYTrampasGrid gridJugador1, gridJugador2;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -16,19 +15,19 @@ public class RegionesMagicasYTrampasVista
     {
         this.vista = vista;
 
-        this.gridJugador = new RegionesMagicasYTrampasGrid(this.vista, this.vista.getModelo().getJugador());
-        this.gridOponente = new RegionesMagicasYTrampasGrid(this.vista, this.vista.getModelo().getOponente());
+        this.gridJugador1 = new RegionesMagicasYTrampasGrid(this.vista, this.vista.getModelo().getJugador());
+        this.gridJugador2 = new RegionesMagicasYTrampasGrid(this.vista, this.vista.getModelo().getOponente());
     }
 
-    public GridPane getGridJugador()
+    public GridPane getGridJugador1()
     {
 
-        return gridJugador.getGrid();
+        return gridJugador1.getGrid();
     }
 
-    public GridPane getGridOponente()
+    public GridPane getGridJugador2()
     {
 
-        return gridOponente.getGrid();
+        return gridJugador2.getGrid();
     }
 }

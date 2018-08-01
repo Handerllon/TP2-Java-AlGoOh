@@ -64,7 +64,6 @@ public class EscenaFinDeJuego implements Escena
         lblTitulo.setAlignment(Pos.BOTTOM_CENTER);
 
         lblTitulo.setFont(new Font("Bauhaus 93", 20));
-//        lblTitulo.setTextFill(Color.web("#910101"));
         lblTitulo.setStyle("-fx-font-weight: bolder; -fx-text-fill: yellow");
 
         this.grid.setBackground(new Background(new BackgroundFill(new ImagePattern(imagenBack), CornerRadii.EMPTY, Insets.EMPTY)));

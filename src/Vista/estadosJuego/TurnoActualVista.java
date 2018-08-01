@@ -2,7 +2,11 @@ package Vista.estadosJuego;
 
 import Controlador.observadores.ObservadorDeControlador;
 import Vista.Vista;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -10,9 +14,12 @@ public class TurnoActualVista implements ObservadorDeControlador
 {
     private Vista vista;
     private Label labelTurnoActual;
+    private Label labelFaseActual;
     private double porcentajeDePantallaHorizontal = 0.48;
     private double porcentajeDePantallaVertical = 0.157;
     private double porcentajeDeTamanioDeFuente = 0.05;
+    private GridPane grid;
+    private VBox paneEstados;
 
     public TurnoActualVista(Vista vista)
     {
@@ -20,18 +27,55 @@ public class TurnoActualVista implements ObservadorDeControlador
 
         this.vista.getControlador().registrarObsevador(this);
 
-        this.labelTurnoActual = new Label();
-
-        this.labelTurnoActual.setPrefSize((this.vista.getResolucionHorizontal() * porcentajeDePantallaHorizontal), this.vista.getResolucionVertical() * porcentajeDePantallaVertical);
-        this.labelTurnoActual.setFont(new Font("Bauhaus 93", this.vista.getResolucionVertical() * porcentajeDeTamanioDeFuente));
-        this.labelTurnoActual.setTextFill(Color.web("#910101"));
+        this.inicializarEscena();
 
         this.seTerminoElTurno();
     }
 
-    public Label getDisplayTurnoActual()
+    private void inicializarEscena()
     {
-        return labelTurnoActual;
+        this.grid = new GridPane();
+
+        this.labelTurnoActual = new Label();
+
+        int fontSizeInPoints = (int) Math.floor(this.vista.getResolucionVertical() * porcentajeDeTamanioDeFuente);
+
+        this.labelTurnoActual.setPrefSize((this.vista.getResolucionHorizontal() * porcentajeDePantallaHorizontal), this.vista.getResolucionVertical() * porcentajeDePantallaVertical);
+        this.labelTurnoActual.setFont(new Font("Bauhaus 93", fontSizeInPoints));
+        this.labelTurnoActual.setTextFill(Color.web("#910101"));
+        labelTurnoActual.setAlignment(Pos.CENTER);
+
+        this.labelFaseActual = new Label();
+
+        this.labelFaseActual.setPrefSize((this.vista.getResolucionHorizontal() * porcentajeDePantallaHorizontal), this.vista.getResolucionVertical() * porcentajeDePantallaVertical);
+        this.labelFaseActual.setFont(new Font("Bauhaus 93", fontSizeInPoints));
+        this.labelFaseActual.setTextFill(Color.web("#910101"));
+        labelFaseActual.setAlignment(Pos.CENTER);
+
+        // -------------------------------
+        // Setting grid.
+        // -------------------------------
+        double lblSeparationInPixels = 20;
+        this.paneEstados = new VBox(lblSeparationInPixels, labelTurnoActual, labelFaseActual);
+
+        this.paneEstados.setStyle(
+                "-fx-border-color: black, red;" +
+                        "-fx-border-width: 5, 5;" +
+                        "-fx-border-radius: 0, 0;" +
+                        "-fx-border-insets: 0, 5;" +
+                        "-fx-border-style: solid inside, dotted outside;");
+
+        this.grid.setPadding(new Insets(10));
+        this.grid.setHgap(lblSeparationInPixels);
+        this.grid.setVgap(lblSeparationInPixels);
+        this.grid.setMinWidth(500);
+
+        this.grid.addRow(0, paneEstados);
+    }
+
+    public VBox getPaneEstados()
+    {
+        return this.paneEstados;
     }
 
     // --------------------------------------------------------------------
@@ -40,13 +84,13 @@ public class TurnoActualVista implements ObservadorDeControlador
     @Override
     public void seTerminoElTurno()
     {
-        this.labelTurnoActual.setText("Turno de: " + this.vista.getControlador().getNombreJugadorActual());
+        this.labelTurnoActual.setText("TURNO DE " + this.vista.getControlador().getNombreJugadorActual());
         this.vista.actualizarDibujo();
     }
 
     @Override
     public void seTerminoLaFase()
     {
-
+        this.labelFaseActual.setText("FASE " + this.vista.getControlador().getNombreFaseActual());
     }
 }

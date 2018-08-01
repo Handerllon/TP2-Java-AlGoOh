@@ -85,17 +85,34 @@ El objetivo de este trabajo práctico es lograr utilizar todos los conceptos sob
 
 A medida que fuimos desarrollando el trabajo práctico, tuvimos que adoptar ciertos supuestos que nos fueron surgiendo durante la realización del mismo pero que ninguno de ellos se contradiga con lo aclarado en la consigna del mismo.
 
+\bigskip
+
+{\large \raggedright \textbf{Fases}}
+
 \begin{description}
 
-\item[Supuesto 1] Una Modelo.carta puede pasar de boca abajo a boca arriba, pero no al revés.
 
-\item[Supuesto 2] Una Modelo.carta puede pasar de boca abajo a boca arriba, pero no al revés.
+\item[Fase Inicial] El usuario solo puede tomar una carta.
 
-\item[Supuesto 3] Una Modelo.carta puede pasar de boca abajo a boca arriba, pero no al revés.
+\item[Fase Preparación] El usuario puede jugar la cantidad de cartas mágicas y trampas que desee.
 
-\item[Supuesto 4] Una Modelo.carta puede pasar de boca abajo a boca arriba, pero no al revés.
+\item[Fase Preparación] Una carta puede cambiar de modo o estado una sola vez por turno.
 
-\item[Supuesto 5] Una Modelo.carta puede pasar de boca abajo a boca arriba, pero no al revés.
+\item[Fase Batalla] Solamente se entra en fase de batalla si hay monstruos boca arriba y en ataque.
+
+\item[Fase Batalla] Una carta puede pasar de boca abajo a boca arriba, pero no al revés.
+
+\item[Fase Batalla] No se puede atacar en el primer turno.
+
+\item[Fase Batalla] Cada monstruo ataca una vez por turno.
+
+\item[Fase Batalla] Una carta pasa a estar boca arriba luego de recibir un ataque.
+
+\item[Fase Interna Trampa] Esta fase se activa siempre despues de un ataque.
+
+\item[Fase Final] Se pueden usar las cartas magicas que el jugador quiera.
+
+\item[Fase Final] Si se usa Pot of Greed, la mano no puede estar llena.
 
 \end{description}
 
@@ -119,7 +136,7 @@ En esta sección, explicaremos sin demasiados detalles las clases que utilizamos
 
 \item[RegionMagicasYTrampas] Albergará las cartas de tipo Magicas o Trampas.
 
-\item[Notificable] El objetivo de esta interfaz es que todas las regiones puedan avisar cuando se juega o se remueve una Modelo.carta en la misma.
+\item[Notificable] El objetivo de esta interfaz es que todas las regiones puedan avisar cuando se juega o se remueve una carta en la misma.
 
 \item[Mazo] Tiene como atributo cartas, que es una lista del tipo Carta. El mazo, se encarga de otorgarle cartas al jugador y de mezclar.
 
@@ -129,9 +146,9 @@ En esta sección, explicaremos sin demasiados detalles las clases que utilizamos
 
 \item[Orientacion] Es una clase abstracta que tendrá como hijas a OrientaciónArriba o OrientaciónAbajo, y las acciones que se puedan realizar dependeran de la misma.
 
-\item[OrientacionArriba] Si la Modelo.carta esta en este estado, puede realizar las acciones de ataque.
+\item[OrientacionArriba] Si la carta esta en este estado, puede realizar las acciones de ataque. 
 
-\item[OrientacionAbajo] Si la Modelo.carta esta en este estado, esta boca abajo por lo que no se puede usar, solo girar.
+\item[OrientacionAbajo] Si la carta esta en este estado, esta boca abajo por lo que no se puede usar, solo girar.
 
 \item[CartaCampo] Es una clase abstracta que obligará a sus hijos a tener como atributos un modificador de defensa y un modificador de ataque, y además a ser capaces de activar un efecto y deshacerlo, y modificar los puntos de ataque y defensa de un monstruo.
 
@@ -143,19 +160,19 @@ En esta sección, explicaremos sin demasiados detalles las clases que utilizamos
 
 \item[Modo] Puede ser ModoAtaque o ModoDefensa, dependiendo de lo que decida el jugador y en base a eso, se podrá o no atacar, los calculos de puntos de vida a quitar seran distintos, etc.
 
-\item[ModoAtaque] Representa uno de los estados posibles de la Modelo.carta.
+\item[ModoAtaque] Representa uno de los estados posibles de la carta.
 
-\item[ModoDefensa] Representa uno de los estados posibles de la Modelo.carta.
+\item[ModoDefensa] Representa uno de los estados posibles de la carta.
 
-\item[FabricaCartas] Contiene 4 fabricas, detalladas a continuación. Se encarga de pedirle a cada una de estas fábricas una Modelo.carta.
+\item[FabricaCartas] Contiene 4 fabricas, detalladas a continuación. Se encarga de pedirle a cada una de estas fábricas una carta.
 
-\item[FabricaCartasMonstruo] Genera y devuelve una Modelo.carta monstruo.
+\item[FabricaCartasMonstruo] Genera y devuelve una carta monstruo.
 
-\item[FabricaCartasMagicas] Genera y devuelve una Modelo.carta mágica.
+\item[FabricaCartasMagicas] Genera y devuelve una carta mágica.
 
-\item[FabricaCartasTrampa] Genera y devuelve una Modelo.carta trampa.
+\item[FabricaCartasTrampa] Genera y devuelve una carta trampa.
 
-\item[FabricaCartasCampo] Genera y devuelve una Modelo.carta trampa.
+\item[FabricaCartasCampo] Genera y devuelve una carta trampa.
 
 \item[Sacrificio] Contiene una lista de cartas a sacrificar.
 
@@ -178,9 +195,9 @@ El diagrama de la figura 4.2, muestra los distintos tipos de regiones posibles, 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{includes/Modelo.carta.areaDeJuego}
+	\includegraphics[scale=0.3]{includes/areaDeJuego}
 	\caption{Regiones}
-	\label{Modelo.carta.areaDeJuego}
+	\label{areaDeJuego}
 \end{figure}
 
 El diagrama de la figura 4.3, muestra la clase abstracta Carta.
@@ -259,14 +276,137 @@ práctico ]
 
 \section{Detalles de implementación}
 
-[Deben detallar/explicar qué estrategias utilizaron para resolver todos
-los puntos más conflictivos del trabajo práctico. ]
+
+{\large\textbf{Progreso}}
+
+\bigskip
+
+
+Para hacer este trabajo práctico, utilizamos TDD para el desarrollo y, durante las dos primeras entregas, usamos como táctica de programación Pair Programming para avanzar con el modelo, con reuniones físicas o varias veces, por videoconferencia. Ya llegando al final del trabajo práctico, cuando tuvimos que implementar el MVC, dividimos las tareas en el armado de la vista, controlador, modelo e informe. 
+
+\bigskip
+
+
+{\large\textbf{Refactorizaciones}}
+
+\bigskip
+
+Para la realización de este trabajo práctico, nuestro modelo fue cambiando en reiteradas ocasiones e implementamos múltiples refactorizaciones. 
+
+\medskip
+
+En un principio, habiamos decidido en conjunto que lo ideal era no utilizar un tablero y buscamos lograr la interacción entre los dos jugadores. A medida que fuimos avanzando en la primera entrega, tuvimos complicaciones en reiteradas ocaciones y terminamos optando por utilizar el tablero, lo que nos hacía creer que todo era mas fácil. Completamos la entrega y el profesor nos ayudó y nos hizo ver que la utilización de un tablero como entidad arbitraria, no era lo mejor teniendo en cuenta el paradigma orientado a objetos. Cada objeto del juego debería comunicarse con otro para representar en mayor proporción la realidad, y no crear un arbitro que no existe. Esto rompería con el \textbf{Principio SOLID de Responsabilidad Única} (el tablero estaría encargado de todas las acciones) y además, con el \textbf{Principio de Inversión de la Dependencia}, ya que todos dependerían de esta entidad.
+
+\medskip
+
+Entonces, retomamos la idea de que los dos jugadores se relacionen e interactuen entre ellos. Refactorizamos para lograr eliminar el tablero, y en ese momento habíamos decidido que el ataque lo haga el jugador utilizando la carta y no que sea la carta la que atacaba al oponente. Esto tambien lo hablamos con el profesor y tomamos la decisión de que cada carta sea la que realiza el ataque y además, los efectos tambien sean implementados por cada carta. La implementación del efecto, en principio, la realizamos con una interfaz que obligaba a que todos tengan un efecto pero, como cada efecto era muy particular (recibia parametros distintos) optamos por hacer que cada clase que use efecto tenga su método diferente al resto.
+
+
+\medskip
+
+
+Otro asunto que nos obligo a refactorizar, fueron los sacrificios. Lo que hicimos en primer lugar, fue hacer un simple array que contenía los monstruos a sacrificar, para luego terminar creando una entidad sacrificio la cual contiene los monstruos que el usuario decide sacrificar y en el momento de la invocacion se envian al cementerio.
+
+\medskip
+
+Mientras desarrollabamos la segunda entrega, vimos la necesidad refactorizar nuevamente y convertir a cada tipo de carta en una clase abstracta, para que los monstruos especificos hereden de ellas y estos sean los que tengan las particularidades de cada una. Esto cumple a la perfección con el \textbf{Principio de Sustitución de Liskov}, donde todas las clases hijas (Monstruos) son cartas monstruo y las cartas monstruo, son cartas. Esto aplica para toda la relación de cartas, y cumple el principio ya que todas las clases hijas se pueden ubicar en lugar de la clase padre. 
+
+\medskip
+
+También refactorizamos el calculo de daño y ya no son las cartas monstruos las que restaban puntos al jugador, sino que el jugador se quita sus propios puntos de vida (Cumple con principio SOLID abierto/cerrado, la clase debe estar cerrada al exterior para su modificación, pero abierta para su extención.)
+
+\medskip
+
+Ya preparando la entrega final, volvimos a aplicar una refactorización que consistía en que el jugador (que hasta entonces, era el encargado de atacar y de llevar a cabo las tareas) ya no sería el encargado de implementar las estrategias de las cartas, sino que ahora ellas mismas son las que atacan y activan sus efectos. Esta refactorización, también cumple con el \textbf{Principio de Responsabilidad Única} (el jugador, da ordenes a las cartas pero no le interesa como las cumplen) 
+
+\medskip
+
+Una vez finalizado el modelo, comenzamos a implementar la interfaz gráfica y en principio, nuestra idea fue conectarla directamente con el modelo pero nos dimos cuenta de que el usuario iba a interactuar con mas de lo que debía. Esto rompe con el \textbf{Principio de Segregación de la Interfaz} (el cliente solo debe conocer lo que usa) y hablamos con el profesor para solucionar esto. Su recomendación fue utilizar el Patron de Diseño MVC para interactuar con el usuario.
+
+ \bigskip
+
+A continuación se listan los patrones de diseño utilizados, junto con las explicaciones de para que fueron usados.
+
+ \bigskip
+
+\begin{description}
+
+\item[MVC] Como lo indica el nombre, utilizamos este patrón para la relación entre el Modelo, la Vista y el Controlador. -- Falta explicar y ver como lo hacemos --
+
+\item[Observer] La vista, se encarga de observar al modelo y cada parte importante del mismo, implementa la interfaz Observable. Estos objetos observables notifican a las vistas de cambios en su comportamiento. 
+
+\item[Factory] Utilizamos este patrón de diseño para la generación de cartas de cualquier tipo, por lo que creamos 4 fábricas (cartas mágicas, cartas trampas, cartas monstruo, cartas campo).
+
+\item[State] Este patrón de diseño, lo utilizamos para especificar que, una carta, puede estar boca arriba o boca abajo y cambiar su estado en cualquier momento con un simple llamado. Tambien, las cartas monstruos, pueden cambiar de modo de ataque a modo de defensa y asi cambiar su estado cuando el jugador lo desee. Dependiendo del estado en el que este la carta, las acciones a realizar serán distintas.  
+
+\item[Patron 5] Hablar cual mas hay.
+
+\end{description}
+
+
+
+
 
 \section{Excepciones}
 
 [Explicar las excepciones creadas, con qué fin fueron creadas y cómo y
 dónde se las atrapa explicando qué acciones se toman al respecto una vez
 capturadas.]
+
+\bigskip
+
+{\large \raggedright \textbf{Controlador}}
+
+\begin{description}
+
+
+\item[NoEsUnaCartaParaAtacar] La carta no puede realizar ataques.
+
+\item[CartaNoPuedeCambiarOrientacionEnTurnoActual] Su nombre lo indica a la perfección.
+
+\item[CartaYaAtacoEnTurnoActualError] En caso de que ya se haya realizado un ataque con esa carta.
+
+\item[JugadorNoPermitidoParaJugarError] El jugador quiere jugar en el turno del enemigo.
+
+\item[NoEsFaseX] Existe una excepción de este tipo para cada fase con el fin de evitar que se realizen acciones indebidas para el tipo de fase.
+
+\item[NoHayEspacioLibreEnRegionMyT] La carta no se puede colocar si la región esta llena.
+
+\item[NoHayEspacioLibreEnRegionMonstruo] La carta no se puede colocar si la región esta llena.
+
+\item[NoSeAtacaEnPrimerTurnoError] Prohibido atacar en el primer turno.
+
+\item[SolicitanteNoEsPropietarioDeCartaError] Si se desea realizar una acción con la carta enemiga.
+
+\item[YaSeMandoCartaMonstruoARegionEnTurnoActual] Solo se puede jugar un monstruo por turno.
+
+\item[NoSePuedeAtacarError] Casos en los que no sea permitido realizar un ataque.
+
+\end{description}
+
+\bigskip
+
+{\large \raggedright \textbf{Modelo}}
+
+\begin{description}
+
+\item[RegionSinEspacioLibre] Se desea jugar una carta en una región que ya esta totalmente ocupada.
+
+\item[CartaInvalidaError]
+
+\item[CartaNoExisteEnRegionError] Cuando una carta no existe en la región.
+
+\item[ManoLlenaError] Para los casos en los que se desea agarrar una carta y esta llena la mano.
+
+\item[CartaBocaAbajoNoPuedeAtacarError] Si se selecciona la opción de atacar con una carta boca abajo.
+
+\item[CartaEnDefensaNoPuedeAtacarError] Si se selecciona la opción de atacar con una carta en defensa.
+
+\item[SacrificiosInsuficientesError] Cuando se quiere invocar un monstruo que requiere sacrificio y no los hay.
+
+\item[NoHayTresDragonesBlancosParaSacrificarError] Cuando se quiere invocar al dragón definitivo y no hay tres dragones.
+
+\end{description}
 
 %-------------------------------%
 %								%

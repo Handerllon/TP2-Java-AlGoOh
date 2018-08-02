@@ -210,16 +210,63 @@ documentado y entendible como está hecho el TP]
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.8]{includes/Observadores}
+	\includegraphics[scale=0.8]{includes/class_Observadores}
 	\caption{Observadores}
-	\label{Observadores}
+	\label{class_Observadores}
 \end{figure}
 
 Todos implementan registrar y eliminar observador, pero no se los muestra.
 
+\subsection{Jugador}
+
+El diagrama de la figura \ref{}, muestra como se relaciona la clase Jugador con las regiones, con el mazo y con la mano. Ademas, muestra el hecho de que las regiones, el mazo y la mano, contienen cartas. Por otro lado, un jugador, contiene una referencia de otro jugador (oponente).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{includes/class_Jugador}
+	\caption{Jugador}
+	\label{class_Jugador}
+\end{figure}
+
+\subsection{Carta Monstruo}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{includes/class_CartaMonstruo}
+	\caption{Carta Monstruo}
+	\label{class_CartaMonstruo}
+\end{figure}
+
+\subsection{Controlador}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{includes/class_Controlador}
+	\caption{Controlador}
+	\label{class_Controlador}
+\end{figure}
+
+\subsection{Fabrica de Cartas}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{includes/class_FabricaCartas}
+	\caption{Fabrica de Cartas}
+	\label{class_FabricaCartas}
+\end{figure}
+
+\subsection{Regiones}
+
+El diagrama de la figura 4.2, muestra los distintos tipos de regiones posibles, y como estas implementan la interfaz Notificable. La clase Region es abstracta.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{includes/class_Regiones}
+	\caption{Regiones}
+	\label{class_Regiones}
+\end{figure}
 
 
-El diagrama de la figura 4.1, muestra como se relaciona la clase Jugador con las regiones, con el mazo y con la mano. Ademas, muestra el hecho de que las regiones, el mazo y la mano, contienen cartas. Por otro lado, un jugador, contiene una referencia de otro jugador (oponente).
 
 \begin{figure}[H]
 	\centering
@@ -228,7 +275,7 @@ El diagrama de la figura 4.1, muestra como se relaciona la clase Jugador con las
 	\label{Jugador}
 \end{figure}
 
-El diagrama de la figura 4.2, muestra los distintos tipos de regiones posibles, y como estas implementan la interfaz Notificable. La clase Region es abstracta.
+
 
 \begin{figure}[H]
 	\centering
@@ -237,7 +284,7 @@ El diagrama de la figura 4.2, muestra los distintos tipos de regiones posibles, 
 	\label{areaDeJuego}
 \end{figure}
 
-El diagrama de la figura 4.3, muestra la clase abstracta Carta.
+
 
 \begin{figure}[H]
 	\centering

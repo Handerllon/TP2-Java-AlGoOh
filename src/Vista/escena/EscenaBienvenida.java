@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public final class EscenaBienvenida implements Escena
+    public final class EscenaBienvenida implements Escena
 {
     private static String direccion_video_bienvenida = "src/resources/video/welcome_yugioh.mp4";
     private static int ANCHO_CAMPO_NOMBRE = 15;

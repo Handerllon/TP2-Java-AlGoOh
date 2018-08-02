@@ -35,4 +35,5 @@ public class CartaMonstruoTest
 
         assertEquals(2300, carta.getPuntos(), 0);
     }
+    
 }

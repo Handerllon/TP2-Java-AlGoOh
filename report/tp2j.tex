@@ -141,7 +141,7 @@ Modelo:
 notifica si sucedió alguno de los eventos que observa.
 La Vista luego le pide lo que necesita a Modelo mediante la interfaz ModeloObservable.
 
-\begin{description}
+\begin{itemize}
 
 \item[Jugador] Tiene como atributos: un nombre, puntos de vida, un oponente (que tambien es de clase jugador), una region (de clase Region), un mazo (de clase Mazo) y una mano (de clase Mano). Esta clase representa a uno de los usuarios que se van a enfrentar en el juego, y tiene la responsabilidad de iniciar los ataques o acciones relacionadas con la jugabilidad.
 
@@ -195,7 +195,7 @@ La Vista luego le pide lo que necesita a Modelo mediante la interfaz ModeloObser
 
 \item[Sacrificio] Contiene una lista de cartas a sacrificar.
 
-\end{description}
+\end{itemize}
 
 
 \clearpage
@@ -206,120 +206,130 @@ clases, pueden agregar todo el texto necesario para aclarar y explicar su
 diseño, recuerden que la idea de todo el documento es que quede
 documentado y entendible como está hecho el TP]
 
-\subsection{Observadores}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.8]{includes/class_Observadores}
-	\caption{Observadores}
-	\label{class_Observadores}
-\end{figure}
-
 Todos implementan registrar y eliminar observador, pero no se los muestra.
 
-\subsection{Jugador}
+\subsection{Carta Trampa}
 
-El diagrama de la figura \ref{}, muestra como se relaciona la clase Jugador con las regiones, con el mazo y con la mano. Ademas, muestra el hecho de que las regiones, el mazo y la mano, contienen cartas. Por otro lado, un jugador, contiene una referencia de otro jugador (oponente).
+[EXPLICACION]
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.8]{includes/class_Jugador}
-	\caption{Jugador}
-	\label{class_Jugador}
+	\includegraphics[scale=0.8]{includes/class_Carta}
+	\caption{Carta}
+	\label{class_Carta}
 \end{figure}
 
 \subsection{Carta Monstruo}
 
+[EXPLICACION]
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.8]{includes/class_CartaMonstruo}
-	\caption{Carta Monstruo}
+	\caption{Carta Monstruo.}
 	\label{class_CartaMonstruo}
+\end{figure}
+
+
+\subsection{Carta Trampa}
+
+[EXPLICACION]
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{includes/class_CartaTrampa}
+	\caption{Carta Trampa}
+	\label{class_Carta_Trampa}
+\end{figure}
+
+\subsection{Causa Fin de Juego}
+
+[EXPLICACION]
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{includes/class_CausaFinJuego}
+	\caption{Causa Fin de Juego.}
+	\label{class_CausaFinJuego}
 \end{figure}
 
 \subsection{Controlador}
 
+[EXPLICACION]
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.8]{includes/class_Controlador}
-	\caption{Controlador}
+	\caption{Controlador.}
 	\label{class_Controlador}
 \end{figure}
 
-\subsection{Fabrica de Cartas}
+\subsection{Fábrica de Cartas}
+
+[EXPLICACION]
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.8]{includes/class_FabricaCartas}
-	\caption{Fabrica de Cartas}
+	\caption{Fábrica de Cartas.}
 	\label{class_FabricaCartas}
+\end{figure}
+
+\subsection{Jugador}
+
+[EXPLICACION]
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{includes/class_Jugador}
+	\caption{Jugador.}
+	\label{class_Jugador}
+\end{figure}
+
+\subsection{Modelo}
+
+[EXPLICACION]
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{includes/class_Modelo}
+	\caption{Modelo}
+	\label{class_Modelo}
+\end{figure}
+
+\subsection{Observadores}
+
+[EXPLICACION]
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{includes/class_Observadores}
+	\caption{Observadores.}
+	\label{class_Observadores}
 \end{figure}
 
 \subsection{Regiones}
 
-El diagrama de la figura 4.2, muestra los distintos tipos de regiones posibles, y como estas implementan la interfaz Notificable. La clase Region es abstracta.
+[EXPLICACION]
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.8]{includes/class_Regiones}
-	\caption{Regiones}
+	\caption{Regiones.}
 	\label{class_Regiones}
 \end{figure}
 
+\subsection{Vista}
 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.3]{includes/Jugador}
-	\caption{Jugador y Carta}
-	\label{Jugador}
-\end{figure}
-
-
+[EXPLICACION]
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{includes/areaDeJuego}
-	\caption{Regiones}
-	\label{areaDeJuego}
+	\includegraphics[scale=0.8]{includes/class_Vista}
+	\caption{Vista.}
+	\label{class_Vista}
 \end{figure}
 
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.3]{includes/Carta}
-	\caption{Carta}
-	\label{Cartas}
-\end{figure}
-
-El diagrama de la figura 4.4, muestra los distintos tipos de Cartas que puede existir, y tambien el hecho de que existe una fábrica contenedora de cartas.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.3]{includes/Carta2}
-	\caption{Tipos de Cartas}
-	\label{TiposCarta}
-\end{figure}
-
-El diagrama de la figura 4.5 muestra a la clase abstracta CartaMonstruo. La misma contiene un modo, y por otra parte, tendra como hijos a todos los monstruos. La clase sacrificio, conoce a las cartas monstruos gracias al jugador (que es el que decide que sacrificar) y ademas las contiene, 
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.3]{includes/CartaMonstruo}
-	\caption{Carta Monstruo}
-	\label{CartaMonstruo}
-\end{figure}
-
-El diagrama de la figura 4.6 muestra las fábricas de cartas.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.3]{includes/Fabricas}
-	\caption{Fabricas}
-	\label{Fabricas}
-\end{figure}
 
 \clearpage
 \section{Diagramas de secuencia}
@@ -328,23 +338,71 @@ El diagrama de la figura 4.6 muestra las fábricas de cartas.
 clases planteando una gran cantidad de escenarios que contemplen las
 situaciones del trabajo práctico]
 
+\subsection{Ataque de carta sin trampas}
+
+[DESCRIPCIÓN]
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{includes/AtacarCasoMonstruoConMenosAtaqueAMonstruoConMasAtaque}
-	\caption{titulo.}
-	\label{AtacarCasoMonstruoConMenosAtaqueAMonstruoConMasAtaque}
+	\includegraphics[scale=0.9]{includes/seq_Ataque_de_carta_sin_trampas}
+	\caption{Diagrama de secuencia de un ataque de carta monstruo a otra sin cartas trampa en el campo.}
+	\label{seq_Ataque_de_carta_sin_trampas}
 \end{figure}
+
+
+\subsection{titulo}
+
+[DESCRIPCIÓN]
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{includes/JugadorJuegaMonstruoQueRequiereSacrificio}
-	\caption{titulo.}
-	\label{JugadorJuegaMonstruoQueRequiereSacrificio}
+	\includegraphics[scale=0.9]{includes/seq_Carta_con_mayor_ataque_ataca_a_carta_con_menor_ataque}
+	\caption{Diagrama de secuencia de ataque de una carta monstruo a otra con menor ataque.}
+	\label{seq_Carta_con_mayor_ataque_ataca_a_carta_con_menor_ataque}
 \end{figure}
+
+\subsection{titulo}
+
+[DESCRIPCIÓN]
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.9]{includes/JugadorUsaCartaAgujeroNegro}
-	\caption{titulo.}
-	\label{JugadorUsaCartaAgujeroNegro}
+	\includegraphics[scale=0.9]{includes/seq_DarkHole_desde_la_mano}
+	\caption{Diagrama de secuencia de activación de carta mágica Dark Hole desde la mano del jugador.}
+	\label{seq_DarkHole_desde_la_mano}
+\end{figure}
+
+\subsection{titulo}
+
+[DESCRIPCIÓN]
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{includes/seq_Dragon_ataca_a_insecto_Come_Hombres_boca_abajo}
+	\caption{Diagrama de secuencia de carta monstruo dragón atacando a la carta Come-Hombre que se encuentra boca abajo.}
+	\label{seq_Dragon_ataca_a_insecto_Come_Hombres_boca_abajo}
+\end{figure}
+
+\subsection{titulo}
+
+[DESCRIPCIÓN]
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{includes/seq_Ingresa_carta_a_region_monstruo_mostrando_interaccion_en_MVC}
+	\caption{Diagrama de secuencia de una carta ingresando a la región monstruo.}
+	\label{seq_Ingresa_carta_a_region_monstruo_mostrando_interaccion_en_MVC}
+\end{figure}
+
+\subsection{titulo}
+
+[DESCRIPCIÓN]
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{includes/seq_Se_activa_una_carta_campo_y_entran_cartas_monstruo_a_la_region}
+	\caption{Diagrama de secuencia de la activación de una carta campo y el posterior ingreso de una carta monstruo al campo.}
+	\label{seq_Se_activa_una_carta_campo_y_entran_cartas_monstruo_a_la_region}
 \end{figure}
 
 \section{Diagramas de paquetes}
@@ -358,82 +416,76 @@ trabajo ]
 distintas transiciones de los mismos para varias entidades del trabajo
 práctico ]
 
+\subsection{titulo}
+
+[DESCRIPCIÓN]
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{includes/estado_Estados_Vista}
+	\caption{Diagrama de estado de las diferentes escenas.}
+	\label{estado_Estados_Vista}
+\end{figure}
+
+\subsection{titulo}
+
+[DESCRIPCIÓN]
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.9]{includes/estado_Maquina_de_Turnos}
+	\caption{Diagrama de estado de los turnos y fases.}
+	\label{estado_Maquina_de_Turnos}
+\end{figure}
+
 \section{Detalles de implementación}
 [Explicar los elementos más relevantes del diseño. Es decir: qué
 entidades se han creado, qué responsabilidades tienen asignadas, cómo
 se relacionan, etc]
 
-
-
-
-{\large\textbf{Progreso}}
-
-\bigskip
-
-
 Para hacer este trabajo práctico, utilizamos TDD para el desarrollo y, durante las dos primeras entregas, usamos como táctica de programación Pair Programming para avanzar con el modelo, con reuniones físicas o varias veces, por videoconferencia. Ya llegando al final del trabajo práctico, cuando tuvimos que implementar el MVC, dividimos las tareas en el armado de la vista, controlador, modelo e informe. 
 
-\bigskip
-
-
-{\large\textbf{Refactorizaciones}}
-
-\bigskip
+\subsection{Refactorizaciones}
 
 Para la realización de este trabajo práctico, nuestro modelo fue cambiando en reiteradas ocasiones e implementamos múltiples refactorizaciones. 
 
-\medskip
-
 En un principio, habiamos decidido en conjunto que lo ideal era no utilizar un tablero y buscamos lograr la interacción entre los dos jugadores. A medida que fuimos avanzando en la primera entrega, tuvimos complicaciones en reiteradas ocaciones y terminamos optando por utilizar el tablero, lo que nos hacía creer que todo era mas fácil. Completamos la entrega y el profesor nos ayudó y nos hizo ver que la utilización de un tablero como entidad arbitraria, no era lo mejor teniendo en cuenta el paradigma orientado a objetos. Cada objeto del juego debería comunicarse con otro para representar en mayor proporción la realidad, y no crear un arbitro que no existe. Esto rompería con el \textbf{Principio SOLID de Responsabilidad Única} (el tablero estaría encargado de todas las acciones) y además, con el \textbf{Principio de Inversión de la Dependencia}, ya que todos dependerían de esta entidad.
 
-\medskip
 
 Entonces, retomamos la idea de que los dos jugadores se relacionen e interactuen entre ellos. Refactorizamos para lograr eliminar el tablero, y en ese momento habíamos decidido que el ataque lo haga el jugador utilizando la carta y no que sea la carta la que atacaba al oponente. Esto tambien lo hablamos con el profesor y tomamos la decisión de que cada carta sea la que realiza el ataque y además, los efectos tambien sean implementados por cada carta. La implementación del efecto, en principio, la realizamos con una interfaz que obligaba a que todos tengan un efecto pero, como cada efecto era muy particular (recibia parametros distintos) optamos por hacer que cada clase que use efecto tenga su método diferente al resto.
 
 
-\medskip
-
-
 Otro asunto que nos obligo a refactorizar, fueron los sacrificios. Lo que hicimos en primer lugar, fue hacer un simple array que contenía los monstruos a sacrificar, para luego terminar creando una entidad sacrificio la cual contiene los monstruos que el usuario decide sacrificar y en el momento de la invocacion se envian al cementerio.
 
-\medskip
 
 Mientras desarrollabamos la segunda entrega, vimos la necesidad refactorizar nuevamente y convertir a cada tipo de carta en una clase abstracta, para que los monstruos especificos hereden de ellas y estos sean los que tengan las particularidades de cada una. Esto cumple a la perfección con el \textbf{Principio de Sustitución de Liskov}, donde todas las clases hijas (Monstruos) son cartas monstruo y las cartas monstruo, son cartas. Esto aplica para toda la relación de cartas, y cumple el principio ya que todas las clases hijas se pueden ubicar en lugar de la clase padre. 
 
-\medskip
 
 También refactorizamos el calculo de daño y ya no son las cartas monstruos las que restaban puntos al jugador, sino que el jugador se quita sus propios puntos de vida (Cumple con principio SOLID abierto/cerrado, la clase debe estar cerrada al exterior para su modificación, pero abierta para su extención.)
 
-\medskip
 
 Ya preparando la entrega final, volvimos a aplicar una refactorización que consistía en que el jugador (que hasta entonces, era el encargado de atacar y de llevar a cabo las tareas) ya no sería el encargado de implementar las estrategias de las cartas, sino que ahora ellas mismas son las que atacan y activan sus efectos. Esta refactorización, también cumple con el \textbf{Principio de Responsabilidad Única} (el jugador, da ordenes a las cartas pero no le interesa como las cumplen) 
 
-\medskip
 
 Una vez finalizado el modelo, comenzamos a implementar la interfaz gráfica y en principio, nuestra idea fue conectarla directamente con el modelo pero nos dimos cuenta de que el usuario iba a interactuar con mas de lo que debía. Esto rompe con el \textbf{Principio de Segregación de la Interfaz} (el cliente solo debe conocer lo que usa) y hablamos con el profesor para solucionar esto. Su recomendación fue utilizar el Patron de Diseño MVC para interactuar con el usuario.
 
- \bigskip
 
 A continuación se listan los patrones de diseño utilizados, junto con las explicaciones de para que fueron usados.
 
- \bigskip
 
-\begin{description}
+\begin{itemize}
 
-\item[MVC] Como lo indica el nombre, utilizamos este patrón para la relación entre el Modelo, la Vista y el Controlador. -- Falta explicar y ver como lo hacemos --
+\item [MVC] Como lo indica el nombre, utilizamos este patrón para la relación entre el Modelo, la Vista y el Controlador. -- Falta explicar y ver como lo hacemos --
 
-\item[Observer] La vista, se encarga de observar al modelo y cada parte importante del mismo, implementa la interfaz Observable. Estos objetos observables notifican a las vistas de cambios en su comportamiento. 
+\item [Observer] La vista, se encarga de observar al modelo y cada parte importante del mismo, implementa la interfaz Observable. Estos objetos observables notifican a las vistas de cambios en su comportamiento. 
 
-\item[Factory] Utilizamos este patrón de diseño para la generación de cartas de cualquier tipo, por lo que creamos 4 fábricas (cartas mágicas, cartas trampas, cartas monstruo, cartas campo).
+\item [Factory] Utilizamos este patrón de diseño para la generación de cartas de cualquier tipo, por lo que creamos 4 fábricas (cartas mágicas, cartas trampas, cartas monstruo, cartas campo).
 
-\item[State] Este patrón de diseño, lo utilizamos para especificar que, una carta, puede estar boca arriba o boca abajo y cambiar su estado en cualquier momento con un simple llamado. Tambien, las cartas monstruos, pueden cambiar de modo de ataque a modo de defensa y asi cambiar su estado cuando el jugador lo desee. Dependiendo del estado en el que este la carta, las acciones a realizar serán distintas.  
+\item [State] Este patrón de diseño, lo utilizamos para especificar que, una carta, puede estar boca arriba o boca abajo y cambiar su estado en cualquier momento con un simple llamado. Tambien, las cartas monstruos, pueden cambiar de modo de ataque a modo de defensa y asi cambiar su estado cuando el jugador lo desee. Dependiendo del estado en el que este la carta, las acciones a realizar serán distintas.  
 
-\item[Patron 5] Hablar cual mas hay.
+\item [Patron 5] Hablar cual mas hay.
 
-\end{description}
-
-
-
+\end{itemize}
 
 
 \section{Excepciones}
@@ -442,60 +494,19 @@ A continuación se listan los patrones de diseño utilizados, junto con las expl
 dónde se las atrapa explicando qué acciones se toman al respecto una vez
 capturadas.]
 
-\bigskip
+\subsection{Controlador}
 
-{\large \raggedright \textbf{Controlador}}
+\begin{itemize}
+\item excepcion1
 
-\begin{description}
+\end{itemize}
 
+\subsection{Modelo}
 
-\item[NoEsUnaCartaParaAtacar] La carta no puede realizar ataques.
+\begin{itemize}
+\item excepcion1
 
-\item[CartaNoPuedeCambiarOrientacionEnTurnoActual] Su nombre lo indica a la perfección.
-
-\item[CartaYaAtacoEnTurnoActualError] En caso de que ya se haya realizado un ataque con esa carta.
-
-\item[JugadorNoPermitidoParaJugarError] El jugador quiere jugar en el turno del enemigo.
-
-\item[NoEsFaseX] Existe una excepción de este tipo para cada fase con el fin de evitar que se realizen acciones indebidas para el tipo de fase.
-
-\item[NoHayEspacioLibreEnRegionMyT] La carta no se puede colocar si la región esta llena.
-
-\item[NoHayEspacioLibreEnRegionMonstruo] La carta no se puede colocar si la región esta llena.
-
-\item[NoSeAtacaEnPrimerTurnoError] Prohibido atacar en el primer turno.
-
-\item[SolicitanteNoEsPropietarioDeCartaError] Si se desea realizar una acción con la carta enemiga.
-
-\item[YaSeMandoCartaMonstruoARegionEnTurnoActual] Solo se puede jugar un monstruo por turno.
-
-\item[NoSePuedeAtacarError] Casos en los que no sea permitido realizar un ataque.
-
-\end{description}
-
-\bigskip
-
-{\large \raggedright \textbf{Modelo}}
-
-\begin{description}
-
-\item[RegionSinEspacioLibre] Se desea jugar una carta en una región que ya esta totalmente ocupada.
-
-\item[CartaInvalidaError]
-
-\item[CartaNoExisteEnRegionError] Cuando una carta no existe en la región.
-
-\item[ManoLlenaError] Para los casos en los que se desea agarrar una carta y esta llena la mano.
-
-\item[CartaBocaAbajoNoPuedeAtacarError] Si se selecciona la opción de atacar con una carta boca abajo.
-
-\item[CartaEnDefensaNoPuedeAtacarError] Si se selecciona la opción de atacar con una carta en defensa.
-
-\item[SacrificiosInsuficientesError] Cuando se quiere invocar un monstruo que requiere sacrificio y no los hay.
-
-\item[NoHayTresDragonesBlancosParaSacrificarError] Cuando se quiere invocar al dragón definitivo y no hay tres dragones.
-
-\end{description}
+\end{itemize}
 
 %-------------------------------%
 %								%
@@ -512,7 +523,7 @@ capturadas.]
 	
 	\bibitem{fowler_model} Fowler, M. - \hyperref{https://martinfowler.com/distributedComputing/purpose.pdf}{}{}{What's a model for?}
 	
-	\bibitem{fowler_model} Fowler, M. - \hyperref{https://www.yugioh-card.com/en/rulebook/SD_RuleBook_EN_10.pdf}{}{}{Yu-Gi-Oh! TRADING CARD GAME rulebook}
+	\bibitem{reglas_juego} \hyperref{https://www.yugioh-card.com/en/rulebook/SD_RuleBook_EN_10.pdf}{}{}{Yu-Gi-Oh! TRADING CARD GAME rulebook}
 \end{thebibliography}
 \endgroup
 

@@ -13,6 +13,6 @@ public class NoEsFaseFinalError implements EstadoVerificador
     @Override
     public String getNombre()
     {
-        return "No es fase final";
+        return "No es fase final.";
     }
 }

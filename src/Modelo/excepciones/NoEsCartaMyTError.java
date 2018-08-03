@@ -13,6 +13,6 @@ public class NoEsCartaMyTError extends RuntimeException implements EstadoVerific
     @Override
     public String getNombre()
     {
-        return "No es carta mágica o trampa";
+        return "No es carta mágica o trampa.";
     }
 }

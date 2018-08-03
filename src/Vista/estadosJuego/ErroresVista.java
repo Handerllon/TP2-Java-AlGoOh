@@ -16,7 +16,7 @@ public class ErroresVista
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Advertencia");
         alert.setHeaderText(null);
-        alert.setContentText(error.getNombreResponsable() + " : No se puede tomar carta.\n" + error
+        alert.setContentText(error.getNombreResponsable() + ": No se puede tomar carta.\n" + error
                 .getEstadoVerificador()
                 .getNombre());
 
@@ -28,10 +28,7 @@ public class ErroresVista
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Advertencia");
         alert.setHeaderText(null);
-        alert.setContentText(error.getNombreResponsable() + " : La carta monstruo no puede ser envíada a la región.\n" +
-                "monstruo. " + error
-                .getEstadoVerificador()
-                .getNombre());
+        alert.setContentText(error.getNombreResponsable() + ": La carta monstruo no puede ser envíada a la región monstruo.\n" + error.getEstadoVerificador().getNombre());
 
         alert.showAndWait();
     }
@@ -41,7 +38,7 @@ public class ErroresVista
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Advertencia");
         alert.setHeaderText(null);
-        alert.setContentText(error.getNombreResponsable() + " : La carta MyT no puede ser envíada a la región MyT.\n"
+        alert.setContentText(error.getNombreResponsable() + ": La carta MyT no puede ser envíada a la región MyT.\n"
                 + error.getEstadoVerificador()
                 .getNombre());
 
@@ -53,7 +50,7 @@ public class ErroresVista
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Advertencia");
         alert.setHeaderText(null);
-        alert.setContentText(error.getNombreResponsable() + " : La carta elegida no puede ser utilizada.\n" + error
+        alert.setContentText(error.getNombreResponsable() + ": La carta elegida no puede ser utilizada.\n" + error
                 .getEstadoVerificador().getNombre());
 
         alert.showAndWait();
@@ -64,9 +61,7 @@ public class ErroresVista
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Advertencia");
         alert.setHeaderText(null);
-        alert.setContentText(error.getNombreResponsable() + " : La carta campo no puede ser envíada a la región campo" +
-                ".\n" + error.getEstadoVerificador()
-                .getNombre());
+        alert.setContentText(error.getNombreResponsable() + ": La carta campo no puede ser envíada a la región campo.\n" + error.getEstadoVerificador().getNombre());
 
         alert.showAndWait();
     }
@@ -76,9 +71,7 @@ public class ErroresVista
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Advertencia");
         alert.setHeaderText(null);
-        alert.setContentText(error.getNombreResponsable() + " : No se puede cambiar la orientacion de la carta " +
-                "elegida.\n" + error.getEstadoVerificador()
-                .getNombre());
+        alert.setContentText(error.getNombreResponsable() + ": No se puede cambiar la orientacion de la carta elegida.\n" + error.getEstadoVerificador().getNombre());
 
         alert.showAndWait();
     }
@@ -88,8 +81,7 @@ public class ErroresVista
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Advertencia");
         alert.setHeaderText(null);
-        alert.setContentText(error.getNombreResponsable() + " : No se puede atacar.\n" + error.getEstadoVerificador()
-                .getNombre());
+        alert.setContentText(error.getNombreResponsable() + ": No se puede atacar.\n" + error.getEstadoVerificador().getNombre());
 
         alert.showAndWait();
     }

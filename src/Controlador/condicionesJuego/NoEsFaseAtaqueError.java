@@ -13,6 +13,6 @@ public class NoEsFaseAtaqueError implements EstadoVerificador
     @Override
     public String getNombre()
     {
-        return "No es fase de ataque";
+        return "No es fase de ataque.";
     }
 }

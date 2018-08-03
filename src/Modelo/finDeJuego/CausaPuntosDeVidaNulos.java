@@ -4,7 +4,7 @@ import Modelo.Jugador;
 
 public final class CausaPuntosDeVidaNulos extends CausaFinJuego
 {
-    private static String CAUSA = "Puntos De Vida Nulos";
+    private static String CAUSA = "Puntos de vida nulos.";
     private static CausaPuntosDeVidaNulos instancia = null;
 
     private CausaPuntosDeVidaNulos(Jugador jugadorAsociadoAlFin)

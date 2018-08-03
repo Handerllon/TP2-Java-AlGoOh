@@ -13,6 +13,6 @@ public class CartaNoPuedeCambiarOrientacionEnTurnoActualError implements EstadoV
     @Override
     public String getNombre()
     {
-        return "Carta no puede cambiar la orientación en el turno actual";
+        return "Carta no puede cambiar la orientación en el turno actual.";
     }
 }

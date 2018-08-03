@@ -26,6 +26,6 @@ public class JugadorNoPermitidoParaJugarError implements EstadoVerificador
     @Override
     public String getNombre()
     {
-        return "Jugador no permitido para jugar";
+        return "Jugador no permitido para jugar.";
     }
 }

@@ -53,19 +53,19 @@
     </target>
 
     <target name="compilar.aplicacion" depends="setup, resolve">
-        <javac srcdir="src" destdir="${build}" includeantruntime="false" debug="yes" target="1.8">
+        <javac encoding="UTF-8" srcdir="src" destdir="${build}" includeantruntime="false" debug="yes" target="1.8">
             <classpath refid="classpath"/>
         </javac>
     </target>
 
     <target name="compilar.tests" depends="instrumentar.aplicacion">
-        <javac srcdir="test" destdir="${build}/tests" includeantruntime="false" debug="yes" target="1.8">
+        <javac encoding="UTF-8" srcdir="test" destdir="${build}/tests" includeantruntime="false" debug="yes" target="1.8">
             <classpath refid="classpath"/>
         </javac>
     </target>
 
     <target name="compilar.tests.sin.instrumentar" depends="compilar.aplicacion">
-        <javac srcdir="test" destdir="${build}/tests" includeantruntime="false" debug="yes" target="1.8">
+        <javac encoding="UTF-8" srcdir="test" destdir="${build}/tests" includeantruntime="false" debug="yes" target="1.8">
             <classpath refid="classpath"/>
         </javac>
     </target>
@@ -149,7 +149,7 @@
 
 
     <target name="compilar.paquete" depends="test">
-        <javac srcdir="src" destdir="${build}/classes" debug="no">
+        <javac encoding="UTF-8" srcdir="src" destdir="${build}/classes" debug="no">
         </javac>
     	<copy todir="${build}/classes">
     		<fileset dir="src"

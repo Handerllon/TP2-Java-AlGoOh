@@ -13,6 +13,6 @@ public class YaTomoCartaEnTurnoError implements EstadoVerificador
     @Override
     public String getNombre()
     {
-        return "Ya se tomo una carta en el turno actual";
+        return "Ya se tomó una carta en el turno actual.";
     }
 }

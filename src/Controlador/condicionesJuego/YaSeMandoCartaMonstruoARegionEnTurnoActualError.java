@@ -13,7 +13,7 @@ public class YaSeMandoCartaMonstruoARegionEnTurnoActualError implements EstadoVe
     @Override
     public String getNombre()
     {
-        return "Se mandó la carta monstruo a la región en el turno actual.";
+        return "Ya se mandó la carta monstruo a la región en el turno actual.";
     }
 }
 

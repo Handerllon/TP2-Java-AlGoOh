@@ -13,6 +13,6 @@ public class YaSeMandoCartaARegionEnTurnoActualError implements EstadoVerificado
     @Override
     public String getNombre()
     {
-        return "Se mandó la carta a la región en el turno actual";
+        return "Ya se mandó la carta a la región en el turno actual.";
     }
 }

@@ -13,6 +13,6 @@ public class CartaBocaAbajoNoPuedeAtacarError extends RuntimeException implement
     @Override
     public String getNombre()
     {
-        return "Carta boca abajo no puede atacar";
+        return "Carta boca abajo no puede atacar.";
     }
 }

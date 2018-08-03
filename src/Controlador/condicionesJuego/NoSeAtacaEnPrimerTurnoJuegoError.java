@@ -13,6 +13,6 @@ public class NoSeAtacaEnPrimerTurnoJuegoError implements EstadoVerificador
     @Override
     public String getNombre()
     {
-        return "No se puede atacar en el primer turno dele juego";
+        return "No se puede atacar en el primer turno del juego.";
     }
 }

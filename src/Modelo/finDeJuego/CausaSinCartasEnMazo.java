@@ -4,7 +4,7 @@ import Modelo.Jugador;
 
 public final class CausaSinCartasEnMazo extends CausaFinJuego
 {
-    private static String CAUSA = "Sin cartas en el mazo";
+    private static String CAUSA = "Sin cartas en el mazo.";
     private static CausaSinCartasEnMazo instancia = null;
 
     private CausaSinCartasEnMazo(Jugador jugadorAsociadoAlFin)

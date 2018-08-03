@@ -13,6 +13,6 @@ public class EstadoVerificadorBueno implements EstadoVerificador
     @Override
     public String getNombre()
     {
-        return "Estado bueno";
+        return "Estado bueno.";
     }
 }

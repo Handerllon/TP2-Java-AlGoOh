@@ -4,7 +4,7 @@ import Modelo.Jugador;
 
 public final class CausaCincoPartesExodiaReunidas extends CausaFinJuego
 {
-    private static String CAUSA = "Cinco partes de Exodia reunidas";
+    private static String CAUSA = "Cinco partes de Exodia reunidas.";
     private static CausaCincoPartesExodiaReunidas instancia = null;
 
     private CausaCincoPartesExodiaReunidas(Jugador jugadorAsociadoAlFin)

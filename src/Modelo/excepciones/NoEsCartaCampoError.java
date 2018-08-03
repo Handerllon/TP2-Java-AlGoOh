@@ -13,6 +13,6 @@ public class NoEsCartaCampoError extends RuntimeException implements EstadoVerif
     @Override
     public String getNombre()
     {
-        return "No es carta campo";
+        return "No es carta campo.";
     }
 }

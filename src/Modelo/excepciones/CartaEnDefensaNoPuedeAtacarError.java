@@ -13,6 +13,6 @@ public class CartaEnDefensaNoPuedeAtacarError extends RuntimeException implement
     @Override
     public String getNombre()
     {
-        return "Carta en modo defensa no puede atacar";
+        return "Carta en modo defensa no puede atacar.";
     }
 }

@@ -13,6 +13,6 @@ public class CartaYaAtacoEnTurnoActualError implements EstadoVerificador
     @Override
     public String getNombre()
     {
-        return "Carta ya atacó en el turno actual";
+        return "Carta ya atacó en el turno actual.";
     }
 }

@@ -13,6 +13,6 @@ public class NoEsFaseInicialError implements EstadoVerificador
     @Override
     public String getNombre()
     {
-        return "No es la fase inicial";
+        return "No es la fase inicial.";
     }
 }

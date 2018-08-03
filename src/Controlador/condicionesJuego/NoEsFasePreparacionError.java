@@ -13,6 +13,6 @@ public class NoEsFasePreparacionError implements EstadoVerificador
     @Override
     public String getNombre()
     {
-        return "No es la fase de preparación";
+        return "No es la fase de preparación.";
     }
 }

@@ -280,6 +280,7 @@ public class AlGoOhTest2
         FabricaCartas fabricaCartasJugador2 = new FabricaCartas(jugador2, jugador1);
 
         CartaMonstruo insectoComeHombresJugador1 = fabricaCartasJugador1.crearCartaMonstruo("Man-Eater Bug");
+        insectoComeHombresJugador1.cambiarOrientacion();
         jugador1.enviarARegion(insectoComeHombresJugador1);
 
         CartaMonstruo monstruoJugador2 = fabricaCartasJugador2.crearCartaMonstruo("Charcoal Inpachi");

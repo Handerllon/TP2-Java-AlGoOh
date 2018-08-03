@@ -151,6 +151,10 @@
     <target name="compilar.paquete" depends="test">
         <javac srcdir="src" destdir="${build}/classes" debug="no">
         </javac>
+    	<copy todir="${build}/classes">
+    		<fileset dir="src"
+    			excludes="*/.java"/>
+    	</copy>
     </target>
 
     <target name="empaquetar" depends="compilar.paquete">

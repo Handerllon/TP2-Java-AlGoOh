@@ -13,19 +13,19 @@ public interface ModeloInterfaz
     // ------------------------------------
     void tomarCarta(Jugador jugador);
 
-    void setCartaMagica(Jugador jugador, CartaMagica carta);
+    void setCartaMagica(CartaMagica carta);
 
-    void activarCartaMagicaDesdeRegionMyT(Jugador jugador, CartaMagica carta);
+    void activarCartaMagicaDesdeRegionMyT(CartaMagica carta);
 
-    void activarCartaMagicaDesdeMano(Jugador jugador, CartaMagica carta);
+    void activarCartaMagicaDesdeMano(CartaMagica carta);
 
-    void setCartaTrampa(Jugador jugador, CartaTrampa carta);
+    void setCartaTrampa(CartaTrampa carta);
 
-    void activarCartaCampo(Jugador jugador, CartaCampo carta);
+    void activarCartaCampo(CartaCampo carta);
 
-    void setCartaMonstruo(Jugador jugador, CartaMonstruo carta);
+    void setCartaMonstruo(CartaMonstruo carta);
 
-    void summonCartaMonstruo(Jugador jugador, CartaMonstruo carta);
+    void summonCartaMonstruo(CartaMonstruo carta);
 
     boolean seCumplenCondicionesDeSacrificiosRequeridos(CartaMonstruo carta);
 

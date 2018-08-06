@@ -1,6 +1,7 @@
 package Vista.escena;
 
 import Modelo.ModeloObservable;
+import Modelo.carta.Carta;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.Vista;
 import Vista.carta.MazosVista;
@@ -249,7 +250,7 @@ public final class EscenaTableroPrincipal implements Escena
     // Métodos de ataque.
     // ----------------------
     @Override
-    public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante)
+    public void solicitarCartaAAtacar(Carta cartaAtacante)
     {
 
         Popup popup = new Popup();

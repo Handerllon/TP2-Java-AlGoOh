@@ -1,5 +1,6 @@
 package Vista.region;
 
+import Modelo.carta.Carta;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.Vista;
 import javafx.geometry.Insets;
@@ -27,13 +28,13 @@ public class BotonDeCartaMonstruoSolicitada
     private AudioClip audioClipCardAttack;
     private double cardAttackVolume = 0.3;
 
-    public BotonDeCartaMonstruoSolicitada(Vista vista, CartaMonstruo cartaAtacante, CartaMonstruo carta, Popup popup)
+    public BotonDeCartaMonstruoSolicitada(Vista vista, Carta cartaAtacante, Carta carta, Popup popup)
     {
 
-        this.cartaAtacante = cartaAtacante;
+        this.cartaAtacante = (CartaMonstruo) cartaAtacante;
         this.popup = popup;
         this.vista = vista;
-        this.cartaSolicitada = carta;
+        this.cartaSolicitada = (CartaMonstruo) carta;
         this.botonDeCarta = new Button();
 
         URL mediaUrl;

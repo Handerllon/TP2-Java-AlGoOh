@@ -1,5 +1,6 @@
 package Modelo.carta.trampa;
 
+import Controlador.visitor.VisitadorCarta;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.carta.monstruo.CartaMonstruo;
@@ -14,6 +15,14 @@ public abstract class CartaTrampa extends Carta implements CartaTrampaObservable
     public CartaTrampa(Jugador jugador, Jugador oponente, String locacionDeImagen)
     {
         super(jugador, oponente, locacionDeImagen);
+    }
+
+    // --------------------------------------------------------------------
+    // Metodos para patrón visitador.
+    // --------------------------------------------------------------------
+    public void aceptar(VisitadorCarta visitadorCarta)
+    {
+        visitadorCarta.visitarCartaTrampa(this);
     }
 
     // --------------------------------------

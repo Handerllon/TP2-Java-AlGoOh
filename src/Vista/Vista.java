@@ -3,6 +3,7 @@ package Vista;
 import Controlador.ControladorInterfaz;
 import Controlador.excepciones.*;
 import Modelo.ModeloObservable;
+import Modelo.carta.Carta;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.escena.Escena;
 import Vista.escena.EscenaBienvenida;
@@ -90,7 +91,7 @@ public class Vista
         this.escena.actualizarDibujo();
     }
 
-    public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante)
+    public void solicitarCartaAAtacar(Carta cartaAtacante)
     {
         this.escena.solicitarCartaAAtacar(cartaAtacante);
     }

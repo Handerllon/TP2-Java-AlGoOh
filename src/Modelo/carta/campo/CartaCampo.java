@@ -1,5 +1,6 @@
 package Modelo.carta.campo;
 
+import Controlador.visitor.VisitadorCarta;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.carta.monstruo.CartaMonstruo;
@@ -12,6 +13,14 @@ public abstract class CartaCampo extends Carta
     public CartaCampo(Jugador jugador, Jugador oponente, String locacionDeImagen)
     {
         super(jugador, oponente, locacionDeImagen);
+    }
+
+    // --------------------------------------------------------------------
+    // Metodos para patrón visitador.
+    // --------------------------------------------------------------------
+    public void aceptar(VisitadorCarta visitadorCarta)
+    {
+        visitadorCarta.visitarCartaCampo(this);
     }
 
     // Se les aplica a todas las cartas de las regiones monstruo.

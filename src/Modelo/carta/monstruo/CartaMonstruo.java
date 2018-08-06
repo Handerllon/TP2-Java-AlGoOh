@@ -1,5 +1,6 @@
 package Modelo.carta.monstruo;
 
+import Controlador.visitor.VisitadorCarta;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Modelo.carta.ataque.EstrategiaAtaque;
@@ -49,6 +50,14 @@ public abstract class CartaMonstruo extends Carta implements CartaMonstruoObserv
     public void setEstrategiaAtaque(EstrategiaAtaque estrategia)
     {
         this.estrategiaAtaque = estrategia;
+    }
+
+    // --------------------------------------------------------------------
+    // Metodos para patrón visitador.
+    // --------------------------------------------------------------------
+    public void aceptar(VisitadorCarta visitadorCarta)
+    {
+        visitadorCarta.visitarCartaMonstruo(this);
     }
 
     // ------------------------------------------
@@ -123,16 +132,6 @@ public abstract class CartaMonstruo extends Carta implements CartaMonstruoObserv
     public boolean estaEnDefensa()
     {
         return this.modo.esDefensa();
-    }
-
-    public boolean tieneQuickEffect()
-    {
-        return false;
-    }
-
-    public void efecto()
-    {
-
     }
 
     // --------------------------------------------------------------------

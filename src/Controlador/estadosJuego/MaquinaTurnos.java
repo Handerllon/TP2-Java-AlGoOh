@@ -14,7 +14,7 @@ public final class MaquinaTurnos
     private Jugador jugador1, jugador2, jugadorActual;
     private ArrayList<Carta> cartasQueCambiaronOrientacionEnTurnoActual;
     private boolean esElPrimerTurnoDelJuego;
-    private ArrayList<CartaMonstruo> cartasQueAtacaronEnTurnoActual;
+    private ArrayList<Carta> cartasQueAtacaronEnTurnoActual;
     private ArrayList<Carta> cartasQueSeColocaronEnRegionEnTurnoActual;
     private boolean seTomoUnaCartaEnTurno;
     private boolean seColocoCartaMonstruoEnRegionEnTurnoActual;
@@ -210,12 +210,12 @@ public final class MaquinaTurnos
         return this.esElPrimerTurnoDelJuego;
     }
 
-    public void cartaAtacaEnTurnoActual(CartaMonstruo cartaMonstruo)
+    public void cartaAtacaEnTurnoActual(Carta cartaMonstruo)
     {
         this.cartasQueAtacaronEnTurnoActual.add(cartaMonstruo);
     }
 
-    public boolean cartaYaAtacoEnTurnoActual(CartaMonstruo cartaMonstruo)
+    public boolean cartaYaAtacoEnTurnoActual(Carta cartaMonstruo)
     {
         return this.cartasQueAtacaronEnTurnoActual.contains(cartaMonstruo);
     }

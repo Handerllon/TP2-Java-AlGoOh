@@ -1,5 +1,6 @@
 package Modelo.carta;
 
+import Controlador.visitor.VisitadorCarta;
 import Modelo.Jugador;
 import Modelo.carta.orientacion.Orientacion;
 import Modelo.observadores.ObservadorDeCarta;
@@ -54,6 +55,11 @@ public abstract class Carta implements Orientacion, CartaObservable
     }
 
     // --------------------------------------------------------------------
+    // Metodos para patrón visitador.
+    // --------------------------------------------------------------------
+    public abstract void aceptar(VisitadorCarta visitadorCarta);
+
+    // --------------------------------------------------------------------
     // Metodos por ser observable de Carta.
     // --------------------------------------------------------------------
     @Override
@@ -96,11 +102,19 @@ public abstract class Carta implements Orientacion, CartaObservable
         return !this.estaBocaArriba();
     }
 
+    public boolean tieneQuickEffect()
+    {
+        return false;
+    }
+
+    public void efecto()
+    {
+
+    }
+
     // ------------------------------------
     // Métodos de tipo de carta.
     // ------------------------------------
-    public abstract boolean esCampo();
-
     public abstract boolean esMagica();
 
     public abstract boolean esMonstruo();

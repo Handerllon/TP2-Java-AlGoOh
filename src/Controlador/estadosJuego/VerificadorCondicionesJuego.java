@@ -6,7 +6,8 @@ import Modelo.Modelo;
 import Modelo.carta.Carta;
 import Modelo.carta.excepciones.SacrificiosInsuficientesError;
 import Modelo.carta.monstruo.CartaMonstruo;
-import Modelo.excepciones.*;
+import Modelo.excepciones.CartaBocaAbajoNoPuedeAtacarError;
+import Modelo.excepciones.CartaEnDefensaNoPuedeAtacarError;
 
 public final class VerificadorCondicionesJuego
 {
@@ -78,11 +79,7 @@ public final class VerificadorCondicionesJuego
         } else if (this.maquinaTurnos.seColocoCartaMonstruoEnRegionEnTurnoActual())
         {
             return new YaSeMandoCartaMonstruoARegionEnTurnoActualError();
-        } else if (!carta.esMonstruo())
-        {
-            return new NoEsCartaMonstruo();
-        } // A partir de aquí ya se que es CartaMonstruo.
-        else if (!this.modelo.seCumplenCondicionesDeSacrificiosRequeridos((CartaMonstruo) carta))
+        } else if (!this.modelo.seCumplenCondicionesDeSacrificiosRequeridos((CartaMonstruo) carta))
         {
             return new SacrificiosInsuficientesError();
         } else if (!solicitante.getRegionMonstruos().hayEspacioLibre() && !((CartaMonstruo) carta)
@@ -108,9 +105,6 @@ public final class VerificadorCondicionesJuego
         } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
         {
             return new NoEsFasePreparacionError();
-        } else if (!carta.esMagica() && !carta.esTrampa())
-        {
-            return new NoEsCartaMyTError();
         } else if (!solicitante.getRegionMagicasYTrampas().hayEspacioLibre())
         {
             return new NoHayEspacioLibreEnRegionMyT();
@@ -119,7 +113,7 @@ public final class VerificadorCondicionesJuego
         return new EstadoVerificadorBueno();
     }
 
-    public EstadoVerificador sePuedeUsarTrampa(Jugador solicitante, Carta carta)
+    public EstadoVerificador sePuedeActivarCartaDesdeMano(Jugador solicitante, Carta carta)
     {
         if (carta.getPropietario() != solicitante)
         {
@@ -130,29 +124,8 @@ public final class VerificadorCondicionesJuego
         } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
         {
             return new NoEsFasePreparacionError();
-        } else if (!carta.esTrampa())
-        {
-            return new NoEsCartaMyTError();
         }
 
-        return new EstadoVerificadorBueno();
-    }
-
-    public EstadoVerificador sePuedeActivarMagicaDesdeMano(Jugador solicitante, Carta carta)
-    {
-        if (carta.getPropietario() != solicitante)
-        {
-            return new SolicitanteNoEsPropietarioDeCartaError();
-        } else if (!jugadorPuedeJugar(solicitante))
-        {
-            return new JugadorNoPermitidoParaJugarError(solicitante);
-        } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
-        {
-            return new NoEsFasePreparacionError();
-        } else if (!carta.esMagica())
-        {
-            return new NoEsCartaMyTError();
-        }
         return new EstadoVerificadorBueno();
     }
 
@@ -167,28 +140,8 @@ public final class VerificadorCondicionesJuego
         } else if (!this.maquinaTurnos.getFaseActual().esFaseFinal())
         {
             return new NoEsFaseFinalError();
-        } else if (!carta.esMagica())
-        {
-            return new NoEsCartaMyTError();
         }
-        return new EstadoVerificadorBueno();
-    }
 
-    public EstadoVerificador sePuedeActivarCampoDesdeMano(Jugador solicitante, Carta carta)
-    {
-        if (carta.getPropietario() != solicitante)
-        {
-            return new SolicitanteNoEsPropietarioDeCartaError();
-        } else if (!jugadorPuedeJugar(solicitante))
-        {
-            return new JugadorNoPermitidoParaJugarError(solicitante);
-        } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
-        {
-            return new NoEsFasePreparacionError();
-        } else if (!carta.esCampo())
-        {
-            return new NoEsCartaCampoError();
-        }
         return new EstadoVerificadorBueno();
     }
 
@@ -215,28 +168,6 @@ public final class VerificadorCondicionesJuego
         return new EstadoVerificadorBueno();
     }
 
-    public EstadoVerificador sePuedeCambiarModoCarta(Jugador solicitante, Carta carta)
-    {
-        if (!jugadorPuedeJugar(solicitante))
-        {
-            return new JugadorNoPermitidoParaJugarError(solicitante);
-        } else if (!this.maquinaTurnos.getFaseActual().esFasePreparacion())
-        {
-            return new NoEsFasePreparacionError();
-        } else if (this.maquinaTurnos.yaCambioOrientacionEnTurnoActual(carta))
-        {
-            return new CartaNoPuedeCambiarOrientacionEnTurnoActualError();
-        } else if (!carta.esMonstruo())
-        {
-            return new NoEsCartaMonstruo();
-        } else if (this.maquinaTurnos.yaMandoCartaARegionEnTurnoActual(carta))
-        {
-            return new YaSeMandoCartaARegionEnTurnoActualError();
-        }
-
-        return new EstadoVerificadorBueno();
-    }
-
     // ----------------------------------------
     // Verificación de ataque de cartas.
     // ----------------------------------------
@@ -252,9 +183,6 @@ public final class VerificadorCondicionesJuego
         } else if (this.maquinaTurnos.esElPrimerTurnoDelJuego())
         {
             return new NoSeAtacaEnPrimerTurnoJuegoError();
-        } else if (!cartaAtacante.esMonstruo())
-        {
-            return new NoEsCartaMonstruo();
         } else if (((CartaMonstruo) cartaAtacante).estaEnDefensa())
         {
             return new CartaEnDefensaNoPuedeAtacarError();

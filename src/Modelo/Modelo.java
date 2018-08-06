@@ -303,61 +303,59 @@ public final class Modelo implements ModeloInterfaz, ModeloObservable, FinDeJueg
         jugador.tomarCarta();
     }
 
-    @Override
-    public void setCartaMagica(Jugador jugador, CartaMagica carta)
+    public void setCartaMagica(CartaMagica carta)
     {
         this.flipBocaAbajo(carta);
-        jugador.enviarARegion(carta);
+        carta.getPropietario().enviarARegion(carta);
     }
 
     @Override
-    public void activarCartaMagicaDesdeRegionMyT(Jugador jugador, CartaMagica carta)
+    public void activarCartaMagicaDesdeRegionMyT(CartaMagica carta)
     {
         this.flipBocaArriba(carta);
         carta.efecto();
     }
 
     @Override
-    public void activarCartaMagicaDesdeMano(Jugador jugador, CartaMagica carta)
+    public void activarCartaMagicaDesdeMano(CartaMagica carta)
     {
         this.flipBocaArriba(carta);
         carta.efecto();
         carta.getPropietario().getMano().quitarCarta(carta);
     }
 
-    @Override
-    public void setCartaTrampa(Jugador jugador, CartaTrampa carta)
+    public void setCartaTrampa(CartaTrampa carta)
     {
         this.flipBocaAbajo(carta);
-        jugador.enviarARegion(carta);
+        carta.getPropietario().enviarARegion(carta);
     }
 
-    @Override
-    public void activarCartaCampo(Jugador jugador, CartaCampo carta)
+    public void activarCartaCampo(CartaCampo carta)
     {
-        if (!jugador.getRegionCampo().estaVacia())
+        Jugador propietarioCarta = carta.getPropietario();
+        if (!propietarioCarta.getRegionCampo().estaVacia())
         {
-            CartaCampo cartaCampo = jugador.getRegionCampo().getUltimaCartaEnEntrar();
-            jugador.destruirCarta(cartaCampo);
+            CartaCampo cartaCampo = propietarioCarta.getRegionCampo().getUltimaCartaEnEntrar();
+            propietarioCarta.destruirCarta(cartaCampo);
         }
         this.flipBocaArriba(carta);
-        jugador.enviarARegion(carta);
+        propietarioCarta.enviarARegion(carta);
     }
 
     @Override
-    public void setCartaMonstruo(Jugador jugador, CartaMonstruo carta)
+    public void setCartaMonstruo(CartaMonstruo carta)
     {
         this.flipBocaAbajo(carta);
         this.setModoDefensa(carta);
-        jugador.enviarARegion(carta);
+        carta.getPropietario().enviarARegion(carta);
     }
 
     @Override
-    public void summonCartaMonstruo(Jugador jugador, CartaMonstruo carta)
+    public void summonCartaMonstruo(CartaMonstruo carta)
     {
         this.flipBocaArriba(carta);
         this.setModoAtaque(carta);
-        jugador.enviarARegion(carta);
+        carta.getPropietario().enviarARegion(carta);
     }
 
     @Override

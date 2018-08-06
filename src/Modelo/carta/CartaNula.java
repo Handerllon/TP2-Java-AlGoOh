@@ -1,5 +1,6 @@
 package Modelo.carta;
 
+import Controlador.visitor.VisitadorCarta;
 import Modelo.Jugador;
 import Modelo.observadores.ObservadorDeCarta;
 
@@ -27,6 +28,14 @@ public final class CartaNula extends Carta
     public CartaNula clone() throws CloneNotSupportedException
     {
         throw new CloneNotSupportedException();
+    }
+
+    // --------------------------------------------------------------------
+    // Metodos para patrón visitador.
+    // --------------------------------------------------------------------
+    public void aceptar(VisitadorCarta visitadorCarta)
+    {
+
     }
 
     public String getLocacionDeImagen()

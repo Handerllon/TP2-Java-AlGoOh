@@ -7,14 +7,13 @@ import Controlador.excepciones.NoSePuedeUsarMyTError;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
 import Vista.Vista;
-import javafx.event.EventHandler;
+import Vista.visitador.VisitadorBotonCarta;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -89,19 +88,7 @@ public class ManoBoton extends Button
         this.audioClipCardActivation.setVolume(cardActivationVolume);
 
         // Se decide qué tipo de botón crear.
-        if (carta.esMonstruo())
-        {
-            this.crearBotonMonstruo();
-        } else if (carta.esMagica())
-        {
-            this.crearBotonCartaMagica();
-        } else if (carta.esTrampa())
-        {
-            this.crearBotonCartaTrampa();
-        } else if (carta.esCampo())
-        {
-            this.crearBotonCartaCampo();
-        }
+        carta.aceptar(new VisitadorBotonCarta(this));
 
         popup.getContent().addAll(vbox);
 
@@ -117,7 +104,6 @@ public class ManoBoton extends Button
         Point2D point = boton.localToScene(0.0, 0.0);
         popup.setX(primaryStage.getX() + point.getX());
         popup.setY(primaryStage.getY() + point.getY());
-
     }
 
     public Button getBoton()
@@ -128,7 +114,7 @@ public class ManoBoton extends Button
     // --------------------------------------------------------------------
     // Botón Carta Monstruo.
     // --------------------------------------------------------------------
-    private void crearBotonMonstruo()
+    public void crearBotonMonstruo()
     {
         // Se crea la VBox.
         Button b1 = new Button("Invocar");
@@ -187,7 +173,7 @@ public class ManoBoton extends Button
     // --------------------------------------------------------------------
     // Botón Carta Mágica.
     // --------------------------------------------------------------------
-    private void crearBotonCartaMagica()
+    public void crearBotonCartaMagica()
     {
         // Se crea la VBox.
         Button b1 = new Button("Activar");
@@ -245,7 +231,7 @@ public class ManoBoton extends Button
     // --------------------------------------------------------------------
     // Botón Carta Trampa.
     // --------------------------------------------------------------------
-    private void crearBotonCartaTrampa()
+    public void crearBotonCartaTrampa()
     {
         Button b1 = new Button("Posicionar");
         b1.setOnAction(e -> setCartaTrampaBtn_Click());
@@ -281,7 +267,7 @@ public class ManoBoton extends Button
     // --------------------------------------------------------------------
     // Botón Carta Campo.
     // --------------------------------------------------------------------
-    private void crearBotonCartaCampo()
+    public void crearBotonCartaCampo()
     {
         // Se crea la VBox.
         Button b1 = new Button("Activar");

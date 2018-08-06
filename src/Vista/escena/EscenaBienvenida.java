@@ -1,6 +1,7 @@
 package Vista.escena;
 
 import Modelo.ModeloObservable;
+import Modelo.carta.Carta;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Vista.Vista;
 import javafx.geometry.HPos;
@@ -199,7 +200,7 @@ import java.io.File;
     }
 
     @Override
-    public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante)
+    public void solicitarCartaAAtacar(Carta cartaAtacante)
     {
 
     }

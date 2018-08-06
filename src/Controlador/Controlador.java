@@ -3,11 +3,10 @@ package Controlador;
 import Controlador.estadosJuego.*;
 import Controlador.excepciones.*;
 import Controlador.observadores.ObservadorDeControlador;
+import Controlador.visitor.*;
 import Modelo.Jugador;
 import Modelo.Modelo;
 import Modelo.carta.Carta;
-import Modelo.carta.campo.CartaCampo;
-import Modelo.carta.magica.CartaMagica;
 import Modelo.carta.monstruo.CartaMonstruo;
 import Modelo.carta.trampa.CartaTrampa;
 import Modelo.finDeJuego.CausaFinJuego;
@@ -269,7 +268,7 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
             throw new NoSePuedeEnviarCartaMonstruoARegionError(solicitante, estadoVerificador);
         } else
         {
-            this.modelo.setCartaMonstruo(solicitante, (CartaMonstruo) carta);
+            carta.aceptar(new VisitadorSetCarta(this.modelo));
             this.maquinaTurnos.seColocaCartaMonstruoEnRegionEnTurnoActual();
             this.maquinaTurnos.seColocaCartaEnRegionEnTurnoActual(carta);
         }
@@ -284,7 +283,7 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
             throw new NoSePuedeEnviarCartaMonstruoARegionError(solicitante, estadoVerificador);
         } else
         {
-            this.modelo.summonCartaMonstruo(solicitante, (CartaMonstruo) carta);
+            carta.aceptar(new VisitadorSummonCarta(this.modelo));
             this.maquinaTurnos.seColocaCartaMonstruoEnRegionEnTurnoActual();
             this.maquinaTurnos.seColocaCartaEnRegionEnTurnoActual(carta);
         }
@@ -303,7 +302,7 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
             throw new NoSePuedeEnviarMyTARegionError(solicitante, estadoVerificador);
         } else
         {
-            this.modelo.setCartaTrampa(solicitante, (CartaTrampa) carta);
+            carta.aceptar(new VisitadorSetCarta(this.modelo));
         }
     }
 
@@ -317,7 +316,7 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
             throw new NoSePuedeEnviarMyTARegionError(solicitante, estadoVerificador);
         } else
         {
-            this.modelo.setCartaMagica(solicitante, (CartaMagica) carta);
+            carta.aceptar(new VisitadorSetCarta(this.modelo));
         }
     }
 
@@ -328,13 +327,13 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
     @Override
     public void activarCartaMagicaDesdeMano(Jugador solicitante, Carta carta) throws NoSePuedeUsarMyTError
     {
-        estadoVerificador = verificadorCondicionesJuego.sePuedeActivarMagicaDesdeMano(solicitante, carta);
+        estadoVerificador = verificadorCondicionesJuego.sePuedeActivarCartaDesdeMano(solicitante, carta);
         if (estadoVerificador.esFallido())
         {
             throw new NoSePuedeUsarMyTError(solicitante, estadoVerificador);
         } else
         {
-            this.modelo.activarCartaMagicaDesdeMano(solicitante, (CartaMagica) carta);
+            carta.aceptar(new VisitadorActivarCartaDesdeMano(this.modelo));
         }
     }
 
@@ -348,20 +347,20 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
             throw new NoSePuedeUsarMyTError(solicitante, estadoVerificador);
         } else
         {
-            this.modelo.activarCartaMagicaDesdeRegionMyT(solicitante, (CartaMagica) carta);
+            carta.aceptar(new VisitadorActivarCarta(this.modelo));
         }
     }
 
     @Override
     public void activarCartaCampoDesdeMano(Jugador solicitante, Carta carta) throws NoSePuedeEnviarARegionCampoError
     {
-        estadoVerificador = verificadorCondicionesJuego.sePuedeActivarCampoDesdeMano(solicitante, carta);
+        estadoVerificador = verificadorCondicionesJuego.sePuedeActivarCartaDesdeMano(solicitante, carta);
         if (estadoVerificador.esFallido())
         {
             throw new NoSePuedeEnviarARegionCampoError(solicitante, estadoVerificador);
         } else
         {
-            this.modelo.activarCartaCampo(solicitante, (CartaCampo) carta);
+            carta.aceptar(new VisitadorActivarCarta(this.modelo));
         }
     }
 
@@ -385,13 +384,13 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
     @Override
     public void cambiarModoCartaMonstruo(Jugador solicitante, Carta carta) throws NoSePuedeCambiarOrientacionError
     {
-        estadoVerificador = verificadorCondicionesJuego.sePuedeCambiarModoCarta(solicitante, carta);
+        estadoVerificador = verificadorCondicionesJuego.sePuedeCambiarOrientacionCarta(solicitante, carta);
         if (estadoVerificador.esFallido())
         {
             throw new NoSePuedeCambiarOrientacionError(solicitante, estadoVerificador);
         } else
         {
-            this.modelo.cambiarModoCartaMonstruo((CartaMonstruo) carta);
+            carta.aceptar(new VisitadorModoCarta(this.modelo));
             this.maquinaTurnos.seCambiaOrientacionCartaEnTurnoActual(carta);
         }
     }
@@ -406,23 +405,24 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
         if (estadoVerificador.esFallido())
         {
             throw new NoSePuedeAtacarError(solicitante, estadoVerificador);
-        } else if (((CartaMonstruo) cartaAtacante).tieneQuickEffect())
+        } else if (cartaAtacante.tieneQuickEffect())
         {
-            ((CartaMonstruo) cartaAtacante).efecto();
+            cartaAtacante.efecto();
             // En realidad no se sabe si atacó, solamente que se uso, pero a los efectos es lo mismo.
-            this.maquinaTurnos.cartaAtacaEnTurnoActual((CartaMonstruo) cartaAtacante);
+            this.maquinaTurnos.cartaAtacaEnTurnoActual(cartaAtacante);
         } else
         {
-            if (((CartaMonstruo) cartaAtacante).getOponente().getRegionMonstruos().estaVacia())
+            if (cartaAtacante.getOponente().getRegionMonstruos().estaVacia())
             {
                 cambiarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
 
-                this.modelo.atacar((CartaMonstruo) cartaAtacante);
-                this.maquinaTurnos.cartaAtacaEnTurnoActual((CartaMonstruo) cartaAtacante);
+                cartaAtacante.aceptar(new VisitadorAtacarCarta(this.modelo));
+
+                this.maquinaTurnos.cartaAtacaEnTurnoActual(cartaAtacante);
                 retrocederFase();
             } else
             {
-                this.vista.solicitarCartaAAtacar((CartaMonstruo) cartaAtacante);
+                this.vista.solicitarCartaAAtacar(cartaAtacante);
             }
         }
     }
@@ -434,8 +434,8 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
     {
         cambiarAFase(FaseTrampa.getInstancia(this.maquinaTurnos));
 
-        this.modelo.atacar((CartaMonstruo) cartaAtacante, cartaSolicitada);
-        this.maquinaTurnos.cartaAtacaEnTurnoActual((CartaMonstruo) cartaAtacante);
+        this.modelo.atacar(cartaAtacante, cartaSolicitada);
+        this.maquinaTurnos.cartaAtacaEnTurnoActual(cartaAtacante);
         retrocederFase();
     }
 }

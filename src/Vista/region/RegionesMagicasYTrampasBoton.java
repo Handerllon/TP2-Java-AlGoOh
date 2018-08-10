@@ -3,7 +3,9 @@ package Vista.region;
 import Controlador.excepciones.NoSePuedeUsarMyTError;
 import Modelo.Jugador;
 import Modelo.carta.Carta;
+import Modelo.carta.magica.CartaMagica;
 import Vista.Vista;
+import Vista.visitador.VisitadorBotonRegionMagicasYTrampas;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Button;
@@ -34,6 +36,8 @@ public class RegionesMagicasYTrampasBoton extends Button
     private Jugador jugadorAsociado;
     private AudioClip audioClipCardActivation;
     private double cardActivationVolume = 0.3;
+    private Button botonActivar;
+    private Button botonCerrar;
 
     // --------------------------------------------------------------------
     // Métodos de construcción e inicialización.
@@ -113,14 +117,11 @@ public class RegionesMagicasYTrampasBoton extends Button
         popup.setAutoHide(true);
         VBox vbox = new VBox();
 
-        Button botonActivar = new Button("Activar");
+        this.botonActivar = new Button("Activar");
         // Las cartas trampa se activan solamente en la fase trampa, y de forma automática.
-        if (this.carta.esMagica())
-        {
-            botonActivar.setOnAction(e -> activarCartaMagicaDesdeRegionBtn_Click());
-        }
+        this.carta.aceptar(new VisitadorBotonRegionMagicasYTrampas(this));
 
-        Button botonCerrar = new Button("Cerrar");
+        this.botonCerrar = new Button("Cerrar");
         botonCerrar.setOnAction(e -> popup.hide());
 
         vbox.getChildren().addAll(botonActivar, botonCerrar);
@@ -132,6 +133,11 @@ public class RegionesMagicasYTrampasBoton extends Button
         }
 
         return botonEnRegion;
+    }
+
+    public void setBotonActivarCartaMagica()
+    {
+        botonActivar.setOnAction(e -> activarCartaMagicaDesdeRegionBtn_Click());
     }
 
     // --------------------------------------------------------------------

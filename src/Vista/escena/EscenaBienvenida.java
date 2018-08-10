@@ -200,7 +200,7 @@ import java.io.File;
     }
 
     @Override
-    public void solicitarCartaAAtacar(Carta cartaAtacante)
+    public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante)
     {
 
     }

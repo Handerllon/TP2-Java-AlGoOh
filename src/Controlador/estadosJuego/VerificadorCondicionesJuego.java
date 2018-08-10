@@ -189,7 +189,7 @@ public final class VerificadorCondicionesJuego
         } else if (cartaAtacante.estaBocaAbajo())
         {
             return new CartaBocaAbajoNoPuedeAtacarError();
-        } else if (this.maquinaTurnos.cartaYaAtacoEnTurnoActual((CartaMonstruo) cartaAtacante))
+        } else if (this.maquinaTurnos.cartaYaAtacoEnTurnoActual(cartaAtacante))
         {
             return new CartaYaAtacoEnTurnoActualError();
         }

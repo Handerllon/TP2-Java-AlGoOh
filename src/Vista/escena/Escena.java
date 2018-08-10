@@ -1,6 +1,6 @@
 package Vista.escena;
 
-import Modelo.carta.Carta;
+import Modelo.carta.monstruo.CartaMonstruo;
 
 public interface Escena
 {
@@ -18,5 +18,5 @@ public interface Escena
 
     void cerrar();
 
-    void solicitarCartaAAtacar(Carta cartaAtacante);
+    void solicitarCartaAAtacar(CartaMonstruo cartaAtacante);
 }

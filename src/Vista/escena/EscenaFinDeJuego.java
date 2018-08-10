@@ -171,7 +171,7 @@ public class EscenaFinDeJuego implements Escena
     }
 
     @Override
-    public void solicitarCartaAAtacar(Carta cartaAtacante)
+    public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante)
     {
 
     }

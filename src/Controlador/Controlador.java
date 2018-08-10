@@ -422,7 +422,7 @@ public final class Controlador implements ControladorObservable, ObservadorDeFin
                 retrocederFase();
             } else
             {
-                this.vista.solicitarCartaAAtacar(cartaAtacante);
+                cartaAtacante.aceptar(new VisitadorSolicitudCartaAtacar(this.vista));
             }
         }
     }

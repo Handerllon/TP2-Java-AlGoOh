@@ -20,6 +20,8 @@ public class Mazo implements FinDeJuegoObservable, MazoObservable
     private static int CANTIDAD_CARTAS_INICIALES = 40;
     private Jugador jugador, oponente;
     private Stack<Carta> cartas = new Stack<>();
+    private ArrayList<CartaMonstruo> cartasMonstruo = new ArrayList<>();
+    private ArrayList<CartaTrampa> cartasTrampa = new ArrayList<>();
     private ArrayList<ObservadorDeFinJuego> observadoresFinJuegos = new ArrayList<>();
     private ArrayList<ObservadorDeMazo> observadoresMazo = new ArrayList<>();
 
@@ -28,46 +30,60 @@ public class Mazo implements FinDeJuegoObservable, MazoObservable
         this.jugador = jugador;
         this.oponente = oponente;
 
-        int cantidadCartas = CANTIDAD_CARTAS_INICIALES;
+        int cantidadCartasRestantes = CANTIDAD_CARTAS_INICIALES;
 
         FabricaCartas fabricaCartas = new FabricaCartas(jugador, oponente);
 
+        CartaMonstruo cartaMonstruoAAgregar;
+        CartaTrampa cartaTrampaAAgregar;
+
         ArrayList<String> nombresMonstruosNoNormales = fabricaCartas.getNombresCartasMonstruosNoNormales();
-        for (int i = 0; i < nombresMonstruosNoNormales.size() && cantidadCartas > 0; i++)
+        for (int i = 0; i < nombresMonstruosNoNormales.size() && cantidadCartasRestantes > 0; i++)
         {
-            cartas.push(fabricaCartas.crearCartaMonstruo(nombresMonstruosNoNormales.get(i)));
-            cantidadCartas--;
+            cartaMonstruoAAgregar = fabricaCartas.crearCartaMonstruo(nombresMonstruosNoNormales.get(i));
+            cartas.push(cartaMonstruoAAgregar);
+            cartasMonstruo.add(cartaMonstruoAAgregar);
+            cantidadCartasRestantes--;
         }
 
         ArrayList<String> nombresMagicas = fabricaCartas.getNombresCartasMagicas();
-        for (int i = 0; i < nombresMagicas.size() && cantidadCartas > 0; i++)
+        for (int i = 0; i < nombresMagicas.size() && cantidadCartasRestantes > 0; i++)
         {
             cartas.push(fabricaCartas.crearCartaMagica(nombresMagicas.get(i)));
-            cantidadCartas--;
+            cantidadCartasRestantes--;
         }
 
         ArrayList<String> nombresCampo = fabricaCartas.getNombresCartasCampo();
-        for (int i = 0; i < nombresCampo.size() && cantidadCartas > 0; i++)
+        for (int i = 0; i < nombresCampo.size() && cantidadCartasRestantes > 0; i++)
         {
             cartas.push(fabricaCartas.crearCartaCampo(nombresCampo.get(i)));
-            cantidadCartas--;
+            cantidadCartasRestantes--;
         }
 
         ArrayList<String> nombresTrampas = fabricaCartas.getNombresCartasTrampa();
-        for (int i = 0; i < nombresTrampas.size() && cantidadCartas > 0; i++)
+        for (int i = 0; i < nombresTrampas.size() && cantidadCartasRestantes > 0; i++)
         {
-            cartas.push(fabricaCartas.crearCartaTrampa(nombresTrampas.get(i)));
-            cantidadCartas--;
+            cartaTrampaAAgregar = fabricaCartas.crearCartaTrampa(nombresTrampas.get(i));
+            cartas.push(cartaTrampaAAgregar);
+            cartasTrampa.add(cartaTrampaAAgregar);
+            cantidadCartasRestantes--;
         }
 
         // Agrego todas las que se pueden repetir.
         ArrayList<String> nombresMonstruosNormales = fabricaCartas.getNombresCartasMonstruosNormales();
-        for (int i = 0; cantidadCartas > 0; i++)
+        for (int i = 0; cantidadCartasRestantes > 0; i++)
         {
+            // Se reinicia la iteración.
             if (i == nombresMonstruosNormales.size())
+            {
                 i = 0;
-            cartas.push(fabricaCartas.crearCartaMonstruo(nombresMonstruosNormales.get(i)));
-            cantidadCartas--;
+            }
+
+            cartaMonstruoAAgregar = fabricaCartas.crearCartaMonstruo(nombresMonstruosNormales.get(i));
+            cartas.push(cartaMonstruoAAgregar);
+            cartasMonstruo.add(cartaMonstruoAAgregar);
+
+            cantidadCartasRestantes--;
         }
 
         this.mezclar();
@@ -91,6 +107,9 @@ public class Mazo implements FinDeJuegoObservable, MazoObservable
         if (!this.cartas.isEmpty())
         {
             carta = this.cartas.pop();
+            // Si la carta no existe en la lista, no sucede nada según la documentación de ArrayList.
+            this.cartasMonstruo.remove(carta);
+            this.cartasTrampa.remove(carta);
             this.notificarTomaDeCartaDeMazo();
         } else
         {
@@ -106,32 +125,14 @@ public class Mazo implements FinDeJuegoObservable, MazoObservable
         return this.cartas;
     }
 
-    public Stack<CartaMonstruo> getCartasMonstruo()
+    public ArrayList<CartaMonstruo> getCartasMonstruo()
     {
-        Stack<CartaMonstruo> cartasMonstruo = new Stack<>();
-        this.cartas.forEach(carta ->
-        {
-            if (carta.esMonstruo())
-            {
-                cartasMonstruo.push((CartaMonstruo) carta);
-            }
-        });
-
-        return cartasMonstruo;
+        return this.cartasMonstruo;
     }
 
-    public Stack<CartaTrampa> getCartasTrampa()
+    public ArrayList<CartaTrampa> getCartasTrampa()
     {
-        Stack<CartaTrampa> cartasTrampa = new Stack<>();
-        this.cartas.forEach(carta ->
-        {
-            if (carta.esTrampa())
-            {
-                cartasTrampa.push((CartaTrampa) carta);
-            }
-        });
-
-        return cartasTrampa;
+        return this.cartasTrampa;
     }
 
     public int cantidadCartas()

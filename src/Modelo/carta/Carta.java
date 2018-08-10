@@ -115,12 +115,6 @@ public abstract class Carta implements Orientacion, CartaObservable
     // ------------------------------------
     // Métodos de tipo de carta.
     // ------------------------------------
-    public abstract boolean esMagica();
-
-    public abstract boolean esMonstruo();
-
-    public abstract boolean esTrampa();
-
     public boolean esParteExodia()
     {
         return false;

@@ -250,7 +250,7 @@ public final class EscenaTableroPrincipal implements Escena
     // Métodos de ataque.
     // ----------------------
     @Override
-    public void solicitarCartaAAtacar(Carta cartaAtacante)
+    public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante)
     {
 
         Popup popup = new Popup();

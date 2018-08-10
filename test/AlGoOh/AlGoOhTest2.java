@@ -386,9 +386,8 @@ public class AlGoOhTest2
     {
 
         Modelo modelo = Modelo.getInstancia();
-        ;
         modelo.setNombreJugador("J1");
-        modelo.setNombreOponente("J1");
+        modelo.setNombreOponente("J2");
 
         Jugador jugador = modelo.getJugador();
 
@@ -396,7 +395,7 @@ public class AlGoOhTest2
             jugador.getMazo().tomarCarta();
 
         CausaFinJuego causaFinJuego = modelo.getCausaFinJuego();
-        assertTrue(causaFinJuego.getNombreCausa() == "Sin cartas en el mazo");
+        assertTrue(causaFinJuego.getNombreCausa() == "Sin cartas en el mazo.");
     }
 
     //    Colocar las 5 partes de exodia en la mano de un jugador, verificar que la partida
@@ -407,7 +406,7 @@ public class AlGoOhTest2
         Modelo modelo = Modelo.getInstancia();
         ;
         modelo.setNombreJugador("J1");
-        modelo.setNombreOponente("J1");
+        modelo.setNombreOponente("J2");
 
         Mano manoJugador1 = modelo.getJugador().getMano();
 
@@ -425,6 +424,6 @@ public class AlGoOhTest2
         manoJugador1.agregarCarta(exodiaParte5);
 
         CausaFinJuego causaFinJuego = modelo.getCausaFinJuego();
-        assertTrue(causaFinJuego.getNombreCausa() == "Cinco partes de Exodia reunidas");
+        assertTrue(causaFinJuego.getNombreCausa() == "Cinco partes de Exodia reunidas.");
     }
 }

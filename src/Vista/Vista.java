@@ -91,7 +91,7 @@ public class Vista
         this.escena.actualizarDibujo();
     }
 
-    public void solicitarCartaAAtacar(Carta cartaAtacante)
+    public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante)
     {
         this.escena.solicitarCartaAAtacar(cartaAtacante);
     }

@@ -198,7 +198,7 @@ public final class EscenaSorteoJugadorInicial implements Escena
     }
 
     @Override
-    public void solicitarCartaAAtacar(Carta cartaAtacante)
+    public void solicitarCartaAAtacar(CartaMonstruo cartaAtacante)
     {
 
     }
